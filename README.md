@@ -22,7 +22,7 @@ See the [Quick start](docs/quickstart.md) for more details.
 
 ## Examples
 
-Check out the [configs](https://github.com/KablamoOSS/Kombustion/configs/) directory for examples.
+Check out the [configs](https://github.com/KablamoOSS/kombustion/configs/) directory for examples.
 
 ## Maintainers
 
