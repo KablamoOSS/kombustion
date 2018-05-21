@@ -1,5 +1,6 @@
 ## Kombustion
 
+[![Build Status](https://travis-ci.org/KablamoOSS/kombustion.svg?branch=master)](https://travis-ci.org/KablamoOSS/kombustion)
 > A CloudFormation template generator, written in Go.
 
 ## What is it
