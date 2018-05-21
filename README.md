@@ -32,4 +32,4 @@ Made with :heart: in Australia.
 
 ---
 
-<small>The Kombustion logo is based on an original design by Renee French.</small>
+The Kombustion logo is based on an original design by Renee French.
