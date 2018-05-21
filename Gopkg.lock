@@ -2,10 +2,10 @@
 
 
 [[projects]]
-  branch = "v2"
   name = "github.com/KablamoOSS/yaml"
   packages = ["."]
-  revision = "02fa7f79ac769765be1317611963a3c0a8f5ea1a"
+  revision = "2bbb9391bbcc4c20cf36604955b746df3333c012"
+  version = "v2.2.2"
 
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
@@ -37,8 +37,8 @@
     "service/cloudformation",
     "service/sts"
   ]
-  revision = "d3bdbc0c838508b38782f91c504fcf719a8722a7"
-  version = "v1.13.43"
+  revision = "cf00d544fc3c02f31e05e8d02444a1325d3a840b"
+  version = "v1.13.53"
 
 [[projects]]
   name = "github.com/davecgh/go-spew"
@@ -72,18 +72,20 @@
 [[projects]]
   name = "github.com/stretchr/testify"
   packages = ["assert"]
-  revision = "4d4bfba8f1d1027c4fdbe371823030df51419987"
+  revision = "12b6f73e6084dad08a7c6e575284b177ecafbc71"
+  version = "v1.2.1"
 
 [[projects]]
   name = "github.com/urfave/cli"
   packages = ["."]
-  revision = "75104e932ac2ddb944a6ea19d9f9f26316ff1145"
+  revision = "cfb38830724cc34fedffe9a2a29fb54fa9169cd1"
+  version = "v1.20.0"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "4ec37c66abab2c7e02ae775328b2ff001c3f025a"
+  revision = "1a580b3eff7814fc9b40602fd35256c63b50f491"
 
 [[projects]]
   branch = "master"
@@ -92,7 +94,7 @@
     "unix",
     "windows"
   ]
-  revision = "7db1c3b1a98089d0071c84f646ff5c96aad43682"
+  revision = "7c87d13f8e835d2fb3a70a2912c811ed0c1d241b"
 
 [[projects]]
   name = "gopkg.in/yaml.v2"
@@ -103,6 +105,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "7a74b938be63284afca002ff192067375000b7642e27abd1ed379b7ebe9c0391"
+  inputs-digest = "cc67d1c5d5056e70d3ef9fba6845a3d09b5bba7c9132c493836146c045328de2"
   solver-name = "gps-cdcl"
   solver-version = 1
