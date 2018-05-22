@@ -144,9 +144,6 @@ directory for example stacks.
 
 ### CloudFormation Stack Management
 
-CloudFormation is the only target available, support for others may be added
-later. For now to use CloudFormation commands start with `kombustion cf`.
-
 Upsert a CloudFormation template:
 
 ```sh
