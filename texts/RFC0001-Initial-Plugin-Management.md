@@ -183,6 +183,9 @@ accounts:
     accountId: "123456789"
   - environment: production
     accountId: "456789123"
+    
+# Ask Kombustion to provide default exports for all stacks in this project
+addDefaultExports: true | false
 ```
 
 `version-condition` is currently unresolved in so much as the best options to
