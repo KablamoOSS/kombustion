@@ -135,8 +135,9 @@ Resources:
       EIP: !Ref IPAddress
 ```
 
-Check out the [configs](https://github.com/KablamoOSS/Kombustion/configs/)
-directory for examples.
+Check out the
+[examples](https://github.com/KablamoOSS/Kombustion/tree/master/examples/)
+directory for example stacks.
 
 ### Cloudformation Stack Management
 
@@ -146,19 +147,19 @@ later. For now to use Cloudformation commands start with `kombustion cf`.
 Upsert a CloudFormation template:
 
 ```sh
-kombustion cf upsert configs/test.yaml --stackName test-stack
+kombustion cf upsert examples/stacks/test.yaml --stackName test-stack
 ```
 
 Delete a CloudFormation stack:
 
 ```sh
-kombustion cf delete configs/test.yaml
+kombustion cf delete examples/stacks/test.yaml
 ```
 
 Print all the events for a stack:
 
 ```sh
-kombustion cf events configs/test.yaml
+kombustion cf events examples/stacks/test.yaml
 ```
 
 #### Credentials
@@ -171,7 +172,7 @@ You can either use the standard environment variables `AWS_ACCESS_KEY_ID`,
 Or use a profile you have configured, for example:
 
 ```sh
-kombustion cf upsert configs/test.yaml --stackName test-stack --profile myAwsProfile
+kombustion cf upsert examples/stacks/test.yaml --stackName test-stack --profile myAwsProfile
 ```
 
 ### Plugins
