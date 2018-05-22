@@ -287,7 +287,8 @@ func main() {
 }
 
 func checkLocalData(sourceDir string, specList map[string]string) {
-	for region, url := range specList {
+	for _, region := range sortSpecList(specList) {
+		url := specList[region]
 		if _, err := os.Stat(sourceDir + "/" + region + ".json"); os.IsNotExist(err) {
 			cfnData := fetchSourceData(region)
 			if len(cfnData) > 0 {
@@ -302,7 +303,7 @@ func buildUniqueSet(sourceDir string, specList map[string]string) CfnSpec {
 		PropertyTypes: map[string]CfnType{},
 		ResourceTypes: map[string]CfnType{},
 	}
-	for region := range specList {
+	for _, region := range sortSpecList(specList) {
 		var tempcfnSpec CfnSpec
 		cfnData, err := ioutil.ReadFile(fmt.Sprintf("%v%v.json", sourceDir, region))
 		if err == nil {
@@ -539,6 +540,17 @@ func needsPropertiesImport(cfnType CfnType) bool {
 		}
 	}
 	return false
+}
+
+func sortSpecList(specList map[string]string) []string {
+	regions := make([]string, len(specList))
+	i := 0
+	for region := range specList {
+		regions[i] = region
+		i++
+	}
+	sort.Strings(regions)
+	return regions
 }
 
 func sortProperties(properties map[string]CfnProperty) []NamedCfnProperty {
