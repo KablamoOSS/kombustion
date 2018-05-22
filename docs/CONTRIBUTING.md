@@ -1,3 +1,0 @@
-# Contributing
-
-This page needs updating...
