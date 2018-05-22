@@ -3,12 +3,12 @@
 [![Build Status](https://travis-ci.org/KablamoOSS/kombustion.svg?branch=master)](https://travis-ci.org/KablamoOSS/kombustion)
 [![](https://tokei.rs/b1/github/KablamoOSS/kombustion)](https://github.com/KablamoOSS/kombustion)
 
-> Extend Cloudformation with plugins
+> Extend CloudFormation with plugins
 
 Kombustion uses plugins to preprocess and extend your CloudFormation templates.
 
 In addition to generating templates, Kombustion can also create, update and
-delete your Cloudformation stacks.
+delete your CloudFormation stacks.
 
 Kombustion has automatic support for new CloudFormation types as they are
 released ([how?](docs/generation.md)).
@@ -52,11 +52,11 @@ docker run -ti kablamooss/kombustion
 
 ## Usage
 
-### Cloudformation Stacks
+### CloudFormation Stacks
 
-A stack template is written in the same way as standard Cloudformation.
+A stack template is written in the same way as standard CloudFormation.
 Kombustion allows plugins to extend the syntax, but the end result is always
-standard Cloudformation.
+standard CloudFormation.
 
 The following example shows how a small definition, can be processed into a
 bigger template. This lets your plugin maintain safe, sane defaults, and ensure
@@ -139,10 +139,10 @@ Check out the
 [examples](https://github.com/KablamoOSS/Kombustion/tree/master/examples/)
 directory for example stacks.
 
-### Cloudformation Stack Management
+### CloudFormation Stack Management
 
-Cloudformation is the only target available, support for others may be added
-later. For now to use Cloudformation commands start with `kombustion cf`.
+CloudFormation is the only target available, support for others may be added
+later. For now to use CloudFormation commands start with `kombustion cf`.
 
 Upsert a CloudFormation template:
 
