@@ -58,9 +58,10 @@ A stack template is written in the same way as standard CloudFormation.
 Kombustion allows plugins to extend the syntax, but the end result is always
 standard CloudFormation.
 
-The following example shows how a small definition, can be processed into a
-bigger template. This lets your plugin maintain safe, sane defaults, and ensure
-you don't miss any required fields.
+The following example shows how a small definition for a
+[bastion host](https://en.wikipedia.org/wiki/Bastion_host), can be processed
+into a bigger template. This lets your plugin maintain safe, sane defaults, and
+ensure you don't miss any required fields.
 
 ```yaml
 # In this example we're going to create a bastion host.
@@ -86,8 +87,10 @@ Resources:
         Latest: true
 ```
 
-In this case the plugin `Kombustion::Examples::BastionHost` processing the above
-template. Finds the correct AMI to use, and generates the following template.
+The Plugin `Kombustion::Examples::BastionHost` is used to generate the following
+template. It uses the AmiFilter to find the correct AMI, and creates two
+parameters for the `KeyName` and `SSHLocation`. The latter being the IP address
+allowed through the security group.
 
 ```yaml
 AWSTemplateFormatVersion: 2010-09-09
