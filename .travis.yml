@@ -1,6 +1,2 @@
-language: go
-go:
-  - 1.10.1
-install: 
-  - go get -t -v ./... || true
-  - go generate github.com/KablamoOSS/kombustion
+exclude:
+  - rfc

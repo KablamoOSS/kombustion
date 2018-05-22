@@ -1,8 +1,0 @@
-# This is an example of an environment.yaml file.
-# See https://kombustion.io/#/environment for documentation
-dev:
-  BucketName: dev-lambda-code-bucket
-
-prod:
-  BucketName: lambda-code-bucket
-  
