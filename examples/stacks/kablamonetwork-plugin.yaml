@@ -1,3 +1,6 @@
+# To use this example make sure you have the following plugins
+#
+#
 AWSTemplateFormatVersion: 2010-09-09
 Description: Roles for test
 Parameters:
