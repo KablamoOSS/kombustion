@@ -1,6 +1,5 @@
 * Start Date: (2018-05-22)
-* RFC PR:
-* Kombustion Issue:
+* RFC PR: https://github.com/KablamoOSS/kombustion/pull/10
 
 # Summary
 
