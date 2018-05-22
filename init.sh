@@ -11,7 +11,7 @@ mkdir -p ~/.kombustion/plugins
 cd plugins
 for plugin in *; do
     cd $plugin
-    go build -buildmode plugin -o $plugin.so && cp -f $plugin.so ~/.kombustion/plugins/$plugin.so
+    go build -buildmode plugin -tags plugin -o $plugin.so && cp -f $plugin.so ~/.kombustion/plugins/$plugin.so
     cd ..
 done
 cd ..

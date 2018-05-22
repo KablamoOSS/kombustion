@@ -1,3 +1,5 @@
+// +build plugin
+
 package resources
 
 import (

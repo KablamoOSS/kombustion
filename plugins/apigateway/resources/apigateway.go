@@ -1,12 +1,14 @@
+// +build plugin
+
 package resources
 
 import (
 	"log"
 
-	yaml "github.com/KablamoOSS/yaml"
 	"github.com/KablamoOSS/kombustion/pluginParsers/properties"
 	"github.com/KablamoOSS/kombustion/pluginParsers/resources"
 	"github.com/KablamoOSS/kombustion/types"
+	yaml "github.com/KablamoOSS/yaml"
 )
 
 type ApiGatewayConfig struct {

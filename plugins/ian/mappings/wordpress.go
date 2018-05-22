@@ -1,3 +1,5 @@
+// +build plugin
+
 package mappings
 
 import (
