@@ -3,7 +3,6 @@ kombustion
 *.so
 compiled/
 .DS_Store
-parsers/
 pluginParsers/
 generate/generate
 genplugin/genplugin
