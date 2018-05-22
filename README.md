@@ -1,7 +1,7 @@
 ## Kombustion
 
 [![Build Status](https://travis-ci.org/KablamoOSS/kombustion.svg?branch=master)](https://travis-ci.org/KablamoOSS/kombustion)
-[![](https://tokei.rs/b1/github/kablamooss/kombustion)](https://github.com/kablamooss/kombustion)
+[![](https://tokei.rs/b1/github/KablamoOSS/kombustion)](https://github.com/KablamoOSS/kombustion)
 
 > Extend Cloudformation with plugins
 
@@ -202,14 +202,15 @@ kombustion cf plugins delete mypluginname
 ## Contributing
 
 Please read
-[CONTRIBUTING.md](https://github.com/kablamoos/kombustion/blob/master/CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/KablamoOSS/kombustion/blob/master/CONTRIBUTING.md)
 for details on our code of conduct, and the process for submitting pull requests
 to us.
 
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available,
-see the [tags on this repository](https://github.com/kablamoos/kombustion/tags).
+see the
+[tags on this repository](https://github.com/KablamoOSS/kombustion/tags).
 
 ## Maintainers
 
@@ -223,7 +224,7 @@ The Kombustion logo is based on an original design by Renee French.
 ## License
 
 This project is licensed under the
-[MIT License](https://github.com/kablamoos/kombustion/blob/master/LICENSE).
+[MIT License](https://github.com/KablamoOSS/kombustion/blob/master/LICENSE).
 
 ---
 
