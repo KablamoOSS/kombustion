@@ -12,6 +12,8 @@ It also provides all the necessary tools to create, update, delete and retrieve 
 
 See the [Quick start](quickstart.md) for more details.
 
+[![](https://tokei.rs/b1/github/kablamooss/kombustion)](https://github.com/kablamooss/kombustion)
+
 ## Features
 
 * Written in Go, for simplicity and speed
