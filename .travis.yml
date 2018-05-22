@@ -1,4 +1,6 @@
 language: go
 go:
   - 1.10.1
-script: go generate && go test ./...
+install: 
+  - go get -t -v ./... || true
+  - go generate github.com/KablamoOSS/kombustion
