@@ -1,0 +1,17 @@
+kombustion
+*.exe
+*.so
+compiled/
+.DS_Store
+parsers/
+plugin-parsers/
+generate/generate
+genplugin/genplugin
+.vscode/*
+
+# Don't pull the git and docker files into the container, unnecessary bloat
+Dockerfile
+.dockerignore
+.gitignore
+README.md
+.git/*

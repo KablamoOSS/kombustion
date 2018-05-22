@@ -1,0 +1,9 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  myAuroraCluster:
+    Type: Ian::Databases::Aurora
+    Properties:
+      InstanceCount: 3
+      Username: admin
+      Password: s3cretPassword!!!
+      
