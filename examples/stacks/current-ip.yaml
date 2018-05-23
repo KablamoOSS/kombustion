@@ -1,3 +1,7 @@
+# To use this example make sure you have the following plugins
+#
+#
+
 Resources:
   metaInfo:
     Type: Ian::Meta::Attributes

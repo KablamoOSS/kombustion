@@ -1,6 +1,0 @@
-dev:
-  BucketName: dev-lambda-code-bucket
-
-prod:
-  BucketName: lambda-code-bucket
-  
