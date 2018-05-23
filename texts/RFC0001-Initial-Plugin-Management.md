@@ -186,6 +186,18 @@ accounts:
     
 # Ask Kombustion to provide default exports for all stacks in this project
 addDefaultExports: true | false
+
+# the concept of environment.yaml could also be rolled into the manifest file
+# this would simplify the call, and mean you only really need to supply the ENV you want to
+# deploy to
+parameters:
+  development:
+    paramName: paramValueDev
+  ci:
+    paramName: paramValueCi
+ production:
+    paramName: paramValueProd
+
 ```
 
 `version-condition` is currently unresolved in so much as the best options to
