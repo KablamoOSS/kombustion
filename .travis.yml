@@ -9,13 +9,9 @@ script:
 
 # Before deploy compile for all platforms
 before_deploy:
-  - PLATFORMS=(darwin/386 darwin/amd64 freebsd/386 freebsd/amd64 freebsd/arm linux/386 linux/amd64 linux/arm windows/386 windows/amd64)
-
- # build binary for all archs
-  - |
-    mkdir .build
-
-    for PLATFORM in "${PLATFORMS[@]}"; do
+- PLATFORMS=(darwin/386 darwin/amd64 freebsd/386 freebsd/amd64 freebsd/arm linux/386 linux/amd64 linux/arm windows/386 windows/amd64)
+- mkdir .build
+- | for PLATFORM in "${PLATFORMS[@]}"; do
       echo "Building $PLATFORM"
       GOOS=${PLATFORM%/*}
       GOARCH=${PLATFORM#*/}
