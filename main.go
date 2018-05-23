@@ -63,7 +63,7 @@ import (
 func main() {
 	app := cli.NewApp()
 	app.EnableBashCompletion = true
-	app.Version = "1.4.0"
+	app.Version = "0.1.5"
 	app.Name = "kombustion"
 	app.Usage = "A CloudFormation template generator, written in Go."
 	app.Before = func(c *cli.Context) error {
