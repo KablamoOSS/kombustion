@@ -1,3 +1,45 @@
 language: go
+
 go:
-  - 1.10.1
+- 1.10.1
+
+script:
+- go get -t ./...
+- go generate
+
+# Before deploy compile for all platforms
+before_deploy:
+  - PLATFORMS=(darwin/386 darwin/amd64 freebsd/386 freebsd/amd64 freebsd/arm linux/386 linux/amd64 linux/arm windows/386 windows/amd64)
+
+ # build binary for all archs
+  - |
+    mkdir .build
+
+    for PLATFORM in "${PLATFORMS[@]}"; do
+      echo "Building $PLATFORM"
+      GOOS=${PLATFORM%/*}
+      GOARCH=${PLATFORM#*/}
+      if [ "$GOOS" = "windows" ]; then
+        build_cmd="GOOS=$GOOS GOARCH=$GOARCH go build -o kombustion -ldflags '-w -s'"
+      else
+        build_cmd="CGO_ENABLED=0 GOOS=$GOOS GOARCH=$GOARCH go build -o kombustion -ldflags '-d -w -s'"
+      fi
+      if ! eval $build_cmd; then
+        echo "Failed building kombustion for $PLATFORM" && return 1
+      fi
+      if [ "$GOOS" = "windows" ]; then
+        zip .build/kombustion-${GOOS}-${GOARCH}.zip kombustion
+      else
+        tar cvzf .build/kombustion-${GOOS}-${GOARCH}.tgz kombustion
+      fi
+    done
+- ls .build
+
+# Deploy to Github release on tags
+deploy:
+  provider: releases
+  api_key:
+    secure: RG9Hd77NoFS7NwMjDVyurbROV33bsefz8kW7XigfFDURTSfGAsMjyWR3wWt4qWCgCw2gMtszLlYp8yoX0xlHV38UslDscEKfvUnzWdHDPPgM2AtRyLFk5tYeOaX+t0VQDZA3KKgQRUitPgzC8SoaVdwQL5EhkvYKM4pUM2irvFYLT/pRIaP1yJ6gsrJqiybjpfpUHwH6VtgSLKjj6o6YBywr7LHSlrAGK2N+0eSncs5C0A0F+Jfs4NPPB0v2ke8SvHprN3V9pC51KZTWTuApKu+bAXxQbnZo4aOFdK52f7tO2uKj7xFbcCgpj8HDrypofX3HwzyAYV6Xd23vdhbHisJDkqwQpUW/hx/bWygGk/4b92D+yw9fMVgec/Lg03+evXkXJZ0ZsRSuANrKtsgVk8+8RsH/eGgsMAK7eISESxVkAW8C2CIPjvRP6E5F7I6fW8v7nj1SJZablCCNRAD20E3ICkXkhJTADWHcxEr2Bnl/m4RJNUsrO5OJeY1E2zbWJwwqIRGK5O0NtaTfRvcPgI2iJ9dmenJFUttYm1631C5MIFKFCISBrIBdTIiOVZa5xWKek18ReKblrT6ARyg1yxk5b7PvAbnmp+jfYvj9d9hYaKYmbASGC2m9Qa7M+mpCbrElrZ9EB6KD98lJUXjAZXpcmGBWnxXpglxBSM2O1gg=
+  file: ".build/**"
+  on:
+    tags: true
