@@ -17,16 +17,10 @@ See the [Quick start](docs/quickstart.md) for more details.
 
 ## Getting Started
 
-Kombustion is distibuted as binaries for all major platforms.
+Kombustion is built for Linux, FreeBSD, MacOS and Windows.
 
-#### MacOS
-
-[64-bit](http://downloads.kombustion.io/releases/latest/MacOS/64/kombustion)
-
-### Linux
-
-[32-bit](http://downloads.kombustion.io/releases/latest/Linux/32/kombustion) |
-[64-bit](http://downloads.kombustion.io/releases/latest/Linux/64/kombustion)
+Get the latest release from the
+[release page](https://github.com/KablamoOSS/kombustion/releases).
 
 After downloading for MacOS or Linux, you will need to move the `kombustion`
 binary into your `$PATH`, and make it executable.
@@ -35,12 +29,6 @@ binary into your `$PATH`, and make it executable.
 sudo chmod +x kombustion
 sudo cp kombustion /usr/local/bin/kombustion
 ```
-
-### Windows
-
-[32-bit](http://downloads.kombustion.io/releases/latest/Windows/32/kombustion.exe)
-|
-[64-bit](http://downloads.kombustion.io/releases/latest/Windows/64/kombustion.exe)
 
 ### Docker
 
