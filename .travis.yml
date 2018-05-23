@@ -19,7 +19,7 @@ before_deploy:
       if [ "$GOOS" = "windows" ]; then
         build_cmd="GOOS=$GOOS GOARCH=$GOARCH go build -o kombustion -ldflags '-w -s'"
       else
-        build_cmd="CGO_ENABLED=1 GOOS=$GOOS GOARCH=$GOARCH go build -o kombustion -ldflags '-d -w -s'"
+        build_cmd="GOOS=$GOOS GOARCH=$GOARCH go build -o kombustion -ldflags '-d -w -s'"
       fi
       if ! eval $build_cmd; then
         echo "Failed building kombustion for $PLATFORM" && return 1
