@@ -32,9 +32,12 @@ retrival.
 
 ```yaml
 plugins:
-  - github.com/KablmoOSS/kombustion-bation-host@=1.x.x
-  - github.com/KablmoOSS/kombustion-example-plugin@latest
-  - github.com/KablmoOSS/kombustion-another-example-plugin@~1.x.x
+  - name: github.com/KablmoOSS/kombustion-bation-host
+    version: =1.x.x
+  - name: github.com/KablmoOSS/kombustion-example-plugin
+    version: latest
+  - name: github.com/KablmoOSS/kombustion-another-example-plugin
+    version: ~1.x.x
 architectures: [ "x68", "arm"]
 ```
 
@@ -146,7 +149,8 @@ _OPTIONAL_:The manifest file could be extended to enhance the usability of
 ```yaml
 # A list of plugins used in this project
 # of the format
-#  github.com/{organisation/user}/{repository-name}@{version-condition}{tag}
+#  name: github.com/{organisation/user}/{repository-name}
+#  version: {version-condition}{tag}
 #
 # Where version-condition is one of:
 # = : equal to
@@ -154,10 +158,14 @@ _OPTIONAL_:The manifest file could be extended to enhance the usability of
 # < : greater than
 # ~ : Anything in the major version
 
+
 plugins:
-  - github.com/KablmoOSS/kombustion-bation-host@=1.x.x
-  - github.com/KablmoOSS/kombustion-example-plugin@latest
-  - github.com/KablmoOSS/kombustion-another-example-plugin@~1.x.x
+  - name: github.com/KablmoOSS/kombustion-bation-host
+    version: =1.x.x
+  - name: github.com/KablmoOSS/kombustion-example-plugin
+    version: latest
+  - name: github.com/KablmoOSS/kombustion-another-example-plugin
+    version: ~1.x.x
 
 # This determines the plugin compilations to download
 # leave blank for all
