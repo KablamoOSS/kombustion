@@ -60,10 +60,14 @@ import (
 //go:generate go run ./generate/generate.go
 //go:generate go run ./generate/generate.go pluginParsers
 
+var (
+	version string
+)
+
 func main() {
 	app := cli.NewApp()
 	app.EnableBashCompletion = true
-	app.Version = "0.1.5"
+	app.Version = version
 	app.Name = "kombustion"
 	app.Usage = "A CloudFormation template generator, written in Go."
 	app.Before = func(c *cli.Context) error {
