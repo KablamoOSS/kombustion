@@ -65,6 +65,11 @@ var (
 )
 
 func main() {
+
+	if version == "" {
+		version = "BUILT_FROM_SOURCE"
+	}
+
 	app := cli.NewApp()
 	app.EnableBashCompletion = true
 	app.Version = version
