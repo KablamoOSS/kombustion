@@ -10,7 +10,8 @@ import (
 	"plugin"
 	"reflect"
 
-	"github.com/KablamoOSS/kombustion/plugins"
+	"github.com/KablamoOSS/kombustion/types"
+
 	log "github.com/sirupsen/logrus"
 )
 
@@ -97,7 +98,7 @@ func loadPlugin(filename, pluginDir string) (ret []TypeDefinition) {
 	help, _ := p.Lookup("Help")
 
 	if help != nil {
-		for _, typeMapping := range help.(*plugins.PluginHelp).TypeMappings {
+		for _, typeMapping := range help.(*types.PluginHelp).TypeMappings {
 			var typeDef TypeDefinition
 
 			typeDef.Name = typeMapping.Name
