@@ -16,7 +16,7 @@ import (
 	loads the correct configs/environment.yaml ValueMap
 	for the specified env
 */
-func ResolveEnvironment(envFile string, env string) types.ValueMap {
+func ResolveEnvironment(envFile string, env string) types.TemplateObject {
 
 	if len(envFile) == 0 {
 		envFile = "./environment.yml"
@@ -24,17 +24,17 @@ func ResolveEnvironment(envFile string, env string) types.ValueMap {
 
 	data, err := ioutil.ReadFile(envFile)
 	if err != nil {
-		return make(types.ValueMap)
+		return make(types.TemplateObject)
 	}
 
-	var envMap map[string]types.ValueMap
+	var envMap map[string]types.TemplateObject
 	yaml.Unmarshal(data, &envMap)
 
 	if env, ok := envMap[env]; ok {
 		return env
 	}
 
-	return types.ValueMap{}
+	return types.TemplateObject{}
 }
 
 /*

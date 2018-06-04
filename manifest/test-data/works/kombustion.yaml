@@ -1,0 +1,43 @@
+name: KombustionTest
+
+# architectures:
+#   - "darwin/amd64"
+#   - "freebsd/386"
+#   - "freebsd/amd64"
+#   - "freebsd/arm"
+#   - "linux/386"
+#   - "linux/amd64"
+#   - "linux/arm"
+# Plugins are currently unsupported on Windows
+#   - "windows/386"
+#   - "windows/amd64"
+
+plugins:
+  # Plugin 1 tests the latest version condition
+  - name: github.com/KablamoOSS/kombustion-example-plugin-one
+    version: latest
+
+environments:
+  development:
+    accountIDs: [ "11111111111", "22222222222" ]
+    parameters:
+      parameterOneName: "parameterOneValue"
+      parameterTwoName: "8654238642489624862"
+      parameterThreeName: "3so87tg4y98n7y34ts3t4sh  st34y79p4y3t7 8s"
+      parameterFourName: "hhh:://asdfasdf.sadfasdf:3452345@f][a;v-][0[-"
+
+  staging:
+    accountIDs: [ "555555555"]
+    parameters:
+      parameterOneName: "parameterOneValue"
+      parameterTwoName: "8654238642489624862"
+      parameterThreeName: "3so87tg4y98n7y34ts3t4sh  st34y79p4y3t7 8s"
+      parameterFourName: "hhh:://asdfasdf.sadfasdf:3452345@f][a;v-][0[-"
+
+  production:
+    accountIDs: [ "55555555", "66666666"]
+    parameters:
+      parameterOneName: "parameterOneValue"
+      parameterTwoName: "8654238642489624862"
+      parameterThreeName: "3so87tg4y98n7y34ts3t4sh  st34y79p4y3t7 8s"
+      parameterFourName: "hhh:://asdfasdf.sadfasdf:3452345@f][a;v-][0[-"

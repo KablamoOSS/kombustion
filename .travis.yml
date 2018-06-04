@@ -1,36 +1,51 @@
 language: go
 
+os:
+  - linux
+
 go:
 - 1.10.1
 
+sudo: required
+
 script:
+# Download the dependencies
 - go get -t ./...
 - go generate
+# Run the tests
+- go test ./...
 
-# Before deploy compile for all platforms
 before_deploy:
-- rm -rf build && mkdir build
-- PLATFORMS=(darwin/amd64 freebsd/386 freebsd/amd64 freebsd/arm linux/386 linux/amd64 linux/arm windows/386 windows/amd64)
+# Grab the cross compiler
+- go get github.com/karalabe/xgo
+# Compile
 - |
-  for PLATFORM in "${PLATFORMS[@]}"; do
-      echo "Building $PLATFORM"
-      GOOS=${PLATFORM%/*}
-      GOARCH=${PLATFORM#*/}
-      if [ "$GOOS" = "windows" ]; then
-        build_cmd="GOOS=$GOOS GOARCH=$GOARCH go build -o kombustion -ldflags '-w -s'"
-      else
-        build_cmd="GOOS=$GOOS GOARCH=$GOARCH go build -o kombustion -ldflags '-d -w -s'"
-      fi
-      if ! eval $build_cmd; then
-        echo "Failed building kombustion for $PLATFORM" && return 1
-      fi
-      if [ "$GOOS" = "windows" ]; then
-        zip build/kombustion-${GOOS}-${GOARCH}.zip kombustion
-      else
-        tar cvzf build/kombustion-${GOOS}-${GOARCH}.tgz kombustion
-      fi
-    done
-- ls build
+  # Get the full go repo url
+  REPO=$(pwd |  rev | cut -d'/' -f-3 | rev)
+
+  # Get the name of the app
+  APP="${PWD##*/}"
+
+  # Get this tag as the version
+  VERSION=$(git describe --abbrev=0 --tags)
+  # Ensure a fresh build folder
+  rm -rf build && mkdir build
+  # Compile
+  xgo \
+    -dest build/ \
+    --targets=darwin-10.11/amd64,freebsd/386,freebsd/amd64,freebsd/arm,linux/386,linux/amd64,linux/arm \
+    --ldflags "-X main.version=${VERSION}" \
+    $REPO
+  # Package
+  cd build
+  # For each compiled binary, we're repackaging it in a zip with the architecture name, and
+  # renaming the binary to the app name
+  for FILE in $(ls .); do
+    mv $FILE $APP
+    tar cvzf ${FILE}.tgz $APP
+    rm -f $APP
+  done
+  cd ..
 
 # Deploy to Github release on tags
 deploy:

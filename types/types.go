@@ -4,11 +4,6 @@ type Validatable interface {
 	Validate() []error
 }
 
-type ValueMap map[string]interface{}
-
-// ParserFunc - the func definition for resource/output parsers
-type ParserFunc func(string, string) (ValueMap, error)
-
 // CfResource - A Cloudformation Resource
 type CfResource struct {
 	Type       string      `yaml:"Type"`
@@ -21,16 +16,8 @@ type CfResource struct {
 // ResourceMap - a map of resouces
 type ResourceMap map[string]CfResource
 
-// PluginHelp - a set of available documentation fields
-type PluginHelp struct {
-	Description  string
-	TypeMappings []TypeMapping
-	Snippets     []string
-}
+// TemplateObject - the type for outputs, resources, mappings
+type TemplateObject map[string]interface{}
 
-// TypeMapping - recursive list of types with its associated config object
-type TypeMapping struct {
-	Name        string
-	Description string
-	Config      interface{}
-}
+// ParserFunc - a definition of the function called for resource/output/mapping parsers
+type ParserFunc func(ctx map[string]interface{}, name string, data string) (TemplateObject, error)

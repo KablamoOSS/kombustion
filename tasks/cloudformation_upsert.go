@@ -175,7 +175,7 @@ func resolveParameters(c *cli.Context, cfYaml cloudformation.YamlCloudformation)
 func resolveParametersS3(c *cli.Context) []*awsCF.Parameter {
 	results := []*awsCF.Parameter{}
 
-	var params types.ValueMap
+	var params types.TemplateObject
 
 	// override envFile values with optional --param values
 	paramMap := getParamMap(c)

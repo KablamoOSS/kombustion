@@ -52,6 +52,8 @@ package main
 import (
 	"os"
 
+	"github.com/KablamoOSS/kombustion/manifest"
+	"github.com/KablamoOSS/kombustion/plugins"
 	"github.com/KablamoOSS/kombustion/tasks"
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
@@ -60,12 +62,16 @@ import (
 //go:generate go run ./generate/generate.go
 //go:generate go run ./generate/generate.go pluginParsers
 
+var (
+	version string
+)
+
 func main() {
 	app := cli.NewApp()
 	app.EnableBashCompletion = true
-	app.Version = "0.1.5"
+	app.Version = version
 	app.Name = "kombustion"
-	app.Usage = "A CloudFormation template generator, written in Go."
+	app.Usage = "Extend CloudFormation with plugins."
 	app.Before = func(c *cli.Context) error {
 		log.SetLevel(log.WarnLevel)
 		if c.Bool("verbose") {
@@ -81,6 +87,29 @@ func main() {
 	}
 
 	app.Commands = []cli.Command{
+		// Manifest
+		{
+			Name:      "init",
+			Usage:     "init manifest file",
+			UsageText: "initialise a new manifest file in the current directory",
+			Action:    manifest.InitaliseNewManifestTask,
+			// Flags not yet programmed
+			// Flags:     manifest.InitManifestFlags,
+		},
+		// Plugin management
+		{
+			Name:      "add",
+			Usage:     "add github.com/organisation/plugin",
+			UsageText: "add github.com/organisation/plugin github.com/organisation/pluginTwo",
+			Action:    plugins.AddPluginToManifest,
+		},
+		{
+			Name:      "install",
+			Usage:     "install all plugins in kombustion.yaml",
+			UsageText: "install all plugins in kombustion.yaml",
+			Action:    plugins.InstallPlugins,
+		},
+		// Cloudformation
 		{
 			Name:    "cloudformation",
 			Aliases: []string{"cf"},
