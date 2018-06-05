@@ -14,7 +14,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-var Generate_Flags = []cli.Flag{
+var GenerateFlags = []cli.Flag{
 	cli.StringFlag{
 		Name:  "format, f",
 		Usage: "cf output format (only yaml is supported)",
@@ -25,7 +25,7 @@ var Generate_Flags = []cli.Flag{
 		Usage: "environment config to use from ./config/environment.yaml",
 	},
 	cli.StringFlag{
-		Name:  "envFile",
+		Name:  "env-file",
 		Usage: "path to the environment.yaml file",
 	},
 	cli.StringSliceFlag{
@@ -33,7 +33,7 @@ var Generate_Flags = []cli.Flag{
 		Usage: "cloudformation parameters. eg. ( -p Env=dev -p BucketName=test )",
 	},
 	cli.BoolFlag{
-		Name:  "noBaseOutputs, b",
+		Name:  "no-base-outputs, b",
 		Usage: "disable generation of outputs for Base AWS types",
 	},
 }
@@ -60,9 +60,9 @@ func generateYamlTemplate(c *cli.Context) ([]byte, cloudformation.YamlCloudforma
 	cf, err := cloudformation.GenerateYamlStack(
 		cloudformation.GenerateParams{
 			Filename:           c.Args().Get(0),
-			EnvFile:            c.String("envFile"),
+			EnvFile:            c.String("env-file"),
 			Env:                c.String("env"),
-			DisableBaseOutputs: c.Bool("noBaseOutputs"),
+			DisableBaseOutputs: c.Bool("no-base-outputs"),
 			ParamMap:           paramMap,
 		})
 	checkError(err)

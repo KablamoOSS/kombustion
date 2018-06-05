@@ -4,7 +4,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-var PrintEvents_Flags = []cli.Flag{
+var PrintEventsFlags = []cli.Flag{
 	cli.StringFlag{
 		Name:  "region, r",
 		Usage: "region to deploy to",

@@ -111,73 +111,32 @@ func main() {
 		},
 		// Cloudformation
 		{
-			Name:    "cloudformation",
-			Aliases: []string{"cf"},
-			Usage:   "tasks for building and deploying cloudformation templates",
-			Flags: []cli.Flag{
-				cli.StringFlag{
-					Name:  "profile",
-					Usage: "aws credentials profile to use",
-				},
-			},
-			Subcommands: []cli.Command{
-				{
-					Name:      "generate",
-					Usage:     "parse a cloudformation template from ./config",
-					UsageText: "kombustion cloudformation generate [command options] [stack]",
-					Action:    tasks.Generate,
-					Flags:     tasks.Generate_Flags,
-				},
-				{
-					Name:      "upsert",
-					Usage:     "upsert a cloudformation template or a yaml config",
-					UsageText: "kombustion cloudformation upsert [command options] [stack]",
-					Action:    tasks.Upsert,
-					Flags:     tasks.Upsert_Flags,
-				},
-				{
-					Name:      "delete",
-					Usage:     "delete a cloudformation stack",
-					UsageText: "kombustion cloudformation delete [command options] [stackName]",
-					Action:    tasks.Delete,
-					Flags:     tasks.Delete_Flags,
-				},
-				{
-					Name:      "events",
-					Usage:     "print all events for a cloudformation stack ",
-					UsageText: "kombustion cloudformation events [command options] [stackName]",
-					Action:    tasks.PrintEvents,
-					Flags:     tasks.PrintEvents_Flags,
-				},
-				{
-					Name:      "plugins",
-					Usage:     "get or list plugins (see cf plugins help)",
-					UsageText: "kombustion cloudformation plugins [command options]",
-					Subcommands: []cli.Command{
-						{
-							Name:      "get",
-							Usage:     "install a plugin from the plugin repository",
-							UsageText: "kombustion cloudformation plugins get [command options] pluginname",
-							Action:    tasks.GetPlugin,
-							Flags:     tasks.GetPlugin_Flags,
-						},
-						{
-							Name:      "list",
-							Usage:     "list all loaded plugins",
-							UsageText: "kombustion cloudformation plugins list [command options]",
-							Action:    tasks.PrintPlugins,
-							Flags:     tasks.PrintPlugins_Flags,
-						},
-						{
-							Name:      "delete",
-							Usage:     "deletes the given plugin",
-							UsageText: "kombustion cloudformation plugins delete [command options] pluginname",
-							Action:    tasks.DeletePlugin,
-							Flags:     tasks.DeletePlugin_Flags,
-						},
-					},
-				},
-			},
+			Name:      "generate",
+			Usage:     "parse a cloudformation template from ./config",
+			UsageText: "kombustion cloudformation generate [command options] [stack]",
+			Action:    tasks.Generate,
+			Flags:     tasks.GenerateFlags,
+		},
+		{
+			Name:      "upsert",
+			Usage:     "upsert a cloudformation template or a yaml config",
+			UsageText: "kombustion cloudformation upsert [command options] [stack]",
+			Action:    tasks.Upsert,
+			Flags:     tasks.UpsertFlags,
+		},
+		{
+			Name:      "delete",
+			Usage:     "delete a cloudformation stack",
+			UsageText: "kombustion cloudformation delete [command options] [stackName]",
+			Action:    tasks.Delete,
+			Flags:     tasks.DeleteFlags,
+		},
+		{
+			Name:      "events",
+			Usage:     "print all events for a cloudformation stack ",
+			UsageText: "kombustion cloudformation events [command options] [stackName]",
+			Action:    tasks.PrintEvents,
+			Flags:     tasks.PrintEventsFlags,
 		},
 	}
 

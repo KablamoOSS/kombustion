@@ -10,7 +10,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-var Delete_Flags = []cli.Flag{
+var DeleteFlags = []cli.Flag{
 	cli.StringFlag{
 		Name:  "region, r",
 		Usage: "region to delete from",
