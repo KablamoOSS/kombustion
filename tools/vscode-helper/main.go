@@ -10,7 +10,7 @@ import (
 	"plugin"
 	"reflect"
 
-	"github.com/KablamoOSS/kombustion/plugins/api/types"
+	"github.com/KablamoOSS/kombustion/pkg/plugins/api/types"
 
 	log "github.com/sirupsen/logrus"
 )

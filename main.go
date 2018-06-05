@@ -52,9 +52,9 @@ package main
 import (
 	"os"
 
-	"github.com/KablamoOSS/kombustion/manifest"
-	"github.com/KablamoOSS/kombustion/plugins"
-	"github.com/KablamoOSS/kombustion/tasks"
+	"github.com/KablamoOSS/kombustion/internal/manifest"
+	"github.com/KablamoOSS/kombustion/internal/plugins"
+	"github.com/KablamoOSS/kombustion/internal/tasks"
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
