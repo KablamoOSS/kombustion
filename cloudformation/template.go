@@ -206,7 +206,7 @@ func addBaseResources(baseResources types.TemplateObject, configResources types.
 	return
 }
 
-func yamlTemplateCF(resources types.ResourceMap, parsers ParserMap, warn bool) (compiled types.TemplateObject, err error) {
+func yamlTemplateCF(resources types.ResourceMap, parsers ParserMap, isResources bool) (compiled types.TemplateObject, err error) {
 	compiled = make(types.TemplateObject)
 
 	context := make(map[string]interface{})
@@ -217,28 +217,43 @@ func yamlTemplateCF(resources types.ResourceMap, parsers ParserMap, warn bool) (
 			}).Warn("Condition being applied on resource, this is not yet supported")
 		}
 
-		parser, ok := parsers[resource.Type]
-		if !ok {
-			if warn {
-				log.WithFields(log.Fields{
-					"type": resource.Type,
-				}).Warn("Type not found")
-			}
-			continue
-		}
-
-		var resourseData []byte
-		if resourseData, err = yaml.Marshal(resource); err != nil {
-			return
-		}
-
 		var output types.TemplateObject
-		if output, err = parser(context, resourceName, string(resourseData)); err != nil {
-			log.WithFields(log.Fields{
-				"resource": resourceName,
-			}).Error("Error parsing resource")
-			logFileError(string(resourseData), err)
-			return
+		var resourseData []byte
+
+		if isResources && (resource.Type == "AWS::CloudFormation::CustomResource" || strings.HasPrefix(resource.Type, "Custom::")) {
+			var cfResource types.CfResource
+
+			if resourseData, err = yaml.Marshal(resource); err != nil {
+				return
+			}
+
+			if err = yaml.Unmarshal([]byte(resourseData), &cfResource); err != nil {
+				return
+			}
+
+			output = types.TemplateObject{resourceName: cfResource}
+		} else {
+			parser, ok := parsers[resource.Type]
+			if !ok {
+				if isResources {
+					log.WithFields(log.Fields{
+						"type": resource.Type,
+					}).Warn("Type not found")
+				}
+				continue
+			}
+
+			if resourseData, err = yaml.Marshal(resource); err != nil {
+				return
+			}
+
+			if output, err = parser(context, resourceName, string(resourseData)); err != nil {
+				log.WithFields(log.Fields{
+					"resource": resourceName,
+				}).Error("Error parsing resource")
+				logFileError(string(resourseData), err)
+				return
+			}
 		}
 
 		// collect all output resources in one list
