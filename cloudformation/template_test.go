@@ -24,7 +24,7 @@ func TestTemplateYamlCF_iamRole_success(t *testing.T) {
 		rolekey: role,
 	}
 
-	expectedResources := TemplateObject{
+	expectedResources := types.TemplateObject{
 		rolekey: resources.NewIAMRole(
 			resources.IAMRoleProperties{
 				RoleName:                 rolekey,

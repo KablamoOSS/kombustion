@@ -14,7 +14,8 @@ name: KombustionTest
 
 plugins:
   # Plugin 1 tests the latest version condition
-  - name: github.com/KablamoOSS/kombustion-example-plugin-one
+  "github.com/KablamoOSS/kombustion-example-plugin-one@latest":
+    name: github.com/KablamoOSS/kombustion-example-plugin-one
     version: latest
 
 environments:

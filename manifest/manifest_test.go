@@ -3,6 +3,8 @@ package manifest
 import (
 	"fmt"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 	// "github.com/google/go-cmp/cmp"
 )
 
@@ -25,9 +27,9 @@ func TestLoadManifestFromString(t *testing.T) {
 			manifestYaml: `name: TestManifest`,
 			output: Manifest{
 				Name:               "TestManifest",
-				Plugins:            map[string]ManifestPlugin(nil),
+				Plugins:            map[string]Plugin(nil),
 				Architectures:      []string(nil),
-				Environments:       map[string]ManifestEnvironment(nil),
+				Environments:       map[string]Environment(nil),
 				HideDefaultExports: false,
 			},
 		},
@@ -44,9 +46,9 @@ func TestLoadManifestFromString(t *testing.T) {
 hideDefaultExports: true`,
 			output: Manifest{
 				Name:               "TestManifest",
-				Plugins:            map[string]ManifestPlugin(nil),
+				Plugins:            map[string]Plugin(nil),
 				Architectures:      []string(nil),
-				Environments:       map[string]ManifestEnvironment(nil),
+				Environments:       map[string]Environment(nil),
 				HideDefaultExports: true,
 			},
 		},
@@ -56,43 +58,46 @@ hideDefaultExports: true`,
 architectures: ["darwin/x64", "linux/386"]
 plugins:
   # Plugin 1 tests the latest version condition
-  - name: github.com/KablamoOSS/kombustion-example-plugin-one
+  "github.com/KablamoOSS/kombustion-example-plugin-one@latest":
+    name: github.com/KablamoOSS/kombustion-example-plugin-one
     version: latest
 
   # Plugin 2 tests the equals/exact version condition
-  - name: github.com/KablamoOSS/kombustion-example-plugin-two
+  "github.com/KablamoOSS/kombustion-example-plugin-two@=2.0.1":
+    name: github.com/KablamoOSS/kombustion-example-plugin-two
     version: "=2.0.1"
 
   # Plugin 3 tests the greater than version condition
-  - name: github.com/KablamoOSS/kombustion-example-plugin-three
+  "github.com/KablamoOSS/kombustion-example-plugin-three@>3.x.x":
+    name: github.com/KablamoOSS/kombustion-example-plugin-three
     version: ">3.x.x"
-
   # Plugin 4 tests the less than version condition
-  - name: github.com/KablamoOSS/kombustion-example-plugin-four
+  "github.com/KablamoOSS/kombustion-example-plugin-four@<4.x.x":
+    name: github.com/KablamoOSS/kombustion-example-plugin-four
     version: "<4.x.x"
 `,
 			output: Manifest{
 				Name:          "TestManifestWithPlugins",
 				Architectures: []string{"darwin/x64", "linux/386"},
-				Plugins: map[string]ManifestPlugin{
-					"github.com/KablamoOSS/kombustion-example-plugin-one": {
+				Plugins: map[string]Plugin{
+					"github.com/KablamoOSS/kombustion-example-plugin-one@latest": {
 						Name:    "github.com/KablamoOSS/kombustion-example-plugin-one",
 						Version: "latest",
 					},
-					"github.com/KablamoOSS/kombustion-example-plugin-two": {
+					"github.com/KablamoOSS/kombustion-example-plugin-two@=2.0.1": {
 						Name:    "github.com/KablamoOSS/kombustion-example-plugin-two",
 						Version: "=2.0.1",
 					},
-					"github.com/KablamoOSS/kombustion-example-plugin-three": {
+					"github.com/KablamoOSS/kombustion-example-plugin-three@>3.x.x": {
 						Name:    "github.com/KablamoOSS/kombustion-example-plugin-three",
 						Version: ">3.x.x",
 					},
-					"github.com/KablamoOSS/kombustion-example-plugin-four": {
+					"github.com/KablamoOSS/kombustion-example-plugin-four@<4.x.x": {
 						Name:    "github.com/KablamoOSS/kombustion-example-plugin-four",
 						Version: "<4.x.x",
 					},
 				},
-				Environments:       map[string]ManifestEnvironment(nil),
+				Environments:       map[string]Environment(nil),
 				HideDefaultExports: false,
 			},
 		},
@@ -126,10 +131,10 @@ environments:
 `,
 			output: Manifest{
 				Name:               "TestManifestWithEnvironment",
-				Plugins:            map[string]ManifestPlugin(nil),
+				Plugins:            map[string]Plugin(nil),
 				Architectures:      []string(nil),
 				HideDefaultExports: false,
-				Environments: map[string]ManifestEnvironment{
+				Environments: map[string]Environment{
 					"development": {
 						AccountIDs: []string{"11111111111", "22222222222"},
 						Parameters: map[string]string{
@@ -162,8 +167,8 @@ environments:
 		},
 	}
 
-	for _, test := range tests {
-		_, err := loadManifestFromString([]byte(test.manifestYaml))
+	for i, test := range tests {
+		testOutput, err := loadManifestFromString([]byte(test.manifestYaml))
 		if err != nil {
 			if test.throws != nil {
 				// currently not testing the error that is thrown, just that one is
@@ -171,11 +176,11 @@ environments:
 				t.Error(err)
 			}
 		}
-		// if cmp.Equal(testOutput, test.output) == false {
-		// 	if diff := cmp.Diff(testOutput, test.output); diff != "" {
-		// 		t.Errorf("Test #%d [%s] output: (-got +want)\n%s", i, test.name, diff)
-		// 	}
-		// }
+		if cmp.Equal(testOutput, test.output) == false {
+			if diff := cmp.Diff(testOutput, test.output); diff != "" {
+				t.Errorf("Test #%d [%s] output: (-got +want)\n%s", i, test.name, diff)
+			}
+		}
 	}
 }
 
@@ -191,15 +196,15 @@ func TestFindAndLoadManifest(t *testing.T) {
 			input: "test-data/works",
 			output: Manifest{
 				Name: "KombustionTest",
-				Plugins: map[string]ManifestPlugin{
-					"github.com/KablamoOSS/kombustion-example-plugin-one": {
+				Plugins: map[string]Plugin{
+					"github.com/KablamoOSS/kombustion-example-plugin-one@latest": {
 						Name:    "github.com/KablamoOSS/kombustion-example-plugin-one",
 						Version: "latest",
 					},
 				},
 				Architectures:      []string(nil),
 				HideDefaultExports: false,
-				Environments: map[string]ManifestEnvironment{
+				Environments: map[string]Environment{
 					"development": {
 						AccountIDs: []string{"11111111111", "22222222222"},
 						Parameters: map[string]string{
@@ -242,8 +247,8 @@ func TestFindAndLoadManifest(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		_, err := findAndLoadManifest(test.input)
+	for i, test := range tests {
+		testOutput, err := findAndLoadManifest(test.input)
 		if err != nil {
 			if test.throws != nil {
 				// currently not testing the error that is thrown, just that one is
@@ -251,10 +256,10 @@ func TestFindAndLoadManifest(t *testing.T) {
 				t.Error(err)
 			}
 		}
-		// if cmp.Equal(testOutput, test.output) == false {
-		// 	if diff := cmp.Diff(testOutput, test.output); diff != "" {
-		// 		t.Errorf("Test #%d [%s] output: (-got +want)\n%s", i, test.name, diff)
-		// 	}
-		// }
+		if cmp.Equal(testOutput, test.output) == false {
+			if diff := cmp.Diff(testOutput, test.output); diff != "" {
+				t.Errorf("Test #%d [%s] output: (-got +want)\n%s", i, test.name, diff)
+			}
+		}
 	}
 }

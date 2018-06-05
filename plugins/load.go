@@ -186,7 +186,7 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 	// TODO: improve these error messages, and provide links to the docs for plugin devs
 	if config.Name == "" {
 		// err
-		log.Fatal(fmt.Sprintf("%s did not supply a name, this plugin cannot be loaded"))
+		log.Fatal(fmt.Sprintf("%s did not supply a name, this plugin cannot be loaded", config.Name))
 		foundIssue = true
 	}
 	// } else if config.Name != pluginName {
@@ -196,7 +196,7 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 	// }
 
 	if config.Prefix == "" {
-		log.Fatal(fmt.Sprintf("%s did not supply a prefix, this plugin cannot be loaded"))
+		log.Fatal(fmt.Sprintf("%s did not supply a prefix, this plugin cannot be loaded", config.Name))
 		foundIssue = true
 	}
 
