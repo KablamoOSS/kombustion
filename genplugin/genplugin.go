@@ -17,14 +17,14 @@ import (
 )
 
 type YamlConfig struct {
-	AWSTemplateFormatVersion string         `yaml:"AWSTemplateFormatVersion,omitempty"`
-	Description              string         `yaml:"Description,omitempty"`
-	Parameters               ParameterMap   `yaml:"Parameters,omitempty"`
-	Mappings                 types.ValueMap `yaml:"Mappings,omitempty"`
-	Conditions               types.ValueMap `yaml:"Conditions,omitempty"`
-	Transform                types.ValueMap `yaml:"Transform,omitempty"`
-	Resources                ResourceMap    `yaml:"Resources"`
-	Outputs                  types.ValueMap `yaml:"Outputs,omitempty"`
+	AWSTemplateFormatVersion string               `yaml:"AWSTemplateFormatVersion,omitempty"`
+	Description              string               `yaml:"Description,omitempty"`
+	Parameters               ParameterMap         `yaml:"Parameters,omitempty"`
+	Mappings                 types.TemplateObject `yaml:"Mappings,omitempty"`
+	Conditions               types.TemplateObject `yaml:"Conditions,omitempty"`
+	Transform                types.TemplateObject `yaml:"Transform,omitempty"`
+	Resources                ResourceMap          `yaml:"Resources"`
+	Outputs                  types.TemplateObject `yaml:"Outputs,omitempty"`
 }
 
 type CfResource struct {
@@ -239,7 +239,7 @@ func generateResources(config YamlConfig, resname string) []byte {
 	writeLine(buf, "package resources\n"+
 		"\n"+
 		"import (\n"+
-		"	\"github.com/KablamoOSS/kombustion/types\"\n")
+		"	\"github.com/KablamoOSS/kombustion/plugins\"\n")
 	if needsResourcesImport {
 		writeLine(buf, "   \"github.com/KablamoOSS/kombustion/pluginParsers/resources\"\n"+
 			"   yaml \"gopkg.in/yaml.v2\"\n")
@@ -261,9 +261,9 @@ func generateResources(config YamlConfig, resname string) []byte {
 			"}\n\n")
 	}
 
-	writeLine(buf, "func Parse"+resname+"(name string, data string) (cf types.ValueMap, err error) {\n"+
+	writeLine(buf, "func Parse"+resname+"(name string, data string) (cf types.TemplateObject, err error) {\n"+
 		"	// create a group of objects (each to be validated)\n"+
-		"	cf = make(types.ValueMap)\n"+
+		"	cf = make(types.TemplateObject)\n"+
 		"\n")
 
 	if len(config.Parameters) > 0 {
@@ -352,16 +352,16 @@ func generateMain(pluginname string, restype string, resname string, config Yaml
 		"\n"+
 		"import (\n"+
 		"	\"github.com/KablamoOSS/kombustion/plugins/"+pluginname+"/resources\"\n"+
-		"	\"github.com/KablamoOSS/kombustion/types\"\n"+
+		"	\"github.com/KablamoOSS/kombustion/plugins\"\n"+
 		")\n"+
 		"\n"+
-		"var Resources = map[string]types.ParserFunc{\n"+
+		"var Resources = map[string]plugins.ParserFunc{\n"+
 		"	\""+restype+"\": resources.Parse"+resname+",\n"+
 		"}\n"+
 		"\n"+
-		"var Outputs = map[string]types.ParserFunc{}\n"+
+		"var Outputs = map[string]plugins.ParserFunc{}\n"+
 		"\n"+
-		"var Mappings = map[string]types.ParserFunc{}\n"+
+		"var Mappings = map[string]plugins.ParserFunc{}\n"+
 		"\n"+
 		"func main() {}\n")
 

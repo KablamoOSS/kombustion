@@ -1,12 +1,13 @@
 # Writing your first plugin
 
-!> Kombustion plugins are not yet supported on Windows. Please use Docker or WSL in the meantime.
+!> Kombustion plugins are not yet supported on Windows. Please use Docker or WSL
+in the meantime.
 
 ## Using plugins
 
-Kombustion utilizes the `package` plugin (https://godoc.org/plugin). By default, Kombustion
-will look for plugins in the `~/.kombustion/plugins` directory. You can also specify custom
-plugins directory:
+Kombustion utilizes the `package` plugin (https://godoc.org/plugin). By default,
+Kombustion will look for plugins in the `~/.kombustion/plugins` directory. You
+can also specify custom plugins directory:
 
 ```sh
 PLUGINS=/plugins kombustion cf generate stack.yaml
@@ -14,7 +15,9 @@ PLUGINS=/plugins kombustion cf generate stack.yaml
 
 ## Building from the plugin quickstart
 
-The following documentation uses the plugin name `myplugin` as an example. Please ensure you have completed the [initialization](initialization.md) before starting.
+The following documentation uses the plugin name `myplugin` as an example.
+Please ensure you have completed the [initialization](initialization.md) before
+starting.
 
 ```sh
 cd $GOPATH/src/github.com/KablamoOSS/kombustion/plugins/
@@ -23,23 +26,24 @@ mv kombustion-plugin-boilerplate myplugin
 cd myplugin
 ```
 
-Open the file `plugin.go` in the tutorial directory and amend it to produce the following content:
+Open the file `plugin.go` in the tutorial directory and amend it to produce the
+following content:
 
 ```plugin.go
 package main
 
 import (
 	"github.com/KablamoOSS/kombustion/plugins/myplugin/resources"
-	"github.com/KablamoOSS/kombustion/types"
+	"github.com/KablamoOSS/kombustion/plugins"
 )
 
-var Resources = map[string]types.ParserFunc{
+var Resources = map[string]plugins.ParserFunc{
 	"Tutorial::Example::MultiBucket": resources.ParseExampleMultiBuckets,
 }
 
-var Outputs = map[string]types.ParserFunc{}
+var Outputs = map[string]plugins.ParserFunc{}
 
-var Mappings = map[string]types.ParserFunc{}
+var Mappings = map[string]plugins.ParserFunc{}
 
 var Help = types.PluginHelp{
 	Description: "My tutorial plugin",
@@ -55,7 +59,9 @@ var Help = types.PluginHelp{
 func main() {}
 ```
 
-We've now added a reference to the `Tutorial::Example::MultiBucket`, which we will now define. Open the `resources/examplemultibucket.go` file and amend it to match the following:
+We've now added a reference to the `Tutorial::Example::MultiBucket`, which we
+will now define. Open the `resources/examplemultibucket.go` file and amend it to
+match the following:
 
 ```resources/examplemultibucket.go
 package resources
@@ -75,7 +81,7 @@ type MultiBucketConfig struct {
 	} `yaml:"Properties"`
 }
 
-func ParseExampleMultiBuckets(name string, data string) (cf types.ValueMap, err error) {
+func ParseExampleMultiBuckets(name string, data string) (cf plugins.ValueMap, err error) {
 	// Parse the config data
 	var config MultiBucketConfig
 	if err = yaml.Unmarshal([]byte(data), &config); err != nil {
@@ -86,7 +92,7 @@ func ParseExampleMultiBuckets(name string, data string) (cf types.ValueMap, err 
 	config.Validate()
 
 	// create a group of objects (each to be validated)
-	cf = make(types.ValueMap)
+	cf = make(plugins.ValueMap)
 
 	// defaults
 	count := 1
@@ -114,22 +120,29 @@ func (this MultiBucketConfig) Validate() {
 }
 ```
 
-We've just created a `MultiBucketConfig` type, which will be used to pass the values for the `Properties:` section in your template. The defined `Count` property defines how many S3 buckets will be output in the processed template. If that property is not defined, we output a warning and use the default value, 1.
+We've just created a `MultiBucketConfig` type, which will be used to pass the
+values for the `Properties:` section in your template. The defined `Count`
+property defines how many S3 buckets will be output in the processed template.
+If that property is not defined, we output a warning and use the default
+value, 1.
 
 ## Compiling the plugin
 
-Now we have the plugin fully defined, let's build it for your system. Execute the following:
+Now we have the plugin fully defined, let's build it for your system. Execute
+the following:
 
 ```sh
 cd $GOPATH/src/github.com/KablamoOSS/kombustion/plugins/myplugin
 go build -buildmode plugin
 ```
 
-You should now see that we have created the `myplugin.so` file in the directory. Kombustion loads this compiled plugin at runtime.
+You should now see that we have created the `myplugin.so` file in the directory.
+Kombustion loads this compiled plugin at runtime.
 
 ## Test your plugin
 
-You'll now need to test your plugin. Let's define that in a file called `mystack.yaml`:
+You'll now need to test your plugin. Let's define that in a file called
+`mystack.yaml`:
 
 ```mystack.yaml
 AWSTemplateFormatVersion: 2010-09-09

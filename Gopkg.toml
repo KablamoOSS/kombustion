@@ -45,10 +45,15 @@
   name = "github.com/urfave/cli"
   version = "1.20.0"
 
-[[constraint]]
-  name = "gopkg.in/yaml.v2"
-  version = "2.2.1"
 
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  name = "gopkg.in/AlecAivazis/survey.v1"
+  version = "1.5.3"
+
+[[constraint]]
+  name = "github.com/google/go-github"
+  version = "15.0.0"

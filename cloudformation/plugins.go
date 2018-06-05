@@ -11,9 +11,8 @@ import (
 	"plugin"
 	"runtime"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/KablamoOSS/kombustion/types"
+	log "github.com/sirupsen/logrus"
 )
 
 const RepositoryPath = "https://downloads.kombustion.io/plugins"
