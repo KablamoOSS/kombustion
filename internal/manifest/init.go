@@ -4,36 +4,11 @@ import (
 	"log"
 	"strings"
 
-	"github.com/urfave/cli"
-
 	"gopkg.in/AlecAivazis/survey.v1"
 )
 
-// InitManifestFlags - Flags that will prevent prompts
-// TODO: implment flags
-var InitManifestFlags = []cli.Flag{
-	cli.StringFlag{
-		Name:  "name, n",
-		Usage: "Set the name of the project",
-	},
-	cli.StringFlag{
-		Name:  "environments",
-		Usage: "comma seperated environments eg: production,development",
-	},
-}
-
-// InitaliseNewManifestTask - Create a new manifest file, and prompt to fill out
-// the default required fields
-func InitaliseNewManifestTask(c *cli.Context) error {
-
-	// This funciton is a thin layer between the task, and the cli wrapper
-	err := initaliseNewManifest()
-
-	return err
-}
-
-// initaliseNewManifest
-func initaliseNewManifest() error {
+// InitaliseNewManifest creates a new manifest with a survey
+func InitaliseNewManifest() error {
 	// TODO: Check if there is a manifest file and exit
 
 	// Load the manifest file from this directory

@@ -15,8 +15,8 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// installPlugins - Get the lock file and then call installPluginsWithLock
-func installPlugins() error {
+// InstallPlugins - Get the lock file and then call installPluginsWithLock
+func InstallPlugins() error {
 
 	lockFile, err := lock.FindAndLoadLock()
 	if err != nil {

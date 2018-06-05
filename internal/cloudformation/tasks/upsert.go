@@ -14,54 +14,9 @@ import (
 	"github.com/urfave/cli"
 )
 
-var UpsertFlags = []cli.Flag{
-	cli.StringFlag{
-		Name:  "region, r",
-		Usage: "region to deploy to",
-		Value: "ap-southeast-2",
-	},
-	cli.StringFlag{
-		Name:  "stack-name",
-		Usage: "stack name to deploy (defaults to filename)",
-	},
-	cli.StringFlag{
-		Name:  "url",
-		Usage: "Url to use for the stack definition (s3)",
-	},
+func UpsertStack(generateParams cloudformation.GenerateParams, profile, region string) {
+cf := getCF(profile, region)
 
-	// cf generate flags
-	cli.StringFlag{
-		Name:  "format, f",
-		Usage: "cf output format (only yaml is supported)",
-		Value: "yaml",
-	},
-	cli.StringFlag{
-		Name:  "env",
-		Usage: "environment config to use from ./config/environment.yaml",
-	},
-	cli.StringFlag{
-		Name:  "env-file",
-		Usage: "path to the environment.yaml file",
-	},
-	cli.StringSliceFlag{
-		Name:  "param, p",
-		Usage: "cloudformation parameters. eg. ( --param Env=dev --param BucketName=test )",
-	},
-	cli.BoolFlag{
-		Name:  "no-base-outputs, b",
-		Usage: "disable generation of outputs for Base AWS types",
-	},
-	cli.BoolFlag{
-		Name:  "iam, i",
-		Usage: "gives the capability to perform upserts of IAM resources",
-	},
-}
-
-func Upsert(c *cli.Context) {
-	upsertStack(c, getCF(c.GlobalString("profile"), c.String("region")))
-}
-
-func upsertStack(c *cli.Context, cf *awsCF.CloudFormation) {
 	var err error
 	var status *awsCF.DescribeStacksOutput
 
@@ -96,7 +51,7 @@ func upsertStack(c *cli.Context, cf *awsCF.CloudFormation) {
 		checkError(err)
 	} else {
 		// use template from file
-		data, cfYaml := generateTemplate(c)
+		data, cfYaml := GenerateTemplate(generateParams)
 		_, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
 		if err == nil { //update
 			_, err = cf.UpdateStack(&awsCF.UpdateStackInput{

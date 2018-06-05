@@ -52,8 +52,7 @@ package main
 import (
 	"os"
 
-	"github.com/KablamoOSS/kombustion/internal/manifest"
-	"github.com/KablamoOSS/kombustion/internal/plugins"
+	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/tasks"
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
@@ -73,18 +72,15 @@ func main() {
 	app.Name = "kombustion"
 	app.Usage = "Extend CloudFormation with plugins."
 	app.Before = func(c *cli.Context) error {
+		printer.Progress("Kombusting")
 		log.SetLevel(log.WarnLevel)
 		if c.Bool("verbose") {
 			log.SetLevel(log.InfoLevel)
 		}
 		return nil
 	}
-	app.Flags = []cli.Flag{
-		cli.BoolFlag{
-			Name:  "verbose",
-			Usage: "output with high verbosity",
-		},
-	}
+
+	app.Flags = tasks.GlobalFlags
 
 	app.Commands = []cli.Command{
 		// Manifest
@@ -92,22 +88,21 @@ func main() {
 			Name:      "init",
 			Usage:     "init manifest file",
 			UsageText: "initialise a new manifest file in the current directory",
-			Action:    manifest.InitaliseNewManifestTask,
-			// Flags not yet programmed
-			// Flags:     manifest.InitManifestFlags,
+			Action:    tasks.InitaliseNewManifestTask,
+			Flags:     tasks.InitManifestFlags,
 		},
 		// Plugin management
 		{
 			Name:      "add",
 			Usage:     "add github.com/organisation/plugin",
 			UsageText: "add github.com/organisation/plugin github.com/organisation/pluginTwo",
-			Action:    plugins.AddPluginToManifest,
+			Action:    tasks.AddPluginToManifest,
 		},
 		{
 			Name:      "install",
 			Usage:     "install all plugins in kombustion.yaml",
 			UsageText: "install all plugins in kombustion.yaml",
-			Action:    plugins.InstallPlugins,
+			Action:    tasks.InstallPlugins,
 		},
 		// Cloudformation
 		{
@@ -129,14 +124,14 @@ func main() {
 			Usage:     "delete a cloudformation stack",
 			UsageText: "kombustion cloudformation delete [command options] [stackName]",
 			Action:    tasks.Delete,
-			Flags:     tasks.DeleteFlags,
+			Flags:     tasks.CloudFormationStackFlags,
 		},
 		{
 			Name:      "events",
 			Usage:     "print all events for a cloudformation stack ",
 			UsageText: "kombustion cloudformation events [command options] [stackName]",
 			Action:    tasks.PrintEvents,
-			Flags:     tasks.PrintEventsFlags,
+			Flags:     tasks.CloudFormationStackFlags,
 		},
 	}
 
