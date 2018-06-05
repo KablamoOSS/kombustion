@@ -14,14 +14,14 @@ import (
 	"github.com/urfave/cli"
 )
 
-var Upsert_Flags = []cli.Flag{
+var UpsertFlags = []cli.Flag{
 	cli.StringFlag{
 		Name:  "region, r",
 		Usage: "region to deploy to",
 		Value: "ap-southeast-2",
 	},
 	cli.StringFlag{
-		Name:  "stackName",
+		Name:  "stack-name",
 		Usage: "stack name to deploy (defaults to filename)",
 	},
 	cli.StringFlag{
@@ -40,7 +40,7 @@ var Upsert_Flags = []cli.Flag{
 		Usage: "environment config to use from ./config/environment.yaml",
 	},
 	cli.StringFlag{
-		Name:  "envFile",
+		Name:  "env-file",
 		Usage: "path to the environment.yaml file",
 	},
 	cli.StringSliceFlag{
@@ -48,11 +48,11 @@ var Upsert_Flags = []cli.Flag{
 		Usage: "cloudformation parameters. eg. ( --param Env=dev --param BucketName=test )",
 	},
 	cli.BoolFlag{
-		Name:  "noBaseOutputs, b",
+		Name:  "no-base-outputs, b",
 		Usage: "disable generation of outputs for Base AWS types",
 	},
 	cli.BoolFlag{
-		Name:  "allowIAMUpsert, i",
+		Name:  "iam, i",
 		Usage: "gives the capability to perform upserts of IAM resources",
 	},
 }
@@ -66,12 +66,12 @@ func upsertStack(c *cli.Context, cf *awsCF.CloudFormation) {
 	var status *awsCF.DescribeStacksOutput
 
 	stackName := c.Args().Get(0)
-	if len(c.String("stackName")) > 0 {
-		stackName = c.String("stackName")
+	if len(c.String("stack-name")) > 0 {
+		stackName = c.String("stack-name")
 	}
 
 	capabilities := aws.StringSlice([]string{})
-	if c.Bool("allowIAMUpsert") {
+	if c.Bool("iam") {
 		capabilities = aws.StringSlice([]string{"CAPABILITY_NAMED_IAM"})
 	}
 
@@ -146,7 +146,7 @@ func resolveParameters(c *cli.Context, cfYaml cloudformation.YamlCloudformation)
 	results := []*awsCF.Parameter{}
 
 	// Get params from the envFile
-	env := cloudformation.ResolveEnvironment(c.String("envFile"), c.String("env"))
+	env := cloudformation.ResolveEnvironment(c.String("env-file"), c.String("env"))
 
 	// override envFile values with optional --param values
 	params := getParamMap(c)
