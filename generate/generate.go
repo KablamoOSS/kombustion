@@ -85,7 +85,7 @@ const parserMapTemplate = `{{$MainPackageName := .MainPackageName}}package {{$Ma
 
 import (
   "github.com/KablamoOSS/kombustion/types"
-  "github.com/KablamoOSS/kombustion/{{$MainPackageName}}/{{$PackageName}}"
+  "github.com/KablamoOSS/kombustion/pkg/{{$MainPackageName}}/{{$PackageName}}"
 )
 
 // GetParsers_{{$PackageName}} returns parser functions
@@ -140,7 +140,7 @@ import (
 	"fmt"
 	{{- end}}
 	{{- if .NeedsPropertiesImport}}
-	"github.com/KablamoOSS/kombustion/{{$MainPackageName}}/properties"
+	"github.com/KablamoOSS/kombustion/pkg/{{$MainPackageName}}/properties"
 	{{- end}}
 )
 
@@ -277,11 +277,11 @@ func init() {
 		mainPackageName = os.Args[1]
 	}
 
-	typesDir = fmt.Sprintf("./%v/types/", mainPackageName)
-	parsersDir = fmt.Sprintf("./%v/", mainPackageName)
-	propertiesDir = fmt.Sprintf("./%v/properties/", mainPackageName)
-	outputsDir = fmt.Sprintf("./%v/outputs/", mainPackageName)
-	resourcesDir = fmt.Sprintf("./%v/resources/", mainPackageName)
+	typesDir = fmt.Sprintf("./pkg/%v/types/", mainPackageName)
+	parsersDir = fmt.Sprintf("./pkg/%v/", mainPackageName)
+	propertiesDir = fmt.Sprintf("./pkg/%v/properties/", mainPackageName)
+	outputsDir = fmt.Sprintf("./pkg/%v/outputs/", mainPackageName)
+	resourcesDir = fmt.Sprintf("./pkg/%v/resources/", mainPackageName)
 
 	os.Mkdir(sourceDir, 0744)
 	os.Mkdir(parsersDir, 0744)
@@ -301,9 +301,6 @@ func main() {
 	buildJsonParsers(cfnSpec)
 	buildYamlParsers(cfnSpec)
 
-	// filePath := fmt.Sprintf("%vtypes.go", typesDir)
-	// err := ioutil.WriteFile(filePath, []byte(typesData), 0644)
-	//checkError(err)
 }
 
 func checkLocalData(sourceDir string, specList map[string]string) {
