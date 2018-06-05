@@ -203,7 +203,7 @@ func addBaseResources(baseResources types.ValueMap, configResources types.Resour
 	return
 }
 
-func yamlTemplateCF(resources types.ResourceMap, parsers ParserMap, warn bool) (compiled types.ValueMap, err error) {
+func yamlTemplateCF(resources types.ResourceMap, parsers ParserMap, isResources bool) (compiled types.ValueMap, err error) {
 	compiled = make(types.ValueMap)
 
 	for resourceName, resource := range resources {
@@ -213,30 +213,45 @@ func yamlTemplateCF(resources types.ResourceMap, parsers ParserMap, warn bool) (
 			}).Warn("Condition being applied on resource, this is not yet supported")
 		}
 
-		parser, ok := parsers[resource.Type]
-		if !ok {
-			if warn {
-				log.WithFields(log.Fields{
-					"type": resource.Type,
-				}).Warn("Type not found")
-			}
-			continue
-		}
-
-		var resourseData []byte
-		if resourseData, err = yaml.Marshal(resource); err != nil {
-			return
-		}
-
 		var output types.ValueMap
-		if output, err = parser(resourceName, string(resourseData)); err != nil {
-			log.WithFields(log.Fields{
-				"resource": resourceName,
-			}).Error("Error parsing resource")
-			logFileError(string(resourseData), err)
-			return
-		}
+		var resourseData []byte
 
+		if isResources && (resource.Type == "AWS::CloudFormation::CustomResource" || strings.HasPrefix(resource.Type, "Custom::")) {
+			var cfResource types.CfResource
+
+			if resourseData, err = yaml.Marshal(resource); err != nil {
+				return
+			}
+
+			if err = yaml.Unmarshal([]byte(resourseData), &cfResource); err != nil {
+				return
+			}
+
+			output = types.ValueMap{resourceName: cfResource}
+		} else {
+			parser, ok := parsers[resource.Type]
+			if !ok {
+				if isResources {
+					log.WithFields(log.Fields{
+						"type": resource.Type,
+					}).Warn("Type not found")
+				}
+				continue
+			}
+
+			if resourseData, err = yaml.Marshal(resource); err != nil {
+				return
+			}
+
+			if output, err = parser(resourceName, string(resourseData)); err != nil {
+				log.WithFields(log.Fields{
+					"resource": resourceName,
+				}).Error("Error parsing resource")
+				logFileError(string(resourseData), err)
+				return
+			}
+		}
+		
 		// collect all output resources in one list
 		for k, v := range output {
 			compiled[k] = v
