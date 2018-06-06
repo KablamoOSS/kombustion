@@ -206,7 +206,7 @@ func generatePlugin(c *cli.Context) error {
 	resname := c.String("resourcename")
 	restype := c.String("resourcetype")
 
-	config = getCfn(inputfile)
+	config = GetCloudformationClientn(inputfile)
 	resources := generateResources(config, resname)
 	mainfile := generateMain(pluginname, restype, resname, config)
 
@@ -368,7 +368,7 @@ func generateMain(pluginname string, restype string, resname string, config Yaml
 	return buf.Bytes()
 }
 
-func getCfn(cfPath string) YamlConfig {
+func GetCloudformationClientn(cfPath string) YamlConfig {
 	// load the config file
 	var data []byte
 	data, err := ioutil.ReadFile(cfPath)

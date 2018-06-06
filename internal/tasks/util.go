@@ -1,43 +1,14 @@
 package tasks
 
 import (
-	"fmt"
-	"os"
 	"strings"
 
-	log "github.com/sirupsen/logrus"
-
+	"github.com/KablamoOSS/kombustion/internal/cloudformation"
+	"github.com/KablamoOSS/kombustion/types"
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/urfave/cli"
 )
-
-func checkError(err error) {
-	if err != nil {
-		if strings.Contains(err.Error(), "No updates are to be performed") {
-			log.Warn("No updates are to be performed.")
-			os.Exit(0)
-		} else if strings.Contains(err.Error(), "Stack with id") && strings.Contains(err.Error(), "does not exist") {
-			log.Warn("The stack does not exist.")
-			os.Exit(0)
-		} else {
-			log.Fatal(err)
-		}
-	}
-}
-
-func checkErrorDeletePoll(err error) {
-	if err != nil {
-		if strings.Contains(err.Error(), "No updates are to be performed") {
-			log.Warn("No updates are to be performed.")
-			os.Exit(0)
-		} else if strings.Contains(err.Error(), "Stack with id") && strings.Contains(err.Error(), "does not exist") {
-			os.Exit(0)
-		} else {
-			log.Fatal(err)
-		}
-	}
-}
 
 func getParamMap(c *cli.Context) map[string]string {
 	paramMap := make(map[string]string)
@@ -51,28 +22,57 @@ func getParamMap(c *cli.Context) map[string]string {
 	return paramMap
 }
 
-func printStackEvents(cf *awsCF.CloudFormation, stackName string) {
-	status, err := cf.DescribeStackEvents(&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)})
-	checkError(err)
+func resolveParameters(c *cli.Context, cfYaml cloudformation.YamlCloudformation) []*awsCF.Parameter {
+	results := []*awsCF.Parameter{}
 
-	fmt.Println()
-	fmt.Printf(" %-19v | %-22v | %-30v | %v | %v | \n", "Time", "Status", "Type", "LogicalID", "Status Reason")
-	for _, event := range status.StackEvents {
-		if event.Timestamp != nil {
-			fmt.Printf(" %-19v |", event.Timestamp.Format("2006-01-2 15:04:05"))
-		}
-		if event.ResourceStatus != nil {
-			fmt.Printf(" %-22v |", *event.ResourceStatus)
-		}
-		if event.ResourceType != nil {
-			fmt.Printf(" %-30v |", *event.ResourceType)
-		}
-		if event.LogicalResourceId != nil {
-			fmt.Printf(" %v |", *event.LogicalResourceId)
-		}
-		if event.ResourceStatusReason != nil {
-			fmt.Printf(" %v |", *event.ResourceStatusReason)
-		}
-		fmt.Println()
+	// Get params from the envFile
+	env := cloudformation.ResolveEnvironment(c.String("env-file"), c.String("env"))
+
+	// override envFile values with optional --param values
+	params := getParamMap(c)
+	for k, v := range params {
+		env[k] = v
 	}
+
+	// convert to aws Parameter list
+	for paramK := range cfYaml.Parameters {
+		for k, v := range env {
+			if paramK == k {
+				if s, ok := v.(string); ok {
+					// Filter to params in the stack
+					results = append(results, &awsCF.Parameter{
+						ParameterKey:   aws.String(k),
+						ParameterValue: aws.String(s),
+					})
+				}
+			}
+		}
+	}
+
+	return results
+}
+
+func resolveParametersS3(c *cli.Context) []*awsCF.Parameter {
+	results := []*awsCF.Parameter{}
+
+	var params types.TemplateObject
+
+	// override envFile values with optional --param values
+	paramMap := getParamMap(c)
+	for k, v := range paramMap {
+		params[k] = v
+	}
+
+	// convert to aws Parameter list
+	for k, v := range params {
+		if s, ok := v.(string); ok {
+			// Filter to params in the stack
+			results = append(results, &awsCF.Parameter{
+				ParameterKey:   aws.String(k),
+				ParameterValue: aws.String(s),
+			})
+		}
+	}
+
+	return results
 }

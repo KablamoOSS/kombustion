@@ -15,8 +15,10 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// installPlugins - Get the lock file and then call installPluginsWithLock
-func installPlugins() error {
+// InstallPlugins - Get the lock file and then call installPluginsWithLock
+func InstallPlugins() error {
+	printer.Step("Installing plugins")
+	printer.Progress("Kombusting")
 
 	lockFile, err := lock.FindAndLoadLock()
 	if err != nil {
@@ -39,13 +41,11 @@ func installPlugins() error {
 
 // installPluginsWithLock - Using a provided lockFile install plugins
 func installPluginsWithLock(lockFile lock.Lock) (updatedLockFile lock.Lock, installErrors []error) {
-	printer.Step("Installing plugins")
 	updatedLockFile = lockFile
 
 	ensureLocalPluginDir()
 
 	for i, plugin := range lockFile.Plugins {
-		printer.SubStep(fmt.Sprintf("Installing %s", plugin.Name), 1, false)
 		updatedPlugin, errs := installPlugin(plugin)
 		if errs != nil {
 			installErrors = append(installErrors, errs...)
@@ -63,6 +63,8 @@ func installPluginsWithLock(lockFile lock.Lock) (updatedLockFile lock.Lock, inst
 
 // installPlugin - Install an individual plugin
 func installPlugin(plugin lock.Plugin) (updatedPlugin lock.Plugin, installErrors []error) {
+	printer.SubStep(fmt.Sprintf("Installing %s", plugin.Name), 1, false)
+
 	updatedPlugin = plugin
 	for i, resolved := range plugin.Resolved {
 		pluginIsInstalled := checkPluginIsAlreadyInstalled(plugin, resolved)
@@ -73,7 +75,7 @@ func installPlugin(plugin lock.Plugin) (updatedPlugin lock.Plugin, installErrors
 				plugin.Version,
 				resolved.OperatingSystem,
 				resolved.Architecture,
-			), 2, false)
+			), 2, true)
 		} else {
 			var couldInstallFromCache bool
 			updatedResolved := resolved

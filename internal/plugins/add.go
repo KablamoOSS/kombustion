@@ -13,12 +13,12 @@ import (
 	"github.com/google/go-github/github"
 )
 
-// addPluginsToManifest - Add all new plugin to the manifest
+// AddPluginsToManifest - Add all new plugin to the manifest
 // update it if it's already there
 // then write the manifest to disk
-func addPluginsToManifest(manifest manifestType.Manifest, pluginLocations []string) (manifestType.Manifest, error) {
-	printer.Step("Adding plugins")
+func AddPluginsToManifest(manifest manifestType.Manifest, pluginLocations []string) (manifestType.Manifest, error) {
 	printer.Progress("Kombusting")
+
 	lockFile, err := lock.FindAndLoadLock()
 
 	for _, pluginLocation := range pluginLocations {

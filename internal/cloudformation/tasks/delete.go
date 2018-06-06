@@ -7,23 +7,11 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/cloudformation"
-	"github.com/urfave/cli"
 )
 
-var DeleteFlags = []cli.Flag{
-	cli.StringFlag{
-		Name:  "region, r",
-		Usage: "region to delete from",
-		Value: "ap-southeast-2",
-	},
-}
-
-func Delete(c *cli.Context) {
-	deleteStack(c, getCF(c.GlobalString("profile"), c.String("region")))
-}
-
-func deleteStack(c *cli.Context, cf *cloudformation.CloudFormation) {
-	stackName := c.Args().Get(0)
+// DeleteStack removes a cloudformation stack
+func DeleteStack(stackName, profile, region string) {
+	cf := GetCloudformationClient(profile, region)
 
 	//See if the stack exists to begin with
 	_, err := cf.DescribeStacks(&cloudformation.DescribeStacksInput{StackName: aws.String(stackName)})
