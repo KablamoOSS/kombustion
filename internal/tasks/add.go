@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/KablamoOSS/go-cli-printer"
+
 	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/KablamoOSS/kombustion/internal/plugins"
 	"github.com/urfave/cli"
@@ -11,7 +12,7 @@ import (
 
 // AddPluginToManifest file and update it
 func AddPluginToManifest(c *cli.Context) error {
-	printer.Progress("Kombusting")
+	printer.Step("Adding plugins")
 	// Try and load the manifest
 	manifest, err := manifest.FindAndLoadManifest()
 	if err != nil {

@@ -11,7 +11,7 @@ import (
 
 // DeleteStack removes a cloudformation stack
 func DeleteStack(stackName, profile, region string) {
-	cf := getCF(profile, region)
+	cf := GetCloudformationClient(profile, region)
 
 	//See if the stack exists to begin with
 	_, err := cf.DescribeStacks(&cloudformation.DescribeStacksInput{StackName: aws.String(stackName)})

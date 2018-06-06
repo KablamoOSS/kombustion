@@ -72,11 +72,20 @@ func main() {
 	app.Name = "kombustion"
 	app.Usage = "Extend CloudFormation with plugins."
 	app.Before = func(c *cli.Context) error {
-		printer.Progress("Kombusting")
-		log.SetLevel(log.WarnLevel)
-		if c.Bool("verbose") {
+
+		verbose := c.Bool("verbose")
+
+		if verbose {
 			log.SetLevel(log.InfoLevel)
+		} else {
+			log.SetLevel(log.WarnLevel)
 		}
+
+		// Init the spinner/printer
+		printer.Init(verbose, "yellow", 14)
+
+		// This is the initial loading message
+		printer.Progress("Kombusting")
 		return nil
 	}
 

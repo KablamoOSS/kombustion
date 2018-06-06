@@ -1,6 +1,7 @@
 package tasks
 
 import (
+	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation/tasks"
 	"github.com/urfave/cli"
 )
@@ -31,5 +32,5 @@ func Generate(c *cli.Context) {
 		Env:                c.String("env"),
 		DisableBaseOutputs: c.Bool("no-base-outputs"),
 		ParamMap:           paramMap,
-	}))
+	})
 }

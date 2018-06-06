@@ -17,8 +17,8 @@ import (
 // update it if it's already there
 // then write the manifest to disk
 func AddPluginsToManifest(manifest manifestType.Manifest, pluginLocations []string) (manifestType.Manifest, error) {
-	printer.Step("Adding plugins")
 	printer.Progress("Kombusting")
+
 	lockFile, err := lock.FindAndLoadLock()
 
 	for _, pluginLocation := range pluginLocations {

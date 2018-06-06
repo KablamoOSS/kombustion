@@ -10,7 +10,25 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudformation"
 )
 
-func getCreds() *credentials.Credentials {
+// GetCloudformationClient from the standard credential chain
+func GetCloudformationClient(profile string, region string) *cloudformation.CloudFormation {
+	var awsConfig *aws.Config
+
+	// If we have a custom env var for assuming a role, lets assume
+	if len(os.Getenv("ASSUMED_ROLE")) > 0 {
+		// TODO: Check for all env params, and err if not all exist
+		creds := getAWSCredentials()
+		awsConfig = &aws.Config{Credentials: creds, Region: aws.String(region)}
+	} else {
+		awsConfig = &aws.Config{Region: aws.String(region)}
+	}
+
+	awsSession := session.Must(getSession(profile))
+	cf := cloudformation.New(awsSession, awsConfig)
+	return cf
+}
+
+func getAWSCredentials() *credentials.Credentials {
 	assumedRole := os.Getenv("ASSUMED_ROLE")
 	mfaSerial := os.Getenv("MFA_SERIAL")
 	awsMfaToken := os.Getenv("TOKEN")
@@ -41,20 +59,4 @@ func getSession(profile string) (*session.Session, error) {
 	awsSession, err := session.NewSessionWithOptions(options)
 
 	return awsSession, err
-}
-
-func getCF(profile string, region string) *cloudformation.CloudFormation {
-	var awsConfig *aws.Config
-
-	// If we have a custom env var for assuming a role, lets assume
-	if len(os.Getenv("ASSUMED_ROLE")) > 0 {
-		creds := getCreds()
-		awsConfig = &aws.Config{Credentials: creds, Region: aws.String(region)}
-	} else {
-		awsConfig = &aws.Config{Region: aws.String(region)}
-	}
-
-	awsSession := session.Must(getSession(profile))
-	cf := cloudformation.New(awsSession, awsConfig)
-	return cf
 }

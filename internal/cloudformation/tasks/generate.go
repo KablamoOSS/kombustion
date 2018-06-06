@@ -13,11 +13,12 @@ import (
 
 // GenerateTemplate and save it to disk, without upserting it
 func GenerateTemplate(params cloudformation.GenerateParams) {
-	output, cf := generateYamlTemplate(params)
+	output, _ := GenerateYamlTemplate(params)
 	writeOutput(params.Filename, output)
 }
 
-func generateYamlTemplate(params cloudformation.GenerateParams) ([]byte, cloudformation.YamlCloudformation) {
+// GenerateYamlTemplate and return both the raw data as []byte, but also the cloudformation yaml object
+func GenerateYamlTemplate(params cloudformation.GenerateParams) ([]byte, cloudformation.YamlCloudformation) {
 	cf, err := cloudformation.GenerateYamlStack(params)
 	checkError(err)
 	output, err := yaml.Marshal(cf)

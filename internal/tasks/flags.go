@@ -5,7 +5,7 @@ import "github.com/urfave/cli"
 // GlobalFlags for all tasks
 var GlobalFlags = []cli.Flag{
 	cli.BoolFlag{
-		Name:  "verbose, v",
+		Name:  "verbose",
 		Usage: "output with high verbosity",
 	},
 	cli.StringSliceFlag{

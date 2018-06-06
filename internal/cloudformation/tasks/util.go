@@ -5,8 +5,6 @@ import (
 	"strings"
 
 	log "github.com/sirupsen/logrus"
-
-	"github.com/urfave/cli"
 )
 
 func checkError(err error) {
@@ -34,16 +32,4 @@ func checkErrorDeletePoll(err error) {
 			log.Fatal(err)
 		}
 	}
-}
-
-func getParamMap(c *cli.Context) map[string]string {
-	paramMap := make(map[string]string)
-	params := c.StringSlice("param")
-	for _, param := range params {
-		parts := strings.Split(param, "=")
-		if len(parts) > 1 {
-			paramMap[parts[0]] = strings.Join(parts[1:], "=")
-		}
-	}
-	return paramMap
 }
