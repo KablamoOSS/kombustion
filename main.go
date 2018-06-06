@@ -66,6 +66,13 @@ var (
 )
 
 func main() {
+
+	// Fix for #13, to provide a fallback version for plugin developers
+	// In general it's recommended to use the official builds.
+	if version == "" {
+		version = "BUILT_FROM_SOURCE"
+	}
+
 	app := cli.NewApp()
 	app.EnableBashCompletion = true
 	app.Version = version
