@@ -50,6 +50,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
@@ -73,6 +74,29 @@ func main() {
 		version = "BUILT_FROM_SOURCE"
 	}
 
+	kombustionLogo := `
+   __              __            __  _
+  / /_____  __ _  / /  __ _____ / /_(_)__  ___
+ /  '_/ _ \/  ' \/ _ \/ // (_-</ __/ / _ \/ _ \
+/_/\_\\___/_/_/_/_.__/\_,_/___/\__/_/\___/_//_/`
+
+	cli.AppHelpTemplate = fmt.Sprintf(`%s
+kombustion.io
+_______________________________________________________________________
+
+%s
+ISSUES:
+If you have an issue with kombustion, check both the kombustion.io documentation [0], and
+the Cloudformation documentation [1] to help you resolve it.
+
+If the issue still persists please check out the issue queue [3] to see if it's
+already been reported and/or has a fix. If it hasn't you can create a new one [3].
+
+[0] https://kombustion.com
+[1] https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-reference.html
+[3] https://github.com/KablamoOSS/kombustion/issues
+`, kombustionLogo, cli.AppHelpTemplate)
+
 	app := cli.NewApp()
 	app.EnableBashCompletion = true
 	app.Version = version
@@ -90,9 +114,6 @@ func main() {
 
 		// Init the spinner/printer
 		printer.Init(verbose, "yellow", 14)
-
-		// This is the initial loading message
-		printer.Progress("Kombusting")
 		return nil
 	}
 
