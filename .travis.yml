@@ -10,7 +10,8 @@ sudo: required
 
 script:
 # Download the dependencies
-- go get -t ./...
+- dep ensure
+# Ensure the parsers can generate and are up to date
 - go generate
 # Run the tests
 - go test ./...
