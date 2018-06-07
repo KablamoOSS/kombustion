@@ -9,7 +9,7 @@ go:
 sudo: required
 
 env:
-  - DEP_VERSION="v0.4.1"
+  - DEP_VERSION="0.4.1"
 
 before_install:
   # Download the binary to bin folder in $GOPATH
@@ -17,9 +17,11 @@ before_install:
   # Make the binary executable
   - chmod +x $GOPATH/bin/dep
 
-script:
+install:
 # Download the dependencies
 - dep ensure
+
+script:
 # Ensure the parsers can generate and are up to date
 - go generate
 # Run the tests
