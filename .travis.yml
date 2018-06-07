@@ -8,10 +8,7 @@ go:
 
 sudo: required
 env:
-  matrix:
   - DEP_VERSION="0.4.1"
-  global:
-    secure: wWW0QLPr3+jPP8gtRX12FdlMbhfsyfnTXx3aboCVIYKFd1p0+ng4jo4N5fNCLBBpK6JgH+NtTqvsXdGBFDoVHF5jo3qsxYneonh0eC9ffXD/Rbbp4CeHqBZKVOTyzxMvLM1HWzI4Ynq8VP5ktPx+O4enuXTUlZQ7NOtg4yplliEXIIueu/QNIxOd0lDLwy2k/lHjcWPHAKxEV0BAnRxSA4fe7I/1q3VQctGjVVS94HCsE5C3ecCzf3rAsxppyaNK1SoFmIWNDT5PDlBBONM1pzKEiDsZEIFLIBYfM0RCkEhXwwskFTPxRgN7/g8BIv/qD59MVc1/ywSsx+fFPUZRHH+zykFiD1aNKA2D9RP0sRYuaqCpxwq/+ZD6hh4t3bRfZ1tZq94FiSMHTfHaUFOvpHKSJf3lkpo8nGPw8exFkEi0mgeKyvFgN4Vj42bVsZklksZROwJuNMNUWLBNAr3dlZCZyGbh26CUFnq0izsI9HK1hQQDGRxeEBD+WTIvyAYEXdBzIHU+bnB1E7Mg7yuhYrLybRDIidypRSVieJ4WkAj766ILs4G/jHoVzw1RjH1qFHsycZellY52wVjd8BVSqhQDNTLivIMDOGA/UjXLEoKnvMu1pR3lzSQLHEcDPXfB8N+nZn3XoAVhFP7rxXdoafL6bjJJrzDeJvxGNJWZgYQ=
 
 before_install:
 - curl -L -s https://github.com/golang/dep/releases/download/v${DEP_VERSION}/dep-linux-amd64
@@ -25,8 +22,8 @@ install:
 
 script:
 - go generate
-- go test -v -covermode=count -coverprofile=coverage.out ./....
-- "$HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN"
+- go test -v -covermode=count -coverprofile=coverage.out ./...
+- $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci
 
 before_deploy:
 - go get github.com/karalabe/xgo
