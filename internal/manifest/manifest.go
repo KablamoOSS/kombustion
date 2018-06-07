@@ -24,6 +24,7 @@ func FindAndLoadManifest() (Manifest, error) {
 func findAndLoadManifest(path string) (Manifest, error) {
 	var manifestPath string
 	foundManifest := false
+	pwd, err := filepath.Abs(filepath.Dir(os.Args[0]))
 
 	files, err := ioutil.ReadDir(path)
 	if err != nil {
@@ -31,7 +32,7 @@ func findAndLoadManifest(path string) (Manifest, error) {
 	}
 
 	for _, f := range files {
-		fmt.Printf("%s/%s/\n", path, f.Name())
+		fmt.Printf("%s %s/%s/\n", pwd, path, f.Name())
 	}
 
 	// Support for .yml
