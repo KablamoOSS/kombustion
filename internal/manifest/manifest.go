@@ -53,7 +53,7 @@ func findAndLoadManifest(path string) (Manifest, error) {
 		return manifest, nil
 
 	}
-	return Manifest{}, fmt.Errorf("no kombustion.yaml manifest file found")
+	return Manifest{}, fmt.Errorf("kombustion.yaml was not found")
 }
 
 // loadManifestFromString - Load a manifest from a string into a Manifest struct

@@ -42,6 +42,7 @@ type YamlCloudformation struct {
 	Outputs                  types.TemplateObject `yaml:"Outputs,omitempty"`
 }
 
+// GenerateParams are required to generate a cloudformation yaml template
 type GenerateParams struct {
 	Filename           string
 	EnvFile            string
@@ -93,14 +94,6 @@ func PluginDocs() (docs map[string]string) {
 		docs[k] = ""
 	}
 	return
-}
-
-func DownloadPlugin(pluginname string) error {
-	return downloadPlugin(pluginname)
-}
-
-func DeletePlugin(pluginname string) error {
-	return deletePlugin(pluginname)
 }
 
 // GenerateYamlStack - generate a stack definition from ./configs

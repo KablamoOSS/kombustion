@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/KablamoOSS/kombustion.svg?branch=master)](https://travis-ci.org/KablamoOSS/kombustion)
 [![](https://tokei.rs/b1/github/KablamoOSS/kombustion)](https://github.com/KablamoOSS/kombustion)
 [![Go Report Card](https://goreportcard.com/badge/github.com/KablamoOSS/kombustion)](https://goreportcard.com/report/github.com/KablamoOSS/kombustion)
+[![Coverage Status](https://coveralls.io/repos/github/KablamoOSS/kombustion/badge.svg?branch=master)](https://coveralls.io/github/KablamoOSS/kombustion?branch=master)
 
 > Extend CloudFormation with plugins
 
