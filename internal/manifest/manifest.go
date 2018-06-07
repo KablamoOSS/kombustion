@@ -24,16 +24,6 @@ func FindAndLoadManifest() (Manifest, error) {
 func findAndLoadManifest(path string) (Manifest, error) {
 	var manifestPath string
 	foundManifest := false
-	pwd, err := filepath.Abs(filepath.Dir(os.Args[0]))
-
-	files, err := ioutil.ReadDir(path)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for _, f := range files {
-		fmt.Printf("%s %s/%s/\n", pwd, path, f.Name())
-	}
 
 	// Support for .yml
 	if _, err := os.Stat(path + "/kombustion.yml"); err == nil {
