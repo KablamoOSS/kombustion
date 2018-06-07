@@ -187,8 +187,8 @@ func TestFindAndLoadManifest(t *testing.T) {
 		throws error
 	}{
 		{
-			name:  "Find manifest file in test-data",
-			input: "test-data/works",
+			name:  "Find manifest file in testdata",
+			input: "testdata/works",
 			output: Manifest{
 				Name: "KombustionTest",
 				Plugins: map[string]Plugin{
@@ -231,13 +231,13 @@ func TestFindAndLoadManifest(t *testing.T) {
 			},
 		},
 		{
-			name:   "Find manifest file in test-data",
-			input:  "test-data/errors",
+			name:   "Find manifest file in testdata",
+			input:  "testdata/errors",
 			throws: fmt.Errorf("there are both kombustion.yaml && kombustion.yml files, please remove one"),
 		},
 		{
-			name:   "Find manifest file in test-data",
-			input:  "test-data/empty",
+			name:   "Find manifest file in testdata",
+			input:  "testdata/empty",
 			throws: fmt.Errorf("no kombustion.yaml manifest file found"),
 		},
 	}
