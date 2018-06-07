@@ -11,11 +11,7 @@ import (
 	yaml "github.com/KablamoOSS/yaml"
 )
 
-/*
-	ResolveEnvironment
-	loads the correct configs/environment.yaml ValueMap
-	for the specified env
-*/
+// ResolveEnvironment loads the correct configs/environment.yaml ValueMap for the specified env
 func ResolveEnvironment(envFile string, env string) types.TemplateObject {
 
 	if len(envFile) == 0 {

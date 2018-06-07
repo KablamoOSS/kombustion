@@ -25,7 +25,7 @@ script:
 # Ensure the parsers can generate and are up to date
 - go generate
 # Run the tests
-- go test ./...
+- go test -v ./...
 
 before_deploy:
 # Grab the cross compiler

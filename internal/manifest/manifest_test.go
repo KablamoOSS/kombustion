@@ -19,11 +19,12 @@ func TestLoadManifestFromString(t *testing.T) {
 		name         string
 		manifestYaml string
 		output       Manifest
-		throws       error
+		throws       bool
 	}{
 		{
 			name:         "Simple manifest",
 			manifestYaml: `name: TestManifest`,
+			throws:       false,
 			output: Manifest{
 				Name:               "TestManifest",
 				Plugins:            map[string]Plugin(nil),
@@ -37,7 +38,7 @@ func TestLoadManifestFromString(t *testing.T) {
 			manifestYaml: `
 			name: TestManifest
 `,
-			throws: fmt.Errorf("line 2: found character that cannot start any token"),
+			throws: true,
 		},
 		{
 			name: "Simple manifest HideDefaultExports",
@@ -50,9 +51,11 @@ hideDefaultExports: true`,
 				Environments:       map[string]Environment(nil),
 				HideDefaultExports: true,
 			},
+			throws: false,
 		},
 		{
-			name: "Manifest with github plugins",
+			name:   "Manifest with github plugins",
+			throws: false,
 			manifestYaml: `name: TestManifestWithPlugins
 architectures: ["darwin/x64", "linux/386"]
 plugins:
@@ -101,7 +104,8 @@ plugins:
 			},
 		},
 		{
-			name: "Enviroment configuration",
+			name:   "Enviroment configuration",
+			throws: false,
 			manifestYaml: `name: TestManifestWithEnvironment
 environments:
   development:
@@ -167,15 +171,14 @@ environments:
 	}
 
 	for i, test := range tests {
+		assert := assert.New(t)
 		testOutput, err := loadManifestFromString([]byte(test.manifestYaml))
-		if err != nil {
-			if test.throws != nil {
-				// currently not testing the error that is thrown, just that one is
-			} else {
-				t.Error(err)
-			}
+		if test.throws {
+			assert.NotNil(err)
+		} else {
+			assert.Nil(err)
+			assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d: %s", i, test.name))
 		}
-		assert.Equal(t, testOutput, test.output, fmt.Sprintf("Test %d: failed not equal", i))
 	}
 }
 
@@ -184,7 +187,7 @@ func TestFindAndLoadManifest(t *testing.T) {
 		name   string
 		input  string
 		output Manifest
-		throws error
+		throws bool
 	}{
 		{
 			name:  "Find manifest file in testdata",
@@ -233,24 +236,23 @@ func TestFindAndLoadManifest(t *testing.T) {
 		{
 			name:   "Find manifest file in testdata",
 			input:  "testdata/errors",
-			throws: fmt.Errorf("there are both kombustion.yaml && kombustion.yml files, please remove one"),
+			throws: true,
 		},
 		{
 			name:   "Find manifest file in testdata",
 			input:  "testdata/empty",
-			throws: fmt.Errorf("no kombustion.yaml manifest file found"),
+			throws: true,
 		},
 	}
 
 	for i, test := range tests {
+		assert := assert.New(t)
 		testOutput, err := findAndLoadManifest(test.input)
-		if err != nil {
-			if test.throws != nil {
-				// currently not testing the error that is thrown, just that one is
-			} else {
-				t.Error(err)
-			}
+		if test.throws {
+			assert.NotNil(err)
+		} else {
+			assert.Nil(err)
+			assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d: %s", i, test.name))
 		}
-		assert.Equal(t, testOutput, test.output, fmt.Sprintf("Test %d: failed not equal", i))
 	}
 }

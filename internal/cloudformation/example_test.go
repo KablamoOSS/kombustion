@@ -2,7 +2,7 @@ package cloudformation
 
 import "log"
 
-func Example_GenerateYamlStack() {
+func ExampleGenerateYamlStack() {
 	params := map[string]string{"size": "5"}
 	out, err := GenerateYamlStack(GenerateParams{
 		Filename: "api",
