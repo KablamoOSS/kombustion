@@ -3,7 +3,7 @@ package cloudformation
 import (
 	"testing"
 
-	"github.com/KablamoOSS/kombustion/internal/parsers/resources"
+	"github.com/KablamoOSS/kombustion/pkg/parsers/resources"
 	"github.com/KablamoOSS/kombustion/types"
 	"github.com/stretchr/testify/assert"
 )
