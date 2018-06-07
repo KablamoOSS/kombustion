@@ -20,33 +20,8 @@ before_deploy:
 # Grab the cross compiler
 - go get github.com/karalabe/xgo
 # Compile
-- |
-  # Get the full go repo url
-  REPO=$(pwd |  rev | cut -d'/' -f-3 | rev)
+- ./build/ci/build.sh
 
-  # Get the name of the app
-  APP="${PWD##*/}"
-
-  # Get this tag as the version
-  VERSION=$(git describe --abbrev=0 --tags)
-  # Ensure a fresh build folder
-  rm -rf build && mkdir build
-  # Compile
-  xgo \
-    -dest build/ \
-    --targets=darwin-10.11/amd64,freebsd/386,freebsd/amd64,freebsd/arm,linux/386,linux/amd64,linux/arm \
-    --ldflags "-X main.version=${VERSION}" \
-    $REPO
-  # Package
-  cd build
-  # For each compiled binary, we're repackaging it in a zip with the architecture name, and
-  # renaming the binary to the app name
-  for FILE in $(ls .); do
-    mv $FILE $APP
-    tar cvzf ${FILE}.tgz $APP
-    rm -f $APP
-  done
-  cd ..
 
 # Deploy to Github release on tags
 deploy:
@@ -54,7 +29,12 @@ deploy:
   api_key:
     secure: RG9Hd77NoFS7NwMjDVyurbROV33bsefz8kW7XigfFDURTSfGAsMjyWR3wWt4qWCgCw2gMtszLlYp8yoX0xlHV38UslDscEKfvUnzWdHDPPgM2AtRyLFk5tYeOaX+t0VQDZA3KKgQRUitPgzC8SoaVdwQL5EhkvYKM4pUM2irvFYLT/pRIaP1yJ6gsrJqiybjpfpUHwH6VtgSLKjj6o6YBywr7LHSlrAGK2N+0eSncs5C0A0F+Jfs4NPPB0v2ke8SvHprN3V9pC51KZTWTuApKu+bAXxQbnZo4aOFdK52f7tO2uKj7xFbcCgpj8HDrypofX3HwzyAYV6Xd23vdhbHisJDkqwQpUW/hx/bWygGk/4b92D+yw9fMVgec/Lg03+evXkXJZ0ZsRSuANrKtsgVk8+8RsH/eGgsMAK7eISESxVkAW8C2CIPjvRP6E5F7I6fW8v7nj1SJZablCCNRAD20E3ICkXkhJTADWHcxEr2Bnl/m4RJNUsrO5OJeY1E2zbWJwwqIRGK5O0NtaTfRvcPgI2iJ9dmenJFUttYm1631C5MIFKFCISBrIBdTIiOVZa5xWKek18ReKblrT6ARyg1yxk5b7PvAbnmp+jfYvj9d9hYaKYmbASGC2m9Qa7M+mpCbrElrZ9EB6KD98lJUXjAZXpcmGBWnxXpglxBSM2O1gg=
   file_glob: true
-  file: "build/*"
+  file: ".build/*"
   skip_cleanup: true
   on:
     tags: true
+
+
+# Push code coverage information
+after_success:
+- bash <(curl -s https://codecov.io/bash)
