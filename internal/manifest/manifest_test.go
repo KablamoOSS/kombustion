@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"
-	// "github.com/google/go-cmp/cmp"
+	"github.com/stretchr/testify/assert"
 )
 
 // TestManifestLoad - Test unmarshalling the kombustion.yaml manifest
@@ -176,11 +175,7 @@ environments:
 				t.Error(err)
 			}
 		}
-		if cmp.Equal(testOutput, test.output) == false {
-			if diff := cmp.Diff(testOutput, test.output); diff != "" {
-				t.Errorf("Test #%d [%s] output: (-got +want)\n%s", i, test.name, diff)
-			}
-		}
+		assert.Equal(t, testOutput, test.output, fmt.Sprintf("Test %d: failed not equal", i))
 	}
 }
 
@@ -256,10 +251,6 @@ func TestFindAndLoadManifest(t *testing.T) {
 				t.Error(err)
 			}
 		}
-		if cmp.Equal(testOutput, test.output) == false {
-			if diff := cmp.Diff(testOutput, test.output); diff != "" {
-				t.Errorf("Test #%d [%s] output: (-got +want)\n%s", i, test.name, diff)
-			}
-		}
+		assert.Equal(t, testOutput, test.output, fmt.Sprintf("Test %d: failed not equal", i))
 	}
 }
