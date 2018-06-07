@@ -11,3 +11,4 @@ kombustion.yaml
 kombustion.lock
 .kombustion/*
 build/*
+coverage*
