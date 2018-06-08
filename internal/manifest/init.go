@@ -1,8 +1,10 @@
 package manifest
 
 import (
-	"log"
+	"fmt"
 	"strings"
+
+	"github.com/KablamoOSS/go-cli-printer"
 
 	"gopkg.in/AlecAivazis/survey.v1"
 )
@@ -14,7 +16,11 @@ func InitaliseNewManifest() error {
 	// Load the manifest file from this directory
 	_, err := FindAndLoadManifest()
 	if err == nil {
-		log.Fatal("Sorry we can't create a new kombustion.yaml, one already exists.")
+		printer.Fatal(
+			fmt.Errorf("Sorry we can't create a new kombustion.yaml, one already exists."),
+			"If you want to re-initialise your kombustion.yaml file, first remove it.",
+			"https://kombustion.io/manifest",
+		)
 	}
 
 	// Survey the user for required info
@@ -86,7 +92,7 @@ func surveyForName() (string, error) {
 	return strings.Replace(surveyAnswers.Name, " ", "", -1), nil
 }
 
-// surveyForEnvironments - prompt the user to find out what environments this
+// surveyForEnvironments prompts the user to find out what environments this
 // project uses
 func surveyForEnvironments() (manifestEnvironments map[string]Environment, err error) {
 	// Survey for which environments are used in this project
@@ -103,15 +109,31 @@ func surveyForEnvironments() (manifestEnvironments map[string]Environment, err e
 	if err != nil {
 		return manifestEnvironments, err
 	}
-
-	// TODO: prompt to ask for whitelisting account ids
-
 	for _, env := range environments {
+		accountId, err := surveyForAccountId(env)
+		if err != nil {
+			return manifestEnvironments, err
+		}
 		manifestEnvironments[env] = Environment{
-			AccountIDs: []string{""},
-			Parameters: map[string]string{"": ""},
+			AccountIDs: []string{accountId},
+			Parameters: map[string]string{"ENVIRONMENT": env},
 		}
 	}
 
 	return manifestEnvironments, err
+}
+
+// surveyForAccountId prompts the user to find out what accounts each environment uses
+func surveyForAccountId(environment string) (accountId string, err error) {
+	prompt := &survey.Input{
+		Message: fmt.Sprintf("What is the Account ID for %s:", environment),
+		Help:    "This is a whitelist of accounts, these stacks and parameters can be deployed to. This can prevent unintentional deployment.",
+	}
+	// Prompts the user
+	err = survey.AskOne(prompt, &accountId, nil)
+	if err != nil {
+		return accountId, err
+	}
+
+	return accountId, err
 }

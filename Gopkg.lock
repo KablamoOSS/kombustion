@@ -5,7 +5,7 @@
   branch = "master"
   name = "github.com/KablamoOSS/go-cli-printer"
   packages = ["."]
-  revision = "a4ee444a59b3c0bf9092ce50993a5d3b0c583ad7"
+  revision = "e261ebc9ccb87b2531c0603c7b8d4144e226081a"
 
 [[projects]]
   name = "github.com/KablamoOSS/yaml"
