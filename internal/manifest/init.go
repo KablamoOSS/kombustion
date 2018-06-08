@@ -14,8 +14,8 @@ func InitaliseNewManifest() error {
 	// TODO: Check if there is a manifest file and exit
 
 	// Load the manifest file from this directory
-	_, err := FindAndLoadManifest()
-	if err == nil {
+	manifestSearch := FindAndLoadManifest()
+	if &manifestSearch != nil {
 		printer.Fatal(
 			fmt.Errorf("Sorry we can't create a new kombustion.yaml, one already exists."),
 			"If you want to re-initialise your kombustion.yaml file, first remove it.",
@@ -34,7 +34,7 @@ func InitaliseNewManifest() error {
 		Environments: environments,
 	}
 
-	err = WriteManifestToDisk(manifest)
+	err = WriteManifestToDisk(&manifest)
 	if err != nil {
 		return err
 	}

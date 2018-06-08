@@ -16,7 +16,7 @@ import (
 // AddPluginsToManifest - Add all new plugin to the manifest
 // update it if it's already there
 // then write the manifest to disk
-func AddPluginsToManifest(manifest manifestType.Manifest, pluginLocations []string) (manifestType.Manifest, error) {
+func AddPluginsToManifest(manifest *manifestType.Manifest, pluginLocations []string) (*manifestType.Manifest, error) {
 	printer.Progress("Kombusting")
 
 	lockFile, err := lock.FindAndLoadLock()
@@ -53,7 +53,7 @@ func AddPluginsToManifest(manifest manifestType.Manifest, pluginLocations []stri
 }
 
 // updatePluginInManifest - Write a new manifest to disk
-func updatePluginInManifest(manifest manifestType.Manifest) error {
+func updatePluginInManifest(manifest *manifestType.Manifest) error {
 	printer.Progress("Updating manifest")
 	err := manifestType.WriteManifestToDisk(manifest)
 	if err != nil {
@@ -64,7 +64,7 @@ func updatePluginInManifest(manifest manifestType.Manifest) error {
 
 // constructGithubPlugin - Create a plugin based on a github url
 func constructGithubPlugin(
-	manifest manifestType.Manifest, pluginURI string,
+	manifest *manifestType.Manifest, pluginURI string,
 ) (
 	plugin manifestType.Plugin,
 	pluginLock lock.Plugin,

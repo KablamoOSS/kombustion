@@ -25,7 +25,8 @@ var CloudFormationStackFlags = []cli.Flag{
 		Usage: "stack name to deploy (defaults to filename)",
 	},
 	cli.StringFlag{
-		Name:  "env",
+		Name:  "environment, e",
 		Usage: "environment config to use from ./kombustion.yaml",
+		// Help:  "If you omit this, it will be derived based on the account the role is assumed from, provided that account is listed under an environment.",
 	},
 }

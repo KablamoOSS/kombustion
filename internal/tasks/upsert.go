@@ -34,6 +34,12 @@ func init() {
 
 // Upsert a stack
 func Upsert(c *cli.Context) {
+
+	cfClient := tasks.GetCloudformationClient(
+		c.GlobalString("profile"),
+		c.String("region"),
+	)
+
 	paramMap := cloudformation.GetParamMap(c)
 
 	// Template generation parameters
@@ -55,7 +61,7 @@ func Upsert(c *cli.Context) {
 		stackName = c.String("stack-name")
 	}
 	if len(c.String("url")) > 0 {
-		parameters = cloudformation.ResolveParametersS3(c)
+		parameters = cloudformation.ResolveParametersS3(c, cfClient)
 
 		templateURL := c.String("url")
 
@@ -64,21 +70,19 @@ func Upsert(c *cli.Context) {
 			parameters,
 			capabilities,
 			stackName,
-			c.GlobalString("profile"),
-			c.String("region"),
+			cfClient,
 		)
 	} else {
 
 		templateBody, cfYaml := tasks.GenerateYamlTemplate(generateParams)
-		parameters = cloudformation.ResolveParameters(c, cfYaml)
+		parameters = cloudformation.ResolveParameters(c, cfYaml, cfClient)
 
 		tasks.UpsertStack(
 			templateBody,
 			parameters,
 			capabilities,
 			stackName,
-			c.GlobalString("profile"),
-			c.String("region"),
+			cfClient,
 		)
 	}
 }

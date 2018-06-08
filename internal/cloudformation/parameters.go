@@ -3,6 +3,7 @@ package cloudformation
 import (
 	"strings"
 
+	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/KablamoOSS/kombustion/types"
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
@@ -21,11 +22,15 @@ func GetParamMap(c *cli.Context) map[string]string {
 	return paramMap
 }
 
-func ResolveParameters(c *cli.Context, cfYaml YamlCloudformation) []*awsCF.Parameter {
+func ResolveParameters(
+	c *cli.Context,
+	cfYaml YamlCloudformation,
+	cfClient *awsCF.CloudFormation,
+) []*awsCF.Parameter {
 	results := []*awsCF.Parameter{}
 
 	// Get params from the envFile
-	env := ResolveEnvironment(c.String("env-file"), c.String("env"))
+	env := resolveEnvironmentParameters(c.String("environment"))
 
 	// override envFile values with optional --param values
 	params := GetParamMap(c)
@@ -51,7 +56,11 @@ func ResolveParameters(c *cli.Context, cfYaml YamlCloudformation) []*awsCF.Param
 	return results
 }
 
-func ResolveParametersS3(c *cli.Context) []*awsCF.Parameter {
+func ResolveParametersS3(
+	c *cli.Context,
+	cfClient *awsCF.CloudFormation,
+) []*awsCF.Parameter {
+
 	results := []*awsCF.Parameter{}
 
 	var params types.TemplateObject
@@ -74,4 +83,12 @@ func ResolveParametersS3(c *cli.Context) []*awsCF.Parameter {
 	}
 
 	return results
+}
+
+func resolveEnvironmentParameters(environment string) (parameters types.TemplateObject) {
+	manifest := manifest.FindAndLoadManifest()
+	if &manifest == nil {
+
+	}
+	return
 }

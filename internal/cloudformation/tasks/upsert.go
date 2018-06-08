@@ -11,14 +11,14 @@ import (
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 )
 
-// Upsert a stack
+// UpsertStack -
 func UpsertStack(
 	templateBody []byte,
 	parameters []*awsCF.Parameter,
 	capabilities []*string,
-	stackName, profile, region string,
+	stackName string,
+	cf *awsCF.CloudFormation,
 ) {
-	cf := GetCloudformationClient(profile, region)
 
 	var err error
 	var status *awsCF.DescribeStacksOutput
@@ -69,14 +69,14 @@ func UpsertStack(
 	}
 }
 
-// Upsert a stack
+// UpsertStackViaS3 -
 func UpsertStackViaS3(
 	templateURL string,
 	parameters []*awsCF.Parameter,
 	capabilities []*string,
-	stackName, profile, region string,
+	stackName string,
+	cf *awsCF.CloudFormation,
 ) {
-	cf := GetCloudformationClient(profile, region)
 
 	var err error
 	var status *awsCF.DescribeStacksOutput
