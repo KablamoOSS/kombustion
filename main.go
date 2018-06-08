@@ -56,6 +56,7 @@ import (
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/tasks"
 	log "github.com/sirupsen/logrus"
+	"github.com/ttacon/chalk"
 	"github.com/urfave/cli"
 )
 
@@ -74,16 +75,16 @@ func main() {
 		version = "BUILT_FROM_SOURCE"
 	}
 
-	kombustionLogo := `
+	kombustionLogo := chalk.Dim.TextStyle(`
    __              __            __  _
   / /_____  __ _  / /  __ _____ / /_(_)__  ___
  /  '_/ _ \/  ' \/ _ \/ // (_-</ __/ / _ \/ _ \
-/_/\_\\___/_/_/_/_.__/\_,_/___/\__/_/\___/_//_/`
-
-	cli.AppHelpTemplate = fmt.Sprintf(`%s
+/_/\_\\___/_/_/_/_.__/\_,_/___/\__/_/\___/_//_/
 kombustion.io
 _______________________________________________________________________
+`)
 
+	cli.AppHelpTemplate = fmt.Sprintf(`%s
 %s
 ISSUES:
     If you have an issue with kombustion, check both the kombustion.io documentation [0], and
@@ -91,11 +92,15 @@ ISSUES:
 
     If the issue still persists please check out the issue queue [3] to see if it's
     already been reported and/or has a fix. If it hasn't you can create a new one [3].
-
+%s`,
+		kombustionLogo,
+		cli.AppHelpTemplate,
+		chalk.Dim.TextStyle(`
     [0] https://kombustion.com
     [1] https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-reference.html
     [3] https://github.com/KablamoOSS/kombustion/issues
-`, kombustionLogo, cli.AppHelpTemplate)
+`),
+	)
 
 	app := cli.NewApp()
 	app.EnableBashCompletion = true
