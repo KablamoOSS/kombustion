@@ -14,27 +14,32 @@ Resources:
             CIDR: 172.16.0.0/20,
             Details: {VPCName: KABLAMOBUILDVPC, VPCDesc: Kablamo Build VPC, Region: ap-southeast-2}
             Tags: {Name : KABLAMO-BUILD-VPC, Taking : care of business}            
-            DHCP: {name: DhcpOptions, dnsservers: 8.8.8.8, ntpservers: 8.8.8.8, ntbtype: 2}
+            DHCP: {Name: DhcpOptions, DNSServers: 172.16.0.2, NTPServers: 169.254.169.123, NTBType: 2}
             Subnets:
-                ReservedMgmt1: {CIDR: 172.16.0.0/26, AZ: 0, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
-                ReservedMgmt2: {CIDR: 172.16.1.0/26, AZ: 1, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
-                ReservedMgmt3: {CIDR: 172.16.2.0/26, AZ: 2, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
-                ReservedNet1: {CIDR: 172.16.0.192/26, AZ: 0, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
-                ReservedNet2: {CIDR: 172.16.1.192/26, AZ: 1, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
-                ReservedNet3: {CIDR: 172.16.2.192/26, AZ: 2, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
-                Internal1: {CIDR: 172.16.3.0/24, AZ: 0, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
-                Internal2: {CIDR: 172.16.4.0/24, AZ: 1, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
-                Internal3: {CIDR: 172.16.5.0/24, AZ: 2, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
-                PerimeterInternal1: {CIDR: 172.16.6.0/24, AZ: 0, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
-                PerimeterInternal2: {CIDR: 172.16.7.0/24, AZ: 1, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
-                PerimeterInternal3: {CIDR: 172.16.8.0/24, AZ: 2, NetAcl: InternalSubnetAcl, RouteTable: InternalRT }
-                PerimeterExternal1: {CIDR: 172.16.9.0/24, AZ: 0, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
-                PerimeterExternal2: {CIDR: 172.16.10.0/24, AZ: 1, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
-                PerimeterExternal3: {CIDR: 172.16.11.0/24, AZ: 2, NetAcl: RestrictedSubnetAcl, RouteTable: PublicRT }
+                ReservedMgmt1: {CIDR: 172.16.0.0/26, AZ: 0, NetACL: InternalSubnetAcl, RouteTable: InternalRT1 }
+                ReservedMgmt2: {CIDR: 172.16.1.0/26, AZ: 1, NetACL: InternalSubnetAcl, RouteTable: InternalRT2 }
+                ReservedMgmt3: {CIDR: 172.16.2.0/26, AZ: 2, NetACL: InternalSubnetAcl, RouteTable: InternalRT3 }
+                ReservedNet1: {CIDR: 172.16.0.192/26, AZ: 0, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
+                ReservedNet2: {CIDR: 172.16.1.192/26, AZ: 1, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
+                ReservedNet3: {CIDR: 172.16.2.192/26, AZ: 2, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
+                Internal1: {CIDR: 172.16.3.0/24, AZ: 0, NetACL: InternalSubnetAcl, RouteTable: InternalRT1 }
+                Internal2: {CIDR: 172.16.4.0/24, AZ: 1, NetACL: InternalSubnetAcl, RouteTable: InternalRT2 }
+                Internal3: {CIDR: 172.16.5.0/24, AZ: 2, NetACL: InternalSubnetAcl, RouteTable: InternalRT3 }
+                PerimeterInternal1: {CIDR: 172.16.6.0/24, AZ: 0, NetACL: InternalSubnetAcl, RouteTable: InternalRT1 }
+                PerimeterInternal2: {CIDR: 172.16.7.0/24, AZ: 1, NetACL: InternalSubnetAcl, RouteTable: InternalRT2 }
+                PerimeterInternal3: {CIDR: 172.16.8.0/24, AZ: 2, NetACL: InternalSubnetAcl, RouteTable: InternalRT3 }
+                PerimeterExternal1: {CIDR: 172.16.9.0/24, AZ: 0, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
+                PerimeterExternal2: {CIDR: 172.16.10.0/24, AZ: 1, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
+                PerimeterExternal3: {CIDR: 172.16.11.0/24, AZ: 2, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
             RouteTables:
                 PublicRT:
                     {routename: PublicRoute, routecidr: 0.0.0.0/0,  routegw: InternetGateway}
-                InternalRT:
+                InternalRT1:
+                    {routename: PublicRoute, routecidr: 0.0.0.0/0,  routegw: InternetGateway}
+                InternalRT2:
+                    {routename: PublicRoute, routecidr: 0.0.0.0/0,  routegw: InternetGateway}
+                InternalRT3:
+                    {routename: PublicRoute, routecidr: 0.0.0.0/0,  routegw: InternetGateway}
             NetworkACLs:
                 RestrictedSubnetAcl: 
                     RestrictedSubnetAclEntryInTCPUnReserved: "90,6,allow,false,0.0.0.0/0,1024,65535"

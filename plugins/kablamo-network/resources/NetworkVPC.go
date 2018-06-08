@@ -4,6 +4,7 @@ package resources
 
 import (
 	"log"
+	"strconv"
 	"strings"
 
 	"github.com/KablamoOSS/kombustion/pluginParsers/properties"
@@ -37,17 +38,18 @@ type NetworkVPCConfig struct {
 	Properties struct {
 		CIDR *string `yaml:"CIDR"`
 		DHCP struct {
-			name           string `yaml:"name"`
-			dnsservers     string `yaml:"dnsservers"`
-			ntpservers     string `yaml:"ntpservers,omitempty"`
-			ntbtype        string `yaml:"ntbtype,omitempty"`
-			domainname     string `yaml:"domainname,omitempty"`
-			netbiosservers string `yaml:"netbiosservers,omitempty"`
+			Name           string `yaml:"Name"`
+			DNSServers     string `yaml:"DNSServers"`
+			NTPServers     string `yaml:"NTPServers,omitempty"`
+			NTBType        string `yaml:"NTBType,omitempty"`
+			Domainname     string `yaml:"Domainname,omitempty"`
+			Netbiosservers string `yaml:"Netbiosservers,omitempty"`
 		} `yaml:"DHCP"`
 		Details struct {
-			VPCName string `yaml:"VPCName"`
-			VPCDesc string `yaml:"VPCDesc"`
-			Region  string `yaml:"Region"`
+			VPCName    string `yaml:"VPCName"`
+			VPCDesc    string `yaml:"VPCDesc"`
+			Region     string `yaml:"Region"`
+			NatGateway bool   `yaml:"NatGateway"`
 		} `yaml:"Details"`
 		Subnets     map[string]Subnet      `yaml:"Subnets,omitempty"`
 		RouteTables map[string]Routetable  `yaml:"RouteTables,omitempty"`
@@ -79,20 +81,20 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 		},
 	)
 
-	cf[config.Properties.DHCP.name] = resources.NewEC2DHCPOptions(
+	cf[config.Properties.DHCP.Name] = resources.NewEC2DHCPOptions(
 		resources.EC2DHCPOptionsProperties{
-			DomainName:         config.Properties.DHCP.domainname,
-			NetbiosNodeType:    config.Properties.DHCP.ntbtype,
-			DomainNameServers:  config.Properties.DHCP.dnsservers,
-			NetbiosNameServers: config.Properties.DHCP.netbiosservers,
-			NtpServers:         config.Properties.DHCP.ntpservers,
-			Tags:               map[string]string{"Name": config.Properties.DHCP.name},
+			DomainName:         config.Properties.DHCP.Domainname,
+			NetbiosNodeType:    config.Properties.DHCP.Netbiosservers,
+			DomainNameServers:  config.Properties.DHCP.DNSServers,
+			NetbiosNameServers: config.Properties.DHCP.Netbiosservers,
+			NtpServers:         config.Properties.DHCP.NTPServers,
+			Tags:               map[string]string{"Name": config.Properties.DHCP.Name},
 		},
 	)
 
-	cf[config.Properties.DHCP.name+"VPCDHCPOptionsAssociation"] = resources.NewEC2VPCDHCPOptionsAssociation(
+	cf[config.Properties.DHCP.Name+"VPCDHCPOptionsAssociation"] = resources.NewEC2VPCDHCPOptionsAssociation(
 		resources.EC2VPCDHCPOptionsAssociationProperties{
-			DhcpOptionsId: map[string]interface{}{"Ref": config.Properties.DHCP.name},
+			DhcpOptionsId: map[string]interface{}{"Ref": config.Properties.DHCP.Name},
 			VpcId:         map[string]interface{}{"Ref": config.Properties.Details.VPCName},
 		},
 	)
@@ -177,7 +179,7 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 			resources.EC2SubnetProperties{
 				VpcId:            map[string]interface{}{"Ref": config.Properties.Details.VPCName},
 				CidrBlock:        settings.CIDR,
-				AvailabilityZone: map[interface{}]interface{}{"Fn::Select": []interface{}{settings.AZ, "Fn::GetAZs"}},
+				AvailabilityZone: map[interface{}]interface{}{"Fn::Select": []interface{}{settings.AZ, map[string]string{"Fn::GetAZs": ""}}},
 				Tags:             map[string]string{"Name": subnet},
 			},
 		)
@@ -195,6 +197,24 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 				SubnetId:     map[string]interface{}{"Ref": subnet},
 			},
 		)
+	}
+
+	if config.Properties.Details.NatGateway {
+		for i := 1; i < 4; i++ {
+			cf["EIPReserved"+strconv.Itoa(i)] = resources.NewEC2EIP(
+				resources.EC2EIPProperties{
+					Domain: "vpc",
+				},
+			)
+
+			cf["NATReserved"+strconv.Itoa(i)] = resources.NewEC2NatGateway(
+				resources.EC2NatGatewayProperties{
+					AllocationId: map[string]interface{}{"Fn::GetAtt": []string{"EIP" + strconv.Itoa(i), "AllocationId"}},
+					SubnetId:     map[string]interface{}{"Ref": "ReservedNet" + strconv.Itoa(i)},
+					Tags:         map[string]interface{}{"Name": "NATGateway" + strconv.Itoa(i)},
+				},
+			)
+		}
 	}
 
 	/* 	for k, resource := range cf {
