@@ -24,7 +24,7 @@ func init() {
 
 // Generate a template and save it to disk, without upserting it
 func Generate(c *cli.Context) {
-	paramMap := getParamMap(c)
+	paramMap := cloudformation.GetParamMap(c)
 
 	tasks.GenerateTemplate(cloudformation.GenerateParams{
 		Filename:           c.Args().Get(0),
