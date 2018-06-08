@@ -4,7 +4,6 @@ import (
 	"strings"
 
 	"github.com/KablamoOSS/kombustion/internal/manifest"
-	"github.com/KablamoOSS/kombustion/types"
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/urfave/cli"
@@ -29,26 +28,23 @@ func ResolveParameters(
 ) []*awsCF.Parameter {
 	results := []*awsCF.Parameter{}
 
-	// Get params from the envFile
 	env := resolveEnvironmentParameters(c.String("environment"))
 
 	// override envFile values with optional --param values
 	params := GetParamMap(c)
-	for k, v := range params {
-		env[k] = v
+	for key, value := range params {
+		env[key] = value
 	}
 
 	// convert to aws Parameter list
-	for paramK := range cfYaml.Parameters {
-		for k, v := range env {
-			if paramK == k {
-				if s, ok := v.(string); ok {
-					// Filter to params in the stack
-					results = append(results, &awsCF.Parameter{
-						ParameterKey:   aws.String(k),
-						ParameterValue: aws.String(s),
-					})
-				}
+	for paramKey := range cfYaml.Parameters {
+		for key, value := range env {
+			if paramKey == key {
+				// Filter to params in the stack
+				results = append(results, &awsCF.Parameter{
+					ParameterKey:   aws.String(key),
+					ParameterValue: aws.String(value),
+				})
 			}
 		}
 	}
@@ -63,32 +59,32 @@ func ResolveParametersS3(
 
 	results := []*awsCF.Parameter{}
 
-	var params types.TemplateObject
+	params := make(map[string]string)
 
-	// override envFile values with optional --param values
-	paramMap := GetParamMap(c)
-	for k, v := range paramMap {
-		params[k] = v
+	env := resolveEnvironmentParameters(c.String("environment"))
+	for key, value := range params {
+		env[key] = value
 	}
 
 	// convert to aws Parameter list
-	for k, v := range params {
-		if s, ok := v.(string); ok {
-			// Filter to params in the stack
-			results = append(results, &awsCF.Parameter{
-				ParameterKey:   aws.String(k),
-				ParameterValue: aws.String(s),
-			})
-		}
+	for key, value := range params {
+		// Filter to params in the stack
+		results = append(results, &awsCF.Parameter{
+			ParameterKey:   aws.String(key),
+			ParameterValue: aws.String(value),
+		})
 	}
 
 	return results
 }
 
-func resolveEnvironmentParameters(environment string) (parameters types.TemplateObject) {
-	manifest := manifest.FindAndLoadManifest()
-	if &manifest == nil {
-
+func resolveEnvironmentParameters(environment string) (parameters map[string]string) {
+	manifestFile := manifest.FindAndLoadManifest()
+	if manifestFile != nil {
+		envParams := manifestFile.Environments[environment].Parameters
+		if envParams != nil {
+			parameters = envParams
+		}
 	}
 	return
 }

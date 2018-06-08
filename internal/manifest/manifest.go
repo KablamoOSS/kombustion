@@ -21,7 +21,6 @@ var (
 
 // FindAndLoadManifest - Search the current directory for a manifest file, and load it
 func FindAndLoadManifest() *Manifest {
-
 	if loadedManifest == nil {
 		once.Do(func() {
 			path, err := filepath.Abs(filepath.Dir(os.Args[0]))
