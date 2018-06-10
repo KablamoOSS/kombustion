@@ -4,7 +4,6 @@ package resources
 
 import (
 	"log"
-	"strconv"
 	"strings"
 
 	"github.com/KablamoOSS/kombustion/pluginParsers/properties"
@@ -21,6 +20,12 @@ type Subnet struct {
 	RouteTable string `yaml:"RouteTable"`
 }
 
+//NATGateway object
+type NATGateway struct {
+	Subnet     string `yaml:"Subnet"`
+	Routetable string `yaml:"Routetable"`
+}
+
 //Routetable an array of Route(s)
 type Routetable struct {
 	routes []Route `yaml:"routes"`
@@ -28,9 +33,9 @@ type Routetable struct {
 
 //Route Object
 type Route struct {
-	routename string `yaml:"routename"`
-	routecidr string `yaml:"routecidr"`
-	routegw   string `yaml:"routegw"`
+	RouteName string `yaml:"RouteName"`
+	RouteCIDR string `yaml:"RouteCIDR"`
+	RouteGW   string `yaml:"RouteGW"`
 }
 
 //NetworkVPCConfig Main Object and construct
@@ -46,13 +51,13 @@ type NetworkVPCConfig struct {
 			Netbiosservers string `yaml:"Netbiosservers,omitempty"`
 		} `yaml:"DHCP"`
 		Details struct {
-			VPCName    string `yaml:"VPCName"`
-			VPCDesc    string `yaml:"VPCDesc"`
-			Region     string `yaml:"Region"`
-			NatGateway bool   `yaml:"NatGateway"`
+			VPCName string `yaml:"VPCName"`
+			VPCDesc string `yaml:"VPCDesc"`
+			Region  string `yaml:"Region"`
 		} `yaml:"Details"`
 		Subnets     map[string]Subnet      `yaml:"Subnets,omitempty"`
-		RouteTables map[string]Routetable  `yaml:"RouteTables,omitempty"`
+		NatGateways map[string]NATGateway  `yaml:"NATGateways,omitempty"`
+		RouteTables map[string][]Route     `yaml:"RouteTables,omitempty"`
 		NetworkACLs map[string]interface{} `yaml:"NetworkACLs,omitempty"`
 		Tags        interface{}            `yaml:"Tags"`
 	} `yaml:"Properties"`
@@ -127,15 +132,14 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 			},
 		)
 
-		for route, routedetail := range settings.routes {
-			if route > 0 {
-				cf[routetable+routedetail.routename] = resources.NewEC2Route(
-					resources.EC2RouteProperties{
-						DestinationCidrBlock: routedetail.routecidr,
-						GatewayId:            map[string]string{"Ref": routedetail.routegw},
-					},
-				)
-			}
+		for _, routeinfo := range settings {
+			cf[routeinfo.RouteName] = resources.NewEC2Route(
+				resources.EC2RouteProperties{
+					DestinationCidrBlock: routeinfo.RouteCIDR,
+					GatewayId:            map[string]string{"Ref": routeinfo.RouteGW},
+					RouteTableId:         map[string]string{"Ref": routetable},
+				},
+			)
 		}
 
 		cf[routetable+"RoutePropagation"] = resources.NewEC2VPNGatewayRoutePropagation(
@@ -199,22 +203,36 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 		)
 	}
 
-	if config.Properties.Details.NatGateway {
-		for i := 1; i < 4; i++ {
-			cf["EIPReserved"+strconv.Itoa(i)] = resources.NewEC2EIP(
-				resources.EC2EIPProperties{
-					Domain: "vpc",
-				},
-			)
+	for natgw, settings := range config.Properties.NatGateways {
+		cf["EIP"+natgw] = resources.NewEC2EIP(
+			resources.EC2EIPProperties{
+				Domain: "vpc",
+			},
+		)
 
-			cf["NATReserved"+strconv.Itoa(i)] = resources.NewEC2NatGateway(
-				resources.EC2NatGatewayProperties{
-					AllocationId: map[string]interface{}{"Fn::GetAtt": []string{"EIP" + strconv.Itoa(i), "AllocationId"}},
-					SubnetId:     map[string]interface{}{"Ref": "ReservedNet" + strconv.Itoa(i)},
-					Tags:         map[string]interface{}{"Name": "NATGateway" + strconv.Itoa(i)},
-				},
-			)
-		}
+		cf[natgw] = resources.NewEC2NatGateway(
+			resources.EC2NatGatewayProperties{
+				AllocationId: map[string]interface{}{"Fn::GetAtt": []string{"EIP" + natgw, "AllocationId"}},
+				SubnetId:     map[string]interface{}{"Ref": settings.Subnet},
+				Tags:         map[string]interface{}{"Name": natgw},
+			},
+		)
+
+		cf[natgw] = resources.NewEC2NatGateway(
+			resources.EC2NatGatewayProperties{
+				AllocationId: map[string]interface{}{"Fn::GetAtt": []string{"EIP" + natgw, "AllocationId"}},
+				SubnetId:     map[string]interface{}{"Ref": settings.Subnet},
+				Tags:         map[string]interface{}{"Name": natgw},
+			},
+		)
+
+		cf[natgw+"Route"] = resources.NewEC2Route(
+			resources.EC2RouteProperties{
+				DestinationCidrBlock: "0.0.0.0/0",
+				RouteTableId:         map[string]string{"Ref": settings.Routetable},
+				GatewayId:            map[string]string{"Ref": natgw},
+			},
+		)
 	}
 
 	/* 	for k, resource := range cf {
