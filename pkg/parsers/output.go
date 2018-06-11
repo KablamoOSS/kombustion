@@ -8,8 +8,8 @@ import (
 	"github.com/KablamoOSS/kombustion/types"
 )
 
-// GetParsers_outputs returns parser functions
-func GetParsers_outputs() map[string]types.ParserFunc {
+// GetParsersOutputs returns parser functions
+func GetParsersOutputs() map[string]types.ParserFunc {
 	return map[string]types.ParserFunc{
 		"AWS::ApiGateway::Account":                              outputs.ParseApiGatewayAccount,
 		"AWS::ApiGateway::ApiKey":                               outputs.ParseApiGatewayApiKey,
