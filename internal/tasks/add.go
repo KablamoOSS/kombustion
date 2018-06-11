@@ -14,13 +14,13 @@ import (
 func AddPluginToManifest(c *cli.Context) error {
 	printer.Step("Adding plugins")
 	// Try and load the manifest
-	manifest := manifest.FindAndLoadManifest()
+	manifestFile := manifest.FindAndLoadManifest()
 
 	// Get the plugin to add
 	pluginNames := c.Args()
 
 	// Add them
-	manifest, err := plugins.AddPluginsToManifest(manifest, pluginNames)
+	_, err := plugins.AddPluginsToManifest(manifestFile, pluginNames)
 	if err != nil {
 		log.Fatal(err)
 	}
