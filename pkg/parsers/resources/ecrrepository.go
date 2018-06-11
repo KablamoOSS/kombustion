@@ -51,10 +51,12 @@ func ParseECRRepository(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseECRRepository validator
 func (resource ECRRepository) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseECRRepositoryProperties validator
 func (resource ECRRepositoryProperties) Validate() []error {
 	errs := []error{}
 	return errs

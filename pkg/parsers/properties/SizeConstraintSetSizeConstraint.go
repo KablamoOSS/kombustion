@@ -13,6 +13,7 @@ type SizeConstraintSetSizeConstraint struct {
 	FieldToMatch       *SizeConstraintSetFieldToMatch `yaml:"FieldToMatch"`
 }
 
+// SizeConstraintSetSizeConstraint validation
 func (resource SizeConstraintSetSizeConstraint) Validate() []error {
 	errs := []error{}
 

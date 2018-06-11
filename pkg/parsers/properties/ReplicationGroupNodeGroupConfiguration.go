@@ -11,6 +11,7 @@ type ReplicationGroupNodeGroupConfiguration struct {
 	ReplicaAvailabilityZones interface{} `yaml:"ReplicaAvailabilityZones,omitempty"`
 }
 
+// ReplicationGroupNodeGroupConfiguration validation
 func (resource ReplicationGroupNodeGroupConfiguration) Validate() []error {
 	errs := []error{}
 

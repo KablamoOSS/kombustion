@@ -11,6 +11,7 @@ type FileSystemElasticFileSystemTag struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// FileSystemElasticFileSystemTag validation
 func (resource FileSystemElasticFileSystemTag) Validate() []error {
 	errs := []error{}
 

@@ -19,6 +19,7 @@ type TableStorageDescriptor struct {
 	SortColumns            interface{}      `yaml:"SortColumns,omitempty"`
 }
 
+// TableStorageDescriptor validation
 func (resource TableStorageDescriptor) Validate() []error {
 	errs := []error{}
 

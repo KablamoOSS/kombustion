@@ -51,10 +51,12 @@ func ParseApiGatewayDocumentationVersion(ctx map[string]interface{}, name string
 	return
 }
 
+// ParseApiGatewayDocumentationVersion validator
 func (resource ApiGatewayDocumentationVersion) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayDocumentationVersionProperties validator
 func (resource ApiGatewayDocumentationVersionProperties) Validate() []error {
 	errs := []error{}
 	if resource.DocumentationVersion == nil {

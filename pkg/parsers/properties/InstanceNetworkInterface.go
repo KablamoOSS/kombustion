@@ -21,6 +21,7 @@ type InstanceNetworkInterface struct {
 	PrivateIpAddresses             interface{} `yaml:"PrivateIpAddresses,omitempty"`
 }
 
+// InstanceNetworkInterface validation
 func (resource InstanceNetworkInterface) Validate() []error {
 	errs := []error{}
 

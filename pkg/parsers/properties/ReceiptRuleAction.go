@@ -14,6 +14,7 @@ type ReceiptRuleAction struct {
 	AddHeaderAction *ReceiptRuleAddHeaderAction `yaml:"AddHeaderAction,omitempty"`
 }
 
+// ReceiptRuleAction validation
 func (resource ReceiptRuleAction) Validate() []error {
 	errs := []error{}
 

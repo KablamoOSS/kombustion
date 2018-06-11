@@ -60,10 +60,12 @@ func ParseSSMPatchBaseline(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseSSMPatchBaseline validator
 func (resource SSMPatchBaseline) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSSMPatchBaselineProperties validator
 func (resource SSMPatchBaselineProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

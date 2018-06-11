@@ -13,6 +13,7 @@ type InstanceGroupConfigScalingRule struct {
 	Action      *InstanceGroupConfigScalingAction  `yaml:"Action"`
 }
 
+// InstanceGroupConfigScalingRule validation
 func (resource InstanceGroupConfigScalingRule) Validate() []error {
 	errs := []error{}
 

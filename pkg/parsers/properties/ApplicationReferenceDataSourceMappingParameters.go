@@ -9,6 +9,7 @@ type ApplicationReferenceDataSourceMappingParameters struct {
 	CSVMappingParameters  *ApplicationReferenceDataSourceCSVMappingParameters  `yaml:"CSVMappingParameters,omitempty"`
 }
 
+// ApplicationReferenceDataSourceMappingParameters validation
 func (resource ApplicationReferenceDataSourceMappingParameters) Validate() []error {
 	errs := []error{}
 

@@ -15,6 +15,7 @@ type ScalingPlanScalingInstruction struct {
 	TargetTrackingConfigurations interface{} `yaml:"TargetTrackingConfigurations"`
 }
 
+// ScalingPlanScalingInstruction validation
 func (resource ScalingPlanScalingInstruction) Validate() []error {
 	errs := []error{}
 

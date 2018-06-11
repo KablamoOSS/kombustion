@@ -11,6 +11,7 @@ type InstanceGroupConfigAutoScalingPolicy struct {
 	Rules       interface{}                            `yaml:"Rules"`
 }
 
+// InstanceGroupConfigAutoScalingPolicy validation
 func (resource InstanceGroupConfigAutoScalingPolicy) Validate() []error {
 	errs := []error{}
 

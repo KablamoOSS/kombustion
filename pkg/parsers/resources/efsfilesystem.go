@@ -51,10 +51,12 @@ func ParseEFSFileSystem(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseEFSFileSystem validator
 func (resource EFSFileSystem) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEFSFileSystemProperties validator
 func (resource EFSFileSystemProperties) Validate() []error {
 	errs := []error{}
 	return errs

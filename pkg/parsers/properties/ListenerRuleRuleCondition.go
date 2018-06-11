@@ -9,6 +9,7 @@ type ListenerRuleRuleCondition struct {
 	Values interface{} `yaml:"Values,omitempty"`
 }
 
+// ListenerRuleRuleCondition validation
 func (resource ListenerRuleRuleCondition) Validate() []error {
 	errs := []error{}
 

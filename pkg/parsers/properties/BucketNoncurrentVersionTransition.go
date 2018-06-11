@@ -11,6 +11,7 @@ type BucketNoncurrentVersionTransition struct {
 	TransitionInDays interface{} `yaml:"TransitionInDays"`
 }
 
+// BucketNoncurrentVersionTransition validation
 func (resource BucketNoncurrentVersionTransition) Validate() []error {
 	errs := []error{}
 

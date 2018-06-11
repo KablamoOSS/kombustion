@@ -52,10 +52,12 @@ func ParseLogsDestination(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseLogsDestination validator
 func (resource LogsDestination) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseLogsDestinationProperties validator
 func (resource LogsDestinationProperties) Validate() []error {
 	errs := []error{}
 	if resource.DestinationName == nil {

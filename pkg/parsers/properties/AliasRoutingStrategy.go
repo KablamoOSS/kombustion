@@ -12,6 +12,7 @@ type AliasRoutingStrategy struct {
 	Type    interface{} `yaml:"Type"`
 }
 
+// AliasRoutingStrategy validation
 func (resource AliasRoutingStrategy) Validate() []error {
 	errs := []error{}
 

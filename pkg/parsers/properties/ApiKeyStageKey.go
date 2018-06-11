@@ -9,6 +9,7 @@ type ApiKeyStageKey struct {
 	StageName interface{} `yaml:"StageName,omitempty"`
 }
 
+// ApiKeyStageKey validation
 func (resource ApiKeyStageKey) Validate() []error {
 	errs := []error{}
 

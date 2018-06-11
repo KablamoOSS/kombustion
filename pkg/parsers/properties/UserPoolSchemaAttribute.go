@@ -14,6 +14,7 @@ type UserPoolSchemaAttribute struct {
 	NumberAttributeConstraints *UserPoolNumberAttributeConstraints `yaml:"NumberAttributeConstraints,omitempty"`
 }
 
+// UserPoolSchemaAttribute validation
 func (resource UserPoolSchemaAttribute) Validate() []error {
 	errs := []error{}
 

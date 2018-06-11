@@ -50,10 +50,12 @@ func ParseWAFRegionalWebACLAssociation(ctx map[string]interface{}, name string, 
 	return
 }
 
+// ParseWAFRegionalWebACLAssociation validator
 func (resource WAFRegionalWebACLAssociation) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFRegionalWebACLAssociationProperties validator
 func (resource WAFRegionalWebACLAssociationProperties) Validate() []error {
 	errs := []error{}
 	if resource.ResourceArn == nil {

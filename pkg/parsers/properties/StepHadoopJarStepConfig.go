@@ -13,6 +13,7 @@ type StepHadoopJarStepConfig struct {
 	StepProperties interface{} `yaml:"StepProperties,omitempty"`
 }
 
+// StepHadoopJarStepConfig validation
 func (resource StepHadoopJarStepConfig) Validate() []error {
 	errs := []error{}
 

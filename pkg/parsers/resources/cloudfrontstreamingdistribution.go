@@ -51,10 +51,12 @@ func ParseCloudFrontStreamingDistribution(ctx map[string]interface{}, name strin
 	return
 }
 
+// ParseCloudFrontStreamingDistribution validator
 func (resource CloudFrontStreamingDistribution) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCloudFrontStreamingDistributionProperties validator
 func (resource CloudFrontStreamingDistributionProperties) Validate() []error {
 	errs := []error{}
 	if resource.StreamingDistributionConfig == nil {

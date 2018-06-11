@@ -11,6 +11,7 @@ type AlarmDimension struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// AlarmDimension validation
 func (resource AlarmDimension) Validate() []error {
 	errs := []error{}
 

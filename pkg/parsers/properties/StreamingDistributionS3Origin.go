@@ -11,6 +11,7 @@ type StreamingDistributionS3Origin struct {
 	OriginAccessIdentity interface{} `yaml:"OriginAccessIdentity"`
 }
 
+// StreamingDistributionS3Origin validation
 func (resource StreamingDistributionS3Origin) Validate() []error {
 	errs := []error{}
 

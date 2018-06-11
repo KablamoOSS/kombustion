@@ -12,6 +12,7 @@ type ReceiptRuleLambdaAction struct {
 	TopicArn       interface{} `yaml:"TopicArn,omitempty"`
 }
 
+// ReceiptRuleLambdaAction validation
 func (resource ReceiptRuleLambdaAction) Validate() []error {
 	errs := []error{}
 

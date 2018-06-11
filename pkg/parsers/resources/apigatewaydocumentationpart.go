@@ -52,10 +52,12 @@ func ParseApiGatewayDocumentationPart(ctx map[string]interface{}, name string, d
 	return
 }
 
+// ParseApiGatewayDocumentationPart validator
 func (resource ApiGatewayDocumentationPart) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayDocumentationPartProperties validator
 func (resource ApiGatewayDocumentationPartProperties) Validate() []error {
 	errs := []error{}
 	if resource.Properties == nil {

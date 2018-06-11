@@ -8,6 +8,7 @@ type LaunchTemplateMonitoring struct {
 	Enabled interface{} `yaml:"Enabled,omitempty"`
 }
 
+// LaunchTemplateMonitoring validation
 func (resource LaunchTemplateMonitoring) Validate() []error {
 	errs := []error{}
 

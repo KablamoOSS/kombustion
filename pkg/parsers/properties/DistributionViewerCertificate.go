@@ -12,6 +12,7 @@ type DistributionViewerCertificate struct {
 	SslSupportMethod             interface{} `yaml:"SslSupportMethod,omitempty"`
 }
 
+// DistributionViewerCertificate validation
 func (resource DistributionViewerCertificate) Validate() []error {
 	errs := []error{}
 

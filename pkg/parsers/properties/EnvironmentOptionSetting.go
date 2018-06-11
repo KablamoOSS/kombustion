@@ -13,6 +13,7 @@ type EnvironmentOptionSetting struct {
 	Value        interface{} `yaml:"Value,omitempty"`
 }
 
+// EnvironmentOptionSetting validation
 func (resource EnvironmentOptionSetting) Validate() []error {
 	errs := []error{}
 

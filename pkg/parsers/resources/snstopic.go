@@ -50,10 +50,12 @@ func ParseSNSTopic(ctx map[string]interface{}, name string, data string) (cf typ
 	return
 }
 
+// ParseSNSTopic validator
 func (resource SNSTopic) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSNSTopicProperties validator
 func (resource SNSTopicProperties) Validate() []error {
 	errs := []error{}
 	return errs

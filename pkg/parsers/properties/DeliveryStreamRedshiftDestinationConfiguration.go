@@ -17,6 +17,7 @@ type DeliveryStreamRedshiftDestinationConfiguration struct {
 	CloudWatchLoggingOptions *DeliveryStreamCloudWatchLoggingOptions   `yaml:"CloudWatchLoggingOptions,omitempty"`
 }
 
+// DeliveryStreamRedshiftDestinationConfiguration validation
 func (resource DeliveryStreamRedshiftDestinationConfiguration) Validate() []error {
 	errs := []error{}
 

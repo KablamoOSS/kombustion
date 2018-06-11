@@ -51,10 +51,12 @@ func ParseDAXSubnetGroup(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseDAXSubnetGroup validator
 func (resource DAXSubnetGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDAXSubnetGroupProperties validator
 func (resource DAXSubnetGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.SubnetIds == nil {

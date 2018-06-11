@@ -12,6 +12,7 @@ type StreamingDistributionLogging struct {
 	Prefix  interface{} `yaml:"Prefix"`
 }
 
+// StreamingDistributionLogging validation
 func (resource StreamingDistributionLogging) Validate() []error {
 	errs := []error{}
 

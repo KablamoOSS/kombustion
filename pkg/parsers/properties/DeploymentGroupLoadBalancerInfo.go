@@ -9,6 +9,7 @@ type DeploymentGroupLoadBalancerInfo struct {
 	TargetGroupInfoList interface{} `yaml:"TargetGroupInfoList,omitempty"`
 }
 
+// DeploymentGroupLoadBalancerInfo validation
 func (resource DeploymentGroupLoadBalancerInfo) Validate() []error {
 	errs := []error{}
 

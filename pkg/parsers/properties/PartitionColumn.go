@@ -12,6 +12,7 @@ type PartitionColumn struct {
 	Type    interface{} `yaml:"Type,omitempty"`
 }
 
+// PartitionColumn validation
 func (resource PartitionColumn) Validate() []error {
 	errs := []error{}
 

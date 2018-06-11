@@ -11,6 +11,7 @@ type DeliveryStreamBufferingHints struct {
 	SizeInMBs         interface{} `yaml:"SizeInMBs"`
 }
 
+// DeliveryStreamBufferingHints validation
 func (resource DeliveryStreamBufferingHints) Validate() []error {
 	errs := []error{}
 

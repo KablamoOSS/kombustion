@@ -9,6 +9,7 @@ type LoadBalancerLBCookieStickinessPolicy struct {
 	PolicyName             interface{} `yaml:"PolicyName,omitempty"`
 }
 
+// LoadBalancerLBCookieStickinessPolicy validation
 func (resource LoadBalancerLBCookieStickinessPolicy) Validate() []error {
 	errs := []error{}
 

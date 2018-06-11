@@ -9,6 +9,7 @@ type SpotFleetSpotPlacement struct {
 	GroupName        interface{} `yaml:"GroupName,omitempty"`
 }
 
+// SpotFleetSpotPlacement validation
 func (resource SpotFleetSpotPlacement) Validate() []error {
 	errs := []error{}
 

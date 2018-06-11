@@ -51,10 +51,12 @@ func ParseKinesisAnalyticsApplicationReferenceDataSource(ctx map[string]interfac
 	return
 }
 
+// ParseKinesisAnalyticsApplicationReferenceDataSource validator
 func (resource KinesisAnalyticsApplicationReferenceDataSource) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseKinesisAnalyticsApplicationReferenceDataSourceProperties validator
 func (resource KinesisAnalyticsApplicationReferenceDataSourceProperties) Validate() []error {
 	errs := []error{}
 	if resource.ApplicationName == nil {

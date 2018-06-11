@@ -8,6 +8,7 @@ type InstanceCreditSpecification struct {
 	CPUCredits interface{} `yaml:"CPUCredits,omitempty"`
 }
 
+// InstanceCreditSpecification validation
 func (resource InstanceCreditSpecification) Validate() []error {
 	errs := []error{}
 

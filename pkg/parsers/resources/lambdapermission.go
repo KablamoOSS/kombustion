@@ -54,10 +54,12 @@ func ParseLambdaPermission(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseLambdaPermission validator
 func (resource LambdaPermission) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseLambdaPermissionProperties validator
 func (resource LambdaPermissionProperties) Validate() []error {
 	errs := []error{}
 	if resource.Action == nil {

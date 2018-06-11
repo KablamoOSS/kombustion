@@ -11,6 +11,7 @@ type DistributionOriginCustomHeader struct {
 	HeaderValue interface{} `yaml:"HeaderValue"`
 }
 
+// DistributionOriginCustomHeader validation
 func (resource DistributionOriginCustomHeader) Validate() []error {
 	errs := []error{}
 

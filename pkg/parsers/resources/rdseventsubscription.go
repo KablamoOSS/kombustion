@@ -53,10 +53,12 @@ func ParseRDSEventSubscription(ctx map[string]interface{}, name string, data str
 	return
 }
 
+// ParseRDSEventSubscription validator
 func (resource RDSEventSubscription) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRDSEventSubscriptionProperties validator
 func (resource RDSEventSubscriptionProperties) Validate() []error {
 	errs := []error{}
 	if resource.SnsTopicArn == nil {

@@ -52,10 +52,12 @@ func ParseCertificateManagerCertificate(ctx map[string]interface{}, name string,
 	return
 }
 
+// ParseCertificateManagerCertificate validator
 func (resource CertificateManagerCertificate) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCertificateManagerCertificateProperties validator
 func (resource CertificateManagerCertificateProperties) Validate() []error {
 	errs := []error{}
 	if resource.DomainName == nil {

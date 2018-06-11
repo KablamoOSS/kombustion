@@ -13,6 +13,7 @@ type DistributionForwardedValues struct {
 	Cookies              *DistributionCookies `yaml:"Cookies,omitempty"`
 }
 
+// DistributionForwardedValues validation
 func (resource DistributionForwardedValues) Validate() []error {
 	errs := []error{}
 

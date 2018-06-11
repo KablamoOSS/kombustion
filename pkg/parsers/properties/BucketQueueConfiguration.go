@@ -12,6 +12,7 @@ type BucketQueueConfiguration struct {
 	Filter *BucketNotificationFilter `yaml:"Filter,omitempty"`
 }
 
+// BucketQueueConfiguration validation
 func (resource BucketQueueConfiguration) Validate() []error {
 	errs := []error{}
 

@@ -10,6 +10,7 @@ type LoadBalancerConnectionSettings struct {
 	IdleTimeout interface{} `yaml:"IdleTimeout"`
 }
 
+// LoadBalancerConnectionSettings validation
 func (resource LoadBalancerConnectionSettings) Validate() []error {
 	errs := []error{}
 

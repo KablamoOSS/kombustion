@@ -11,6 +11,7 @@ type DeliveryStreamElasticsearchBufferingHints struct {
 	SizeInMBs         interface{} `yaml:"SizeInMBs"`
 }
 
+// DeliveryStreamElasticsearchBufferingHints validation
 func (resource DeliveryStreamElasticsearchBufferingHints) Validate() []error {
 	errs := []error{}
 

@@ -50,10 +50,12 @@ func ParseEC2SubnetRouteTableAssociation(ctx map[string]interface{}, name string
 	return
 }
 
+// ParseEC2SubnetRouteTableAssociation validator
 func (resource EC2SubnetRouteTableAssociation) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2SubnetRouteTableAssociationProperties validator
 func (resource EC2SubnetRouteTableAssociationProperties) Validate() []error {
 	errs := []error{}
 	if resource.RouteTableId == nil {

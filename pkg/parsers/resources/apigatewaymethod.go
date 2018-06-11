@@ -61,10 +61,12 @@ func ParseApiGatewayMethod(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseApiGatewayMethod validator
 func (resource ApiGatewayMethod) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayMethodProperties validator
 func (resource ApiGatewayMethodProperties) Validate() []error {
 	errs := []error{}
 	if resource.HttpMethod == nil {

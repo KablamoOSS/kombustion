@@ -11,6 +11,7 @@ type MaintenanceWindowTaskTarget struct {
 	Values interface{} `yaml:"Values,omitempty"`
 }
 
+// MaintenanceWindowTaskTarget validation
 func (resource MaintenanceWindowTaskTarget) Validate() []error {
 	errs := []error{}
 

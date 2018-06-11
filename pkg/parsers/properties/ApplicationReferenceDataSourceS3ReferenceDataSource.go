@@ -12,6 +12,7 @@ type ApplicationReferenceDataSourceS3ReferenceDataSource struct {
 	ReferenceRoleARN interface{} `yaml:"ReferenceRoleARN"`
 }
 
+// ApplicationReferenceDataSourceS3ReferenceDataSource validation
 func (resource ApplicationReferenceDataSourceS3ReferenceDataSource) Validate() []error {
 	errs := []error{}
 

@@ -9,6 +9,7 @@ type StackChefConfiguration struct {
 	ManageBerkshelf  interface{} `yaml:"ManageBerkshelf,omitempty"`
 }
 
+// StackChefConfiguration validation
 func (resource StackChefConfiguration) Validate() []error {
 	errs := []error{}
 

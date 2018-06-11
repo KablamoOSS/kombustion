@@ -10,6 +10,7 @@ type ApplicationJSONMappingParameters struct {
 	RecordRowPath interface{} `yaml:"RecordRowPath"`
 }
 
+// ApplicationJSONMappingParameters validation
 func (resource ApplicationJSONMappingParameters) Validate() []error {
 	errs := []error{}
 

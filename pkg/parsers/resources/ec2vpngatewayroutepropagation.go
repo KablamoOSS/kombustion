@@ -50,10 +50,12 @@ func ParseEC2VPNGatewayRoutePropagation(ctx map[string]interface{}, name string,
 	return
 }
 
+// ParseEC2VPNGatewayRoutePropagation validator
 func (resource EC2VPNGatewayRoutePropagation) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2VPNGatewayRoutePropagationProperties validator
 func (resource EC2VPNGatewayRoutePropagationProperties) Validate() []error {
 	errs := []error{}
 	if resource.VpnGatewayId == nil {

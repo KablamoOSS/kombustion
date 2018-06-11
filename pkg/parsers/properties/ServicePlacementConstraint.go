@@ -11,6 +11,7 @@ type ServicePlacementConstraint struct {
 	Type       interface{} `yaml:"Type"`
 }
 
+// ServicePlacementConstraint validation
 func (resource ServicePlacementConstraint) Validate() []error {
 	errs := []error{}
 

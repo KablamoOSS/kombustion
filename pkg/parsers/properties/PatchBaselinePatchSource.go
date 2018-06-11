@@ -10,6 +10,7 @@ type PatchBaselinePatchSource struct {
 	Products      interface{} `yaml:"Products,omitempty"`
 }
 
+// PatchBaselinePatchSource validation
 func (resource PatchBaselinePatchSource) Validate() []error {
 	errs := []error{}
 

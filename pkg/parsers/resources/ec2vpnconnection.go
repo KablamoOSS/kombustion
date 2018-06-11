@@ -54,10 +54,12 @@ func ParseEC2VPNConnection(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseEC2VPNConnection validator
 func (resource EC2VPNConnection) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2VPNConnectionProperties validator
 func (resource EC2VPNConnectionProperties) Validate() []error {
 	errs := []error{}
 	if resource.CustomerGatewayId == nil {

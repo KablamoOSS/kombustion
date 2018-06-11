@@ -26,6 +26,7 @@ type SpotFleetSpotFleetLaunchSpecification struct {
 	IamInstanceProfile  *SpotFleetIamInstanceProfileSpecification `yaml:"IamInstanceProfile,omitempty"`
 }
 
+// SpotFleetSpotFleetLaunchSpecification validation
 func (resource SpotFleetSpotFleetLaunchSpecification) Validate() []error {
 	errs := []error{}
 

@@ -9,6 +9,7 @@ type MaintenanceWindowTaskMaintenanceWindowStepFunctionsParameters struct {
 	Name  interface{} `yaml:"Name,omitempty"`
 }
 
+// MaintenanceWindowTaskMaintenanceWindowStepFunctionsParameters validation
 func (resource MaintenanceWindowTaskMaintenanceWindowStepFunctionsParameters) Validate() []error {
 	errs := []error{}
 

@@ -8,6 +8,7 @@ type JobDefinitionRetryStrategy struct {
 	Attempts interface{} `yaml:"Attempts,omitempty"`
 }
 
+// JobDefinitionRetryStrategy validation
 func (resource JobDefinitionRetryStrategy) Validate() []error {
 	errs := []error{}
 

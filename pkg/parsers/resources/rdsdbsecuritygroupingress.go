@@ -53,10 +53,12 @@ func ParseRDSDBSecurityGroupIngress(ctx map[string]interface{}, name string, dat
 	return
 }
 
+// ParseRDSDBSecurityGroupIngress validator
 func (resource RDSDBSecurityGroupIngress) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRDSDBSecurityGroupIngressProperties validator
 func (resource RDSDBSecurityGroupIngressProperties) Validate() []error {
 	errs := []error{}
 	if resource.DBSecurityGroupName == nil {

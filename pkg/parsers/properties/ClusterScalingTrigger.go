@@ -10,6 +10,7 @@ type ClusterScalingTrigger struct {
 	CloudWatchAlarmDefinition *ClusterCloudWatchAlarmDefinition `yaml:"CloudWatchAlarmDefinition"`
 }
 
+// ClusterScalingTrigger validation
 func (resource ClusterScalingTrigger) Validate() []error {
 	errs := []error{}
 

@@ -51,10 +51,12 @@ func ParseCognitoIdentityPoolRoleAttachment(ctx map[string]interface{}, name str
 	return
 }
 
+// ParseCognitoIdentityPoolRoleAttachment validator
 func (resource CognitoIdentityPoolRoleAttachment) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCognitoIdentityPoolRoleAttachmentProperties validator
 func (resource CognitoIdentityPoolRoleAttachmentProperties) Validate() []error {
 	errs := []error{}
 	if resource.IdentityPoolId == nil {

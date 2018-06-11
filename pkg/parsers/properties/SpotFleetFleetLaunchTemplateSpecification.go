@@ -10,6 +10,7 @@ type SpotFleetFleetLaunchTemplateSpecification struct {
 	Version            interface{} `yaml:"Version,omitempty"`
 }
 
+// SpotFleetFleetLaunchTemplateSpecification validation
 func (resource SpotFleetFleetLaunchTemplateSpecification) Validate() []error {
 	errs := []error{}
 

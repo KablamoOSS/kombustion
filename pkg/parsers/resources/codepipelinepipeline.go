@@ -55,10 +55,12 @@ func ParseCodePipelinePipeline(ctx map[string]interface{}, name string, data str
 	return
 }
 
+// ParseCodePipelinePipeline validator
 func (resource CodePipelinePipeline) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCodePipelinePipelineProperties validator
 func (resource CodePipelinePipelineProperties) Validate() []error {
 	errs := []error{}
 	if resource.RoleArn == nil {

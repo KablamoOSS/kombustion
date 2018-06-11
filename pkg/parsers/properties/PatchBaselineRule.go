@@ -11,6 +11,7 @@ type PatchBaselineRule struct {
 	PatchFilterGroup  *PatchBaselinePatchFilterGroup `yaml:"PatchFilterGroup,omitempty"`
 }
 
+// PatchBaselineRule validation
 func (resource PatchBaselineRule) Validate() []error {
 	errs := []error{}
 

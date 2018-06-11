@@ -52,10 +52,12 @@ func ParseRDSDBSecurityGroup(ctx map[string]interface{}, name string, data strin
 	return
 }
 
+// ParseRDSDBSecurityGroup validator
 func (resource RDSDBSecurityGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRDSDBSecurityGroupProperties validator
 func (resource RDSDBSecurityGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.GroupDescription == nil {

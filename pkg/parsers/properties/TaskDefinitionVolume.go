@@ -9,6 +9,7 @@ type TaskDefinitionVolume struct {
 	Host *TaskDefinitionHostVolumeProperties `yaml:"Host,omitempty"`
 }
 
+// TaskDefinitionVolume validation
 func (resource TaskDefinitionVolume) Validate() []error {
 	errs := []error{}
 

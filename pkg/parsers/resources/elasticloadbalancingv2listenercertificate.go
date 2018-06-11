@@ -50,10 +50,12 @@ func ParseElasticLoadBalancingV2ListenerCertificate(ctx map[string]interface{}, 
 	return
 }
 
+// ParseElasticLoadBalancingV2ListenerCertificate validator
 func (resource ElasticLoadBalancingV2ListenerCertificate) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElasticLoadBalancingV2ListenerCertificateProperties validator
 func (resource ElasticLoadBalancingV2ListenerCertificateProperties) Validate() []error {
 	errs := []error{}
 	if resource.ListenerArn == nil {

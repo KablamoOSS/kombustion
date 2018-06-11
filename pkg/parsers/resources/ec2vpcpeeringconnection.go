@@ -53,10 +53,12 @@ func ParseEC2VPCPeeringConnection(ctx map[string]interface{}, name string, data 
 	return
 }
 
+// ParseEC2VPCPeeringConnection validator
 func (resource EC2VPCPeeringConnection) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2VPCPeeringConnectionProperties validator
 func (resource EC2VPCPeeringConnectionProperties) Validate() []error {
 	errs := []error{}
 	if resource.PeerVpcId == nil {

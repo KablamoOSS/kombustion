@@ -10,6 +10,7 @@ type DeliveryStreamCloudWatchLoggingOptions struct {
 	LogStreamName interface{} `yaml:"LogStreamName,omitempty"`
 }
 
+// DeliveryStreamCloudWatchLoggingOptions validation
 func (resource DeliveryStreamCloudWatchLoggingOptions) Validate() []error {
 	errs := []error{}
 

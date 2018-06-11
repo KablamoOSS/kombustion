@@ -50,10 +50,12 @@ func ParseSNSTopicPolicy(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseSNSTopicPolicy validator
 func (resource SNSTopicPolicy) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSNSTopicPolicyProperties validator
 func (resource SNSTopicPolicyProperties) Validate() []error {
 	errs := []error{}
 	if resource.PolicyDocument == nil {

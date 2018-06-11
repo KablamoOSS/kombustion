@@ -14,6 +14,7 @@ type EndpointS3Settings struct {
 	ServiceAccessRoleArn    interface{} `yaml:"ServiceAccessRoleArn,omitempty"`
 }
 
+// EndpointS3Settings validation
 func (resource EndpointS3Settings) Validate() []error {
 	errs := []error{}
 

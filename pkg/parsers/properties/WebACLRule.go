@@ -12,6 +12,7 @@ type WebACLRule struct {
 	Action   *WebACLAction `yaml:"Action"`
 }
 
+// WebACLRule validation
 func (resource WebACLRule) Validate() []error {
 	errs := []error{}
 

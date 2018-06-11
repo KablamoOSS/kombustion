@@ -53,10 +53,12 @@ func ParseApiGatewayApiKey(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseApiGatewayApiKey validator
 func (resource ApiGatewayApiKey) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayApiKeyProperties validator
 func (resource ApiGatewayApiKeyProperties) Validate() []error {
 	errs := []error{}
 	return errs

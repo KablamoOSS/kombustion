@@ -55,10 +55,12 @@ func ParseGuardDutyFilter(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseGuardDutyFilter validator
 func (resource GuardDutyFilter) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGuardDutyFilterProperties validator
 func (resource GuardDutyFilterProperties) Validate() []error {
 	errs := []error{}
 	if resource.Action == nil {

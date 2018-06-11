@@ -8,6 +8,7 @@ type JobDefinitionVolumesHost struct {
 	SourcePath interface{} `yaml:"SourcePath,omitempty"`
 }
 
+// JobDefinitionVolumesHost validation
 func (resource JobDefinitionVolumesHost) Validate() []error {
 	errs := []error{}
 

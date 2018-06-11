@@ -51,10 +51,12 @@ func ParseEC2NetworkInterfacePermission(ctx map[string]interface{}, name string,
 	return
 }
 
+// ParseEC2NetworkInterfacePermission validator
 func (resource EC2NetworkInterfacePermission) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2NetworkInterfacePermissionProperties validator
 func (resource EC2NetworkInterfacePermissionProperties) Validate() []error {
 	errs := []error{}
 	if resource.AwsAccountId == nil {

@@ -51,10 +51,12 @@ func ParseLambdaVersion(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseLambdaVersion validator
 func (resource LambdaVersion) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseLambdaVersionProperties validator
 func (resource LambdaVersionProperties) Validate() []error {
 	errs := []error{}
 	if resource.FunctionName == nil {

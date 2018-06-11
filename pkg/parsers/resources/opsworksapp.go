@@ -61,10 +61,12 @@ func ParseOpsWorksApp(ctx map[string]interface{}, name string, data string) (cf 
 	return
 }
 
+// ParseOpsWorksApp validator
 func (resource OpsWorksApp) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseOpsWorksAppProperties validator
 func (resource OpsWorksAppProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

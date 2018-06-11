@@ -50,10 +50,12 @@ func ParseWAFSizeConstraintSet(ctx map[string]interface{}, name string, data str
 	return
 }
 
+// ParseWAFSizeConstraintSet validator
 func (resource WAFSizeConstraintSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFSizeConstraintSetProperties validator
 func (resource WAFSizeConstraintSetProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

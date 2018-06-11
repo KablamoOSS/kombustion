@@ -50,10 +50,12 @@ func ParseSQSQueuePolicy(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseSQSQueuePolicy validator
 func (resource SQSQueuePolicy) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSQSQueuePolicyProperties validator
 func (resource SQSQueuePolicyProperties) Validate() []error {
 	errs := []error{}
 	if resource.PolicyDocument == nil {

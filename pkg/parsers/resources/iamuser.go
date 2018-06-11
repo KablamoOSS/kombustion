@@ -54,10 +54,12 @@ func ParseIAMUser(ctx map[string]interface{}, name string, data string) (cf type
 	return
 }
 
+// ParseIAMUser validator
 func (resource IAMUser) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIAMUserProperties validator
 func (resource IAMUserProperties) Validate() []error {
 	errs := []error{}
 	return errs

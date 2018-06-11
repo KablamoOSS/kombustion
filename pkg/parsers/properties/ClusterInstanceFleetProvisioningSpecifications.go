@@ -10,6 +10,7 @@ type ClusterInstanceFleetProvisioningSpecifications struct {
 	SpotSpecification *ClusterSpotProvisioningSpecification `yaml:"SpotSpecification"`
 }
 
+// ClusterInstanceFleetProvisioningSpecifications validation
 func (resource ClusterInstanceFleetProvisioningSpecifications) Validate() []error {
 	errs := []error{}
 

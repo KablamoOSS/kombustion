@@ -10,6 +10,7 @@ type SpotFleetGroupIdentifier struct {
 	GroupId interface{} `yaml:"GroupId"`
 }
 
+// SpotFleetGroupIdentifier validation
 func (resource SpotFleetGroupIdentifier) Validate() []error {
 	errs := []error{}
 

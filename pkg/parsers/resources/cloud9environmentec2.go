@@ -55,10 +55,12 @@ func ParseCloud9EnvironmentEC2(ctx map[string]interface{}, name string, data str
 	return
 }
 
+// ParseCloud9EnvironmentEC2 validator
 func (resource Cloud9EnvironmentEC2) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCloud9EnvironmentEC2Properties validator
 func (resource Cloud9EnvironmentEC2Properties) Validate() []error {
 	errs := []error{}
 	if resource.InstanceType == nil {

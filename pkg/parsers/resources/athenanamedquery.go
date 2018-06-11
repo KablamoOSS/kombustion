@@ -52,10 +52,12 @@ func ParseAthenaNamedQuery(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseAthenaNamedQuery validator
 func (resource AthenaNamedQuery) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAthenaNamedQueryProperties validator
 func (resource AthenaNamedQueryProperties) Validate() []error {
 	errs := []error{}
 	if resource.Database == nil {

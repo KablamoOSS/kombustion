@@ -11,6 +11,7 @@ type ConfigurationTemplateSourceConfiguration struct {
 	TemplateName    interface{} `yaml:"TemplateName"`
 }
 
+// ConfigurationTemplateSourceConfiguration validation
 func (resource ConfigurationTemplateSourceConfiguration) Validate() []error {
 	errs := []error{}
 

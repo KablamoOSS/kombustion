@@ -8,6 +8,7 @@ type CrawlerSchedule struct {
 	ScheduleExpression interface{} `yaml:"ScheduleExpression,omitempty"`
 }
 
+// CrawlerSchedule validation
 func (resource CrawlerSchedule) Validate() []error {
 	errs := []error{}
 

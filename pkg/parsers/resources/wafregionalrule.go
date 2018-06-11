@@ -51,10 +51,12 @@ func ParseWAFRegionalRule(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseWAFRegionalRule validator
 func (resource WAFRegionalRule) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFRegionalRuleProperties validator
 func (resource WAFRegionalRuleProperties) Validate() []error {
 	errs := []error{}
 	if resource.MetricName == nil {

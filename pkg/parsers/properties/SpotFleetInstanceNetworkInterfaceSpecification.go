@@ -18,6 +18,7 @@ type SpotFleetInstanceNetworkInterfaceSpecification struct {
 	PrivateIpAddresses             interface{} `yaml:"PrivateIpAddresses,omitempty"`
 }
 
+// SpotFleetInstanceNetworkInterfaceSpecification validation
 func (resource SpotFleetInstanceNetworkInterfaceSpecification) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type InstanceGroupConfigScalingConstraints struct {
 	MinCapacity interface{} `yaml:"MinCapacity"`
 }
 
+// InstanceGroupConfigScalingConstraints validation
 func (resource InstanceGroupConfigScalingConstraints) Validate() []error {
 	errs := []error{}
 

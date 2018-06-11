@@ -8,6 +8,7 @@ type ApplicationInputProcessingConfiguration struct {
 	InputLambdaProcessor *ApplicationInputLambdaProcessor `yaml:"InputLambdaProcessor,omitempty"`
 }
 
+// ApplicationInputProcessingConfiguration validation
 func (resource ApplicationInputProcessingConfiguration) Validate() []error {
 	errs := []error{}
 

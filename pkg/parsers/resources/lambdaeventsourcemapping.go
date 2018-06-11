@@ -53,10 +53,12 @@ func ParseLambdaEventSourceMapping(ctx map[string]interface{}, name string, data
 	return
 }
 
+// ParseLambdaEventSourceMapping validator
 func (resource LambdaEventSourceMapping) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseLambdaEventSourceMappingProperties validator
 func (resource LambdaEventSourceMappingProperties) Validate() []error {
 	errs := []error{}
 	if resource.EventSourceArn == nil {

@@ -62,10 +62,12 @@ func ParseCodeDeployDeploymentGroup(ctx map[string]interface{}, name string, dat
 	return
 }
 
+// ParseCodeDeployDeploymentGroup validator
 func (resource CodeDeployDeploymentGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCodeDeployDeploymentGroupProperties validator
 func (resource CodeDeployDeploymentGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.ApplicationName == nil {

@@ -13,6 +13,7 @@ type ServiceLoadBalancer struct {
 	TargetGroupArn   interface{} `yaml:"TargetGroupArn,omitempty"`
 }
 
+// ServiceLoadBalancer validation
 func (resource ServiceLoadBalancer) Validate() []error {
 	errs := []error{}
 

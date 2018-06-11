@@ -53,10 +53,12 @@ func ParseGuardDutyIPSet(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseGuardDutyIPSet validator
 func (resource GuardDutyIPSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGuardDutyIPSetProperties validator
 func (resource GuardDutyIPSetProperties) Validate() []error {
 	errs := []error{}
 	if resource.Activate == nil {

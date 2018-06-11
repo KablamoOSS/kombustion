@@ -51,10 +51,12 @@ func ParseEC2NatGateway(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseEC2NatGateway validator
 func (resource EC2NatGateway) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2NatGatewayProperties validator
 func (resource EC2NatGatewayProperties) Validate() []error {
 	errs := []error{}
 	if resource.AllocationId == nil {

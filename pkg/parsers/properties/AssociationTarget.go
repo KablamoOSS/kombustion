@@ -11,6 +11,7 @@ type AssociationTarget struct {
 	Values interface{} `yaml:"Values"`
 }
 
+// AssociationTarget validation
 func (resource AssociationTarget) Validate() []error {
 	errs := []error{}
 

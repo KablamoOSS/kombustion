@@ -8,6 +8,7 @@ type ApplicationOutputDestinationSchema struct {
 	RecordFormatType interface{} `yaml:"RecordFormatType,omitempty"`
 }
 
+// ApplicationOutputDestinationSchema validation
 func (resource ApplicationOutputDestinationSchema) Validate() []error {
 	errs := []error{}
 

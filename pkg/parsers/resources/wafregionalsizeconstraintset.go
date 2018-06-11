@@ -50,10 +50,12 @@ func ParseWAFRegionalSizeConstraintSet(ctx map[string]interface{}, name string, 
 	return
 }
 
+// ParseWAFRegionalSizeConstraintSet validator
 func (resource WAFRegionalSizeConstraintSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFRegionalSizeConstraintSetProperties validator
 func (resource WAFRegionalSizeConstraintSetProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

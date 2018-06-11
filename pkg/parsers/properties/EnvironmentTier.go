@@ -10,6 +10,7 @@ type EnvironmentTier struct {
 	Version interface{} `yaml:"Version,omitempty"`
 }
 
+// EnvironmentTier validation
 func (resource EnvironmentTier) Validate() []error {
 	errs := []error{}
 

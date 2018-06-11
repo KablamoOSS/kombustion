@@ -11,6 +11,7 @@ type ApplicationOutputKinesisStreamsOutput struct {
 	RoleARN     interface{} `yaml:"RoleARN"`
 }
 
+// ApplicationOutputKinesisStreamsOutput validation
 func (resource ApplicationOutputKinesisStreamsOutput) Validate() []error {
 	errs := []error{}
 

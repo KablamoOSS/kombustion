@@ -10,6 +10,7 @@ type RuleKinesisParameters struct {
 	PartitionKeyPath interface{} `yaml:"PartitionKeyPath"`
 }
 
+// RuleKinesisParameters validation
 func (resource RuleKinesisParameters) Validate() []error {
 	errs := []error{}
 

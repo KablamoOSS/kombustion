@@ -51,10 +51,12 @@ func ParseLogsMetricFilter(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseLogsMetricFilter validator
 func (resource LogsMetricFilter) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseLogsMetricFilterProperties validator
 func (resource LogsMetricFilterProperties) Validate() []error {
 	errs := []error{}
 	if resource.FilterPattern == nil {

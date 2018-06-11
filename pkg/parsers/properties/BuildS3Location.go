@@ -12,6 +12,7 @@ type BuildS3Location struct {
 	RoleArn interface{} `yaml:"RoleArn"`
 }
 
+// BuildS3Location validation
 func (resource BuildS3Location) Validate() []error {
 	errs := []error{}
 

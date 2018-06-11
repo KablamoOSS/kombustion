@@ -9,6 +9,7 @@ type DeliveryStreamEncryptionConfiguration struct {
 	KMSEncryptionConfig *DeliveryStreamKMSEncryptionConfig `yaml:"KMSEncryptionConfig,omitempty"`
 }
 
+// DeliveryStreamEncryptionConfiguration validation
 func (resource DeliveryStreamEncryptionConfiguration) Validate() []error {
 	errs := []error{}
 

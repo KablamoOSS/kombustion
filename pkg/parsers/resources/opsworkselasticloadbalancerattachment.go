@@ -50,10 +50,12 @@ func ParseOpsWorksElasticLoadBalancerAttachment(ctx map[string]interface{}, name
 	return
 }
 
+// ParseOpsWorksElasticLoadBalancerAttachment validator
 func (resource OpsWorksElasticLoadBalancerAttachment) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseOpsWorksElasticLoadBalancerAttachmentProperties validator
 func (resource OpsWorksElasticLoadBalancerAttachmentProperties) Validate() []error {
 	errs := []error{}
 	if resource.ElasticLoadBalancerName == nil {

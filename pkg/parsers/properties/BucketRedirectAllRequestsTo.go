@@ -11,6 +11,7 @@ type BucketRedirectAllRequestsTo struct {
 	Protocol interface{} `yaml:"Protocol,omitempty"`
 }
 
+// BucketRedirectAllRequestsTo validation
 func (resource BucketRedirectAllRequestsTo) Validate() []error {
 	errs := []error{}
 

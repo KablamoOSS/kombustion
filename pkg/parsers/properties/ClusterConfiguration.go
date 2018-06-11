@@ -10,6 +10,7 @@ type ClusterConfiguration struct {
 	Configurations          interface{} `yaml:"Configurations,omitempty"`
 }
 
+// ClusterConfiguration validation
 func (resource ClusterConfiguration) Validate() []error {
 	errs := []error{}
 

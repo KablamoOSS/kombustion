@@ -8,6 +8,7 @@ type UserPoolPolicies struct {
 	PasswordPolicy *UserPoolPasswordPolicy `yaml:"PasswordPolicy,omitempty"`
 }
 
+// UserPoolPolicies validation
 func (resource UserPoolPolicies) Validate() []error {
 	errs := []error{}
 

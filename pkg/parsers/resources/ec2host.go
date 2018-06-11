@@ -51,10 +51,12 @@ func ParseEC2Host(ctx map[string]interface{}, name string, data string) (cf type
 	return
 }
 
+// ParseEC2Host validator
 func (resource EC2Host) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2HostProperties validator
 func (resource EC2HostProperties) Validate() []error {
 	errs := []error{}
 	if resource.AvailabilityZone == nil {

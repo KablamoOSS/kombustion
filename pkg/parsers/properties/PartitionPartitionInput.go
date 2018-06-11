@@ -12,6 +12,7 @@ type PartitionPartitionInput struct {
 	Values            interface{}                 `yaml:"Values"`
 }
 
+// PartitionPartitionInput validation
 func (resource PartitionPartitionInput) Validate() []error {
 	errs := []error{}
 

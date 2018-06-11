@@ -53,10 +53,12 @@ func ParseEC2DHCPOptions(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseEC2DHCPOptions validator
 func (resource EC2DHCPOptions) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2DHCPOptionsProperties validator
 func (resource EC2DHCPOptionsProperties) Validate() []error {
 	errs := []error{}
 	return errs

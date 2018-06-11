@@ -8,6 +8,7 @@ type DeploymentGroupELBInfo struct {
 	Name interface{} `yaml:"Name,omitempty"`
 }
 
+// DeploymentGroupELBInfo validation
 func (resource DeploymentGroupELBInfo) Validate() []error {
 	errs := []error{}
 

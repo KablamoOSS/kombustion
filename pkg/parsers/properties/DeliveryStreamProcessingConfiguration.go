@@ -11,6 +11,7 @@ type DeliveryStreamProcessingConfiguration struct {
 	Processors interface{} `yaml:"Processors"`
 }
 
+// DeliveryStreamProcessingConfiguration validation
 func (resource DeliveryStreamProcessingConfiguration) Validate() []error {
 	errs := []error{}
 

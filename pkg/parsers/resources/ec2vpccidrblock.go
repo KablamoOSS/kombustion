@@ -51,10 +51,12 @@ func ParseEC2VPCCidrBlock(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseEC2VPCCidrBlock validator
 func (resource EC2VPCCidrBlock) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2VPCCidrBlockProperties validator
 func (resource EC2VPCCidrBlockProperties) Validate() []error {
 	errs := []error{}
 	if resource.VpcId == nil {

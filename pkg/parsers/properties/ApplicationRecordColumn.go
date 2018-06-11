@@ -12,6 +12,7 @@ type ApplicationRecordColumn struct {
 	SqlType interface{} `yaml:"SqlType"`
 }
 
+// ApplicationRecordColumn validation
 func (resource ApplicationRecordColumn) Validate() []error {
 	errs := []error{}
 

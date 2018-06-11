@@ -10,6 +10,7 @@ type HostedZoneQueryLoggingConfig struct {
 	CloudWatchLogsLogGroupArn interface{} `yaml:"CloudWatchLogsLogGroupArn"`
 }
 
+// HostedZoneQueryLoggingConfig validation
 func (resource HostedZoneQueryLoggingConfig) Validate() []error {
 	errs := []error{}
 

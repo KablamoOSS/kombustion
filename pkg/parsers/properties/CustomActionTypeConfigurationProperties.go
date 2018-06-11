@@ -16,6 +16,7 @@ type CustomActionTypeConfigurationProperties struct {
 	Type        interface{} `yaml:"Type,omitempty"`
 }
 
+// CustomActionTypeConfigurationProperties validation
 func (resource CustomActionTypeConfigurationProperties) Validate() []error {
 	errs := []error{}
 

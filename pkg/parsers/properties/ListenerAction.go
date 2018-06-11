@@ -11,6 +11,7 @@ type ListenerAction struct {
 	Type           interface{} `yaml:"Type"`
 }
 
+// ListenerAction validation
 func (resource ListenerAction) Validate() []error {
 	errs := []error{}
 

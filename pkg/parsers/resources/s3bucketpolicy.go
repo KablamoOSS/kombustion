@@ -50,10 +50,12 @@ func ParseS3BucketPolicy(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseS3BucketPolicy validator
 func (resource S3BucketPolicy) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseS3BucketPolicyProperties validator
 func (resource S3BucketPolicyProperties) Validate() []error {
 	errs := []error{}
 	if resource.Bucket == nil {

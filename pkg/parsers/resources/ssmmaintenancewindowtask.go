@@ -62,10 +62,12 @@ func ParseSSMMaintenanceWindowTask(ctx map[string]interface{}, name string, data
 	return
 }
 
+// ParseSSMMaintenanceWindowTask validator
 func (resource SSMMaintenanceWindowTask) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSSMMaintenanceWindowTaskProperties validator
 func (resource SSMMaintenanceWindowTaskProperties) Validate() []error {
 	errs := []error{}
 	if resource.MaxConcurrency == nil {

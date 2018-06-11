@@ -12,6 +12,7 @@ type ProjectVpcConfig struct {
 	Subnets          interface{} `yaml:"Subnets"`
 }
 
+// ProjectVpcConfig validation
 func (resource ProjectVpcConfig) Validate() []error {
 	errs := []error{}
 

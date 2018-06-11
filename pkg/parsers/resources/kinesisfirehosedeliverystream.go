@@ -55,10 +55,12 @@ func ParseKinesisFirehoseDeliveryStream(ctx map[string]interface{}, name string,
 	return
 }
 
+// ParseKinesisFirehoseDeliveryStream validator
 func (resource KinesisFirehoseDeliveryStream) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseKinesisFirehoseDeliveryStreamProperties validator
 func (resource KinesisFirehoseDeliveryStreamProperties) Validate() []error {
 	errs := []error{}
 	return errs

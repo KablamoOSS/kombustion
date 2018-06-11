@@ -49,10 +49,12 @@ func ParseSESTemplate(ctx map[string]interface{}, name string, data string) (cf 
 	return
 }
 
+// ParseSESTemplate validator
 func (resource SESTemplate) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSESTemplateProperties validator
 func (resource SESTemplateProperties) Validate() []error {
 	errs := []error{}
 	return errs

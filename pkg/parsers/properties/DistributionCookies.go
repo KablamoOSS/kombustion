@@ -11,6 +11,7 @@ type DistributionCookies struct {
 	WhitelistedNames interface{} `yaml:"WhitelistedNames,omitempty"`
 }
 
+// DistributionCookies validation
 func (resource DistributionCookies) Validate() []error {
 	errs := []error{}
 

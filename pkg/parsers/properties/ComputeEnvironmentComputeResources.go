@@ -22,6 +22,7 @@ type ComputeEnvironmentComputeResources struct {
 	Subnets          interface{} `yaml:"Subnets"`
 }
 
+// ComputeEnvironmentComputeResources validation
 func (resource ComputeEnvironmentComputeResources) Validate() []error {
 	errs := []error{}
 

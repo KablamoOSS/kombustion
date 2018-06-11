@@ -12,6 +12,7 @@ type FilterCondition struct {
 	Neq interface{} `yaml:"Neq,omitempty"`
 }
 
+// FilterCondition validation
 func (resource FilterCondition) Validate() []error {
 	errs := []error{}
 

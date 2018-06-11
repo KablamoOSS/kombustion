@@ -12,6 +12,7 @@ type PipelinePipelineObject struct {
 	Fields interface{} `yaml:"Fields"`
 }
 
+// PipelinePipelineObject validation
 func (resource PipelinePipelineObject) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type InstanceGroupConfigMetricDimension struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// InstanceGroupConfigMetricDimension validation
 func (resource InstanceGroupConfigMetricDimension) Validate() []error {
 	errs := []error{}
 

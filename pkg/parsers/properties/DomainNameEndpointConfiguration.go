@@ -8,6 +8,7 @@ type DomainNameEndpointConfiguration struct {
 	Types interface{} `yaml:"Types,omitempty"`
 }
 
+// DomainNameEndpointConfiguration validation
 func (resource DomainNameEndpointConfiguration) Validate() []error {
 	errs := []error{}
 

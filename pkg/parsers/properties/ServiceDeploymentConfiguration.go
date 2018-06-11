@@ -9,6 +9,7 @@ type ServiceDeploymentConfiguration struct {
 	MinimumHealthyPercent interface{} `yaml:"MinimumHealthyPercent,omitempty"`
 }
 
+// ServiceDeploymentConfiguration validation
 func (resource ServiceDeploymentConfiguration) Validate() []error {
 	errs := []error{}
 

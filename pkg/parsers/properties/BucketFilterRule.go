@@ -11,6 +11,7 @@ type BucketFilterRule struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// BucketFilterRule validation
 func (resource BucketFilterRule) Validate() []error {
 	errs := []error{}
 

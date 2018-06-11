@@ -11,6 +11,7 @@ type TaskDefinitionLogConfiguration struct {
 	Options   interface{} `yaml:"Options,omitempty"`
 }
 
+// TaskDefinitionLogConfiguration validation
 func (resource TaskDefinitionLogConfiguration) Validate() []error {
 	errs := []error{}
 

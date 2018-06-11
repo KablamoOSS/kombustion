@@ -70,10 +70,12 @@ func ParseOpsWorksInstance(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseOpsWorksInstance validator
 func (resource OpsWorksInstance) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseOpsWorksInstanceProperties validator
 func (resource OpsWorksInstanceProperties) Validate() []error {
 	errs := []error{}
 	if resource.InstanceType == nil {

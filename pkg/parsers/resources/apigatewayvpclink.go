@@ -51,10 +51,12 @@ func ParseApiGatewayVpcLink(ctx map[string]interface{}, name string, data string
 	return
 }
 
+// ParseApiGatewayVpcLink validator
 func (resource ApiGatewayVpcLink) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayVpcLinkProperties validator
 func (resource ApiGatewayVpcLinkProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

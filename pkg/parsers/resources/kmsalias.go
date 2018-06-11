@@ -50,10 +50,12 @@ func ParseKMSAlias(ctx map[string]interface{}, name string, data string) (cf typ
 	return
 }
 
+// ParseKMSAlias validator
 func (resource KMSAlias) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseKMSAliasProperties validator
 func (resource KMSAliasProperties) Validate() []error {
 	errs := []error{}
 	if resource.AliasName == nil {

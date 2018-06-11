@@ -25,6 +25,7 @@ type HealthCheckHealthCheckConfig struct {
 	AlarmIdentifier              *HealthCheckAlarmIdentifier `yaml:"AlarmIdentifier,omitempty"`
 }
 
+// HealthCheckHealthCheckConfig validation
 func (resource HealthCheckHealthCheckConfig) Validate() []error {
 	errs := []error{}
 

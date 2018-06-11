@@ -50,10 +50,12 @@ func ParseEC2LaunchTemplate(ctx map[string]interface{}, name string, data string
 	return
 }
 
+// ParseEC2LaunchTemplate validator
 func (resource EC2LaunchTemplate) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2LaunchTemplateProperties validator
 func (resource EC2LaunchTemplateProperties) Validate() []error {
 	errs := []error{}
 	return errs

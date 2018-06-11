@@ -12,6 +12,7 @@ type ConfigRuleSourceDetail struct {
 	MessageType               interface{} `yaml:"MessageType"`
 }
 
+// ConfigRuleSourceDetail validation
 func (resource ConfigRuleSourceDetail) Validate() []error {
 	errs := []error{}
 

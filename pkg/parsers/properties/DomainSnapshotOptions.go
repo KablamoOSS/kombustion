@@ -8,6 +8,7 @@ type DomainSnapshotOptions struct {
 	AutomatedSnapshotStartHour interface{} `yaml:"AutomatedSnapshotStartHour,omitempty"`
 }
 
+// DomainSnapshotOptions validation
 func (resource DomainSnapshotOptions) Validate() []error {
 	errs := []error{}
 

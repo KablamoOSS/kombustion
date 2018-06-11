@@ -54,10 +54,12 @@ func ParseBatchJobDefinition(ctx map[string]interface{}, name string, data strin
 	return
 }
 
+// ParseBatchJobDefinition validator
 func (resource BatchJobDefinition) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseBatchJobDefinitionProperties validator
 func (resource BatchJobDefinitionProperties) Validate() []error {
 	errs := []error{}
 	if resource.Type == nil {

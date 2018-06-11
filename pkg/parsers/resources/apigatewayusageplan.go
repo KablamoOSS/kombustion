@@ -53,10 +53,12 @@ func ParseApiGatewayUsagePlan(ctx map[string]interface{}, name string, data stri
 	return
 }
 
+// ParseApiGatewayUsagePlan validator
 func (resource ApiGatewayUsagePlan) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayUsagePlanProperties validator
 func (resource ApiGatewayUsagePlanProperties) Validate() []error {
 	errs := []error{}
 	return errs

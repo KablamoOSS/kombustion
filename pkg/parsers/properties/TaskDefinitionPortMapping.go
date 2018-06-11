@@ -10,6 +10,7 @@ type TaskDefinitionPortMapping struct {
 	Protocol      interface{} `yaml:"Protocol,omitempty"`
 }
 
+// TaskDefinitionPortMapping validation
 func (resource TaskDefinitionPortMapping) Validate() []error {
 	errs := []error{}
 

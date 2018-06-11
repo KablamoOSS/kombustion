@@ -11,6 +11,7 @@ type CustomActionTypeArtifactDetails struct {
 	MinimumCount interface{} `yaml:"MinimumCount"`
 }
 
+// CustomActionTypeArtifactDetails validation
 func (resource CustomActionTypeArtifactDetails) Validate() []error {
 	errs := []error{}
 

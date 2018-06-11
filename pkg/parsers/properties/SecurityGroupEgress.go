@@ -17,6 +17,7 @@ type SecurityGroupEgress struct {
 	ToPort                     interface{} `yaml:"ToPort,omitempty"`
 }
 
+// SecurityGroupEgress validation
 func (resource SecurityGroupEgress) Validate() []error {
 	errs := []error{}
 

@@ -10,6 +10,7 @@ type TriggerCondition struct {
 	State           interface{} `yaml:"State,omitempty"`
 }
 
+// TriggerCondition validation
 func (resource TriggerCondition) Validate() []error {
 	errs := []error{}
 

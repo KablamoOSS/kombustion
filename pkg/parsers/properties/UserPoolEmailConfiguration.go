@@ -9,6 +9,7 @@ type UserPoolEmailConfiguration struct {
 	SourceArn           interface{} `yaml:"SourceArn,omitempty"`
 }
 
+// UserPoolEmailConfiguration validation
 func (resource UserPoolEmailConfiguration) Validate() []error {
 	errs := []error{}
 

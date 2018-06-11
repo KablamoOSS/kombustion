@@ -8,6 +8,7 @@ type SpotFleetSpotFleetTagSpecification struct {
 	ResourceType interface{} `yaml:"ResourceType,omitempty"`
 }
 
+// SpotFleetSpotFleetTagSpecification validation
 func (resource SpotFleetSpotFleetTagSpecification) Validate() []error {
 	errs := []error{}
 

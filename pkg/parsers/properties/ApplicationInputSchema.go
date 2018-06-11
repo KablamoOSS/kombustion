@@ -12,6 +12,7 @@ type ApplicationInputSchema struct {
 	RecordColumns  interface{}              `yaml:"RecordColumns"`
 }
 
+// ApplicationInputSchema validation
 func (resource ApplicationInputSchema) Validate() []error {
 	errs := []error{}
 

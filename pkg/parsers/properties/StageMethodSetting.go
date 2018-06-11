@@ -17,6 +17,7 @@ type StageMethodSetting struct {
 	ThrottlingRateLimit  interface{} `yaml:"ThrottlingRateLimit,omitempty"`
 }
 
+// StageMethodSetting validation
 func (resource StageMethodSetting) Validate() []error {
 	errs := []error{}
 

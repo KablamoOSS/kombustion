@@ -51,10 +51,12 @@ func ParseEC2VolumeAttachment(ctx map[string]interface{}, name string, data stri
 	return
 }
 
+// ParseEC2VolumeAttachment validator
 func (resource EC2VolumeAttachment) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2VolumeAttachmentProperties validator
 func (resource EC2VolumeAttachmentProperties) Validate() []error {
 	errs := []error{}
 	if resource.Device == nil {

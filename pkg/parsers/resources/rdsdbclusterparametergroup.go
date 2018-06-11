@@ -52,10 +52,12 @@ func ParseRDSDBClusterParameterGroup(ctx map[string]interface{}, name string, da
 	return
 }
 
+// ParseRDSDBClusterParameterGroup validator
 func (resource RDSDBClusterParameterGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRDSDBClusterParameterGroupProperties validator
 func (resource RDSDBClusterParameterGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.Description == nil {

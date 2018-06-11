@@ -10,6 +10,7 @@ type JobDefinitionMountPoints struct {
 	SourceVolume  interface{} `yaml:"SourceVolume,omitempty"`
 }
 
+// JobDefinitionMountPoints validation
 func (resource JobDefinitionMountPoints) Validate() []error {
 	errs := []error{}
 

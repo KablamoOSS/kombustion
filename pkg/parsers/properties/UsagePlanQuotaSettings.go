@@ -10,6 +10,7 @@ type UsagePlanQuotaSettings struct {
 	Period interface{} `yaml:"Period,omitempty"`
 }
 
+// UsagePlanQuotaSettings validation
 func (resource UsagePlanQuotaSettings) Validate() []error {
 	errs := []error{}
 

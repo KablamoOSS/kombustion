@@ -50,10 +50,12 @@ func ParseDMSCertificate(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseDMSCertificate validator
 func (resource DMSCertificate) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDMSCertificateProperties validator
 func (resource DMSCertificateProperties) Validate() []error {
 	errs := []error{}
 	return errs

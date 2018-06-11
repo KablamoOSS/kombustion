@@ -48,10 +48,12 @@ func ParseECSCluster(ctx map[string]interface{}, name string, data string) (cf t
 	return
 }
 
+// ParseECSCluster validator
 func (resource ECSCluster) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseECSClusterProperties validator
 func (resource ECSClusterProperties) Validate() []error {
 	errs := []error{}
 	return errs

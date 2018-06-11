@@ -50,10 +50,12 @@ func ParseInspectorAssessmentTarget(ctx map[string]interface{}, name string, dat
 	return
 }
 
+// ParseInspectorAssessmentTarget validator
 func (resource InspectorAssessmentTarget) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseInspectorAssessmentTargetProperties validator
 func (resource InspectorAssessmentTargetProperties) Validate() []error {
 	errs := []error{}
 	if resource.ResourceGroupArn == nil {

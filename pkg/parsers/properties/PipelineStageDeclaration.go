@@ -12,6 +12,7 @@ type PipelineStageDeclaration struct {
 	Blockers interface{} `yaml:"Blockers,omitempty"`
 }
 
+// PipelineStageDeclaration validation
 func (resource PipelineStageDeclaration) Validate() []error {
 	errs := []error{}
 

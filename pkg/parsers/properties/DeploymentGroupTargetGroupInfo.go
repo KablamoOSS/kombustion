@@ -8,6 +8,7 @@ type DeploymentGroupTargetGroupInfo struct {
 	Name interface{} `yaml:"Name,omitempty"`
 }
 
+// DeploymentGroupTargetGroupInfo validation
 func (resource DeploymentGroupTargetGroupInfo) Validate() []error {
 	errs := []error{}
 

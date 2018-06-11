@@ -13,6 +13,7 @@ type BucketAnalyticsConfiguration struct {
 	TagFilters           interface{}                 `yaml:"TagFilters,omitempty"`
 }
 
+// BucketAnalyticsConfiguration validation
 func (resource BucketAnalyticsConfiguration) Validate() []error {
 	errs := []error{}
 

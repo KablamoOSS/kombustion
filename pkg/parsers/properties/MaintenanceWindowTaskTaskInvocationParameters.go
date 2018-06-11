@@ -11,6 +11,7 @@ type MaintenanceWindowTaskTaskInvocationParameters struct {
 	MaintenanceWindowAutomationParameters    *MaintenanceWindowTaskMaintenanceWindowAutomationParameters    `yaml:"MaintenanceWindowAutomationParameters,omitempty"`
 }
 
+// MaintenanceWindowTaskTaskInvocationParameters validation
 func (resource MaintenanceWindowTaskTaskInvocationParameters) Validate() []error {
 	errs := []error{}
 

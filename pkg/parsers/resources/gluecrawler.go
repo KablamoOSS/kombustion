@@ -58,10 +58,12 @@ func ParseGlueCrawler(ctx map[string]interface{}, name string, data string) (cf 
 	return
 }
 
+// ParseGlueCrawler validator
 func (resource GlueCrawler) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGlueCrawlerProperties validator
 func (resource GlueCrawlerProperties) Validate() []error {
 	errs := []error{}
 	if resource.DatabaseName == nil {

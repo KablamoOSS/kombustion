@@ -10,6 +10,7 @@ type TaskDefinitionMountPoint struct {
 	SourceVolume  interface{} `yaml:"SourceVolume,omitempty"`
 }
 
+// TaskDefinitionMountPoint validation
 func (resource TaskDefinitionMountPoint) Validate() []error {
 	errs := []error{}
 

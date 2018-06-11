@@ -11,6 +11,7 @@ type LoadBalancerAppCookieStickinessPolicy struct {
 	PolicyName interface{} `yaml:"PolicyName"`
 }
 
+// LoadBalancerAppCookieStickinessPolicy validation
 func (resource LoadBalancerAppCookieStickinessPolicy) Validate() []error {
 	errs := []error{}
 

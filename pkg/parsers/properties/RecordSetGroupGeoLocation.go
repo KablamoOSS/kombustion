@@ -10,6 +10,7 @@ type RecordSetGroupGeoLocation struct {
 	SubdivisionCode interface{} `yaml:"SubdivisionCode,omitempty"`
 }
 
+// RecordSetGroupGeoLocation validation
 func (resource RecordSetGroupGeoLocation) Validate() []error {
 	errs := []error{}
 

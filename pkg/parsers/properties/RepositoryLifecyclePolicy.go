@@ -9,6 +9,7 @@ type RepositoryLifecyclePolicy struct {
 	RegistryId          interface{} `yaml:"RegistryId,omitempty"`
 }
 
+// RepositoryLifecyclePolicy validation
 func (resource RepositoryLifecyclePolicy) Validate() []error {
 	errs := []error{}
 

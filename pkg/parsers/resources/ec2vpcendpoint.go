@@ -52,10 +52,12 @@ func ParseEC2VPCEndpoint(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseEC2VPCEndpoint validator
 func (resource EC2VPCEndpoint) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2VPCEndpointProperties validator
 func (resource EC2VPCEndpointProperties) Validate() []error {
 	errs := []error{}
 	if resource.ServiceName == nil {

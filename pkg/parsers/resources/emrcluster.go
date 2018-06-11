@@ -66,10 +66,12 @@ func ParseEMRCluster(ctx map[string]interface{}, name string, data string) (cf t
 	return
 }
 
+// ParseEMRCluster validator
 func (resource EMRCluster) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEMRClusterProperties validator
 func (resource EMRClusterProperties) Validate() []error {
 	errs := []error{}
 	if resource.JobFlowRole == nil {

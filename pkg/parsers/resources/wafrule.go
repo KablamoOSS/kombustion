@@ -51,10 +51,12 @@ func ParseWAFRule(ctx map[string]interface{}, name string, data string) (cf type
 	return
 }
 
+// ParseWAFRule validator
 func (resource WAFRule) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFRuleProperties validator
 func (resource WAFRuleProperties) Validate() []error {
 	errs := []error{}
 	if resource.MetricName == nil {

@@ -53,10 +53,12 @@ func ParseIAMRole(ctx map[string]interface{}, name string, data string) (cf type
 	return
 }
 
+// ParseIAMRole validator
 func (resource IAMRole) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIAMRoleProperties validator
 func (resource IAMRoleProperties) Validate() []error {
 	errs := []error{}
 	if resource.AssumeRolePolicyDocument == nil {

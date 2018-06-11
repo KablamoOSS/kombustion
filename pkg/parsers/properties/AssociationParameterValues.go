@@ -10,6 +10,7 @@ type AssociationParameterValues struct {
 	ParameterValues interface{} `yaml:"ParameterValues"`
 }
 
+// AssociationParameterValues validation
 func (resource AssociationParameterValues) Validate() []error {
 	errs := []error{}
 

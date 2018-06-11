@@ -51,10 +51,12 @@ func ParseEC2VPNGateway(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseEC2VPNGateway validator
 func (resource EC2VPNGateway) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2VPNGatewayProperties validator
 func (resource EC2VPNGatewayProperties) Validate() []error {
 	errs := []error{}
 	if resource.Type == nil {

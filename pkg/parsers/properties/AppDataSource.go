@@ -10,6 +10,7 @@ type AppDataSource struct {
 	Type         interface{} `yaml:"Type,omitempty"`
 }
 
+// AppDataSource validation
 func (resource AppDataSource) Validate() []error {
 	errs := []error{}
 

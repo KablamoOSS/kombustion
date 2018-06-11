@@ -11,6 +11,7 @@ type ClusterScriptBootstrapActionConfig struct {
 	Args interface{} `yaml:"Args,omitempty"`
 }
 
+// ClusterScriptBootstrapActionConfig validation
 func (resource ClusterScriptBootstrapActionConfig) Validate() []error {
 	errs := []error{}
 

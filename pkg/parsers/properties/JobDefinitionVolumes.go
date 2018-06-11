@@ -9,6 +9,7 @@ type JobDefinitionVolumes struct {
 	Host *JobDefinitionVolumesHost `yaml:"Host,omitempty"`
 }
 
+// JobDefinitionVolumes validation
 func (resource JobDefinitionVolumes) Validate() []error {
 	errs := []error{}
 

@@ -10,6 +10,7 @@ type ConnectionPhysicalConnectionRequirements struct {
 	SecurityGroupIdList interface{} `yaml:"SecurityGroupIdList,omitempty"`
 }
 
+// ConnectionPhysicalConnectionRequirements validation
 func (resource ConnectionPhysicalConnectionRequirements) Validate() []error {
 	errs := []error{}
 

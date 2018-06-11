@@ -11,6 +11,7 @@ type PipelineParameterValue struct {
 	StringValue interface{} `yaml:"StringValue"`
 }
 
+// PipelineParameterValue validation
 func (resource PipelineParameterValue) Validate() []error {
 	errs := []error{}
 

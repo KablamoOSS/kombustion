@@ -74,10 +74,12 @@ func ParseOpsWorksStack(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseOpsWorksStack validator
 func (resource OpsWorksStack) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseOpsWorksStackProperties validator
 func (resource OpsWorksStackProperties) Validate() []error {
 	errs := []error{}
 	if resource.DefaultInstanceProfileArn == nil {

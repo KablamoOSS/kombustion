@@ -50,10 +50,12 @@ func ParseIoTPolicyPrincipalAttachment(ctx map[string]interface{}, name string, 
 	return
 }
 
+// ParseIoTPolicyPrincipalAttachment validator
 func (resource IoTPolicyPrincipalAttachment) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIoTPolicyPrincipalAttachmentProperties validator
 func (resource IoTPolicyPrincipalAttachmentProperties) Validate() []error {
 	errs := []error{}
 	if resource.PolicyName == nil {

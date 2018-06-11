@@ -15,6 +15,7 @@ type DistributionOrigin struct {
 	CustomOriginConfig  *DistributionCustomOriginConfig `yaml:"CustomOriginConfig,omitempty"`
 }
 
+// DistributionOrigin validation
 func (resource DistributionOrigin) Validate() []error {
 	errs := []error{}
 

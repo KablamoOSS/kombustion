@@ -11,6 +11,7 @@ type TableTimeToLiveSpecification struct {
 	Enabled       interface{} `yaml:"Enabled"`
 }
 
+// TableTimeToLiveSpecification validation
 func (resource TableTimeToLiveSpecification) Validate() []error {
 	errs := []error{}
 

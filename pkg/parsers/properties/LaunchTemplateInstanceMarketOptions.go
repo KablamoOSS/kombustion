@@ -9,6 +9,7 @@ type LaunchTemplateInstanceMarketOptions struct {
 	SpotOptions *LaunchTemplateSpotOptions `yaml:"SpotOptions,omitempty"`
 }
 
+// LaunchTemplateInstanceMarketOptions validation
 func (resource LaunchTemplateInstanceMarketOptions) Validate() []error {
 	errs := []error{}
 

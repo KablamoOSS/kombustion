@@ -11,6 +11,7 @@ type ProjectSourceAuth struct {
 	Type     interface{} `yaml:"Type"`
 }
 
+// ProjectSourceAuth validation
 func (resource ProjectSourceAuth) Validate() []error {
 	errs := []error{}
 

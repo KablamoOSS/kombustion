@@ -50,10 +50,12 @@ func ParseCodeDeployDeploymentConfig(ctx map[string]interface{}, name string, da
 	return
 }
 
+// ParseCodeDeployDeploymentConfig validator
 func (resource CodeDeployDeploymentConfig) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCodeDeployDeploymentConfigProperties validator
 func (resource CodeDeployDeploymentConfigProperties) Validate() []error {
 	errs := []error{}
 	return errs

@@ -11,6 +11,7 @@ type DistributionGeoRestriction struct {
 	Locations       interface{} `yaml:"Locations,omitempty"`
 }
 
+// DistributionGeoRestriction validation
 func (resource DistributionGeoRestriction) Validate() []error {
 	errs := []error{}
 

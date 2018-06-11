@@ -56,10 +56,12 @@ func ParseAutoScalingLifecycleHook(ctx map[string]interface{}, name string, data
 	return
 }
 
+// ParseAutoScalingLifecycleHook validator
 func (resource AutoScalingLifecycleHook) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAutoScalingLifecycleHookProperties validator
 func (resource AutoScalingLifecycleHookProperties) Validate() []error {
 	errs := []error{}
 	if resource.AutoScalingGroupName == nil {

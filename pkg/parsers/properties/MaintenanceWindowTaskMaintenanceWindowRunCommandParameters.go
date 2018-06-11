@@ -16,6 +16,7 @@ type MaintenanceWindowTaskMaintenanceWindowRunCommandParameters struct {
 	NotificationConfig *MaintenanceWindowTaskNotificationConfig `yaml:"NotificationConfig,omitempty"`
 }
 
+// MaintenanceWindowTaskMaintenanceWindowRunCommandParameters validation
 func (resource MaintenanceWindowTaskMaintenanceWindowRunCommandParameters) Validate() []error {
 	errs := []error{}
 

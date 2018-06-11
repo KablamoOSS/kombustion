@@ -49,10 +49,12 @@ func ParseLogsLogGroup(ctx map[string]interface{}, name string, data string) (cf
 	return
 }
 
+// ParseLogsLogGroup validator
 func (resource LogsLogGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseLogsLogGroupProperties validator
 func (resource LogsLogGroupProperties) Validate() []error {
 	errs := []error{}
 	return errs

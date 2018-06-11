@@ -15,6 +15,7 @@ type InstanceFleetConfigInstanceTypeConfig struct {
 	EbsConfiguration                    *InstanceFleetConfigEbsConfiguration `yaml:"EbsConfiguration,omitempty"`
 }
 
+// InstanceFleetConfigInstanceTypeConfig validation
 func (resource InstanceFleetConfigInstanceTypeConfig) Validate() []error {
 	errs := []error{}
 

@@ -55,10 +55,12 @@ func ParseDirectoryServiceMicrosoftAD(ctx map[string]interface{}, name string, d
 	return
 }
 
+// ParseDirectoryServiceMicrosoftAD validator
 func (resource DirectoryServiceMicrosoftAD) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDirectoryServiceMicrosoftADProperties validator
 func (resource DirectoryServiceMicrosoftADProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

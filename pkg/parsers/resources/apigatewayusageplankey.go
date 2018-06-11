@@ -51,10 +51,12 @@ func ParseApiGatewayUsagePlanKey(ctx map[string]interface{}, name string, data s
 	return
 }
 
+// ParseApiGatewayUsagePlanKey validator
 func (resource ApiGatewayUsagePlanKey) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayUsagePlanKeyProperties validator
 func (resource ApiGatewayUsagePlanKeyProperties) Validate() []error {
 	errs := []error{}
 	if resource.KeyId == nil {

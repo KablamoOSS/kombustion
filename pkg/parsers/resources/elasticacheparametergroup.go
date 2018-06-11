@@ -51,10 +51,12 @@ func ParseElastiCacheParameterGroup(ctx map[string]interface{}, name string, dat
 	return
 }
 
+// ParseElastiCacheParameterGroup validator
 func (resource ElastiCacheParameterGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElastiCacheParameterGroupProperties validator
 func (resource ElastiCacheParameterGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.CacheParameterGroupFamily == nil {

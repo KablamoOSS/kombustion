@@ -11,6 +11,7 @@ type ApplicationReferenceDataSourceRecordFormat struct {
 	MappingParameters *ApplicationReferenceDataSourceMappingParameters `yaml:"MappingParameters,omitempty"`
 }
 
+// ApplicationReferenceDataSourceRecordFormat validation
 func (resource ApplicationReferenceDataSourceRecordFormat) Validate() []error {
 	errs := []error{}
 

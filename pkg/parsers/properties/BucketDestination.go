@@ -13,6 +13,7 @@ type BucketDestination struct {
 	Prefix          interface{} `yaml:"Prefix,omitempty"`
 }
 
+// BucketDestination validation
 func (resource BucketDestination) Validate() []error {
 	errs := []error{}
 

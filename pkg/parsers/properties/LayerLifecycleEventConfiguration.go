@@ -8,6 +8,7 @@ type LayerLifecycleEventConfiguration struct {
 	ShutdownEventConfiguration *LayerShutdownEventConfiguration `yaml:"ShutdownEventConfiguration,omitempty"`
 }
 
+// LayerLifecycleEventConfiguration validation
 func (resource LayerLifecycleEventConfiguration) Validate() []error {
 	errs := []error{}
 

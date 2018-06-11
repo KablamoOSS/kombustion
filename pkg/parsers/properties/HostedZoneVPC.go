@@ -11,6 +11,7 @@ type HostedZoneVPC struct {
 	VPCRegion interface{} `yaml:"VPCRegion"`
 }
 
+// HostedZoneVPC validation
 func (resource HostedZoneVPC) Validate() []error {
 	errs := []error{}
 

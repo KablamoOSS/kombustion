@@ -14,6 +14,7 @@ type MethodIntegrationResponse struct {
 	ResponseTemplates  interface{} `yaml:"ResponseTemplates,omitempty"`
 }
 
+// MethodIntegrationResponse validation
 func (resource MethodIntegrationResponse) Validate() []error {
 	errs := []error{}
 

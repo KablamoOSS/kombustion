@@ -50,10 +50,12 @@ func ParseWAFXssMatchSet(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseWAFXssMatchSet validator
 func (resource WAFXssMatchSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFXssMatchSetProperties validator
 func (resource WAFXssMatchSetProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

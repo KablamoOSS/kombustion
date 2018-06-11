@@ -50,10 +50,12 @@ func ParseDAXParameterGroup(ctx map[string]interface{}, name string, data string
 	return
 }
 
+// ParseDAXParameterGroup validator
 func (resource DAXParameterGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDAXParameterGroupProperties validator
 func (resource DAXParameterGroupProperties) Validate() []error {
 	errs := []error{}
 	return errs

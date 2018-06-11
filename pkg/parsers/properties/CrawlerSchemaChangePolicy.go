@@ -9,6 +9,7 @@ type CrawlerSchemaChangePolicy struct {
 	UpdateBehavior interface{} `yaml:"UpdateBehavior,omitempty"`
 }
 
+// CrawlerSchemaChangePolicy validation
 func (resource CrawlerSchemaChangePolicy) Validate() []error {
 	errs := []error{}
 

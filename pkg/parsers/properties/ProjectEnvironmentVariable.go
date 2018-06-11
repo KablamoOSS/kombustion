@@ -12,6 +12,7 @@ type ProjectEnvironmentVariable struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// ProjectEnvironmentVariable validation
 func (resource ProjectEnvironmentVariable) Validate() []error {
 	errs := []error{}
 

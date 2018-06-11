@@ -9,6 +9,7 @@ type GraphQLApiLogConfig struct {
 	FieldLogLevel         interface{} `yaml:"FieldLogLevel,omitempty"`
 }
 
+// GraphQLApiLogConfig validation
 func (resource GraphQLApiLogConfig) Validate() []error {
 	errs := []error{}
 

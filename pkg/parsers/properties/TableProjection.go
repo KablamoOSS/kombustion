@@ -9,6 +9,7 @@ type TableProjection struct {
 	NonKeyAttributes interface{} `yaml:"NonKeyAttributes,omitempty"`
 }
 
+// TableProjection validation
 func (resource TableProjection) Validate() []error {
 	errs := []error{}
 

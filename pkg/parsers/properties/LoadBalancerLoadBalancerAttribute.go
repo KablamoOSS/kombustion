@@ -9,6 +9,7 @@ type LoadBalancerLoadBalancerAttribute struct {
 	Value interface{} `yaml:"Value,omitempty"`
 }
 
+// LoadBalancerLoadBalancerAttribute validation
 func (resource LoadBalancerLoadBalancerAttribute) Validate() []error {
 	errs := []error{}
 

@@ -8,6 +8,7 @@ type FunctionDeadLetterConfig struct {
 	TargetArn interface{} `yaml:"TargetArn,omitempty"`
 }
 
+// FunctionDeadLetterConfig validation
 func (resource FunctionDeadLetterConfig) Validate() []error {
 	errs := []error{}
 

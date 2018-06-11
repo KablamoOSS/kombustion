@@ -9,6 +9,7 @@ type InstanceGroupConfigEbsConfiguration struct {
 	EbsBlockDeviceConfigs interface{} `yaml:"EbsBlockDeviceConfigs,omitempty"`
 }
 
+// InstanceGroupConfigEbsConfiguration validation
 func (resource InstanceGroupConfigEbsConfiguration) Validate() []error {
 	errs := []error{}
 

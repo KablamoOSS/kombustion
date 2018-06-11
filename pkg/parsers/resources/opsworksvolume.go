@@ -52,10 +52,12 @@ func ParseOpsWorksVolume(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseOpsWorksVolume validator
 func (resource OpsWorksVolume) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseOpsWorksVolumeProperties validator
 func (resource OpsWorksVolumeProperties) Validate() []error {
 	errs := []error{}
 	if resource.Ec2VolumeId == nil {

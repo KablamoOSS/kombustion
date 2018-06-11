@@ -13,6 +13,7 @@ type LoadBalancerAccessLoggingPolicy struct {
 	S3BucketPrefix interface{} `yaml:"S3BucketPrefix,omitempty"`
 }
 
+// LoadBalancerAccessLoggingPolicy validation
 func (resource LoadBalancerAccessLoggingPolicy) Validate() []error {
 	errs := []error{}
 

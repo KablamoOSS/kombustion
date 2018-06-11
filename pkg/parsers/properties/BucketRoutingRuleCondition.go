@@ -9,6 +9,7 @@ type BucketRoutingRuleCondition struct {
 	KeyPrefixEquals             interface{} `yaml:"KeyPrefixEquals,omitempty"`
 }
 
+// BucketRoutingRuleCondition validation
 func (resource BucketRoutingRuleCondition) Validate() []error {
 	errs := []error{}
 

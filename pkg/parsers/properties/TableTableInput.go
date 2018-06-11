@@ -17,6 +17,7 @@ type TableTableInput struct {
 	PartitionKeys     interface{}             `yaml:"PartitionKeys,omitempty"`
 }
 
+// TableTableInput validation
 func (resource TableTableInput) Validate() []error {
 	errs := []error{}
 

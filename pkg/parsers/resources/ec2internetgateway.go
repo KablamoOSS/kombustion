@@ -48,10 +48,12 @@ func ParseEC2InternetGateway(ctx map[string]interface{}, name string, data strin
 	return
 }
 
+// ParseEC2InternetGateway validator
 func (resource EC2InternetGateway) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2InternetGatewayProperties validator
 func (resource EC2InternetGatewayProperties) Validate() []error {
 	errs := []error{}
 	return errs

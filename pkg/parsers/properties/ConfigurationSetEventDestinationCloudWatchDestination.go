@@ -8,6 +8,7 @@ type ConfigurationSetEventDestinationCloudWatchDestination struct {
 	DimensionConfigurations interface{} `yaml:"DimensionConfigurations,omitempty"`
 }
 
+// ConfigurationSetEventDestinationCloudWatchDestination validation
 func (resource ConfigurationSetEventDestinationCloudWatchDestination) Validate() []error {
 	errs := []error{}
 

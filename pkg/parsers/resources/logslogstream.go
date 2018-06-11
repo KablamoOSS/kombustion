@@ -50,10 +50,12 @@ func ParseLogsLogStream(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseLogsLogStream validator
 func (resource LogsLogStream) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseLogsLogStreamProperties validator
 func (resource LogsLogStreamProperties) Validate() []error {
 	errs := []error{}
 	if resource.LogGroupName == nil {

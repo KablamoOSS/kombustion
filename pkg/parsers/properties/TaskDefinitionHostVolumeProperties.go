@@ -8,6 +8,7 @@ type TaskDefinitionHostVolumeProperties struct {
 	SourcePath interface{} `yaml:"SourcePath,omitempty"`
 }
 
+// TaskDefinitionHostVolumeProperties validation
 func (resource TaskDefinitionHostVolumeProperties) Validate() []error {
 	errs := []error{}
 

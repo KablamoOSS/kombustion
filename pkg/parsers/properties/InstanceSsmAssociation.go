@@ -11,6 +11,7 @@ type InstanceSsmAssociation struct {
 	AssociationParameters interface{} `yaml:"AssociationParameters,omitempty"`
 }
 
+// InstanceSsmAssociation validation
 func (resource InstanceSsmAssociation) Validate() []error {
 	errs := []error{}
 

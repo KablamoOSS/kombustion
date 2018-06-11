@@ -10,6 +10,7 @@ type DeploymentGroupTriggerConfig struct {
 	TriggerEvents    interface{} `yaml:"TriggerEvents,omitempty"`
 }
 
+// DeploymentGroupTriggerConfig validation
 func (resource DeploymentGroupTriggerConfig) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type ApplicationCSVMappingParameters struct {
 	RecordRowDelimiter    interface{} `yaml:"RecordRowDelimiter"`
 }
 
+// ApplicationCSVMappingParameters validation
 func (resource ApplicationCSVMappingParameters) Validate() []error {
 	errs := []error{}
 

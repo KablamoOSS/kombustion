@@ -9,6 +9,7 @@ type LaunchTemplateIamInstanceProfile struct {
 	Name interface{} `yaml:"Name,omitempty"`
 }
 
+// LaunchTemplateIamInstanceProfile validation
 func (resource LaunchTemplateIamInstanceProfile) Validate() []error {
 	errs := []error{}
 

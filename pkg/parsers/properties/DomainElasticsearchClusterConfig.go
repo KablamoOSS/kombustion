@@ -13,6 +13,7 @@ type DomainElasticsearchClusterConfig struct {
 	ZoneAwarenessEnabled   interface{} `yaml:"ZoneAwarenessEnabled,omitempty"`
 }
 
+// DomainElasticsearchClusterConfig validation
 func (resource DomainElasticsearchClusterConfig) Validate() []error {
 	errs := []error{}
 

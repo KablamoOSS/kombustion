@@ -10,6 +10,7 @@ type BucketBucketEncryption struct {
 	ServerSideEncryptionConfiguration interface{} `yaml:"ServerSideEncryptionConfiguration"`
 }
 
+// BucketBucketEncryption validation
 func (resource BucketBucketEncryption) Validate() []error {
 	errs := []error{}
 

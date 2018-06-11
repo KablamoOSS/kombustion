@@ -9,6 +9,7 @@ type IdentityPoolPushSync struct {
 	ApplicationArns interface{} `yaml:"ApplicationArns,omitempty"`
 }
 
+// IdentityPoolPushSync validation
 func (resource IdentityPoolPushSync) Validate() []error {
 	errs := []error{}
 

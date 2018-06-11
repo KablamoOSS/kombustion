@@ -10,6 +10,7 @@ type DeploymentGroupAlarmConfiguration struct {
 	Alarms                 interface{} `yaml:"Alarms,omitempty"`
 }
 
+// DeploymentGroupAlarmConfiguration validation
 func (resource DeploymentGroupAlarmConfiguration) Validate() []error {
 	errs := []error{}
 

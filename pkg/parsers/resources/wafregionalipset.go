@@ -50,10 +50,12 @@ func ParseWAFRegionalIPSet(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseWAFRegionalIPSet validator
 func (resource WAFRegionalIPSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFRegionalIPSetProperties validator
 func (resource WAFRegionalIPSetProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

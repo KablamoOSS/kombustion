@@ -62,10 +62,12 @@ func ParseCodeBuildProject(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseCodeBuildProject validator
 func (resource CodeBuildProject) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCodeBuildProjectProperties validator
 func (resource CodeBuildProjectProperties) Validate() []error {
 	errs := []error{}
 	if resource.ServiceRole == nil {

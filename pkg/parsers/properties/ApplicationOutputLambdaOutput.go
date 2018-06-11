@@ -11,6 +11,7 @@ type ApplicationOutputLambdaOutput struct {
 	RoleARN     interface{} `yaml:"RoleARN"`
 }
 
+// ApplicationOutputLambdaOutput validation
 func (resource ApplicationOutputLambdaOutput) Validate() []error {
 	errs := []error{}
 

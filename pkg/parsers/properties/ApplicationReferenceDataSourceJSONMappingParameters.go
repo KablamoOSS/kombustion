@@ -10,6 +10,7 @@ type ApplicationReferenceDataSourceJSONMappingParameters struct {
 	RecordRowPath interface{} `yaml:"RecordRowPath"`
 }
 
+// ApplicationReferenceDataSourceJSONMappingParameters validation
 func (resource ApplicationReferenceDataSourceJSONMappingParameters) Validate() []error {
 	errs := []error{}
 

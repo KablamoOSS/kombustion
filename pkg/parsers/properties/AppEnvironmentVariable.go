@@ -12,6 +12,7 @@ type AppEnvironmentVariable struct {
 	Value  interface{} `yaml:"Value"`
 }
 
+// AppEnvironmentVariable validation
 func (resource AppEnvironmentVariable) Validate() []error {
 	errs := []error{}
 

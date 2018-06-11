@@ -59,10 +59,12 @@ func ParseCognitoIdentityPool(ctx map[string]interface{}, name string, data stri
 	return
 }
 
+// ParseCognitoIdentityPool validator
 func (resource CognitoIdentityPool) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCognitoIdentityPoolProperties validator
 func (resource CognitoIdentityPoolProperties) Validate() []error {
 	errs := []error{}
 	if resource.AllowUnauthenticatedIdentities == nil {

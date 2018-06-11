@@ -54,10 +54,12 @@ func ParseLambdaAlias(ctx map[string]interface{}, name string, data string) (cf 
 	return
 }
 
+// ParseLambdaAlias validator
 func (resource LambdaAlias) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseLambdaAliasProperties validator
 func (resource LambdaAliasProperties) Validate() []error {
 	errs := []error{}
 	if resource.FunctionName == nil {

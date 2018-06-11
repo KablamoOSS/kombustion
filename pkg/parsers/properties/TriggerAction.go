@@ -9,6 +9,7 @@ type TriggerAction struct {
 	JobName   interface{} `yaml:"JobName,omitempty"`
 }
 
+// TriggerAction validation
 func (resource TriggerAction) Validate() []error {
 	errs := []error{}
 

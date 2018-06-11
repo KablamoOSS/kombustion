@@ -50,10 +50,12 @@ func ParseIoTPolicy(ctx map[string]interface{}, name string, data string) (cf ty
 	return
 }
 
+// ParseIoTPolicy validator
 func (resource IoTPolicy) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIoTPolicyProperties validator
 func (resource IoTPolicyProperties) Validate() []error {
 	errs := []error{}
 	if resource.PolicyDocument == nil {

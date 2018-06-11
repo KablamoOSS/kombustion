@@ -14,6 +14,7 @@ type ReceiptRuleBounceAction struct {
 	TopicArn      interface{} `yaml:"TopicArn,omitempty"`
 }
 
+// ReceiptRuleBounceAction validation
 func (resource ReceiptRuleBounceAction) Validate() []error {
 	errs := []error{}
 

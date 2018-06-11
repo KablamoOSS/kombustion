@@ -9,6 +9,7 @@ type LaunchTemplatePrivateIpAdd struct {
 	PrivateIpAddress interface{} `yaml:"PrivateIpAddress,omitempty"`
 }
 
+// LaunchTemplatePrivateIpAdd validation
 func (resource LaunchTemplatePrivateIpAdd) Validate() []error {
 	errs := []error{}
 

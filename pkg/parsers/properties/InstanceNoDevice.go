@@ -7,6 +7,7 @@ package properties
 type InstanceNoDevice struct {
 }
 
+// InstanceNoDevice validation
 func (resource InstanceNoDevice) Validate() []error {
 	errs := []error{}
 	return errs

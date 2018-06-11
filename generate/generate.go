@@ -116,6 +116,7 @@ type {{$PropertyName}} struct {
 	{{- end}}
 }
 
+// {{$PropertyName}} validation
 func (resource {{$PropertyName}}) Validate() []error {
 	errs := []error{}
 	{{- range $validator := .ValidatorStrings}}
@@ -187,10 +188,12 @@ func Parse{{$ResourceName}}(ctx map[string]interface{}, name string, data string
 	return
 }
 
+// Parse{{$ResourceName}} validator
 func (resource {{$ResourceName}}) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// Parse{{$ResourceName}}Properties validator
 func (resource {{$ResourceName}}Properties) Validate() []error {
 	errs := []error{}
 	{{- range $validator := .ValidatorStrings}}

@@ -57,10 +57,12 @@ func ParseEC2Volume(ctx map[string]interface{}, name string, data string) (cf ty
 	return
 }
 
+// ParseEC2Volume validator
 func (resource EC2Volume) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2VolumeProperties validator
 func (resource EC2VolumeProperties) Validate() []error {
 	errs := []error{}
 	if resource.AvailabilityZone == nil {

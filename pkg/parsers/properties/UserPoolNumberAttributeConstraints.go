@@ -9,6 +9,7 @@ type UserPoolNumberAttributeConstraints struct {
 	MinValue interface{} `yaml:"MinValue,omitempty"`
 }
 
+// UserPoolNumberAttributeConstraints validation
 func (resource UserPoolNumberAttributeConstraints) Validate() []error {
 	errs := []error{}
 

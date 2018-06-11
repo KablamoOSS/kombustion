@@ -8,6 +8,7 @@ type JobExecutionProperty struct {
 	MaxConcurrentRuns interface{} `yaml:"MaxConcurrentRuns,omitempty"`
 }
 
+// JobExecutionProperty validation
 func (resource JobExecutionProperty) Validate() []error {
 	errs := []error{}
 

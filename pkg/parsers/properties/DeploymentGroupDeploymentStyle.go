@@ -9,6 +9,7 @@ type DeploymentGroupDeploymentStyle struct {
 	DeploymentType   interface{} `yaml:"DeploymentType,omitempty"`
 }
 
+// DeploymentGroupDeploymentStyle validation
 func (resource DeploymentGroupDeploymentStyle) Validate() []error {
 	errs := []error{}
 

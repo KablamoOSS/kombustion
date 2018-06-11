@@ -50,10 +50,12 @@ func ParseWAFSqlInjectionMatchSet(ctx map[string]interface{}, name string, data 
 	return
 }
 
+// ParseWAFSqlInjectionMatchSet validator
 func (resource WAFSqlInjectionMatchSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFSqlInjectionMatchSetProperties validator
 func (resource WAFSqlInjectionMatchSetProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

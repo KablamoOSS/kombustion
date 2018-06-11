@@ -11,6 +11,7 @@ type TopicRuleRepublishAction struct {
 	Topic   interface{} `yaml:"Topic"`
 }
 
+// TopicRuleRepublishAction validation
 func (resource TopicRuleRepublishAction) Validate() []error {
 	errs := []error{}
 

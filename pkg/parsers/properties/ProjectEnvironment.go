@@ -14,6 +14,7 @@ type ProjectEnvironment struct {
 	EnvironmentVariables interface{} `yaml:"EnvironmentVariables,omitempty"`
 }
 
+// ProjectEnvironment validation
 func (resource ProjectEnvironment) Validate() []error {
 	errs := []error{}
 

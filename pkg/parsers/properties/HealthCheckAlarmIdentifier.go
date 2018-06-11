@@ -11,6 +11,7 @@ type HealthCheckAlarmIdentifier struct {
 	Region interface{} `yaml:"Region"`
 }
 
+// HealthCheckAlarmIdentifier validation
 func (resource HealthCheckAlarmIdentifier) Validate() []error {
 	errs := []error{}
 

@@ -56,10 +56,12 @@ func ParseGlueDevEndpoint(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseGlueDevEndpoint validator
 func (resource GlueDevEndpoint) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGlueDevEndpointProperties validator
 func (resource GlueDevEndpointProperties) Validate() []error {
 	errs := []error{}
 	if resource.PublicKey == nil {

@@ -10,6 +10,7 @@ type BucketNotificationFilter struct {
 	S3Key *BucketS3KeyFilter `yaml:"S3Key"`
 }
 
+// BucketNotificationFilter validation
 func (resource BucketNotificationFilter) Validate() []error {
 	errs := []error{}
 

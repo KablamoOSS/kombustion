@@ -10,6 +10,7 @@ type DeliveryStreamElasticsearchRetryOptions struct {
 	DurationInSeconds interface{} `yaml:"DurationInSeconds"`
 }
 
+// DeliveryStreamElasticsearchRetryOptions validation
 func (resource DeliveryStreamElasticsearchRetryOptions) Validate() []error {
 	errs := []error{}
 

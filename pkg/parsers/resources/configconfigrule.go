@@ -55,10 +55,12 @@ func ParseConfigConfigRule(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseConfigConfigRule validator
 func (resource ConfigConfigRule) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseConfigConfigRuleProperties validator
 func (resource ConfigConfigRuleProperties) Validate() []error {
 	errs := []error{}
 	if resource.Source == nil {

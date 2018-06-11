@@ -12,6 +12,7 @@ type JobDefinitionUlimit struct {
 	SoftLimit interface{} `yaml:"SoftLimit"`
 }
 
+// JobDefinitionUlimit validation
 func (resource JobDefinitionUlimit) Validate() []error {
 	errs := []error{}
 

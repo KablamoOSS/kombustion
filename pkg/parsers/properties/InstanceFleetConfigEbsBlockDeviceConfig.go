@@ -11,6 +11,7 @@ type InstanceFleetConfigEbsBlockDeviceConfig struct {
 	VolumeSpecification *InstanceFleetConfigVolumeSpecification `yaml:"VolumeSpecification"`
 }
 
+// InstanceFleetConfigEbsBlockDeviceConfig validation
 func (resource InstanceFleetConfigEbsBlockDeviceConfig) Validate() []error {
 	errs := []error{}
 

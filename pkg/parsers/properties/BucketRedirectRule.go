@@ -12,6 +12,7 @@ type BucketRedirectRule struct {
 	ReplaceKeyWith       interface{} `yaml:"ReplaceKeyWith,omitempty"`
 }
 
+// BucketRedirectRule validation
 func (resource BucketRedirectRule) Validate() []error {
 	errs := []error{}
 

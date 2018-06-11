@@ -10,6 +10,7 @@ type TaskDefinitionLinuxParameters struct {
 	Capabilities       *TaskDefinitionKernelCapabilities `yaml:"Capabilities,omitempty"`
 }
 
+// TaskDefinitionLinuxParameters validation
 func (resource TaskDefinitionLinuxParameters) Validate() []error {
 	errs := []error{}
 

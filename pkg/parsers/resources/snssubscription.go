@@ -50,10 +50,12 @@ func ParseSNSSubscription(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseSNSSubscription validator
 func (resource SNSSubscription) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSNSSubscriptionProperties validator
 func (resource SNSSubscriptionProperties) Validate() []error {
 	errs := []error{}
 	return errs

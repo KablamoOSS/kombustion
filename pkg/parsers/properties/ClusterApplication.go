@@ -11,6 +11,7 @@ type ClusterApplication struct {
 	Args           interface{} `yaml:"Args,omitempty"`
 }
 
+// ClusterApplication validation
 func (resource ClusterApplication) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type RuleRunCommandTarget struct {
 	Values interface{} `yaml:"Values"`
 }
 
+// RuleRunCommandTarget validation
 func (resource RuleRunCommandTarget) Validate() []error {
 	errs := []error{}
 

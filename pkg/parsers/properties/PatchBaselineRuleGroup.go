@@ -8,6 +8,7 @@ type PatchBaselineRuleGroup struct {
 	PatchRules interface{} `yaml:"PatchRules,omitempty"`
 }
 
+// PatchBaselineRuleGroup validation
 func (resource PatchBaselineRuleGroup) Validate() []error {
 	errs := []error{}
 

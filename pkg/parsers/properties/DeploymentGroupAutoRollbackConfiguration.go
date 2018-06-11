@@ -9,6 +9,7 @@ type DeploymentGroupAutoRollbackConfiguration struct {
 	Events  interface{} `yaml:"Events,omitempty"`
 }
 
+// DeploymentGroupAutoRollbackConfiguration validation
 func (resource DeploymentGroupAutoRollbackConfiguration) Validate() []error {
 	errs := []error{}
 

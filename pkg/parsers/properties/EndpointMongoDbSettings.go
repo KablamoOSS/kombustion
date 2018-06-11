@@ -18,6 +18,7 @@ type EndpointMongoDbSettings struct {
 	Username          interface{} `yaml:"Username,omitempty"`
 }
 
+// EndpointMongoDbSettings validation
 func (resource EndpointMongoDbSettings) Validate() []error {
 	errs := []error{}
 

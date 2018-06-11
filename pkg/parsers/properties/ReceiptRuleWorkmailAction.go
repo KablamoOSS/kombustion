@@ -11,6 +11,7 @@ type ReceiptRuleWorkmailAction struct {
 	TopicArn        interface{} `yaml:"TopicArn,omitempty"`
 }
 
+// ReceiptRuleWorkmailAction validation
 func (resource ReceiptRuleWorkmailAction) Validate() []error {
 	errs := []error{}
 

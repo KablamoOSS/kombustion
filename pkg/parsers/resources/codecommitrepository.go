@@ -51,10 +51,12 @@ func ParseCodeCommitRepository(ctx map[string]interface{}, name string, data str
 	return
 }
 
+// ParseCodeCommitRepository validator
 func (resource CodeCommitRepository) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCodeCommitRepositoryProperties validator
 func (resource CodeCommitRepositoryProperties) Validate() []error {
 	errs := []error{}
 	if resource.RepositoryName == nil {

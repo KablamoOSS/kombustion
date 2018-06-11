@@ -9,6 +9,7 @@ type TaskDefinitionKernelCapabilities struct {
 	Drop interface{} `yaml:"Drop,omitempty"`
 }
 
+// TaskDefinitionKernelCapabilities validation
 func (resource TaskDefinitionKernelCapabilities) Validate() []error {
 	errs := []error{}
 

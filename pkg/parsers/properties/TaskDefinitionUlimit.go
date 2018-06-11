@@ -12,6 +12,7 @@ type TaskDefinitionUlimit struct {
 	SoftLimit interface{} `yaml:"SoftLimit"`
 }
 
+// TaskDefinitionUlimit validation
 func (resource TaskDefinitionUlimit) Validate() []error {
 	errs := []error{}
 

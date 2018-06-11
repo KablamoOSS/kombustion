@@ -77,10 +77,12 @@ func ParseElastiCacheReplicationGroup(ctx map[string]interface{}, name string, d
 	return
 }
 
+// ParseElastiCacheReplicationGroup validator
 func (resource ElastiCacheReplicationGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElastiCacheReplicationGroupProperties validator
 func (resource ElastiCacheReplicationGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.ReplicationGroupDescription == nil {

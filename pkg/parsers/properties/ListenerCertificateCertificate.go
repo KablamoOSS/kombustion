@@ -8,6 +8,7 @@ type ListenerCertificateCertificate struct {
 	CertificateArn interface{} `yaml:"CertificateArn,omitempty"`
 }
 
+// ListenerCertificateCertificate validation
 func (resource ListenerCertificateCertificate) Validate() []error {
 	errs := []error{}
 

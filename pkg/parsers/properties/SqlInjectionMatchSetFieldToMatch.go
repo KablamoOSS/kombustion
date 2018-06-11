@@ -11,6 +11,7 @@ type SqlInjectionMatchSetFieldToMatch struct {
 	Type interface{} `yaml:"Type"`
 }
 
+// SqlInjectionMatchSetFieldToMatch validation
 func (resource SqlInjectionMatchSetFieldToMatch) Validate() []error {
 	errs := []error{}
 

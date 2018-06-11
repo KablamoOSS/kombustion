@@ -11,6 +11,7 @@ type LoadBalancerConnectionDrainingPolicy struct {
 	Timeout interface{} `yaml:"Timeout,omitempty"`
 }
 
+// LoadBalancerConnectionDrainingPolicy validation
 func (resource LoadBalancerConnectionDrainingPolicy) Validate() []error {
 	errs := []error{}
 

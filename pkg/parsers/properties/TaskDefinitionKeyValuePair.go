@@ -9,6 +9,7 @@ type TaskDefinitionKeyValuePair struct {
 	Value interface{} `yaml:"Value,omitempty"`
 }
 
+// TaskDefinitionKeyValuePair validation
 func (resource TaskDefinitionKeyValuePair) Validate() []error {
 	errs := []error{}
 

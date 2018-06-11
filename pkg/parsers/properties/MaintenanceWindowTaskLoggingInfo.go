@@ -12,6 +12,7 @@ type MaintenanceWindowTaskLoggingInfo struct {
 	S3Prefix interface{} `yaml:"S3Prefix,omitempty"`
 }
 
+// MaintenanceWindowTaskLoggingInfo validation
 func (resource MaintenanceWindowTaskLoggingInfo) Validate() []error {
 	errs := []error{}
 

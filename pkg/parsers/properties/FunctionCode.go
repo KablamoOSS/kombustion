@@ -11,6 +11,7 @@ type FunctionCode struct {
 	ZipFile         interface{} `yaml:"ZipFile,omitempty"`
 }
 
+// FunctionCode validation
 func (resource FunctionCode) Validate() []error {
 	errs := []error{}
 

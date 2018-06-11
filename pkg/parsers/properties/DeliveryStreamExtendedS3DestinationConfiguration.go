@@ -19,6 +19,7 @@ type DeliveryStreamExtendedS3DestinationConfiguration struct {
 	BufferingHints           *DeliveryStreamBufferingHints             `yaml:"BufferingHints"`
 }
 
+// DeliveryStreamExtendedS3DestinationConfiguration validation
 func (resource DeliveryStreamExtendedS3DestinationConfiguration) Validate() []error {
 	errs := []error{}
 

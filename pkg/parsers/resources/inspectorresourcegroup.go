@@ -49,10 +49,12 @@ func ParseInspectorResourceGroup(ctx map[string]interface{}, name string, data s
 	return
 }
 
+// ParseInspectorResourceGroup validator
 func (resource InspectorResourceGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseInspectorResourceGroupProperties validator
 func (resource InspectorResourceGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.ResourceGroupTags == nil {

@@ -10,6 +10,7 @@ type BucketVersioningConfiguration struct {
 	Status interface{} `yaml:"Status"`
 }
 
+// BucketVersioningConfiguration validation
 func (resource BucketVersioningConfiguration) Validate() []error {
 	errs := []error{}
 

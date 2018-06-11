@@ -11,6 +11,7 @@ type DeploymentGroupGitHubLocation struct {
 	Repository interface{} `yaml:"Repository"`
 }
 
+// DeploymentGroupGitHubLocation validation
 func (resource DeploymentGroupGitHubLocation) Validate() []error {
 	errs := []error{}
 

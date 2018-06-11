@@ -11,6 +11,7 @@ type PipelineParameterObject struct {
 	Attributes interface{} `yaml:"Attributes"`
 }
 
+// PipelineParameterObject validation
 func (resource PipelineParameterObject) Validate() []error {
 	errs := []error{}
 

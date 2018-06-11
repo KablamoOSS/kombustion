@@ -11,6 +11,7 @@ type InstanceVolume struct {
 	VolumeId interface{} `yaml:"VolumeId"`
 }
 
+// InstanceVolume validation
 func (resource InstanceVolume) Validate() []error {
 	errs := []error{}
 

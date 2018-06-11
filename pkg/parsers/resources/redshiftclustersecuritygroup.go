@@ -50,10 +50,12 @@ func ParseRedshiftClusterSecurityGroup(ctx map[string]interface{}, name string, 
 	return
 }
 
+// ParseRedshiftClusterSecurityGroup validator
 func (resource RedshiftClusterSecurityGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRedshiftClusterSecurityGroupProperties validator
 func (resource RedshiftClusterSecurityGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.Description == nil {

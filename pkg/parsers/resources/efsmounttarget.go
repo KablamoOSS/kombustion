@@ -52,10 +52,12 @@ func ParseEFSMountTarget(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseEFSMountTarget validator
 func (resource EFSMountTarget) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEFSMountTargetProperties validator
 func (resource EFSMountTargetProperties) Validate() []error {
 	errs := []error{}
 	if resource.FileSystemId == nil {

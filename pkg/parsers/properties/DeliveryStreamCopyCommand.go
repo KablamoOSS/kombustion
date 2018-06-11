@@ -12,6 +12,7 @@ type DeliveryStreamCopyCommand struct {
 	DataTableName    interface{} `yaml:"DataTableName"`
 }
 
+// DeliveryStreamCopyCommand validation
 func (resource DeliveryStreamCopyCommand) Validate() []error {
 	errs := []error{}
 

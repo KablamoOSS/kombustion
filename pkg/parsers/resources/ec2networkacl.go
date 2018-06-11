@@ -50,10 +50,12 @@ func ParseEC2NetworkAcl(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseEC2NetworkAcl validator
 func (resource EC2NetworkAcl) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2NetworkAclProperties validator
 func (resource EC2NetworkAclProperties) Validate() []error {
 	errs := []error{}
 	if resource.VpcId == nil {

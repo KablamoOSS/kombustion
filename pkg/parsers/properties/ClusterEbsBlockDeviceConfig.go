@@ -11,6 +11,7 @@ type ClusterEbsBlockDeviceConfig struct {
 	VolumeSpecification *ClusterVolumeSpecification `yaml:"VolumeSpecification"`
 }
 
+// ClusterEbsBlockDeviceConfig validation
 func (resource ClusterEbsBlockDeviceConfig) Validate() []error {
 	errs := []error{}
 

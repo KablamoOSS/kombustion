@@ -16,6 +16,7 @@ type BucketInventoryConfiguration struct {
 	Destination            *BucketDestination `yaml:"Destination"`
 }
 
+// BucketInventoryConfiguration validation
 func (resource BucketInventoryConfiguration) Validate() []error {
 	errs := []error{}
 

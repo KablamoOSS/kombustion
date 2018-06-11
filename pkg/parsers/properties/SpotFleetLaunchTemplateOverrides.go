@@ -12,6 +12,7 @@ type SpotFleetLaunchTemplateOverrides struct {
 	WeightedCapacity interface{} `yaml:"WeightedCapacity,omitempty"`
 }
 
+// SpotFleetLaunchTemplateOverrides validation
 func (resource SpotFleetLaunchTemplateOverrides) Validate() []error {
 	errs := []error{}
 

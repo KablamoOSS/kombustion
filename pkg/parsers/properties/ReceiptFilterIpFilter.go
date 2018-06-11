@@ -11,6 +11,7 @@ type ReceiptFilterIpFilter struct {
 	Policy interface{} `yaml:"Policy"`
 }
 
+// ReceiptFilterIpFilter validation
 func (resource ReceiptFilterIpFilter) Validate() []error {
 	errs := []error{}
 

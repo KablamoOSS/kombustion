@@ -9,6 +9,7 @@ type UsagePlanApiStage struct {
 	Stage interface{} `yaml:"Stage,omitempty"`
 }
 
+// UsagePlanApiStage validation
 func (resource UsagePlanApiStage) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type ServicePlacementStrategy struct {
 	Type  interface{} `yaml:"Type"`
 }
 
+// ServicePlacementStrategy validation
 func (resource ServicePlacementStrategy) Validate() []error {
 	errs := []error{}
 

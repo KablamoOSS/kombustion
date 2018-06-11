@@ -57,10 +57,12 @@ func ParseAppSyncDataSource(ctx map[string]interface{}, name string, data string
 	return
 }
 
+// ParseAppSyncDataSource validator
 func (resource AppSyncDataSource) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAppSyncDataSourceProperties validator
 func (resource AppSyncDataSourceProperties) Validate() []error {
 	errs := []error{}
 	if resource.ApiId == nil {

@@ -50,10 +50,12 @@ func ParseEC2SpotFleet(ctx map[string]interface{}, name string, data string) (cf
 	return
 }
 
+// ParseEC2SpotFleet validator
 func (resource EC2SpotFleet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2SpotFleetProperties validator
 func (resource EC2SpotFleetProperties) Validate() []error {
 	errs := []error{}
 	if resource.SpotFleetRequestConfigData == nil {

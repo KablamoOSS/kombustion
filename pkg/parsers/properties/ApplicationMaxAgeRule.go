@@ -10,6 +10,7 @@ type ApplicationMaxAgeRule struct {
 	MaxAgeInDays       interface{} `yaml:"MaxAgeInDays,omitempty"`
 }
 
+// ApplicationMaxAgeRule validation
 func (resource ApplicationMaxAgeRule) Validate() []error {
 	errs := []error{}
 

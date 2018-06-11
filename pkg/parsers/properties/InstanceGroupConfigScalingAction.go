@@ -11,6 +11,7 @@ type InstanceGroupConfigScalingAction struct {
 	SimpleScalingPolicyConfiguration *InstanceGroupConfigSimpleScalingPolicyConfiguration `yaml:"SimpleScalingPolicyConfiguration"`
 }
 
+// InstanceGroupConfigScalingAction validation
 func (resource InstanceGroupConfigScalingAction) Validate() []error {
 	errs := []error{}
 

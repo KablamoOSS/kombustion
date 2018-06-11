@@ -11,6 +11,7 @@ type BucketDataExport struct {
 	Destination         *BucketDestination `yaml:"Destination"`
 }
 
+// BucketDataExport validation
 func (resource BucketDataExport) Validate() []error {
 	errs := []error{}
 

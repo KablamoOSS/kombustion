@@ -21,6 +21,7 @@ type BucketRule struct {
 	AbortIncompleteMultipartUpload    *BucketAbortIncompleteMultipartUpload `yaml:"AbortIncompleteMultipartUpload,omitempty"`
 }
 
+// BucketRule validation
 func (resource BucketRule) Validate() []error {
 	errs := []error{}
 

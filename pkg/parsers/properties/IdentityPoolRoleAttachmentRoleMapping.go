@@ -12,6 +12,7 @@ type IdentityPoolRoleAttachmentRoleMapping struct {
 	RulesConfiguration      *IdentityPoolRoleAttachmentRulesConfigurationType `yaml:"RulesConfiguration,omitempty"`
 }
 
+// IdentityPoolRoleAttachmentRoleMapping validation
 func (resource IdentityPoolRoleAttachmentRoleMapping) Validate() []error {
 	errs := []error{}
 

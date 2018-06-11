@@ -49,10 +49,12 @@ func ParseEC2EIP(ctx map[string]interface{}, name string, data string) (cf types
 	return
 }
 
+// ParseEC2EIP validator
 func (resource EC2EIP) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2EIPProperties validator
 func (resource EC2EIPProperties) Validate() []error {
 	errs := []error{}
 	return errs

@@ -48,10 +48,12 @@ func ParseApiGatewayClientCertificate(ctx map[string]interface{}, name string, d
 	return
 }
 
+// ParseApiGatewayClientCertificate validator
 func (resource ApiGatewayClientCertificate) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayClientCertificateProperties validator
 func (resource ApiGatewayClientCertificateProperties) Validate() []error {
 	errs := []error{}
 	return errs

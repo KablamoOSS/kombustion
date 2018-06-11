@@ -12,6 +12,7 @@ type ConfigurationSetEventDestinationDimensionConfiguration struct {
 	DimensionValueSource  interface{} `yaml:"DimensionValueSource"`
 }
 
+// ConfigurationSetEventDestinationDimensionConfiguration validation
 func (resource ConfigurationSetEventDestinationDimensionConfiguration) Validate() []error {
 	errs := []error{}
 

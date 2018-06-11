@@ -13,6 +13,7 @@ type PipelineActionTypeId struct {
 	Version  interface{} `yaml:"Version"`
 }
 
+// PipelineActionTypeId validation
 func (resource PipelineActionTypeId) Validate() []error {
 	errs := []error{}
 

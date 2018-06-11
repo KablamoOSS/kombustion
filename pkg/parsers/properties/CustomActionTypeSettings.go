@@ -11,6 +11,7 @@ type CustomActionTypeSettings struct {
 	ThirdPartyConfigurationUrl interface{} `yaml:"ThirdPartyConfigurationUrl,omitempty"`
 }
 
+// CustomActionTypeSettings validation
 func (resource CustomActionTypeSettings) Validate() []error {
 	errs := []error{}
 

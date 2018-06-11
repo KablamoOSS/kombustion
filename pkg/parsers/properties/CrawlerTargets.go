@@ -9,6 +9,7 @@ type CrawlerTargets struct {
 	S3Targets   interface{} `yaml:"S3Targets,omitempty"`
 }
 
+// CrawlerTargets validation
 func (resource CrawlerTargets) Validate() []error {
 	errs := []error{}
 

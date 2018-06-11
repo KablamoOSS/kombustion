@@ -48,10 +48,12 @@ func ParseSESReceiptRuleSet(ctx map[string]interface{}, name string, data string
 	return
 }
 
+// ParseSESReceiptRuleSet validator
 func (resource SESReceiptRuleSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSESReceiptRuleSetProperties validator
 func (resource SESReceiptRuleSetProperties) Validate() []error {
 	errs := []error{}
 	return errs

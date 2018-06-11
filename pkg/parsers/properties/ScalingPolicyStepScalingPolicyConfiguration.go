@@ -12,6 +12,7 @@ type ScalingPolicyStepScalingPolicyConfiguration struct {
 	StepAdjustments        interface{} `yaml:"StepAdjustments,omitempty"`
 }
 
+// ScalingPolicyStepScalingPolicyConfiguration validation
 func (resource ScalingPolicyStepScalingPolicyConfiguration) Validate() []error {
 	errs := []error{}
 

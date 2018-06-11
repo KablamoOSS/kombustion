@@ -8,6 +8,7 @@ type JobConnectionsList struct {
 	Connections interface{} `yaml:"Connections,omitempty"`
 }
 
+// JobConnectionsList validation
 func (resource JobConnectionsList) Validate() []error {
 	errs := []error{}
 

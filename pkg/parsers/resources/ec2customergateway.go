@@ -52,10 +52,12 @@ func ParseEC2CustomerGateway(ctx map[string]interface{}, name string, data strin
 	return
 }
 
+// ParseEC2CustomerGateway validator
 func (resource EC2CustomerGateway) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2CustomerGatewayProperties validator
 func (resource EC2CustomerGatewayProperties) Validate() []error {
 	errs := []error{}
 	if resource.BgpAsn == nil {

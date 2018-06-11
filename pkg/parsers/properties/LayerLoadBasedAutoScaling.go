@@ -10,6 +10,7 @@ type LayerLoadBasedAutoScaling struct {
 	UpScaling   *LayerAutoScalingThresholds `yaml:"UpScaling,omitempty"`
 }
 
+// LayerLoadBasedAutoScaling validation
 func (resource LayerLoadBasedAutoScaling) Validate() []error {
 	errs := []error{}
 

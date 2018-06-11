@@ -52,10 +52,12 @@ func ParseApiGatewayBasePathMapping(ctx map[string]interface{}, name string, dat
 	return
 }
 
+// ParseApiGatewayBasePathMapping validator
 func (resource ApiGatewayBasePathMapping) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayBasePathMappingProperties validator
 func (resource ApiGatewayBasePathMappingProperties) Validate() []error {
 	errs := []error{}
 	if resource.DomainName == nil {

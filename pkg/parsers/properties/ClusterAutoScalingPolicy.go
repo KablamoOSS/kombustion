@@ -11,6 +11,7 @@ type ClusterAutoScalingPolicy struct {
 	Rules       interface{}                `yaml:"Rules"`
 }
 
+// ClusterAutoScalingPolicy validation
 func (resource ClusterAutoScalingPolicy) Validate() []error {
 	errs := []error{}
 

@@ -9,6 +9,7 @@ type CloudFormationProvisionedProductProvisioningParameter struct {
 	Value interface{} `yaml:"Value,omitempty"`
 }
 
+// CloudFormationProvisionedProductProvisioningParameter validation
 func (resource CloudFormationProvisionedProductProvisioningParameter) Validate() []error {
 	errs := []error{}
 

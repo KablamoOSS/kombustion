@@ -12,6 +12,7 @@ type UserPoolPasswordPolicy struct {
 	RequireUppercase interface{} `yaml:"RequireUppercase,omitempty"`
 }
 
+// UserPoolPasswordPolicy validation
 func (resource UserPoolPasswordPolicy) Validate() []error {
 	errs := []error{}
 

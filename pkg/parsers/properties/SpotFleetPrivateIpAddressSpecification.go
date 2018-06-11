@@ -11,6 +11,7 @@ type SpotFleetPrivateIpAddressSpecification struct {
 	PrivateIpAddress interface{} `yaml:"PrivateIpAddress"`
 }
 
+// SpotFleetPrivateIpAddressSpecification validation
 func (resource SpotFleetPrivateIpAddressSpecification) Validate() []error {
 	errs := []error{}
 

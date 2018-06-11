@@ -17,6 +17,7 @@ type DeploymentMethodSetting struct {
 	ThrottlingRateLimit  interface{} `yaml:"ThrottlingRateLimit,omitempty"`
 }
 
+// DeploymentMethodSetting validation
 func (resource DeploymentMethodSetting) Validate() []error {
 	errs := []error{}
 

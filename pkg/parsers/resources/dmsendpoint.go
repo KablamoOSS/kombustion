@@ -65,10 +65,12 @@ func ParseDMSEndpoint(ctx map[string]interface{}, name string, data string) (cf 
 	return
 }
 
+// ParseDMSEndpoint validator
 func (resource DMSEndpoint) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDMSEndpointProperties validator
 func (resource DMSEndpointProperties) Validate() []error {
 	errs := []error{}
 	if resource.EndpointType == nil {

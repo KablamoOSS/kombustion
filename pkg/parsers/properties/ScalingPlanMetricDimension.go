@@ -11,6 +11,7 @@ type ScalingPlanMetricDimension struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// ScalingPlanMetricDimension validation
 func (resource ScalingPlanMetricDimension) Validate() []error {
 	errs := []error{}
 

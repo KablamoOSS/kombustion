@@ -11,6 +11,7 @@ type ClusterScalingAction struct {
 	SimpleScalingPolicyConfiguration *ClusterSimpleScalingPolicyConfiguration `yaml:"SimpleScalingPolicyConfiguration"`
 }
 
+// ClusterScalingAction validation
 func (resource ClusterScalingAction) Validate() []error {
 	errs := []error{}
 

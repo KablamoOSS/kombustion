@@ -11,6 +11,7 @@ type XssMatchSetFieldToMatch struct {
 	Type interface{} `yaml:"Type"`
 }
 
+// XssMatchSetFieldToMatch validation
 func (resource XssMatchSetFieldToMatch) Validate() []error {
 	errs := []error{}
 

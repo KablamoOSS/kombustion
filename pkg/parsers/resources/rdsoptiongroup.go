@@ -53,10 +53,12 @@ func ParseRDSOptionGroup(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseRDSOptionGroup validator
 func (resource RDSOptionGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRDSOptionGroupProperties validator
 func (resource RDSOptionGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.EngineName == nil {

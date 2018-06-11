@@ -53,10 +53,12 @@ func ParseEC2FlowLog(ctx map[string]interface{}, name string, data string) (cf t
 	return
 }
 
+// ParseEC2FlowLog validator
 func (resource EC2FlowLog) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2FlowLogProperties validator
 func (resource EC2FlowLogProperties) Validate() []error {
 	errs := []error{}
 	if resource.DeliverLogsPermissionArn == nil {

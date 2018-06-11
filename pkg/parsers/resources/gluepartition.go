@@ -53,10 +53,12 @@ func ParseGluePartition(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseGluePartition validator
 func (resource GluePartition) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGluePartitionProperties validator
 func (resource GluePartitionProperties) Validate() []error {
 	errs := []error{}
 	if resource.CatalogId == nil {

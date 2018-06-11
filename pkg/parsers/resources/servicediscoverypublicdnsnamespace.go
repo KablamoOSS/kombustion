@@ -50,10 +50,12 @@ func ParseServiceDiscoveryPublicDnsNamespace(ctx map[string]interface{}, name st
 	return
 }
 
+// ParseServiceDiscoveryPublicDnsNamespace validator
 func (resource ServiceDiscoveryPublicDnsNamespace) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseServiceDiscoveryPublicDnsNamespaceProperties validator
 func (resource ServiceDiscoveryPublicDnsNamespaceProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

@@ -58,10 +58,12 @@ func ParseEC2NetworkAclEntry(ctx map[string]interface{}, name string, data strin
 	return
 }
 
+// ParseEC2NetworkAclEntry validator
 func (resource EC2NetworkAclEntry) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2NetworkAclEntryProperties validator
 func (resource EC2NetworkAclEntryProperties) Validate() []error {
 	errs := []error{}
 	if resource.CidrBlock == nil {

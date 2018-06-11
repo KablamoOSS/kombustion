@@ -10,6 +10,7 @@ type TableStreamSpecification struct {
 	StreamViewType interface{} `yaml:"StreamViewType"`
 }
 
+// TableStreamSpecification validation
 func (resource TableStreamSpecification) Validate() []error {
 	errs := []error{}
 

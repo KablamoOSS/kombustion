@@ -12,6 +12,7 @@ type TopicRuleKinesisAction struct {
 	StreamName   interface{} `yaml:"StreamName"`
 }
 
+// TopicRuleKinesisAction validation
 func (resource TopicRuleKinesisAction) Validate() []error {
 	errs := []error{}
 

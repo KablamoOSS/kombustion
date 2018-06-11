@@ -51,10 +51,12 @@ func ParseAppSyncGraphQLSchema(ctx map[string]interface{}, name string, data str
 	return
 }
 
+// ParseAppSyncGraphQLSchema validator
 func (resource AppSyncGraphQLSchema) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAppSyncGraphQLSchemaProperties validator
 func (resource AppSyncGraphQLSchemaProperties) Validate() []error {
 	errs := []error{}
 	if resource.ApiId == nil {

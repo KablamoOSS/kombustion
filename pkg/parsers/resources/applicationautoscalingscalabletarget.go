@@ -55,10 +55,12 @@ func ParseApplicationAutoScalingScalableTarget(ctx map[string]interface{}, name 
 	return
 }
 
+// ParseApplicationAutoScalingScalableTarget validator
 func (resource ApplicationAutoScalingScalableTarget) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApplicationAutoScalingScalableTargetProperties validator
 func (resource ApplicationAutoScalingScalableTargetProperties) Validate() []error {
 	errs := []error{}
 	if resource.MaxCapacity == nil {

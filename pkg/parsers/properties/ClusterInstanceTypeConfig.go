@@ -15,6 +15,7 @@ type ClusterInstanceTypeConfig struct {
 	EbsConfiguration                    *ClusterEbsConfiguration `yaml:"EbsConfiguration,omitempty"`
 }
 
+// ClusterInstanceTypeConfig validation
 func (resource ClusterInstanceTypeConfig) Validate() []error {
 	errs := []error{}
 

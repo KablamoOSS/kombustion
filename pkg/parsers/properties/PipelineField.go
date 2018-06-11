@@ -12,6 +12,7 @@ type PipelineField struct {
 	StringValue interface{} `yaml:"StringValue,omitempty"`
 }
 
+// PipelineField validation
 func (resource PipelineField) Validate() []error {
 	errs := []error{}
 

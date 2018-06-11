@@ -54,10 +54,12 @@ func ParseConfigDeliveryChannel(ctx map[string]interface{}, name string, data st
 	return
 }
 
+// ParseConfigDeliveryChannel validator
 func (resource ConfigDeliveryChannel) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseConfigDeliveryChannelProperties validator
 func (resource ConfigDeliveryChannelProperties) Validate() []error {
 	errs := []error{}
 	if resource.S3BucketName == nil {

@@ -13,6 +13,7 @@ type DistributionCustomErrorResponse struct {
 	ResponsePagePath   interface{} `yaml:"ResponsePagePath,omitempty"`
 }
 
+// DistributionCustomErrorResponse validation
 func (resource DistributionCustomErrorResponse) Validate() []error {
 	errs := []error{}
 

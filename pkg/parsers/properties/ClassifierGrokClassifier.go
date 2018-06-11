@@ -13,6 +13,7 @@ type ClassifierGrokClassifier struct {
 	Name           interface{} `yaml:"Name,omitempty"`
 }
 
+// ClassifierGrokClassifier validation
 func (resource ClassifierGrokClassifier) Validate() []error {
 	errs := []error{}
 

@@ -65,10 +65,12 @@ func ParseElasticLoadBalancingV2TargetGroup(ctx map[string]interface{}, name str
 	return
 }
 
+// ParseElasticLoadBalancingV2TargetGroup validator
 func (resource ElasticLoadBalancingV2TargetGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElasticLoadBalancingV2TargetGroupProperties validator
 func (resource ElasticLoadBalancingV2TargetGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.Port == nil {

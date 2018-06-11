@@ -53,10 +53,12 @@ func ParseGuardDutyThreatIntelSet(ctx map[string]interface{}, name string, data 
 	return
 }
 
+// ParseGuardDutyThreatIntelSet validator
 func (resource GuardDutyThreatIntelSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGuardDutyThreatIntelSetProperties validator
 func (resource GuardDutyThreatIntelSetProperties) Validate() []error {
 	errs := []error{}
 	if resource.Activate == nil {

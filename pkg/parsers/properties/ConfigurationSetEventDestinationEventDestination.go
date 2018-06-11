@@ -14,6 +14,7 @@ type ConfigurationSetEventDestinationEventDestination struct {
 	CloudWatchDestination      *ConfigurationSetEventDestinationCloudWatchDestination      `yaml:"CloudWatchDestination,omitempty"`
 }
 
+// ConfigurationSetEventDestinationEventDestination validation
 func (resource ConfigurationSetEventDestinationEventDestination) Validate() []error {
 	errs := []error{}
 

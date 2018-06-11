@@ -10,6 +10,7 @@ type DeploymentGroupRevisionLocation struct {
 	GitHubLocation *DeploymentGroupGitHubLocation `yaml:"GitHubLocation,omitempty"`
 }
 
+// DeploymentGroupRevisionLocation validation
 func (resource DeploymentGroupRevisionLocation) Validate() []error {
 	errs := []error{}
 

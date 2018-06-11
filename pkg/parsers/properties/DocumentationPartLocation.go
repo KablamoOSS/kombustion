@@ -12,6 +12,7 @@ type DocumentationPartLocation struct {
 	Type       interface{} `yaml:"Type,omitempty"`
 }
 
+// DocumentationPartLocation validation
 func (resource DocumentationPartLocation) Validate() []error {
 	errs := []error{}
 

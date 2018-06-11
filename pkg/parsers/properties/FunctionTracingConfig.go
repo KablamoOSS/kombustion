@@ -8,6 +8,7 @@ type FunctionTracingConfig struct {
 	Mode interface{} `yaml:"Mode,omitempty"`
 }
 
+// FunctionTracingConfig validation
 func (resource FunctionTracingConfig) Validate() []error {
 	errs := []error{}
 

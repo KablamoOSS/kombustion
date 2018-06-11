@@ -10,6 +10,7 @@ type TableSerdeInfo struct {
 	SerializationLibrary interface{} `yaml:"SerializationLibrary,omitempty"`
 }
 
+// TableSerdeInfo validation
 func (resource TableSerdeInfo) Validate() []error {
 	errs := []error{}
 

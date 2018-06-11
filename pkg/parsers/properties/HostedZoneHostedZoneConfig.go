@@ -8,6 +8,7 @@ type HostedZoneHostedZoneConfig struct {
 	Comment interface{} `yaml:"Comment,omitempty"`
 }
 
+// HostedZoneHostedZoneConfig validation
 func (resource HostedZoneHostedZoneConfig) Validate() []error {
 	errs := []error{}
 

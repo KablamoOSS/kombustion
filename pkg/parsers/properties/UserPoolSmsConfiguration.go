@@ -9,6 +9,7 @@ type UserPoolSmsConfiguration struct {
 	SnsCallerArn interface{} `yaml:"SnsCallerArn,omitempty"`
 }
 
+// UserPoolSmsConfiguration validation
 func (resource UserPoolSmsConfiguration) Validate() []error {
 	errs := []error{}
 

@@ -12,6 +12,7 @@ type LaunchTemplatePlacement struct {
 	Tenancy          interface{} `yaml:"Tenancy,omitempty"`
 }
 
+// LaunchTemplatePlacement validation
 func (resource LaunchTemplatePlacement) Validate() []error {
 	errs := []error{}
 

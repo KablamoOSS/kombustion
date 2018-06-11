@@ -51,10 +51,12 @@ func ParseStepFunctionsStateMachine(ctx map[string]interface{}, name string, dat
 	return
 }
 
+// ParseStepFunctionsStateMachine validator
 func (resource StepFunctionsStateMachine) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseStepFunctionsStateMachineProperties validator
 func (resource StepFunctionsStateMachineProperties) Validate() []error {
 	errs := []error{}
 	if resource.DefinitionString == nil {

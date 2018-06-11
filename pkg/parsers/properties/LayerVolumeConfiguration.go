@@ -13,6 +13,7 @@ type LayerVolumeConfiguration struct {
 	VolumeType    interface{} `yaml:"VolumeType,omitempty"`
 }
 
+// LayerVolumeConfiguration validation
 func (resource LayerVolumeConfiguration) Validate() []error {
 	errs := []error{}
 

@@ -12,6 +12,7 @@ type RepositoryRepositoryTrigger struct {
 	Events         interface{} `yaml:"Events,omitempty"`
 }
 
+// RepositoryRepositoryTrigger validation
 func (resource RepositoryRepositoryTrigger) Validate() []error {
 	errs := []error{}
 

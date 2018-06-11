@@ -57,10 +57,12 @@ func ParseDMSReplicationTask(ctx map[string]interface{}, name string, data strin
 	return
 }
 
+// ParseDMSReplicationTask validator
 func (resource DMSReplicationTask) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDMSReplicationTaskProperties validator
 func (resource DMSReplicationTaskProperties) Validate() []error {
 	errs := []error{}
 	if resource.MigrationType == nil {

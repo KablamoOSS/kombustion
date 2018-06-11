@@ -11,6 +11,7 @@ type StreamingDistributionTrustedSigners struct {
 	AwsAccountNumbers interface{} `yaml:"AwsAccountNumbers,omitempty"`
 }
 
+// StreamingDistributionTrustedSigners validation
 func (resource StreamingDistributionTrustedSigners) Validate() []error {
 	errs := []error{}
 

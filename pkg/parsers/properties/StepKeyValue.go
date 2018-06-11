@@ -9,6 +9,7 @@ type StepKeyValue struct {
 	Value interface{} `yaml:"Value,omitempty"`
 }
 
+// StepKeyValue validation
 func (resource StepKeyValue) Validate() []error {
 	errs := []error{}
 

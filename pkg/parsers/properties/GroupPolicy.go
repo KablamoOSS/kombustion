@@ -11,6 +11,7 @@ type GroupPolicy struct {
 	PolicyName     interface{} `yaml:"PolicyName"`
 }
 
+// GroupPolicy validation
 func (resource GroupPolicy) Validate() []error {
 	errs := []error{}
 

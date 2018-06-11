@@ -10,6 +10,7 @@ type SpotFleetInstanceIpv6Address struct {
 	Ipv6Address interface{} `yaml:"Ipv6Address"`
 }
 
+// SpotFleetInstanceIpv6Address validation
 func (resource SpotFleetInstanceIpv6Address) Validate() []error {
 	errs := []error{}
 

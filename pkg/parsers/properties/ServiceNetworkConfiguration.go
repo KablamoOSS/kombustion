@@ -8,6 +8,7 @@ type ServiceNetworkConfiguration struct {
 	AwsvpcConfiguration *ServiceAwsVpcConfiguration `yaml:"AwsvpcConfiguration,omitempty"`
 }
 
+// ServiceNetworkConfiguration validation
 func (resource ServiceNetworkConfiguration) Validate() []error {
 	errs := []error{}
 

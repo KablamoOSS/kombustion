@@ -12,6 +12,7 @@ type ScalingPolicyStepAdjustment struct {
 	ScalingAdjustment        interface{} `yaml:"ScalingAdjustment"`
 }
 
+// ScalingPolicyStepAdjustment validation
 func (resource ScalingPolicyStepAdjustment) Validate() []error {
 	errs := []error{}
 

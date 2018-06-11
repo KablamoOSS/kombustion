@@ -10,6 +10,7 @@ type BucketS3KeyFilter struct {
 	Rules interface{} `yaml:"Rules"`
 }
 
+// BucketS3KeyFilter validation
 func (resource BucketS3KeyFilter) Validate() []error {
 	errs := []error{}
 

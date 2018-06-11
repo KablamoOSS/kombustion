@@ -56,10 +56,12 @@ func ParseCodePipelineCustomActionType(ctx map[string]interface{}, name string, 
 	return
 }
 
+// ParseCodePipelineCustomActionType validator
 func (resource CodePipelineCustomActionType) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCodePipelineCustomActionTypeProperties validator
 func (resource CodePipelineCustomActionTypeProperties) Validate() []error {
 	errs := []error{}
 	if resource.Category == nil {

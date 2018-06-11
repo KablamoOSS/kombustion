@@ -11,6 +11,7 @@ type ConfigRuleScope struct {
 	ComplianceResourceTypes interface{} `yaml:"ComplianceResourceTypes,omitempty"`
 }
 
+// ConfigRuleScope validation
 func (resource ConfigRuleScope) Validate() []error {
 	errs := []error{}
 

@@ -8,6 +8,7 @@ type LaunchTemplateCreditSpecification struct {
 	CpuCredits interface{} `yaml:"CpuCredits,omitempty"`
 }
 
+// LaunchTemplateCreditSpecification validation
 func (resource LaunchTemplateCreditSpecification) Validate() []error {
 	errs := []error{}
 

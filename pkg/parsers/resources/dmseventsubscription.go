@@ -55,10 +55,12 @@ func ParseDMSEventSubscription(ctx map[string]interface{}, name string, data str
 	return
 }
 
+// ParseDMSEventSubscription validator
 func (resource DMSEventSubscription) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDMSEventSubscriptionProperties validator
 func (resource DMSEventSubscriptionProperties) Validate() []error {
 	errs := []error{}
 	if resource.SnsTopicArn == nil {

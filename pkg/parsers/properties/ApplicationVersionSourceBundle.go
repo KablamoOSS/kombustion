@@ -11,6 +11,7 @@ type ApplicationVersionSourceBundle struct {
 	S3Key    interface{} `yaml:"S3Key"`
 }
 
+// ApplicationVersionSourceBundle validation
 func (resource ApplicationVersionSourceBundle) Validate() []error {
 	errs := []error{}
 

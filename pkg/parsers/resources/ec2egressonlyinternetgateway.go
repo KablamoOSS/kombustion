@@ -49,10 +49,12 @@ func ParseEC2EgressOnlyInternetGateway(ctx map[string]interface{}, name string, 
 	return
 }
 
+// ParseEC2EgressOnlyInternetGateway validator
 func (resource EC2EgressOnlyInternetGateway) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2EgressOnlyInternetGatewayProperties validator
 func (resource EC2EgressOnlyInternetGatewayProperties) Validate() []error {
 	errs := []error{}
 	if resource.VpcId == nil {

@@ -10,6 +10,7 @@ type BucketSourceSelectionCriteria struct {
 	SseKmsEncryptedObjects *BucketSseKmsEncryptedObjects `yaml:"SseKmsEncryptedObjects"`
 }
 
+// BucketSourceSelectionCriteria validation
 func (resource BucketSourceSelectionCriteria) Validate() []error {
 	errs := []error{}
 

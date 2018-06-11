@@ -57,10 +57,12 @@ func ParseDirectoryServiceSimpleAD(ctx map[string]interface{}, name string, data
 	return
 }
 
+// ParseDirectoryServiceSimpleAD validator
 func (resource DirectoryServiceSimpleAD) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDirectoryServiceSimpleADProperties validator
 func (resource DirectoryServiceSimpleADProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

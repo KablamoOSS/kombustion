@@ -56,10 +56,12 @@ func ParseEMRInstanceFleetConfig(ctx map[string]interface{}, name string, data s
 	return
 }
 
+// ParseEMRInstanceFleetConfig validator
 func (resource EMRInstanceFleetConfig) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEMRInstanceFleetConfigProperties validator
 func (resource EMRInstanceFleetConfigProperties) Validate() []error {
 	errs := []error{}
 	if resource.ClusterId == nil {

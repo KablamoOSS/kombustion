@@ -18,6 +18,7 @@ type InstanceGroupConfigCloudWatchAlarmDefinition struct {
 	Dimensions         interface{} `yaml:"Dimensions,omitempty"`
 }
 
+// InstanceGroupConfigCloudWatchAlarmDefinition validation
 func (resource InstanceGroupConfigCloudWatchAlarmDefinition) Validate() []error {
 	errs := []error{}
 

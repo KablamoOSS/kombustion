@@ -54,10 +54,12 @@ func ParseEC2SecurityGroup(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseEC2SecurityGroup validator
 func (resource EC2SecurityGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2SecurityGroupProperties validator
 func (resource EC2SecurityGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.GroupDescription == nil {

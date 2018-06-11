@@ -10,6 +10,7 @@ type NetworkInterfaceInstanceIpv6Address struct {
 	Ipv6Address interface{} `yaml:"Ipv6Address"`
 }
 
+// NetworkInterfaceInstanceIpv6Address validation
 func (resource NetworkInterfaceInstanceIpv6Address) Validate() []error {
 	errs := []error{}
 

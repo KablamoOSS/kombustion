@@ -11,6 +11,7 @@ type GraphQLApiOpenIDConnectConfig struct {
 	Issuer   interface{} `yaml:"Issuer,omitempty"`
 }
 
+// GraphQLApiOpenIDConnectConfig validation
 func (resource GraphQLApiOpenIDConnectConfig) Validate() []error {
 	errs := []error{}
 

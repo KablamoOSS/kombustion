@@ -11,6 +11,7 @@ type JobQueueComputeEnvironmentOrder struct {
 	Order              interface{} `yaml:"Order"`
 }
 
+// JobQueueComputeEnvironmentOrder validation
 func (resource JobQueueComputeEnvironmentOrder) Validate() []error {
 	errs := []error{}
 

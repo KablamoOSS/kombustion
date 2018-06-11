@@ -18,6 +18,7 @@ type RuleTarget struct {
 	EcsParameters        *RuleEcsParameters        `yaml:"EcsParameters,omitempty"`
 }
 
+// RuleTarget validation
 func (resource RuleTarget) Validate() []error {
 	errs := []error{}
 

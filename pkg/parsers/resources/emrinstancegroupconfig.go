@@ -59,10 +59,12 @@ func ParseEMRInstanceGroupConfig(ctx map[string]interface{}, name string, data s
 	return
 }
 
+// ParseEMRInstanceGroupConfig validator
 func (resource EMRInstanceGroupConfig) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEMRInstanceGroupConfigProperties validator
 func (resource EMRInstanceGroupConfigProperties) Validate() []error {
 	errs := []error{}
 	if resource.InstanceCount == nil {

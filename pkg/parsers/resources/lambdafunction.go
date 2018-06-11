@@ -64,10 +64,12 @@ func ParseLambdaFunction(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseLambdaFunction validator
 func (resource LambdaFunction) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseLambdaFunctionProperties validator
 func (resource LambdaFunctionProperties) Validate() []error {
 	errs := []error{}
 	if resource.Handler == nil {

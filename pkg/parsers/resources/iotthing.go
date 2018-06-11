@@ -50,10 +50,12 @@ func ParseIoTThing(ctx map[string]interface{}, name string, data string) (cf typ
 	return
 }
 
+// ParseIoTThing validator
 func (resource IoTThing) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIoTThingProperties validator
 func (resource IoTThingProperties) Validate() []error {
 	errs := []error{}
 	return errs

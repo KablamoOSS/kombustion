@@ -14,6 +14,7 @@ type TopicRuleTopicRulePayload struct {
 	Actions          interface{} `yaml:"Actions"`
 }
 
+// TopicRuleTopicRulePayload validation
 func (resource TopicRuleTopicRulePayload) Validate() []error {
 	errs := []error{}
 

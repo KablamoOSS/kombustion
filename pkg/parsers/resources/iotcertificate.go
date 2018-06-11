@@ -50,10 +50,12 @@ func ParseIoTCertificate(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseIoTCertificate validator
 func (resource IoTCertificate) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIoTCertificateProperties validator
 func (resource IoTCertificateProperties) Validate() []error {
 	errs := []error{}
 	if resource.CertificateSigningRequest == nil {

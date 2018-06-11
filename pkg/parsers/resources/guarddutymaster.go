@@ -51,10 +51,12 @@ func ParseGuardDutyMaster(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseGuardDutyMaster validator
 func (resource GuardDutyMaster) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGuardDutyMasterProperties validator
 func (resource GuardDutyMasterProperties) Validate() []error {
 	errs := []error{}
 	if resource.DetectorId == nil {

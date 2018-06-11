@@ -11,6 +11,7 @@ type ReceiptFilterFilter struct {
 	IpFilter *ReceiptFilterIpFilter `yaml:"IpFilter"`
 }
 
+// ReceiptFilterFilter validation
 func (resource ReceiptFilterFilter) Validate() []error {
 	errs := []error{}
 

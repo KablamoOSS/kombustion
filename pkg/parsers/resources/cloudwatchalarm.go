@@ -66,10 +66,12 @@ func ParseCloudWatchAlarm(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseCloudWatchAlarm validator
 func (resource CloudWatchAlarm) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCloudWatchAlarmProperties validator
 func (resource CloudWatchAlarmProperties) Validate() []error {
 	errs := []error{}
 	if resource.ComparisonOperator == nil {

@@ -11,6 +11,7 @@ type InstanceBlockDeviceMapping struct {
 	Ebs         *InstanceEbsBlockDevice `yaml:"Ebs,omitempty"`
 }
 
+// InstanceBlockDeviceMapping validation
 func (resource InstanceBlockDeviceMapping) Validate() []error {
 	errs := []error{}
 

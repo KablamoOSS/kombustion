@@ -51,10 +51,12 @@ func ParseEC2VPCGatewayAttachment(ctx map[string]interface{}, name string, data 
 	return
 }
 
+// ParseEC2VPCGatewayAttachment validator
 func (resource EC2VPCGatewayAttachment) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2VPCGatewayAttachmentProperties validator
 func (resource EC2VPCGatewayAttachmentProperties) Validate() []error {
 	errs := []error{}
 	if resource.VpcId == nil {

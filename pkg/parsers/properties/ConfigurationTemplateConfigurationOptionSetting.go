@@ -13,6 +13,7 @@ type ConfigurationTemplateConfigurationOptionSetting struct {
 	Value        interface{} `yaml:"Value,omitempty"`
 }
 
+// ConfigurationTemplateConfigurationOptionSetting validation
 func (resource ConfigurationTemplateConfigurationOptionSetting) Validate() []error {
 	errs := []error{}
 

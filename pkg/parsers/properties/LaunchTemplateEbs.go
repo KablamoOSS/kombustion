@@ -14,6 +14,7 @@ type LaunchTemplateEbs struct {
 	VolumeType          interface{} `yaml:"VolumeType,omitempty"`
 }
 
+// LaunchTemplateEbs validation
 func (resource LaunchTemplateEbs) Validate() []error {
 	errs := []error{}
 

@@ -10,6 +10,7 @@ type ClusterPlacementType struct {
 	AvailabilityZone interface{} `yaml:"AvailabilityZone"`
 }
 
+// ClusterPlacementType validation
 func (resource ClusterPlacementType) Validate() []error {
 	errs := []error{}
 

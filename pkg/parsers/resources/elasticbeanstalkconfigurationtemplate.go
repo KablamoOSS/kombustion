@@ -56,10 +56,12 @@ func ParseElasticBeanstalkConfigurationTemplate(ctx map[string]interface{}, name
 	return
 }
 
+// ParseElasticBeanstalkConfigurationTemplate validator
 func (resource ElasticBeanstalkConfigurationTemplate) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElasticBeanstalkConfigurationTemplateProperties validator
 func (resource ElasticBeanstalkConfigurationTemplateProperties) Validate() []error {
 	errs := []error{}
 	if resource.ApplicationName == nil {

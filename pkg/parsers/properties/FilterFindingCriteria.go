@@ -9,6 +9,7 @@ type FilterFindingCriteria struct {
 	ItemType  *FilterCondition `yaml:"ItemType,omitempty"`
 }
 
+// FilterFindingCriteria validation
 func (resource FilterFindingCriteria) Validate() []error {
 	errs := []error{}
 

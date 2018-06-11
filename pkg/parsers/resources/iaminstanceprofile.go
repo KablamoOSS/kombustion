@@ -51,10 +51,12 @@ func ParseIAMInstanceProfile(ctx map[string]interface{}, name string, data strin
 	return
 }
 
+// ParseIAMInstanceProfile validator
 func (resource IAMInstanceProfile) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIAMInstanceProfileProperties validator
 func (resource IAMInstanceProfileProperties) Validate() []error {
 	errs := []error{}
 	if resource.Roles == nil {

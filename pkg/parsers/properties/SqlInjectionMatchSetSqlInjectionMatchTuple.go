@@ -5,12 +5,13 @@ package properties
 
 import "fmt"
 
-// SqlInjectionMatchSetSqlInjectionMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-sqlinjectionmatchset-sqlinjectionmatchtuple.html
+// SqlInjectionMatchSetSqlInjectionMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sqlinjectionmatchset-sqlinjectionmatchtuples.html
 type SqlInjectionMatchSetSqlInjectionMatchTuple struct {
 	TextTransformation interface{}                       `yaml:"TextTransformation"`
 	FieldToMatch       *SqlInjectionMatchSetFieldToMatch `yaml:"FieldToMatch"`
 }
 
+// SqlInjectionMatchSetSqlInjectionMatchTuple validation
 func (resource SqlInjectionMatchSetSqlInjectionMatchTuple) Validate() []error {
 	errs := []error{}
 

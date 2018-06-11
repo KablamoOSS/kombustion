@@ -11,6 +11,7 @@ type TrailDataResource struct {
 	Values interface{} `yaml:"Values,omitempty"`
 }
 
+// TrailDataResource validation
 func (resource TrailDataResource) Validate() []error {
 	errs := []error{}
 

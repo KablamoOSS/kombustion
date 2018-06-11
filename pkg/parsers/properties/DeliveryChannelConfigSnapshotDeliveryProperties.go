@@ -8,6 +8,7 @@ type DeliveryChannelConfigSnapshotDeliveryProperties struct {
 	DeliveryFrequency interface{} `yaml:"DeliveryFrequency,omitempty"`
 }
 
+// DeliveryChannelConfigSnapshotDeliveryProperties validation
 func (resource DeliveryChannelConfigSnapshotDeliveryProperties) Validate() []error {
 	errs := []error{}
 

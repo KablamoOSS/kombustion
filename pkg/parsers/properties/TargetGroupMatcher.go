@@ -10,6 +10,7 @@ type TargetGroupMatcher struct {
 	HttpCode interface{} `yaml:"HttpCode"`
 }
 
+// TargetGroupMatcher validation
 func (resource TargetGroupMatcher) Validate() []error {
 	errs := []error{}
 

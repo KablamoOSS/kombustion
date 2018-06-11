@@ -12,6 +12,7 @@ type TableLocalSecondaryIndex struct {
 	KeySchema  interface{}      `yaml:"KeySchema"`
 }
 
+// TableLocalSecondaryIndex validation
 func (resource TableLocalSecondaryIndex) Validate() []error {
 	errs := []error{}
 

@@ -16,6 +16,7 @@ type StreamingDistributionStreamingDistributionConfig struct {
 	Aliases        interface{}                          `yaml:"Aliases,omitempty"`
 }
 
+// StreamingDistributionStreamingDistributionConfig validation
 func (resource StreamingDistributionStreamingDistributionConfig) Validate() []error {
 	errs := []error{}
 

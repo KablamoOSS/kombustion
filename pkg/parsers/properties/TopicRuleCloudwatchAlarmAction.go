@@ -13,6 +13,7 @@ type TopicRuleCloudwatchAlarmAction struct {
 	StateValue  interface{} `yaml:"StateValue"`
 }
 
+// TopicRuleCloudwatchAlarmAction validation
 func (resource TopicRuleCloudwatchAlarmAction) Validate() []error {
 	errs := []error{}
 

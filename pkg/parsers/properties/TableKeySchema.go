@@ -11,6 +11,7 @@ type TableKeySchema struct {
 	KeyType       interface{} `yaml:"KeyType"`
 }
 
+// TableKeySchema validation
 func (resource TableKeySchema) Validate() []error {
 	errs := []error{}
 

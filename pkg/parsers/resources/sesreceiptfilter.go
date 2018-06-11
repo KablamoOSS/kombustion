@@ -50,10 +50,12 @@ func ParseSESReceiptFilter(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseSESReceiptFilter validator
 func (resource SESReceiptFilter) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSESReceiptFilterProperties validator
 func (resource SESReceiptFilterProperties) Validate() []error {
 	errs := []error{}
 	if resource.Filter == nil {

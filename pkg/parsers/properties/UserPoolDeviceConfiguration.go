@@ -9,6 +9,7 @@ type UserPoolDeviceConfiguration struct {
 	DeviceOnlyRememberedOnUserPrompt interface{} `yaml:"DeviceOnlyRememberedOnUserPrompt,omitempty"`
 }
 
+// UserPoolDeviceConfiguration validation
 func (resource UserPoolDeviceConfiguration) Validate() []error {
 	errs := []error{}
 

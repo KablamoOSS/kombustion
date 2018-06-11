@@ -57,10 +57,12 @@ func ParseElasticsearchDomain(ctx map[string]interface{}, name string, data stri
 	return
 }
 
+// ParseElasticsearchDomain validator
 func (resource ElasticsearchDomain) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElasticsearchDomainProperties validator
 func (resource ElasticsearchDomainProperties) Validate() []error {
 	errs := []error{}
 	return errs

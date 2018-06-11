@@ -10,6 +10,7 @@ type BucketEncryptionConfiguration struct {
 	ReplicaKmsKeyID interface{} `yaml:"ReplicaKmsKeyID"`
 }
 
+// BucketEncryptionConfiguration validation
 func (resource BucketEncryptionConfiguration) Validate() []error {
 	errs := []error{}
 

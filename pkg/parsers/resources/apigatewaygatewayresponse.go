@@ -53,10 +53,12 @@ func ParseApiGatewayGatewayResponse(ctx map[string]interface{}, name string, dat
 	return
 }
 
+// ParseApiGatewayGatewayResponse validator
 func (resource ApiGatewayGatewayResponse) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayGatewayResponseProperties validator
 func (resource ApiGatewayGatewayResponseProperties) Validate() []error {
 	errs := []error{}
 	if resource.ResponseType == nil {

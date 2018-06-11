@@ -18,6 +18,7 @@ type ClusterCloudWatchAlarmDefinition struct {
 	Dimensions         interface{} `yaml:"Dimensions,omitempty"`
 }
 
+// ClusterCloudWatchAlarmDefinition validation
 func (resource ClusterCloudWatchAlarmDefinition) Validate() []error {
 	errs := []error{}
 

@@ -13,6 +13,7 @@ type SpotFleetEbsBlockDevice struct {
 	VolumeType          interface{} `yaml:"VolumeType,omitempty"`
 }
 
+// SpotFleetEbsBlockDevice validation
 func (resource SpotFleetEbsBlockDevice) Validate() []error {
 	errs := []error{}
 

@@ -10,6 +10,7 @@ type IdentityPoolRoleAttachmentRulesConfigurationType struct {
 	Rules interface{} `yaml:"Rules"`
 }
 
+// IdentityPoolRoleAttachmentRulesConfigurationType validation
 func (resource IdentityPoolRoleAttachmentRulesConfigurationType) Validate() []error {
 	errs := []error{}
 

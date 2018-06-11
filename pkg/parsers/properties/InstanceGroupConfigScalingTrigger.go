@@ -10,6 +10,7 @@ type InstanceGroupConfigScalingTrigger struct {
 	CloudWatchAlarmDefinition *InstanceGroupConfigCloudWatchAlarmDefinition `yaml:"CloudWatchAlarmDefinition"`
 }
 
+// InstanceGroupConfigScalingTrigger validation
 func (resource InstanceGroupConfigScalingTrigger) Validate() []error {
 	errs := []error{}
 

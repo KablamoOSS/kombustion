@@ -13,6 +13,7 @@ type StackSource struct {
 	Username interface{} `yaml:"Username,omitempty"`
 }
 
+// StackSource validation
 func (resource StackSource) Validate() []error {
 	errs := []error{}
 

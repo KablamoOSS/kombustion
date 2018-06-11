@@ -12,6 +12,7 @@ type ApplicationReferenceDataSourceReferenceDataSource struct {
 	ReferenceSchema       *ApplicationReferenceDataSourceReferenceSchema       `yaml:"ReferenceSchema"`
 }
 
+// ApplicationReferenceDataSourceReferenceDataSource validation
 func (resource ApplicationReferenceDataSourceReferenceDataSource) Validate() []error {
 	errs := []error{}
 

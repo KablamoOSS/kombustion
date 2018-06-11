@@ -12,6 +12,7 @@ type BucketMetricsConfiguration struct {
 	TagFilters interface{} `yaml:"TagFilters,omitempty"`
 }
 
+// BucketMetricsConfiguration validation
 func (resource BucketMetricsConfiguration) Validate() []error {
 	errs := []error{}
 

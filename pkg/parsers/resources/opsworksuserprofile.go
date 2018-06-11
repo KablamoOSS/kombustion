@@ -52,10 +52,12 @@ func ParseOpsWorksUserProfile(ctx map[string]interface{}, name string, data stri
 	return
 }
 
+// ParseOpsWorksUserProfile validator
 func (resource OpsWorksUserProfile) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseOpsWorksUserProfileProperties validator
 func (resource OpsWorksUserProfileProperties) Validate() []error {
 	errs := []error{}
 	if resource.IamUserArn == nil {

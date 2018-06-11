@@ -12,6 +12,7 @@ type InstanceEbsBlockDevice struct {
 	VolumeType          interface{} `yaml:"VolumeType,omitempty"`
 }
 
+// InstanceEbsBlockDevice validation
 func (resource InstanceEbsBlockDevice) Validate() []error {
 	errs := []error{}
 

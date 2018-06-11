@@ -20,6 +20,7 @@ type DeliveryStreamElasticsearchDestinationConfiguration struct {
 	CloudWatchLoggingOptions *DeliveryStreamCloudWatchLoggingOptions    `yaml:"CloudWatchLoggingOptions,omitempty"`
 }
 
+// DeliveryStreamElasticsearchDestinationConfiguration validation
 func (resource DeliveryStreamElasticsearchDestinationConfiguration) Validate() []error {
 	errs := []error{}
 

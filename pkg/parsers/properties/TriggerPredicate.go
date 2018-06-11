@@ -9,6 +9,7 @@ type TriggerPredicate struct {
 	Conditions interface{} `yaml:"Conditions,omitempty"`
 }
 
+// TriggerPredicate validation
 func (resource TriggerPredicate) Validate() []error {
 	errs := []error{}
 

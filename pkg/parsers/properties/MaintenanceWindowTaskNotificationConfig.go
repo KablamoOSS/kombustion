@@ -12,6 +12,7 @@ type MaintenanceWindowTaskNotificationConfig struct {
 	NotificationEvents interface{} `yaml:"NotificationEvents,omitempty"`
 }
 
+// MaintenanceWindowTaskNotificationConfig validation
 func (resource MaintenanceWindowTaskNotificationConfig) Validate() []error {
 	errs := []error{}
 

@@ -15,6 +15,7 @@ type ProjectArtifacts struct {
 	Type          interface{} `yaml:"Type"`
 }
 
+// ProjectArtifacts validation
 func (resource ProjectArtifacts) Validate() []error {
 	errs := []error{}
 

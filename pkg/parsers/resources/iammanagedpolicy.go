@@ -55,10 +55,12 @@ func ParseIAMManagedPolicy(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseIAMManagedPolicy validator
 func (resource IAMManagedPolicy) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIAMManagedPolicyProperties validator
 func (resource IAMManagedPolicyProperties) Validate() []error {
 	errs := []error{}
 	if resource.PolicyDocument == nil {

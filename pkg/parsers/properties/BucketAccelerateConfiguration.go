@@ -10,6 +10,7 @@ type BucketAccelerateConfiguration struct {
 	AccelerationStatus interface{} `yaml:"AccelerationStatus"`
 }
 
+// BucketAccelerateConfiguration validation
 func (resource BucketAccelerateConfiguration) Validate() []error {
 	errs := []error{}
 

@@ -5,12 +5,13 @@ package properties
 
 import "fmt"
 
-// ByteMatchSetFieldToMatch Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-bytematchset-bytematchtuples-fieldtomatch.html
+// ByteMatchSetFieldToMatch Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-bytematchset-fieldtomatch.html
 type ByteMatchSetFieldToMatch struct {
 	Data interface{} `yaml:"Data,omitempty"`
 	Type interface{} `yaml:"Type"`
 }
 
+// ByteMatchSetFieldToMatch validation
 func (resource ByteMatchSetFieldToMatch) Validate() []error {
 	errs := []error{}
 

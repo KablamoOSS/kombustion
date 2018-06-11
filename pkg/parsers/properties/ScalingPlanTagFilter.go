@@ -11,6 +11,7 @@ type ScalingPlanTagFilter struct {
 	Values interface{} `yaml:"Values,omitempty"`
 }
 
+// ScalingPlanTagFilter validation
 func (resource ScalingPlanTagFilter) Validate() []error {
 	errs := []error{}
 

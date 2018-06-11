@@ -50,10 +50,12 @@ func ParseWAFIPSet(ctx map[string]interface{}, name string, data string) (cf typ
 	return
 }
 
+// ParseWAFIPSet validator
 func (resource WAFIPSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFIPSetProperties validator
 func (resource WAFIPSetProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

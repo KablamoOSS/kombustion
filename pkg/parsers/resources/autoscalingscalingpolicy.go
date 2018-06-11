@@ -59,10 +59,12 @@ func ParseAutoScalingScalingPolicy(ctx map[string]interface{}, name string, data
 	return
 }
 
+// ParseAutoScalingScalingPolicy validator
 func (resource AutoScalingScalingPolicy) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAutoScalingScalingPolicyProperties validator
 func (resource AutoScalingScalingPolicyProperties) Validate() []error {
 	errs := []error{}
 	if resource.AutoScalingGroupName == nil {

@@ -65,10 +65,12 @@ func ParseCognitoUserPool(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseCognitoUserPool validator
 func (resource CognitoUserPool) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCognitoUserPoolProperties validator
 func (resource CognitoUserPoolProperties) Validate() []error {
 	errs := []error{}
 	return errs

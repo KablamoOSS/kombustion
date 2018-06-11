@@ -14,6 +14,7 @@ type ScalingPlanCustomizedScalingMetricSpecification struct {
 	Dimensions interface{} `yaml:"Dimensions,omitempty"`
 }
 
+// ScalingPlanCustomizedScalingMetricSpecification validation
 func (resource ScalingPlanCustomizedScalingMetricSpecification) Validate() []error {
 	errs := []error{}
 

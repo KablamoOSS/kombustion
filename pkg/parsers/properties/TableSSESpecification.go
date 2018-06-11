@@ -10,6 +10,7 @@ type TableSSESpecification struct {
 	SSEEnabled interface{} `yaml:"SSEEnabled"`
 }
 
+// TableSSESpecification validation
 func (resource TableSSESpecification) Validate() []error {
 	errs := []error{}
 

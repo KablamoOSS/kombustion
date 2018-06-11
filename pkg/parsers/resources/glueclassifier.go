@@ -49,10 +49,12 @@ func ParseGlueClassifier(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseGlueClassifier validator
 func (resource GlueClassifier) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGlueClassifierProperties validator
 func (resource GlueClassifierProperties) Validate() []error {
 	errs := []error{}
 	return errs

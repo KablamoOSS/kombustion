@@ -10,6 +10,7 @@ type WebACLWafAction struct {
 	Type interface{} `yaml:"Type"`
 }
 
+// WebACLWafAction validation
 func (resource WebACLWafAction) Validate() []error {
 	errs := []error{}
 

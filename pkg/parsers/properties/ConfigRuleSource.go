@@ -12,6 +12,7 @@ type ConfigRuleSource struct {
 	SourceDetails    interface{} `yaml:"SourceDetails,omitempty"`
 }
 
+// ConfigRuleSource validation
 func (resource ConfigRuleSource) Validate() []error {
 	errs := []error{}
 

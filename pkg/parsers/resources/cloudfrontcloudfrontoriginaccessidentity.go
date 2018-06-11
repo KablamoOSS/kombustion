@@ -50,10 +50,12 @@ func ParseCloudFrontCloudFrontOriginAccessIdentity(ctx map[string]interface{}, n
 	return
 }
 
+// ParseCloudFrontCloudFrontOriginAccessIdentity validator
 func (resource CloudFrontCloudFrontOriginAccessIdentity) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCloudFrontCloudFrontOriginAccessIdentityProperties validator
 func (resource CloudFrontCloudFrontOriginAccessIdentityProperties) Validate() []error {
 	errs := []error{}
 	if resource.CloudFrontOriginAccessIdentityConfig == nil {

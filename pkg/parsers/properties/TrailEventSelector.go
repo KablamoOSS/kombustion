@@ -10,6 +10,7 @@ type TrailEventSelector struct {
 	DataResources           interface{} `yaml:"DataResources,omitempty"`
 }
 
+// TrailEventSelector validation
 func (resource TrailEventSelector) Validate() []error {
 	errs := []error{}
 

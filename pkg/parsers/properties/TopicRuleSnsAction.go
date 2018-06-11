@@ -12,6 +12,7 @@ type TopicRuleSnsAction struct {
 	TargetArn     interface{} `yaml:"TargetArn"`
 }
 
+// TopicRuleSnsAction validation
 func (resource TopicRuleSnsAction) Validate() []error {
 	errs := []error{}
 

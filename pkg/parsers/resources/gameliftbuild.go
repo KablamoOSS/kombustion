@@ -51,10 +51,12 @@ func ParseGameLiftBuild(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseGameLiftBuild validator
 func (resource GameLiftBuild) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGameLiftBuildProperties validator
 func (resource GameLiftBuildProperties) Validate() []error {
 	errs := []error{}
 	return errs

@@ -11,6 +11,7 @@ type CertificateDomainValidationOption struct {
 	ValidationDomain interface{} `yaml:"ValidationDomain"`
 }
 
+// CertificateDomainValidationOption validation
 func (resource CertificateDomainValidationOption) Validate() []error {
 	errs := []error{}
 

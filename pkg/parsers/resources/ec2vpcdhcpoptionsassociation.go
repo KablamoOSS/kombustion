@@ -50,10 +50,12 @@ func ParseEC2VPCDHCPOptionsAssociation(ctx map[string]interface{}, name string, 
 	return
 }
 
+// ParseEC2VPCDHCPOptionsAssociation validator
 func (resource EC2VPCDHCPOptionsAssociation) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2VPCDHCPOptionsAssociationProperties validator
 func (resource EC2VPCDHCPOptionsAssociationProperties) Validate() []error {
 	errs := []error{}
 	if resource.DhcpOptionsId == nil {

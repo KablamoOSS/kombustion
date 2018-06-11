@@ -50,10 +50,12 @@ func ParseEC2SubnetCidrBlock(ctx map[string]interface{}, name string, data strin
 	return
 }
 
+// ParseEC2SubnetCidrBlock validator
 func (resource EC2SubnetCidrBlock) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2SubnetCidrBlockProperties validator
 func (resource EC2SubnetCidrBlockProperties) Validate() []error {
 	errs := []error{}
 	if resource.Ipv6CidrBlock == nil {

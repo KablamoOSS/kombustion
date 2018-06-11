@@ -14,6 +14,7 @@ type BucketReplicationRule struct {
 	Destination             *BucketReplicationDestination  `yaml:"Destination"`
 }
 
+// BucketReplicationRule validation
 func (resource BucketReplicationRule) Validate() []error {
 	errs := []error{}
 

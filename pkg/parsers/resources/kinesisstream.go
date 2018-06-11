@@ -54,10 +54,12 @@ func ParseKinesisStream(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseKinesisStream validator
 func (resource KinesisStream) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseKinesisStreamProperties validator
 func (resource KinesisStreamProperties) Validate() []error {
 	errs := []error{}
 	if resource.ShardCount == nil {

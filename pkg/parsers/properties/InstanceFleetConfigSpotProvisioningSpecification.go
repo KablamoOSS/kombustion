@@ -12,6 +12,7 @@ type InstanceFleetConfigSpotProvisioningSpecification struct {
 	TimeoutDurationMinutes interface{} `yaml:"TimeoutDurationMinutes"`
 }
 
+// InstanceFleetConfigSpotProvisioningSpecification validation
 func (resource InstanceFleetConfigSpotProvisioningSpecification) Validate() []error {
 	errs := []error{}
 

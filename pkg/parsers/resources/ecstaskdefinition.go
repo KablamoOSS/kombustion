@@ -57,10 +57,12 @@ func ParseECSTaskDefinition(ctx map[string]interface{}, name string, data string
 	return
 }
 
+// ParseECSTaskDefinition validator
 func (resource ECSTaskDefinition) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseECSTaskDefinitionProperties validator
 func (resource ECSTaskDefinitionProperties) Validate() []error {
 	errs := []error{}
 	return errs

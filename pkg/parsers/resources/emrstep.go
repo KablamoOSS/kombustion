@@ -53,10 +53,12 @@ func ParseEMRStep(ctx map[string]interface{}, name string, data string) (cf type
 	return
 }
 
+// ParseEMRStep validator
 func (resource EMRStep) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEMRStepProperties validator
 func (resource EMRStepProperties) Validate() []error {
 	errs := []error{}
 	if resource.ActionOnFailure == nil {

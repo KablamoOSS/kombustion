@@ -15,6 +15,7 @@ type ApplicationInput struct {
 	InputParallelism             *ApplicationInputParallelism             `yaml:"InputParallelism,omitempty"`
 }
 
+// ApplicationInput validation
 func (resource ApplicationInput) Validate() []error {
 	errs := []error{}
 

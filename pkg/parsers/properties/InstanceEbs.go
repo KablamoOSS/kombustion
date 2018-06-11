@@ -13,6 +13,7 @@ type InstanceEbs struct {
 	VolumeType          interface{} `yaml:"VolumeType,omitempty"`
 }
 
+// InstanceEbs validation
 func (resource InstanceEbs) Validate() []error {
 	errs := []error{}
 

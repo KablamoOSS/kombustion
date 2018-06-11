@@ -12,6 +12,7 @@ type LayerRecipes struct {
 	Undeploy  interface{} `yaml:"Undeploy,omitempty"`
 }
 
+// LayerRecipes validation
 func (resource LayerRecipes) Validate() []error {
 	errs := []error{}
 

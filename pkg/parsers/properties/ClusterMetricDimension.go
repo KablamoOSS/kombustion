@@ -11,6 +11,7 @@ type ClusterMetricDimension struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// ClusterMetricDimension validation
 func (resource ClusterMetricDimension) Validate() []error {
 	errs := []error{}
 

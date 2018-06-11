@@ -50,10 +50,12 @@ func ParseEMRSecurityConfiguration(ctx map[string]interface{}, name string, data
 	return
 }
 
+// ParseEMRSecurityConfiguration validator
 func (resource EMRSecurityConfiguration) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEMRSecurityConfigurationProperties validator
 func (resource EMRSecurityConfigurationProperties) Validate() []error {
 	errs := []error{}
 	if resource.SecurityConfiguration == nil {

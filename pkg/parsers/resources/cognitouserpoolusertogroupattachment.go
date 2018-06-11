@@ -51,10 +51,12 @@ func ParseCognitoUserPoolUserToGroupAttachment(ctx map[string]interface{}, name 
 	return
 }
 
+// ParseCognitoUserPoolUserToGroupAttachment validator
 func (resource CognitoUserPoolUserToGroupAttachment) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCognitoUserPoolUserToGroupAttachmentProperties validator
 func (resource CognitoUserPoolUserToGroupAttachmentProperties) Validate() []error {
 	errs := []error{}
 	if resource.GroupName == nil {

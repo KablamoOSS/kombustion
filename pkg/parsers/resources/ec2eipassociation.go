@@ -52,10 +52,12 @@ func ParseEC2EIPAssociation(ctx map[string]interface{}, name string, data string
 	return
 }
 
+// ParseEC2EIPAssociation validator
 func (resource EC2EIPAssociation) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2EIPAssociationProperties validator
 func (resource EC2EIPAssociationProperties) Validate() []error {
 	errs := []error{}
 	return errs

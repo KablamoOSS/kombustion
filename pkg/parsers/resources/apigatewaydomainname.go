@@ -53,10 +53,12 @@ func ParseApiGatewayDomainName(ctx map[string]interface{}, name string, data str
 	return
 }
 
+// ParseApiGatewayDomainName validator
 func (resource ApiGatewayDomainName) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayDomainNameProperties validator
 func (resource ApiGatewayDomainNameProperties) Validate() []error {
 	errs := []error{}
 	if resource.DomainName == nil {

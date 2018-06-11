@@ -9,6 +9,7 @@ type UserPoolUserAttributeType struct {
 	Value interface{} `yaml:"Value,omitempty"`
 }
 
+// UserPoolUserAttributeType validation
 func (resource UserPoolUserAttributeType) Validate() []error {
 	errs := []error{}
 

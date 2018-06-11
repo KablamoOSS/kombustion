@@ -58,10 +58,12 @@ func ParseApiGatewayAuthorizer(ctx map[string]interface{}, name string, data str
 	return
 }
 
+// ParseApiGatewayAuthorizer validator
 func (resource ApiGatewayAuthorizer) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApiGatewayAuthorizerProperties validator
 func (resource ApiGatewayAuthorizerProperties) Validate() []error {
 	errs := []error{}
 	if resource.RestApiId == nil {

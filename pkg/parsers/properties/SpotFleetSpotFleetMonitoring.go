@@ -8,6 +8,7 @@ type SpotFleetSpotFleetMonitoring struct {
 	Enabled interface{} `yaml:"Enabled,omitempty"`
 }
 
+// SpotFleetSpotFleetMonitoring validation
 func (resource SpotFleetSpotFleetMonitoring) Validate() []error {
 	errs := []error{}
 

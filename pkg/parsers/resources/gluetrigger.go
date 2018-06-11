@@ -55,10 +55,12 @@ func ParseGlueTrigger(ctx map[string]interface{}, name string, data string) (cf 
 	return
 }
 
+// ParseGlueTrigger validator
 func (resource GlueTrigger) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGlueTriggerProperties validator
 func (resource GlueTriggerProperties) Validate() []error {
 	errs := []error{}
 	if resource.Type == nil {

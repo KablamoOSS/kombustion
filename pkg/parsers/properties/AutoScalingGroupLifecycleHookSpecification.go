@@ -16,6 +16,7 @@ type AutoScalingGroupLifecycleHookSpecification struct {
 	RoleARN               interface{} `yaml:"RoleARN,omitempty"`
 }
 
+// AutoScalingGroupLifecycleHookSpecification validation
 func (resource AutoScalingGroupLifecycleHookSpecification) Validate() []error {
 	errs := []error{}
 

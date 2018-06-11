@@ -54,10 +54,12 @@ func ParseRoute53HostedZone(ctx map[string]interface{}, name string, data string
 	return
 }
 
+// ParseRoute53HostedZone validator
 func (resource Route53HostedZone) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRoute53HostedZoneProperties validator
 func (resource Route53HostedZoneProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

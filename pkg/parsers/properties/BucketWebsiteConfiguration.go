@@ -11,6 +11,7 @@ type BucketWebsiteConfiguration struct {
 	RoutingRules          interface{}                  `yaml:"RoutingRules,omitempty"`
 }
 
+// BucketWebsiteConfiguration validation
 func (resource BucketWebsiteConfiguration) Validate() []error {
 	errs := []error{}
 

@@ -13,6 +13,7 @@ type LayerAutoScalingThresholds struct {
 	ThresholdsWaitTime interface{} `yaml:"ThresholdsWaitTime,omitempty"`
 }
 
+// LayerAutoScalingThresholds validation
 func (resource LayerAutoScalingThresholds) Validate() []error {
 	errs := []error{}
 

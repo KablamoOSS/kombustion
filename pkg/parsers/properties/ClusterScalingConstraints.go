@@ -11,6 +11,7 @@ type ClusterScalingConstraints struct {
 	MinCapacity interface{} `yaml:"MinCapacity"`
 }
 
+// ClusterScalingConstraints validation
 func (resource ClusterScalingConstraints) Validate() []error {
 	errs := []error{}
 

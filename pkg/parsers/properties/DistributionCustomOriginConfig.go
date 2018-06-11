@@ -15,6 +15,7 @@ type DistributionCustomOriginConfig struct {
 	OriginSSLProtocols     interface{} `yaml:"OriginSSLProtocols,omitempty"`
 }
 
+// DistributionCustomOriginConfig validation
 func (resource DistributionCustomOriginConfig) Validate() []error {
 	errs := []error{}
 

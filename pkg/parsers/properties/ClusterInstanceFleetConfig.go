@@ -12,6 +12,7 @@ type ClusterInstanceFleetConfig struct {
 	LaunchSpecifications   *ClusterInstanceFleetProvisioningSpecifications `yaml:"LaunchSpecifications,omitempty"`
 }
 
+// ClusterInstanceFleetConfig validation
 func (resource ClusterInstanceFleetConfig) Validate() []error {
 	errs := []error{}
 

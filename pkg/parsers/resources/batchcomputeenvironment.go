@@ -54,10 +54,12 @@ func ParseBatchComputeEnvironment(ctx map[string]interface{}, name string, data 
 	return
 }
 
+// ParseBatchComputeEnvironment validator
 func (resource BatchComputeEnvironment) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseBatchComputeEnvironmentProperties validator
 func (resource BatchComputeEnvironmentProperties) Validate() []error {
 	errs := []error{}
 	if resource.ServiceRole == nil {

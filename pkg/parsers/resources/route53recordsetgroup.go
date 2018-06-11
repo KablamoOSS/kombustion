@@ -51,10 +51,12 @@ func ParseRoute53RecordSetGroup(ctx map[string]interface{}, name string, data st
 	return
 }
 
+// ParseRoute53RecordSetGroup validator
 func (resource Route53RecordSetGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRoute53RecordSetGroupProperties validator
 func (resource Route53RecordSetGroupProperties) Validate() []error {
 	errs := []error{}
 	return errs

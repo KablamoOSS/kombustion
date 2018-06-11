@@ -5,12 +5,13 @@ package properties
 
 import "fmt"
 
-// IPSetIPSetDescriptor Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-ipset-ipsetdescriptors.html
+// IPSetIPSetDescriptor Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-ipset-ipsetdescriptor.html
 type IPSetIPSetDescriptor struct {
 	Type  interface{} `yaml:"Type"`
 	Value interface{} `yaml:"Value"`
 }
 
+// IPSetIPSetDescriptor validation
 func (resource IPSetIPSetDescriptor) Validate() []error {
 	errs := []error{}
 

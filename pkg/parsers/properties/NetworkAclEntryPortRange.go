@@ -9,6 +9,7 @@ type NetworkAclEntryPortRange struct {
 	To   interface{} `yaml:"To,omitempty"`
 }
 
+// NetworkAclEntryPortRange validation
 func (resource NetworkAclEntryPortRange) Validate() []error {
 	errs := []error{}
 

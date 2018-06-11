@@ -11,6 +11,7 @@ type AliasVersionWeight struct {
 	FunctionWeight  interface{} `yaml:"FunctionWeight"`
 }
 
+// AliasVersionWeight validation
 func (resource AliasVersionWeight) Validate() []error {
 	errs := []error{}
 

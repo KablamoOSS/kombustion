@@ -9,6 +9,7 @@ type ScalingPlanApplicationSource struct {
 	TagFilters             interface{} `yaml:"TagFilters,omitempty"`
 }
 
+// ScalingPlanApplicationSource validation
 func (resource ScalingPlanApplicationSource) Validate() []error {
 	errs := []error{}
 

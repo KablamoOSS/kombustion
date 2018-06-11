@@ -8,6 +8,7 @@ type ApplicationInputParallelism struct {
 	Count interface{} `yaml:"Count,omitempty"`
 }
 
+// ApplicationInputParallelism validation
 func (resource ApplicationInputParallelism) Validate() []error {
 	errs := []error{}
 

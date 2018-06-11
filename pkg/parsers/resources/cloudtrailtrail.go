@@ -61,10 +61,12 @@ func ParseCloudTrailTrail(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseCloudTrailTrail validator
 func (resource CloudTrailTrail) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCloudTrailTrailProperties validator
 func (resource CloudTrailTrailProperties) Validate() []error {
 	errs := []error{}
 	if resource.IsLogging == nil {

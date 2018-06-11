@@ -8,6 +8,7 @@ type DistributionS3OriginConfig struct {
 	OriginAccessIdentity interface{} `yaml:"OriginAccessIdentity,omitempty"`
 }
 
+// DistributionS3OriginConfig validation
 func (resource DistributionS3OriginConfig) Validate() []error {
 	errs := []error{}
 

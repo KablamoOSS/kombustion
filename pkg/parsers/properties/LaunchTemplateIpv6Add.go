@@ -8,6 +8,7 @@ type LaunchTemplateIpv6Add struct {
 	Ipv6Address interface{} `yaml:"Ipv6Address,omitempty"`
 }
 
+// LaunchTemplateIpv6Add validation
 func (resource LaunchTemplateIpv6Add) Validate() []error {
 	errs := []error{}
 

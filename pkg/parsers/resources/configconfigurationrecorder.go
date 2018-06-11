@@ -52,10 +52,12 @@ func ParseConfigConfigurationRecorder(ctx map[string]interface{}, name string, d
 	return
 }
 
+// ParseConfigConfigurationRecorder validator
 func (resource ConfigConfigurationRecorder) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseConfigConfigurationRecorderProperties validator
 func (resource ConfigConfigurationRecorderProperties) Validate() []error {
 	errs := []error{}
 	if resource.RoleARN == nil {

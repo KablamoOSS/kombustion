@@ -54,10 +54,12 @@ func ParseEventsRule(ctx map[string]interface{}, name string, data string) (cf t
 	return
 }
 
+// ParseEventsRule validator
 func (resource EventsRule) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEventsRuleProperties validator
 func (resource EventsRuleProperties) Validate() []error {
 	errs := []error{}
 	return errs

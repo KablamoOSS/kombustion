@@ -11,6 +11,7 @@ type InstancePrivateIpAddressSpecification struct {
 	PrivateIpAddress interface{} `yaml:"PrivateIpAddress"`
 }
 
+// InstancePrivateIpAddressSpecification validation
 func (resource InstancePrivateIpAddressSpecification) Validate() []error {
 	errs := []error{}
 

@@ -21,6 +21,7 @@ type ClusterJobFlowInstancesConfig struct {
 	MasterInstanceFleet            *ClusterInstanceFleetConfig `yaml:"MasterInstanceFleet,omitempty"`
 }
 
+// ClusterJobFlowInstancesConfig validation
 func (resource ClusterJobFlowInstancesConfig) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type PipelineEncryptionKey struct {
 	Type interface{} `yaml:"Type"`
 }
 
+// PipelineEncryptionKey validation
 func (resource PipelineEncryptionKey) Validate() []error {
 	errs := []error{}
 

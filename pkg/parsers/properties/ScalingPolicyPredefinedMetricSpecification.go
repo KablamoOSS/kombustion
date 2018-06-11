@@ -11,6 +11,7 @@ type ScalingPolicyPredefinedMetricSpecification struct {
 	ResourceLabel        interface{} `yaml:"ResourceLabel,omitempty"`
 }
 
+// ScalingPolicyPredefinedMetricSpecification validation
 func (resource ScalingPolicyPredefinedMetricSpecification) Validate() []error {
 	errs := []error{}
 

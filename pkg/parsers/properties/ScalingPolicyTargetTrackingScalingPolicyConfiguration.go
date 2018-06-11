@@ -15,6 +15,7 @@ type ScalingPolicyTargetTrackingScalingPolicyConfiguration struct {
 	CustomizedMetricSpecification *ScalingPolicyCustomizedMetricSpecification `yaml:"CustomizedMetricSpecification,omitempty"`
 }
 
+// ScalingPolicyTargetTrackingScalingPolicyConfiguration validation
 func (resource ScalingPolicyTargetTrackingScalingPolicyConfiguration) Validate() []error {
 	errs := []error{}
 

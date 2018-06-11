@@ -11,6 +11,7 @@ type GraphQLApiUserPoolConfig struct {
 	UserPoolId       interface{} `yaml:"UserPoolId,omitempty"`
 }
 
+// GraphQLApiUserPoolConfig validation
 func (resource GraphQLApiUserPoolConfig) Validate() []error {
 	errs := []error{}
 

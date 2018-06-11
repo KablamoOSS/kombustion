@@ -11,6 +11,7 @@ type RestApiS3Location struct {
 	Version interface{} `yaml:"Version,omitempty"`
 }
 
+// RestApiS3Location validation
 func (resource RestApiS3Location) Validate() []error {
 	errs := []error{}
 

@@ -57,10 +57,12 @@ func ParseApplicationAutoScalingScalingPolicy(ctx map[string]interface{}, name s
 	return
 }
 
+// ParseApplicationAutoScalingScalingPolicy validator
 func (resource ApplicationAutoScalingScalingPolicy) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseApplicationAutoScalingScalingPolicyProperties validator
 func (resource ApplicationAutoScalingScalingPolicyProperties) Validate() []error {
 	errs := []error{}
 	if resource.PolicyName == nil {

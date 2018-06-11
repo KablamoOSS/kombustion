@@ -12,6 +12,7 @@ type TopicRuleS3Action struct {
 	RoleArn    interface{} `yaml:"RoleArn"`
 }
 
+// TopicRuleS3Action validation
 func (resource TopicRuleS3Action) Validate() []error {
 	errs := []error{}
 

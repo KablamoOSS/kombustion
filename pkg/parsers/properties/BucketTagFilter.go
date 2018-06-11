@@ -11,6 +11,7 @@ type BucketTagFilter struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// BucketTagFilter validation
 func (resource BucketTagFilter) Validate() []error {
 	errs := []error{}
 

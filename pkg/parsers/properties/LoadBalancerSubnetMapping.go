@@ -11,6 +11,7 @@ type LoadBalancerSubnetMapping struct {
 	SubnetId     interface{} `yaml:"SubnetId"`
 }
 
+// LoadBalancerSubnetMapping validation
 func (resource LoadBalancerSubnetMapping) Validate() []error {
 	errs := []error{}
 

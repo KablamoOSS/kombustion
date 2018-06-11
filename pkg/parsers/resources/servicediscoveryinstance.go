@@ -51,10 +51,12 @@ func ParseServiceDiscoveryInstance(ctx map[string]interface{}, name string, data
 	return
 }
 
+// ParseServiceDiscoveryInstance validator
 func (resource ServiceDiscoveryInstance) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseServiceDiscoveryInstanceProperties validator
 func (resource ServiceDiscoveryInstanceProperties) Validate() []error {
 	errs := []error{}
 	if resource.InstanceAttributes == nil {

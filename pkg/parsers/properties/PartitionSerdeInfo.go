@@ -10,6 +10,7 @@ type PartitionSerdeInfo struct {
 	SerializationLibrary interface{} `yaml:"SerializationLibrary,omitempty"`
 }
 
+// PartitionSerdeInfo validation
 func (resource PartitionSerdeInfo) Validate() []error {
 	errs := []error{}
 

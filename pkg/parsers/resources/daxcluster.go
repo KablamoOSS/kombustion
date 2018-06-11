@@ -60,10 +60,12 @@ func ParseDAXCluster(ctx map[string]interface{}, name string, data string) (cf t
 	return
 }
 
+// ParseDAXCluster validator
 func (resource DAXCluster) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDAXClusterProperties validator
 func (resource DAXClusterProperties) Validate() []error {
 	errs := []error{}
 	if resource.IAMRoleARN == nil {

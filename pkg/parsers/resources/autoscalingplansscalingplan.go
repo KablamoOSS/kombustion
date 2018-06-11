@@ -51,10 +51,12 @@ func ParseAutoScalingPlansScalingPlan(ctx map[string]interface{}, name string, d
 	return
 }
 
+// ParseAutoScalingPlansScalingPlan validator
 func (resource AutoScalingPlansScalingPlan) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAutoScalingPlansScalingPlanProperties validator
 func (resource AutoScalingPlansScalingPlanProperties) Validate() []error {
 	errs := []error{}
 	if resource.ScalingInstructions == nil {

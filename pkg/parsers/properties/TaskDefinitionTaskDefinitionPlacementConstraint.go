@@ -11,6 +11,7 @@ type TaskDefinitionTaskDefinitionPlacementConstraint struct {
 	Type       interface{} `yaml:"Type"`
 }
 
+// TaskDefinitionTaskDefinitionPlacementConstraint validation
 func (resource TaskDefinitionTaskDefinitionPlacementConstraint) Validate() []error {
 	errs := []error{}
 

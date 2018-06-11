@@ -53,10 +53,12 @@ func ParseCloudFormationStack(ctx map[string]interface{}, name string, data stri
 	return
 }
 
+// ParseCloudFormationStack validator
 func (resource CloudFormationStack) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCloudFormationStackProperties validator
 func (resource CloudFormationStackProperties) Validate() []error {
 	errs := []error{}
 	if resource.TemplateURL == nil {

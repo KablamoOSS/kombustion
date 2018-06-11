@@ -50,10 +50,12 @@ func ParseWAFRegionalByteMatchSet(ctx map[string]interface{}, name string, data 
 	return
 }
 
+// ParseWAFRegionalByteMatchSet validator
 func (resource WAFRegionalByteMatchSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFRegionalByteMatchSetProperties validator
 func (resource WAFRegionalByteMatchSetProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

@@ -51,10 +51,12 @@ func ParseSESConfigurationSetEventDestination(ctx map[string]interface{}, name s
 	return
 }
 
+// ParseSESConfigurationSetEventDestination validator
 func (resource SESConfigurationSetEventDestination) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSESConfigurationSetEventDestinationProperties validator
 func (resource SESConfigurationSetEventDestinationProperties) Validate() []error {
 	errs := []error{}
 	if resource.ConfigurationSetName == nil {

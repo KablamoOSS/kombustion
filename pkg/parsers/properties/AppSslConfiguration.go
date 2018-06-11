@@ -10,6 +10,7 @@ type AppSslConfiguration struct {
 	PrivateKey  interface{} `yaml:"PrivateKey,omitempty"`
 }
 
+// AppSslConfiguration validation
 func (resource AppSslConfiguration) Validate() []error {
 	errs := []error{}
 

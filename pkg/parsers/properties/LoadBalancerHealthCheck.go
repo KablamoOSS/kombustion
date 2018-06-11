@@ -14,6 +14,7 @@ type LoadBalancerHealthCheck struct {
 	UnhealthyThreshold interface{} `yaml:"UnhealthyThreshold"`
 }
 
+// LoadBalancerHealthCheck validation
 func (resource LoadBalancerHealthCheck) Validate() []error {
 	errs := []error{}
 

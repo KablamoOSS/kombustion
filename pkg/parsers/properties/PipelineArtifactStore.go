@@ -12,6 +12,7 @@ type PipelineArtifactStore struct {
 	EncryptionKey *PipelineEncryptionKey `yaml:"EncryptionKey,omitempty"`
 }
 
+// PipelineArtifactStore validation
 func (resource PipelineArtifactStore) Validate() []error {
 	errs := []error{}
 

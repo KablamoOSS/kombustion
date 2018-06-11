@@ -52,10 +52,12 @@ func ParseLogsSubscriptionFilter(ctx map[string]interface{}, name string, data s
 	return
 }
 
+// ParseLogsSubscriptionFilter validator
 func (resource LogsSubscriptionFilter) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseLogsSubscriptionFilterProperties validator
 func (resource LogsSubscriptionFilterProperties) Validate() []error {
 	errs := []error{}
 	if resource.DestinationArn == nil {

@@ -51,10 +51,12 @@ func ParseElastiCacheSubnetGroup(ctx map[string]interface{}, name string, data s
 	return
 }
 
+// ParseElastiCacheSubnetGroup validator
 func (resource ElastiCacheSubnetGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElastiCacheSubnetGroupProperties validator
 func (resource ElastiCacheSubnetGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.Description == nil {

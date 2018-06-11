@@ -12,6 +12,7 @@ type InstanceGroupConfigSimpleScalingPolicyConfiguration struct {
 	ScalingAdjustment interface{} `yaml:"ScalingAdjustment"`
 }
 
+// InstanceGroupConfigSimpleScalingPolicyConfiguration validation
 func (resource InstanceGroupConfigSimpleScalingPolicyConfiguration) Validate() []error {
 	errs := []error{}
 

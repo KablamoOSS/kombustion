@@ -87,10 +87,12 @@ func ParseRDSDBInstance(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseRDSDBInstance validator
 func (resource RDSDBInstance) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRDSDBInstanceProperties validator
 func (resource RDSDBInstanceProperties) Validate() []error {
 	errs := []error{}
 	if resource.DBInstanceClass == nil {

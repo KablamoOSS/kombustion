@@ -9,6 +9,7 @@ type StackStackConfigurationManager struct {
 	Version interface{} `yaml:"Version,omitempty"`
 }
 
+// StackStackConfigurationManager validation
 func (resource StackStackConfigurationManager) Validate() []error {
 	errs := []error{}
 

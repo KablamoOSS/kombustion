@@ -11,6 +11,7 @@ type MicrosoftADVpcSettings struct {
 	SubnetIds interface{} `yaml:"SubnetIds"`
 }
 
+// MicrosoftADVpcSettings validation
 func (resource MicrosoftADVpcSettings) Validate() []error {
 	errs := []error{}
 

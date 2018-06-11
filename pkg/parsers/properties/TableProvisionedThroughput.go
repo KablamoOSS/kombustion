@@ -11,6 +11,7 @@ type TableProvisionedThroughput struct {
 	WriteCapacityUnits interface{} `yaml:"WriteCapacityUnits"`
 }
 
+// TableProvisionedThroughput validation
 func (resource TableProvisionedThroughput) Validate() []error {
 	errs := []error{}
 

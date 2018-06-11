@@ -11,6 +11,7 @@ type TaskDefinitionHostEntry struct {
 	IpAddress interface{} `yaml:"IpAddress"`
 }
 
+// TaskDefinitionHostEntry validation
 func (resource TaskDefinitionHostEntry) Validate() []error {
 	errs := []error{}
 

@@ -9,6 +9,7 @@ type ApplicationApplicationVersionLifecycleConfig struct {
 	MaxAgeRule   *ApplicationMaxAgeRule   `yaml:"MaxAgeRule,omitempty"`
 }
 
+// ApplicationApplicationVersionLifecycleConfig validation
 func (resource ApplicationApplicationVersionLifecycleConfig) Validate() []error {
 	errs := []error{}
 

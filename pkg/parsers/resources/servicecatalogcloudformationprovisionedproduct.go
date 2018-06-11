@@ -57,10 +57,12 @@ func ParseServiceCatalogCloudFormationProvisionedProduct(ctx map[string]interfac
 	return
 }
 
+// ParseServiceCatalogCloudFormationProvisionedProduct validator
 func (resource ServiceCatalogCloudFormationProvisionedProduct) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseServiceCatalogCloudFormationProvisionedProductProperties validator
 func (resource ServiceCatalogCloudFormationProvisionedProductProperties) Validate() []error {
 	errs := []error{}
 	return errs

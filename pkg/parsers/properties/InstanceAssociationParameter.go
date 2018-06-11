@@ -11,6 +11,7 @@ type InstanceAssociationParameter struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// InstanceAssociationParameter validation
 func (resource InstanceAssociationParameter) Validate() []error {
 	errs := []error{}
 

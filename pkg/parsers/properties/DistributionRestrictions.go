@@ -10,6 +10,7 @@ type DistributionRestrictions struct {
 	GeoRestriction *DistributionGeoRestriction `yaml:"GeoRestriction"`
 }
 
+// DistributionRestrictions validation
 func (resource DistributionRestrictions) Validate() []error {
 	errs := []error{}
 

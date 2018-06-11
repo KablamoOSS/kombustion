@@ -15,6 +15,7 @@ type ConnectionConnectionInput struct {
 	MatchCriteria                  interface{}                               `yaml:"MatchCriteria,omitempty"`
 }
 
+// ConnectionConnectionInput validation
 func (resource ConnectionConnectionInput) Validate() []error {
 	errs := []error{}
 

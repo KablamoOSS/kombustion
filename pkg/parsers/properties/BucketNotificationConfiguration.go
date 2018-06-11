@@ -10,6 +10,7 @@ type BucketNotificationConfiguration struct {
 	TopicConfigurations  interface{} `yaml:"TopicConfigurations,omitempty"`
 }
 
+// BucketNotificationConfiguration validation
 func (resource BucketNotificationConfiguration) Validate() []error {
 	errs := []error{}
 

@@ -53,10 +53,12 @@ func ParseIAMPolicy(ctx map[string]interface{}, name string, data string) (cf ty
 	return
 }
 
+// ParseIAMPolicy validator
 func (resource IAMPolicy) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIAMPolicyProperties validator
 func (resource IAMPolicyProperties) Validate() []error {
 	errs := []error{}
 	if resource.PolicyDocument == nil {

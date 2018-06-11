@@ -11,6 +11,7 @@ type ClusterParameterGroupParameter struct {
 	ParameterValue interface{} `yaml:"ParameterValue"`
 }
 
+// ClusterParameterGroupParameter validation
 func (resource ClusterParameterGroupParameter) Validate() []error {
 	errs := []error{}
 

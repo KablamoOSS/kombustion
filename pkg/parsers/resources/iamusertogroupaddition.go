@@ -50,10 +50,12 @@ func ParseIAMUserToGroupAddition(ctx map[string]interface{}, name string, data s
 	return
 }
 
+// ParseIAMUserToGroupAddition validator
 func (resource IAMUserToGroupAddition) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIAMUserToGroupAdditionProperties validator
 func (resource IAMUserToGroupAdditionProperties) Validate() []error {
 	errs := []error{}
 	if resource.GroupName == nil {

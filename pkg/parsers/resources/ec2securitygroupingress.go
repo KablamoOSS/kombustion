@@ -59,10 +59,12 @@ func ParseEC2SecurityGroupIngress(ctx map[string]interface{}, name string, data 
 	return
 }
 
+// ParseEC2SecurityGroupIngress validator
 func (resource EC2SecurityGroupIngress) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2SecurityGroupIngressProperties validator
 func (resource EC2SecurityGroupIngressProperties) Validate() []error {
 	errs := []error{}
 	if resource.IpProtocol == nil {

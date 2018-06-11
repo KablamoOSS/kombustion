@@ -10,6 +10,7 @@ type MaintenanceWindowTaskMaintenanceWindowLambdaParameters struct {
 	Qualifier     interface{} `yaml:"Qualifier,omitempty"`
 }
 
+// MaintenanceWindowTaskMaintenanceWindowLambdaParameters validation
 func (resource MaintenanceWindowTaskMaintenanceWindowLambdaParameters) Validate() []error {
 	errs := []error{}
 

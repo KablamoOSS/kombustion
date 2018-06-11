@@ -12,6 +12,7 @@ type StackRdsDbInstance struct {
 	RdsDbInstanceArn interface{} `yaml:"RdsDbInstanceArn"`
 }
 
+// StackRdsDbInstance validation
 func (resource StackRdsDbInstance) Validate() []error {
 	errs := []error{}
 

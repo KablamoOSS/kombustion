@@ -17,6 +17,7 @@ type ClusterInstanceGroupConfig struct {
 	AutoScalingPolicy *ClusterAutoScalingPolicy `yaml:"AutoScalingPolicy,omitempty"`
 }
 
+// ClusterInstanceGroupConfig validation
 func (resource ClusterInstanceGroupConfig) Validate() []error {
 	errs := []error{}
 

@@ -48,10 +48,12 @@ func ParseSESConfigurationSet(ctx map[string]interface{}, name string, data stri
 	return
 }
 
+// ParseSESConfigurationSet validator
 func (resource SESConfigurationSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSESConfigurationSetProperties validator
 func (resource SESConfigurationSetProperties) Validate() []error {
 	errs := []error{}
 	return errs

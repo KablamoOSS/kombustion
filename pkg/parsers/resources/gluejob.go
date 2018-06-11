@@ -59,10 +59,12 @@ func ParseGlueJob(ctx map[string]interface{}, name string, data string) (cf type
 	return
 }
 
+// ParseGlueJob validator
 func (resource GlueJob) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGlueJobProperties validator
 func (resource GlueJobProperties) Validate() []error {
 	errs := []error{}
 	if resource.Role == nil {

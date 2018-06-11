@@ -10,6 +10,7 @@ type IdentityPoolCognitoStreams struct {
 	StreamingStatus interface{} `yaml:"StreamingStatus,omitempty"`
 }
 
+// IdentityPoolCognitoStreams validation
 func (resource IdentityPoolCognitoStreams) Validate() []error {
 	errs := []error{}
 

@@ -9,6 +9,7 @@ type ScalableTargetScalableTargetAction struct {
 	MinCapacity interface{} `yaml:"MinCapacity,omitempty"`
 }
 
+// ScalableTargetScalableTargetAction validation
 func (resource ScalableTargetScalableTargetAction) Validate() []error {
 	errs := []error{}
 

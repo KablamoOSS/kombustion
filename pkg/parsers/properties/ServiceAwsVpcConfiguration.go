@@ -12,6 +12,7 @@ type ServiceAwsVpcConfiguration struct {
 	Subnets        interface{} `yaml:"Subnets"`
 }
 
+// ServiceAwsVpcConfiguration validation
 func (resource ServiceAwsVpcConfiguration) Validate() []error {
 	errs := []error{}
 

@@ -9,6 +9,7 @@ type PatchBaselinePatchFilter struct {
 	Values interface{} `yaml:"Values,omitempty"`
 }
 
+// PatchBaselinePatchFilter validation
 func (resource PatchBaselinePatchFilter) Validate() []error {
 	errs := []error{}
 

@@ -12,6 +12,7 @@ type TableColumn struct {
 	Type    interface{} `yaml:"Type,omitempty"`
 }
 
+// TableColumn validation
 func (resource TableColumn) Validate() []error {
 	errs := []error{}
 

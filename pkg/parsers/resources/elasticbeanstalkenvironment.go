@@ -60,10 +60,12 @@ func ParseElasticBeanstalkEnvironment(ctx map[string]interface{}, name string, d
 	return
 }
 
+// ParseElasticBeanstalkEnvironment validator
 func (resource ElasticBeanstalkEnvironment) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElasticBeanstalkEnvironmentProperties validator
 func (resource ElasticBeanstalkEnvironmentProperties) Validate() []error {
 	errs := []error{}
 	if resource.ApplicationName == nil {

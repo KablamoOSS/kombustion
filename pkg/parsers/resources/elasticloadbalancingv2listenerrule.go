@@ -52,10 +52,12 @@ func ParseElasticLoadBalancingV2ListenerRule(ctx map[string]interface{}, name st
 	return
 }
 
+// ParseElasticLoadBalancingV2ListenerRule validator
 func (resource ElasticLoadBalancingV2ListenerRule) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElasticLoadBalancingV2ListenerRuleProperties validator
 func (resource ElasticLoadBalancingV2ListenerRuleProperties) Validate() []error {
 	errs := []error{}
 	if resource.ListenerArn == nil {

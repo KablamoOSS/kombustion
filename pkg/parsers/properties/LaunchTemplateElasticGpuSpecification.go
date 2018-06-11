@@ -8,6 +8,7 @@ type LaunchTemplateElasticGpuSpecification struct {
 	Type interface{} `yaml:"Type,omitempty"`
 }
 
+// LaunchTemplateElasticGpuSpecification validation
 func (resource LaunchTemplateElasticGpuSpecification) Validate() []error {
 	errs := []error{}
 

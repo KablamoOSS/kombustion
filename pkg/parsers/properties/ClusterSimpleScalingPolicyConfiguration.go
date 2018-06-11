@@ -12,6 +12,7 @@ type ClusterSimpleScalingPolicyConfiguration struct {
 	ScalingAdjustment interface{} `yaml:"ScalingAdjustment"`
 }
 
+// ClusterSimpleScalingPolicyConfiguration validation
 func (resource ClusterSimpleScalingPolicyConfiguration) Validate() []error {
 	errs := []error{}
 

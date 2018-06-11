@@ -10,6 +10,7 @@ type ConfigurationRecorderRecordingGroup struct {
 	ResourceTypes              interface{} `yaml:"ResourceTypes,omitempty"`
 }
 
+// ConfigurationRecorderRecordingGroup validation
 func (resource ConfigurationRecorderRecordingGroup) Validate() []error {
 	errs := []error{}
 

@@ -65,10 +65,12 @@ func ParseElasticLoadBalancingLoadBalancer(ctx map[string]interface{}, name stri
 	return
 }
 
+// ParseElasticLoadBalancingLoadBalancer validator
 func (resource ElasticLoadBalancingLoadBalancer) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElasticLoadBalancingLoadBalancerProperties validator
 func (resource ElasticLoadBalancingLoadBalancerProperties) Validate() []error {
 	errs := []error{}
 	if resource.Listeners == nil {

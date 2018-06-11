@@ -8,6 +8,7 @@ type SpotFleetIamInstanceProfileSpecification struct {
 	Arn interface{} `yaml:"Arn,omitempty"`
 }
 
+// SpotFleetIamInstanceProfileSpecification validation
 func (resource SpotFleetIamInstanceProfileSpecification) Validate() []error {
 	errs := []error{}
 

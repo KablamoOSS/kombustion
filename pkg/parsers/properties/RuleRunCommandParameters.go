@@ -10,6 +10,7 @@ type RuleRunCommandParameters struct {
 	RunCommandTargets interface{} `yaml:"RunCommandTargets"`
 }
 
+// RuleRunCommandParameters validation
 func (resource RuleRunCommandParameters) Validate() []error {
 	errs := []error{}
 

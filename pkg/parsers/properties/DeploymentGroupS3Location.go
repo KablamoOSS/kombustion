@@ -14,6 +14,7 @@ type DeploymentGroupS3Location struct {
 	Version    interface{} `yaml:"Version,omitempty"`
 }
 
+// DeploymentGroupS3Location validation
 func (resource DeploymentGroupS3Location) Validate() []error {
 	errs := []error{}
 

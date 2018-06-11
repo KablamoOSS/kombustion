@@ -51,10 +51,12 @@ func ParseIAMGroup(ctx map[string]interface{}, name string, data string) (cf typ
 	return
 }
 
+// ParseIAMGroup validator
 func (resource IAMGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIAMGroupProperties validator
 func (resource IAMGroupProperties) Validate() []error {
 	errs := []error{}
 	return errs

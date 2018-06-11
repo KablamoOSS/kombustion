@@ -13,6 +13,7 @@ type TableGlobalSecondaryIndex struct {
 	KeySchema             interface{}                 `yaml:"KeySchema"`
 }
 
+// TableGlobalSecondaryIndex validation
 func (resource TableGlobalSecondaryIndex) Validate() []error {
 	errs := []error{}
 

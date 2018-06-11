@@ -52,10 +52,12 @@ func ParseGameLiftAlias(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseGameLiftAlias validator
 func (resource GameLiftAlias) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGameLiftAliasProperties validator
 func (resource GameLiftAliasProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

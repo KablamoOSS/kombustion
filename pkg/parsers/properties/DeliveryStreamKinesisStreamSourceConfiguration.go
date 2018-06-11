@@ -11,6 +11,7 @@ type DeliveryStreamKinesisStreamSourceConfiguration struct {
 	RoleARN          interface{} `yaml:"RoleARN"`
 }
 
+// DeliveryStreamKinesisStreamSourceConfiguration validation
 func (resource DeliveryStreamKinesisStreamSourceConfiguration) Validate() []error {
 	errs := []error{}
 

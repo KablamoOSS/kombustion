@@ -52,10 +52,12 @@ func ParseGlueTable(ctx map[string]interface{}, name string, data string) (cf ty
 	return
 }
 
+// ParseGlueTable validator
 func (resource GlueTable) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGlueTableProperties validator
 func (resource GlueTableProperties) Validate() []error {
 	errs := []error{}
 	if resource.CatalogId == nil {

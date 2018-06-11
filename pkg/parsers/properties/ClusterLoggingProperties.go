@@ -11,6 +11,7 @@ type ClusterLoggingProperties struct {
 	S3KeyPrefix interface{} `yaml:"S3KeyPrefix,omitempty"`
 }
 
+// ClusterLoggingProperties validation
 func (resource ClusterLoggingProperties) Validate() []error {
 	errs := []error{}
 

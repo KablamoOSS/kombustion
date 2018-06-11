@@ -10,6 +10,7 @@ type UserPoolInviteMessageTemplate struct {
 	SMSMessage   interface{} `yaml:"SMSMessage,omitempty"`
 }
 
+// UserPoolInviteMessageTemplate validation
 func (resource UserPoolInviteMessageTemplate) Validate() []error {
 	errs := []error{}
 

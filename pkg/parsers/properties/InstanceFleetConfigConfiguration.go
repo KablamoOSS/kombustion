@@ -10,6 +10,7 @@ type InstanceFleetConfigConfiguration struct {
 	Configurations          interface{} `yaml:"Configurations,omitempty"`
 }
 
+// InstanceFleetConfigConfiguration validation
 func (resource InstanceFleetConfigConfiguration) Validate() []error {
 	errs := []error{}
 

@@ -53,10 +53,12 @@ func ParseWAFWebACL(ctx map[string]interface{}, name string, data string) (cf ty
 	return
 }
 
+// ParseWAFWebACL validator
 func (resource WAFWebACL) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFWebACLProperties validator
 func (resource WAFWebACLProperties) Validate() []error {
 	errs := []error{}
 	if resource.MetricName == nil {

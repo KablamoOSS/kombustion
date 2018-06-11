@@ -13,6 +13,7 @@ type LaunchConfigurationBlockDeviceMapping struct {
 	Ebs         *LaunchConfigurationBlockDevice `yaml:"Ebs,omitempty"`
 }
 
+// LaunchConfigurationBlockDeviceMapping validation
 func (resource LaunchConfigurationBlockDeviceMapping) Validate() []error {
 	errs := []error{}
 

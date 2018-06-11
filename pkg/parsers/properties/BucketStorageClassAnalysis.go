@@ -8,6 +8,7 @@ type BucketStorageClassAnalysis struct {
 	DataExport *BucketDataExport `yaml:"DataExport,omitempty"`
 }
 
+// BucketStorageClassAnalysis validation
 func (resource BucketStorageClassAnalysis) Validate() []error {
 	errs := []error{}
 

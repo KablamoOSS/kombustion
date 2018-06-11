@@ -14,6 +14,7 @@ type ApplicationOutputOutput struct {
 	DestinationSchema     *ApplicationOutputDestinationSchema     `yaml:"DestinationSchema"`
 }
 
+// ApplicationOutputOutput validation
 func (resource ApplicationOutputOutput) Validate() []error {
 	errs := []error{}
 

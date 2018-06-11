@@ -11,6 +11,7 @@ type AutoScalingGroupNotificationConfiguration struct {
 	NotificationTypes interface{} `yaml:"NotificationTypes,omitempty"`
 }
 
+// AutoScalingGroupNotificationConfiguration validation
 func (resource AutoScalingGroupNotificationConfiguration) Validate() []error {
 	errs := []error{}
 

@@ -13,6 +13,7 @@ type ClusterScalingRule struct {
 	Action      *ClusterScalingAction  `yaml:"Action"`
 }
 
+// ClusterScalingRule validation
 func (resource ClusterScalingRule) Validate() []error {
 	errs := []error{}
 

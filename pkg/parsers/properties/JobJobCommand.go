@@ -9,6 +9,7 @@ type JobJobCommand struct {
 	ScriptLocation interface{} `yaml:"ScriptLocation,omitempty"`
 }
 
+// JobJobCommand validation
 func (resource JobJobCommand) Validate() []error {
 	errs := []error{}
 

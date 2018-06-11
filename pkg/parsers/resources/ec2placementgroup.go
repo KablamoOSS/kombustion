@@ -48,10 +48,12 @@ func ParseEC2PlacementGroup(ctx map[string]interface{}, name string, data string
 	return
 }
 
+// ParseEC2PlacementGroup validator
 func (resource EC2PlacementGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2PlacementGroupProperties validator
 func (resource EC2PlacementGroupProperties) Validate() []error {
 	errs := []error{}
 	return errs

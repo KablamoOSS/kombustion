@@ -8,6 +8,7 @@ type BucketServerSideEncryptionRule struct {
 	ServerSideEncryptionByDefault *BucketServerSideEncryptionByDefault `yaml:"ServerSideEncryptionByDefault,omitempty"`
 }
 
+// BucketServerSideEncryptionRule validation
 func (resource BucketServerSideEncryptionRule) Validate() []error {
 	errs := []error{}
 

@@ -49,10 +49,12 @@ func ParseCloudFormationCustomResource(ctx map[string]interface{}, name string, 
 	return
 }
 
+// ParseCloudFormationCustomResource validator
 func (resource CloudFormationCustomResource) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCloudFormationCustomResourceProperties validator
 func (resource CloudFormationCustomResourceProperties) Validate() []error {
 	errs := []error{}
 	if resource.ServiceToken == nil {

@@ -51,10 +51,12 @@ func ParseIAMAccessKey(ctx map[string]interface{}, name string, data string) (cf
 	return
 }
 
+// ParseIAMAccessKey validator
 func (resource IAMAccessKey) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIAMAccessKeyProperties validator
 func (resource IAMAccessKeyProperties) Validate() []error {
 	errs := []error{}
 	if resource.UserName == nil {

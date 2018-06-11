@@ -15,6 +15,7 @@ type ProjectSource struct {
 	Auth          *ProjectSourceAuth `yaml:"Auth,omitempty"`
 }
 
+// ProjectSource validation
 func (resource ProjectSource) Validate() []error {
 	errs := []error{}
 

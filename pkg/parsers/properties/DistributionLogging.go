@@ -12,6 +12,7 @@ type DistributionLogging struct {
 	Prefix         interface{} `yaml:"Prefix,omitempty"`
 }
 
+// DistributionLogging validation
 func (resource DistributionLogging) Validate() []error {
 	errs := []error{}
 

@@ -13,6 +13,7 @@ type AppSource struct {
 	Username interface{} `yaml:"Username,omitempty"`
 }
 
+// AppSource validation
 func (resource AppSource) Validate() []error {
 	errs := []error{}
 

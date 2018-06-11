@@ -11,6 +11,7 @@ type TableOrder struct {
 	SortOrder interface{} `yaml:"SortOrder"`
 }
 
+// TableOrder validation
 func (resource TableOrder) Validate() []error {
 	errs := []error{}
 

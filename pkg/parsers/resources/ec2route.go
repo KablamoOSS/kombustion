@@ -57,10 +57,12 @@ func ParseEC2Route(ctx map[string]interface{}, name string, data string) (cf typ
 	return
 }
 
+// ParseEC2Route validator
 func (resource EC2Route) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2RouteProperties validator
 func (resource EC2RouteProperties) Validate() []error {
 	errs := []error{}
 	if resource.RouteTableId == nil {

@@ -80,10 +80,12 @@ func ParseEC2Instance(ctx map[string]interface{}, name string, data string) (cf 
 	return
 }
 
+// ParseEC2Instance validator
 func (resource EC2Instance) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2InstanceProperties validator
 func (resource EC2InstanceProperties) Validate() []error {
 	errs := []error{}
 	if resource.ImageId == nil {

@@ -49,10 +49,12 @@ func ParseStepFunctionsActivity(ctx map[string]interface{}, name string, data st
 	return
 }
 
+// ParseStepFunctionsActivity validator
 func (resource StepFunctionsActivity) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseStepFunctionsActivityProperties validator
 func (resource StepFunctionsActivityProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

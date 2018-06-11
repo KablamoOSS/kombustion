@@ -56,10 +56,12 @@ func ParseAppSyncResolver(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseAppSyncResolver validator
 func (resource AppSyncResolver) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAppSyncResolverProperties validator
 func (resource AppSyncResolverProperties) Validate() []error {
 	errs := []error{}
 	if resource.ApiId == nil {

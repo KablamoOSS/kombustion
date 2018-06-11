@@ -10,6 +10,7 @@ type TableSkewedInfo struct {
 	SkewedColumnValues            interface{} `yaml:"SkewedColumnValues,omitempty"`
 }
 
+// TableSkewedInfo validation
 func (resource TableSkewedInfo) Validate() []error {
 	errs := []error{}
 

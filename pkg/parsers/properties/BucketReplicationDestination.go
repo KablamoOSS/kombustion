@@ -14,6 +14,7 @@ type BucketReplicationDestination struct {
 	AccessControlTranslation *BucketAccessControlTranslation `yaml:"AccessControlTranslation,omitempty"`
 }
 
+// BucketReplicationDestination validation
 func (resource BucketReplicationDestination) Validate() []error {
 	errs := []error{}
 

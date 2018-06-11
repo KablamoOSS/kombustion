@@ -52,10 +52,12 @@ func ParseBatchJobQueue(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseBatchJobQueue validator
 func (resource BatchJobQueue) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseBatchJobQueueProperties validator
 func (resource BatchJobQueueProperties) Validate() []error {
 	errs := []error{}
 	if resource.Priority == nil {

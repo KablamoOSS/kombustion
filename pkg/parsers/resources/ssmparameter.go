@@ -53,10 +53,12 @@ func ParseSSMParameter(ctx map[string]interface{}, name string, data string) (cf
 	return
 }
 
+// ParseSSMParameter validator
 func (resource SSMParameter) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSSMParameterProperties validator
 func (resource SSMParameterProperties) Validate() []error {
 	errs := []error{}
 	if resource.Type == nil {

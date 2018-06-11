@@ -15,6 +15,7 @@ type BucketCorsRule struct {
 	ExposedHeaders interface{} `yaml:"ExposedHeaders,omitempty"`
 }
 
+// BucketCorsRule validation
 func (resource BucketCorsRule) Validate() []error {
 	errs := []error{}
 

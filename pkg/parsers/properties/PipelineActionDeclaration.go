@@ -16,6 +16,7 @@ type PipelineActionDeclaration struct {
 	ActionTypeId    *PipelineActionTypeId `yaml:"ActionTypeId"`
 }
 
+// PipelineActionDeclaration validation
 func (resource PipelineActionDeclaration) Validate() []error {
 	errs := []error{}
 

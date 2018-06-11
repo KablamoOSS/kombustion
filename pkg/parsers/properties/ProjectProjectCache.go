@@ -11,6 +11,7 @@ type ProjectProjectCache struct {
 	Type     interface{} `yaml:"Type"`
 }
 
+// ProjectProjectCache validation
 func (resource ProjectProjectCache) Validate() []error {
 	errs := []error{}
 

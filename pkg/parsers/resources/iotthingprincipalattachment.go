@@ -50,10 +50,12 @@ func ParseIoTThingPrincipalAttachment(ctx map[string]interface{}, name string, d
 	return
 }
 
+// ParseIoTThingPrincipalAttachment validator
 func (resource IoTThingPrincipalAttachment) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIoTThingPrincipalAttachmentProperties validator
 func (resource IoTThingPrincipalAttachmentProperties) Validate() []error {
 	errs := []error{}
 	if resource.Principal == nil {

@@ -8,6 +8,7 @@ type RestApiEndpointConfiguration struct {
 	Types interface{} `yaml:"Types,omitempty"`
 }
 
+// RestApiEndpointConfiguration validation
 func (resource RestApiEndpointConfiguration) Validate() []error {
 	errs := []error{}
 

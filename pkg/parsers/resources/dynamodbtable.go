@@ -59,10 +59,12 @@ func ParseDynamoDBTable(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseDynamoDBTable validator
 func (resource DynamoDBTable) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDynamoDBTableProperties validator
 func (resource DynamoDBTableProperties) Validate() []error {
 	errs := []error{}
 	if resource.ProvisionedThroughput == nil {

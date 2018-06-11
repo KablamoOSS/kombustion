@@ -11,6 +11,7 @@ type ConfigurationSetEventDestinationKinesisFirehoseDestination struct {
 	IAMRoleARN        interface{} `yaml:"IAMRoleARN"`
 }
 
+// ConfigurationSetEventDestinationKinesisFirehoseDestination validation
 func (resource ConfigurationSetEventDestinationKinesisFirehoseDestination) Validate() []error {
 	errs := []error{}
 

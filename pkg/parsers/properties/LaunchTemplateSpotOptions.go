@@ -10,6 +10,7 @@ type LaunchTemplateSpotOptions struct {
 	SpotInstanceType             interface{} `yaml:"SpotInstanceType,omitempty"`
 }
 
+// LaunchTemplateSpotOptions validation
 func (resource LaunchTemplateSpotOptions) Validate() []error {
 	errs := []error{}
 

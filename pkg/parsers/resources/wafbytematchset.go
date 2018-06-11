@@ -50,10 +50,12 @@ func ParseWAFByteMatchSet(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseWAFByteMatchSet validator
 func (resource WAFByteMatchSet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWAFByteMatchSetProperties validator
 func (resource WAFByteMatchSetProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

@@ -8,6 +8,7 @@ type EndpointDynamoDbSettings struct {
 	ServiceAccessRoleArn interface{} `yaml:"ServiceAccessRoleArn,omitempty"`
 }
 
+// EndpointDynamoDbSettings validation
 func (resource EndpointDynamoDbSettings) Validate() []error {
 	errs := []error{}
 

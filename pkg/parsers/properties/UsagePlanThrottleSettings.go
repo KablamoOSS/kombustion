@@ -9,6 +9,7 @@ type UsagePlanThrottleSettings struct {
 	RateLimit  interface{} `yaml:"RateLimit,omitempty"`
 }
 
+// UsagePlanThrottleSettings validation
 func (resource UsagePlanThrottleSettings) Validate() []error {
 	errs := []error{}
 

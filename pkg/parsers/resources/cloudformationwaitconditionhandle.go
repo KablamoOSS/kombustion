@@ -47,10 +47,12 @@ func ParseCloudFormationWaitConditionHandle(ctx map[string]interface{}, name str
 	return
 }
 
+// ParseCloudFormationWaitConditionHandle validator
 func (resource CloudFormationWaitConditionHandle) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCloudFormationWaitConditionHandleProperties validator
 func (resource CloudFormationWaitConditionHandleProperties) Validate() []error {
 	errs := []error{}
 	return errs

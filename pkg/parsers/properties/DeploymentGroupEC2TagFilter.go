@@ -10,6 +10,7 @@ type DeploymentGroupEC2TagFilter struct {
 	Value interface{} `yaml:"Value,omitempty"`
 }
 
+// DeploymentGroupEC2TagFilter validation
 func (resource DeploymentGroupEC2TagFilter) Validate() []error {
 	errs := []error{}
 

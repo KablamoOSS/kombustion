@@ -55,10 +55,12 @@ func ParseSSMAssociation(ctx map[string]interface{}, name string, data string) (
 	return
 }
 
+// ParseSSMAssociation validator
 func (resource SSMAssociation) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSSMAssociationProperties validator
 func (resource SSMAssociationProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

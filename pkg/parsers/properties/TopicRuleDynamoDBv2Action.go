@@ -9,6 +9,7 @@ type TopicRuleDynamoDBv2Action struct {
 	PutItem *TopicRulePutItemInput `yaml:"PutItem,omitempty"`
 }
 
+// TopicRuleDynamoDBv2Action validation
 func (resource TopicRuleDynamoDBv2Action) Validate() []error {
 	errs := []error{}
 

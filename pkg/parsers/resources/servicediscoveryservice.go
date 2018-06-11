@@ -53,10 +53,12 @@ func ParseServiceDiscoveryService(ctx map[string]interface{}, name string, data 
 	return
 }
 
+// ParseServiceDiscoveryService validator
 func (resource ServiceDiscoveryService) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseServiceDiscoveryServiceProperties validator
 func (resource ServiceDiscoveryServiceProperties) Validate() []error {
 	errs := []error{}
 	if resource.DnsConfig == nil {

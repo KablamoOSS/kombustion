@@ -9,6 +9,7 @@ type VPNConnectionVpnTunnelOptionsSpecification struct {
 	TunnelInsideCidr interface{} `yaml:"TunnelInsideCidr,omitempty"`
 }
 
+// VPNConnectionVpnTunnelOptionsSpecification validation
 func (resource VPNConnectionVpnTunnelOptionsSpecification) Validate() []error {
 	errs := []error{}
 

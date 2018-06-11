@@ -11,6 +11,7 @@ type DeploymentConfigMinimumHealthyHosts struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// DeploymentConfigMinimumHealthyHosts validation
 func (resource DeploymentConfigMinimumHealthyHosts) Validate() []error {
 	errs := []error{}
 

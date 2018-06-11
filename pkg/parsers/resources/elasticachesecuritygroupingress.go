@@ -51,10 +51,12 @@ func ParseElastiCacheSecurityGroupIngress(ctx map[string]interface{}, name strin
 	return
 }
 
+// ParseElastiCacheSecurityGroupIngress validator
 func (resource ElastiCacheSecurityGroupIngress) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElastiCacheSecurityGroupIngressProperties validator
 func (resource ElastiCacheSecurityGroupIngressProperties) Validate() []error {
 	errs := []error{}
 	if resource.CacheSecurityGroupName == nil {

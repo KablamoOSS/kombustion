@@ -11,6 +11,7 @@ type DomainEBSOptions struct {
 	VolumeType interface{} `yaml:"VolumeType,omitempty"`
 }
 
+// DomainEBSOptions validation
 func (resource DomainEBSOptions) Validate() []error {
 	errs := []error{}
 

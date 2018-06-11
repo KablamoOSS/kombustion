@@ -52,10 +52,12 @@ func ParseEC2TrunkInterfaceAssociation(ctx map[string]interface{}, name string, 
 	return
 }
 
+// ParseEC2TrunkInterfaceAssociation validator
 func (resource EC2TrunkInterfaceAssociation) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2TrunkInterfaceAssociationProperties validator
 func (resource EC2TrunkInterfaceAssociationProperties) Validate() []error {
 	errs := []error{}
 	if resource.BranchInterfaceId == nil {

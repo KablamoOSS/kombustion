@@ -11,6 +11,7 @@ type HostedZoneHostedZoneTag struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// HostedZoneHostedZoneTag validation
 func (resource HostedZoneHostedZoneTag) Validate() []error {
 	errs := []error{}
 

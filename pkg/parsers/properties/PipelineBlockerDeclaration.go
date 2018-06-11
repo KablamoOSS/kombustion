@@ -11,6 +11,7 @@ type PipelineBlockerDeclaration struct {
 	Type interface{} `yaml:"Type"`
 }
 
+// PipelineBlockerDeclaration validation
 func (resource PipelineBlockerDeclaration) Validate() []error {
 	errs := []error{}
 

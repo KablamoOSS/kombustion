@@ -13,6 +13,7 @@ type ReceiptRuleRule struct {
 	Recipients  interface{} `yaml:"Recipients,omitempty"`
 }
 
+// ReceiptRuleRule validation
 func (resource ReceiptRuleRule) Validate() []error {
 	errs := []error{}
 

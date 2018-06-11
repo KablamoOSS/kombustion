@@ -52,10 +52,12 @@ func ParseRedshiftClusterParameterGroup(ctx map[string]interface{}, name string,
 	return
 }
 
+// ParseRedshiftClusterParameterGroup validator
 func (resource RedshiftClusterParameterGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRedshiftClusterParameterGroupProperties validator
 func (resource RedshiftClusterParameterGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.Description == nil {

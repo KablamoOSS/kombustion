@@ -8,6 +8,7 @@ type ProjectProjectTriggers struct {
 	Webhook interface{} `yaml:"Webhook,omitempty"`
 }
 
+// ProjectProjectTriggers validation
 func (resource ProjectProjectTriggers) Validate() []error {
 	errs := []error{}
 

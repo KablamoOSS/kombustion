@@ -10,6 +10,7 @@ type BucketAbortIncompleteMultipartUpload struct {
 	DaysAfterInitiation interface{} `yaml:"DaysAfterInitiation"`
 }
 
+// BucketAbortIncompleteMultipartUpload validation
 func (resource BucketAbortIncompleteMultipartUpload) Validate() []error {
 	errs := []error{}
 

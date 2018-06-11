@@ -9,6 +9,7 @@ type DomainVPCOptions struct {
 	SubnetIds        interface{} `yaml:"SubnetIds,omitempty"`
 }
 
+// DomainVPCOptions validation
 func (resource DomainVPCOptions) Validate() []error {
 	errs := []error{}
 

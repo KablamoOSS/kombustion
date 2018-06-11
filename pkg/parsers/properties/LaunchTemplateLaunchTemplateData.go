@@ -27,6 +27,7 @@ type LaunchTemplateLaunchTemplateData struct {
 	CreditSpecification               *LaunchTemplateCreditSpecification   `yaml:"CreditSpecification,omitempty"`
 }
 
+// LaunchTemplateLaunchTemplateData validation
 func (resource LaunchTemplateLaunchTemplateData) Validate() []error {
 	errs := []error{}
 

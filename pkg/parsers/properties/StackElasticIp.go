@@ -11,6 +11,7 @@ type StackElasticIp struct {
 	Name interface{} `yaml:"Name,omitempty"`
 }
 
+// StackElasticIp validation
 func (resource StackElasticIp) Validate() []error {
 	errs := []error{}
 

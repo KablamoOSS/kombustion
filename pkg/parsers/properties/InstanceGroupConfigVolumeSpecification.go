@@ -12,6 +12,7 @@ type InstanceGroupConfigVolumeSpecification struct {
 	VolumeType interface{} `yaml:"VolumeType"`
 }
 
+// InstanceGroupConfigVolumeSpecification validation
 func (resource InstanceGroupConfigVolumeSpecification) Validate() []error {
 	errs := []error{}
 

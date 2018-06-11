@@ -9,6 +9,7 @@ type ReceiptRuleSNSAction struct {
 	TopicArn interface{} `yaml:"TopicArn,omitempty"`
 }
 
+// ReceiptRuleSNSAction validation
 func (resource ReceiptRuleSNSAction) Validate() []error {
 	errs := []error{}
 

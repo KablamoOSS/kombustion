@@ -51,10 +51,12 @@ func ParseRoute53HealthCheck(ctx map[string]interface{}, name string, data strin
 	return
 }
 
+// ParseRoute53HealthCheck validator
 func (resource Route53HealthCheck) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRoute53HealthCheckProperties validator
 func (resource Route53HealthCheckProperties) Validate() []error {
 	errs := []error{}
 	if resource.HealthCheckConfig == nil {

@@ -54,10 +54,12 @@ func ParseWorkSpacesWorkspace(ctx map[string]interface{}, name string, data stri
 	return
 }
 
+// ParseWorkSpacesWorkspace validator
 func (resource WorkSpacesWorkspace) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseWorkSpacesWorkspaceProperties validator
 func (resource WorkSpacesWorkspaceProperties) Validate() []error {
 	errs := []error{}
 	if resource.BundleId == nil {

@@ -11,6 +11,7 @@ type SimpleADVpcSettings struct {
 	SubnetIds interface{} `yaml:"SubnetIds"`
 }
 
+// SimpleADVpcSettings validation
 func (resource SimpleADVpcSettings) Validate() []error {
 	errs := []error{}
 

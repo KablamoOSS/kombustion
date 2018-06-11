@@ -14,6 +14,7 @@ type ScalableTargetScheduledAction struct {
 	ScalableTargetAction *ScalableTargetScalableTargetAction `yaml:"ScalableTargetAction,omitempty"`
 }
 
+// ScalableTargetScheduledAction validation
 func (resource ScalableTargetScheduledAction) Validate() []error {
 	errs := []error{}
 

@@ -58,10 +58,12 @@ func ParseSQSQueue(ctx map[string]interface{}, name string, data string) (cf typ
 	return
 }
 
+// ParseSQSQueue validator
 func (resource SQSQueue) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSQSQueueProperties validator
 func (resource SQSQueueProperties) Validate() []error {
 	errs := []error{}
 	return errs

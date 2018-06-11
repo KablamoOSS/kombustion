@@ -10,6 +10,7 @@ type DeploymentGroupTagFilter struct {
 	Value interface{} `yaml:"Value,omitempty"`
 }
 
+// DeploymentGroupTagFilter validation
 func (resource DeploymentGroupTagFilter) Validate() []error {
 	errs := []error{}
 

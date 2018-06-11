@@ -52,10 +52,12 @@ func ParseRedshiftClusterSecurityGroupIngress(ctx map[string]interface{}, name s
 	return
 }
 
+// ParseRedshiftClusterSecurityGroupIngress validator
 func (resource RedshiftClusterSecurityGroupIngress) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRedshiftClusterSecurityGroupIngressProperties validator
 func (resource RedshiftClusterSecurityGroupIngressProperties) Validate() []error {
 	errs := []error{}
 	if resource.ClusterSecurityGroupName == nil {

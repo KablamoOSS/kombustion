@@ -67,10 +67,12 @@ func ParseAutoScalingAutoScalingGroup(ctx map[string]interface{}, name string, d
 	return
 }
 
+// ParseAutoScalingAutoScalingGroup validator
 func (resource AutoScalingAutoScalingGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAutoScalingAutoScalingGroupProperties validator
 func (resource AutoScalingAutoScalingGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.MaxSize == nil {

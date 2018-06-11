@@ -23,6 +23,7 @@ type RecordSetGroupRecordSet struct {
 	AliasTarget     *RecordSetGroupAliasTarget `yaml:"AliasTarget,omitempty"`
 }
 
+// RecordSetGroupRecordSet validation
 func (resource RecordSetGroupRecordSet) Validate() []error {
 	errs := []error{}
 

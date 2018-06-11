@@ -13,6 +13,7 @@ type LaunchConfigurationBlockDevice struct {
 	VolumeType          interface{} `yaml:"VolumeType,omitempty"`
 }
 
+// LaunchConfigurationBlockDevice validation
 func (resource LaunchConfigurationBlockDevice) Validate() []error {
 	errs := []error{}
 

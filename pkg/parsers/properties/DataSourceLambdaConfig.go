@@ -10,6 +10,7 @@ type DataSourceLambdaConfig struct {
 	LambdaFunctionArn interface{} `yaml:"LambdaFunctionArn"`
 }
 
+// DataSourceLambdaConfig validation
 func (resource DataSourceLambdaConfig) Validate() []error {
 	errs := []error{}
 

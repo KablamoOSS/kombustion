@@ -11,6 +11,7 @@ type UserLoginProfile struct {
 	PasswordResetRequired interface{} `yaml:"PasswordResetRequired,omitempty"`
 }
 
+// UserLoginProfile validation
 func (resource UserLoginProfile) Validate() []error {
 	errs := []error{}
 

@@ -12,6 +12,7 @@ type ApplicationReferenceDataSourceReferenceSchema struct {
 	RecordColumns  interface{}                                 `yaml:"RecordColumns"`
 }
 
+// ApplicationReferenceDataSourceReferenceSchema validation
 func (resource ApplicationReferenceDataSourceReferenceSchema) Validate() []error {
 	errs := []error{}
 

@@ -51,10 +51,12 @@ func ParseRedshiftClusterSubnetGroup(ctx map[string]interface{}, name string, da
 	return
 }
 
+// ParseRedshiftClusterSubnetGroup validator
 func (resource RedshiftClusterSubnetGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRedshiftClusterSubnetGroupProperties validator
 func (resource RedshiftClusterSubnetGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.Description == nil {

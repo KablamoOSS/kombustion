@@ -55,10 +55,12 @@ func ParseEC2Subnet(ctx map[string]interface{}, name string, data string) (cf ty
 	return
 }
 
+// ParseEC2Subnet validator
 func (resource EC2Subnet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2SubnetProperties validator
 func (resource EC2SubnetProperties) Validate() []error {
 	errs := []error{}
 	if resource.CidrBlock == nil {

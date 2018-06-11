@@ -62,10 +62,12 @@ func ParseDMSReplicationInstance(ctx map[string]interface{}, name string, data s
 	return
 }
 
+// ParseDMSReplicationInstance validator
 func (resource DMSReplicationInstance) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDMSReplicationInstanceProperties validator
 func (resource DMSReplicationInstanceProperties) Validate() []error {
 	errs := []error{}
 	if resource.ReplicationInstanceClass == nil {

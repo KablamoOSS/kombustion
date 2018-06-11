@@ -10,6 +10,7 @@ type InstanceElasticGpuSpecification struct {
 	Type interface{} `yaml:"Type"`
 }
 
+// InstanceElasticGpuSpecification validation
 func (resource InstanceElasticGpuSpecification) Validate() []error {
 	errs := []error{}
 

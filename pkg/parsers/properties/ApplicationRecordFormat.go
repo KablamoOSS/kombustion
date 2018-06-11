@@ -11,6 +11,7 @@ type ApplicationRecordFormat struct {
 	MappingParameters *ApplicationMappingParameters `yaml:"MappingParameters,omitempty"`
 }
 
+// ApplicationRecordFormat validation
 func (resource ApplicationRecordFormat) Validate() []error {
 	errs := []error{}
 

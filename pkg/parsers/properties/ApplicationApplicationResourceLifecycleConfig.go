@@ -9,6 +9,7 @@ type ApplicationApplicationResourceLifecycleConfig struct {
 	VersionLifecycleConfig *ApplicationApplicationVersionLifecycleConfig `yaml:"VersionLifecycleConfig,omitempty"`
 }
 
+// ApplicationApplicationResourceLifecycleConfig validation
 func (resource ApplicationApplicationResourceLifecycleConfig) Validate() []error {
 	errs := []error{}
 

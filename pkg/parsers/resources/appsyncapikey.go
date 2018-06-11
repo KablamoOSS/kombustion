@@ -51,10 +51,12 @@ func ParseAppSyncApiKey(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseAppSyncApiKey validator
 func (resource AppSyncApiKey) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAppSyncApiKeyProperties validator
 func (resource AppSyncApiKeyProperties) Validate() []error {
 	errs := []error{}
 	if resource.ApiId == nil {

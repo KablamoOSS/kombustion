@@ -11,6 +11,7 @@ type ServiceDnsConfig struct {
 	DnsRecords  interface{} `yaml:"DnsRecords"`
 }
 
+// ServiceDnsConfig validation
 func (resource ServiceDnsConfig) Validate() []error {
 	errs := []error{}
 

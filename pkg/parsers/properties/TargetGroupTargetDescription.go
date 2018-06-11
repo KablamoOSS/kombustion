@@ -12,6 +12,7 @@ type TargetGroupTargetDescription struct {
 	Port             interface{} `yaml:"Port,omitempty"`
 }
 
+// TargetGroupTargetDescription validation
 func (resource TargetGroupTargetDescription) Validate() []error {
 	errs := []error{}
 

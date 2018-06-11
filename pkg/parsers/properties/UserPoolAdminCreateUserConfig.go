@@ -10,6 +10,7 @@ type UserPoolAdminCreateUserConfig struct {
 	InviteMessageTemplate     *UserPoolInviteMessageTemplate `yaml:"InviteMessageTemplate,omitempty"`
 }
 
+// UserPoolAdminCreateUserConfig validation
 func (resource UserPoolAdminCreateUserConfig) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type BucketServerSideEncryptionByDefault struct {
 	SSEAlgorithm   interface{} `yaml:"SSEAlgorithm"`
 }
 
+// BucketServerSideEncryptionByDefault validation
 func (resource BucketServerSideEncryptionByDefault) Validate() []error {
 	errs := []error{}
 

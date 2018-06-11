@@ -10,6 +10,7 @@ type WebACLAction struct {
 	Type interface{} `yaml:"Type"`
 }
 
+// WebACLAction validation
 func (resource WebACLAction) Validate() []error {
 	errs := []error{}
 

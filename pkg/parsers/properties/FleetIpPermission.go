@@ -13,6 +13,7 @@ type FleetIpPermission struct {
 	ToPort   interface{} `yaml:"ToPort"`
 }
 
+// FleetIpPermission validation
 func (resource FleetIpPermission) Validate() []error {
 	errs := []error{}
 

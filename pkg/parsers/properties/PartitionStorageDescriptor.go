@@ -19,6 +19,7 @@ type PartitionStorageDescriptor struct {
 	SortColumns            interface{}          `yaml:"SortColumns,omitempty"`
 }
 
+// PartitionStorageDescriptor validation
 func (resource PartitionStorageDescriptor) Validate() []error {
 	errs := []error{}
 

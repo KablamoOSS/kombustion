@@ -12,6 +12,7 @@ type AutoScalingGroupTagProperty struct {
 	Value             interface{} `yaml:"Value"`
 }
 
+// AutoScalingGroupTagProperty validation
 func (resource AutoScalingGroupTagProperty) Validate() []error {
 	errs := []error{}
 

@@ -9,6 +9,7 @@ type TargetGroupTargetGroupAttribute struct {
 	Value interface{} `yaml:"Value,omitempty"`
 }
 
+// TargetGroupTargetGroupAttribute validation
 func (resource TargetGroupTargetGroupAttribute) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type BucketRoutingRule struct {
 	RedirectRule         *BucketRedirectRule         `yaml:"RedirectRule"`
 }
 
+// BucketRoutingRule validation
 func (resource BucketRoutingRule) Validate() []error {
 	errs := []error{}
 

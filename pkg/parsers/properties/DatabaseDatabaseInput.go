@@ -11,6 +11,7 @@ type DatabaseDatabaseInput struct {
 	Parameters  interface{} `yaml:"Parameters,omitempty"`
 }
 
+// DatabaseDatabaseInput validation
 func (resource DatabaseDatabaseInput) Validate() []error {
 	errs := []error{}
 

@@ -12,6 +12,7 @@ type MethodMethodResponse struct {
 	ResponseParameters interface{} `yaml:"ResponseParameters,omitempty"`
 }
 
+// MethodMethodResponse validation
 func (resource MethodMethodResponse) Validate() []error {
 	errs := []error{}
 

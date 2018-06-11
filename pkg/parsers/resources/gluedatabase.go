@@ -51,10 +51,12 @@ func ParseGlueDatabase(ctx map[string]interface{}, name string, data string) (cf
 	return
 }
 
+// ParseGlueDatabase validator
 func (resource GlueDatabase) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGlueDatabaseProperties validator
 func (resource GlueDatabaseProperties) Validate() []error {
 	errs := []error{}
 	if resource.CatalogId == nil {

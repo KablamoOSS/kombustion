@@ -12,6 +12,7 @@ type DeploymentGroupDeployment struct {
 	Revision                      *DeploymentGroupRevisionLocation `yaml:"Revision"`
 }
 
+// DeploymentGroupDeployment validation
 func (resource DeploymentGroupDeployment) Validate() []error {
 	errs := []error{}
 

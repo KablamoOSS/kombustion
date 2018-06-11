@@ -11,6 +11,7 @@ type TemplateTemplate struct {
 	TextPart     interface{} `yaml:"TextPart,omitempty"`
 }
 
+// TemplateTemplate validation
 func (resource TemplateTemplate) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type FunctionVpcConfig struct {
 	SubnetIds        interface{} `yaml:"SubnetIds"`
 }
 
+// FunctionVpcConfig validation
 func (resource FunctionVpcConfig) Validate() []error {
 	errs := []error{}
 

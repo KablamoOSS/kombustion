@@ -15,6 +15,7 @@ type UserPoolLambdaConfig struct {
 	VerifyAuthChallengeResponse interface{} `yaml:"VerifyAuthChallengeResponse,omitempty"`
 }
 
+// UserPoolLambdaConfig validation
 func (resource UserPoolLambdaConfig) Validate() []error {
 	errs := []error{}
 

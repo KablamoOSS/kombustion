@@ -10,6 +10,7 @@ type PartitionSkewedInfo struct {
 	SkewedColumnValues            interface{} `yaml:"SkewedColumnValues,omitempty"`
 }
 
+// PartitionSkewedInfo validation
 func (resource PartitionSkewedInfo) Validate() []error {
 	errs := []error{}
 

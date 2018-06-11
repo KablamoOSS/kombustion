@@ -11,6 +11,7 @@ type HealthCheckHealthCheckTag struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// HealthCheckHealthCheckTag validation
 func (resource HealthCheckHealthCheckTag) Validate() []error {
 	errs := []error{}
 

@@ -52,10 +52,12 @@ func ParseElasticBeanstalkApplicationVersion(ctx map[string]interface{}, name st
 	return
 }
 
+// ParseElasticBeanstalkApplicationVersion validator
 func (resource ElasticBeanstalkApplicationVersion) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElasticBeanstalkApplicationVersionProperties validator
 func (resource ElasticBeanstalkApplicationVersionProperties) Validate() []error {
 	errs := []error{}
 	if resource.ApplicationName == nil {

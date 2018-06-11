@@ -52,10 +52,12 @@ func ParseEC2NetworkInterfaceAttachment(ctx map[string]interface{}, name string,
 	return
 }
 
+// ParseEC2NetworkInterfaceAttachment validator
 func (resource EC2NetworkInterfaceAttachment) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2NetworkInterfaceAttachmentProperties validator
 func (resource EC2NetworkInterfaceAttachmentProperties) Validate() []error {
 	errs := []error{}
 	if resource.DeviceIndex == nil {

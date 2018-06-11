@@ -10,6 +10,7 @@ type AliasAliasRoutingConfiguration struct {
 	AdditionalVersionWeights interface{} `yaml:"AdditionalVersionWeights"`
 }
 
+// AliasAliasRoutingConfiguration validation
 func (resource AliasAliasRoutingConfiguration) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type RuleInputTransformer struct {
 	InputPathsMap interface{} `yaml:"InputPathsMap,omitempty"`
 }
 
+// RuleInputTransformer validation
 func (resource RuleInputTransformer) Validate() []error {
 	errs := []error{}
 

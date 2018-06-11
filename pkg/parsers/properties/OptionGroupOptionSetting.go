@@ -9,6 +9,7 @@ type OptionGroupOptionSetting struct {
 	Value interface{} `yaml:"Value,omitempty"`
 }
 
+// OptionGroupOptionSetting validation
 func (resource OptionGroupOptionSetting) Validate() []error {
 	errs := []error{}
 

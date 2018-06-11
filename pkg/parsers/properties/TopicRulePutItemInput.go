@@ -10,6 +10,7 @@ type TopicRulePutItemInput struct {
 	TableName interface{} `yaml:"TableName"`
 }
 
+// TopicRulePutItemInput validation
 func (resource TopicRulePutItemInput) Validate() []error {
 	errs := []error{}
 

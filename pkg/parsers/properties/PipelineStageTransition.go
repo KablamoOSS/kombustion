@@ -11,6 +11,7 @@ type PipelineStageTransition struct {
 	StageName interface{} `yaml:"StageName"`
 }
 
+// PipelineStageTransition validation
 func (resource PipelineStageTransition) Validate() []error {
 	errs := []error{}
 

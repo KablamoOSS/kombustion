@@ -34,6 +34,7 @@ type TaskDefinitionContainerDefinition struct {
 	LinuxParameters        *TaskDefinitionLinuxParameters  `yaml:"LinuxParameters,omitempty"`
 }
 
+// TaskDefinitionContainerDefinition validation
 func (resource TaskDefinitionContainerDefinition) Validate() []error {
 	errs := []error{}
 

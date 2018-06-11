@@ -12,6 +12,7 @@ type WebACLActivatedRule struct {
 	Action   *WebACLWafAction `yaml:"Action"`
 }
 
+// WebACLActivatedRule validation
 func (resource WebACLActivatedRule) Validate() []error {
 	errs := []error{}
 

@@ -62,10 +62,12 @@ func ParseECSService(ctx map[string]interface{}, name string, data string) (cf t
 	return
 }
 
+// ParseECSService validator
 func (resource ECSService) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseECSServiceProperties validator
 func (resource ECSServiceProperties) Validate() []error {
 	errs := []error{}
 	if resource.TaskDefinition == nil {

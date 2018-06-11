@@ -21,6 +21,7 @@ type SpotFleetSpotFleetRequestConfigData struct {
 	LaunchTemplateConfigs            interface{} `yaml:"LaunchTemplateConfigs,omitempty"`
 }
 
+// SpotFleetSpotFleetRequestConfigData validation
 func (resource SpotFleetSpotFleetRequestConfigData) Validate() []error {
 	errs := []error{}
 

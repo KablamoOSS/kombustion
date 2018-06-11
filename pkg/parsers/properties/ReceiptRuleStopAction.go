@@ -11,6 +11,7 @@ type ReceiptRuleStopAction struct {
 	TopicArn interface{} `yaml:"TopicArn,omitempty"`
 }
 
+// ReceiptRuleStopAction validation
 func (resource ReceiptRuleStopAction) Validate() []error {
 	errs := []error{}
 

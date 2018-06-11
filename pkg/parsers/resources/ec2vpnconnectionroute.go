@@ -50,10 +50,12 @@ func ParseEC2VPNConnectionRoute(ctx map[string]interface{}, name string, data st
 	return
 }
 
+// ParseEC2VPNConnectionRoute validator
 func (resource EC2VPNConnectionRoute) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2VPNConnectionRouteProperties validator
 func (resource EC2VPNConnectionRouteProperties) Validate() []error {
 	errs := []error{}
 	if resource.DestinationCidrBlock == nil {

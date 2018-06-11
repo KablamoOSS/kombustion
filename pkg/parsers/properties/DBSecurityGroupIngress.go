@@ -11,6 +11,7 @@ type DBSecurityGroupIngress struct {
 	EC2SecurityGroupOwnerId interface{} `yaml:"EC2SecurityGroupOwnerId,omitempty"`
 }
 
+// DBSecurityGroupIngress validation
 func (resource DBSecurityGroupIngress) Validate() []error {
 	errs := []error{}
 

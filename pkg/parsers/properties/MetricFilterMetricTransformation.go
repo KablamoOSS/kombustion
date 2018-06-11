@@ -12,6 +12,7 @@ type MetricFilterMetricTransformation struct {
 	MetricValue     interface{} `yaml:"MetricValue"`
 }
 
+// MetricFilterMetricTransformation validation
 func (resource MetricFilterMetricTransformation) Validate() []error {
 	errs := []error{}
 

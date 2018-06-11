@@ -67,10 +67,12 @@ func ParseRDSDBCluster(ctx map[string]interface{}, name string, data string) (cf
 	return
 }
 
+// ParseRDSDBCluster validator
 func (resource RDSDBCluster) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRDSDBClusterProperties validator
 func (resource RDSDBClusterProperties) Validate() []error {
 	errs := []error{}
 	if resource.Engine == nil {

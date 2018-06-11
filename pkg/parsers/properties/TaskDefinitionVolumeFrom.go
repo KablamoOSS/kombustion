@@ -9,6 +9,7 @@ type TaskDefinitionVolumeFrom struct {
 	SourceContainer interface{} `yaml:"SourceContainer,omitempty"`
 }
 
+// TaskDefinitionVolumeFrom validation
 func (resource TaskDefinitionVolumeFrom) Validate() []error {
 	errs := []error{}
 

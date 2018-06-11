@@ -10,6 +10,7 @@ type IdentityPoolCognitoIdentityProvider struct {
 	ServerSideTokenCheck interface{} `yaml:"ServerSideTokenCheck,omitempty"`
 }
 
+// IdentityPoolCognitoIdentityProvider validation
 func (resource IdentityPoolCognitoIdentityProvider) Validate() []error {
 	errs := []error{}
 

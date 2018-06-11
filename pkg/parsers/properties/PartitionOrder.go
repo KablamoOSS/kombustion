@@ -11,6 +11,7 @@ type PartitionOrder struct {
 	SortOrder interface{} `yaml:"SortOrder,omitempty"`
 }
 
+// PartitionOrder validation
 func (resource PartitionOrder) Validate() []error {
 	errs := []error{}
 

@@ -10,6 +10,7 @@ type DeliveryStreamKMSEncryptionConfig struct {
 	AWSKMSKeyARN interface{} `yaml:"AWSKMSKeyARN"`
 }
 
+// DeliveryStreamKMSEncryptionConfig validation
 func (resource DeliveryStreamKMSEncryptionConfig) Validate() []error {
 	errs := []error{}
 

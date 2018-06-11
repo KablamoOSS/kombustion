@@ -78,10 +78,12 @@ func ParseRedshiftCluster(ctx map[string]interface{}, name string, data string) 
 	return
 }
 
+// ParseRedshiftCluster validator
 func (resource RedshiftCluster) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRedshiftClusterProperties validator
 func (resource RedshiftClusterProperties) Validate() []error {
 	errs := []error{}
 	if resource.ClusterType == nil {

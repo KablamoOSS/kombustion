@@ -9,6 +9,7 @@ type LaunchTemplateTagSpecification struct {
 	Tags         interface{} `yaml:"Tags,omitempty"`
 }
 
+// LaunchTemplateTagSpecification validation
 func (resource LaunchTemplateTagSpecification) Validate() []error {
 	errs := []error{}
 

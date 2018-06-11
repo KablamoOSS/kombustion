@@ -11,6 +11,7 @@ type Tag struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// Tag validation
 func (resource Tag) Validate() []error {
 	errs := []error{}
 

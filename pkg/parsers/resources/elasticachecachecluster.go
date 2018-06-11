@@ -69,10 +69,12 @@ func ParseElastiCacheCacheCluster(ctx map[string]interface{}, name string, data 
 	return
 }
 
+// ParseElastiCacheCacheCluster validator
 func (resource ElastiCacheCacheCluster) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseElastiCacheCacheClusterProperties validator
 func (resource ElastiCacheCacheClusterProperties) Validate() []error {
 	errs := []error{}
 	if resource.CacheNodeType == nil {

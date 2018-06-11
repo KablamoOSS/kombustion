@@ -12,6 +12,7 @@ type DataSourceDynamoDBConfig struct {
 	UseCallerCredentials interface{} `yaml:"UseCallerCredentials,omitempty"`
 }
 
+// DataSourceDynamoDBConfig validation
 func (resource DataSourceDynamoDBConfig) Validate() []error {
 	errs := []error{}
 

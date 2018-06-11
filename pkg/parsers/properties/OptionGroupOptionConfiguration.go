@@ -15,6 +15,7 @@ type OptionGroupOptionConfiguration struct {
 	VpcSecurityGroupMemberships interface{}               `yaml:"VpcSecurityGroupMemberships,omitempty"`
 }
 
+// OptionGroupOptionConfiguration validation
 func (resource OptionGroupOptionConfiguration) Validate() []error {
 	errs := []error{}
 

@@ -52,10 +52,12 @@ func ParseDMSReplicationSubnetGroup(ctx map[string]interface{}, name string, dat
 	return
 }
 
+// ParseDMSReplicationSubnetGroup validator
 func (resource DMSReplicationSubnetGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseDMSReplicationSubnetGroupProperties validator
 func (resource DMSReplicationSubnetGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.ReplicationSubnetGroupDescription == nil {

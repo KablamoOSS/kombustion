@@ -9,6 +9,7 @@ type ClusterEbsConfiguration struct {
 	EbsBlockDeviceConfigs interface{} `yaml:"EbsBlockDeviceConfigs,omitempty"`
 }
 
+// ClusterEbsConfiguration validation
 func (resource ClusterEbsConfiguration) Validate() []error {
 	errs := []error{}
 

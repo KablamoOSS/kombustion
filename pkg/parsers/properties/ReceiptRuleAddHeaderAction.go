@@ -11,6 +11,7 @@ type ReceiptRuleAddHeaderAction struct {
 	HeaderValue interface{} `yaml:"HeaderValue"`
 }
 
+// ReceiptRuleAddHeaderAction validation
 func (resource ReceiptRuleAddHeaderAction) Validate() []error {
 	errs := []error{}
 

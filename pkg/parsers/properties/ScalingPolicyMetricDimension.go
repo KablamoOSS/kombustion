@@ -5,12 +5,13 @@ package properties
 
 import "fmt"
 
-// ScalingPolicyMetricDimension Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-scalingpolicy-metricdimension.html
+// ScalingPolicyMetricDimension Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-metricdimension.html
 type ScalingPolicyMetricDimension struct {
 	Name  interface{} `yaml:"Name"`
 	Value interface{} `yaml:"Value"`
 }
 
+// ScalingPolicyMetricDimension validation
 func (resource ScalingPolicyMetricDimension) Validate() []error {
 	errs := []error{}
 

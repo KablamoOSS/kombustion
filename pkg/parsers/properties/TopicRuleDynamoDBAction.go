@@ -18,6 +18,7 @@ type TopicRuleDynamoDBAction struct {
 	TableName     interface{} `yaml:"TableName"`
 }
 
+// TopicRuleDynamoDBAction validation
 func (resource TopicRuleDynamoDBAction) Validate() []error {
 	errs := []error{}
 

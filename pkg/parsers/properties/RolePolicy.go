@@ -11,6 +11,7 @@ type RolePolicy struct {
 	PolicyName     interface{} `yaml:"PolicyName"`
 }
 
+// RolePolicy validation
 func (resource RolePolicy) Validate() []error {
 	errs := []error{}
 

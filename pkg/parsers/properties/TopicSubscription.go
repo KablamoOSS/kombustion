@@ -11,6 +11,7 @@ type TopicSubscription struct {
 	Protocol interface{} `yaml:"Protocol"`
 }
 
+// TopicSubscription validation
 func (resource TopicSubscription) Validate() []error {
 	errs := []error{}
 

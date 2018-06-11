@@ -8,6 +8,7 @@ type TopicRuleLambdaAction struct {
 	FunctionArn interface{} `yaml:"FunctionArn,omitempty"`
 }
 
+// TopicRuleLambdaAction validation
 func (resource TopicRuleLambdaAction) Validate() []error {
 	errs := []error{}
 

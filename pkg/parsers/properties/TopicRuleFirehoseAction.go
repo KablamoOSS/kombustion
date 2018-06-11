@@ -12,6 +12,7 @@ type TopicRuleFirehoseAction struct {
 	Separator          interface{} `yaml:"Separator,omitempty"`
 }
 
+// TopicRuleFirehoseAction validation
 func (resource TopicRuleFirehoseAction) Validate() []error {
 	errs := []error{}
 

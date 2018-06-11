@@ -10,6 +10,7 @@ type ApplicationMaxCountRule struct {
 	MaxCount           interface{} `yaml:"MaxCount,omitempty"`
 }
 
+// ApplicationMaxCountRule validation
 func (resource ApplicationMaxCountRule) Validate() []error {
 	errs := []error{}
 

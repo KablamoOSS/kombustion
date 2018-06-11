@@ -52,10 +52,12 @@ func ParseKinesisAnalyticsApplication(ctx map[string]interface{}, name string, d
 	return
 }
 
+// ParseKinesisAnalyticsApplication validator
 func (resource KinesisAnalyticsApplication) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseKinesisAnalyticsApplicationProperties validator
 func (resource KinesisAnalyticsApplicationProperties) Validate() []error {
 	errs := []error{}
 	if resource.Inputs == nil {

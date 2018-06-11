@@ -10,6 +10,7 @@ type CrawlerJdbcTarget struct {
 	Exclusions     interface{} `yaml:"Exclusions,omitempty"`
 }
 
+// CrawlerJdbcTarget validation
 func (resource CrawlerJdbcTarget) Validate() []error {
 	errs := []error{}
 

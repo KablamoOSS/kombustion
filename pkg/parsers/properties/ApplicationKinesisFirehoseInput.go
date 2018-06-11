@@ -11,6 +11,7 @@ type ApplicationKinesisFirehoseInput struct {
 	RoleARN     interface{} `yaml:"RoleARN"`
 }
 
+// ApplicationKinesisFirehoseInput validation
 func (resource ApplicationKinesisFirehoseInput) Validate() []error {
 	errs := []error{}
 

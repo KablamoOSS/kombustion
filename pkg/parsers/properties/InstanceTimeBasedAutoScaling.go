@@ -14,6 +14,7 @@ type InstanceTimeBasedAutoScaling struct {
 	Wednesday interface{} `yaml:"Wednesday,omitempty"`
 }
 
+// InstanceTimeBasedAutoScaling validation
 func (resource InstanceTimeBasedAutoScaling) Validate() []error {
 	errs := []error{}
 

@@ -22,6 +22,7 @@ type DeploymentStageDescription struct {
 	MethodSettings       interface{} `yaml:"MethodSettings,omitempty"`
 }
 
+// DeploymentStageDescription validation
 func (resource DeploymentStageDescription) Validate() []error {
 	errs := []error{}
 

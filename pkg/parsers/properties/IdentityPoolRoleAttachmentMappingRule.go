@@ -13,6 +13,7 @@ type IdentityPoolRoleAttachmentMappingRule struct {
 	Value     interface{} `yaml:"Value"`
 }
 
+// IdentityPoolRoleAttachmentMappingRule validation
 func (resource IdentityPoolRoleAttachmentMappingRule) Validate() []error {
 	errs := []error{}
 

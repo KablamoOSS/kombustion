@@ -9,6 +9,7 @@ type NetworkAclEntryIcmp struct {
 	Type interface{} `yaml:"Type,omitempty"`
 }
 
+// NetworkAclEntryIcmp validation
 func (resource NetworkAclEntryIcmp) Validate() []error {
 	errs := []error{}
 

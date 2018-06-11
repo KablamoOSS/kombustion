@@ -10,6 +10,7 @@ type BucketSseKmsEncryptedObjects struct {
 	Status interface{} `yaml:"Status"`
 }
 
+// BucketSseKmsEncryptedObjects validation
 func (resource BucketSseKmsEncryptedObjects) Validate() []error {
 	errs := []error{}
 

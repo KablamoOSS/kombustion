@@ -11,6 +11,7 @@ type DataSourceElasticsearchConfig struct {
 	Endpoint  interface{} `yaml:"Endpoint"`
 }
 
+// DataSourceElasticsearchConfig validation
 func (resource DataSourceElasticsearchConfig) Validate() []error {
 	errs := []error{}
 

@@ -52,10 +52,12 @@ func ParseRDSDBSubnetGroup(ctx map[string]interface{}, name string, data string)
 	return
 }
 
+// ParseRDSDBSubnetGroup validator
 func (resource RDSDBSubnetGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseRDSDBSubnetGroupProperties validator
 func (resource RDSDBSubnetGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.DBSubnetGroupDescription == nil {

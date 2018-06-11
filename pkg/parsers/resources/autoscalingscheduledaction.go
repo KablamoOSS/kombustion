@@ -55,10 +55,12 @@ func ParseAutoScalingScheduledAction(ctx map[string]interface{}, name string, da
 	return
 }
 
+// ParseAutoScalingScheduledAction validator
 func (resource AutoScalingScheduledAction) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAutoScalingScheduledActionProperties validator
 func (resource AutoScalingScheduledActionProperties) Validate() []error {
 	errs := []error{}
 	if resource.AutoScalingGroupName == nil {

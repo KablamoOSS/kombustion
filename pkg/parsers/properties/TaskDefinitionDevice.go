@@ -12,6 +12,7 @@ type TaskDefinitionDevice struct {
 	Permissions   interface{} `yaml:"Permissions,omitempty"`
 }
 
+// TaskDefinitionDevice validation
 func (resource TaskDefinitionDevice) Validate() []error {
 	errs := []error{}
 

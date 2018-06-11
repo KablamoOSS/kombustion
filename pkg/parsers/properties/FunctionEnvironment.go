@@ -8,6 +8,7 @@ type FunctionEnvironment struct {
 	Variables interface{} `yaml:"Variables,omitempty"`
 }
 
+// FunctionEnvironment validation
 func (resource FunctionEnvironment) Validate() []error {
 	errs := []error{}
 

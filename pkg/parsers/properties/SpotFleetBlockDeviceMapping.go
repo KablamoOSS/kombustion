@@ -13,6 +13,7 @@ type SpotFleetBlockDeviceMapping struct {
 	Ebs         *SpotFleetEbsBlockDevice `yaml:"Ebs,omitempty"`
 }
 
+// SpotFleetBlockDeviceMapping validation
 func (resource SpotFleetBlockDeviceMapping) Validate() []error {
 	errs := []error{}
 

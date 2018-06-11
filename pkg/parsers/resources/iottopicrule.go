@@ -51,10 +51,12 @@ func ParseIoTTopicRule(ctx map[string]interface{}, name string, data string) (cf
 	return
 }
 
+// ParseIoTTopicRule validator
 func (resource IoTTopicRule) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseIoTTopicRuleProperties validator
 func (resource IoTTopicRuleProperties) Validate() []error {
 	errs := []error{}
 	if resource.TopicRulePayload == nil {

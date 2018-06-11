@@ -11,6 +11,7 @@ type PipelinePipelineTag struct {
 	Value interface{} `yaml:"Value"`
 }
 
+// PipelinePipelineTag validation
 func (resource PipelinePipelineTag) Validate() []error {
 	errs := []error{}
 

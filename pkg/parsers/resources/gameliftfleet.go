@@ -59,10 +59,12 @@ func ParseGameLiftFleet(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseGameLiftFleet validator
 func (resource GameLiftFleet) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseGameLiftFleetProperties validator
 func (resource GameLiftFleetProperties) Validate() []error {
 	errs := []error{}
 	if resource.BuildId == nil {

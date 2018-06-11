@@ -9,6 +9,7 @@ type SpotFleetLaunchTemplateConfig struct {
 	LaunchTemplateSpecification *SpotFleetFleetLaunchTemplateSpecification `yaml:"LaunchTemplateSpecification,omitempty"`
 }
 
+// SpotFleetLaunchTemplateConfig validation
 func (resource SpotFleetLaunchTemplateConfig) Validate() []error {
 	errs := []error{}
 

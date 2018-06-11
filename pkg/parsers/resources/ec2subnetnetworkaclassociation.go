@@ -50,10 +50,12 @@ func ParseEC2SubnetNetworkAclAssociation(ctx map[string]interface{}, name string
 	return
 }
 
+// ParseEC2SubnetNetworkAclAssociation validator
 func (resource EC2SubnetNetworkAclAssociation) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2SubnetNetworkAclAssociationProperties validator
 func (resource EC2SubnetNetworkAclAssociationProperties) Validate() []error {
 	errs := []error{}
 	if resource.NetworkAclId == nil {

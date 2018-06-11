@@ -50,10 +50,12 @@ func ParseCloudWatchDashboard(ctx map[string]interface{}, name string, data stri
 	return
 }
 
+// ParseCloudWatchDashboard validator
 func (resource CloudWatchDashboard) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCloudWatchDashboardProperties validator
 func (resource CloudWatchDashboardProperties) Validate() []error {
 	errs := []error{}
 	if resource.DashboardBody == nil {

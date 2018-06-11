@@ -9,6 +9,7 @@ type JobDefinitionEnvironment struct {
 	Value interface{} `yaml:"Value,omitempty"`
 }
 
+// JobDefinitionEnvironment validation
 func (resource JobDefinitionEnvironment) Validate() []error {
 	errs := []error{}
 

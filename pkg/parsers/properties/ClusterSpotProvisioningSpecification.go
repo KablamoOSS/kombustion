@@ -12,6 +12,7 @@ type ClusterSpotProvisioningSpecification struct {
 	TimeoutDurationMinutes interface{} `yaml:"TimeoutDurationMinutes"`
 }
 
+// ClusterSpotProvisioningSpecification validation
 func (resource ClusterSpotProvisioningSpecification) Validate() []error {
 	errs := []error{}
 

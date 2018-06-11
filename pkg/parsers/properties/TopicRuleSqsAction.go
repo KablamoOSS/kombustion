@@ -12,6 +12,7 @@ type TopicRuleSqsAction struct {
 	UseBase64 interface{} `yaml:"UseBase64,omitempty"`
 }
 
+// TopicRuleSqsAction validation
 func (resource TopicRuleSqsAction) Validate() []error {
 	errs := []error{}
 

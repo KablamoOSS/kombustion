@@ -24,6 +24,7 @@ type DistributionDistributionConfig struct {
 	DefaultCacheBehavior *DistributionDefaultCacheBehavior `yaml:"DefaultCacheBehavior,omitempty"`
 }
 
+// DistributionDistributionConfig validation
 func (resource DistributionDistributionConfig) Validate() []error {
 	errs := []error{}
 

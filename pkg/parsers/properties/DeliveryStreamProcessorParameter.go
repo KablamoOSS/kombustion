@@ -11,6 +11,7 @@ type DeliveryStreamProcessorParameter struct {
 	ParameterValue interface{} `yaml:"ParameterValue"`
 }
 
+// DeliveryStreamProcessorParameter validation
 func (resource DeliveryStreamProcessorParameter) Validate() []error {
 	errs := []error{}
 

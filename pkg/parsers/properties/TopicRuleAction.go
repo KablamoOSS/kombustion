@@ -19,6 +19,7 @@ type TopicRuleAction struct {
 	CloudwatchAlarm  *TopicRuleCloudwatchAlarmAction  `yaml:"CloudwatchAlarm,omitempty"`
 }
 
+// TopicRuleAction validation
 func (resource TopicRuleAction) Validate() []error {
 	errs := []error{}
 

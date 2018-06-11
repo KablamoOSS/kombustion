@@ -21,6 +21,7 @@ type JobDefinitionContainerProperties struct {
 	Volumes                interface{} `yaml:"Volumes,omitempty"`
 }
 
+// JobDefinitionContainerProperties validation
 func (resource JobDefinitionContainerProperties) Validate() []error {
 	errs := []error{}
 

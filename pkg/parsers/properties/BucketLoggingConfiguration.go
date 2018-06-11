@@ -9,6 +9,7 @@ type BucketLoggingConfiguration struct {
 	LogFilePrefix         interface{} `yaml:"LogFilePrefix,omitempty"`
 }
 
+// BucketLoggingConfiguration validation
 func (resource BucketLoggingConfiguration) Validate() []error {
 	errs := []error{}
 

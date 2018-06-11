@@ -10,6 +10,7 @@ type CloudFrontOriginAccessIdentityCloudFrontOriginAccessIdentityConfig struct {
 	Comment interface{} `yaml:"Comment"`
 }
 
+// CloudFrontOriginAccessIdentityCloudFrontOriginAccessIdentityConfig validation
 func (resource CloudFrontOriginAccessIdentityCloudFrontOriginAccessIdentityConfig) Validate() []error {
 	errs := []error{}
 

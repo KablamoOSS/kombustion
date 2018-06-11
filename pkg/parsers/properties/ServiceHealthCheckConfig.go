@@ -12,6 +12,7 @@ type ServiceHealthCheckConfig struct {
 	Type             interface{} `yaml:"Type"`
 }
 
+// ServiceHealthCheckConfig validation
 func (resource ServiceHealthCheckConfig) Validate() []error {
 	errs := []error{}
 

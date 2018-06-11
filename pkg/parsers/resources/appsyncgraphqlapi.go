@@ -54,10 +54,12 @@ func ParseAppSyncGraphQLApi(ctx map[string]interface{}, name string, data string
 	return
 }
 
+// ParseAppSyncGraphQLApi validator
 func (resource AppSyncGraphQLApi) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAppSyncGraphQLApiProperties validator
 func (resource AppSyncGraphQLApiProperties) Validate() []error {
 	errs := []error{}
 	if resource.AuthenticationType == nil {

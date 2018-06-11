@@ -8,6 +8,7 @@ type ThingAttributePayload struct {
 	Attributes interface{} `yaml:"Attributes,omitempty"`
 }
 
+// ThingAttributePayload validation
 func (resource ThingAttributePayload) Validate() []error {
 	errs := []error{}
 

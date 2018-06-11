@@ -10,6 +10,7 @@ type BucketLifecycleConfiguration struct {
 	Rules interface{} `yaml:"Rules"`
 }
 
+// BucketLifecycleConfiguration validation
 func (resource BucketLifecycleConfiguration) Validate() []error {
 	errs := []error{}
 

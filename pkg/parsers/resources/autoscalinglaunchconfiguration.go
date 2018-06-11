@@ -65,10 +65,12 @@ func ParseAutoScalingLaunchConfiguration(ctx map[string]interface{}, name string
 	return
 }
 
+// ParseAutoScalingLaunchConfiguration validator
 func (resource AutoScalingLaunchConfiguration) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseAutoScalingLaunchConfigurationProperties validator
 func (resource AutoScalingLaunchConfigurationProperties) Validate() []error {
 	errs := []error{}
 	if resource.ImageId == nil {

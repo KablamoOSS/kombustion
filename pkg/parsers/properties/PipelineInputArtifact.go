@@ -10,6 +10,7 @@ type PipelineInputArtifact struct {
 	Name interface{} `yaml:"Name"`
 }
 
+// PipelineInputArtifact validation
 func (resource PipelineInputArtifact) Validate() []error {
 	errs := []error{}
 

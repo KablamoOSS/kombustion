@@ -63,10 +63,12 @@ func ParseS3Bucket(ctx map[string]interface{}, name string, data string) (cf typ
 	return
 }
 
+// ParseS3Bucket validator
 func (resource S3Bucket) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseS3BucketProperties validator
 func (resource S3BucketProperties) Validate() []error {
 	errs := []error{}
 	return errs

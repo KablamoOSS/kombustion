@@ -60,10 +60,12 @@ func ParseEC2NetworkInterface(ctx map[string]interface{}, name string, data stri
 	return
 }
 
+// ParseEC2NetworkInterface validator
 func (resource EC2NetworkInterface) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseEC2NetworkInterfaceProperties validator
 func (resource EC2NetworkInterfaceProperties) Validate() []error {
 	errs := []error{}
 	if resource.SubnetId == nil {

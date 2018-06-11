@@ -11,6 +11,7 @@ type BucketReplicationConfiguration struct {
 	Rules interface{} `yaml:"Rules"`
 }
 
+// BucketReplicationConfiguration validation
 func (resource BucketReplicationConfiguration) Validate() []error {
 	errs := []error{}
 

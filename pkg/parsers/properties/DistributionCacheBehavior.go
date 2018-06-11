@@ -22,6 +22,7 @@ type DistributionCacheBehavior struct {
 	ForwardedValues            *DistributionForwardedValues `yaml:"ForwardedValues"`
 }
 
+// DistributionCacheBehavior validation
 func (resource DistributionCacheBehavior) Validate() []error {
 	errs := []error{}
 

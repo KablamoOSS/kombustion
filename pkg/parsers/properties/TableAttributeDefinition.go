@@ -11,6 +11,7 @@ type TableAttributeDefinition struct {
 	AttributeType interface{} `yaml:"AttributeType"`
 }
 
+// TableAttributeDefinition validation
 func (resource TableAttributeDefinition) Validate() []error {
 	errs := []error{}
 

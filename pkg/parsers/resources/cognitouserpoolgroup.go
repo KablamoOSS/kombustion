@@ -53,10 +53,12 @@ func ParseCognitoUserPoolGroup(ctx map[string]interface{}, name string, data str
 	return
 }
 
+// ParseCognitoUserPoolGroup validator
 func (resource CognitoUserPoolGroup) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCognitoUserPoolGroupProperties validator
 func (resource CognitoUserPoolGroupProperties) Validate() []error {
 	errs := []error{}
 	if resource.UserPoolId == nil {

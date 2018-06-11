@@ -48,10 +48,12 @@ func ParseSDBDomain(ctx map[string]interface{}, name string, data string) (cf ty
 	return
 }
 
+// ParseSDBDomain validator
 func (resource SDBDomain) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSDBDomainProperties validator
 func (resource SDBDomainProperties) Validate() []error {
 	errs := []error{}
 	return errs

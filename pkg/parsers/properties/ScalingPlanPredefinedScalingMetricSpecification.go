@@ -11,6 +11,7 @@ type ScalingPlanPredefinedScalingMetricSpecification struct {
 	ResourceLabel               interface{} `yaml:"ResourceLabel,omitempty"`
 }
 
+// ScalingPlanPredefinedScalingMetricSpecification validation
 func (resource ScalingPlanPredefinedScalingMetricSpecification) Validate() []error {
 	errs := []error{}
 

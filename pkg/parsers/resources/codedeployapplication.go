@@ -49,10 +49,12 @@ func ParseCodeDeployApplication(ctx map[string]interface{}, name string, data st
 	return
 }
 
+// ParseCodeDeployApplication validator
 func (resource CodeDeployApplication) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseCodeDeployApplicationProperties validator
 func (resource CodeDeployApplicationProperties) Validate() []error {
 	errs := []error{}
 	return errs

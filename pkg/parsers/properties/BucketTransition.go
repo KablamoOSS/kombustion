@@ -12,6 +12,7 @@ type BucketTransition struct {
 	TransitionInDays interface{} `yaml:"TransitionInDays,omitempty"`
 }
 
+// BucketTransition validation
 func (resource BucketTransition) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type AutoScalingGroupMetricsCollection struct {
 	Metrics     interface{} `yaml:"Metrics,omitempty"`
 }
 
+// AutoScalingGroupMetricsCollection validation
 func (resource AutoScalingGroupMetricsCollection) Validate() []error {
 	errs := []error{}
 

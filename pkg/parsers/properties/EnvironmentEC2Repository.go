@@ -11,6 +11,7 @@ type EnvironmentEC2Repository struct {
 	RepositoryUrl interface{} `yaml:"RepositoryUrl"`
 }
 
+// EnvironmentEC2Repository validation
 func (resource EnvironmentEC2Repository) Validate() []error {
 	errs := []error{}
 

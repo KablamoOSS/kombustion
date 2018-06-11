@@ -11,6 +11,7 @@ type ClusterBootstrapActionConfig struct {
 	ScriptBootstrapAction *ClusterScriptBootstrapActionConfig `yaml:"ScriptBootstrapAction"`
 }
 
+// ClusterBootstrapActionConfig validation
 func (resource ClusterBootstrapActionConfig) Validate() []error {
 	errs := []error{}
 

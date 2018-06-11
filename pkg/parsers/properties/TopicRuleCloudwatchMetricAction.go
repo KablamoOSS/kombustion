@@ -15,6 +15,7 @@ type TopicRuleCloudwatchMetricAction struct {
 	RoleArn         interface{} `yaml:"RoleArn"`
 }
 
+// TopicRuleCloudwatchMetricAction validation
 func (resource TopicRuleCloudwatchMetricAction) Validate() []error {
 	errs := []error{}
 

@@ -11,6 +11,7 @@ type ApplicationInputLambdaProcessor struct {
 	RoleARN     interface{} `yaml:"RoleARN"`
 }
 
+// ApplicationInputLambdaProcessor validation
 func (resource ApplicationInputLambdaProcessor) Validate() []error {
 	errs := []error{}
 

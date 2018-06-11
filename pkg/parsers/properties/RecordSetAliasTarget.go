@@ -12,6 +12,7 @@ type RecordSetAliasTarget struct {
 	HostedZoneId         interface{} `yaml:"HostedZoneId"`
 }
 
+// RecordSetAliasTarget validation
 func (resource RecordSetAliasTarget) Validate() []error {
 	errs := []error{}
 

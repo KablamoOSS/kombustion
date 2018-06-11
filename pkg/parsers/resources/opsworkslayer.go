@@ -68,10 +68,12 @@ func ParseOpsWorksLayer(ctx map[string]interface{}, name string, data string) (c
 	return
 }
 
+// ParseOpsWorksLayer validator
 func (resource OpsWorksLayer) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseOpsWorksLayerProperties validator
 func (resource OpsWorksLayerProperties) Validate() []error {
 	errs := []error{}
 	if resource.AutoAssignElasticIps == nil {

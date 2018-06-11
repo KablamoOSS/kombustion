@@ -15,6 +15,7 @@ type LoadBalancerListeners struct {
 	PolicyNames      interface{} `yaml:"PolicyNames,omitempty"`
 }
 
+// LoadBalancerListeners validation
 func (resource LoadBalancerListeners) Validate() []error {
 	errs := []error{}
 

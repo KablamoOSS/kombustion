@@ -14,6 +14,7 @@ type TopicRuleElasticsearchAction struct {
 	Type     interface{} `yaml:"Type"`
 }
 
+// TopicRuleElasticsearchAction validation
 func (resource TopicRuleElasticsearchAction) Validate() []error {
 	errs := []error{}
 

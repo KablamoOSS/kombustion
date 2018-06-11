@@ -9,6 +9,7 @@ type LayerShutdownEventConfiguration struct {
 	ExecutionTimeout                interface{} `yaml:"ExecutionTimeout,omitempty"`
 }
 
+// LayerShutdownEventConfiguration validation
 func (resource LayerShutdownEventConfiguration) Validate() []error {
 	errs := []error{}
 

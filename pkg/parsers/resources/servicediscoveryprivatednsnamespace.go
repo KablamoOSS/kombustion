@@ -51,10 +51,12 @@ func ParseServiceDiscoveryPrivateDnsNamespace(ctx map[string]interface{}, name s
 	return
 }
 
+// ParseServiceDiscoveryPrivateDnsNamespace validator
 func (resource ServiceDiscoveryPrivateDnsNamespace) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseServiceDiscoveryPrivateDnsNamespaceProperties validator
 func (resource ServiceDiscoveryPrivateDnsNamespaceProperties) Validate() []error {
 	errs := []error{}
 	if resource.Name == nil {

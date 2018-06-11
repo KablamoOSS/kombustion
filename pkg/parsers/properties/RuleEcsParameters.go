@@ -11,6 +11,7 @@ type RuleEcsParameters struct {
 	TaskDefinitionArn interface{} `yaml:"TaskDefinitionArn"`
 }
 
+// RuleEcsParameters validation
 func (resource RuleEcsParameters) Validate() []error {
 	errs := []error{}
 

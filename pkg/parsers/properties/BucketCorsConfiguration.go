@@ -10,6 +10,7 @@ type BucketCorsConfiguration struct {
 	CorsRules interface{} `yaml:"CorsRules"`
 }
 
+// BucketCorsConfiguration validation
 func (resource BucketCorsConfiguration) Validate() []error {
 	errs := []error{}
 

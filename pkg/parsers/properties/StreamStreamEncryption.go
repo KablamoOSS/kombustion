@@ -11,6 +11,7 @@ type StreamStreamEncryption struct {
 	KeyId          interface{} `yaml:"KeyId"`
 }
 
+// StreamStreamEncryption validation
 func (resource StreamStreamEncryption) Validate() []error {
 	errs := []error{}
 

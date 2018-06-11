@@ -10,6 +10,7 @@ type InstanceGroupConfigConfiguration struct {
 	Configurations          interface{} `yaml:"Configurations,omitempty"`
 }
 
+// InstanceGroupConfigConfiguration validation
 func (resource InstanceGroupConfigConfiguration) Validate() []error {
 	errs := []error{}
 

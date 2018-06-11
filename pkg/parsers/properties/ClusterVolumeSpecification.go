@@ -12,6 +12,7 @@ type ClusterVolumeSpecification struct {
 	VolumeType interface{} `yaml:"VolumeType"`
 }
 
+// ClusterVolumeSpecification validation
 func (resource ClusterVolumeSpecification) Validate() []error {
 	errs := []error{}
 

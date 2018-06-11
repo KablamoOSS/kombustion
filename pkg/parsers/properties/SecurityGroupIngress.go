@@ -18,6 +18,7 @@ type SecurityGroupIngress struct {
 	ToPort                     interface{} `yaml:"ToPort,omitempty"`
 }
 
+// SecurityGroupIngress validation
 func (resource SecurityGroupIngress) Validate() []error {
 	errs := []error{}
 

@@ -14,6 +14,7 @@ type LoadBalancerPolicies struct {
 	LoadBalancerPorts interface{} `yaml:"LoadBalancerPorts,omitempty"`
 }
 
+// LoadBalancerPolicies validation
 func (resource LoadBalancerPolicies) Validate() []error {
 	errs := []error{}
 

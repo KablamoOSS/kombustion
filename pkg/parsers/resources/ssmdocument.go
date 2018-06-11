@@ -51,10 +51,12 @@ func ParseSSMDocument(ctx map[string]interface{}, name string, data string) (cf 
 	return
 }
 
+// ParseSSMDocument validator
 func (resource SSMDocument) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseSSMDocumentProperties validator
 func (resource SSMDocumentProperties) Validate() []error {
 	errs := []error{}
 	if resource.Content == nil {

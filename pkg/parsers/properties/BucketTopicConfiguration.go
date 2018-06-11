@@ -12,6 +12,7 @@ type BucketTopicConfiguration struct {
 	Filter *BucketNotificationFilter `yaml:"Filter,omitempty"`
 }
 
+// BucketTopicConfiguration validation
 func (resource BucketTopicConfiguration) Validate() []error {
 	errs := []error{}
 

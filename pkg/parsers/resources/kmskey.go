@@ -54,10 +54,12 @@ func ParseKMSKey(ctx map[string]interface{}, name string, data string) (cf types
 	return
 }
 
+// ParseKMSKey validator
 func (resource KMSKey) Validate() []error {
 	return resource.Properties.Validate()
 }
 
+// ParseKMSKeyProperties validator
 func (resource KMSKeyProperties) Validate() []error {
 	errs := []error{}
 	if resource.KeyPolicy == nil {

@@ -9,6 +9,7 @@ type DistributionLambdaFunctionAssociation struct {
 	LambdaFunctionARN interface{} `yaml:"LambdaFunctionARN,omitempty"`
 }
 
+// DistributionLambdaFunctionAssociation validation
 func (resource DistributionLambdaFunctionAssociation) Validate() []error {
 	errs := []error{}
 

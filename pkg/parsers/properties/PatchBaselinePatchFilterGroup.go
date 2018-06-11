@@ -8,6 +8,7 @@ type PatchBaselinePatchFilterGroup struct {
 	PatchFilters interface{} `yaml:"PatchFilters,omitempty"`
 }
 
+// PatchBaselinePatchFilterGroup validation
 func (resource PatchBaselinePatchFilterGroup) Validate() []error {
 	errs := []error{}
 

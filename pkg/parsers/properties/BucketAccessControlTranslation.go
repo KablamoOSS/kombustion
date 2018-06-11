@@ -10,6 +10,7 @@ type BucketAccessControlTranslation struct {
 	Owner interface{} `yaml:"Owner"`
 }
 
+// BucketAccessControlTranslation validation
 func (resource BucketAccessControlTranslation) Validate() []error {
 	errs := []error{}
 
