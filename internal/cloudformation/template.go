@@ -63,13 +63,13 @@ func init() {
 }
 
 func populateParsers(noBaseOutputs bool) {
-	resourceParsers = parsers.GetParsers_resources()
+	resourceParsers = parsers.GetParsersResources()
 	mappingParsers = make(ParserMap)
 
 	if noBaseOutputs {
 		outputParsers = make(ParserMap)
 	} else {
-		outputParsers = parsers.GetParsers_outputs()
+		outputParsers = parsers.GetParsersOutputs()
 	}
 
 	resources, outputs, mappings := plugins.LoadPlugins()

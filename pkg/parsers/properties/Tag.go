@@ -5,11 +5,13 @@ package properties
 
 import "fmt"
 
+// Tag Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html
 type Tag struct {
 	Key   interface{} `yaml:"Key"`
 	Value interface{} `yaml:"Value"`
 }
 
+// Tag validation
 func (resource Tag) Validate() []error {
 	errs := []error{}
 
