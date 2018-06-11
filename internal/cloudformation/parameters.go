@@ -39,7 +39,8 @@ func ResolveParameters(
 		env[key] = value
 	}
 
-	// convert to aws Parameter list
+	// Filter all available Parameters to only those present
+	// in the template
 	for paramKey := range cfYaml.Parameters {
 		for key, value := range env {
 			if paramKey == key {
@@ -51,7 +52,6 @@ func ResolveParameters(
 			}
 		}
 	}
-
 	return results
 }
 
@@ -66,13 +66,20 @@ func ResolveParametersS3(
 	params := make(map[string]string)
 
 	env := resolveEnvironmentParameters(manifestFile, c.String("environment"))
-	for key, value := range params {
-		env[key] = value
-	}
 
 	// convert to aws Parameter list
+	// TODO: We probably need to download the template to determine what params
+	// it needs, and filter the available params only to those
+
 	for key, value := range params {
 		// Filter to params in the stack
+		results = append(results, &awsCF.Parameter{
+			ParameterKey:   aws.String(key),
+			ParameterValue: aws.String(value),
+		})
+	}
+
+	for key, value := range env {
 		results = append(results, &awsCF.Parameter{
 			ParameterKey:   aws.String(key),
 			ParameterValue: aws.String(value),

@@ -65,6 +65,8 @@ func Upsert(c *cli.Context) {
 		stackName = c.String("stack-name")
 	}
 	if len(c.String("url")) > 0 {
+		// TODO: We probably need to download the template to determine what params
+		// it needs, and filter the available params only to those
 		parameters = cloudformation.ResolveParametersS3(c, manifest)
 
 		templateURL := c.String("url")

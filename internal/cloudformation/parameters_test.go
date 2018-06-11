@@ -1,7 +1,6 @@
 package cloudformation
 
 import (
-	"flag"
 	"fmt"
 	"testing"
 
@@ -100,9 +99,32 @@ func TestResolveParameters(t *testing.T) {
 			name: "Dev",
 			input: input{
 				ctx: func() *cli.Context {
-					set := flag.NewFlagSet("test", 0)
-					set.String("environment", "development", "development")
-					context := cli.NewContext(nil, set, nil)
+					var context *cli.Context
+
+					app := cli.NewApp()
+
+					app.Flags = []cli.Flag{
+						cli.StringSliceFlag{
+							Name:  "param, p",
+							Usage: "cloudformation parameters. eg. ( -p Env=dev -p BucketName=test )",
+						},
+						cli.StringFlag{
+							Name:  "environment, e",
+							Usage: "environment config to use from ./kombustion.yaml",
+						},
+					}
+
+					app.Action = func(c *cli.Context) error {
+						context = c
+						return nil
+					}
+
+					app.Run([]string{
+						"",
+						"--environment", "development",
+						"--param", "parameterOneName=parameterOneValue",
+						"--param", "parameterTwoName=8654238642489624862",
+					})
 					return context
 				}(),
 				cfYaml: YamlCloudformation{
@@ -120,6 +142,92 @@ func TestResolveParameters(t *testing.T) {
 					Resources:  types.TemplateObject{},
 					Outputs:    types.TemplateObject{},
 				},
+				manifestFile: &manifest.Manifest{
+					Name:               "TestManifestWithEnvironment",
+					Plugins:            nil,
+					Architectures:      []string(nil),
+					HideDefaultExports: false,
+					Environments: map[string]manifest.Environment{
+						"development": {
+							AccountIDs: nil,
+							Parameters: map[string]string{
+								"parameterThreeName": "3so87tg4y98n7y34ts3t4sh  st34y79p4y3t7 8s",
+								"parameterFourName":  "hhh:://asdfasdf.sadfasdf:3452345@f][a;v-][0[-",
+							},
+						},
+					},
+				},
+			},
+			output: []*awsCF.Parameter{
+				{
+					ParameterKey:   aws.String("parameterOneName"),
+					ParameterValue: aws.String("parameterOneValue"),
+				},
+				{
+					ParameterKey:   aws.String("parameterTwoName"),
+					ParameterValue: aws.String("8654238642489624862"),
+				},
+				{
+					ParameterKey:   aws.String("parameterThreeName"),
+					ParameterValue: aws.String("3so87tg4y98n7y34ts3t4sh  st34y79p4y3t7 8s"),
+				},
+				{
+					ParameterKey:   aws.String("parameterFourName"),
+					ParameterValue: aws.String("hhh:://asdfasdf.sadfasdf:3452345@f][a;v-][0[-"),
+				},
+			},
+		},
+	}
+
+	for i, test := range tests {
+		assert := assert.New(t)
+		testOutput := ResolveParameters(
+			test.input.ctx,
+			test.input.cfYaml,
+			test.input.manifestFile,
+		)
+		assert.Equal(test.output, testOutput, fmt.Sprintf("Test %d: %s", i, test.name))
+	}
+}
+
+func TestResolveParametersS3(t *testing.T) {
+	type input struct {
+		ctx          *cli.Context
+		cfClient     *awsCF.CloudFormation
+		manifestFile *manifest.Manifest
+	}
+
+	tests := []struct {
+		name   string
+		input  input
+		output []*awsCF.Parameter
+	}{
+		{
+			name: "Dev",
+			input: input{
+				ctx: func() *cli.Context {
+					var context *cli.Context
+
+					app := cli.NewApp()
+
+					app.Flags = []cli.Flag{
+						cli.StringFlag{
+							Name:  "environment, e",
+							Usage: "environment config to use from ./kombustion.yaml",
+						},
+					}
+
+					app.Action = func(c *cli.Context) error {
+						context = c
+						return nil
+					}
+
+					app.Run([]string{
+						"",
+						"--environment", "development",
+					})
+					return context
+				}(),
 				manifestFile: &manifest.Manifest{
 					Name:               "TestManifestWithEnvironment",
 					Plugins:            nil,
@@ -161,9 +269,8 @@ func TestResolveParameters(t *testing.T) {
 
 	for i, test := range tests {
 		assert := assert.New(t)
-		testOutput := ResolveParameters(
+		testOutput := ResolveParametersS3(
 			test.input.ctx,
-			test.input.cfYaml,
 			test.input.manifestFile,
 		)
 		assert.Equal(test.output, testOutput, fmt.Sprintf("Test %d: %s", i, test.name))
