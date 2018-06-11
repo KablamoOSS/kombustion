@@ -1,8 +1,10 @@
 package tasks
 
 import (
+	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation/tasks"
+	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/urfave/cli"
@@ -34,6 +36,8 @@ func init() {
 
 // Upsert a stack
 func Upsert(c *cli.Context) {
+	printer.Step("Upserting stack")
+	manifest := manifest.FindAndLoadManifest()
 
 	cfClient := tasks.GetCloudformationClient(
 		c.GlobalString("profile"),
@@ -61,7 +65,7 @@ func Upsert(c *cli.Context) {
 		stackName = c.String("stack-name")
 	}
 	if len(c.String("url")) > 0 {
-		parameters = cloudformation.ResolveParametersS3(c, cfClient)
+		parameters = cloudformation.ResolveParametersS3(c, manifest)
 
 		templateURL := c.String("url")
 
@@ -75,7 +79,7 @@ func Upsert(c *cli.Context) {
 	} else {
 
 		templateBody, cfYaml := tasks.GenerateYamlTemplate(generateParams)
-		parameters = cloudformation.ResolveParameters(c, cfYaml, cfClient)
+		parameters = cloudformation.ResolveParameters(c, cfYaml, manifest)
 
 		tasks.UpsertStack(
 			templateBody,

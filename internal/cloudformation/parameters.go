@@ -9,6 +9,8 @@ import (
 	"github.com/urfave/cli"
 )
 
+// GetParamMap retrives the --param if any, for the map of
+// Parameters in the template
 func GetParamMap(c *cli.Context) map[string]string {
 	paramMap := make(map[string]string)
 	params := c.StringSlice("param")
@@ -21,14 +23,15 @@ func GetParamMap(c *cli.Context) map[string]string {
 	return paramMap
 }
 
+// ResolveParameters for the template
 func ResolveParameters(
 	c *cli.Context,
 	cfYaml YamlCloudformation,
-	cfClient *awsCF.CloudFormation,
+	manifestFile *manifest.Manifest,
 ) []*awsCF.Parameter {
 	results := []*awsCF.Parameter{}
 
-	env := resolveEnvironmentParameters(c.String("environment"))
+	env := resolveEnvironmentParameters(manifestFile, c.String("environment"))
 
 	// override envFile values with optional --param values
 	params := GetParamMap(c)
@@ -52,16 +55,17 @@ func ResolveParameters(
 	return results
 }
 
+// ResolveParametersS3 for an S3 based template
 func ResolveParametersS3(
 	c *cli.Context,
-	cfClient *awsCF.CloudFormation,
+	manifestFile *manifest.Manifest,
 ) []*awsCF.Parameter {
 
 	results := []*awsCF.Parameter{}
 
 	params := make(map[string]string)
 
-	env := resolveEnvironmentParameters(c.String("environment"))
+	env := resolveEnvironmentParameters(manifestFile, c.String("environment"))
 	for key, value := range params {
 		env[key] = value
 	}
@@ -78,9 +82,8 @@ func ResolveParametersS3(
 	return results
 }
 
-func resolveEnvironmentParameters(environment string) (parameters map[string]string) {
-	manifestFile := manifest.FindAndLoadManifest()
-	if manifestFile != nil {
+func resolveEnvironmentParameters(manifestFile *manifest.Manifest, environment string) (parameters map[string]string) {
+	if manifestFile.Environments[environment].Parameters != nil {
 		envParams := manifestFile.Environments[environment].Parameters
 		if envParams != nil {
 			parameters = envParams

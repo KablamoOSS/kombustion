@@ -22,7 +22,7 @@ var CloudFormationStackFlags = []cli.Flag{
 	},
 	cli.StringFlag{
 		Name:  "stack-name",
-		Usage: "stack name to deploy (defaults to filename)",
+		Usage: "stack name to deploy (defaults to ProjectName-Filename--Environment)",
 	},
 	cli.StringFlag{
 		Name:  "environment, e",
