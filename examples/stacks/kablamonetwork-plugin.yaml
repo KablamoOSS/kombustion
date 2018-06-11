@@ -2,18 +2,18 @@
 #
 #
 AWSTemplateFormatVersion: 2010-09-09
-Description: Roles for test
+Description: Private VPC Template
 Parameters:
-  VGW: {Description: VPC Gateway, Type: String, Default: vgw-b1033eac}
+  VGW: {Description: VPC Gateway, Type: String, Default: vgw-eb4e70f6}
 Mappings: {}
 Resources:
 
-    KABLAMOBUILDVPC:
+    EXAMPLEVPC:
         Type: Kablamo::Network::VPC
         Properties:
-            CIDR: 172.16.0.0/20,
-            Details: {VPCName: KABLAMOBUILDVPC, VPCDesc: Kablamo Build VPC, Region: ap-southeast-2}
-            Tags: {Name : KABLAMO-BUILD-VPC, Taking : care of business}            
+            CIDR: 172.16.0.0/20
+            Details: {VPCName: PUBLICVPC, VPCDesc: Public VPC, Region: ap-southeast-2}
+            Tags: {Name: PUBLIC-VPC, Template: VPC for public endpoints}            
             DHCP: {Name: DhcpOptions, DNSServers: 172.16.0.2, NTPServers: 169.254.169.123, NTBType: 2}
             Subnets:
                 ReservedMgmt1: {CIDR: 172.16.0.0/26, AZ: 0, NetACL: InternalSubnetAcl, RouteTable: InternalRT1 }
@@ -28,18 +28,24 @@ Resources:
                 PerimeterInternal1: {CIDR: 172.16.6.0/24, AZ: 0, NetACL: InternalSubnetAcl, RouteTable: InternalRT1 }
                 PerimeterInternal2: {CIDR: 172.16.7.0/24, AZ: 1, NetACL: InternalSubnetAcl, RouteTable: InternalRT2 }
                 PerimeterInternal3: {CIDR: 172.16.8.0/24, AZ: 2, NetACL: InternalSubnetAcl, RouteTable: InternalRT3 }
-                PerimeterExternal1: {CIDR: 172.16.9.0/24, AZ: 0, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
-                PerimeterExternal2: {CIDR: 172.16.10.0/24, AZ: 1, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
-                PerimeterExternal3: {CIDR: 172.16.11.0/24, AZ: 2, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
+                PerimeterExternal1: {CIDR: 172.16.6.0/24, AZ: 0, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
+                PerimeterExternal2: {CIDR: 172.16.7.0/24, AZ: 1, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
+                PerimeterExternal3: {CIDR: 172.16.8.0/24, AZ: 2, NetACL: RestrictedSubnetAcl, RouteTable: PublicRT }
             RouteTables:
                 PublicRT:
-                    {routename: PublicRoute, routecidr: 0.0.0.0/0,  routegw: InternetGateway}
+                  - RouteName: PublicRoute
+                    RouteCIDR: 0.0.0.0/0
+                    RouteGW: InternetGateway
                 InternalRT1:
-                    {routename: PublicRoute, routecidr: 0.0.0.0/0,  routegw: InternetGateway}
                 InternalRT2:
-                    {routename: PublicRoute, routecidr: 0.0.0.0/0,  routegw: InternetGateway}
                 InternalRT3:
-                    {routename: PublicRoute, routecidr: 0.0.0.0/0,  routegw: InternetGateway}
+            NATGateways:
+                NATGW1:
+                    {Subnet: ReservedNet1, Routetable: InternalRT1}
+                NATGW2:
+                    {Subnet: ReservedNet2, Routetable: InternalRT2}
+                NATGW3:
+                    {Subnet: ReservedNet3, Routetable: InternalRT3}
             NetworkACLs:
                 RestrictedSubnetAcl: 
                     RestrictedSubnetAclEntryInTCPUnReserved: "90,6,allow,false,0.0.0.0/0,1024,65535"
