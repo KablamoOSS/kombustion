@@ -7,6 +7,7 @@ import (
 
 	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/KablamoOSS/kombustion/types"
+	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/aws/aws-sdk-go/service/cloudformation/cloudformationiface"
 	"github.com/stretchr/testify/assert"
@@ -78,7 +79,7 @@ func TestResolveEnvironmentParameters(t *testing.T) {
 	for i, test := range tests {
 		assert := assert.New(t)
 		testOutput := resolveEnvironmentParameters(&test.manifest, test.environment)
-		assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d: %s", i, test.name))
+		assert.Equal(test.output, testOutput, fmt.Sprintf("Test %d: %s", i, test.name))
 	}
 }
 
@@ -108,10 +109,10 @@ func TestResolveParameters(t *testing.T) {
 					AWSTemplateFormatVersion: "version",
 					Description:              "Test Template",
 					Parameters: types.TemplateObject{
-						"parameterOneName":   "parameterOneValue",
-						"parameterTwoName":   "8654238642489624862",
-						"parameterThreeName": "3so87tg4y98n7y34ts3t4sh  st34y79p4y3t7 8s",
-						"parameterFourName":  "hhh:://asdfasdf.sadfasdf:3452345@f][a;v-][0[-",
+						"parameterOneName":   "",
+						"parameterTwoName":   "",
+						"parameterThreeName": "",
+						"parameterFourName":  "",
 					},
 					Mappings:   types.TemplateObject{},
 					Conditions: types.TemplateObject{},
@@ -137,7 +138,24 @@ func TestResolveParameters(t *testing.T) {
 					},
 				},
 			},
-			output: []*awsCF.Parameter{},
+			output: []*awsCF.Parameter{
+				{
+					ParameterKey:   aws.String("parameterOneName"),
+					ParameterValue: aws.String("parameterOneValue"),
+				},
+				{
+					ParameterKey:   aws.String("parameterTwoName"),
+					ParameterValue: aws.String("8654238642489624862"),
+				},
+				{
+					ParameterKey:   aws.String("parameterThreeName"),
+					ParameterValue: aws.String("3so87tg4y98n7y34ts3t4sh  st34y79p4y3t7 8s"),
+				},
+				{
+					ParameterKey:   aws.String("parameterFourName"),
+					ParameterValue: aws.String("hhh:://asdfasdf.sadfasdf:3452345@f][a;v-][0[-"),
+				},
+			},
 		},
 	}
 
@@ -148,7 +166,7 @@ func TestResolveParameters(t *testing.T) {
 			test.input.cfYaml,
 			test.input.manifestFile,
 		)
-		assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d: %s", i, test.name))
+		assert.Equal(test.output, testOutput, fmt.Sprintf("Test %d: %s", i, test.name))
 	}
 }
 
