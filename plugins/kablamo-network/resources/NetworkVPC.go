@@ -38,6 +38,11 @@ type Route struct {
 	RouteGW   string `yaml:"RouteGW"`
 }
 
+type Tag struct {
+	Key   string `yaml:"Key"`
+	Value string `yaml:"Value"`
+}
+
 //NetworkVPCConfig Main Object and construct
 type NetworkVPCConfig struct {
 	Properties struct {
@@ -63,6 +68,29 @@ type NetworkVPCConfig struct {
 	} `yaml:"Properties"`
 }
 
+func splitStrArray(asset string) []string {
+	if len(asset) > 0 {
+		strArray := strings.Split(asset, ",")
+		return strArray
+	} else {
+		return nil
+	}
+}
+
+func genMap(asset map[string]string) []map[string]string {
+	arrayMap := make([]map[string]string, 0)
+	arrayMap = append(arrayMap, asset)
+	return arrayMap
+}
+
+func genTags(Tags map[string]string) []Tag {
+	arrayTags := make([]Tag, 0)
+	for k, v := range Tags {
+		arrayTags = append(arrayTags, Tag{Key: k, Value: v})
+	}
+	return arrayTags
+}
+
 //ParseNetworkVPC parser builder.
 func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 	// Parse the config data
@@ -82,18 +110,19 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 			CidrBlock:          config.Properties.CIDR,
 			EnableDnsHostnames: true,
 			EnableDnsSupport:   true,
-			InstanceTenancy:    true,
+			InstanceTenancy:    "default",
+			Tags:               genTags(map[string]string{"Name": config.Properties.Details.VPCName}),
 		},
 	)
 
 	cf[config.Properties.DHCP.Name] = resources.NewEC2DHCPOptions(
 		resources.EC2DHCPOptionsProperties{
-			DomainName:         config.Properties.DHCP.Domainname,
-			NetbiosNodeType:    config.Properties.DHCP.Netbiosservers,
-			DomainNameServers:  config.Properties.DHCP.DNSServers,
-			NetbiosNameServers: config.Properties.DHCP.Netbiosservers,
-			NtpServers:         config.Properties.DHCP.NTPServers,
-			Tags:               map[string]string{"Name": config.Properties.DHCP.Name},
+			DomainName:         config.Properties.DHCP.Name,
+			NetbiosNodeType:    config.Properties.DHCP.NTBType,
+			DomainNameServers:  splitStrArray(config.Properties.DHCP.DNSServers),
+			NetbiosNameServers: splitStrArray(config.Properties.DHCP.Netbiosservers),
+			NtpServers:         splitStrArray(config.Properties.DHCP.NTPServers),
+			Tags:               genTags(map[string]string{"Name": config.Properties.DHCP.Name}),
 		},
 	)
 
@@ -106,7 +135,7 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 
 	cf["InternetGateway"] = resources.NewEC2InternetGateway(
 		resources.EC2InternetGatewayProperties{
-			Tags: map[string]interface{}{"Name": "IGW"},
+			Tags: genTags(map[string]string{"Name": "IGW"}),
 		},
 	)
 
@@ -127,8 +156,8 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 	for routetable, settings := range config.Properties.RouteTables {
 		cf[routetable] = resources.NewEC2RouteTable(
 			resources.EC2RouteTableProperties{
-				VpcId: config.Properties.Details.VPCName,
-				Tags:  map[string]string{"Name": routetable},
+				VpcId: map[string]interface{}{"Ref": config.Properties.Details.VPCName},
+				Tags:  genTags(map[string]string{"Name": routetable}),
 			},
 		)
 
@@ -144,7 +173,7 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 
 		cf[routetable+"RoutePropagation"] = resources.NewEC2VPNGatewayRoutePropagation(
 			resources.EC2VPNGatewayRoutePropagationProperties{
-				RouteTableIds: map[string]string{"Ref": routetable},
+				RouteTableIds: genMap(map[string]string{"Ref": routetable}),
 				VpnGatewayId:  map[string]string{"Ref": "VGW"},
 			},
 			"VPNGatewayVPCGatewayAttachment",
@@ -155,7 +184,7 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 		cf[networkacl] = resources.NewEC2NetworkAcl(
 			resources.EC2NetworkAclProperties{
 				VpcId: map[string]interface{}{"Ref": config.Properties.Details.VPCName},
-				Tags:  map[string]interface{}{"Name": networkacl},
+				Tags:  genTags(map[string]string{"Name": networkacl}),
 			},
 		)
 
@@ -184,7 +213,7 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 				VpcId:            map[string]interface{}{"Ref": config.Properties.Details.VPCName},
 				CidrBlock:        settings.CIDR,
 				AvailabilityZone: map[interface{}]interface{}{"Fn::Select": []interface{}{settings.AZ, map[string]string{"Fn::GetAZs": ""}}},
-				Tags:             map[string]string{"Name": subnet},
+				Tags:             genTags(map[string]string{"Name": subnet}),
 			},
 		)
 
@@ -214,15 +243,7 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 			resources.EC2NatGatewayProperties{
 				AllocationId: map[string]interface{}{"Fn::GetAtt": []string{"EIP" + natgw, "AllocationId"}},
 				SubnetId:     map[string]interface{}{"Ref": settings.Subnet},
-				Tags:         map[string]interface{}{"Name": natgw},
-			},
-		)
-
-		cf[natgw] = resources.NewEC2NatGateway(
-			resources.EC2NatGatewayProperties{
-				AllocationId: map[string]interface{}{"Fn::GetAtt": []string{"EIP" + natgw, "AllocationId"}},
-				SubnetId:     map[string]interface{}{"Ref": settings.Subnet},
-				Tags:         map[string]interface{}{"Name": natgw},
+				Tags:         genTags(map[string]string{"Name": natgw}),
 			},
 		)
 
@@ -230,7 +251,7 @@ func ParseNetworkVPC(name string, data string) (cf types.ValueMap, err error) {
 			resources.EC2RouteProperties{
 				DestinationCidrBlock: "0.0.0.0/0",
 				RouteTableId:         map[string]string{"Ref": settings.Routetable},
-				GatewayId:            map[string]string{"Ref": natgw},
+				NatGatewayId:         map[string]string{"Ref": natgw},
 			},
 		)
 	}
