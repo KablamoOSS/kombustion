@@ -54,11 +54,11 @@ func getPrinter() *spinner.Spinner {
 func Progress(message string) {
 	spinner := getPrinter()
 	if message != previousProgressMessage {
-	previousProgressMessage = message
-	spinner.Suffix = fmt.Sprintf("  %s", message)
-	spinner.Color(color)
-}
-spinner.Start()
+		previousProgressMessage = message
+		spinner.Suffix = fmt.Sprintf("  %s", message)
+		spinner.Color(color)
+	}
+	spinner.Start()
 }
 
 // Step prints a line console and stops the spinner
@@ -77,7 +77,8 @@ func SubStep(message string, indent int, last bool) {
 	if message != previousSubStepMessage {
 		previousSubStepMessage = message
 		// Substeps are only printed if the verbose flag is set at init
-		if verbose {
+		// Unless it's the last substep
+		if verbose || last {
 			var indentString string
 
 			for i := 1; i <= indent; i++ {
@@ -109,7 +110,7 @@ func SubStep(message string, indent int, last bool) {
 func Finish(message string) {
 	spinner := getPrinter()
 	spinner.Stop()
-fmt.Println(fmt.Sprintf("%s  %s", chalk.Green.Color("✔"), chalk.Bold.TextStyle(message)))
+	fmt.Println(fmt.Sprintf("%s  %s", chalk.Green.Color("✔"), chalk.Bold.TextStyle(message)))
 }
 
 // Error prints an error to the screen. As it's intended reader is a user of your program,
@@ -120,10 +121,21 @@ func Error(err error, resolution string, link string) {
 	spinner := getPrinter()
 
 	spinner.Stop()
-	errMessage := fmt.Sprintf("%s  Error: %s \nHow to fix: %s \n", chalk.Red.Color("✖"), chalk.Red.Color(err.Error()), chalk.Dim.TextStyle(resolution))
+	errMessage := fmt.Sprintf(
+		"%s %s \n%s%s",
+		chalk.Bold.TextStyle(chalk.Red.Color("✖  Error:")),
+		chalk.Red.Color(err.Error()),
+		chalk.Dim.TextStyle(chalk.Bold.TextStyle("★  Resolution: ")),
+		chalk.Dim.TextStyle(resolution),
+	)
 
 	if link != "" {
-		errMessage = fmt.Sprintf("%s\n More information: %s", errMessage, chalk.Dim.TextStyle(link))
+		errMessage = fmt.Sprintf(
+			"%s\n%s%s",
+			errMessage,
+			chalk.Dim.TextStyle(chalk.Bold.TextStyle("🔗  More info: ")),
+			chalk.Italic.TextStyle(link),
+		)
 	}
 
 	fmt.Println(errMessage)
@@ -134,11 +146,22 @@ func Error(err error, resolution string, link string) {
 func Fatal(err error, resolution string, link string) {
 	spinner := getPrinter()
 
-	errMessage := fmt.Sprintf("%s  Fatal: %s \nHow to fix: %s \n", chalk.Red.Color("✖"), chalk.Red.Color(err.Error()), chalk.Dim.TextStyle(resolution))
+	errMessage := fmt.Sprintf(
+		"%s %s \n%s%s",
+		chalk.Bold.TextStyle(chalk.Red.Color("✖  Fatal:")),
+		chalk.Red.Color(err.Error()),
+		chalk.Dim.TextStyle(chalk.Bold.TextStyle("★  Resolution: ")),
+		chalk.Dim.TextStyle(resolution),
+	)
 
 	// Add the link if a valid one was supplied
 	if link != "" {
-		errMessage = fmt.Sprintf("%s\n More information: %s", errMessage, chalk.Dim.TextStyle(link))
+		errMessage = fmt.Sprintf(
+			"%s\n%s%s",
+			errMessage,
+			chalk.Dim.TextStyle(chalk.Bold.TextStyle("🔗  More info: ")),
+			chalk.Italic.TextStyle(link),
+		)
 	}
 
 	spinner.Stop()

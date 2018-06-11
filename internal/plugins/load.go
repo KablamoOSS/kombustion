@@ -26,7 +26,7 @@ func LoadPlugins() (resources, outputs, mappings map[string]kombustionTypes.Pars
 		log.Fatal(err)
 	}
 
-	manifestFile, err := manifest.FindAndLoadManifest()
+	manifestFile := manifest.FindAndLoadManifest()
 	if err != nil {
 		log.Fatal(err)
 	}

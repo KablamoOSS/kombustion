@@ -14,16 +14,13 @@ import (
 func AddPluginToManifest(c *cli.Context) error {
 	printer.Step("Adding plugins")
 	// Try and load the manifest
-	manifest, err := manifest.FindAndLoadManifest()
-	if err != nil {
-		log.Fatal("No kombustion.yaml manifest. Create one with: kombustion init")
-	}
+	manifest := manifest.FindAndLoadManifest()
 
 	// Get the plugin to add
 	pluginNames := c.Args()
 
 	// Add them
-	manifest, err = plugins.AddPluginsToManifest(manifest, pluginNames)
+	manifest, err := plugins.AddPluginsToManifest(manifest, pluginNames)
 	if err != nil {
 		log.Fatal(err)
 	}

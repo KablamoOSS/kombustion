@@ -6,17 +6,44 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sync"
+
+	"github.com/KablamoOSS/go-cli-printer"
 
 	yaml "github.com/KablamoOSS/yaml"
 )
 
+// Once loaded, we keep the manifest in memory
+var (
+	loadedManifest *Manifest
+	once           sync.Once
+)
+
 // FindAndLoadManifest - Search the current directory for a manifest file, and load it
-func FindAndLoadManifest() (Manifest, error) {
-	path, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
+func FindAndLoadManifest() *Manifest {
+	if loadedManifest == nil {
+		once.Do(func() {
+			path, err := filepath.Abs(filepath.Dir(os.Args[0]))
+			if err != nil {
+				log.Fatal(err)
+				printer.Fatal(
+					err,
+					"If you want to re-initialise your kombustion.yaml file, first remove it.",
+					"https://kombustion.io/manifest",
+				)
+			}
+			manifest, err := findAndLoadManifest(path)
+			if err != nil {
+				printer.Fatal(
+					err,
+					"If you want to re-initialise your kombustion.yaml file, first remove it.",
+					"https://kombustion.io/manifest",
+				)
+			}
+			loadedManifest = &manifest
+		})
 	}
-	return findAndLoadManifest(path)
+	return loadedManifest
 }
 
 // findAndLoadManifest - Search the given directory for a manifest file, and load it

@@ -1,8 +1,10 @@
 package tasks
 
 import (
+	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation/tasks"
+	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/urfave/cli"
@@ -34,7 +36,15 @@ func init() {
 
 // Upsert a stack
 func Upsert(c *cli.Context) {
-	paramMap := getParamMap(c)
+	printer.Step("Upserting stack")
+	manifest := manifest.FindAndLoadManifest()
+
+	cfClient := tasks.GetCloudformationClient(
+		c.GlobalString("profile"),
+		c.String("region"),
+	)
+
+	paramMap := cloudformation.GetParamMap(c)
 
 	// Template generation parameters
 	generateParams := cloudformation.GenerateParams{
@@ -55,7 +65,9 @@ func Upsert(c *cli.Context) {
 		stackName = c.String("stack-name")
 	}
 	if len(c.String("url")) > 0 {
-		parameters = resolveParametersS3(c)
+		// TODO: We probably need to download the template to determine what params
+		// it needs, and filter the available params only to those
+		parameters = cloudformation.ResolveParametersS3(c, manifest)
 
 		templateURL := c.String("url")
 
@@ -64,21 +76,19 @@ func Upsert(c *cli.Context) {
 			parameters,
 			capabilities,
 			stackName,
-			c.GlobalString("profile"),
-			c.String("region"),
+			cfClient,
 		)
 	} else {
 
 		templateBody, cfYaml := tasks.GenerateYamlTemplate(generateParams)
-		parameters = resolveParameters(c, cfYaml)
+		parameters = cloudformation.ResolveParameters(c, cfYaml, manifest)
 
 		tasks.UpsertStack(
 			templateBody,
 			parameters,
 			capabilities,
 			stackName,
-			c.GlobalString("profile"),
-			c.String("region"),
+			cfClient,
 		)
 	}
 }
