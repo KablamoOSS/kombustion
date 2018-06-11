@@ -90,8 +90,6 @@ func TestResolveParameters(t *testing.T) {
 		manifestFile *manifest.Manifest
 	}
 
-	cfClient := &mockCloudFormationClient{}
-
 	tests := []struct {
 		name   string
 		input  input
