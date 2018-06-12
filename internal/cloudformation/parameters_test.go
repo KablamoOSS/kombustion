@@ -78,7 +78,16 @@ func TestResolveEnvironmentParameters(t *testing.T) {
 	for i, test := range tests {
 		assert := assert.New(t)
 		testOutput := resolveEnvironmentParameters(&test.manifest, test.environment)
-		assert.Equal(test.output, testOutput, fmt.Sprintf("Test %d: %s", i, test.name))
+
+		matches := 0
+		for key, value := range testOutput {
+			for paramKey, paramVal := range test.output {
+				if key == paramKey && value == paramVal {
+					matches = matches + 1
+				}
+			}
+		}
+		assert.Equal(len(test.output), matches, fmt.Sprintf("Test %d: %s", i, test.name))
 	}
 }
 
@@ -186,7 +195,17 @@ func TestResolveParameters(t *testing.T) {
 			test.input.cfYaml,
 			test.input.manifestFile,
 		)
-		assert.Equal(test.output, testOutput, fmt.Sprintf("Test %d: %s", i, test.name))
+		matches := 0
+		for _, outputParam := range testOutput {
+			for _, param := range test.output {
+				if *outputParam.ParameterKey == *param.ParameterKey &&
+					*outputParam.ParameterValue == *param.ParameterValue {
+					matches = matches + 1
+				}
+			}
+		}
+
+		assert.Equal(len(test.output), matches, fmt.Sprintf("Test %d: %s", i, test.name))
 	}
 }
 
@@ -273,7 +292,18 @@ func TestResolveParametersS3(t *testing.T) {
 			test.input.ctx,
 			test.input.manifestFile,
 		)
-		assert.Equal(test.output, testOutput, fmt.Sprintf("Test %d: %s", i, test.name))
+
+		matches := 0
+		for _, outputParam := range testOutput {
+			for _, param := range test.output {
+				if *outputParam.ParameterKey == *param.ParameterKey &&
+					*outputParam.ParameterValue == *param.ParameterValue {
+					matches = matches + 1
+				}
+			}
+		}
+
+		assert.Equal(len(test.output), matches, fmt.Sprintf("Test %d: %s", i, test.name))
 	}
 }
 
