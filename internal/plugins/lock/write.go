@@ -7,7 +7,7 @@ import (
 )
 
 // WriteLockToDisk - Write the Lock to disk
-func WriteLockToDisk(lockFile Lock) error {
+func WriteLockToDisk(lockFile *Lock) error {
 
 	// Mashall the the struct into yaml
 	lockString, err := yaml.Marshal(&lockFile)

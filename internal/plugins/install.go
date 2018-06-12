@@ -40,8 +40,8 @@ func InstallPlugins() error {
 }
 
 // installPluginsWithLock - Using a provided lockFile install plugins
-func installPluginsWithLock(lockFile lock.Lock) (updatedLockFile lock.Lock, installErrors []error) {
-	updatedLockFile = lockFile
+func installPluginsWithLock(lockFile *lock.Lock) (updatedLockFile *lock.Lock, installErrors []error) {
+	updatedLockFile = *&lockFile
 
 	ensureLocalPluginDir()
 

@@ -13,31 +13,30 @@ import (
 	"github.com/google/go-github/github"
 )
 
+var githubClient *github.Client
+
+func init() {
+	githubClient = github.NewClient(nil)
+}
+
 // AddPluginsToManifest - Add all new plugin to the manifest
 // update it if it's already there
 // then write the manifest to disk
 func AddPluginsToManifest(manifest *manifestType.Manifest, pluginLocations []string) (*manifestType.Manifest, error) {
 	printer.Progress("Kombusting")
 
+	// Get the lockFile
 	lockFile, err := lock.FindAndLoadLock()
 
-	for _, pluginLocation := range pluginLocations {
-		plugin, pluginLock, err := constructGithubPlugin(manifest, pluginLocation)
-		printer.SubStep(fmt.Sprintf("Adding plugin: %s", plugin.Name), 2, true)
-		if err != nil {
-			return manifest, err
-		}
-		if manifest.Plugins == nil {
-			manifest.Plugins = make(map[string]manifestType.Plugin)
-		}
-		if lockFile.Plugins == nil {
-			lockFile.Plugins = make(map[string]lock.Plugin)
-		}
-		manifest.Plugins[fmt.Sprintf("%s@%s", plugin.Name, plugin.Version)] = plugin
-		lockFile.Plugins[fmt.Sprintf("%s@%s", plugin.Name, plugin.Version)] = pluginLock
+	// Add all the plugins to the manifest and lockfile
+	manifest, lockFile, err = addPluginsToManifestAndLock(manifest, lockFile, pluginLocations)
+	if err != nil {
+		printer.Error(err, config.ErrorHelpInfo, "")
+		return manifest, err
 	}
 
-	err = updatePluginInManifest(manifest)
+	printer.Progress("Updating manifest")
+	err = manifestType.WriteManifestToDisk(manifest)
 	if err != nil {
 		printer.Error(err, config.ErrorHelpInfo, "")
 		return manifest, err
@@ -52,14 +51,31 @@ func AddPluginsToManifest(manifest *manifestType.Manifest, pluginLocations []str
 	return manifest, nil
 }
 
-// updatePluginInManifest - Write a new manifest to disk
-func updatePluginInManifest(manifest *manifestType.Manifest) error {
-	printer.Progress("Updating manifest")
-	err := manifestType.WriteManifestToDisk(manifest)
-	if err != nil {
-		return err
+func addPluginsToManifestAndLock(
+	manifest *manifestType.Manifest,
+	lockFile *lock.Lock,
+	pluginLocations []string,
+) (
+	*manifestType.Manifest,
+	*lock.Lock,
+	error,
+) {
+	for _, pluginLocation := range pluginLocations {
+		plugin, pluginLock, err := constructGithubPlugin(manifest, pluginLocation)
+		printer.SubStep(fmt.Sprintf("Adding plugin: %s", plugin.Name), 2, true)
+		if err != nil {
+			return manifest, lockFile, err
+		}
+		if manifest.Plugins == nil {
+			manifest.Plugins = make(map[string]manifestType.Plugin)
+		}
+		if lockFile.Plugins == nil {
+			lockFile.Plugins = make(map[string]lock.Plugin)
+		}
+		manifest.Plugins[fmt.Sprintf("%s@%s", plugin.Name, plugin.Version)] = plugin
+		lockFile.Plugins[fmt.Sprintf("%s@%s", plugin.Name, plugin.Version)] = pluginLock
 	}
-	return nil
+	return manifest, lockFile, nil
 }
 
 // constructGithubPlugin - Create a plugin based on a github url
@@ -130,12 +146,16 @@ func constructGithubPlugin(
 }
 
 // getLatestRelease - Return the latest release of the repository
-func getLatestRelease(githubOrg string, githubProject string) (latestRelease *github.RepositoryRelease, err error) {
-
-	client := github.NewClient(nil)
+func getLatestRelease(
+	githubOrg string,
+	githubProject string,
+) (
+	latestRelease *github.RepositoryRelease,
+	err error,
+) {
 
 	// Get latest release
-	latestRelease, _, err = client.Repositories.GetLatestRelease(
+	latestRelease, _, err = githubClient.Repositories.GetLatestRelease(
 		context.Background(),
 		githubOrg,
 		githubProject,
