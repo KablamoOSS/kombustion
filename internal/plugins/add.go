@@ -66,7 +66,7 @@ func addPluginsToManifestAndLock(
 ) {
 	for _, pluginLocation := range pluginLocations {
 		plugin, pluginLock, err := constructGithubPlugin(manifest, pluginLocation)
-		printer.SubStep(fmt.Sprintf("Adding plugin: %s", plugin.Name), 2, true)
+		printer.SubStep(fmt.Sprintf("Adding plugin: %s", plugin.Name), 2, true, false)
 		if err != nil {
 			return manifest, lockFile, err
 		}
@@ -170,7 +170,12 @@ func getLatestRelease(
 		return latestRelease, err
 	}
 
-	printer.SubStep(fmt.Sprintf("Found release %s for %s/%s", *latestRelease.TagName, githubOrg, githubProject), 1, true)
+	printer.SubStep(
+		fmt.Sprintf("Found release %s for %s/%s", *latestRelease.TagName, githubOrg, githubProject),
+		1,
+		true,
+		false,
+	)
 
 	return latestRelease, nil
 }

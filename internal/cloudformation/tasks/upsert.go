@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	log "github.com/sirupsen/logrus"
+	printer "github.com/KablamoOSS/go-cli-printer"
 
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
@@ -58,7 +58,7 @@ func UpsertStack(
 					stackStatus == awsCF.StackStatusUpdateComplete {
 					os.Exit(0)
 				} else {
-					log.Error("Upsert Failed: ")
+					printer.Error(fmt.Errorf("Upsert Failed"), "", "")
 					time.Sleep(2 * time.Second)
 
 					PrintStackEvents(cf, stackName)
@@ -116,7 +116,7 @@ func UpsertStackViaS3(
 					stackStatus == awsCF.StackStatusUpdateComplete {
 					os.Exit(0)
 				} else {
-					log.Error("Upsert Failed: ")
+					printer.Error(fmt.Errorf("Upsert Failed"), "", "")
 					time.Sleep(2 * time.Second)
 
 					PrintStackEvents(cf, stackName)

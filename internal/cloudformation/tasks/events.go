@@ -3,6 +3,7 @@ package tasks
 import (
 	"fmt"
 
+	printer "github.com/KablamoOSS/go-cli-printer"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -14,24 +15,53 @@ func PrintStackEvents(cf *awsCF.CloudFormation, stackName string) {
 	status, err := cf.DescribeStackEvents(&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)})
 	checkError(err)
 
-	fmt.Println()
-	fmt.Printf(" %-19v | %-22v | %-30v | %v | %v | \n", "Time", "Status", "Type", "LogicalID", "Status Reason")
+	printer.Step(fmt.Sprintf("Events for %s:", stackName))
+	printer.SubStep(
+		fmt.Sprintf(" %-19v | %-22v | %-30v | %v | %v | \n", "Time", "Status", "Type", "LogicalID", "Status Reason"),
+		1,
+		false,
+		true,
+	)
 	for _, event := range status.StackEvents {
 		if event.Timestamp != nil {
-			fmt.Printf(" %-19v |", event.Timestamp.Format("2006-01-2 15:04:05"))
+			printer.SubStep(
+				fmt.Sprintf(" %-19v |", event.Timestamp.Format("2006-01-2 15:04:05")),
+				1,
+				false,
+				true,
+			)
 		}
 		if event.ResourceStatus != nil {
-			fmt.Printf(" %-22v |", *event.ResourceStatus)
+			printer.SubStep(
+				fmt.Sprintf(" %-22v |", *event.ResourceStatus),
+				1,
+				false,
+				true,
+			)
 		}
 		if event.ResourceType != nil {
-			fmt.Printf(" %-30v |", *event.ResourceType)
+			printer.SubStep(
+				fmt.Sprintf(" %-30v |", *event.ResourceType),
+				1,
+				false,
+				true,
+			)
 		}
 		if event.LogicalResourceId != nil {
-			fmt.Printf(" %v |", *event.LogicalResourceId)
+			printer.SubStep(
+				fmt.Sprintf(" %v |", *event.LogicalResourceId),
+				1,
+				false,
+				true,
+			)
 		}
 		if event.ResourceStatusReason != nil {
-			fmt.Printf(" %v |", *event.ResourceStatusReason)
+			printer.SubStep(
+				fmt.Sprintf(" %v |", *event.ResourceStatusReason),
+				1,
+				false,
+				true,
+			)
 		}
-		fmt.Println()
 	}
 }
