@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
-	"os/user"
 	"strings"
 
 	"github.com/KablamoOSS/go-cli-printer"
@@ -40,8 +39,8 @@ func InstallPlugins() error {
 }
 
 // installPluginsWithLock - Using a provided lockFile install plugins
-func installPluginsWithLock(lockFile lock.Lock) (updatedLockFile lock.Lock, installErrors []error) {
-	updatedLockFile = lockFile
+func installPluginsWithLock(lockFile *lock.Lock) (updatedLockFile *lock.Lock, installErrors []error) {
+	updatedLockFile = *&lockFile
 
 	ensureLocalPluginDir()
 
@@ -261,23 +260,12 @@ func getDownloadDir(pluginName string, version string) string {
 	return pluginDir
 }
 
-// Clean up the download directory
-func cleanDownloadDir() error {
-	usr, err := user.Current()
-	if err != nil {
-		log.Fatal(err)
-	}
-	downloadDir := fmt.Sprintf("%s/.kombustion/cache", usr.HomeDir)
-
-	return os.RemoveAll(downloadDir)
-}
-
 // The PR hasn't been released into a new version, so we're putting it here
 // https://github.com/mholt/archiver/pull/45/files
 func getExtracter(fpath string) archiver.Archiver {
-	for _, fmt := range archiver.SupportedFormats {
-		if fmt.Match(fpath) {
-			return fmt
+	for _, format := range archiver.SupportedFormats {
+		if format.Match(fpath) {
+			return format
 		}
 	}
 	return nil

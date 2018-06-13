@@ -5,7 +5,7 @@ import (
 )
 
 // UpdateLock - update and write out a new lock file
-func UpdateLock(manifest *manifestType.Manifest, newLockFile Lock) error {
+func UpdateLock(manifest *manifestType.Manifest, newLockFile *Lock) error {
 	// First load the lock file
 	lockFile, err := FindAndLoadLock()
 	if err != nil {
@@ -18,7 +18,7 @@ func UpdateLock(manifest *manifestType.Manifest, newLockFile Lock) error {
 	return err
 }
 
-func updateLock(manifest *manifestType.Manifest, lockFile Lock, newLockFile Lock) error {
+func updateLock(manifest *manifestType.Manifest, lockFile *Lock, newLockFile *Lock) error {
 	// TODO: reconcile the manifest with the lock file
 
 	err := WriteLockToDisk(newLockFile)
