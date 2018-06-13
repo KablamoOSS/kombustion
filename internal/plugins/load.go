@@ -6,8 +6,6 @@ import (
 	"plugin"
 	"runtime"
 
-	log "github.com/sirupsen/logrus"
-
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/KablamoOSS/kombustion/internal/plugins/lock"
@@ -159,8 +157,12 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 	foundIssue := false
 	// TODO: improve these error messages, and provide links to the docs for plugin devs
 	if config.Name == "" {
-		// err
-		log.Fatal(fmt.Sprintf("%s did not supply a name, this plugin cannot be loaded", config.Name))
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` did not supply a name, this plugin cannot be loaded", pluginName),
+			"Try your command again, but if it fails file an issue with the plugin author.",
+			"",
+		)
+
 		foundIssue = true
 	}
 	// } else if config.Name != pluginName {
@@ -170,13 +172,23 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 	// }
 
 	if config.Prefix == "" {
-		log.Fatal(fmt.Sprintf("%s did not supply a prefix, this plugin cannot be loaded", config.Name))
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` did not supply a prefix, this plugin cannot be loaded", pluginName),
+			"Try your command again, but if it fails file an issue with the plugin author.",
+			"",
+		)
 		foundIssue = true
 	}
 
 	if config.RequiresAWSSession != requiresAWSSession {
 		// Warn about the need to add the config val to the manifest file
 		// foundIssue = true
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` requires an AWS session, has not been allowed one", pluginName),
+			fmt.Sprintf("Add `role: RoleName` to `kombustion.yaml` under `%s` to allow this plugin to assume that role.\n Reason for access: %s", pluginName, config.RequiresAWSSessionReason),
+			"",
+		)
+
 	}
 	if foundIssue == false {
 		ok = true
