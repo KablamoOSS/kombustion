@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/KablamoOSS/go-cli-printer"
-
+	printer "github.com/KablamoOSS/go-cli-printer"
 	"gopkg.in/AlecAivazis/survey.v1"
 )
 
@@ -14,8 +13,8 @@ func InitaliseNewManifest() error {
 	// TODO: Check if there is a manifest file and exit
 
 	// Load the manifest file from this directory
-	manifestSearch := FindAndLoadManifest()
-	if &manifestSearch != nil {
+	manifestExists := CheckManifestExists()
+	if manifestExists {
 		printer.Fatal(
 			fmt.Errorf("Sorry we can't create a new kombustion.yaml, one already exists."),
 			"If you want to re-initialise your kombustion.yaml file, first remove it.",

@@ -46,6 +46,20 @@ func FindAndLoadManifest() *Manifest {
 	return loadedManifest
 }
 
+// CheckManifestExists to determine if there is a manifest in the current dir
+func CheckManifestExists() bool {
+	path, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		return false
+	}
+	manifest, err := findAndLoadManifest(path)
+	if err != nil {
+		return false
+	}
+	fmt.Println("manifest: ", manifest)
+	return true
+}
+
 // findAndLoadManifest - Search the given directory for a manifest file, and load it
 // This is seperated to allow for easy testing
 func findAndLoadManifest(path string) (Manifest, error) {
