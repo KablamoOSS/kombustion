@@ -115,15 +115,9 @@ func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error
 		return
 	}
 
-	// handle environment variables and custom params
-	envMap := ResolveEnvironment(params.EnvFile, params.Env)
-	for k, v := range params.ParamMap {
-		envMap[k] = v
-	}
-
 	//preprocess - template in the environment variables and custom params
 	buf := new(bytes.Buffer)
-	if err = executeTemplate(buf, configData, envMap); err != nil {
+	if err = executeTemplate(buf, configData, params.ParamMap); err != nil {
 		log.WithFields(log.Fields{
 			"template": configPath,
 		}).Error("Error executing config template")

@@ -54,6 +54,7 @@ import (
 	"os"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/config"
 	"github.com/KablamoOSS/kombustion/internal/tasks"
 	log "github.com/sirupsen/logrus"
 	"github.com/ttacon/chalk"
@@ -77,7 +78,7 @@ func main() {
 		devModeFlags := []cli.Flag{
 			cli.StringFlag{
 				Name:  "load-plugin",
-				Usage: "load arbitrary plugin --load-plugin path/to/plugin.so",
+				Usage: "load arbitrary plugin `path/to/plugin.so`",
 			},
 		}
 
@@ -187,5 +188,9 @@ ISSUES:
 		},
 	}
 
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+
+	if err != nil {
+		printer.Fatal(err, config.ErrorHelpInfo, "")
+	}
 }

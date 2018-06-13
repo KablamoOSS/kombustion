@@ -25,7 +25,7 @@ func LoadPlugins(manifestFile *manifest.Manifest, lockFile *lock.Lock) (loadedPl
 						runtime.GOARCH == resolved.Architecture {
 						loadedPlugins = append(
 							loadedPlugins,
-							loadPlugin(manifestPlugin, plugin.Name, plugin.Version, resolved.PathOnDisk),
+							loadPlugin(manifestPlugin, plugin.Name, plugin.Version, resolved.PathOnDisk, false),
 						)
 					}
 				}
@@ -44,11 +44,26 @@ func LoadPlugins(manifestFile *manifest.Manifest, lockFile *lock.Lock) (loadedPl
 	return
 }
 
+// LoadDevPlugin loads an arbitrary plugin for plugin developers, to ease plugin development.
+// Only works with a kombustion binary that was built from source
+func LoadDevPlugin(
+	pluginPath string,
+) *PluginLoaded {
+	return loadPlugin(
+		manifest.Plugin{},
+		"dev-loaded-plugin",
+		"DEV",
+		pluginPath,
+		true,
+	)
+}
+
 func loadPlugin(
 	manifestPlugin manifest.Plugin,
 	pluginName string,
 	pluginVersion string,
 	pluginPath string,
+	isDevPlugin bool,
 ) *PluginLoaded {
 
 	loadedPlugin := PluginLoaded{}
