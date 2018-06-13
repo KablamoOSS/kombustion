@@ -6,31 +6,14 @@ import (
 	"plugin"
 	"runtime"
 
-	log "github.com/sirupsen/logrus"
-
+	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/KablamoOSS/kombustion/internal/plugins/lock"
 	pluginTypes "github.com/KablamoOSS/kombustion/pkg/plugins/api/types"
-	kombustionTypes "github.com/KablamoOSS/kombustion/types"
 )
 
-// LoadPlugins for the project
-func LoadPlugins() (resources, outputs, mappings map[string]kombustionTypes.ParserFunc) {
-	resources, outputs, mappings =
-		make(map[string]kombustionTypes.ParserFunc),
-		make(map[string]kombustionTypes.ParserFunc),
-		make(map[string]kombustionTypes.ParserFunc)
-
-	lockFile, err := lock.FindAndLoadLock()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	manifestFile := manifest.FindAndLoadManifest()
-	if err != nil {
-		log.Fatal(err)
-	}
-
+// LoadPlugins from a manifest and lockfile
+func LoadPlugins(manifestFile *manifest.Manifest, lockFile *lock.Lock) (loadedPlugins []*PluginLoaded) {
 	// Load all plugins the manifest
 	for _, manifestPlugin := range manifestFile.Plugins {
 		for _, plugin := range lockFile.Plugins {
@@ -40,37 +23,76 @@ func LoadPlugins() (resources, outputs, mappings map[string]kombustionTypes.Pars
 					// Find the right plugin for the current OS/Arch
 					if runtime.GOOS == resolved.OperatingSystem &&
 						runtime.GOARCH == resolved.Architecture {
-						loadPlugin(manifestPlugin, plugin.Name, plugin.Version, resolved.PathOnDisk, resources, outputs, mappings)
+						loadedPlugins = append(
+							loadedPlugins,
+							loadPlugin(manifestPlugin, plugin.Name, plugin.Version, resolved.PathOnDisk, false),
+						)
 					}
 				}
 			} else {
-				log.Fatal(fmt.Sprintf("Plugin %s is not installed, but is included in kombustion.yaml. Run `kombustion install` to fix.", manifestPlugin.Name))
+				printer.Fatal(
+					fmt.Errorf("Plugin `%s` is not installed, but is included in kombustion.yaml", manifestPlugin.Name),
+					fmt.Sprintf(
+						"Run `kombustion install` to fix.",
+					),
+					"",
+				)
 			}
 		}
 	}
-	fmt.Println(resources)
-	return resources, outputs, mappings
+
+	return
 }
 
-func loadPlugin(manifestPlugin manifest.Plugin, pluginName string, pluginVersion string, pluginPath string, resources, outputs, mappings map[string]kombustionTypes.ParserFunc) {
-	resources, outputs, mappings =
-		make(map[string]kombustionTypes.ParserFunc),
-		make(map[string]kombustionTypes.ParserFunc),
-		make(map[string]kombustionTypes.ParserFunc)
+// LoadDevPlugin loads an arbitrary plugin for plugin developers, to ease plugin development.
+// Only works with a kombustion binary that was built from source
+func LoadDevPlugin(
+	pluginPath string,
+) *PluginLoaded {
+	return loadPlugin(
+		manifest.Plugin{},
+		"dev-loaded-plugin",
+		"DEV",
+		pluginPath,
+		true,
+	)
+}
 
-		// TODO: Make the help messages for users much friendlier
+func loadPlugin(
+	manifestPlugin manifest.Plugin,
+	pluginName string,
+	pluginVersion string,
+	pluginPath string,
+	isDevPlugin bool,
+) *PluginLoaded {
+
+	loadedPlugin := PluginLoaded{}
+
+	// TODO: Make the help messages for users much friendlier
 	if !pluginExists(pluginPath) {
-		fmt.Fprintf(os.Stderr, "error: invalid plugin file: %s\n", pluginPath)
-		os.Exit(1)
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` is not installed, but is included in kombustion.lock", manifestPlugin.Name),
+			fmt.Sprintf(
+				"Run `kombustion install` to fix.",
+			),
+			"",
+		)
 	}
+
+	loadedPlugin.InternalConfig.PathOnDisk = pluginPath
 
 	// TODO: Check the hash of the plugin to load matches the lockfile
 
-	// open the plug-in file, causing its package init function to run,
-	// thereby registering the module
+	// Open the plugin
 	p, err := plugin.Open(pluginPath)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error: failed to load plugin: %v\n", err)
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` could not be loaded, this is likely an issue with the plugin", manifestPlugin.Name),
+			fmt.Sprintf(
+				"Try your command again, but if it fails file an issue with the plugin author.",
+			),
+			"",
+		)
 	}
 
 	// Config
@@ -78,44 +100,38 @@ func loadPlugin(manifestPlugin manifest.Plugin, pluginName string, pluginVersion
 	configFunc := RegisterConstructor.(func() []byte)
 	config, err := loadConfig(configFunc())
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error: failed to load config for plugin: %v\n", err)
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` does not have a valid config", pluginName),
+			"Try your command again, but if it fails file an issue with the plugin author.",
+			"",
+		)
 	}
-	fmt.Println(config)
 
 	if configIsValid(config, pluginName, pluginVersion, false) == false {
-		log.Fatal(fmt.Sprintf("Unable to load plugin: %s", pluginName))
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` does not have a valid config", pluginName),
+			"Contact the plugin author.",
+			"",
+		)
 	}
 
-	prefix := config.Prefix
+	loadedPlugin.Config = config
+
+	loadedPlugin.InternalConfig.Prefix = config.Prefix
 
 	if manifestPlugin.Alias != "" {
-		prefix = manifestPlugin.Alias
+		loadedPlugin.InternalConfig.Prefix = manifestPlugin.Alias
 	}
 
 	// [ Resources ]----------------------------------------------------------------------------------
 
 	resourcesConstructor, _ := p.Lookup("Resources")
 	if resourcesConstructor != nil {
-
-		resourcesFuncs := *resourcesConstructor.(*map[string]func(
+		loadedPlugin.Resources = resourcesConstructor.(*map[string]func(
 			ctx map[string]interface{},
 			name string,
 			data string,
 		) []byte)
-
-		for key, parserFunc := range resourcesFuncs {
-			pluginKey := fmt.Sprintf("%s::%s", prefix, key)
-			if _, ok := resources[pluginKey]; ok { // Check for duplicates
-				log.WithFields(log.Fields{
-					"resource": pluginKey,
-				}).Warn("duplicate resource definition for resource")
-			} else {
-				wrappedParserFunc := func(ctx map[string]interface{}, name string, data string) (kombustionTypes.TemplateObject, error) {
-					return loadResource(parserFunc(ctx, name, data))
-				}
-				resources[pluginKey] = wrappedParserFunc
-			}
-		}
 	}
 
 	// [ Mapping ]------------------------------------------------------------------------------------
@@ -123,54 +139,25 @@ func loadPlugin(manifestPlugin manifest.Plugin, pluginName string, pluginVersion
 	mappingsConstructor, _ := p.Lookup("Mappings")
 	if mappingsConstructor != nil {
 
-		mappingsFuncs := *mappingsConstructor.(*map[string]func(
+		loadedPlugin.Mappings = mappingsConstructor.(*map[string]func(
 			ctx map[string]interface{},
 			name string,
 			data string,
 		) []byte)
-
-		for key, parserFunc := range mappingsFuncs {
-			pluginKey := fmt.Sprintf("%s::%s", prefix, key)
-			if _, ok := mappings[pluginKey]; ok { // Check for duplicates
-				log.WithFields(log.Fields{
-					"resource": pluginKey,
-				}).Warn("duplicate resource definition for mapping")
-			} else {
-				wrappedParserFunc := func(ctx map[string]interface{}, name string, data string) (kombustionTypes.TemplateObject, error) {
-					return loadResource(parserFunc(ctx, name, data))
-				}
-				mappings[pluginKey] = wrappedParserFunc
-			}
-		}
 	}
 
 	// [ Outputs ]------------------------------------------------------------------------------------
 
-	outputsConstructor, _ := p.Lookup("Mapping")
+	outputsConstructor, _ := p.Lookup("Outputs")
 	if outputsConstructor != nil {
-
-		outputsFuncs := *outputsConstructor.(*map[string]func(
+		loadedPlugin.Outputs = outputsConstructor.(*map[string]func(
 			ctx map[string]interface{},
 			name string,
 			data string,
 		) []byte)
-
-		for key, parserFunc := range outputsFuncs {
-			pluginKey := fmt.Sprintf("%s::%s", prefix, key)
-			if _, ok := outputs[pluginKey]; ok { // Check for duplicates
-				log.WithFields(log.Fields{
-					"resource": key,
-				}).Warn("duplicate resource definition for output")
-			} else {
-				wrappedParserFunc := func(ctx map[string]interface{}, name string, data string) (kombustionTypes.TemplateObject, error) {
-					return loadResource(parserFunc(ctx, name, data))
-				}
-				outputs[pluginKey] = wrappedParserFunc
-			}
-		}
 	}
 
-	return
+	return &loadedPlugin
 }
 
 // Helper function to ensure a plugin file exists before we attempt to load it
@@ -185,8 +172,12 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 	foundIssue := false
 	// TODO: improve these error messages, and provide links to the docs for plugin devs
 	if config.Name == "" {
-		// err
-		log.Fatal(fmt.Sprintf("%s did not supply a name, this plugin cannot be loaded", config.Name))
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` did not supply a name, this plugin cannot be loaded", pluginName),
+			"Try your command again, but if it fails file an issue with the plugin author.",
+			"",
+		)
+
 		foundIssue = true
 	}
 	// } else if config.Name != pluginName {
@@ -196,13 +187,23 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 	// }
 
 	if config.Prefix == "" {
-		log.Fatal(fmt.Sprintf("%s did not supply a prefix, this plugin cannot be loaded", config.Name))
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` did not supply a prefix, this plugin cannot be loaded", pluginName),
+			"Try your command again, but if it fails file an issue with the plugin author.",
+			"",
+		)
 		foundIssue = true
 	}
 
 	if config.RequiresAWSSession != requiresAWSSession {
 		// Warn about the need to add the config val to the manifest file
 		// foundIssue = true
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` requires an AWS session, has not been allowed one", pluginName),
+			fmt.Sprintf("Add `role: RoleName` to `kombustion.yaml` under `%s` to allow this plugin to assume that role.\n Reason for access: %s", pluginName, config.RequiresAWSSessionReason),
+			"",
+		)
+
 	}
 	if foundIssue == false {
 		ok = true

@@ -10,7 +10,7 @@ var GlobalFlags = []cli.Flag{
 	},
 	cli.StringSliceFlag{
 		Name:  "param, p",
-		Usage: "cloudformation parameters. eg. ( -p Env=dev -p BucketName=test )",
+		Usage: "cloudformation parameters `BucketName=test`",
 	},
 }
 
@@ -18,15 +18,14 @@ var GlobalFlags = []cli.Flag{
 var CloudFormationStackFlags = []cli.Flag{
 	cli.StringFlag{
 		Name:  "region, r",
-		Usage: "region to deploy to",
+		Usage: "region to deploy to eg `us-east-1`",
 	},
 	cli.StringFlag{
 		Name:  "stack-name",
-		Usage: "stack name to deploy (defaults to ProjectName-Filename--Environment)",
+		Usage: "stack name to deploy [Default: ProjectName-Filename-Environment] eg `StackName-Environment`",
 	},
 	cli.StringFlag{
 		Name:  "environment, e",
-		Usage: "environment config to use from ./kombustion.yaml",
-		// Help:  "If you omit this, it will be derived based on the account the role is assumed from, provided that account is listed under an environment.",
+		Usage: "environment config to use from ./kombustion.yaml eg `production`",
 	},
 }

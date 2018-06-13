@@ -54,6 +54,7 @@ import (
 	"os"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/config"
 	"github.com/KablamoOSS/kombustion/internal/tasks"
 	log "github.com/sirupsen/logrus"
 	"github.com/ttacon/chalk"
@@ -73,6 +74,16 @@ func main() {
 	// In general it's recommended to use the official builds.
 	if version == "" {
 		version = "BUILT_FROM_SOURCE"
+
+		devModeFlags := []cli.Flag{
+			cli.StringFlag{
+				Name:  "load-plugin",
+				Usage: "load arbitrary plugin `path/to/plugin.so`",
+			},
+		}
+
+		tasks.GlobalFlags = append(tasks.GlobalFlags, devModeFlags...)
+
 	}
 
 	kombustionLogo := chalk.Dim.TextStyle(`
@@ -177,5 +188,15 @@ ISSUES:
 		},
 	}
 
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+	if err != nil {
+		if err.Error() == "flag provided but not defined: -load-plugin" {
+			printer.Fatal(
+				err,
+				"--load-plugin is only available when kombustion is built from source. See the link below for more information.",
+				"https://www.kombustion.io/plugins/developing",
+				)
+		}
+		printer.Fatal(err, config.ErrorHelpInfo, "")
+	}
 }

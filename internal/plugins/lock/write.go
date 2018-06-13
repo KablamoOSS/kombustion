@@ -3,6 +3,8 @@ package lock
 import (
 	"io/ioutil"
 
+	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/config"
 	"github.com/KablamoOSS/yaml"
 )
 
@@ -18,7 +20,7 @@ func WriteLockToDisk(lockFile *Lock) error {
 	// Write the LockString
 	err = ioutil.WriteFile("kombustion.lock", lockString, 0644)
 	if err != nil {
-		return err
+		printer.Fatal(err, config.ErrorHelpInfo, "")
 	}
 	return nil
 }
