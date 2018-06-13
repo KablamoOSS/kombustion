@@ -52,11 +52,10 @@ func CheckManifestExists() bool {
 	if err != nil {
 		return false
 	}
-	manifest, err := findAndLoadManifest(path)
+	_, err = findAndLoadManifest(path)
 	if err != nil {
 		return false
 	}
-	fmt.Println("manifest: ", manifest)
 	return true
 }
 
