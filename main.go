@@ -189,8 +189,14 @@ ISSUES:
 	}
 
 	err := app.Run(os.Args)
-
 	if err != nil {
+		if err.Error() == "flag provided but not defined: -load-plugin" {
+			printer.Fatal(
+				err,
+				"--load-plugin is only available when kombustion is built from source. See the link below for more information.",
+				"https://www.kombustion.io/plugins/developing",
+				)
+		}
 		printer.Fatal(err, config.ErrorHelpInfo, "")
 	}
 }
