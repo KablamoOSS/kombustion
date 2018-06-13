@@ -62,7 +62,7 @@ func installPluginsWithLock(lockFile *lock.Lock) (updatedLockFile *lock.Lock, in
 
 // installPlugin - Install an individual plugin
 func installPlugin(plugin lock.Plugin) (updatedPlugin lock.Plugin, installErrors []error) {
-	printer.SubStep(fmt.Sprintf("Installing %s", plugin.Name), 1, false)
+	printer.SubStep(fmt.Sprintf("Installing %s", plugin.Name), 1, false, false)
 
 	updatedPlugin = plugin
 	for i, resolved := range plugin.Resolved {
@@ -74,7 +74,11 @@ func installPlugin(plugin lock.Plugin) (updatedPlugin lock.Plugin, installErrors
 				plugin.Version,
 				resolved.OperatingSystem,
 				resolved.Architecture,
-			), 2, true)
+			),
+				2,
+				true,
+				false,
+			)
 		} else {
 			var couldInstallFromCache bool
 			updatedResolved := resolved
@@ -93,7 +97,11 @@ func installPlugin(plugin lock.Plugin) (updatedPlugin lock.Plugin, installErrors
 					plugin.Version,
 					resolved.OperatingSystem,
 					resolved.Architecture,
-				), 2, false)
+				),
+					2,
+					false,
+					false,
+				)
 
 				var cacheErrors []error
 				couldInstallFromCache, cacheErrors = installFromCache(cacheFile, plugin, resolved)
@@ -113,7 +121,7 @@ func installPlugin(plugin lock.Plugin) (updatedPlugin lock.Plugin, installErrors
 		}
 	}
 
-	printer.SubStep(fmt.Sprintf("Installed %s", plugin.Name), 2, true)
+	printer.SubStep(fmt.Sprintf("Installed %s", plugin.Name), 2, true, false)
 	return updatedPlugin, installErrors
 }
 
@@ -198,7 +206,10 @@ func downloadPlugin(plugin lock.Plugin, resolved lock.PluginResolution) (updated
 			resolved.OperatingSystem,
 			resolved.Architecture,
 		),
-		2, false)
+		2,
+		false,
+		false,
+	)
 
 	updatedResolved = resolved
 	return updatedResolved, downloadErrors

@@ -73,12 +73,13 @@ func Step(message string) {
 }
 
 // SubStep prints a line console, at a given indent and stops the spinner
-func SubStep(message string, indent int, last bool) {
+// ignoreVerboseRule true, ensures the SubStep always prints
+func SubStep(message string, indent int, last bool, ignoreVerboseRule bool) {
 	if message != previousSubStepMessage {
 		previousSubStepMessage = message
 		// Substeps are only printed if the verbose flag is set at init
 		// Unless it's the last substep
-		if verbose || last {
+		if verbose || ignoreVerboseRule || last {
 			var indentString string
 
 			for i := 1; i <= indent; i++ {
@@ -125,9 +126,15 @@ func Error(err error, resolution string, link string) {
 		"%s %s \n%s%s",
 		chalk.Bold.TextStyle(chalk.Red.Color("✖  Error:")),
 		chalk.Red.Color(err.Error()),
-		chalk.Dim.TextStyle(chalk.Bold.TextStyle("★  Resolution: ")),
-		chalk.Dim.TextStyle(resolution),
 	)
+	if resolution != "" { 
+		errMessage = fmt.Sprintf(
+			"%s\n%s%s",
+			errMessage,
+			chalk.Dim.TextStyle(chalk.Bold.TextStyle("★  Resolution: ")),
+			chalk.Dim.TextStyle(resolution),
+		)
+	}
 
 	if link != "" {
 		errMessage = fmt.Sprintf(
@@ -150,10 +157,16 @@ func Fatal(err error, resolution string, link string) {
 		"%s %s \n%s%s",
 		chalk.Bold.TextStyle(chalk.Red.Color("✖  Fatal:")),
 		chalk.Red.Color(err.Error()),
-		chalk.Dim.TextStyle(chalk.Bold.TextStyle("★  Resolution: ")),
-		chalk.Dim.TextStyle(resolution),
 	)
 
+	if resolution != "" { 
+		errMessage = fmt.Sprintf(
+			"%s\n%s%s",
+			errMessage,
+			chalk.Dim.TextStyle(chalk.Bold.TextStyle("★  Resolution: ")),
+			chalk.Dim.TextStyle(resolution),
+		)
+	}
 	// Add the link if a valid one was supplied
 	if link != "" {
 		errMessage = fmt.Sprintf(

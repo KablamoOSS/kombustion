@@ -5,7 +5,7 @@
   branch = "master"
   name = "github.com/KablamoOSS/go-cli-printer"
   packages = ["."]
-  revision = "e261ebc9ccb87b2531c0603c7b8d4144e226081a"
+  revision = "12b03ccdc3ac22daaf175a751e0663a23695358c"
 
 [[projects]]
   name = "github.com/KablamoOSS/yaml"
@@ -41,6 +41,7 @@
     "private/protocol/rest",
     "private/protocol/xml/xmlutil",
     "service/cloudformation",
+    "service/cloudformation/cloudformationiface",
     "service/sts"
   ]
   revision = "cf00d544fc3c02f31e05e8d02444a1325d3a840b"
@@ -236,6 +237,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "418aa0eccf9861017fb7b3ef52c631d84e68baea64ba85024ed71a171604fa1a"
+  inputs-digest = "ba3ecaec6169924a1ad27dcbe516a95d0cf4a276735d0ae99c25c90f622488fd"
   solver-name = "gps-cdcl"
   solver-version = 1

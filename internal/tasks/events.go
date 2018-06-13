@@ -8,7 +8,7 @@ import (
 
 // PrintEvents outputs the events of a stack
 func PrintEvents(c *cli.Context) {
-	printer.Step("Printing events")
+	printer.Step("Print events")
 	printer.Progress("Kombusting")
 
 	cf := tasks.GetCloudformationClient(c.GlobalString("profile"), c.String("region"))

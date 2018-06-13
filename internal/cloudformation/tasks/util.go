@@ -1,22 +1,23 @@
 package tasks
 
 import (
+	"fmt"
 	"os"
 	"strings"
 
-	log "github.com/sirupsen/logrus"
+	printer "github.com/KablamoOSS/go-cli-printer"
 )
 
 func checkError(err error) {
 	if err != nil {
 		if strings.Contains(err.Error(), "No updates are to be performed") {
-			log.Warn("No updates are to be performed.")
+			printer.Error(fmt.Errorf("No updates are to be performed"), "", "")
 			os.Exit(0)
 		} else if strings.Contains(err.Error(), "Stack with id") && strings.Contains(err.Error(), "does not exist") {
-			log.Warn("The stack does not exist.")
+			printer.Error(fmt.Errorf("The stack does not exist"), "", "")
 			os.Exit(0)
 		} else {
-			log.Fatal(err)
+			printer.Fatal(err, "", "")
 		}
 	}
 }
@@ -24,12 +25,12 @@ func checkError(err error) {
 func checkErrorDeletePoll(err error) {
 	if err != nil {
 		if strings.Contains(err.Error(), "No updates are to be performed") {
-			log.Warn("No updates are to be performed.")
+			printer.Fatal(fmt.Errorf("No updates are to be performed"), "", "")
 			os.Exit(0)
 		} else if strings.Contains(err.Error(), "Stack with id") && strings.Contains(err.Error(), "does not exist") {
 			os.Exit(0)
 		} else {
-			log.Fatal(err)
+			printer.Fatal(err, "", "")
 		}
 	}
 }
