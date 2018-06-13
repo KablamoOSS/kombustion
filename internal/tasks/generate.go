@@ -2,7 +2,6 @@ package tasks
 
 import (
 	"fmt"
-	"log"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
@@ -31,6 +30,8 @@ func init() {
 
 // Generate a template and save it to disk, without upserting it
 func Generate(c *cli.Context) {
+	printer.Step("Generating template")
+	printer.Progress("Kombusting")
 
 	fileName := c.Args().Get(0)
 	if fileName == "" {
@@ -47,12 +48,24 @@ func Generate(c *cli.Context) {
 
 	lockFile, err := lock.FindAndLoadLock()
 	if err != nil {
-		log.Fatal(err)
+		printer.Fatal(
+			err,
+			fmt.Sprintf(
+				"kombustion.lock may need to be rebuilt",
+			),
+			"",
+		)
 	}
 
 	manifestFile := manifest.FindAndLoadManifest()
 	if err != nil {
-		log.Fatal(err)
+		printer.Fatal(
+			err,
+			fmt.Sprintf(
+				"kombustion.yaml may need to be rebuilt",
+			),
+			"",
+		)
 	}
 
 	// load all plugins
