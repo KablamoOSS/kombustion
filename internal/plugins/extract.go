@@ -16,7 +16,7 @@ func ExtractResourcesFromPlugins(
 		if *plugin.Resources != nil {
 			for key, parserFunc := range *plugin.Resources {
 				pluginKey := fmt.Sprintf("%s::%s", plugin.InternalConfig.Prefix, key)
-				if _, ok := (*resources)[pluginKey]; ok == false { // Check for duplicates
+				if _, ok := (*resources)[pluginKey]; ok { // Check for duplicates
 					printer.Fatal(
 						fmt.Errorf("Plugin `%s` tried to load resource `%s` but it already exists", plugin.Config.Name, pluginKey),
 						fmt.Sprintf(
