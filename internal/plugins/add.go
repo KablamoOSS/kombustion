@@ -27,6 +27,10 @@ func AddPluginsToManifest(manifest *manifestType.Manifest, pluginLocations []str
 
 	// Get the lockFile
 	lockFile, err := lock.FindAndLoadLock()
+	if err != nil {
+		printer.Error(err, config.ErrorHelpInfo, "")
+		return manifest, err
+	}
 
 	// Add all the plugins to the manifest and lockfile
 	manifest, lockFile, err = addPluginsToManifestAndLock(manifest, lockFile, pluginLocations)
@@ -66,12 +70,14 @@ func addPluginsToManifestAndLock(
 		if err != nil {
 			return manifest, lockFile, err
 		}
+
 		if manifest.Plugins == nil {
 			manifest.Plugins = make(map[string]manifestType.Plugin)
 		}
 		if lockFile.Plugins == nil {
 			lockFile.Plugins = make(map[string]lock.Plugin)
 		}
+
 		manifest.Plugins[fmt.Sprintf("%s@%s", plugin.Name, plugin.Version)] = plugin
 		lockFile.Plugins[fmt.Sprintf("%s@%s", plugin.Name, plugin.Version)] = pluginLock
 	}

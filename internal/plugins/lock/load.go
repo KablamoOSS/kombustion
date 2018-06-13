@@ -2,20 +2,31 @@ package lock
 
 import (
 	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 
+	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/config"
 	"github.com/KablamoOSS/yaml"
 )
 
 // FindAndLoadLock - Search the current directory for a Lock file, and load it
+// If no lock is found, return an empty Lock
 func FindAndLoadLock() (lock *Lock, err error) {
 	path, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
-		log.Fatal(err)
+		printer.Fatal(err, config.ErrorHelpInfo, "")
 	}
-	return findAndLoadLock(path)
+	lock, err = findAndLoadLock(path)
+	if err != nil {
+		printer.Fatal(err, config.ErrorHelpInfo, "")
+	}
+
+	if lock == nil {
+		lock = &Lock{}
+		lock.Plugins = make(map[string]Plugin)
+	}
+	return
 }
 
 // findAndLoadLock - Search the given directory for a Lock , and load it

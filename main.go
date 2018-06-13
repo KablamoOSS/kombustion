@@ -73,6 +73,16 @@ func main() {
 	// In general it's recommended to use the official builds.
 	if version == "" {
 		version = "BUILT_FROM_SOURCE"
+
+		devModeFlags := []cli.Flag{
+			cli.StringFlag{
+				Name:  "load-plugin",
+				Usage: "load arbitrary plugin --load-plugin path/to/plugin.so",
+			},
+		}
+
+		tasks.GlobalFlags = append(tasks.GlobalFlags, devModeFlags...)
+
 	}
 
 	kombustionLogo := chalk.Dim.TextStyle(`

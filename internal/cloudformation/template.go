@@ -49,50 +49,54 @@ type GenerateParams struct {
 	Env                string
 	DisableBaseOutputs bool
 	ParamMap           map[string]string
+	Plugins            []*plugins.PluginLoaded
 }
 
-// ParserMap - a map of parsers
-type ParserMap map[string]types.ParserFunc
-
-var resourceParsers ParserMap
-var outputParsers ParserMap
-var mappingParsers ParserMap
+var resourceParsers map[string]types.ParserFunc
+var outputParsers map[string]types.ParserFunc
+var mappingParsers map[string]types.ParserFunc
 
 func init() {
 	registerYamlTagUnmarshalers()
 }
 
-func populateParsers(noBaseOutputs bool) {
+func populateParsers(loadedPlugins []*plugins.PluginLoaded, noBaseOutputs bool) {
 	resourceParsers = parsers.GetParsersResources()
-	mappingParsers = make(ParserMap)
+	mappingParsers = make(map[string]types.ParserFunc)
 
 	if noBaseOutputs {
-		outputParsers = make(ParserMap)
+		outputParsers = make(map[string]types.ParserFunc)
 	} else {
 		outputParsers = parsers.GetParsersOutputs()
 	}
 
-	resources, outputs, mappings := plugins.LoadPlugins()
-	for k, v := range resources {
-		resourceParsers[k] = v
-	}
-	for k, v := range outputs {
-		outputParsers[k] = v
-	}
-	for k, v := range mappings {
-		mappingParsers[k] = v
-	}
+	plugins.ExtractResourcesFromPlugins(loadedPlugins, &resourceParsers)
+	plugins.ExtractMappingsFromPlugins(loadedPlugins, &mappingParsers)
+	plugins.ExtractOutputsFromPlugins(loadedPlugins, &outputParsers)
+
+	// dont need if above extracts work
+	// resources, outputs, mappings := plugins.LoadPlugins()
+	// for k, v := range resources {
+	// 	resourceParsers[k] = v
+	// }
+	// for k, v := range outputs {
+	// 	outputParsers[k] = v
+	// }
+	// for k, v := range mappings {
+	// 	mappingParsers[k] = v
+	// }
 }
 
 // PluginDocs -
 func PluginDocs() (docs map[string]string) {
 	docs = make(map[string]string)
-	r, _, _ := plugins.LoadPlugins()
-	for k := range r {
-		// TODO: each plugin should export a `Usage` map.
-		// this function should return those doc strings as values in the docs map
-		docs[k] = ""
-	}
+	// TODO: Plugins need to be passed in now
+	// r, _, _ := plugins.LoadPlugins()
+	// for k := range r {
+	// TODO: each plugin should export a `Usage` map.
+	// this function should return those doc strings as values in the docs map
+	// docs[k] = ""
+	// }
 	return
 }
 
@@ -103,7 +107,7 @@ func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error
 	var configData []byte
 
 	// populate the parser variables
-	populateParsers(params.DisableBaseOutputs)
+	populateParsers(params.Plugins, params.DisableBaseOutputs)
 
 	configPath := fmt.Sprintf(params.Filename)
 	//configPath := fmt.Sprintf("./configs/%v.yaml", filename)
@@ -199,7 +203,14 @@ func addBaseResources(baseResources types.TemplateObject, configResources types.
 	return
 }
 
-func yamlTemplateCF(resources types.ResourceMap, parsers ParserMap, isResources bool) (compiled types.TemplateObject, err error) {
+func yamlTemplateCF(
+	resources types.ResourceMap,
+	parsers map[string]types.ParserFunc,
+	isResources bool,
+) (
+	compiled types.TemplateObject,
+	err error,
+) {
 	compiled = make(types.TemplateObject)
 
 	context := make(map[string]interface{})
