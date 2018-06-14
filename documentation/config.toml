@@ -1,0 +1,28 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "Kombustion"
+# theme = "kube"
+Paginate = 4
+
+[Params]
+  RSSLink = "/index.xml"
+  author = "Kablamo"
+  github = "KablamoOSS" # add your github profile name
+  description = "Extend Cloudformation with plugins"
+
+[[menu.main]]
+    name = "Docs"
+    weight = -100
+    url = "/docs/"
+[[menu.main]]
+    name = "Guides"
+    weight = -100
+    url = "/guides/"
+[[menu.main]]
+    name = "Concepts"
+    weight = -100
+    url = "/concepts/"
+[[menu.main]]
+    name = "API"
+    weight = -100
+    url = "/api/"
