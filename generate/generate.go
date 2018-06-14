@@ -173,7 +173,7 @@ func New{{$ResourceName}}(properties {{$ResourceName}}Properties, deps ...interf
 }
 
 // Parse{{$ResourceName}} parses {{$ResourceName}}
-func Parse{{$ResourceName}}(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func Parse{{$ResourceName}}(name string, data string) (cf types.TemplateObject, err error) {
 	var resource {{$ResourceName}}
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return
@@ -218,7 +218,7 @@ import (
 )
 
 // Parse{{$ResourceName}} Documentation {{.Documentation}}
-func Parse{{$ResourceName}}(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func Parse{{$ResourceName}}(name string, data string) (cf types.TemplateObject, err error) {
 	{{if .Attributes}}
 	var resource, output types.TemplateObject
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {

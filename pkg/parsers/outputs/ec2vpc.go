@@ -9,7 +9,7 @@ import (
 )
 
 // ParseEC2VPC Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html
-func ParseEC2VPC(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VPC(name string, data string) (cf types.TemplateObject, err error) {
 
 	var resource, output types.TemplateObject
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {

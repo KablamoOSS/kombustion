@@ -46,7 +46,7 @@ func NewOpsWorksApp(properties OpsWorksAppProperties, deps ...interface{}) OpsWo
 }
 
 // ParseOpsWorksApp parses OpsWorksApp
-func ParseOpsWorksApp(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseOpsWorksApp(name string, data string) (cf types.TemplateObject, err error) {
 	var resource OpsWorksApp
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -39,7 +39,7 @@ func NewGuardDutyMember(properties GuardDutyMemberProperties, deps ...interface{
 }
 
 // ParseGuardDutyMember parses GuardDutyMember
-func ParseGuardDutyMember(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGuardDutyMember(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GuardDutyMember
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

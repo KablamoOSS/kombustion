@@ -36,7 +36,7 @@ func NewLogsMetricFilter(properties LogsMetricFilterProperties, deps ...interfac
 }
 
 // ParseLogsMetricFilter parses LogsMetricFilter
-func ParseLogsMetricFilter(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseLogsMetricFilter(name string, data string) (cf types.TemplateObject, err error) {
 	var resource LogsMetricFilter
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -50,7 +50,7 @@ func NewElasticLoadBalancingV2TargetGroup(properties ElasticLoadBalancingV2Targe
 }
 
 // ParseElasticLoadBalancingV2TargetGroup parses ElasticLoadBalancingV2TargetGroup
-func ParseElasticLoadBalancingV2TargetGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElasticLoadBalancingV2TargetGroup(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ElasticLoadBalancingV2TargetGroup
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

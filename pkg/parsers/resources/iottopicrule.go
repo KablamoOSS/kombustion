@@ -36,7 +36,7 @@ func NewIoTTopicRule(properties IoTTopicRuleProperties, deps ...interface{}) IoT
 }
 
 // ParseIoTTopicRule parses IoTTopicRule
-func ParseIoTTopicRule(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseIoTTopicRule(name string, data string) (cf types.TemplateObject, err error) {
 	var resource IoTTopicRule
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

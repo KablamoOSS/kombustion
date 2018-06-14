@@ -8,7 +8,7 @@ import (
 )
 
 // ParseGuardDutyDetector Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-detector.html
-func ParseGuardDutyDetector(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGuardDutyDetector(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

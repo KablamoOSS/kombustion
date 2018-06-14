@@ -44,7 +44,7 @@ func NewDynamoDBTable(properties DynamoDBTableProperties, deps ...interface{}) D
 }
 
 // ParseDynamoDBTable parses DynamoDBTable
-func ParseDynamoDBTable(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseDynamoDBTable(name string, data string) (cf types.TemplateObject, err error) {
 	var resource DynamoDBTable
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

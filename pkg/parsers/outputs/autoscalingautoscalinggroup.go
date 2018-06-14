@@ -8,7 +8,7 @@ import (
 )
 
 // ParseAutoScalingAutoScalingGroup Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html
-func ParseAutoScalingAutoScalingGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAutoScalingAutoScalingGroup(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

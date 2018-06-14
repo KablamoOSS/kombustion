@@ -35,7 +35,7 @@ func NewEC2SubnetRouteTableAssociation(properties EC2SubnetRouteTableAssociation
 }
 
 // ParseEC2SubnetRouteTableAssociation parses EC2SubnetRouteTableAssociation
-func ParseEC2SubnetRouteTableAssociation(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2SubnetRouteTableAssociation(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2SubnetRouteTableAssociation
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

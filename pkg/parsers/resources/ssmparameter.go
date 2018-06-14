@@ -38,7 +38,7 @@ func NewSSMParameter(properties SSMParameterProperties, deps ...interface{}) SSM
 }
 
 // ParseSSMParameter parses SSMParameter
-func ParseSSMParameter(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSSMParameter(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SSMParameter
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

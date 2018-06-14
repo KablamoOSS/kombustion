@@ -34,7 +34,7 @@ func NewEC2EgressOnlyInternetGateway(properties EC2EgressOnlyInternetGatewayProp
 }
 
 // ParseEC2EgressOnlyInternetGateway parses EC2EgressOnlyInternetGateway
-func ParseEC2EgressOnlyInternetGateway(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2EgressOnlyInternetGateway(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2EgressOnlyInternetGateway
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

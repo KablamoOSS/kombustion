@@ -34,7 +34,7 @@ func NewStepFunctionsActivity(properties StepFunctionsActivityProperties, deps .
 }
 
 // ParseStepFunctionsActivity parses StepFunctionsActivity
-func ParseStepFunctionsActivity(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseStepFunctionsActivity(name string, data string) (cf types.TemplateObject, err error) {
 	var resource StepFunctionsActivity
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

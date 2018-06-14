@@ -35,7 +35,7 @@ func NewSQSQueuePolicy(properties SQSQueuePolicyProperties, deps ...interface{})
 }
 
 // ParseSQSQueuePolicy parses SQSQueuePolicy
-func ParseSQSQueuePolicy(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSQSQueuePolicy(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SQSQueuePolicy
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

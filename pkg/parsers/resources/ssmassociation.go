@@ -40,7 +40,7 @@ func NewSSMAssociation(properties SSMAssociationProperties, deps ...interface{})
 }
 
 // ParseSSMAssociation parses SSMAssociation
-func ParseSSMAssociation(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSSMAssociation(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SSMAssociation
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

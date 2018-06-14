@@ -8,7 +8,7 @@ import (
 )
 
 // ParseCognitoUserPoolGroup Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolgroup.html
-func ParseCognitoUserPoolGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCognitoUserPoolGroup(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2SecurityGroupIngress Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html
-func ParseEC2SecurityGroupIngress(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2SecurityGroupIngress(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

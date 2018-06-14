@@ -38,7 +38,7 @@ func NewGluePartition(properties GluePartitionProperties, deps ...interface{}) G
 }
 
 // ParseGluePartition parses GluePartition
-func ParseGluePartition(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGluePartition(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GluePartition
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

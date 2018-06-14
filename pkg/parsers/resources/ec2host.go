@@ -36,7 +36,7 @@ func NewEC2Host(properties EC2HostProperties, deps ...interface{}) EC2Host {
 }
 
 // ParseEC2Host parses EC2Host
-func ParseEC2Host(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2Host(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2Host
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

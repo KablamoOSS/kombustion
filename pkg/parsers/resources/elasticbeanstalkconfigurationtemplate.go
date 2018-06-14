@@ -41,7 +41,7 @@ func NewElasticBeanstalkConfigurationTemplate(properties ElasticBeanstalkConfigu
 }
 
 // ParseElasticBeanstalkConfigurationTemplate parses ElasticBeanstalkConfigurationTemplate
-func ParseElasticBeanstalkConfigurationTemplate(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElasticBeanstalkConfigurationTemplate(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ElasticBeanstalkConfigurationTemplate
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -36,7 +36,7 @@ func NewIAMInstanceProfile(properties IAMInstanceProfileProperties, deps ...inte
 }
 
 // ParseIAMInstanceProfile parses IAMInstanceProfile
-func ParseIAMInstanceProfile(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseIAMInstanceProfile(name string, data string) (cf types.TemplateObject, err error) {
 	var resource IAMInstanceProfile
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

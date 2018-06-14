@@ -8,7 +8,7 @@ import (
 )
 
 // ParseConfigDeliveryChannel Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-deliverychannel.html
-func ParseConfigDeliveryChannel(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseConfigDeliveryChannel(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

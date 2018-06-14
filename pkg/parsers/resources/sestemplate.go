@@ -34,7 +34,7 @@ func NewSESTemplate(properties SESTemplateProperties, deps ...interface{}) SESTe
 }
 
 // ParseSESTemplate parses SESTemplate
-func ParseSESTemplate(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSESTemplate(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SESTemplate
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

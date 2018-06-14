@@ -35,7 +35,7 @@ func NewDAXParameterGroup(properties DAXParameterGroupProperties, deps ...interf
 }
 
 // ParseDAXParameterGroup parses DAXParameterGroup
-func ParseDAXParameterGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseDAXParameterGroup(name string, data string) (cf types.TemplateObject, err error) {
 	var resource DAXParameterGroup
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

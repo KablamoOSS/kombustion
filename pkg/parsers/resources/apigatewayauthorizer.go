@@ -43,7 +43,7 @@ func NewApiGatewayAuthorizer(properties ApiGatewayAuthorizerProperties, deps ...
 }
 
 // ParseApiGatewayAuthorizer parses ApiGatewayAuthorizer
-func ParseApiGatewayAuthorizer(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayAuthorizer(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayAuthorizer
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -45,7 +45,7 @@ func NewSSMPatchBaseline(properties SSMPatchBaselineProperties, deps ...interfac
 }
 
 // ParseSSMPatchBaseline parses SSMPatchBaseline
-func ParseSSMPatchBaseline(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSSMPatchBaseline(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SSMPatchBaseline
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

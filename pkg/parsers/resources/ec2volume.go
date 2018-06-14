@@ -42,7 +42,7 @@ func NewEC2Volume(properties EC2VolumeProperties, deps ...interface{}) EC2Volume
 }
 
 // ParseEC2Volume parses EC2Volume
-func ParseEC2Volume(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2Volume(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2Volume
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

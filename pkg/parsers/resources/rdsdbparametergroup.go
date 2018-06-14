@@ -37,7 +37,7 @@ func NewRDSDBParameterGroup(properties RDSDBParameterGroupProperties, deps ...in
 }
 
 // ParseRDSDBParameterGroup parses RDSDBParameterGroup
-func ParseRDSDBParameterGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRDSDBParameterGroup(name string, data string) (cf types.TemplateObject, err error) {
 	var resource RDSDBParameterGroup
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

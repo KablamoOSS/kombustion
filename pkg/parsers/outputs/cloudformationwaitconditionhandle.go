@@ -8,7 +8,7 @@ import (
 )
 
 // ParseCloudFormationWaitConditionHandle Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waitconditionhandle.html
-func ParseCloudFormationWaitConditionHandle(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloudFormationWaitConditionHandle(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

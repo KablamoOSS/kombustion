@@ -8,7 +8,7 @@ import (
 )
 
 // ParseGlueJob Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html
-func ParseGlueJob(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGlueJob(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

@@ -8,7 +8,7 @@ import (
 )
 
 // ParseElastiCacheSecurityGroupIngress Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-security-group-ingress.html
-func ParseElastiCacheSecurityGroupIngress(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElastiCacheSecurityGroupIngress(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

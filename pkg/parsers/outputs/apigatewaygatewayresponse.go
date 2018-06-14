@@ -8,7 +8,7 @@ import (
 )
 
 // ParseApiGatewayGatewayResponse Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-gatewayresponse.html
-func ParseApiGatewayGatewayResponse(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayGatewayResponse(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

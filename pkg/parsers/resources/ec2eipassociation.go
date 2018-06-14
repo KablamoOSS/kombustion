@@ -37,7 +37,7 @@ func NewEC2EIPAssociation(properties EC2EIPAssociationProperties, deps ...interf
 }
 
 // ParseEC2EIPAssociation parses EC2EIPAssociation
-func ParseEC2EIPAssociation(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2EIPAssociation(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2EIPAssociation
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -8,7 +8,7 @@ import (
 )
 
 // ParseConfigConfigurationRecorder Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html
-func ParseConfigConfigurationRecorder(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseConfigConfigurationRecorder(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

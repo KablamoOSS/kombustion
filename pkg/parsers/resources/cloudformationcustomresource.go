@@ -34,7 +34,7 @@ func NewCloudFormationCustomResource(properties CloudFormationCustomResourceProp
 }
 
 // ParseCloudFormationCustomResource parses CloudFormationCustomResource
-func ParseCloudFormationCustomResource(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloudFormationCustomResource(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CloudFormationCustomResource
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

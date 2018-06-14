@@ -8,7 +8,7 @@ import (
 )
 
 // ParseRedshiftClusterSubnetGroup Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clustersubnetgroup.html
-func ParseRedshiftClusterSubnetGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRedshiftClusterSubnetGroup(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

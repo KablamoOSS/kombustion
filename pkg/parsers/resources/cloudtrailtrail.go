@@ -46,7 +46,7 @@ func NewCloudTrailTrail(properties CloudTrailTrailProperties, deps ...interface{
 }
 
 // ParseCloudTrailTrail parses CloudTrailTrail
-func ParseCloudTrailTrail(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloudTrailTrail(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CloudTrailTrail
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

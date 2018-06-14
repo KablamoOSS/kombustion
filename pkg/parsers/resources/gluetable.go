@@ -37,7 +37,7 @@ func NewGlueTable(properties GlueTableProperties, deps ...interface{}) GlueTable
 }
 
 // ParseGlueTable parses GlueTable
-func ParseGlueTable(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGlueTable(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GlueTable
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

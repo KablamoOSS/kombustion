@@ -8,7 +8,7 @@ import (
 )
 
 // ParseRoute53RecordSetGroup Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-recordsetgroup.html
-func ParseRoute53RecordSetGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRoute53RecordSetGroup(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

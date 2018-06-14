@@ -40,7 +40,7 @@ func NewDataPipelinePipeline(properties DataPipelinePipelineProperties, deps ...
 }
 
 // ParseDataPipelinePipeline parses DataPipelinePipeline
-func ParseDataPipelinePipeline(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseDataPipelinePipeline(name string, data string) (cf types.TemplateObject, err error) {
 	var resource DataPipelinePipeline
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -35,7 +35,7 @@ func NewEC2NetworkAcl(properties EC2NetworkAclProperties, deps ...interface{}) E
 }
 
 // ParseEC2NetworkAcl parses EC2NetworkAcl
-func ParseEC2NetworkAcl(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2NetworkAcl(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2NetworkAcl
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

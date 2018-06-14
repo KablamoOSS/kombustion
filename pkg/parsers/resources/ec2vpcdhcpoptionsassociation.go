@@ -35,7 +35,7 @@ func NewEC2VPCDHCPOptionsAssociation(properties EC2VPCDHCPOptionsAssociationProp
 }
 
 // ParseEC2VPCDHCPOptionsAssociation parses EC2VPCDHCPOptionsAssociation
-func ParseEC2VPCDHCPOptionsAssociation(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VPCDHCPOptionsAssociation(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2VPCDHCPOptionsAssociation
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

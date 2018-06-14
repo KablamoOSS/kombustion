@@ -26,13 +26,12 @@ func ExtractResourcesFromPlugins(
 					)
 				} else {
 					wrappedParserFunc := func(
-						ctx map[string]interface{},
 						name string, data string,
 					) (
 						kombustionTypes.TemplateObject,
 						error,
 					) {
-						return loadResource(parserFunc(ctx, name, data))
+						return loadResource(parserFunc(name, data))
 					}
 					(*resources)[pluginKey] = wrappedParserFunc
 				}
@@ -61,13 +60,12 @@ func ExtractMappingsFromPlugins(
 					)
 				} else {
 					wrappedParserFunc := func(
-						ctx map[string]interface{},
 						name string, data string,
 					) (
 						kombustionTypes.TemplateObject,
 						error,
 					) {
-						return loadResource(parserFunc(ctx, name, data))
+						return loadResource(parserFunc(name, data))
 					}
 					(*mappings)[pluginKey] = wrappedParserFunc
 				}
@@ -98,13 +96,12 @@ func ExtractOutputsFromPlugins(
 					)
 				} else {
 					wrappedParserFunc := func(
-						ctx map[string]interface{},
 						name string, data string,
 					) (
 						kombustionTypes.TemplateObject,
 						error,
 					) {
-						return loadResource(parserFunc(ctx, name, data))
+						return loadResource(parserFunc(name, data))
 					}
 					(*outputs)[pluginKey] = wrappedParserFunc
 				}

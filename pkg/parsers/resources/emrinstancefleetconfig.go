@@ -41,7 +41,7 @@ func NewEMRInstanceFleetConfig(properties EMRInstanceFleetConfigProperties, deps
 }
 
 // ParseEMRInstanceFleetConfig parses EMRInstanceFleetConfig
-func ParseEMRInstanceFleetConfig(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEMRInstanceFleetConfig(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EMRInstanceFleetConfig
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

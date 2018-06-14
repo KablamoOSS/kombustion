@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2EIPAssociation Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip-association.html
-func ParseEC2EIPAssociation(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2EIPAssociation(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

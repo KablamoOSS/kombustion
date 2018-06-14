@@ -38,7 +38,7 @@ func NewIAMRole(properties IAMRoleProperties, deps ...interface{}) IAMRole {
 }
 
 // ParseIAMRole parses IAMRole
-func ParseIAMRole(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseIAMRole(name string, data string) (cf types.TemplateObject, err error) {
 	var resource IAMRole
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

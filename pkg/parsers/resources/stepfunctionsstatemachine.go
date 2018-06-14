@@ -36,7 +36,7 @@ func NewStepFunctionsStateMachine(properties StepFunctionsStateMachineProperties
 }
 
 // ParseStepFunctionsStateMachine parses StepFunctionsStateMachine
-func ParseStepFunctionsStateMachine(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseStepFunctionsStateMachine(name string, data string) (cf types.TemplateObject, err error) {
 	var resource StepFunctionsStateMachine
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

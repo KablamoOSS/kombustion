@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2DHCPOptions Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-dhcp-options.html
-func ParseEC2DHCPOptions(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2DHCPOptions(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

@@ -50,7 +50,7 @@ func NewCognitoUserPool(properties CognitoUserPoolProperties, deps ...interface{
 }
 
 // ParseCognitoUserPool parses CognitoUserPool
-func ParseCognitoUserPool(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCognitoUserPool(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CognitoUserPool
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

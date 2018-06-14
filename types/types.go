@@ -20,4 +20,4 @@ type ResourceMap map[string]CfResource
 type TemplateObject map[string]interface{}
 
 // ParserFunc - a definition of the function called for resource/output/mapping parsers
-type ParserFunc func(ctx map[string]interface{}, name string, data string) (TemplateObject, error)
+type ParserFunc func(name string, data string) (TemplateObject, error)

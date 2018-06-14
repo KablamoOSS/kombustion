@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2SpotFleet Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-spotfleet.html
-func ParseEC2SpotFleet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2SpotFleet(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

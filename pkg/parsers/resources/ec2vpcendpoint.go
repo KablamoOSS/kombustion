@@ -37,7 +37,7 @@ func NewEC2VPCEndpoint(properties EC2VPCEndpointProperties, deps ...interface{})
 }
 
 // ParseEC2VPCEndpoint parses EC2VPCEndpoint
-func ParseEC2VPCEndpoint(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VPCEndpoint(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2VPCEndpoint
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

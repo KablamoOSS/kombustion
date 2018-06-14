@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2EgressOnlyInternetGateway Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-egressonlyinternetgateway.html
-func ParseEC2EgressOnlyInternetGateway(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2EgressOnlyInternetGateway(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

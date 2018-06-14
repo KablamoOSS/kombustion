@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2Host Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-host.html
-func ParseEC2Host(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2Host(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

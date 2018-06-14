@@ -40,7 +40,7 @@ func NewIAMManagedPolicy(properties IAMManagedPolicyProperties, deps ...interfac
 }
 
 // ParseIAMManagedPolicy parses IAMManagedPolicy
-func ParseIAMManagedPolicy(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseIAMManagedPolicy(name string, data string) (cf types.TemplateObject, err error) {
 	var resource IAMManagedPolicy
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

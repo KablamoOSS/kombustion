@@ -33,7 +33,7 @@ func NewSDBDomain(properties SDBDomainProperties, deps ...interface{}) SDBDomain
 }
 
 // ParseSDBDomain parses SDBDomain
-func ParseSDBDomain(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSDBDomain(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SDBDomain
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

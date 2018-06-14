@@ -9,7 +9,7 @@ import (
 )
 
 // ParseStepFunctionsStateMachine Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html
-func ParseStepFunctionsStateMachine(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseStepFunctionsStateMachine(name string, data string) (cf types.TemplateObject, err error) {
 
 	var resource, output types.TemplateObject
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {

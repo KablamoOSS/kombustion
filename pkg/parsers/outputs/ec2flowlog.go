@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2FlowLog Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-flowlog.html
-func ParseEC2FlowLog(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2FlowLog(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

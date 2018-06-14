@@ -8,7 +8,7 @@ import (
 )
 
 // ParseGlueConnection Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-connection.html
-func ParseGlueConnection(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGlueConnection(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

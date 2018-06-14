@@ -42,7 +42,7 @@ func NewEC2Route(properties EC2RouteProperties, deps ...interface{}) EC2Route {
 }
 
 // ParseEC2Route parses EC2Route
-func ParseEC2Route(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2Route(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2Route
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

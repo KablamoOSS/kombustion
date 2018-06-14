@@ -48,7 +48,7 @@ func NewS3Bucket(properties S3BucketProperties, deps ...interface{}) S3Bucket {
 }
 
 // ParseS3Bucket parses S3Bucket
-func ParseS3Bucket(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseS3Bucket(name string, data string) (cf types.TemplateObject, err error) {
 	var resource S3Bucket
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -37,7 +37,7 @@ func NewRedshiftClusterParameterGroup(properties RedshiftClusterParameterGroupPr
 }
 
 // ParseRedshiftClusterParameterGroup parses RedshiftClusterParameterGroup
-func ParseRedshiftClusterParameterGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRedshiftClusterParameterGroup(name string, data string) (cf types.TemplateObject, err error) {
 	var resource RedshiftClusterParameterGroup
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2Volume Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html
-func ParseEC2Volume(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2Volume(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

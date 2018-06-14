@@ -36,7 +36,7 @@ func NewEC2VPNGateway(properties EC2VPNGatewayProperties, deps ...interface{}) E
 }
 
 // ParseEC2VPNGateway parses EC2VPNGateway
-func ParseEC2VPNGateway(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VPNGateway(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2VPNGateway
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

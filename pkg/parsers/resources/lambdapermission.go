@@ -39,7 +39,7 @@ func NewLambdaPermission(properties LambdaPermissionProperties, deps ...interfac
 }
 
 // ParseLambdaPermission parses LambdaPermission
-func ParseLambdaPermission(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseLambdaPermission(name string, data string) (cf types.TemplateObject, err error) {
 	var resource LambdaPermission
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

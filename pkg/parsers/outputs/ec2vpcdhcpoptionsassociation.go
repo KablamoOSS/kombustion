@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2VPCDHCPOptionsAssociation Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc-dhcp-options-assoc.html
-func ParseEC2VPCDHCPOptionsAssociation(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VPCDHCPOptionsAssociation(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

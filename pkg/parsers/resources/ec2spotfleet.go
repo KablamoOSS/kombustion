@@ -35,7 +35,7 @@ func NewEC2SpotFleet(properties EC2SpotFleetProperties, deps ...interface{}) EC2
 }
 
 // ParseEC2SpotFleet parses EC2SpotFleet
-func ParseEC2SpotFleet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2SpotFleet(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2SpotFleet
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

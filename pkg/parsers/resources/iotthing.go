@@ -35,7 +35,7 @@ func NewIoTThing(properties IoTThingProperties, deps ...interface{}) IoTThing {
 }
 
 // ParseIoTThing parses IoTThing
-func ParseIoTThing(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseIoTThing(name string, data string) (cf types.TemplateObject, err error) {
 	var resource IoTThing
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -33,7 +33,7 @@ func NewSESReceiptRuleSet(properties SESReceiptRuleSetProperties, deps ...interf
 }
 
 // ParseSESReceiptRuleSet parses SESReceiptRuleSet
-func ParseSESReceiptRuleSet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSESReceiptRuleSet(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SESReceiptRuleSet
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

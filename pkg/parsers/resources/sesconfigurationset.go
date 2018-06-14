@@ -33,7 +33,7 @@ func NewSESConfigurationSet(properties SESConfigurationSetProperties, deps ...in
 }
 
 // ParseSESConfigurationSet parses SESConfigurationSet
-func ParseSESConfigurationSet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSESConfigurationSet(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SESConfigurationSet
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

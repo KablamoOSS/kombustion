@@ -9,7 +9,7 @@ import (
 )
 
 // ParseDAXCluster Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-cluster.html
-func ParseDAXCluster(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseDAXCluster(name string, data string) (cf types.TemplateObject, err error) {
 
 	var resource, output types.TemplateObject
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {

@@ -38,7 +38,7 @@ func NewRDSDBSecurityGroupIngress(properties RDSDBSecurityGroupIngressProperties
 }
 
 // ParseRDSDBSecurityGroupIngress parses RDSDBSecurityGroupIngress
-func ParseRDSDBSecurityGroupIngress(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRDSDBSecurityGroupIngress(name string, data string) (cf types.TemplateObject, err error) {
 	var resource RDSDBSecurityGroupIngress
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

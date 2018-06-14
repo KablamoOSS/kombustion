@@ -36,7 +36,7 @@ func NewEC2VPCGatewayAttachment(properties EC2VPCGatewayAttachmentProperties, de
 }
 
 // ParseEC2VPCGatewayAttachment parses EC2VPCGatewayAttachment
-func ParseEC2VPCGatewayAttachment(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VPCGatewayAttachment(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2VPCGatewayAttachment
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

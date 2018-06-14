@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2VPCGatewayAttachment Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc-gateway-attachment.html
-func ParseEC2VPCGatewayAttachment(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VPCGatewayAttachment(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

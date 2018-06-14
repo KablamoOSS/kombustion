@@ -8,7 +8,7 @@ import (
 )
 
 // ParseRDSDBSecurityGroupIngress Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-security-group-ingress.html
-func ParseRDSDBSecurityGroupIngress(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRDSDBSecurityGroupIngress(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

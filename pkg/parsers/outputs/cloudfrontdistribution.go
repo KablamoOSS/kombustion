@@ -9,7 +9,7 @@ import (
 )
 
 // ParseCloudFrontDistribution Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html
-func ParseCloudFrontDistribution(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloudFrontDistribution(name string, data string) (cf types.TemplateObject, err error) {
 
 	var resource, output types.TemplateObject
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {

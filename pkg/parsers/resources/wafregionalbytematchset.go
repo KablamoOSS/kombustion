@@ -35,7 +35,7 @@ func NewWAFRegionalByteMatchSet(properties WAFRegionalByteMatchSetProperties, de
 }
 
 // ParseWAFRegionalByteMatchSet parses WAFRegionalByteMatchSet
-func ParseWAFRegionalByteMatchSet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseWAFRegionalByteMatchSet(name string, data string) (cf types.TemplateObject, err error) {
 	var resource WAFRegionalByteMatchSet
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -44,7 +44,7 @@ func NewEMRInstanceGroupConfig(properties EMRInstanceGroupConfigProperties, deps
 }
 
 // ParseEMRInstanceGroupConfig parses EMRInstanceGroupConfig
-func ParseEMRInstanceGroupConfig(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEMRInstanceGroupConfig(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EMRInstanceGroupConfig
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

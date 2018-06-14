@@ -46,7 +46,7 @@ func NewApiGatewayMethod(properties ApiGatewayMethodProperties, deps ...interfac
 }
 
 // ParseApiGatewayMethod parses ApiGatewayMethod
-func ParseApiGatewayMethod(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayMethod(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayMethod
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

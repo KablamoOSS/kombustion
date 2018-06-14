@@ -37,7 +37,7 @@ func NewRedshiftClusterSecurityGroupIngress(properties RedshiftClusterSecurityGr
 }
 
 // ParseRedshiftClusterSecurityGroupIngress parses RedshiftClusterSecurityGroupIngress
-func ParseRedshiftClusterSecurityGroupIngress(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRedshiftClusterSecurityGroupIngress(name string, data string) (cf types.TemplateObject, err error) {
 	var resource RedshiftClusterSecurityGroupIngress
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

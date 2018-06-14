@@ -9,7 +9,7 @@ import (
 )
 
 // ParseAppSyncGraphQLApi Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-graphqlapi.html
-func ParseAppSyncGraphQLApi(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAppSyncGraphQLApi(name string, data string) (cf types.TemplateObject, err error) {
 
 	var resource, output types.TemplateObject
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {

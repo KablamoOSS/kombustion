@@ -8,7 +8,7 @@ import (
 )
 
 // ParseElasticLoadBalancingV2Listener Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
-func ParseElasticLoadBalancingV2Listener(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElasticLoadBalancingV2Listener(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

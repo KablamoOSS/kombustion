@@ -40,7 +40,7 @@ func NewDMSEventSubscription(properties DMSEventSubscriptionProperties, deps ...
 }
 
 // ParseDMSEventSubscription parses DMSEventSubscription
-func ParseDMSEventSubscription(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseDMSEventSubscription(name string, data string) (cf types.TemplateObject, err error) {
 	var resource DMSEventSubscription
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

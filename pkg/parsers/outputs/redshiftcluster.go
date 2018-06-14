@@ -9,7 +9,7 @@ import (
 )
 
 // ParseRedshiftCluster Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html
-func ParseRedshiftCluster(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRedshiftCluster(name string, data string) (cf types.TemplateObject, err error) {
 
 	var resource, output types.TemplateObject
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {

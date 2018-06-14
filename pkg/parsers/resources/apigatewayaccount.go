@@ -33,7 +33,7 @@ func NewApiGatewayAccount(properties ApiGatewayAccountProperties, deps ...interf
 }
 
 // ParseApiGatewayAccount parses ApiGatewayAccount
-func ParseApiGatewayAccount(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayAccount(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayAccount
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

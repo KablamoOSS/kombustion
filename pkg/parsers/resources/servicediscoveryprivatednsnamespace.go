@@ -36,7 +36,7 @@ func NewServiceDiscoveryPrivateDnsNamespace(properties ServiceDiscoveryPrivateDn
 }
 
 // ParseServiceDiscoveryPrivateDnsNamespace parses ServiceDiscoveryPrivateDnsNamespace
-func ParseServiceDiscoveryPrivateDnsNamespace(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseServiceDiscoveryPrivateDnsNamespace(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ServiceDiscoveryPrivateDnsNamespace
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

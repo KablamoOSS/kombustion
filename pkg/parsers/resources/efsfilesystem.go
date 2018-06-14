@@ -36,7 +36,7 @@ func NewEFSFileSystem(properties EFSFileSystemProperties, deps ...interface{}) E
 }
 
 // ParseEFSFileSystem parses EFSFileSystem
-func ParseEFSFileSystem(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEFSFileSystem(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EFSFileSystem
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -36,7 +36,7 @@ func NewCloudFrontDistribution(properties CloudFrontDistributionProperties, deps
 }
 
 // ParseCloudFrontDistribution parses CloudFrontDistribution
-func ParseCloudFrontDistribution(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloudFrontDistribution(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CloudFrontDistribution
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

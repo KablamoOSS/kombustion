@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEMRStep Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html
-func ParseEMRStep(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEMRStep(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

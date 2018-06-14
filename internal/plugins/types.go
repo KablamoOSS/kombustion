@@ -7,19 +7,16 @@ import (
 // PluginLoaded is a fully loaded plugin
 type PluginLoaded struct {
 	Resources *map[string]func(
-		ctx map[string]interface{},
 		name string,
 		data string,
 	) []byte
 
 	Outputs *map[string]func(
-		ctx map[string]interface{},
 		name string,
 		data string,
 	) []byte
 
 	Mappings *map[string]func(
-		ctx map[string]interface{},
 		name string,
 		data string,
 	) []byte

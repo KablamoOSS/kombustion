@@ -35,7 +35,7 @@ func NewWAFSqlInjectionMatchSet(properties WAFSqlInjectionMatchSetProperties, de
 }
 
 // ParseWAFSqlInjectionMatchSet parses WAFSqlInjectionMatchSet
-func ParseWAFSqlInjectionMatchSet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseWAFSqlInjectionMatchSet(name string, data string) (cf types.TemplateObject, err error) {
 	var resource WAFSqlInjectionMatchSet
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

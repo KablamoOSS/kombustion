@@ -45,7 +45,7 @@ func NewDAXCluster(properties DAXClusterProperties, deps ...interface{}) DAXClus
 }
 
 // ParseDAXCluster parses DAXCluster
-func ParseDAXCluster(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseDAXCluster(name string, data string) (cf types.TemplateObject, err error) {
 	var resource DAXCluster
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

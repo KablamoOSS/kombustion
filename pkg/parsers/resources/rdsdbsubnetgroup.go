@@ -37,7 +37,7 @@ func NewRDSDBSubnetGroup(properties RDSDBSubnetGroupProperties, deps ...interfac
 }
 
 // ParseRDSDBSubnetGroup parses RDSDBSubnetGroup
-func ParseRDSDBSubnetGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRDSDBSubnetGroup(name string, data string) (cf types.TemplateObject, err error) {
 	var resource RDSDBSubnetGroup
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

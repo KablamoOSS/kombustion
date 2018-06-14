@@ -36,7 +36,7 @@ func NewApiGatewayVpcLink(properties ApiGatewayVpcLinkProperties, deps ...interf
 }
 
 // ParseApiGatewayVpcLink parses ApiGatewayVpcLink
-func ParseApiGatewayVpcLink(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayVpcLink(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayVpcLink
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -37,7 +37,7 @@ func NewElasticBeanstalkApplicationVersion(properties ElasticBeanstalkApplicatio
 }
 
 // ParseElasticBeanstalkApplicationVersion parses ElasticBeanstalkApplicationVersion
-func ParseElasticBeanstalkApplicationVersion(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElasticBeanstalkApplicationVersion(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ElasticBeanstalkApplicationVersion
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

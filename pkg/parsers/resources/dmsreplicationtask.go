@@ -42,7 +42,7 @@ func NewDMSReplicationTask(properties DMSReplicationTaskProperties, deps ...inte
 }
 
 // ParseDMSReplicationTask parses DMSReplicationTask
-func ParseDMSReplicationTask(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseDMSReplicationTask(name string, data string) (cf types.TemplateObject, err error) {
 	var resource DMSReplicationTask
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

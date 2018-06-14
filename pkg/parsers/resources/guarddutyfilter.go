@@ -40,7 +40,7 @@ func NewGuardDutyFilter(properties GuardDutyFilterProperties, deps ...interface{
 }
 
 // ParseGuardDutyFilter parses GuardDutyFilter
-func ParseGuardDutyFilter(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGuardDutyFilter(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GuardDutyFilter
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

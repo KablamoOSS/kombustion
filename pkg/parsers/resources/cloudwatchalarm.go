@@ -51,7 +51,7 @@ func NewCloudWatchAlarm(properties CloudWatchAlarmProperties, deps ...interface{
 }
 
 // ParseCloudWatchAlarm parses CloudWatchAlarm
-func ParseCloudWatchAlarm(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloudWatchAlarm(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CloudWatchAlarm
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

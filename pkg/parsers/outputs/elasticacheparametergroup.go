@@ -8,7 +8,7 @@ import (
 )
 
 // ParseElastiCacheParameterGroup Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-parameter-group.html
-func ParseElastiCacheParameterGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElastiCacheParameterGroup(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

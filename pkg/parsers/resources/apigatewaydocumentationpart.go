@@ -37,7 +37,7 @@ func NewApiGatewayDocumentationPart(properties ApiGatewayDocumentationPartProper
 }
 
 // ParseApiGatewayDocumentationPart parses ApiGatewayDocumentationPart
-func ParseApiGatewayDocumentationPart(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayDocumentationPart(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayDocumentationPart
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

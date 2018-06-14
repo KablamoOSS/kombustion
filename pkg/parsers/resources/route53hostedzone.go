@@ -39,7 +39,7 @@ func NewRoute53HostedZone(properties Route53HostedZoneProperties, deps ...interf
 }
 
 // ParseRoute53HostedZone parses Route53HostedZone
-func ParseRoute53HostedZone(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRoute53HostedZone(name string, data string) (cf types.TemplateObject, err error) {
 	var resource Route53HostedZone
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

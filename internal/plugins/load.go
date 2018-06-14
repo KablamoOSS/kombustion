@@ -128,7 +128,6 @@ func loadPlugin(
 	resourcesConstructor, _ := p.Lookup("Resources")
 	if resourcesConstructor != nil {
 		loadedPlugin.Resources = resourcesConstructor.(*map[string]func(
-			ctx map[string]interface{},
 			name string,
 			data string,
 		) []byte)
@@ -140,7 +139,6 @@ func loadPlugin(
 	if mappingsConstructor != nil {
 
 		loadedPlugin.Mappings = mappingsConstructor.(*map[string]func(
-			ctx map[string]interface{},
 			name string,
 			data string,
 		) []byte)
@@ -151,7 +149,6 @@ func loadPlugin(
 	outputsConstructor, _ := p.Lookup("Outputs")
 	if outputsConstructor != nil {
 		loadedPlugin.Outputs = outputsConstructor.(*map[string]func(
-			ctx map[string]interface{},
 			name string,
 			data string,
 		) []byte)

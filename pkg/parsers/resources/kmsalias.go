@@ -35,7 +35,7 @@ func NewKMSAlias(properties KMSAliasProperties, deps ...interface{}) KMSAlias {
 }
 
 // ParseKMSAlias parses KMSAlias
-func ParseKMSAlias(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseKMSAlias(name string, data string) (cf types.TemplateObject, err error) {
 	var resource KMSAlias
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

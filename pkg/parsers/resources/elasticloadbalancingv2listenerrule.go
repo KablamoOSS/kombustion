@@ -37,7 +37,7 @@ func NewElasticLoadBalancingV2ListenerRule(properties ElasticLoadBalancingV2List
 }
 
 // ParseElasticLoadBalancingV2ListenerRule parses ElasticLoadBalancingV2ListenerRule
-func ParseElasticLoadBalancingV2ListenerRule(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElasticLoadBalancingV2ListenerRule(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ElasticLoadBalancingV2ListenerRule
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

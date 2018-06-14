@@ -35,7 +35,7 @@ func NewEC2SubnetNetworkAclAssociation(properties EC2SubnetNetworkAclAssociation
 }
 
 // ParseEC2SubnetNetworkAclAssociation parses EC2SubnetNetworkAclAssociation
-func ParseEC2SubnetNetworkAclAssociation(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2SubnetNetworkAclAssociation(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2SubnetNetworkAclAssociation
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

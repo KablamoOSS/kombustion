@@ -38,7 +38,7 @@ func NewApiGatewayDeployment(properties ApiGatewayDeploymentProperties, deps ...
 }
 
 // ParseApiGatewayDeployment parses ApiGatewayDeployment
-func ParseApiGatewayDeployment(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayDeployment(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayDeployment
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

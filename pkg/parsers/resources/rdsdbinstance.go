@@ -72,7 +72,7 @@ func NewRDSDBInstance(properties RDSDBInstanceProperties, deps ...interface{}) R
 }
 
 // ParseRDSDBInstance parses RDSDBInstance
-func ParseRDSDBInstance(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRDSDBInstance(name string, data string) (cf types.TemplateObject, err error) {
 	var resource RDSDBInstance
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

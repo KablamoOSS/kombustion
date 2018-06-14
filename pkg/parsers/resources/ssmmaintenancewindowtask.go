@@ -47,7 +47,7 @@ func NewSSMMaintenanceWindowTask(properties SSMMaintenanceWindowTaskProperties, 
 }
 
 // ParseSSMMaintenanceWindowTask parses SSMMaintenanceWindowTask
-func ParseSSMMaintenanceWindowTask(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSSMMaintenanceWindowTask(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SSMMaintenanceWindowTask
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

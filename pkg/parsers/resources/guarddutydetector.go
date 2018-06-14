@@ -34,7 +34,7 @@ func NewGuardDutyDetector(properties GuardDutyDetectorProperties, deps ...interf
 }
 
 // ParseGuardDutyDetector parses GuardDutyDetector
-func ParseGuardDutyDetector(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGuardDutyDetector(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GuardDutyDetector
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

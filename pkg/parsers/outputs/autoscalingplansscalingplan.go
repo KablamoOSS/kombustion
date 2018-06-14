@@ -8,7 +8,7 @@ import (
 )
 
 // ParseAutoScalingPlansScalingPlan Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscalingplans-scalingplan.html
-func ParseAutoScalingPlansScalingPlan(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAutoScalingPlansScalingPlan(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

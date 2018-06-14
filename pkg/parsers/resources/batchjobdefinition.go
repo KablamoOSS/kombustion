@@ -39,7 +39,7 @@ func NewBatchJobDefinition(properties BatchJobDefinitionProperties, deps ...inte
 }
 
 // ParseBatchJobDefinition parses BatchJobDefinition
-func ParseBatchJobDefinition(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseBatchJobDefinition(name string, data string) (cf types.TemplateObject, err error) {
 	var resource BatchJobDefinition
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

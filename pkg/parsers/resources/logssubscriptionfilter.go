@@ -37,7 +37,7 @@ func NewLogsSubscriptionFilter(properties LogsSubscriptionFilterProperties, deps
 }
 
 // ParseLogsSubscriptionFilter parses LogsSubscriptionFilter
-func ParseLogsSubscriptionFilter(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseLogsSubscriptionFilter(name string, data string) (cf types.TemplateObject, err error) {
 	var resource LogsSubscriptionFilter
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

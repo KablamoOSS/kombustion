@@ -207,7 +207,6 @@ func yamlTemplateCF(
 ) {
 	compiled = make(types.TemplateObject)
 
-	context := make(map[string]interface{})
 	for resourceName, resource := range resources {
 		if resource.Condition != nil { // if there is a condition on the source resource, warn the user
 			log.WithFields(log.Fields{
@@ -245,7 +244,7 @@ func yamlTemplateCF(
 				return
 			}
 
-			if output, err = parser(context, resourceName, string(resourseData)); err != nil {
+			if output, err = parser(resourceName, string(resourseData)); err != nil {
 				log.WithFields(log.Fields{
 					"resource": resourceName,
 				}).Error("Error parsing resource")

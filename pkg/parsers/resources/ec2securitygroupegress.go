@@ -42,7 +42,7 @@ func NewEC2SecurityGroupEgress(properties EC2SecurityGroupEgressProperties, deps
 }
 
 // ParseEC2SecurityGroupEgress parses EC2SecurityGroupEgress
-func ParseEC2SecurityGroupEgress(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2SecurityGroupEgress(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2SecurityGroupEgress
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

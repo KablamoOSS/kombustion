@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// ScalingPolicyStepAdjustment Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-stepadjustment.html
+// ScalingPolicyStepAdjustment Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-scalingpolicy-stepadjustments.html
 type ScalingPolicyStepAdjustment struct {
 	MetricIntervalLowerBound interface{} `yaml:"MetricIntervalLowerBound,omitempty"`
 	MetricIntervalUpperBound interface{} `yaml:"MetricIntervalUpperBound,omitempty"`

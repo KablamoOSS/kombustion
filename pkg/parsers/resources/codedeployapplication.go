@@ -34,7 +34,7 @@ func NewCodeDeployApplication(properties CodeDeployApplicationProperties, deps .
 }
 
 // ParseCodeDeployApplication parses CodeDeployApplication
-func ParseCodeDeployApplication(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCodeDeployApplication(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CodeDeployApplication
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

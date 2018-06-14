@@ -38,7 +38,7 @@ func NewEC2VPC(properties EC2VPCProperties, deps ...interface{}) EC2VPC {
 }
 
 // ParseEC2VPC parses EC2VPC
-func ParseEC2VPC(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VPC(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2VPC
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -38,7 +38,7 @@ func NewIAMPolicy(properties IAMPolicyProperties, deps ...interface{}) IAMPolicy
 }
 
 // ParseIAMPolicy parses IAMPolicy
-func ParseIAMPolicy(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseIAMPolicy(name string, data string) (cf types.TemplateObject, err error) {
 	var resource IAMPolicy
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

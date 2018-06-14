@@ -8,7 +8,7 @@ import (
 )
 
 // ParseSESConfigurationSetEventDestination Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-configurationseteventdestination.html
-func ParseSESConfigurationSetEventDestination(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSESConfigurationSetEventDestination(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

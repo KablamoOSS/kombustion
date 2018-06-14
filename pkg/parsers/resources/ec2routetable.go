@@ -35,7 +35,7 @@ func NewEC2RouteTable(properties EC2RouteTableProperties, deps ...interface{}) E
 }
 
 // ParseEC2RouteTable parses EC2RouteTable
-func ParseEC2RouteTable(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2RouteTable(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2RouteTable
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

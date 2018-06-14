@@ -38,7 +38,7 @@ func NewEC2VPCPeeringConnection(properties EC2VPCPeeringConnectionProperties, de
 }
 
 // ParseEC2VPCPeeringConnection parses EC2VPCPeeringConnection
-func ParseEC2VPCPeeringConnection(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VPCPeeringConnection(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2VPCPeeringConnection
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

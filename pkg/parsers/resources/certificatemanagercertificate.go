@@ -37,7 +37,7 @@ func NewCertificateManagerCertificate(properties CertificateManagerCertificatePr
 }
 
 // ParseCertificateManagerCertificate parses CertificateManagerCertificate
-func ParseCertificateManagerCertificate(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCertificateManagerCertificate(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CertificateManagerCertificate
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

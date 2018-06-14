@@ -36,7 +36,7 @@ func NewKinesisAnalyticsApplicationOutput(properties KinesisAnalyticsApplication
 }
 
 // ParseKinesisAnalyticsApplicationOutput parses KinesisAnalyticsApplicationOutput
-func ParseKinesisAnalyticsApplicationOutput(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseKinesisAnalyticsApplicationOutput(name string, data string) (cf types.TemplateObject, err error) {
 	var resource KinesisAnalyticsApplicationOutput
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

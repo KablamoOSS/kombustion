@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2InternetGateway Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-internetgateway.html
-func ParseEC2InternetGateway(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2InternetGateway(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

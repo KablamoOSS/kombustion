@@ -38,7 +38,7 @@ func NewApiGatewayModel(properties ApiGatewayModelProperties, deps ...interface{
 }
 
 // ParseApiGatewayModel parses ApiGatewayModel
-func ParseApiGatewayModel(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayModel(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayModel
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

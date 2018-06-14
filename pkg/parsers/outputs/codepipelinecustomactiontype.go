@@ -8,7 +8,7 @@ import (
 )
 
 // ParseCodePipelineCustomActionType Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html
-func ParseCodePipelineCustomActionType(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCodePipelineCustomActionType(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

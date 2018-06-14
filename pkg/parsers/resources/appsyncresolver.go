@@ -41,7 +41,7 @@ func NewAppSyncResolver(properties AppSyncResolverProperties, deps ...interface{
 }
 
 // ParseAppSyncResolver parses AppSyncResolver
-func ParseAppSyncResolver(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAppSyncResolver(name string, data string) (cf types.TemplateObject, err error) {
 	var resource AppSyncResolver
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

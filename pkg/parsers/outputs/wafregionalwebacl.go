@@ -8,7 +8,7 @@ import (
 )
 
 // ParseWAFRegionalWebACL Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-webacl.html
-func ParseWAFRegionalWebACL(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseWAFRegionalWebACL(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

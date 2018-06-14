@@ -36,7 +36,7 @@ func NewAutoScalingPlansScalingPlan(properties AutoScalingPlansScalingPlanProper
 }
 
 // ParseAutoScalingPlansScalingPlan parses AutoScalingPlansScalingPlan
-func ParseAutoScalingPlansScalingPlan(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAutoScalingPlansScalingPlan(name string, data string) (cf types.TemplateObject, err error) {
 	var resource AutoScalingPlansScalingPlan
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

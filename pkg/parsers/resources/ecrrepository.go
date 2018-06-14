@@ -36,7 +36,7 @@ func NewECRRepository(properties ECRRepositoryProperties, deps ...interface{}) E
 }
 
 // ParseECRRepository parses ECRRepository
-func ParseECRRepository(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseECRRepository(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ECRRepository
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

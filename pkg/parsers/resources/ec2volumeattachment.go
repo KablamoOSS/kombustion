@@ -36,7 +36,7 @@ func NewEC2VolumeAttachment(properties EC2VolumeAttachmentProperties, deps ...in
 }
 
 // ParseEC2VolumeAttachment parses EC2VolumeAttachment
-func ParseEC2VolumeAttachment(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VolumeAttachment(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2VolumeAttachment
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -36,7 +36,7 @@ func NewGameLiftBuild(properties GameLiftBuildProperties, deps ...interface{}) G
 }
 
 // ParseGameLiftBuild parses GameLiftBuild
-func ParseGameLiftBuild(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGameLiftBuild(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GameLiftBuild
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

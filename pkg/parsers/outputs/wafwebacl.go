@@ -8,7 +8,7 @@ import (
 )
 
 // ParseWAFWebACL Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-webacl.html
-func ParseWAFWebACL(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseWAFWebACL(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

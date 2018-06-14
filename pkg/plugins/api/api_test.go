@@ -42,7 +42,6 @@ func TestRegisterPlugin(t *testing.T) {
 func TestRegisterResource(t *testing.T) {
 	tests := []struct {
 		input func(
-			ctx map[string]interface{},
 			name string,
 			data string,
 		) types.TemplateObject
@@ -50,18 +49,15 @@ func TestRegisterResource(t *testing.T) {
 	}{
 		{
 			input: func(
-				ctx map[string]interface{},
 				name string,
 				data string,
 			) types.TemplateObject {
 				return types.TemplateObject{
-					"Key":  "Value",
 					"Name": name,
 					"Data": data,
 				}
 			},
 			output: types.TemplateObject{
-				"Key":  "Value",
 				"Name": "TestName",
 				"Data": "TestData",
 			},
@@ -71,14 +67,11 @@ func TestRegisterResource(t *testing.T) {
 	for i, test := range tests {
 		assert := assert.New(t)
 
-		ctx := types.TemplateObject{
-			"Key": "Value",
-		}
 		name := "TestName"
 		data := "TestData"
 		testFunc := RegisterResource(test.input)
 
-		testOutput := testFunc(ctx, name, data)
+		testOutput := testFunc(name, data)
 
 		var testResource types.TemplateObject
 
@@ -94,7 +87,6 @@ func TestRegisterResource(t *testing.T) {
 func TestRegisterOutput(t *testing.T) {
 	tests := []struct {
 		input func(
-			ctx map[string]interface{},
 			name string,
 			data string,
 		) types.TemplateObject
@@ -102,18 +94,15 @@ func TestRegisterOutput(t *testing.T) {
 	}{
 		{
 			input: func(
-				ctx map[string]interface{},
 				name string,
 				data string,
 			) types.TemplateObject {
 				return types.TemplateObject{
-					"Key":  "Value",
 					"Name": name,
 					"Data": data,
 				}
 			},
 			output: types.TemplateObject{
-				"Key":  "Value",
 				"Name": "TestName",
 				"Data": "TestData",
 			},
@@ -123,14 +112,11 @@ func TestRegisterOutput(t *testing.T) {
 	for i, test := range tests {
 		assert := assert.New(t)
 
-		ctx := types.TemplateObject{
-			"Key": "Value",
-		}
 		name := "TestName"
 		data := "TestData"
 		testFunc := RegisterOutput(test.input)
 
-		testOutput := testFunc(ctx, name, data)
+		testOutput := testFunc(name, data)
 
 		var testMapping types.TemplateObject
 
@@ -146,7 +132,6 @@ func TestRegisterOutput(t *testing.T) {
 func TestRegisterMapping(t *testing.T) {
 	tests := []struct {
 		input func(
-			ctx map[string]interface{},
 			name string,
 			data string,
 		) types.TemplateObject
@@ -154,18 +139,15 @@ func TestRegisterMapping(t *testing.T) {
 	}{
 		{
 			input: func(
-				ctx map[string]interface{},
 				name string,
 				data string,
 			) types.TemplateObject {
 				return types.TemplateObject{
-					"Key":  "Value",
 					"Name": name,
 					"Data": data,
 				}
 			},
 			output: types.TemplateObject{
-				"Key":  "Value",
 				"Name": "TestName",
 				"Data": "TestData",
 			},
@@ -175,14 +157,11 @@ func TestRegisterMapping(t *testing.T) {
 	for i, test := range tests {
 		assert := assert.New(t)
 
-		ctx := types.TemplateObject{
-			"Key": "Value",
-		}
 		name := "TestName"
 		data := "TestData"
 		testFunc := RegisterMapping(test.input)
 
-		testOutput := testFunc(ctx, name, data)
+		testOutput := testFunc(name, data)
 
 		var testMapping types.TemplateObject
 

@@ -44,7 +44,7 @@ func NewGlueJob(properties GlueJobProperties, deps ...interface{}) GlueJob {
 }
 
 // ParseGlueJob parses GlueJob
-func ParseGlueJob(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGlueJob(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GlueJob
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

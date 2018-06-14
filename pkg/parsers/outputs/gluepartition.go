@@ -8,7 +8,7 @@ import (
 )
 
 // ParseGluePartition Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-partition.html
-func ParseGluePartition(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGluePartition(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{
