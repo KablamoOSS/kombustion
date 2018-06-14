@@ -108,7 +108,7 @@ func Upsert(c *cli.Context) {
 	// Cloudformation Stack parameters
 	var parameters []*awsCF.Parameter
 
-	stackName := getStackName(manifestFile, fileName, environment, c.String("stack-name"))
+	stackName := cloudformation.GetStackName(manifestFile, fileName, environment, c.String("stack-name"))
 
 	printer.Progress("Upserting template")
 	if len(c.String("url")) > 0 {
@@ -163,20 +163,4 @@ func getCapabilities(c *cli.Context) []*string {
 	}
 
 	return capabilities
-}
-
-// TODO: probably need this in Delete too
-func getStackName(manifestFile *manifest.Manifest, fileName, environment, stackNameFlag string) string {
-	stackName := ""
-	if stackNameFlag != "" {
-		stackName = stackNameFlag
-	} else {
-		// TODO: remove the ext
-		fileNameCleaned := fileName
-
-		stackName = fmt.Sprintf("%s-%s-%s", manifestFile.Name, fileNameCleaned, environment)
-	}
-
-	// TODO: parse stackName to ensure it meets cfn regex requirements (strip bad chars)
-	return stackName
 }
