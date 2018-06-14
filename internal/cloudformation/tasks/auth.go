@@ -2,12 +2,11 @@ package tasks
 
 import (
 	"fmt"
-	"log"
 	"os"
+	"strings"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/credentials/stscreds"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -64,7 +63,11 @@ func getSession(profile string) *session.Session {
 	var options session.Options
 
 	options = session.Options{
-		AssumeRoleTokenProvider: stscreds.StdinTokenProvider,
+		// We pass a custom token provider here
+		// to ensure we can stop the printer while we wait for
+		// the mfa token
+		AssumeRoleTokenProvider: mfaTokenProvider,
+
 		Config: aws.Config{
 			CredentialsChainVerboseErrors: aws.Bool(true),
 		},
@@ -79,32 +82,49 @@ func getSession(profile string) *session.Session {
 	return awsSession
 }
 
+// Custom token provider to ensure we can stop the printer while we wait for
+// the mfa token
+func mfaTokenProvider() (string, error) {
+	var v string
+	printer.Stop()
+	fmt.Printf("Enter MFA code: ")
+	_, err := fmt.Scanln(&v)
+	return v, err
+}
+
+// Ensure a session is returned, else fatal with an error explaning why no session was found
 func must(sess *session.Session, err error) *session.Session {
 
+	// if err != nil {
+	// 	if awsErr, ok := err.(awserr.Error); ok {
+	// 		// Get error details
+	// 		log.Println("Error:", awsErr.Code(), awsErr.Message())
+
+	// 		// Prints out full error message, including original error if there was one.
+	// 		log.Println("Error:", awsErr.Error())
+
+	// 		// Get original error
+	// 		if origErr := awsErr.OrigErr(); origErr != nil {
+	// 			// operate on original error.
+	// 		}
+	// 	} else {
+	// 		fmt.Println(err.Error())
+	// 	}
+	// }
+
 	if err != nil {
-		if awsErr, ok := err.(awserr.Error); ok {
-			// Get error details
-			log.Println("Error:", awsErr.Code(), awsErr.Message())
-
-			// Prints out full error message, including original error if there was one.
-			log.Println("Error:", awsErr.Error())
-
-			// Get original error
-			if origErr := awsErr.OrigErr(); origErr != nil {
-				// operate on original error.
-			}
-		} else {
-			fmt.Println(err.Error())
+		if strings.Contains(err.Error(), "NoCredentialProviders") {
+			printer.Fatal(
+				err,
+				"You need to provide access credentials to your AWS account.",
+				"",
+			)
 		}
-	}
 
-	if err != nil {
 		printer.Fatal(
 			err,
-			fmt.Sprintf(
-				"Pass a region in via the cli with `--region us-east-1` or set a default `region` in kombustion.yaml",
-			),
-			"http://kombustion.io/manifest#region",
+			"",
+			"",
 		)
 	}
 	return sess

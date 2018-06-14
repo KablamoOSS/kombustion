@@ -129,7 +129,7 @@ ISSUES:
 		}
 
 		// Init the spinner/printer
-		printer.Init(verbose, "yellow", 14)
+		printer.Init(verbose, "yellow", 14, os.Stdout)
 		return nil
 	}
 
