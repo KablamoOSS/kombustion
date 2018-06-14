@@ -36,7 +36,7 @@ func NewEC2NetworkInterfacePermission(properties EC2NetworkInterfacePermissionPr
 }
 
 // ParseEC2NetworkInterfacePermission parses EC2NetworkInterfacePermission
-func ParseEC2NetworkInterfacePermission(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2NetworkInterfacePermission(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2NetworkInterfacePermission
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

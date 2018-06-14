@@ -38,7 +38,7 @@ func NewWAFWebACL(properties WAFWebACLProperties, deps ...interface{}) WAFWebACL
 }
 
 // ParseWAFWebACL parses WAFWebACL
-func ParseWAFWebACL(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseWAFWebACL(name string, data string) (cf types.TemplateObject, err error) {
 	var resource WAFWebACL
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

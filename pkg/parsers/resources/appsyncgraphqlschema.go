@@ -36,7 +36,7 @@ func NewAppSyncGraphQLSchema(properties AppSyncGraphQLSchemaProperties, deps ...
 }
 
 // ParseAppSyncGraphQLSchema parses AppSyncGraphQLSchema
-func ParseAppSyncGraphQLSchema(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAppSyncGraphQLSchema(name string, data string) (cf types.TemplateObject, err error) {
 	var resource AppSyncGraphQLSchema
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

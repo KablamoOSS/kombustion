@@ -35,7 +35,7 @@ func NewInspectorAssessmentTarget(properties InspectorAssessmentTargetProperties
 }
 
 // ParseInspectorAssessmentTarget parses InspectorAssessmentTarget
-func ParseInspectorAssessmentTarget(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseInspectorAssessmentTarget(name string, data string) (cf types.TemplateObject, err error) {
 	var resource InspectorAssessmentTarget
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

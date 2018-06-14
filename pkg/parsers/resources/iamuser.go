@@ -39,7 +39,7 @@ func NewIAMUser(properties IAMUserProperties, deps ...interface{}) IAMUser {
 }
 
 // ParseIAMUser parses IAMUser
-func ParseIAMUser(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseIAMUser(name string, data string) (cf types.TemplateObject, err error) {
 	var resource IAMUser
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

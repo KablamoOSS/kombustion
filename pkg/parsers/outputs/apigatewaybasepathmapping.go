@@ -8,7 +8,7 @@ import (
 )
 
 // ParseApiGatewayBasePathMapping Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-basepathmapping.html
-func ParseApiGatewayBasePathMapping(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayBasePathMapping(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

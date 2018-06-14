@@ -8,7 +8,7 @@ import (
 )
 
 // ParseWAFRule Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-rule.html
-func ParseWAFRule(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseWAFRule(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

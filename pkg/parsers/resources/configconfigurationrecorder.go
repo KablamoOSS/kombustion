@@ -37,7 +37,7 @@ func NewConfigConfigurationRecorder(properties ConfigConfigurationRecorderProper
 }
 
 // ParseConfigConfigurationRecorder parses ConfigConfigurationRecorder
-func ParseConfigConfigurationRecorder(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseConfigConfigurationRecorder(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ConfigConfigurationRecorder
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

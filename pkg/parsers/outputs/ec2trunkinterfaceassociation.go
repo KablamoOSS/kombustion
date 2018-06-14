@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2TrunkInterfaceAssociation Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-trunkinterfaceassociation.html
-func ParseEC2TrunkInterfaceAssociation(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2TrunkInterfaceAssociation(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

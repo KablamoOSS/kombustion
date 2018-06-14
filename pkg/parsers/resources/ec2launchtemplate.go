@@ -35,7 +35,7 @@ func NewEC2LaunchTemplate(properties EC2LaunchTemplateProperties, deps ...interf
 }
 
 // ParseEC2LaunchTemplate parses EC2LaunchTemplate
-func ParseEC2LaunchTemplate(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2LaunchTemplate(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2LaunchTemplate
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

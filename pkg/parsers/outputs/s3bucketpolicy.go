@@ -8,7 +8,7 @@ import (
 )
 
 // ParseS3BucketPolicy Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
-func ParseS3BucketPolicy(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseS3BucketPolicy(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

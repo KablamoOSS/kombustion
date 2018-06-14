@@ -39,7 +39,7 @@ func NewAppSyncGraphQLApi(properties AppSyncGraphQLApiProperties, deps ...interf
 }
 
 // ParseAppSyncGraphQLApi parses AppSyncGraphQLApi
-func ParseAppSyncGraphQLApi(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAppSyncGraphQLApi(name string, data string) (cf types.TemplateObject, err error) {
 	var resource AppSyncGraphQLApi
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -38,7 +38,7 @@ func NewRDSOptionGroup(properties RDSOptionGroupProperties, deps ...interface{})
 }
 
 // ParseRDSOptionGroup parses RDSOptionGroup
-func ParseRDSOptionGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRDSOptionGroup(name string, data string) (cf types.TemplateObject, err error) {
 	var resource RDSOptionGroup
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

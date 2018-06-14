@@ -42,7 +42,7 @@ func NewDirectoryServiceSimpleAD(properties DirectoryServiceSimpleADProperties, 
 }
 
 // ParseDirectoryServiceSimpleAD parses DirectoryServiceSimpleAD
-func ParseDirectoryServiceSimpleAD(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseDirectoryServiceSimpleAD(name string, data string) (cf types.TemplateObject, err error) {
 	var resource DirectoryServiceSimpleAD
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -42,7 +42,7 @@ func NewApplicationAutoScalingScalingPolicy(properties ApplicationAutoScalingSca
 }
 
 // ParseApplicationAutoScalingScalingPolicy parses ApplicationAutoScalingScalingPolicy
-func ParseApplicationAutoScalingScalingPolicy(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApplicationAutoScalingScalingPolicy(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApplicationAutoScalingScalingPolicy
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

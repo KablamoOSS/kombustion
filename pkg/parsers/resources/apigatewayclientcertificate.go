@@ -33,7 +33,7 @@ func NewApiGatewayClientCertificate(properties ApiGatewayClientCertificateProper
 }
 
 // ParseApiGatewayClientCertificate parses ApiGatewayClientCertificate
-func ParseApiGatewayClientCertificate(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayClientCertificate(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayClientCertificate
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

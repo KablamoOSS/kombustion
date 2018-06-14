@@ -35,7 +35,7 @@ func NewS3BucketPolicy(properties S3BucketPolicyProperties, deps ...interface{})
 }
 
 // ParseS3BucketPolicy parses S3BucketPolicy
-func ParseS3BucketPolicy(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseS3BucketPolicy(name string, data string) (cf types.TemplateObject, err error) {
 	var resource S3BucketPolicy
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

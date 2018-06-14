@@ -8,7 +8,7 @@ import (
 )
 
 // ParseDAXParameterGroup Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-parametergroup.html
-func ParseDAXParameterGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseDAXParameterGroup(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

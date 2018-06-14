@@ -33,7 +33,7 @@ func NewEC2PlacementGroup(properties EC2PlacementGroupProperties, deps ...interf
 }
 
 // ParseEC2PlacementGroup parses EC2PlacementGroup
-func ParseEC2PlacementGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2PlacementGroup(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2PlacementGroup
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

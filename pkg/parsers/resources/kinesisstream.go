@@ -39,7 +39,7 @@ func NewKinesisStream(properties KinesisStreamProperties, deps ...interface{}) K
 }
 
 // ParseKinesisStream parses KinesisStream
-func ParseKinesisStream(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseKinesisStream(name string, data string) (cf types.TemplateObject, err error) {
 	var resource KinesisStream
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

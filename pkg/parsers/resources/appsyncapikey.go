@@ -36,7 +36,7 @@ func NewAppSyncApiKey(properties AppSyncApiKeyProperties, deps ...interface{}) A
 }
 
 // ParseAppSyncApiKey parses AppSyncApiKey
-func ParseAppSyncApiKey(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAppSyncApiKey(name string, data string) (cf types.TemplateObject, err error) {
 	var resource AppSyncApiKey
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

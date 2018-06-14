@@ -38,7 +38,7 @@ func NewEMRStep(properties EMRStepProperties, deps ...interface{}) EMRStep {
 }
 
 // ParseEMRStep parses EMRStep
-func ParseEMRStep(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEMRStep(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EMRStep
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

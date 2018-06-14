@@ -50,7 +50,7 @@ func NewDMSEndpoint(properties DMSEndpointProperties, deps ...interface{}) DMSEn
 }
 
 // ParseDMSEndpoint parses DMSEndpoint
-func ParseDMSEndpoint(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseDMSEndpoint(name string, data string) (cf types.TemplateObject, err error) {
 	var resource DMSEndpoint
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

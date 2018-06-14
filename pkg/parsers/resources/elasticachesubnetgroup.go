@@ -36,7 +36,7 @@ func NewElastiCacheSubnetGroup(properties ElastiCacheSubnetGroupProperties, deps
 }
 
 // ParseElastiCacheSubnetGroup parses ElastiCacheSubnetGroup
-func ParseElastiCacheSubnetGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElastiCacheSubnetGroup(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ElastiCacheSubnetGroup
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

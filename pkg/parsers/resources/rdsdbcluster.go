@@ -52,7 +52,7 @@ func NewRDSDBCluster(properties RDSDBClusterProperties, deps ...interface{}) RDS
 }
 
 // ParseRDSDBCluster parses RDSDBCluster
-func ParseRDSDBCluster(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRDSDBCluster(name string, data string) (cf types.TemplateObject, err error) {
 	var resource RDSDBCluster
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -36,7 +36,7 @@ func NewGlueConnection(properties GlueConnectionProperties, deps ...interface{})
 }
 
 // ParseGlueConnection parses GlueConnection
-func ParseGlueConnection(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGlueConnection(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GlueConnection
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -37,7 +37,7 @@ func NewOpsWorksVolume(properties OpsWorksVolumeProperties, deps ...interface{})
 }
 
 // ParseOpsWorksVolume parses OpsWorksVolume
-func ParseOpsWorksVolume(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseOpsWorksVolume(name string, data string) (cf types.TemplateObject, err error) {
 	var resource OpsWorksVolume
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

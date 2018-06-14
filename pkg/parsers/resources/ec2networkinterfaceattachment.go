@@ -37,7 +37,7 @@ func NewEC2NetworkInterfaceAttachment(properties EC2NetworkInterfaceAttachmentPr
 }
 
 // ParseEC2NetworkInterfaceAttachment parses EC2NetworkInterfaceAttachment
-func ParseEC2NetworkInterfaceAttachment(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2NetworkInterfaceAttachment(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2NetworkInterfaceAttachment
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

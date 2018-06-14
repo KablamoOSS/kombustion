@@ -35,7 +35,7 @@ func NewWAFIPSet(properties WAFIPSetProperties, deps ...interface{}) WAFIPSet {
 }
 
 // ParseWAFIPSet parses WAFIPSet
-func ParseWAFIPSet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseWAFIPSet(name string, data string) (cf types.TemplateObject, err error) {
 	var resource WAFIPSet
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

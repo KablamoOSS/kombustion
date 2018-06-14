@@ -36,7 +36,7 @@ func NewElastiCacheSecurityGroupIngress(properties ElastiCacheSecurityGroupIngre
 }
 
 // ParseElastiCacheSecurityGroupIngress parses ElastiCacheSecurityGroupIngress
-func ParseElastiCacheSecurityGroupIngress(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElastiCacheSecurityGroupIngress(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ElastiCacheSecurityGroupIngress
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

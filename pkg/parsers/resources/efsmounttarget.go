@@ -37,7 +37,7 @@ func NewEFSMountTarget(properties EFSMountTargetProperties, deps ...interface{})
 }
 
 // ParseEFSMountTarget parses EFSMountTarget
-func ParseEFSMountTarget(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEFSMountTarget(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EFSMountTarget
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

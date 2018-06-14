@@ -36,7 +36,7 @@ func NewKinesisAnalyticsApplicationReferenceDataSource(properties KinesisAnalyti
 }
 
 // ParseKinesisAnalyticsApplicationReferenceDataSource parses KinesisAnalyticsApplicationReferenceDataSource
-func ParseKinesisAnalyticsApplicationReferenceDataSource(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseKinesisAnalyticsApplicationReferenceDataSource(name string, data string) (cf types.TemplateObject, err error) {
 	var resource KinesisAnalyticsApplicationReferenceDataSource
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

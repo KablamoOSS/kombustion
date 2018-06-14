@@ -38,7 +38,7 @@ func NewEC2FlowLog(properties EC2FlowLogProperties, deps ...interface{}) EC2Flow
 }
 
 // ParseEC2FlowLog parses EC2FlowLog
-func ParseEC2FlowLog(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2FlowLog(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2FlowLog
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

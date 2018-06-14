@@ -39,7 +39,7 @@ func NewLambdaAlias(properties LambdaAliasProperties, deps ...interface{}) Lambd
 }
 
 // ParseLambdaAlias parses LambdaAlias
-func ParseLambdaAlias(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseLambdaAlias(name string, data string) (cf types.TemplateObject, err error) {
 	var resource LambdaAlias
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

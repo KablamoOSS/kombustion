@@ -35,7 +35,7 @@ func NewEC2SubnetCidrBlock(properties EC2SubnetCidrBlockProperties, deps ...inte
 }
 
 // ParseEC2SubnetCidrBlock parses EC2SubnetCidrBlock
-func ParseEC2SubnetCidrBlock(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2SubnetCidrBlock(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2SubnetCidrBlock
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

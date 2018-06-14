@@ -36,7 +36,7 @@ func NewCloudFormationWaitCondition(properties CloudFormationWaitConditionProper
 }
 
 // ParseCloudFormationWaitCondition parses CloudFormationWaitCondition
-func ParseCloudFormationWaitCondition(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloudFormationWaitCondition(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CloudFormationWaitCondition
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

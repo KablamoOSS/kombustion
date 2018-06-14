@@ -8,7 +8,7 @@ import (
 )
 
 // ParseIoTPolicyPrincipalAttachment Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policyprincipalattachment.html
-func ParseIoTPolicyPrincipalAttachment(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseIoTPolicyPrincipalAttachment(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

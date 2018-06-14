@@ -44,7 +44,7 @@ func NewGameLiftFleet(properties GameLiftFleetProperties, deps ...interface{}) G
 }
 
 // ParseGameLiftFleet parses GameLiftFleet
-func ParseGameLiftFleet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGameLiftFleet(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GameLiftFleet
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

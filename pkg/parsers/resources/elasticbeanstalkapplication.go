@@ -36,7 +36,7 @@ func NewElasticBeanstalkApplication(properties ElasticBeanstalkApplicationProper
 }
 
 // ParseElasticBeanstalkApplication parses ElasticBeanstalkApplication
-func ParseElasticBeanstalkApplication(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElasticBeanstalkApplication(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ElasticBeanstalkApplication
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

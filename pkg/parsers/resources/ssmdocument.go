@@ -36,7 +36,7 @@ func NewSSMDocument(properties SSMDocumentProperties, deps ...interface{}) SSMDo
 }
 
 // ParseSSMDocument parses SSMDocument
-func ParseSSMDocument(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSSMDocument(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SSMDocument
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

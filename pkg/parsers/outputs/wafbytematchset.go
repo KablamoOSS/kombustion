@@ -8,7 +8,7 @@ import (
 )
 
 // ParseWAFByteMatchSet Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-bytematchset.html
-func ParseWAFByteMatchSet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseWAFByteMatchSet(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

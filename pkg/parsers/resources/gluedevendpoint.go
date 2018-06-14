@@ -41,7 +41,7 @@ func NewGlueDevEndpoint(properties GlueDevEndpointProperties, deps ...interface{
 }
 
 // ParseGlueDevEndpoint parses GlueDevEndpoint
-func ParseGlueDevEndpoint(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGlueDevEndpoint(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GlueDevEndpoint
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

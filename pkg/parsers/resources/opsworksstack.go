@@ -59,7 +59,7 @@ func NewOpsWorksStack(properties OpsWorksStackProperties, deps ...interface{}) O
 }
 
 // ParseOpsWorksStack parses OpsWorksStack
-func ParseOpsWorksStack(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseOpsWorksStack(name string, data string) (cf types.TemplateObject, err error) {
 	var resource OpsWorksStack
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

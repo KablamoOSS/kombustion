@@ -47,7 +47,7 @@ func NewECSService(properties ECSServiceProperties, deps ...interface{}) ECSServ
 }
 
 // ParseECSService parses ECSService
-func ParseECSService(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseECSService(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ECSService
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

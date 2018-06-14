@@ -36,7 +36,7 @@ func NewApiGatewayUsagePlanKey(properties ApiGatewayUsagePlanKeyProperties, deps
 }
 
 // ParseApiGatewayUsagePlanKey parses ApiGatewayUsagePlanKey
-func ParseApiGatewayUsagePlanKey(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayUsagePlanKey(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayUsagePlanKey
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

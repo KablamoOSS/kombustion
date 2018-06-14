@@ -35,7 +35,7 @@ func NewCodeDeployDeploymentConfig(properties CodeDeployDeploymentConfigProperti
 }
 
 // ParseCodeDeployDeploymentConfig parses CodeDeployDeploymentConfig
-func ParseCodeDeployDeploymentConfig(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCodeDeployDeploymentConfig(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CodeDeployDeploymentConfig
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

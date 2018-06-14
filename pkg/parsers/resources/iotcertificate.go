@@ -35,7 +35,7 @@ func NewIoTCertificate(properties IoTCertificateProperties, deps ...interface{})
 }
 
 // ParseIoTCertificate parses IoTCertificate
-func ParseIoTCertificate(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseIoTCertificate(name string, data string) (cf types.TemplateObject, err error) {
 	var resource IoTCertificate
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

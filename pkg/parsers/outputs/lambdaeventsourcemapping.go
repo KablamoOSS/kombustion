@@ -8,7 +8,7 @@ import (
 )
 
 // ParseLambdaEventSourceMapping Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html
-func ParseLambdaEventSourceMapping(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseLambdaEventSourceMapping(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

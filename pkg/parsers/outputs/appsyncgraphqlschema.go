@@ -8,7 +8,7 @@ import (
 )
 
 // ParseAppSyncGraphQLSchema Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-graphqlschema.html
-func ParseAppSyncGraphQLSchema(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAppSyncGraphQLSchema(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

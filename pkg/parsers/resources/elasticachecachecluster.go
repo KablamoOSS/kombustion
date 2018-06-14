@@ -54,7 +54,7 @@ func NewElastiCacheCacheCluster(properties ElastiCacheCacheClusterProperties, de
 }
 
 // ParseElastiCacheCacheCluster parses ElastiCacheCacheCluster
-func ParseElastiCacheCacheCluster(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElastiCacheCacheCluster(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ElastiCacheCacheCluster
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

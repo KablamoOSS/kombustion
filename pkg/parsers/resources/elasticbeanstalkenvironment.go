@@ -45,7 +45,7 @@ func NewElasticBeanstalkEnvironment(properties ElasticBeanstalkEnvironmentProper
 }
 
 // ParseElasticBeanstalkEnvironment parses ElasticBeanstalkEnvironment
-func ParseElasticBeanstalkEnvironment(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElasticBeanstalkEnvironment(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ElasticBeanstalkEnvironment
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

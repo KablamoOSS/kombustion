@@ -38,7 +38,7 @@ func NewEC2DHCPOptions(properties EC2DHCPOptionsProperties, deps ...interface{})
 }
 
 // ParseEC2DHCPOptions parses EC2DHCPOptions
-func ParseEC2DHCPOptions(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2DHCPOptions(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2DHCPOptions
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

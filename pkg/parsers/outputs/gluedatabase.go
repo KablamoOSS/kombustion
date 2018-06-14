@@ -8,7 +8,7 @@ import (
 )
 
 // ParseGlueDatabase Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html
-func ParseGlueDatabase(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGlueDatabase(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

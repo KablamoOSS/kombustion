@@ -43,7 +43,7 @@ func NewApiGatewayStage(properties ApiGatewayStageProperties, deps ...interface{
 }
 
 // ParseApiGatewayStage parses ApiGatewayStage
-func ParseApiGatewayStage(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayStage(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayStage
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

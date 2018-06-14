@@ -38,7 +38,7 @@ func NewApiGatewayGatewayResponse(properties ApiGatewayGatewayResponseProperties
 }
 
 // ParseApiGatewayGatewayResponse parses ApiGatewayGatewayResponse
-func ParseApiGatewayGatewayResponse(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayGatewayResponse(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayGatewayResponse
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

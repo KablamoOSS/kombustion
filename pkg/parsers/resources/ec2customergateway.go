@@ -37,7 +37,7 @@ func NewEC2CustomerGateway(properties EC2CustomerGatewayProperties, deps ...inte
 }
 
 // ParseEC2CustomerGateway parses EC2CustomerGateway
-func ParseEC2CustomerGateway(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2CustomerGateway(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2CustomerGateway
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

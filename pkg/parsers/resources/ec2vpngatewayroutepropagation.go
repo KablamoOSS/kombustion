@@ -35,7 +35,7 @@ func NewEC2VPNGatewayRoutePropagation(properties EC2VPNGatewayRoutePropagationPr
 }
 
 // ParseEC2VPNGatewayRoutePropagation parses EC2VPNGatewayRoutePropagation
-func ParseEC2VPNGatewayRoutePropagation(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VPNGatewayRoutePropagation(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2VPNGatewayRoutePropagation
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

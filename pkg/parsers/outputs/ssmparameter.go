@@ -9,7 +9,7 @@ import (
 )
 
 // ParseSSMParameter Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-parameter.html
-func ParseSSMParameter(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSSMParameter(name string, data string) (cf types.TemplateObject, err error) {
 
 	var resource, output types.TemplateObject
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {

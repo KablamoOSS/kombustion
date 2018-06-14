@@ -37,7 +37,7 @@ func NewApiGatewayBasePathMapping(properties ApiGatewayBasePathMappingProperties
 }
 
 // ParseApiGatewayBasePathMapping parses ApiGatewayBasePathMapping
-func ParseApiGatewayBasePathMapping(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApiGatewayBasePathMapping(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApiGatewayBasePathMapping
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

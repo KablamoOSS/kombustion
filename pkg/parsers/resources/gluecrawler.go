@@ -43,7 +43,7 @@ func NewGlueCrawler(properties GlueCrawlerProperties, deps ...interface{}) GlueC
 }
 
 // ParseGlueCrawler parses GlueCrawler
-func ParseGlueCrawler(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGlueCrawler(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GlueCrawler
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

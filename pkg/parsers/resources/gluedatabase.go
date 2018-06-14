@@ -36,7 +36,7 @@ func NewGlueDatabase(properties GlueDatabaseProperties, deps ...interface{}) Glu
 }
 
 // ParseGlueDatabase parses GlueDatabase
-func ParseGlueDatabase(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGlueDatabase(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GlueDatabase
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

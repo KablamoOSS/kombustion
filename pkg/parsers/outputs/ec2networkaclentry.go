@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEC2NetworkAclEntry Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html
-func ParseEC2NetworkAclEntry(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2NetworkAclEntry(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

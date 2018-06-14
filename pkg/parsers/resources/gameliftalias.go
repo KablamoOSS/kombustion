@@ -37,7 +37,7 @@ func NewGameLiftAlias(properties GameLiftAliasProperties, deps ...interface{}) G
 }
 
 // ParseGameLiftAlias parses GameLiftAlias
-func ParseGameLiftAlias(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGameLiftAlias(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GameLiftAlias
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

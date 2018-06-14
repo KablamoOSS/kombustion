@@ -37,7 +37,7 @@ func NewBatchJobQueue(properties BatchJobQueueProperties, deps ...interface{}) B
 }
 
 // ParseBatchJobQueue parses BatchJobQueue
-func ParseBatchJobQueue(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseBatchJobQueue(name string, data string) (cf types.TemplateObject, err error) {
 	var resource BatchJobQueue
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

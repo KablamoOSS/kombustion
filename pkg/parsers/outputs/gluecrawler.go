@@ -8,7 +8,7 @@ import (
 )
 
 // ParseGlueCrawler Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html
-func ParseGlueCrawler(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGlueCrawler(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

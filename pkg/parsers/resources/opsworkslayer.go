@@ -53,7 +53,7 @@ func NewOpsWorksLayer(properties OpsWorksLayerProperties, deps ...interface{}) O
 }
 
 // ParseOpsWorksLayer parses OpsWorksLayer
-func ParseOpsWorksLayer(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseOpsWorksLayer(name string, data string) (cf types.TemplateObject, err error) {
 	var resource OpsWorksLayer
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

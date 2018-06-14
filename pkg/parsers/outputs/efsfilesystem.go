@@ -8,7 +8,7 @@ import (
 )
 
 // ParseEFSFileSystem Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html
-func ParseEFSFileSystem(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEFSFileSystem(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

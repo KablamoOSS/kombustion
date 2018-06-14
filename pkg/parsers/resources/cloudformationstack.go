@@ -38,7 +38,7 @@ func NewCloudFormationStack(properties CloudFormationStackProperties, deps ...in
 }
 
 // ParseCloudFormationStack parses CloudFormationStack
-func ParseCloudFormationStack(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloudFormationStack(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CloudFormationStack
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

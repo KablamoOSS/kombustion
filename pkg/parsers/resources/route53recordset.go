@@ -48,7 +48,7 @@ func NewRoute53RecordSet(properties Route53RecordSetProperties, deps ...interfac
 }
 
 // ParseRoute53RecordSet parses Route53RecordSet
-func ParseRoute53RecordSet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRoute53RecordSet(name string, data string) (cf types.TemplateObject, err error) {
 	var resource Route53RecordSet
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

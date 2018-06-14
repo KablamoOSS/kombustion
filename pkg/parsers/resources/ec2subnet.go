@@ -40,7 +40,7 @@ func NewEC2Subnet(properties EC2SubnetProperties, deps ...interface{}) EC2Subnet
 }
 
 // ParseEC2Subnet parses EC2Subnet
-func ParseEC2Subnet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2Subnet(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2Subnet
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -8,7 +8,7 @@ import (
 )
 
 // ParseAutoScalingLifecycleHook Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-lifecyclehook.html
-func ParseAutoScalingLifecycleHook(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAutoScalingLifecycleHook(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

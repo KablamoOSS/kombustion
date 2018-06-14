@@ -40,7 +40,7 @@ func NewApplicationAutoScalingScalableTarget(properties ApplicationAutoScalingSc
 }
 
 // ParseApplicationAutoScalingScalableTarget parses ApplicationAutoScalingScalableTarget
-func ParseApplicationAutoScalingScalableTarget(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApplicationAutoScalingScalableTarget(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ApplicationAutoScalingScalableTarget
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

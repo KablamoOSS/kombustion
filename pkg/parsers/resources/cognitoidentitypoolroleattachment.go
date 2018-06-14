@@ -36,7 +36,7 @@ func NewCognitoIdentityPoolRoleAttachment(properties CognitoIdentityPoolRoleAtta
 }
 
 // ParseCognitoIdentityPoolRoleAttachment parses CognitoIdentityPoolRoleAttachment
-func ParseCognitoIdentityPoolRoleAttachment(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCognitoIdentityPoolRoleAttachment(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CognitoIdentityPoolRoleAttachment
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

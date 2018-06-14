@@ -8,7 +8,7 @@ import (
 )
 
 // ParseAutoScalingScheduledAction Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-scheduledaction.html
-func ParseAutoScalingScheduledAction(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAutoScalingScheduledAction(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

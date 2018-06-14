@@ -35,7 +35,7 @@ func NewCloudWatchDashboard(properties CloudWatchDashboardProperties, deps ...in
 }
 
 // ParseCloudWatchDashboard parses CloudWatchDashboard
-func ParseCloudWatchDashboard(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloudWatchDashboard(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CloudWatchDashboard
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -41,7 +41,7 @@ func NewElasticLoadBalancingV2LoadBalancer(properties ElasticLoadBalancingV2Load
 }
 
 // ParseElasticLoadBalancingV2LoadBalancer parses ElasticLoadBalancingV2LoadBalancer
-func ParseElasticLoadBalancingV2LoadBalancer(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElasticLoadBalancingV2LoadBalancer(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ElasticLoadBalancingV2LoadBalancer
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

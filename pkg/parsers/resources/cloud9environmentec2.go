@@ -40,7 +40,7 @@ func NewCloud9EnvironmentEC2(properties Cloud9EnvironmentEC2Properties, deps ...
 }
 
 // ParseCloud9EnvironmentEC2 parses Cloud9EnvironmentEC2
-func ParseCloud9EnvironmentEC2(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloud9EnvironmentEC2(name string, data string) (cf types.TemplateObject, err error) {
 	var resource Cloud9EnvironmentEC2
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

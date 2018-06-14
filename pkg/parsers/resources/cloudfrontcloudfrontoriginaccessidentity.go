@@ -35,7 +35,7 @@ func NewCloudFrontCloudFrontOriginAccessIdentity(properties CloudFrontCloudFront
 }
 
 // ParseCloudFrontCloudFrontOriginAccessIdentity parses CloudFrontCloudFrontOriginAccessIdentity
-func ParseCloudFrontCloudFrontOriginAccessIdentity(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloudFrontCloudFrontOriginAccessIdentity(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CloudFrontCloudFrontOriginAccessIdentity
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

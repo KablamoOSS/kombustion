@@ -42,7 +42,7 @@ func NewElasticsearchDomain(properties ElasticsearchDomainProperties, deps ...in
 }
 
 // ParseElasticsearchDomain parses ElasticsearchDomain
-func ParseElasticsearchDomain(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElasticsearchDomain(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ElasticsearchDomain
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

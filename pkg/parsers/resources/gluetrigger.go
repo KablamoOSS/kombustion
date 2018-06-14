@@ -40,7 +40,7 @@ func NewGlueTrigger(properties GlueTriggerProperties, deps ...interface{}) GlueT
 }
 
 // ParseGlueTrigger parses GlueTrigger
-func ParseGlueTrigger(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseGlueTrigger(name string, data string) (cf types.TemplateObject, err error) {
 	var resource GlueTrigger
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

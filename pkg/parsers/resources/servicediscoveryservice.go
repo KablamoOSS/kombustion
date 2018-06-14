@@ -38,7 +38,7 @@ func NewServiceDiscoveryService(properties ServiceDiscoveryServiceProperties, de
 }
 
 // ParseServiceDiscoveryService parses ServiceDiscoveryService
-func ParseServiceDiscoveryService(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseServiceDiscoveryService(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ServiceDiscoveryService
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

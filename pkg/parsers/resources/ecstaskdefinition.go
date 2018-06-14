@@ -42,7 +42,7 @@ func NewECSTaskDefinition(properties ECSTaskDefinitionProperties, deps ...interf
 }
 
 // ParseECSTaskDefinition parses ECSTaskDefinition
-func ParseECSTaskDefinition(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseECSTaskDefinition(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ECSTaskDefinition
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

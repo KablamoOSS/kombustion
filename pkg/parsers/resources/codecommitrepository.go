@@ -36,7 +36,7 @@ func NewCodeCommitRepository(properties CodeCommitRepositoryProperties, deps ...
 }
 
 // ParseCodeCommitRepository parses CodeCommitRepository
-func ParseCodeCommitRepository(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCodeCommitRepository(name string, data string) (cf types.TemplateObject, err error) {
 	var resource CodeCommitRepository
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

@@ -36,7 +36,7 @@ func NewEC2NatGateway(properties EC2NatGatewayProperties, deps ...interface{}) E
 }
 
 // ParseEC2NatGateway parses EC2NatGateway
-func ParseEC2NatGateway(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2NatGateway(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2NatGateway
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

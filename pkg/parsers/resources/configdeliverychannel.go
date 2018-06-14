@@ -39,7 +39,7 @@ func NewConfigDeliveryChannel(properties ConfigDeliveryChannelProperties, deps .
 }
 
 // ParseConfigDeliveryChannel parses ConfigDeliveryChannel
-func ParseConfigDeliveryChannel(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseConfigDeliveryChannel(name string, data string) (cf types.TemplateObject, err error) {
 	var resource ConfigDeliveryChannel
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

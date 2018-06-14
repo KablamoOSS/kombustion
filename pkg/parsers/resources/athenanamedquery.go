@@ -37,7 +37,7 @@ func NewAthenaNamedQuery(properties AthenaNamedQueryProperties, deps ...interfac
 }
 
 // ParseAthenaNamedQuery parses AthenaNamedQuery
-func ParseAthenaNamedQuery(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAthenaNamedQuery(name string, data string) (cf types.TemplateObject, err error) {
 	var resource AthenaNamedQuery
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

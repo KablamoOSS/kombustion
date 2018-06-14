@@ -35,7 +35,7 @@ func NewSNSTopicPolicy(properties SNSTopicPolicyProperties, deps ...interface{})
 }
 
 // ParseSNSTopicPolicy parses SNSTopicPolicy
-func ParseSNSTopicPolicy(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSNSTopicPolicy(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SNSTopicPolicy
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

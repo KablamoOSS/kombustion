@@ -8,7 +8,7 @@ import (
 )
 
 // ParseElasticBeanstalkApplicationVersion Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-version.html
-func ParseElasticBeanstalkApplicationVersion(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElasticBeanstalkApplicationVersion(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

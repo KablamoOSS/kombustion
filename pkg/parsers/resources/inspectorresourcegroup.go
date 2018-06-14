@@ -34,7 +34,7 @@ func NewInspectorResourceGroup(properties InspectorResourceGroupProperties, deps
 }
 
 // ParseInspectorResourceGroup parses InspectorResourceGroup
-func ParseInspectorResourceGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseInspectorResourceGroup(name string, data string) (cf types.TemplateObject, err error) {
 	var resource InspectorResourceGroup
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

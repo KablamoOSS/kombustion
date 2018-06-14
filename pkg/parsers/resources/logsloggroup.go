@@ -34,7 +34,7 @@ func NewLogsLogGroup(properties LogsLogGroupProperties, deps ...interface{}) Log
 }
 
 // ParseLogsLogGroup parses LogsLogGroup
-func ParseLogsLogGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseLogsLogGroup(name string, data string) (cf types.TemplateObject, err error) {
 	var resource LogsLogGroup
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

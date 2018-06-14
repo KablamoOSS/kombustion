@@ -35,7 +35,7 @@ func NewWAFRegionalSizeConstraintSet(properties WAFRegionalSizeConstraintSetProp
 }
 
 // ParseWAFRegionalSizeConstraintSet parses WAFRegionalSizeConstraintSet
-func ParseWAFRegionalSizeConstraintSet(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseWAFRegionalSizeConstraintSet(name string, data string) (cf types.TemplateObject, err error) {
 	var resource WAFRegionalSizeConstraintSet
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

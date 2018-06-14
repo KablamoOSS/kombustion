@@ -36,7 +36,7 @@ func NewLambdaVersion(properties LambdaVersionProperties, deps ...interface{}) L
 }
 
 // ParseLambdaVersion parses LambdaVersion
-func ParseLambdaVersion(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseLambdaVersion(name string, data string) (cf types.TemplateObject, err error) {
 	var resource LambdaVersion
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

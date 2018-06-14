@@ -8,7 +8,7 @@ import (
 )
 
 // ParseApplicationAutoScalingScalingPolicy Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html
-func ParseApplicationAutoScalingScalingPolicy(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseApplicationAutoScalingScalingPolicy(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

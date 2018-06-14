@@ -8,7 +8,7 @@ import (
 )
 
 // ParseElasticLoadBalancingV2ListenerCertificate Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html
-func ParseElasticLoadBalancingV2ListenerCertificate(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseElasticLoadBalancingV2ListenerCertificate(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

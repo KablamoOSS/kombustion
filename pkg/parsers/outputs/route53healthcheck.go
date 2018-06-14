@@ -8,7 +8,7 @@ import (
 )
 
 // ParseRoute53HealthCheck Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-healthcheck.html
-func ParseRoute53HealthCheck(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRoute53HealthCheck(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

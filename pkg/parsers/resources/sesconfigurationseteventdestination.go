@@ -36,7 +36,7 @@ func NewSESConfigurationSetEventDestination(properties SESConfigurationSetEventD
 }
 
 // ParseSESConfigurationSetEventDestination parses SESConfigurationSetEventDestination
-func ParseSESConfigurationSetEventDestination(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseSESConfigurationSetEventDestination(name string, data string) (cf types.TemplateObject, err error) {
 	var resource SESConfigurationSetEventDestination
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

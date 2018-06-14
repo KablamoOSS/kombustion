@@ -65,7 +65,7 @@ func NewEC2Instance(properties EC2InstanceProperties, deps ...interface{}) EC2In
 }
 
 // ParseEC2Instance parses EC2Instance
-func ParseEC2Instance(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2Instance(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2Instance
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

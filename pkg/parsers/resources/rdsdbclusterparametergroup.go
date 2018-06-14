@@ -37,7 +37,7 @@ func NewRDSDBClusterParameterGroup(properties RDSDBClusterParameterGroupProperti
 }
 
 // ParseRDSDBClusterParameterGroup parses RDSDBClusterParameterGroup
-func ParseRDSDBClusterParameterGroup(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseRDSDBClusterParameterGroup(name string, data string) (cf types.TemplateObject, err error) {
 	var resource RDSDBClusterParameterGroup
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

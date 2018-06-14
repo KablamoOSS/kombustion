@@ -8,7 +8,7 @@ import (
 )
 
 // ParseKinesisAnalyticsApplicationOutput Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationoutput.html
-func ParseKinesisAnalyticsApplicationOutput(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseKinesisAnalyticsApplicationOutput(name string, data string) (cf types.TemplateObject, err error) {
 
 	cf = types.TemplateObject{
 		name: types.TemplateObject{

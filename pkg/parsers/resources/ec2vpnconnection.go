@@ -39,7 +39,7 @@ func NewEC2VPNConnection(properties EC2VPNConnectionProperties, deps ...interfac
 }
 
 // ParseEC2VPNConnection parses EC2VPNConnection
-func ParseEC2VPNConnection(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2VPNConnection(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2VPNConnection
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

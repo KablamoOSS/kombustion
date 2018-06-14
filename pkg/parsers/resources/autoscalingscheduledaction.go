@@ -40,7 +40,7 @@ func NewAutoScalingScheduledAction(properties AutoScalingScheduledActionProperti
 }
 
 // ParseAutoScalingScheduledAction parses AutoScalingScheduledAction
-func ParseAutoScalingScheduledAction(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseAutoScalingScheduledAction(name string, data string) (cf types.TemplateObject, err error) {
 	var resource AutoScalingScheduledAction
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

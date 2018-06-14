@@ -36,7 +36,7 @@ func NewIAMAccessKey(properties IAMAccessKeyProperties, deps ...interface{}) IAM
 }
 
 // ParseIAMAccessKey parses IAMAccessKey
-func ParseIAMAccessKey(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseIAMAccessKey(name string, data string) (cf types.TemplateObject, err error) {
 	var resource IAMAccessKey
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return

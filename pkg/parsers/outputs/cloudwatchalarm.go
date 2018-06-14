@@ -9,7 +9,7 @@ import (
 )
 
 // ParseCloudWatchAlarm Documentation http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html
-func ParseCloudWatchAlarm(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseCloudWatchAlarm(name string, data string) (cf types.TemplateObject, err error) {
 
 	var resource, output types.TemplateObject
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {

@@ -34,7 +34,7 @@ func NewEC2EIP(properties EC2EIPProperties, deps ...interface{}) EC2EIP {
 }
 
 // ParseEC2EIP parses EC2EIP
-func ParseEC2EIP(ctx map[string]interface{}, name string, data string) (cf types.TemplateObject, err error) {
+func ParseEC2EIP(name string, data string) (cf types.TemplateObject, err error) {
 	var resource EC2EIP
 	if err = yaml.Unmarshal([]byte(data), &resource); err != nil {
 		return
