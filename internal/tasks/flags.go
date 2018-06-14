@@ -12,6 +12,10 @@ var GlobalFlags = []cli.Flag{
 		Name:  "param, p",
 		Usage: "cloudformation parameters `BucketName=test`",
 	},
+	cli.StringFlag{
+		Name:  "profile",
+		Usage: "use a profile from ~/.aws/credentials eg `MyProfile`",
+	},
 }
 
 // CloudFormationStackFlags for tasks relating to CRUD of cloudformation stacks

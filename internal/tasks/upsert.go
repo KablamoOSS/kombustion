@@ -41,7 +41,7 @@ func init() {
 
 // Upsert a stack
 func Upsert(c *cli.Context) {
-	printer.Step("Upsert stack")
+	printer.Step("Upsert Stack")
 	printer.Progress("Kombusting")
 
 	fileName := c.Args().Get(0)
@@ -76,18 +76,28 @@ func Upsert(c *cli.Context) {
 		loadedPlugins = append(loadedPlugins, devPluginLoaded)
 	}
 
+	region := c.String("region")
+	if region == "" {
+		// If no region was provided by the cli flag, check for the default in the manifest
+		if manifestFile.Region != "" {
+			region = manifestFile.Region
+		}
+	}
+
 	cfClient := tasks.GetCloudformationClient(
 		c.GlobalString("profile"),
-		c.String("region"),
+		region,
 	)
 
 	paramMap := cloudformation.GetParamMap(c)
+
+	environment := c.String("environment")
 
 	printer.Progress("Generating template")
 	// Template generation parameters
 	generateParams := cloudformation.GenerateParams{
 		Filename:           fileName,
-		Env:                c.String("env"),
+		Env:                environment,
 		DisableBaseOutputs: c.Bool("no-base-outputs"),
 		ParamMap:           paramMap,
 		Plugins:            loadedPlugins,
@@ -98,10 +108,8 @@ func Upsert(c *cli.Context) {
 	// Cloudformation Stack parameters
 	var parameters []*awsCF.Parameter
 
-	stackName := c.Args().Get(0)
-	if len(c.String("stack-name")) > 0 {
-		stackName = c.String("stack-name")
-	}
+	stackName := cloudformation.GetStackName(manifestFile, fileName, environment, c.String("stack-name"))
+
 	printer.Progress("Upserting template")
 	if len(c.String("url")) > 0 {
 		// TODO: We probably need to download the template to determine what params
