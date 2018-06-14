@@ -6,6 +6,7 @@ import (
 	"github.com/urfave/cli"
 )
 
+// DeleteFlags for use with the delete taks
 var DeleteFlags = []cli.Flag{
 	cli.StringFlag{
 		Name:  "region, r",
@@ -14,6 +15,7 @@ var DeleteFlags = []cli.Flag{
 	},
 }
 
+// Delete a given stack
 func Delete(c *cli.Context) {
 	printer.Step("Deleting stack")
 	printer.Progress("Kombusting")

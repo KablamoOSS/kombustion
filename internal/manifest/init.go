@@ -101,7 +101,7 @@ func surveyForEnvironments() (manifestEnvironments map[string]Environment, err e
 	prompt := &survey.MultiSelect{
 		Message: "Which environments does this project deploy to:",
 		Help:    "you can add more later",
-		Options: []string{"production", "pre-production", "staging", "development"},
+		Options: []string{"production", "staging", "development"},
 	}
 	// Prompts the user
 	err = survey.AskOne(prompt, &environments, nil)
@@ -115,7 +115,7 @@ func surveyForEnvironments() (manifestEnvironments map[string]Environment, err e
 		}
 		manifestEnvironments[env] = Environment{
 			AccountIDs: []string{accountId},
-			Parameters: map[string]string{"ENVIRONMENT": env},
+			Parameters: map[string]string{"Environment": env},
 		}
 	}
 

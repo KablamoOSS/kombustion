@@ -42,6 +42,7 @@ func init() {
 // Upsert a stack
 func Upsert(c *cli.Context) {
 	printer.Step("Upserting stack")
+	printer.Progress("Kombusting")
 
 	fileName := c.Args().Get(0)
 	if fileName == "" {
@@ -75,17 +76,27 @@ func Upsert(c *cli.Context) {
 		loadedPlugins = append(loadedPlugins, devPluginLoaded)
 	}
 
+	region := c.String("region")
+	if region == "" {
+		// If no region was provided by the cli flag, check for the default in the manifest
+		if manifestFile.Region != "" {
+			region = manifestFile.Region
+		}
+	}
+
 	cfClient := tasks.GetCloudformationClient(
 		c.GlobalString("profile"),
-		c.String("region"),
+		region,
 	)
 
 	paramMap := cloudformation.GetParamMap(c)
 
+	environment := c.String("env")
+
 	// Template generation parameters
 	generateParams := cloudformation.GenerateParams{
 		Filename:           fileName,
-		Env:                c.String("env"),
+		Env:                environment,
 		DisableBaseOutputs: c.Bool("no-base-outputs"),
 		ParamMap:           paramMap,
 		Plugins:            loadedPlugins,
@@ -96,10 +107,8 @@ func Upsert(c *cli.Context) {
 	// Cloudformation Stack parameters
 	var parameters []*awsCF.Parameter
 
-	stackName := c.Args().Get(0)
-	if len(c.String("stack-name")) > 0 {
-		stackName = c.String("stack-name")
-	}
+	stackName := getStackName(manifestFile, fileName, environment, c.String("stack-name"))
+
 	if len(c.String("url")) > 0 {
 		// TODO: We probably need to download the template to determine what params
 		// it needs, and filter the available params only to those
@@ -152,4 +161,20 @@ func getCapabilities(c *cli.Context) []*string {
 	}
 
 	return capabilities
+}
+
+// TODO: probably need this in Delete too
+func getStackName(manifestFile *manifest.Manifest, fileName, environment, stackNameFlag string) string {
+	stackName := ""
+	if stackNameFlag != "" {
+		stackName = stackNameFlag
+	} else {
+		// TODO: remove the ext
+		fileNameCleaned := fileName
+
+		stackName = fmt.Sprintf("%s-%s-%s", manifestFile.Name, fileNameCleaned, environment)
+	}
+
+	// TODO: parse stackName to ensure it meets cfn regex requirements (strip bad chars)
+	return stackName
 }

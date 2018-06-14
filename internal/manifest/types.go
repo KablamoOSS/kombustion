@@ -5,6 +5,9 @@ type Manifest struct {
 	// Name of this Kombustion project, this can be used to prefix stack names
 	Name string `yaml:"name"`
 
+	// Region is the default region stacks will be deployed to
+	Region string `yaml:"region"`
+
 	// A list of plugins used in this project
 	Plugins map[string]Plugin `yaml:"plugins,omitempty"`
 

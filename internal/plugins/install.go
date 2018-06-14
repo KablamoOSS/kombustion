@@ -11,7 +11,6 @@ import (
 	"github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/plugins/lock"
 	"github.com/mholt/archiver"
-	log "github.com/sirupsen/logrus"
 )
 
 // InstallPlugins - Get the lock file and then call installPluginsWithLock
@@ -26,7 +25,7 @@ func InstallPlugins() error {
 	updatedLockFile, installErrors := installPluginsWithLock(lockFile)
 	if len(installErrors) > 0 {
 		for _, err := range installErrors {
-			log.Error(err)
+			printer.Error(err, "", "")
 		}
 		printer.Fatal(err, "Error installing plugins", "")
 	}
@@ -82,7 +81,7 @@ func installPlugin(plugin lock.Plugin) (updatedPlugin lock.Plugin, installErrors
 			// Check the local cache for a file
 			foundInCache, cacheFile, err := findPluginInCache(plugin, resolved)
 			if err != nil {
-				log.Fatal(err)
+				printer.Fatal(err, "", "")
 				installErrors = append(installErrors, err)
 			}
 
