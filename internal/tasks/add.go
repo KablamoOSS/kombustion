@@ -11,7 +11,7 @@ import (
 
 // AddPluginToManifest file and update it
 func AddPluginToManifest(c *cli.Context) error {
-	printer.Step("Adding plugins")
+	printer.Step("Add plugins")
 	// Try and load the manifest
 	manifestFile := manifest.FindAndLoadManifest()
 

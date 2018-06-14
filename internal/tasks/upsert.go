@@ -41,7 +41,11 @@ func init() {
 
 // Upsert a stack
 func Upsert(c *cli.Context) {
+<<<<<<< HEAD
 	printer.Step("Upserting stack")
+=======
+	printer.Step("Upsert stack")
+>>>>>>> master
 	printer.Progress("Kombusting")
 
 	fileName := c.Args().Get(0)
@@ -91,8 +95,12 @@ func Upsert(c *cli.Context) {
 
 	paramMap := cloudformation.GetParamMap(c)
 
+<<<<<<< HEAD
 	environment := c.String("env")
 
+=======
+	printer.Progress("Generating template")
+>>>>>>> master
 	// Template generation parameters
 	generateParams := cloudformation.GenerateParams{
 		Filename:           fileName,
@@ -107,8 +115,16 @@ func Upsert(c *cli.Context) {
 	// Cloudformation Stack parameters
 	var parameters []*awsCF.Parameter
 
+<<<<<<< HEAD
 	stackName := getStackName(manifestFile, fileName, environment, c.String("stack-name"))
 
+=======
+	stackName := c.Args().Get(0)
+	if len(c.String("stack-name")) > 0 {
+		stackName = c.String("stack-name")
+	}
+	printer.Progress("Upserting template")
+>>>>>>> master
 	if len(c.String("url")) > 0 {
 		// TODO: We probably need to download the template to determine what params
 		// it needs, and filter the available params only to those

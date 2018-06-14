@@ -17,7 +17,7 @@ var DeleteFlags = []cli.Flag{
 
 // Delete a given stack
 func Delete(c *cli.Context) {
-	printer.Step("Deleting stack")
+	printer.Step("Delete stack")
 	printer.Progress("Kombusting")
 
 	tasks.DeleteStack(c.Args().Get(0), c.GlobalString("profile"), c.String("region"))

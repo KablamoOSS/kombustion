@@ -30,7 +30,7 @@ func init() {
 
 // Generate a template and save it to disk, without upserting it
 func Generate(c *cli.Context) {
-	printer.Step("Generating template")
+	printer.Step("Generate template")
 	printer.Progress("Kombusting")
 
 	fileName := c.Args().Get(0)
@@ -79,6 +79,7 @@ func Generate(c *cli.Context) {
 		loadedPlugins = append(loadedPlugins, devPluginLoaded)
 	}
 
+	printer.Progress("Generating template")
 	tasks.GenerateTemplate(cloudformation.GenerateParams{
 		Filename:           fileName,
 		Env:                c.String("env"),

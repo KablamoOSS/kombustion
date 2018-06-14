@@ -13,7 +13,7 @@ import (
 // Which is to say, ensure the manifest and lock file agree with the state of the plugins
 // and then ensure the lock file agrees with the disk on the state of the plugins
 func InstallPlugins(c *cli.Context) {
-	printer.Step("Installing plugins")
+	printer.Step("Install plugins")
 	printer.Progress("Kombusting")
 
 	err := plugins.InstallPlugins()
