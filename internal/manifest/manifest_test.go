@@ -23,10 +23,11 @@ func TestLoadManifestFromString(t *testing.T) {
 	}{
 		{
 			name:         "Simple manifest",
-			manifestYaml: `name: TestManifest`,
+			manifestYaml: `Name: TestManifest`,
 			throws:       false,
 			output: Manifest{
 				Name:               "TestManifest",
+				Region:             "",
 				Plugins:            map[string]Plugin(nil),
 				Architectures:      []string(nil),
 				Environments:       map[string]Environment(nil),
@@ -42,10 +43,11 @@ func TestLoadManifestFromString(t *testing.T) {
 		},
 		{
 			name: "Simple manifest HideDefaultExports",
-			manifestYaml: `name: TestManifest
+			manifestYaml: `Name: TestManifest
 hideDefaultExports: true`,
 			output: Manifest{
 				Name:               "TestManifest",
+				Region:             "",
 				Plugins:            map[string]Plugin(nil),
 				Architectures:      []string(nil),
 				Environments:       map[string]Environment(nil),
@@ -56,30 +58,32 @@ hideDefaultExports: true`,
 		{
 			name:   "Manifest with github plugins",
 			throws: false,
-			manifestYaml: `name: TestManifestWithPlugins
-architectures: ["darwin/x64", "linux/386"]
-plugins:
+			manifestYaml: `Name: TestManifestWithPlugins
+Region: us-east-1
+Architectures: ["darwin/x64", "linux/386"]
+Plugins:
   # Plugin 1 tests the latest version condition
   "github.com/KablamoOSS/kombustion-example-plugin-one@latest":
-    name: github.com/KablamoOSS/kombustion-example-plugin-one
-    version: latest
+    Name: github.com/KablamoOSS/kombustion-example-plugin-one
+    Version: latest
 
   # Plugin 2 tests the equals/exact version condition
   "github.com/KablamoOSS/kombustion-example-plugin-two@=2.0.1":
-    name: github.com/KablamoOSS/kombustion-example-plugin-two
-    version: "=2.0.1"
+    Name: github.com/KablamoOSS/kombustion-example-plugin-two
+    Version: "=2.0.1"
 
   # Plugin 3 tests the greater than version condition
   "github.com/KablamoOSS/kombustion-example-plugin-three@>3.x.x":
-    name: github.com/KablamoOSS/kombustion-example-plugin-three
-    version: ">3.x.x"
+    Name: github.com/KablamoOSS/kombustion-example-plugin-three
+    Version: ">3.x.x"
   # Plugin 4 tests the less than version condition
   "github.com/KablamoOSS/kombustion-example-plugin-four@<4.x.x":
-    name: github.com/KablamoOSS/kombustion-example-plugin-four
-    version: "<4.x.x"
+    Name: github.com/KablamoOSS/kombustion-example-plugin-four
+    Version: "<4.x.x"
 `,
 			output: Manifest{
 				Name:          "TestManifestWithPlugins",
+				Region:        "us-east-1",
 				Architectures: []string{"darwin/x64", "linux/386"},
 				Plugins: map[string]Plugin{
 					"github.com/KablamoOSS/kombustion-example-plugin-one@latest": {
@@ -106,27 +110,28 @@ plugins:
 		{
 			name:   "Enviroment configuration",
 			throws: false,
-			manifestYaml: `name: TestManifestWithEnvironment
-environments:
+			manifestYaml: `Name: TestManifestWithEnvironment
+Region: us-east-1
+Environments:
   development:
-    accountIDs: [ "11111111111", "22222222222" ]
-    parameters:
+    AccountIDs: [ "11111111111", "22222222222" ]
+    Parameters:
       parameterOneName: "parameterOneValue"
       parameterTwoName: "8654238642489624862"
       parameterThreeName: "3so87tg4y98n7y34ts3t4sh  st34y79p4y3t7 8s"
       parameterFourName: "hhh:://asdfasdf.sadfasdf:3452345@f][a;v-][0[-"
 
   staging:
-    accountIDs: [ "555555555"]
-    parameters:
+    AccountIDs: [ "555555555"]
+    Parameters:
       parameterOneName: "parameterOneValue"
       parameterTwoName: "8654238642489624862"
       parameterThreeName: "3so87tg4y98n7y34ts3t4sh  st34y79p4y3t7 8s"
       parameterFourName: "hhh:://asdfasdf.sadfasdf:3452345@f][a;v-][0[-"
 
   production:
-    accountIDs: [ "55555555", "66666666"]
-    parameters:
+    AccountIDs: [ "55555555", "66666666"]
+    Parameters:
       parameterOneName: "parameterOneValue"
       parameterTwoName: "8654238642489624862"
       parameterThreeName: "3so87tg4y98n7y34ts3t4sh  st34y79p4y3t7 8s"
@@ -134,6 +139,7 @@ environments:
 `,
 			output: Manifest{
 				Name:               "TestManifestWithEnvironment",
+				Region:             "us-east-1",
 				Plugins:            map[string]Plugin(nil),
 				Architectures:      []string(nil),
 				HideDefaultExports: false,
