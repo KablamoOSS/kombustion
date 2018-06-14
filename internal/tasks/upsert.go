@@ -91,7 +91,7 @@ func Upsert(c *cli.Context) {
 
 	paramMap := cloudformation.GetParamMap(c)
 
-	environment := c.String("env")
+	environment := c.String("environment")
 
 	printer.Progress("Generating template")
 	// Template generation parameters
