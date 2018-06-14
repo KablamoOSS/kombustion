@@ -19,21 +19,18 @@ func RegisterPlugin(config apiTypes.Config) []byte {
 // RegisterResource for your plugin
 func RegisterResource(
 	resource func(
-		ctx map[string]interface{},
 		name string,
 		data string,
 	) (cf types.TemplateObject),
 ) func(
-	ctx map[string]interface{},
 	name string,
 	data string,
 ) []byte {
 	return func(
-		ctx map[string]interface{},
 		name string,
 		data string,
 	) []byte {
-		return marshallResource(resource(ctx, name, data))
+		return marshallResource(resource(name, data))
 	}
 }
 
@@ -42,21 +39,18 @@ func RegisterResource(
 // RegisterMapping for your plugin
 func RegisterMapping(
 	mapping func(
-		ctx map[string]interface{},
 		name string,
 		data string,
 	) (cf types.TemplateObject),
 ) func(
-	ctx map[string]interface{},
 	name string,
 	data string,
 ) []byte {
 	return func(
-		ctx map[string]interface{},
 		name string,
 		data string,
 	) []byte {
-		return marshallMapping(mapping(ctx, name, data))
+		return marshallMapping(mapping(name, data))
 	}
 }
 
@@ -65,20 +59,17 @@ func RegisterMapping(
 // RegisterOutput for your plugin
 func RegisterOutput(
 	output func(
-		ctx map[string]interface{},
 		name string,
 		data string,
 	) (cf types.TemplateObject),
 ) func(
-	ctx map[string]interface{},
 	name string,
 	data string,
 ) []byte {
 	return func(
-		ctx map[string]interface{},
 		name string,
 		data string,
 	) []byte {
-		return marshallOutput(output(ctx, name, data))
+		return marshallOutput(output(name, data))
 	}
 }
