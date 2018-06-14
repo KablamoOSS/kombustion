@@ -12,17 +12,17 @@ Paginate = 4
 
 [[menu.main]]
     name = "Docs"
-    weight = -100
+    weight = 1
     url = "/docs/"
 [[menu.main]]
     name = "Guides"
-    weight = -100
+    weight = 2
     url = "/guides/"
 [[menu.main]]
     name = "Concepts"
-    weight = -100
+    weight = 3
     url = "/concepts/"
 [[menu.main]]
     name = "API"
-    weight = -100
+    weight = 4
     url = "/api/"
