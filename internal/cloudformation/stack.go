@@ -27,8 +27,6 @@ func GetStackName(manifestFile *manifest.Manifest, fileName, environment, stackN
 		)
 	}
 
-	// TODO: parse stackName to ensure it meets cfn regex requirements (strip bad chars)
-	fmt.Println(stackName)
 	return stackName
 }
 
