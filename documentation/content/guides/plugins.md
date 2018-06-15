@@ -389,4 +389,20 @@ deploy:
 ```
 
 
+### Creating a release
+
+Finally to create a release, you need to create a tag, and push both the commit and tag up.
+
+```bash
+# Create a tag
+$ git tag v0.1.0
+
+# Ensure the tagged commit has been pushed
+$ git push
+
+# Now push your tags
+$ git push --tags
+```
+
+
 
