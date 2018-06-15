@@ -13,31 +13,31 @@ layout  = "docs"
 
 Generate a CloudFormation template (from `./examples/stacks/test.yaml`):
 
-```sh
-kombustion generate examples/stacks/test.yaml && cat compiled/test.yaml
+```bash
+$ kombustion generate examples/stacks/test.yaml && cat compiled/test.yaml
 ```
 
 Upsert a CloudFormation template:
 
-```sh
-kombustion upsert examples/stacks/test.yaml --stackName test-stack
+```bash
+$ kombustion upsert examples/stacks/test.yaml --stackName test-stack
 ```
 
 Delete a CloudFormation stack:
 
-```sh
-kombustion delete examples/stacks/test.yaml
+```bash
+$ kombustion delete examples/stacks/test.yaml
 ```
 
 Print all the events for a stack:
 
-```sh
-kombustion events examples/stacks/test.yaml
+```bash
+$ kombustion events examples/stacks/test.yaml
 ```
 
 ## Command
 
-```sh
+```
 kombustion [global options] command [command options] [arguments...]
 
 COMMANDS:
