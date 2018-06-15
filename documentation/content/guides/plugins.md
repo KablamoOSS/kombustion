@@ -94,9 +94,16 @@ func Register() []byte {
     Version:            version,
     // The prefix for all resources this plugin exports
     Prefix:             "Kablamo::Boilerplate",
-    Help: types.Help{
-      // Documentation coming
-    },
+		Help: types.Help{
+			Description: "An Example Plugin",
+			TypeMappings: []types.TypeMapping{
+				{
+					Name:        "Function",
+					Description: "Creates a function.",
+					Config:      resources.LambdaFunctionConfig{},
+				},
+			},
+		},
   })
 }
 
