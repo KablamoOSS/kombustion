@@ -41,7 +41,8 @@ The easiest way to get started is to start from a copy of the [boilerplate](http
 
 ```bash
 $ go get https://github.com/KablamoOSS/kombustion-plugin-boilerplate
-$ cp $GOPATH/src/github.com/KablamoOSS/kombustion-plugin-boilerplate $GOPATH/src/github.com/{username}/{plugin}
+$ cp $GOPATH/src/github.com/KablamoOSS/kombustion-plugin-boilerplate \
+  $GOPATH/src/github.com/{username}/{plugin}
 ```
 
 
@@ -298,7 +299,94 @@ func (config LambdaFunctionConfig) Validate() error {
 
 ## Build process
 
+When building locally all you need is to add the plugin buildmode to your normal build command:
+
+```bash
+$ go build --buildmode=plugin
+```
+
+This will create a `folderName.so` file, which you can then load with `--load-plugin path/to/folderName.so`.
+
+Behind the scenes the plugin and core have been compiled with the C compiler on your machine. Becuase
+these match it sould just work.
 
 ### Release
+
+For release, you need to ensure you have a build for every operating system and architecture `kombustion` supports.
+
+We use a tool called `xgo` which uses Docker to compile for all possible versions, using the correct C compiler.
+
+The following is a working `.travis.yml` configuration that will compile and attach a release to your Github repository.
+
+`xgo` has a consistent naming convention, which `kombustion` relies on when downloading a plugin to determine what
+operating system and architecture the plugin was compiled for.
+
+To make this build script work, you need to add it to your root directory as `.travis.yml` in a public Github repository.
+
+Then you need to setup a token to allow TravisCI to [publish a release](https://docs.travis-ci.com/user/deployment/releases/) on your behalf.
+
+From the root directory of your repository run:
+
+```bash
+$ travis setup releases
+```
+
+It will then connect to your Github account, create and encrypt a token to allow publishing releases.
+
+```yaml
+language: go
+os:
+- linux
+go:
+- 1.10.1
+sudo: required
+script:
+- go get -t ./...
+- go generate
+- go test ./...
+- go get github.com/karalabe/xgo
+- |
+  # Get the full go repo url
+  REPO=$(pwd |  rev | cut -d'/' -f-3 | rev)
+
+  # Get the name of the app
+  APP="${PWD##*/}"
+
+  # Get this tag as the version
+  VERSION=$(git describe --abbrev=0 --tags)
+
+  # Ensure a fresh build folder
+  rm -rf build && mkdir build
+  # Compile
+  xgo \
+    -dest build/ \
+    -buildmode=plugin  \
+    --targets=darwin/amd64,freebsd/386,freebsd/amd64,freebsd/arm,linux/386,linux/amd64,linux/arm64  \
+    --ldflags "-X plugin.version=${VERSION}" \
+    $REPO
+
+  # Package
+  cd build
+  # For each compiled binary, we're repackaging it in a zip with the architecture name, and
+  # renaming the binary to the app name
+  for FILE in $(ls .); do
+    mv $FILE $APP.so
+    tar cvzf ${FILE}.tgz $APP.so
+    rm -f $APP.so
+  done
+  cd ..
+
+# Deploy to Github release on tags
+deploy:
+  provider: releases
+  api_key:
+    secure: XXXXX...YourSecretHere
+  file_glob: true
+  file: "build/*"
+  skip_cleanup: true
+  on:
+    tags: true
+```
+
 
 
