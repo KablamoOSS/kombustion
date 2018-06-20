@@ -94,16 +94,16 @@ func Register() []byte {
     Version:            version,
     // The prefix for all resources this plugin exports
     Prefix:             "Kablamo::Boilerplate",
-		Help: types.Help{
-			Description: "An Example Plugin",
-			TypeMappings: []types.TypeMapping{
-				{
-					Name:        "Function",
-					Description: "Creates a function.",
-					Config:      resources.LambdaFunctionConfig{},
-				},
-			},
-		},
+    Help: types.Help{
+      Description: "An Example Plugin",
+      TypeMappings: []types.TypeMapping{
+        {
+          Name:        "Function",
+          Description: "Creates a function.",
+          Config:      resources.LambdaFunctionConfig{},
+        },
+      },
+    },
   })
 }
 
@@ -193,7 +193,7 @@ Resources:
     # Properties is the Config struct we are about to define, which is passed to the
     # parser function as `data`
     Properties:
-      Code: 
+      Code:
         Bucket: !Ref LambdaBucket
         Key:  "lambda/MyFunction.zip"
       Handler: "main"
@@ -253,7 +253,7 @@ func ParseLambdaFunction(
   }
 
   // Now we can create resources
-  // To do this we need to call a create function from 
+  // To do this we need to call a create function from
   // github.com/KablamoOSS/kombustion/pkg/parsers/resources
   // which we import as cfResource
   cf = types.TemplateObject{
