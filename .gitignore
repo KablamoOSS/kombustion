@@ -12,3 +12,4 @@ kombustion.lock
 .kombustion/*
 build/*
 coverage*
+.idea/*
