@@ -15,42 +15,45 @@ import (
 	"github.com/KablamoOSS/kombustion/pkg/parsers"
 	"github.com/KablamoOSS/kombustion/types"
 
-	yaml "github.com/KablamoOSS/yaml"
+	"github.com/KablamoOSS/yaml"
 )
 
-// YamlConfig -
-type YamlConfig struct {
-	AWSTemplateFormatVersion string               `yaml:"AWSTemplateFormatVersion,omitempty"`
-	Description              string               `yaml:"Description,omitempty"`
-	Parameters               types.TemplateObject `yaml:"Parameters,omitempty"`
-	Mappings                 types.TemplateObject `yaml:"Mappings,omitempty"`
-	Conditions               types.TemplateObject `yaml:"Conditions,omitempty"`
-	Transform                types.TemplateObject `yaml:"Transform,omitempty"`
-	Resources                types.ResourceMap    `yaml:"Resources"`
-	Outputs                  types.TemplateObject `yaml:"Outputs,omitempty"`
-}
+type (
+	// YamlConfig -
+	YamlConfig struct {
+		AWSTemplateFormatVersion string               `yaml:"AWSTemplateFormatVersion,omitempty"`
+		Description              string               `yaml:"Description,omitempty"`
+		Parameters               types.TemplateObject `yaml:"Parameters,omitempty"`
+		Mappings                 types.TemplateObject `yaml:"Mappings,omitempty"`
+		Conditions               types.TemplateObject `yaml:"Conditions,omitempty"`
+		Transform                types.TemplateObject `yaml:"Transform,omitempty"`
+		Resources                types.ResourceMap    `yaml:"Resources"`
+		Outputs                  types.TemplateObject `yaml:"Outputs,omitempty"`
+	}
 
-// YamlCloudformation -
-type YamlCloudformation struct {
-	AWSTemplateFormatVersion string               `yaml:"AWSTemplateFormatVersion,omitempty"`
-	Description              string               `yaml:"Description,omitempty"`
-	Parameters               types.TemplateObject `yaml:"Parameters,omitempty"`
-	Mappings                 types.TemplateObject `yaml:"Mappings,omitempty"`
-	Conditions               types.TemplateObject `yaml:"Conditions,omitempty"`
-	Transform                types.TemplateObject `yaml:"Transform,omitempty"`
-	Resources                types.TemplateObject `yaml:"Resources"`
-	Outputs                  types.TemplateObject `yaml:"Outputs,omitempty"`
-}
+	// YamlCloudformation -
+	YamlCloudformation struct {
+		AWSTemplateFormatVersion string               `yaml:"AWSTemplateFormatVersion,omitempty"`
+		Description              string               `yaml:"Description,omitempty"`
+		Parameters               types.TemplateObject `yaml:"Parameters,omitempty"`
+		Mappings                 types.TemplateObject `yaml:"Mappings,omitempty"`
+		Conditions               types.TemplateObject `yaml:"Conditions,omitempty"`
+		Transform                types.TemplateObject `yaml:"Transform,omitempty"`
+		Resources                types.TemplateObject `yaml:"Resources"`
+		Outputs                  types.TemplateObject `yaml:"Outputs,omitempty"`
+	}
 
-// GenerateParams are required to generate a cloudformation yaml template
-type GenerateParams struct {
-	Filename           string
-	EnvFile            string
-	Env                string
-	DisableBaseOutputs bool
-	ParamMap           map[string]string
-	Plugins            []*plugins.PluginLoaded
-}
+	// GenerateParams are required to generate a cloudformation yaml template
+	GenerateParams struct {
+		Filename           string
+		EnvFile            string
+		Env                string
+		DisableBaseOutputs bool
+		ParamMap           map[string]string
+		Plugins            []*plugins.PluginLoaded
+	}
+
+)
 
 var resourceParsers map[string]types.ParserFunc
 var outputParsers map[string]types.ParserFunc
@@ -112,7 +115,7 @@ func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error
 	configPath := fmt.Sprintf(params.Filename)
 	//configPath := fmt.Sprintf("./configs/%v.yaml", filename)
 	if configData, err = ioutil.ReadFile(configPath); err != nil {
-		return
+		return out, err
 	}
 
 	//preprocess - template in the environment variables and custom params
@@ -122,7 +125,7 @@ func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error
 			"template": configPath,
 		}).Error("Error executing config template")
 		logFileError(string(configData), err)
-		return
+		return out, err
 	}
 
 	// parse the config yaml
@@ -130,23 +133,23 @@ func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error
 	var config YamlConfig
 	if err = yaml.Unmarshal(data, &config); err != nil {
 		logFileError(string(data), err)
-		return
+		return out, err
 	}
 
 	// compile the cloudformation
 	var outputs, resources, mappings types.TemplateObject
 	if resources, err = yamlTemplateCF(config.Resources, resourceParsers, true); err != nil {
-		return
+		return out, err
 	}
 
 	//Adding(Replacing) base objects for correct outputs by type
 	config.Resources = addBaseResources(resources, config.Resources)
 
 	if outputs, err = yamlTemplateCF(config.Resources, outputParsers, false); err != nil {
-		return
+		return out, err
 	}
 	if mappings, err = yamlTemplateCF(config.Resources, mappingParsers, false); err != nil {
-		return
+		return out, err
 	}
 
 	// merge mappings
@@ -180,7 +183,7 @@ func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error
 		Outputs:                  outputs,
 	}
 
-	return
+	return out, nil
 }
 
 func addBaseResources(baseResources types.TemplateObject, configResources types.ResourceMap) (combinedResource types.ResourceMap) {
@@ -208,6 +211,7 @@ func yamlTemplateCF(
 	compiled = make(types.TemplateObject)
 
 	for resourceName, resource := range resources {
+
 		if resource.Condition != nil { // if there is a condition on the source resource, warn the user
 			log.WithFields(log.Fields{
 				"resource": resourceName,
@@ -233,6 +237,7 @@ func yamlTemplateCF(
 			parser, ok := parsers[resource.Type]
 			if !ok {
 				if isResources {
+
 					log.WithFields(log.Fields{
 						"type": resource.Type,
 					}).Warn("Type not found")
@@ -253,7 +258,7 @@ func yamlTemplateCF(
 			}
 		}
 
-		// collect all output resources in one list
+		// collect all output res in one list
 		for k, v := range output {
 			compiled[k] = v
 		}
@@ -279,3 +284,5 @@ func logFileError(file string, err error) {
 		}
 	}
 }
+
+
