@@ -14,7 +14,7 @@
   {{ $default_noindex_kinds := slice "section" "taxonomy" "taxonomyTerm" }}
   {{ $noindex_kinds := .Site.Params.noindex_kinds | default $default_noindex_kinds }}
   {{ $is_noindex_true := and (isset .Params "noindex") .Params.noindex }}
-  
+
   {{ partial "meta/name-author" . }}
   {{ template "_internal/opengraph.html" . }}
   {{ partial "meta/ogimage" . }}
@@ -32,37 +32,34 @@
   {{ partial "favicon" . }}
 
   <link href="{{ "/css/font.css" | relURL }}" rel="stylesheet" type="text/css">
-  <link href="{{ "/css/kube.min.css" | relURL }}" rel="stylesheet" type="text/css">
-  <link href="{{ "/css/kube.legenda.css" | relURL }}" rel="stylesheet" type="text/css">
+  <!-- <link href="{{ "/css/kube.legenda.css" | relURL }}" rel="stylesheet" type="text/css"> -->
+  <!-- <link href="{{ "/css/master.css" | relURL }}" rel="stylesheet" type="text/css"> -->
+
   <link href="{{ "/css/highlight.css" | relURL }}" rel="stylesheet" type="text/css">
-  <link href="{{ "/css/master.css" | relURL }}" rel="stylesheet" type="text/css">
-  <link href="{{ "/css/kube.demo.css" | relURL }}" rel="stylesheet" type="text/css">
+  <link href="{{ "/css/kube.min.css" | relURL }}" rel="stylesheet" type="text/css">
+
+
+  <link href="https://fonts.googleapis.com/css?family=Passion+One|Roboto" rel="stylesheet">
+
 
   <link rel="stylesheet"
       href="{{ "/css/highlight-styles/tomorrow-night-eighties.css" | relURL }}">
   <script src="{{ "/js/highlight.pack.js" | relURL }}"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-<!-- Your own theme here -->
- <link href="{{ "/css/custom.css" | relURL }}" rel="stylesheet" type="text/css">
-<!-- js vendor -->
+
+  <!-- js vendor -->
   <script src="{{ "/js/jquery-2.1.4.min.js" | relURL }}" type="text/javascript">
   </script>
-
-  <script type="text/javascript" src="{{ "/js/tocbot.min.js" | relURL }}"></script>
 </head>
 
 
-<body class="page-kube">
+<body class="page-kube dark">
   <header>{{ block "header" . }}{{ end }}</header>
   <main>{{ block "main" . }}{{ end }}</main>
   <footer>{{ block "footer" . }}{{ end }}</footer>
 
 
-  <script src="{{ "/js/kube.js" | relURL }}" type="text/javascript">
-  </script>
-  <script src="{{ "/js/kube.legenda.js" | relURL }}" type="text/javascript">
-  </script>
-  <script src="{{ "/js/master.js" | relURL }}" type="text/javascript">
+  <script src="{{ "/js/kube.min.js" | relURL }}" type="text/javascript">
   </script>
 </body>
 

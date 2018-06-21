@@ -1,0 +1,74 @@
+body.dark {
+	background-color: #222 !important;
+}
+
+.dark {
+  h1, h2, h3, h4, h5, h6,
+   abbr, acronym, address, big, cite,
+  del, dfn, em, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed,
+  figure, figcaption, footer, header, hgroup,
+  menu, nav, output, ruby, section, summary,
+  time, mark, audio, video,
+  div p, footer div, .made-with {
+   color: #b4b4b4;
+  }
+
+  a {
+		color: #bf882f;
+  }
+  #hero p {
+    color: #ccc;
+  }
+
+  #top-brand a {
+    color: #FFF;
+  }
+  #top {
+    border-bottom: 1px solid #2d2d2d;
+  }
+  #top #top-nav-main a {
+    color: #f0f0f0
+  }
+
+	blockquote {
+		border-color: #2d2d2d;
+	}
+
+  code {
+    background: #2d2d2d;
+    color: #f0f0f0;
+  }
+
+  .docs-toc {
+    border: 1px solid #2d2d2d;
+
+  }
+
+  #footer {
+    border-top: 1px solid #2d2d2d;
+
+  }
+}
+
+pre {
+  border-radius: 4px;
+  background: #2d2d2d !important;
+}
+.docs-toc {
+	border: 1px solid #f0f0f0;
+	padding: 1em 0.3em;
+	a {
+		text-decoration: none;
+	}
+}
+
+
+.made-with {
+  text-decoration: none; color: rgba(0, 0, 0, 0.5)
+}

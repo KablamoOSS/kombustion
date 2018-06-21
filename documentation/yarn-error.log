@@ -1,0 +1,41 @@
+Arguments: 
+  /Users/owenkelly/.nvm/versions/node/v9.8.0/bin/node /usr/local/Cellar/yarn/1.6.0/libexec/bin/yarn.js add gulp gulp-sass gulp-concat gulp-ulglify gulp-rename gulp-clean-css
+
+PATH: 
+  /usr/local/share/npm/bin:/Users/owenkelly/.nvm/versions/node/v9.8.0/bin:/Users/owenkelly/.cargo/bin:/Users/owenkelly/.cargo/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/MacGPG2/bin:/usr/local/share/npm/bin:/Users/owenkelly/.antigen/bundles/robbyrussell/oh-my-zsh/lib:/Users/owenkelly/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/git:/Users/owenkelly/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/heroku:/Users/owenkelly/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/pip:/Users/owenkelly/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/lein:/Users/owenkelly/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/command-not-found:/Users/owenkelly/.antigen/bundles/zsh-users/zsh-syntax-highlighting:/Users/owenkelly/Code/go/bin:/bin:/Users/owenkelly/Code/go/bin
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  9.8.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/gulp-ulglify: Not found
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.6.0/libexec/lib/cli.js:65327:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.6.0/libexec/lib/cli.js:133155:22)
+      at Request.emit (events.js:180:13)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.6.0/libexec/lib/cli.js:134138:10)
+      at Request.emit (events.js:180:13)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.6.0/libexec/lib/cli.js:134058:12)
+      at Object.onceWrapper (events.js:272:13)
+      at IncomingMessage.emit (events.js:185:15)
+      at endReadableNT (_stream_readable.js:1101:12)
+      at process._tickCallback (internal/process/next_tick.js:114:19)
+
+npm manifest: 
+  {
+    "name": "documentation",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
