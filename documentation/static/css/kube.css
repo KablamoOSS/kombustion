@@ -2184,9 +2184,10 @@ body.dark {
 
 .dark #top {
   border-bottom: 1px solid #2d2d2d; }
-
-.dark #top #top-nav-main a {
-  color: #f0f0f0; }
+  .dark #top #top-nav-main {
+    border-left: 1px solid #2d2d2d; }
+    .dark #top #top-nav-main a {
+      color: #f0f0f0; }
 
 .dark blockquote {
   border-color: #2d2d2d; }
@@ -3640,9 +3641,10 @@ body.dark {
 
 .dark #top {
   border-bottom: 1px solid #2d2d2d; }
-
-.dark #top #top-nav-main a {
-  color: #f0f0f0; }
+  .dark #top #top-nav-main {
+    border-left: 1px solid #2d2d2d; }
+    .dark #top #top-nav-main a {
+      color: #f0f0f0; }
 
 .dark blockquote {
   border-color: #2d2d2d; }

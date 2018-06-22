@@ -60,7 +60,7 @@ The other key configuration value is `Prefix`. This should be set to a pattern o
 
 The prefix is then added to the start of any resources you define, seperated with `::`. So if we had a `Function` resource, the final resource export will be `Kablamo::Boilerplate::Function`
 
-> There is no enforcement on what a `Prefix` can be, excepting those in Cloudformation: `AWS::*` and `Custom::*`. If a user has two plugins that have clashing prefixes, they can use the `Alias` paramter in `kombustion.yaml` to add another name in front, for example `MyAlias::Kablamo::Boilerplate::Function`.
+> There is no enforcement on what a `Prefix` can be, excepting those in Cloudformation: `AWS::*` and `Custom::*`. If a user has two plugins that have clashing prefixes, they can use the `Alias` paramter in `kombustion.yaml` to add another name in front for example `MyAlias::Kablamo::Boilerplate::Function`
 
 ```go
 package main
@@ -142,7 +142,7 @@ var Outputs = map[string]func(
 
 ## Writing a Parser function
 
-A Parser function takes in YAML as a string, and returns one or more of its type (either `Resource`, `Mapping` or `Output`).
+> A Parser function takes in YAML as a string, and returns one or more of its type (either `Resource`, `Mapping` or `Output`).
 
 We generally store then in a seperate folder for each.
 
