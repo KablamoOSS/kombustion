@@ -1,16 +1,14 @@
 +++
 title = "kombustion.yaml"
-description = "The manifest file contains information about a projects plugins, and parameters."
+description = ""
 date = "2018-06-14T00:00:00+10:00"
 weight = 20
 draft = false
-bref = "The manifest file contains information about a projects plugins, and parameters."
+bref = ""
 toc = true
 layout = "docs"
 +++
 
-
-## Example
 
 
 ```yaml
@@ -29,8 +27,3 @@ environments:
       ENVIRONMENT: production
 hideDefaultExports: false
 ```
-
-## How to use
-
-
-## Example Project

@@ -3612,6 +3612,14 @@ tr.border-none td {
     margin-top: 24px;
     top: 0; } }
 
+#hero h1 {
+  text-decoration: none;
+  font-family: "Passion One", sans-serif;
+  text-transform: uppercase;
+  color: black;
+  font-style: italic;
+  font-weight: 900; }
+
 body.dark {
   background-color: #222 !important; }
 

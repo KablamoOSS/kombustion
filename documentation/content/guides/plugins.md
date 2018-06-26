@@ -89,11 +89,11 @@ func Register() []byte {
     // Name should match the name of your repository
     // so github.com/KablamoOSS/kombustion-plugin-boilerplate
     // becomes kombustion-plugin-boilerplate
-    Name:               "kombustion-plugin-boilerplate",
+    Name: "kombustion-plugin-boilerplate",
     // Version is set at compile time, to the tag
-    Version:            version,
+    Version: version,
     // The prefix for all resources this plugin exports
-    Prefix:             "Kablamo::Boilerplate",
+    Prefix: "Kablamo::Boilerplate",
     Help: types.Help{
       Description: "An Example Plugin",
       TypeMappings: []types.TypeMapping{
@@ -321,7 +321,7 @@ these match it sould just work.
 
 For release, you need to ensure you have a build for every operating system and architecture `kombustion` supports.
 
-We use a tool called `xgo` which uses Docker to compile for all possible versions, using the correct C compiler.
+We use a tool called [`xgo`](github.com/karalabe/xgo) which uses Docker to compile for all possible versions, using the correct C compiler.
 
 The following is a working `.travis.yml` configuration that will compile and attach a release to your Github repository.
 
