@@ -1,36 +1,20 @@
 +++
-title = "kombustion.yaml"
-description = "The manifest file contains information about a projects plugins, and parameters."
+title = "Project"
+description = "A project contains your template files, and kombustion files."
 date = "2018-06-14T00:00:00+10:00"
 weight = 20
 draft = false
-bref = "The manifest file contains information about a projects plugins, and parameters."
+bref = "A project is a collection of templates, along with the plugins required to use them."
 toc = true
 layout = "docs"
 +++
 
 
-## Example
+The `kombustion.yaml` manifest file fits best alongside the concept of a project. Your project may
+have a few Cloudformation template files in them. And those template files use resources provided
+by Kombustion plugins. Therefore, without the plugins the template files cannot be used.
 
-
-```yaml
-name: Test
-region: ap-southeast-2
-plugins:
-  github.com/KablamoOSS/kombustion-plugin-serverless@0.1.0:
-    name: github.com/KablamoOSS/kombustion-plugin-serverless
-    version: 0.1.0
-    alias: ""
-environments:
-  production:
-    accountIDs:
-    - "13521354"
-    parameters:
-      ENVIRONMENT: production
-hideDefaultExports: false
-```
-
-## How to use
-
-
-## Example Project
+To ensure you can always modify your Cloudformation stacks, we reccomend committing `kombustion.yaml`,
+`kombustion.lock` and the `.kombustion` folder. The latter stores downloaded plugins. With those pieces
+you will always be able to `kombustion upsert` and `kombustion delete`. At any time you can generate
+the final Cloudformation template with `kombustion generate`.
