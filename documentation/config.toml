@@ -1,7 +1,7 @@
 baseURL = "/"
 languageCode = "en-us"
 title = "Kombustion"
-# theme = "kube"
+copyright = "Kablamo 2018"
 Paginate = 4
 
 [Params]
