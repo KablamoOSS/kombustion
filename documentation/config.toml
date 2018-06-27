@@ -1,7 +1,7 @@
 baseURL = "/"
 languageCode = "en-us"
 title = "Kombustion"
-copyright = "Kablamo 2018"
+copyright = "Kablamo 2018. MIT License."
 Paginate = 4
 
 [Params]
