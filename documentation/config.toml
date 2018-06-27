@@ -5,6 +5,7 @@ copyright = "Kablamo 2018. MIT License."
 Paginate = 4
 
 [Params]
+  Release = "0.1.6"
   RSSLink = "/index.xml"
   author = "Kablamo"
   github = "KablamoOSS" # add your github profile name

@@ -14,7 +14,7 @@ layout = "docs"
 Kombustion is built for Linux, FreeBSD and MacOS.
 
 Get the latest release from the
-[release page](https://github.com/KablamoOSS/kombustion/releases).
+[downloads page](/docs/downloads).
 
 After downloading you will need to move the `kombustion` binary into your `$PATH`, and make it executable.
 
