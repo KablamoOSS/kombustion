@@ -9,16 +9,21 @@ toc = true
 layout = "docs"
 +++
 
-### Install
+## Install
 
 After downloading you will need to move the `kombustion` binary into your `$PATH`, and make it executable.
 
 ```bash
 $ sudo chmod +x kombustion
-$ sudo cp kombustion /usr/local/bin/kombustion
+$ sudo mv kombustion /usr/local/bin/kombustion
 ```
 
 You can run `kombustion -v` to confirm you have the correct version installed.
+
+```bash
+$ kombustion -v
+> kombustion version 0.1.6
+```
 
 ### MacOS
 

@@ -20,7 +20,7 @@ After downloading you will need to move the `kombustion` binary into your `$PATH
 
 ```bash
 $ sudo chmod +x kombustion
-$ sudo cp kombustion /usr/local/bin/kombustion
+$ sudo mv kombustion /usr/local/bin/kombustion
 ```
 
 You can run `kombustion -v` to confirm you have the correct version installed.
