@@ -20,7 +20,7 @@ which is usually the root directory of your project. If no `kombustion.yaml` can
 
 ## Global Options
 
-### `verbose`
+### `--verbose`
 
 _Output with high verbosity._
 
@@ -30,23 +30,7 @@ $ kombustion --verbose
 
 ---
 
-### `param`, `p`
-
-_Specify Cloudformation parameters._
-
-Parameters are also sourced from `kombustion.yaml`, but paramteres passed via the cli have precedence.
-So anything you pass via this option, will be used instead of whats in `kombustion.yaml`
-
-```bash
-$ kombustion --param BucketName=test
-
-# Or
-$ kombustion -p BucketName=test
-```
-
----
-
-### `profile`
+### `--profile`
 
 _Use a profile from ~/.aws/credentials_
 
@@ -56,7 +40,7 @@ $ kombustion --profile MyProfile
 
 ---
 
-### `load-plugin`
+### `--load-plugin`
 
 _Load arbitrary plugin._
 
@@ -69,7 +53,7 @@ $ kombustion --load-plugin path/to/plugin.so
 
 ---
 
-### `help`, `h`
+### `--help`, `-h`
 
 _Prints help._
 
@@ -79,7 +63,7 @@ $ kombustion --help, -h
 
 ---
 
-### `version`, `v`
+### `--version`, `-v`
 
 _Print the version._
 
@@ -142,6 +126,10 @@ $ kombustion install
 
 The following commands manage Cloudformation Stacks.
 
+With most of the following commands the Stack Name can either be supplied directly, or is derived
+from `Title` in `kombustion.yaml`, the file name of the stack, and the environment in the
+following pattern `{Title}-{FileName}-{Environment}`.
+
 ---
 
 ### `generate`
@@ -167,17 +155,73 @@ $ kombustion generate path/to/cloudformation/stack.yaml
 
 _Update or insert a cloudformation template._
 
-- Takes one positional argument, that is a relative path to the template file.
-
 ```bash
-# Arguments
-$ kombustion upsert [template file]
-
-# Usage
-$ kombustion upsert path/to/cloudformation/stack.yaml
+$ kombustion upsert [options] path/to/cloudformation/stack.yaml
 ```
 
-__Errors__
+__Arguments__
+
+- Takes one positional argument, that is a relative path to the template file.
+
+__Options__
+
+#### `--region`, `-r`
+
+_Set the region to deploy into._
+
+#### `--stack-name`
+
+_(Optional) Set the stack name._
+
+If not provided a stack name is derived from `Title` in `kombustion.yaml`, the file name of the
+stack, and the environment in the following pattern `{Title}-{FileName}-{Environment}`.
+
+If you do not provide `--stack-name` you must provide `--environment`.
+
+#### `--environment`, `-e`
+
+_(Optional) The environment to deploy to._
+
+Environment config to use as defined in ./kombustion.yaml.
+
+If `AccountIDs` are listed under the environment, then you will only be able to deploy into that
+account.
+
+If `Parameters` are listed under the environment, they will be added to the stack.
+
+_Required if `--stack-name` is not provided._
+
+#### `--param`, `-p`
+
+_(Optional) Specify Cloudformation parameters._
+
+Parameters are also sourced from `kombustion.yaml`, but paramteres passed via the cli have precedence.
+Anything you pass via this option, will be used instead of whats in `kombustion.yaml`.
+
+```bash
+$ kombustion upsert \
+  --param ParamKeyOne=ParamValueOne, ParamKeyTwo=ParamValueTwo \
+  path/to/cloudformation/stack.yaml
+```
+
+#### `--no-base-outputs`, `-b`
+
+_(Optional) Disable generation of outputs for Base AWS types_
+
+#### `--iam`, `-i`
+
+_(Optional) Shorthand for `--capability CAPABILITY_IAM`_
+
+This gives the capability to perform upserts of IAM resources.
+
+Cloudformation requires you to [acknowledge](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities) when you are modifying a stack with IAM resources.
+
+#### `--capability`
+
+_(Optional) Set capabilities for the upsert, for example `CAPABILITY_IAM`_
+
+
+#### Errors
 
 If the stack is not created successfully for any reason, `kombustion` returns an [exit code](#exit-codes) of `1` (an error).
 
@@ -191,17 +235,44 @@ If there are no updates to perform, `kombustion` will return an [exit code](#exi
 
 _Delete a cloudformation stack._
 
-- Takes one positional argument, that is a relative path to the template file.
-
 ```bash
-# Arguments
-$ kombustion delete [template file]
-
-# Usage
-$ kombustion delete path/to/cloudformation/stack.yaml
+$ kombustion delete [options] path/to/cloudformation/stack.yaml
 ```
 
-__Errors__
+__Arguments__
+
+- Takes one positional argument, that is a relative path to the template file.
+
+__Options__
+
+#### `--region`, `-r`
+
+_Set the region to deploy into._
+
+#### `--stack-name`
+
+_(Optional) Set the stack name._
+
+If not provided a stack name is derived from `Title` in `kombustion.yaml`, the file name of the
+stack, and the environment in the following pattern `{Title}-{FileName}-{Environment}`.
+
+If you do not provide `--stack-name` you must provide `--environment`.
+
+#### `--environment`, `-e`
+
+_(Optional) The environment to deploy to._
+
+Environment config to use as defined in ./kombustion.yaml.
+
+If `AccountIDs` are listed under the environment, then you will only be able to deploy into that
+account.
+
+If `Parameters` are listed under the environment, they will be added to the stack.
+
+_Required if `--stack-name` is not provided._
+
+
+#### Errors
 
 If the stack is not deleted for any reason, `kombustion` returns an [exit code](#exit-codes) of `1` (an error).
 
@@ -211,15 +282,42 @@ If the stack is not deleted for any reason, `kombustion` returns an [exit code](
 
 _Print all the events for a stack_
 
-- Takes one positional argument, that is a relative path to the template file.
 
 ```bash
-# Arguments
-$ kombustion events [template file]
-
-# Usage
-$ kombustion events path/to/cloudformation/stack.yaml
+$ kombustion events [options] path/to/cloudformation/stack.yaml
 ```
+
+__Arguments__
+
+- Takes one positional argument, that is a relative path to the template file.
+
+__Options__
+
+#### `--region`, `-r`
+
+_Set the region to deploy into._
+
+#### `--stack-name`
+
+_(Optional) Set the stack name._
+
+If not provided a stack name is derived from `Title` in `kombustion.yaml`, the file name of the
+stack, and the environment in the following pattern `{Title}-{FileName}-{Environment}`.
+
+If you do not provide `--stack-name` you must provide `--environment`.
+
+#### `--environment`, `-e`
+
+_(Optional) The environment to deploy to._
+
+Environment config to use as defined in ./kombustion.yaml.
+
+If `AccountIDs` are listed under the environment, then you will only be able to deploy into that
+account.
+
+If `Parameters` are listed under the environment, they will be added to the stack.
+
+_Required if `--stack-name` is not provided._
 
 ---
 
@@ -254,7 +352,7 @@ __Legend:__
 | `UPDATE_COMPLETE`                              | 0                | 0                | __1__            |
 | `UPDATE_COMPLETE_CLEANUP_IN_PROGRESS`          | ~                | ~                | ~                |
 | `UPDATE_IN_PROGRESS`                           | ~                | ~                | ~                |
-| `UPDATE_ROLLBACK_COMPLETE`                     | 0                | __1__            | __1__            |
+| `UPDATE_ROLLBACK_COMPLETE`                     | __1__            | __1__            | __1__            |
 | `UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS` | ~                | ~                | ~                |
 | `UPDATE_ROLLBACK_FAILED`                       | __1__            | __1__            | __1__            |
 | `UPDATE_ROLLBACK_IN_PROGRESS`                  | ~                | ~                | ~                |
