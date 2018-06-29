@@ -19,10 +19,9 @@ func TestLoadConfig(t *testing.T) {
 		{
 			input: func() []byte {
 				blob, err := msgpack.Marshal(&pluginTypes.Config{
-					Name:               "example-plugin",
-					Version:            "0.1.0",
-					Prefix:             "Test",
-					RequiresAWSSession: false,
+					Name:    "example-plugin",
+					Version: "0.1.0",
+					Prefix:  "Test",
 				})
 
 				if err != nil {
@@ -32,10 +31,9 @@ func TestLoadConfig(t *testing.T) {
 				return blob
 			}(),
 			output: pluginTypes.Config{
-				Name:               "example-plugin",
-				Version:            "0.1.0",
-				Prefix:             "Test",
-				RequiresAWSSession: false,
+				Name:    "example-plugin",
+				Version: "0.1.0",
+				Prefix:  "Test",
 			},
 			throws: false,
 		},

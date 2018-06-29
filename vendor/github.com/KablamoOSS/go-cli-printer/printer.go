@@ -14,6 +14,9 @@ import (
 var instantiated *spinner.Spinner
 var once sync.Once
 
+// Set to true when testing, to never call os.Exit
+var testing bool
+
 var verbose bool
 var color string
 var spinnerStyle int
@@ -28,6 +31,7 @@ func init() {
 	color = "yellow"
 	spinnerStyle = 14
 	writer = os.Stdout
+	testing = false
 }
 
 // Init the spinner with a verbose flag, and color.
@@ -39,6 +43,11 @@ func Init(initVerbose bool, initColor string, initSpinner int, writer io.Writer)
 	color = initColor
 	spinnerStyle = initSpinner
 	getPrinter()
+}
+
+// Test to set testing to true, to prevent exiting on Fatal errors
+func Test(){
+	testing = true
 }
 
 // Create a singleton to the Spinner
@@ -182,7 +191,9 @@ func Fatal(err error, resolution string, link string) {
 
 	spinner.Stop()
 	fmt.Println(errMessage)
-	os.Exit(1)
+	if(testing == false){
+		os.Exit(1)
+	}
 }
 
 // Stop the spinner

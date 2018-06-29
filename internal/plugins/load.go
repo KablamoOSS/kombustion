@@ -107,7 +107,7 @@ func loadPlugin(
 		)
 	}
 
-	if configIsValid(config, pluginName, pluginVersion, false) == false {
+	if configIsValid(config, pluginName, pluginVersion) == false {
 		printer.Fatal(
 			fmt.Errorf("Plugin `%s` does not have a valid config", pluginName),
 			"Contact the plugin author.",
@@ -165,7 +165,7 @@ func pluginExists(filePath string) bool {
 	return false
 }
 
-func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion string, requiresAWSSession bool) (ok bool) {
+func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion string) (ok bool) {
 	foundIssue := false
 	// TODO: improve these error messages, and provide links to the docs for plugin devs
 	if config.Name == "" {
@@ -177,11 +177,6 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 
 		foundIssue = true
 	}
-	// } else if config.Name != pluginName {
-	// 	// warn
-	// 	foundIssue = true
-	// 	log.Fatal(fmt.Sprintf("%s name did not match the name in kombustion.yaml, this plugin cannot be loaded"))
-	// }
 
 	if config.Prefix == "" {
 		printer.Fatal(
@@ -192,16 +187,33 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 		foundIssue = true
 	}
 
-	if config.RequiresAWSSession != requiresAWSSession {
-		// Warn about the need to add the config val to the manifest file
-		// foundIssue = true
+	if config.Prefix == "AWS" {
 		printer.Fatal(
-			fmt.Errorf("Plugin `%s` requires an AWS session, has not been allowed one", pluginName),
-			fmt.Sprintf("Add `role: RoleName` to `kombustion.yaml` under `%s` to allow this plugin to assume that role.\n Reason for access: %s", pluginName, config.RequiresAWSSessionReason),
+			fmt.Errorf("Plugin `%s` tried to use 'AWS' as prefix, this plugin cannot be loaded", pluginName),
+			"'AWS' is a restricted prefix, and cannt be used by a plugin. This is an issue with the plugin.",
 			"",
 		)
-
+		foundIssue = true
 	}
+
+	if config.Prefix == "Custom" {
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` tried to use 'Custom' as prefix, this plugin cannot be loaded", pluginName),
+			"'Custom' is a restricted prefix, and cannt be used by a plugin. This is an issue with the plugin.",
+			"",
+		)
+		foundIssue = true
+	}
+
+	if config.Prefix == "Kombustion" {
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` tried to use 'Kombustion' as prefix, this plugin cannot be loaded", pluginName),
+			"'Kombustion' is a restricted prefix, and cannt be used by a plugin. This is an issue with the plugin.",
+			"",
+		)
+		foundIssue = true
+	}
+
 	if foundIssue == false {
 		ok = true
 	}
