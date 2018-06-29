@@ -179,11 +179,11 @@ $ kombustion upsert path/to/cloudformation/stack.yaml
 
 __Errors__
 
-If the stack is not created successfully for any reason, `kombustion` returns an exit code of `1` (an error).
+If the stack is not created successfully for any reason, `kombustion` returns an [exit code](#exit-codes) of `1` (an error).
 
 __No updates to perform__
 
-If there are no updates to perform, `kombustion` will return an exit code of `0` (no error).
+If there are no updates to perform, `kombustion` will return an [exit code](#exit-codes) of `0` (no error).
 
 ---
 
@@ -203,7 +203,7 @@ $ kombustion delete path/to/cloudformation/stack.yaml
 
 __Errors__
 
-If the stack is not deleted for any reason, `kombustion` returns an exit code of `1` (an error).
+If the stack is not deleted for any reason, `kombustion` returns an [exit code](#exit-codes) of `1` (an error).
 
 ---
 
@@ -220,3 +220,41 @@ $ kombustion events [template file]
 # Usage
 $ kombustion events path/to/cloudformation/stack.yaml
 ```
+
+---
+
+## Exit Codes
+
+The matrix below describes the exit codes for each Cloudformation status.
+
+In general when calling `upsert` if the changes requested (be they Create Stack, or Update Stack) are
+not cleanly applied, an error is returned.
+
+And when calling `delete` if the stack is not fully deleted, and error is returned.
+
+__Legend:__
+
+- `0` - no error
+- `1` - error
+- `~` - Transitional status, `kombustion` will not exit yet
+
+
+| Status                                         | **Create Stack** | **Update Stack** | **Delete Stack** |
+| ---------------------------------------------- | ---------------- | ---------------- | ---------------- |
+| `CREATE_COMPLETE`                              | 0                | 0                | __1__            |
+| `CREATE_IN_PROGRESS`                           | ~                | ~                | ~                |
+| `CREATE_FAILED`                                | __1__            | __1__            | __1__            |
+| `DELETE_COMPLETE`                              | __1__            | __1__            | 0                |
+| `DELETE_FAILED`                                | __1__            | __1__            | __1__            |
+| `DELETE_IN_PROGRESS`                           | ~                | ~                | ~                |
+| `REVIEW_IN_PROGRESS`                           | __1__            | __1__            | __1__            |
+| `ROLLBACK_COMPLETE`                            | __1__            | __1__            | __1__            |
+| `ROLLBACK_FAILED`                              | __1__            | __1__            | __1__            |
+| `ROLLBACK_IN_PROGRESS`                         | ~                | ~                | ~                |
+| `UPDATE_COMPLETE`                              | 0                | 0                | __1__            |
+| `UPDATE_COMPLETE_CLEANUP_IN_PROGRESS`          | ~                | ~                | ~                |
+| `UPDATE_IN_PROGRESS`                           | ~                | ~                | ~                |
+| `UPDATE_ROLLBACK_COMPLETE`                     | 0                | __1__            | __1__            |
+| `UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS` | ~                | ~                | ~                |
+| `UPDATE_ROLLBACK_FAILED`                       | __1__            | __1__            | __1__            |
+| `UPDATE_ROLLBACK_IN_PROGRESS`                  | ~                | ~                | ~                |
