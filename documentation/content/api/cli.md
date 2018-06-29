@@ -116,7 +116,7 @@ $ kombustion init
 
 _Add a [plugin](/concepts/plugin) to your project._
 
-This command takes one positional argument, that must be a Github repository url, with a release.
+- Takes one positional argument, that must be a Github repository url, with a release.
 
 ```bash
 # Arguments
@@ -151,7 +151,7 @@ _Generate a Cloudformation template, from a template file_
 Generate allows you to preview the final template, after plugins. It's the same output that is
 generated when calling `upsert`.
 
-Takes one positional argument, that is a relative path to the template file.
+- Takes one positional argument, that is a relative path to the template file.
 
 ```bash
 # Arguments
@@ -167,8 +167,13 @@ $ kombustion generate path/to/cloudformation/stack.yaml
 
 _Update or insert a cloudformation template._
 
+- Takes one positional argument, that is a relative path to the template file.
 
 ```bash
+# Arguments
+$ kombustion upsert [template file]
+
+# Usage
 $ kombustion upsert path/to/cloudformation/stack.yaml
 ```
 
@@ -184,7 +189,13 @@ If there are no updates to perform, `kombustion` will return an exit code of `0`
 
 _Delete a cloudformation stack._
 
+- Takes one positional argument, that is a relative path to the template file.
+
 ```bash
+# Arguments
+$ kombustion delete [template file]
+
+# Usage
 $ kombustion delete path/to/cloudformation/stack.yaml
 ```
 
@@ -198,6 +209,12 @@ If the stack is not deleted for any reason, `kombustion` returns an exit code of
 
 _Print all the events for a stack_
 
+- Takes one positional argument, that is a relative path to the template file.
+
 ```bash
+# Arguments
+$ kombustion events [template file]
+
+# Usage
 $ kombustion events path/to/cloudformation/stack.yaml
 ```
