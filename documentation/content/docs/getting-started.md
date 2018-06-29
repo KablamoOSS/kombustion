@@ -30,7 +30,7 @@ You can run `kombustion -v` to confirm you have the correct version installed.
 In the root directory of your repository containing your Cloudformation templates run the following to create the `kombustion.yaml` file:
 
 ```bash
-// Create a new kombustion.yaml file in the current directory
+# Create a new kombustion.yaml file in the current directory
 $ kombustion init
 ```
 
@@ -43,7 +43,7 @@ To use a plugin you first need to add it to your project
 Kombustion is fully backwards compatible with native CloudFormation templates. You can use any of your existing templates to get started, otherwise here's one to help you get started:
 
 ```yaml
-// example.yaml
+# example.yaml
 AWSTemplateFormatVersion: 2010-09-09
 Description: "A simple SNS topic"
 Resources:
@@ -58,7 +58,7 @@ Resources:
 Kombustion will use the AWS CLI provided credentials location. If you already have the AWS CLI installed and have run an `aws configure`, you're good to go. If not, we can craft this file ourselves without the need to install the AWS CLI tooling. The default file location is ~/.aws/credentials and looks like the following:
 
 ```
-// ~/.aws/credentials
+# ~/.aws/credentials
 [default]
 aws_access_key_id = AKIAXXXXXXXXXXXXXX
 aws_secret_access_key = xxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -69,5 +69,5 @@ aws_secret_access_key = xxxxxxxxxxxxxxxxxxxxxxxxxx
 The following will upsert the stack you have created when you specify the filename of the stack:
 
 ```bash
-kombustion cf upsert example.yaml --stackName example-stack
+kombustion upsert example.yaml
 ```
