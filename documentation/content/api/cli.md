@@ -30,7 +30,7 @@ $ kombustion --verbose
 
 ---
 
-### `param`
+### `param`, `p`
 
 _Specify Cloudformation parameters._
 
@@ -69,7 +69,7 @@ $ kombustion --load-plugin path/to/plugin.so
 
 ---
 
-### `help`
+### `help`, `h`
 
 _Prints help._
 
@@ -177,10 +177,12 @@ $ kombustion upsert [template file]
 $ kombustion upsert path/to/cloudformation/stack.yaml
 ```
 
-#### Errors
+__Errors__
+
 If the stack is not created successfully for any reason, `kombustion` returns an exit code of `1` (an error).
 
-#### No updates to perform
+__No updates to perform__
+
 If there are no updates to perform, `kombustion` will return an exit code of `0` (no error).
 
 ---
@@ -199,7 +201,7 @@ $ kombustion delete [template file]
 $ kombustion delete path/to/cloudformation/stack.yaml
 ```
 
-#### Errors
+__Errors__
 
 If the stack is not deleted for any reason, `kombustion` returns an exit code of `1` (an error).
 
