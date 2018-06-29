@@ -39,7 +39,7 @@ func Test_GenerateYamlStack(t *testing.T) {
 	tests[0].errMsg = "open : no such file or directory"
 	tests[0].genParams = GenerateParams{
 		Plugins:            []*plugins.PluginLoaded{},
-		DisableBaseOutputs: true,
+		GenerateDefaultOutputs: true,
 		Filename:           "",
 	}
 
@@ -53,7 +53,7 @@ func Test_GenerateYamlStack(t *testing.T) {
 	tests[1].errMsg = ""
 	tests[1].genParams = GenerateParams{
 		Plugins:            []*plugins.PluginLoaded{},
-		DisableBaseOutputs: true,
+		GenerateDefaultOutputs: false,
 		Filename:           tests[1].file.Name(),
 	}
 
@@ -63,7 +63,7 @@ func Test_GenerateYamlStack(t *testing.T) {
 	tests[2].errMsg = "yaml: unmarshal errors:\n  line 1: cannot unmarshal !!str `INVALID` into cloudformation.YamlConfig"
 	tests[2].genParams = GenerateParams{
 		Plugins:            []*plugins.PluginLoaded{},
-		DisableBaseOutputs: true,
+		GenerateDefaultOutputs: false,
 		Filename:           tests[2].file.Name(),
 	}
 
@@ -80,7 +80,7 @@ func Test_GenerateYamlStack(t *testing.T) {
 	tests[3].errMsg = ""
 	tests[3].genParams = GenerateParams{
 		Plugins:            []*plugins.PluginLoaded{},
-		DisableBaseOutputs: true,
+		GenerateDefaultOutputs: false,
 		Filename:           tests[3].file.Name(),
 		ParamMap:           map[string]string{},
 	}
@@ -92,7 +92,7 @@ func Test_GenerateYamlStack(t *testing.T) {
 	tests[4].errMsg = "template: cfn:2: function \"INVALID\" not defined"
 	tests[4].genParams = GenerateParams{
 		Plugins:            []*plugins.PluginLoaded{},
-		DisableBaseOutputs: true,
+		GenerateDefaultOutputs: false,
 		Filename:           tests[4].file.Name(),
 		ParamMap:           map[string]string{"p1": "test"},
 	}
@@ -110,7 +110,7 @@ func Test_GenerateYamlStack(t *testing.T) {
 	tests[5].errMsg = ""
 	tests[5].genParams = GenerateParams{
 		Plugins:            []*plugins.PluginLoaded{},
-		DisableBaseOutputs: true,
+		GenerateDefaultOutputs: false,
 		Filename:           tests[5].file.Name(),
 		ParamMap:           map[string]string{"p1": "test"},
 	}
@@ -125,7 +125,7 @@ func Test_GenerateYamlStack(t *testing.T) {
 	tests[6].errMsg = "Missing required field 'AssumeRolePolicyDocument'"
 	tests[6].genParams = GenerateParams{
 		Plugins:            []*plugins.PluginLoaded{},
-		DisableBaseOutputs: true,
+		GenerateDefaultOutputs: false,
 		Filename:           tests[6].file.Name(),
 	}
 
@@ -157,7 +157,7 @@ func Test_GenerateYamlStack(t *testing.T) {
 	tests[7].errMsg = ""
 	tests[7].genParams = GenerateParams{
 		Plugins:            []*plugins.PluginLoaded{},
-		DisableBaseOutputs: true,
+		GenerateDefaultOutputs: true,
 		Filename:           tests[7].file.Name(),
 	}
 
@@ -184,7 +184,7 @@ func Test_GenerateYamlStack(t *testing.T) {
 	tests[8].errMsg = ""
 	tests[8].genParams = GenerateParams{
 		Plugins:            []*plugins.PluginLoaded{},
-		DisableBaseOutputs: true,
+		GenerateDefaultOutputs: false,
 		Filename:           tests[8].file.Name(),
 	}
 
@@ -213,7 +213,7 @@ func Test_GenerateYamlStack(t *testing.T) {
 	tests[9].errMsg = ""
 	tests[9].genParams = GenerateParams{
 		Plugins:            []*plugins.PluginLoaded{},
-		DisableBaseOutputs: true,
+		GenerateDefaultOutputs: false,
 		Filename:           tests[9].file.Name(),
 	}
 

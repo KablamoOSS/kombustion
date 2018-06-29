@@ -204,7 +204,7 @@ $ kombustion upsert \
   path/to/cloudformation/stack.yaml
 ```
 
-#### `--no-base-outputs`, `-b`
+#### `--generate-default-outputs`, `-b`
 
 _(Optional) Disable generation of outputs for Base AWS types_
 

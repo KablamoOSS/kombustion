@@ -21,7 +21,7 @@ type Manifest struct {
 
 	// A flag to indicate if default exports should be added to stacks in this project
 	// this defaults to false
-	HideDefaultExports bool `yaml:"hideDefaultExports"`
+	GenerateDefaultOutputs bool `yaml:"GenerateDefaultOutputs"`
 }
 
 // Plugin specification inside the manifest

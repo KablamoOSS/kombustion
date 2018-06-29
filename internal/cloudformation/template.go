@@ -48,7 +48,7 @@ type (
 		Filename           string
 		EnvFile            string
 		Env                string
-		DisableBaseOutputs bool
+		GenerateDefaultOutputs bool
 		ParamMap           map[string]string
 		Plugins            []*plugins.PluginLoaded
 	}
@@ -110,7 +110,7 @@ func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error
 	var configData []byte
 
 	// populate the parser variables
-	populateParsers(params.Plugins, params.DisableBaseOutputs)
+	populateParsers(params.Plugins, params.GenerateDefaultOutputs)
 
 	configPath := fmt.Sprintf(params.Filename)
 	//configPath := fmt.Sprintf("./configs/%v.yaml", filename)

@@ -22,7 +22,7 @@ var UpsertFlags = []cli.Flag{
 		Usage: "cloudformation parameters. eg `BucketName=test`",
 	},
 	cli.BoolFlag{
-		Name:  "no-base-outputs, b",
+		Name:  "generate-default-outputs, b",
 		Usage: "disable generation of outputs for Base AWS types",
 	},
 	cli.BoolFlag{
@@ -98,7 +98,7 @@ func Upsert(c *cli.Context) {
 	generateParams := cloudformation.GenerateParams{
 		Filename:           fileName,
 		Env:                environment,
-		DisableBaseOutputs: c.Bool("no-base-outputs"),
+		GenerateDefaultOutputs: c.Bool("generate-default-outputs"),
 		ParamMap:           paramMap,
 		Plugins:            loadedPlugins,
 	}
