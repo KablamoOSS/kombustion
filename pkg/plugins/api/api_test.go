@@ -19,7 +19,6 @@ func TestRegisterPlugin(t *testing.T) {
 				Name:               "Name",
 				Version:            "0.1.0",
 				Prefix:             "Test",
-				RequiresAWSSession: false,
 				Help:               apiTypes.Help{},
 			},
 		},
