@@ -84,7 +84,7 @@ func TestAddPluginsToManifestAndLock(t *testing.T) {
 					},
 					Architectures:      []string(nil),
 					Environments:       map[string]manifestType.Environment(nil),
-					HideDefaultExports: false,
+					GenerateDefaultOutputs: false,
 				},
 				lock: &lock.Lock{
 					Plugins: map[string]lock.Plugin{

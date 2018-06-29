@@ -31,7 +31,7 @@ func TestLoadManifestFromString(t *testing.T) {
 				Plugins:            map[string]Plugin(nil),
 				Architectures:      []string(nil),
 				Environments:       map[string]Environment(nil),
-				HideDefaultExports: false,
+				GenerateDefaultOutputs: false,
 			},
 		},
 		{
@@ -42,16 +42,16 @@ func TestLoadManifestFromString(t *testing.T) {
 			throws: true,
 		},
 		{
-			name: "Simple manifest HideDefaultExports",
+			name: "Simple manifest GenerateDefaultOutputs",
 			manifestYaml: `Name: TestManifest
-hideDefaultExports: true`,
+GenerateDefaultOutputs: true`,
 			output: Manifest{
 				Name:               "TestManifest",
 				Region:             "",
 				Plugins:            map[string]Plugin(nil),
 				Architectures:      []string(nil),
 				Environments:       map[string]Environment(nil),
-				HideDefaultExports: true,
+				GenerateDefaultOutputs: true,
 			},
 			throws: false,
 		},
@@ -104,7 +104,7 @@ Plugins:
 					},
 				},
 				Environments:       map[string]Environment(nil),
-				HideDefaultExports: false,
+				GenerateDefaultOutputs: false,
 			},
 		},
 		{
@@ -142,7 +142,7 @@ Environments:
 				Region:             "us-east-1",
 				Plugins:            map[string]Plugin(nil),
 				Architectures:      []string(nil),
-				HideDefaultExports: false,
+				GenerateDefaultOutputs: false,
 				Environments: map[string]Environment{
 					"development": {
 						AccountIDs: []string{"11111111111", "22222222222"},
@@ -208,7 +208,7 @@ Environments:
 // 					},
 // 				},
 // 				Architectures:      []string(nil),
-// 				HideDefaultExports: false,
+// 				GenerateDefaultOutputs: false,
 // 				Environments: map[string]Environment{
 // 					"development": {
 // 						AccountIDs: []string{"11111111111", "22222222222"},

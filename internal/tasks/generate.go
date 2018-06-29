@@ -19,7 +19,7 @@ var GenerateFlags = []cli.Flag{
 		Usage: "cloudformation parameters. eg. `--param Env=dev --param BucketName=test`",
 	},
 	cli.BoolFlag{
-		Name:  "no-base-outputs, b",
+		Name:  "generate-default-outputs, b",
 		Usage: "disable generation of outputs for Base AWS types",
 	},
 }
@@ -83,7 +83,7 @@ func Generate(c *cli.Context) {
 	tasks.GenerateTemplate(cloudformation.GenerateParams{
 		Filename:           fileName,
 		Env:                c.String("env"),
-		DisableBaseOutputs: c.Bool("no-base-outputs"),
+		GenerateDefaultOutputs: c.Bool("generate-default-outputs"),
 		ParamMap:           paramMap,
 		Plugins:            loadedPlugins,
 	})

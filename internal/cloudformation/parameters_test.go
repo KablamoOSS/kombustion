@@ -31,7 +31,7 @@ func TestResolveEnvironmentParameters(t *testing.T) {
 				Name:               "TestManifestWithEnvironment",
 				Plugins:            nil,
 				Architectures:      []string(nil),
-				HideDefaultExports: false,
+				GenerateDefaultOutputs: false,
 				Environments: map[string]manifest.Environment{
 					"development": {
 						AccountIDs: nil,
@@ -58,7 +58,7 @@ func TestResolveEnvironmentParameters(t *testing.T) {
 				Name:               "TestManifestWithEnvironment",
 				Plugins:            nil,
 				Architectures:      []string(nil),
-				HideDefaultExports: false,
+				GenerateDefaultOutputs: false,
 				Environments: map[string]manifest.Environment{
 					"development": {
 						AccountIDs: nil,
@@ -155,7 +155,7 @@ func TestResolveParameters(t *testing.T) {
 					Name:               "TestManifestWithEnvironment",
 					Plugins:            nil,
 					Architectures:      []string(nil),
-					HideDefaultExports: false,
+					GenerateDefaultOutputs: false,
 					Environments: map[string]manifest.Environment{
 						"development": {
 							AccountIDs: nil,
@@ -251,7 +251,7 @@ func TestResolveParametersS3(t *testing.T) {
 					Name:               "TestManifestWithEnvironment",
 					Plugins:            nil,
 					Architectures:      []string(nil),
-					HideDefaultExports: false,
+					GenerateDefaultOutputs: false,
 					Environments: map[string]manifest.Environment{
 						"development": {
 							AccountIDs: nil,
