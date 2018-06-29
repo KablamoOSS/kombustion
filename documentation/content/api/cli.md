@@ -9,52 +9,195 @@ toc = true
 layout  = "docs"
 +++
 
-## Basic Usage
-
-Generate a CloudFormation template (from `./examples/stacks/test.yaml`):
+## Usage
 
 ```bash
-$ kombustion generate examples/stacks/test.yaml && cat compiled/test.yaml
+$ kombustion [global options] command [command options] [arguments...]
 ```
 
-Upsert a CloudFormation template:
+All of these commands should be called from the same directory where `kombustion.yaml` is location,
+which is usually the root directory of your project. If no `kombustion.yaml` can be found, an error is thrown.
+
+## Global Options
+
+### `verbose`
+
+_Output with high verbosity._
 
 ```bash
-$ kombustion upsert examples/stacks/test.yaml --stackName test-stack
+$ kombustion --verbose
 ```
 
-Delete a CloudFormation stack:
+---
+
+### `param`
+
+_Specify Cloudformation parameters._
+
+Parameters are also sourced from `kombustion.yaml`, but paramteres passed via the cli have precedence.
+So anything you pass via this option, will be used instead of whats in `kombustion.yaml`
 
 ```bash
-$ kombustion delete examples/stacks/test.yaml
+$ kombustion --param BucketName=test
+
+# Or
+$ kombustion -p BucketName=test
 ```
 
-Print all the events for a stack:
+---
+
+### `profile`
+
+_Use a profile from ~/.aws/credentials_
 
 ```bash
-$ kombustion events examples/stacks/test.yaml
+$ kombustion --profile MyProfile
 ```
 
-## Command
+---
 
+### `load-plugin`
+
+_Load arbitrary plugin._
+
+This option is only avaiable when Kombustion is built from source, see [wirting a plugin](/guides/plugins)
+for more information.
+
+```bash
+$ kombustion --load-plugin path/to/plugin.so
 ```
-kombustion [global options] command [command options] [arguments...]
 
-COMMANDS:
-     init      init manifest file
-     add       add github.com/organisation/plugin
-     install   install all plugins in kombustion.yaml
-     generate  parse a cloudformation template from ./config
-     upsert    upsert a cloudformation template or a yaml config
-     delete    delete a cloudformation stack
-     events    print all events for a cloudformation stack
-     help, h   Shows a list of commands or help for one command
+---
 
-GLOBAL OPTIONS:
-   --verbose                                    output with high verbosity
-   --param BucketName=test, -p BucketName=test  cloudformation parameters BucketName=test
-   --profile MyProfile                          use a profile from ~/.aws/credentials eg MyProfile
-   --load-plugin path/to/plugin.so              load arbitrary plugin path/to/plugin.so
-   --help, -h                                   show help
-   --version, -v                                print the version
+### `help`
+
+_Prints help._
+
+```bash
+$ kombustion --help, -h
+```
+
+---
+
+### `version`, `v`
+
+_Print the version._
+
+```bash
+$ kombustion --version
+> kombustion version v1.0.0
+
+# Or
+$ kombustion -v
+> kombustion version v1.0.0
+```
+
+---
+
+## Plugins
+
+The following commands manage plugins in your project.
+
+Learn more about how to [setup a project](/guides/project).
+
+---
+
+### `init`
+
+_Initialise a new [manifest file](/guides/project) in the current directory._
+
+```bash
+$ kombustion init
+```
+
+---
+
+### `add`
+
+_Add a [plugin](/concepts/plugin) to your project._
+
+This command takes one positional argument, that must be a Github repository url, with a release.
+
+```bash
+# Arguments
+> kombustion add [url]
+
+# Usage
+$ kombustion add github.com/organisation/plugin
+```
+
+---
+
+### `install`
+
+_Install all plugins in kombustion.yaml._
+
+```bash
+$ kombustion install
+```
+
+---
+
+## Stacks
+
+The following commands manage Cloudformation Stacks.
+
+---
+
+### `generate`
+
+_Generate a Cloudformation template, from a template file_
+
+Generate allows you to preview the final template, after plugins. It's the same output that is
+generated when calling `upsert`.
+
+Takes one positional argument, that is a relative path to the template file.
+
+```bash
+# Arguments
+$ kombustion generate [template file]
+
+# Usage
+$ kombustion generate path/to/cloudformation/stack.yaml
+```
+
+---
+
+### `upsert`
+
+_Update or insert a cloudformation template._
+
+
+```bash
+$ kombustion upsert path/to/cloudformation/stack.yaml
+```
+
+#### Errors
+If the stack is not created successfully for any reason, `kombustion` returns an exit code of `1` (an error).
+
+#### No updates to perform
+If there are no updates to perform, `kombustion` will return an exit code of `0` (no error).
+
+---
+
+### `delete`
+
+_Delete a cloudformation stack._
+
+```bash
+$ kombustion delete path/to/cloudformation/stack.yaml
+```
+
+#### Errors
+
+If the stack is not deleted for any reason, `kombustion` returns an exit code of `1` (an error).
+
+---
+
+### `events`
+
+_Print all the events for a stack_
+
+```bash
+$ kombustion events path/to/cloudformation/stack.yaml
 ```
