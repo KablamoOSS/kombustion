@@ -95,23 +95,6 @@ func mfaTokenProvider() (string, error) {
 // Ensure a session is returned, else fatal with an error explaning why no session was found
 func must(sess *session.Session, err error) *session.Session {
 
-	// if err != nil {
-	// 	if awsErr, ok := err.(awserr.Error); ok {
-	// 		// Get error details
-	// 		log.Println("Error:", awsErr.Code(), awsErr.Message())
-
-	// 		// Prints out full error message, including original error if there was one.
-	// 		log.Println("Error:", awsErr.Error())
-
-	// 		// Get original error
-	// 		if origErr := awsErr.OrigErr(); origErr != nil {
-	// 			// operate on original error.
-	// 		}
-	// 	} else {
-	// 		fmt.Println(err.Error())
-	// 	}
-	// }
-
 	if err != nil {
 		if strings.Contains(err.Error(), "NoCredentialProviders") {
 			printer.Fatal(

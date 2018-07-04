@@ -3,7 +3,6 @@ package manifest
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 	"sync"
@@ -25,7 +24,6 @@ func FindAndLoadManifest() *Manifest {
 		once.Do(func() {
 			path, err := filepath.Abs(filepath.Dir(os.Args[0]))
 			if err != nil {
-				log.Fatal(err)
 				printer.Fatal(
 					err,
 					"If you want to re-initialise your kombustion.yaml file, first remove it.",

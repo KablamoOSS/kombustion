@@ -98,14 +98,7 @@ func SubStep(message string, indent int, last bool, ignoreVerboseRule bool) {
 				indentString = fmt.Sprintf("   %s", indentString)
 			}
 
-			icon := ""
-
-			switch indent {
-			case 1:
-				icon = "└─"
-			default:
-				icon = "├─"
-			}
+			icon := "├─"
 
 			if last {
 				icon = "└─"
@@ -126,6 +119,38 @@ func Finish(message string) {
 	fmt.Println(fmt.Sprintf("%s  %s", chalk.Green.Color("✔"), chalk.Bold.TextStyle(message)))
 }
 
+// Warn prints a warning to the screen. It's formatted like other errors, and coloured yellow.
+func Warn(err error, resolution string, link string) {
+	spinner := getPrinter()
+
+	spinner.Stop()
+	errMessage := fmt.Sprintf(
+		"%s %s",
+		chalk.Bold.TextStyle(chalk.Yellow.Color("!  Error:")),
+		chalk.Yellow.Color(err.Error()),
+	)
+	if resolution != "" {
+		errMessage = fmt.Sprintf(
+			"%s\n%s%s",
+			errMessage,
+			chalk.Dim.TextStyle(chalk.Bold.TextStyle("☞  Resolution: ")),
+			chalk.Dim.TextStyle(resolution),
+		)
+	}
+
+	if link != "" {
+		errMessage = fmt.Sprintf(
+			"%s\n%s%s",
+			errMessage,
+			chalk.Dim.TextStyle(chalk.Bold.TextStyle("∞  More info: ")),
+			chalk.Italic.TextStyle(link),
+		)
+	}
+
+	fmt.Println(errMessage)
+}
+
+
 // Error prints an error to the screen. As it's intended reader is a user of your program,
 // it expects both the error message, a way for the reader to resolve the error, and if
 // possible a link to futher information.
@@ -139,7 +164,7 @@ func Error(err error, resolution string, link string) {
 		chalk.Bold.TextStyle(chalk.Red.Color("✖  Error:")),
 		chalk.Red.Color(err.Error()),
 	)
-	if resolution != "" { 
+	if resolution != "" {
 		errMessage = fmt.Sprintf(
 			"%s\n%s%s",
 			errMessage,
@@ -171,7 +196,7 @@ func Fatal(err error, resolution string, link string) {
 		chalk.Red.Color(err.Error()),
 	)
 
-	if resolution != "" { 
+	if resolution != "" {
 		errMessage = fmt.Sprintf(
 			"%s\n%s%s",
 			errMessage,

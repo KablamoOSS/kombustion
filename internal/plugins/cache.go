@@ -2,11 +2,11 @@ package plugins
 
 import (
 	"fmt"
-	"log"
+
 	"os"
 	"os/user"
 
-	"github.com/KablamoOSS/go-cli-printer"
+	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/plugins/lock"
 )
 
@@ -39,7 +39,11 @@ func findPluginInCache(plugin lock.Plugin, resolved lock.PluginResolution) (foun
 func GetCacheDir() string {
 	usr, err := user.Current()
 	if err != nil {
-		log.Fatal(err)
+		printer.Fatal(
+			err,
+			"",
+			"",
+		)
 	}
 	plugindir := fmt.Sprintf("%s/.kombustion/cache/plugins", usr.HomeDir)
 	os.MkdirAll(plugindir, 0744)

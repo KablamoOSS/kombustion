@@ -2,7 +2,6 @@ package tasks
 
 import (
 	"fmt"
-	"log"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
@@ -41,7 +40,6 @@ func init() {
 
 // Upsert a stack
 func Upsert(c *cli.Context) {
-	printer.Step("Upsert Stack")
 	printer.Progress("Kombusting")
 
 	fileName := c.Args().Get(0)
@@ -57,12 +55,21 @@ func Upsert(c *cli.Context) {
 
 	lockFile, err := lock.FindAndLoadLock()
 	if err != nil {
-		log.Fatal(err)
+		printer.Fatal(
+			err,
+			"",
+			"",
+		)
+
 	}
 
 	manifestFile := manifest.FindAndLoadManifest()
 	if err != nil {
-		log.Fatal(err)
+		printer.Fatal(
+			err,
+			"",
+			"",
+		)
 	}
 
 	// load all plugins

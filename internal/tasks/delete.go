@@ -19,7 +19,6 @@ func init() {
 
 // Delete a given stack
 func Delete(c *cli.Context) {
-	printer.Step("Delete stack")
 	printer.Progress("Kombusting")
 
 	fileName := c.Args().Get(0)
