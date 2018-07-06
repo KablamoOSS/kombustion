@@ -99,7 +99,7 @@ _______________________________________________________________________
 %s
 ISSUES:
     If you have an issue with kombustion, check both the kombustion.io documentation [0], and
-    the Cloudformation documentation [1] to help you resolve it.
+    the CloudFormation documentation [1] to help you resolve it.
 
     If the issue still persists please check out the issue queue [3] to see if it's
     already been reported and/or has a fix. If it hasn't you can create a new one [3].
@@ -157,7 +157,7 @@ ISSUES:
 			UsageText: "install all plugins in kombustion.yaml",
 			Action:    tasks.InstallPlugins,
 		},
-		// Cloudformation
+		// CloudFormation
 		{
 			Name:      "generate",
 			Usage:     "parse a cloudformation template from ./config",

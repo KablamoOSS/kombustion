@@ -26,7 +26,7 @@ func UpsertStack(
 	// use template from file
 	_, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
 	if err == nil { //update
-	action = "Updating"
+		action = "Updating"
 		printer.Step(fmt.Sprintf("%s Stack %s:", action, stackName))
 		_, err = cf.UpdateStack(&awsCF.UpdateStackInput{
 			StackName:    aws.String(stackName),
@@ -89,7 +89,7 @@ func UpsertStackViaS3(
 
 }
 
-func processUpsert(stackName, action string, cf *awsCF.CloudFormation	){
+func processUpsert(stackName, action string, cf *awsCF.CloudFormation) {
 	var err error
 	var status *awsCF.DescribeStacksOutput
 
@@ -117,12 +117,12 @@ func processUpsert(stackName, action string, cf *awsCF.CloudFormation	){
 				stackStatus != awsCF.StackStatusUpdateCompleteCleanupInProgress {
 				if stackStatus == awsCF.StackStatusCreateComplete ||
 					stackStatus == awsCF.StackStatusUpdateComplete {
-						printer.SubStep(
-							fmt.Sprintf("Success %s Stack %s", action, stackName),
-							1,
-							true,
-							true,
-						)
+					printer.SubStep(
+						fmt.Sprintf("Success %s Stack %s", action, stackName),
+						1,
+						true,
+						true,
+					)
 					os.Exit(0)
 				} else {
 					printer.SubStep(

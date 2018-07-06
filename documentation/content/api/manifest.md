@@ -34,7 +34,7 @@ Environments:
 
 _The name of your project._
 
-If `--stack-name` is not provided this is used along with `--environment` and the file name, to make the Cloudformation Stack name.
+If `--stack-name` is not provided this is used along with `--environment` and the file name, to make the CloudFormation Stack name.
 
 ### `Region`
 
@@ -79,6 +79,6 @@ is a safety to prevent accidentally deploying into the wrong account.
 
 #### `Parameters`
 
-_A map of `Key: Value` parameters that will be supplied to the Cloudformation Stack._
+_A map of `Key: Value` parameters that will be supplied to the CloudFormation Stack._
 
 Only the Paramters the stack needs are supplied, so multiple stacks can all use a subset of all the Parameters.

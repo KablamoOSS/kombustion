@@ -124,7 +124,7 @@ $ kombustion install
 
 ## Stacks
 
-The following commands manage Cloudformation Stacks.
+The following commands manage CloudFormation Stacks.
 
 With most of the following commands the Stack Name can either be supplied directly, or is derived
 from `Title` in `kombustion.yaml`, the file name of the stack, and the environment in the
@@ -134,7 +134,7 @@ following pattern `{Title}-{FileName}-{Environment}`.
 
 ### `generate`
 
-_Generate a Cloudformation template, from a template file_
+_Generate a CloudFormation template, from a template file_
 
 Generate allows you to preview the final template, after plugins. It's the same output that is
 generated when calling `upsert`.
@@ -193,7 +193,7 @@ _Required if `--stack-name` is not provided._
 
 #### `--param`, `-p`
 
-_(Optional) Specify Cloudformation parameters._
+_(Optional) Specify CloudFormation parameters._
 
 Parameters are also sourced from `kombustion.yaml`, but paramteres passed via the cli have precedence.
 Anything you pass via this option, will be used instead of whats in `kombustion.yaml`.
@@ -214,7 +214,7 @@ _(Optional) Shorthand for `--capability CAPABILITY_IAM`_
 
 This gives the capability to perform upserts of IAM resources.
 
-Cloudformation requires you to [acknowledge](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities) when you are modifying a stack with IAM resources.
+CloudFormation requires you to [acknowledge](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities) when you are modifying a stack with IAM resources.
 
 #### `--capability`
 
@@ -323,7 +323,7 @@ _Required if `--stack-name` is not provided._
 
 ## Exit Codes
 
-The matrix below describes the exit codes for each Cloudformation status.
+The matrix below describes the exit codes for each CloudFormation status.
 
 In general when calling `upsert` if the changes requested (be they Create Stack, or Update Stack) are
 not cleanly applied, an error is returned.

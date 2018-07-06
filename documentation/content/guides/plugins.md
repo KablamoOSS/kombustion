@@ -4,7 +4,7 @@ description = "How to write a plugin"
 date = "2018-06-14T00:00:00+10:00"
 weight = 20
 draft = false
-bref = "A plugin’s purpose is to transform input YAML into Cloudformation resources, outputs or mappings."
+bref = "A plugin’s purpose is to transform input YAML into CloudFormation resources, outputs or mappings."
 toc = true
 layout  = "docs"
 +++
@@ -60,7 +60,7 @@ The other key configuration value is `Prefix`. This should be set to a pattern o
 
 The prefix is then added to the start of any resources you define, seperated with `::`. So if we had a `Function` resource, the final resource export will be `Kablamo::Boilerplate::Function`
 
-> There is no enforcement on what a `Prefix` can be, excepting those in Cloudformation: `AWS::*` and `Custom::*`. If a user has two plugins that have clashing prefixes, they can use the `Alias` paramter in `kombustion.yaml` to add another name in front for example `MyAlias::Kablamo::Boilerplate::Function`
+> There is no enforcement on what a `Prefix` can be, excepting those in CloudFormation: `AWS::*` and `Custom::*`. If a user has two plugins that have clashing prefixes, they can use the `Alias` paramter in `kombustion.yaml` to add another name in front for example `MyAlias::Kablamo::Boilerplate::Function`
 
 ```go
 package main
@@ -161,7 +161,7 @@ import (
 
 The process for a Parser function is the same for `Resource`, `Mapping` and `Output`. So in this example we'll cover `Resource`.
 
-In a new file at `resources/lambdaFunction.go` we start by importing the from `kombustion` core the Cloudformation parser functions, some core types, and a YAML library.
+In a new file at `resources/lambdaFunction.go` we start by importing the from `kombustion` core the CloudFormation parser functions, some core types, and a YAML library.
 
 ```go
 package resources
@@ -221,7 +221,7 @@ type Code struct {
 
 Now we have defined the shape of our YAML, we can write the parser function.
 
-A parser function takes two arguments `name` and `data` both strings. Where `name` is the name of the object in the Cloudformation template, and `data` is the yaml of `Properties` of that object. See the yaml example above.
+A parser function takes two arguments `name` and `data` both strings. Where `name` is the name of the object in the CloudFormation template, and `data` is the yaml of `Properties` of that object. See the yaml example above.
 
 A parser function returns `types.TemplateObject`, and an `error`. When you return an `error`, it's treated as fatal.
 

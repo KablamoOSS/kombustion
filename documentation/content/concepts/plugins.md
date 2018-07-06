@@ -11,13 +11,13 @@ layout  = "docs"
 
 ## How a plugin works
 
-Kombustion's implementation of plugins builds upon the Go [Plugin package](https://golang.org/pkg/plugin/).
+Kombustion's implementation of plugins builds upon the Go [Plugin package][1].
 
-Plugins are loaded according to the `kombustion.lock` file (which is genrated from `kombustion.yaml`).
+Plugins are loaded according to the `kombustion.lock` file (which is generated from `kombustion.yaml`).
 
 If a template uses a resource registered to a plugin, the relevant parser function is called. The
 plugins parser function receives the name of the resource, and the template object as a string. It's
-then up to the parser function to transform those inputs into one or more Cloudformation template objects, and
+then up to the parser function to transform those inputs into one or more CloudFormation template objects, and
 return them.
 
 Due to the nature of Go's Plugin package, however it's not quite that simple. We need to serialise
@@ -37,14 +37,14 @@ removing the need to write this boilerplate code in your plugin. When you call `
 calling a helper function, that returns another function that handles the binary marshalling.
 
 
-### Cloudformation Definitions
+### CloudFormation Definitions
 
-Because plugins are compiled the version of Cloudformation definitions is frozen in time for that plugin.
+Because plugins are compiled the version of CloudFormation definitions is frozen in time for that plugin.
 This means, if a new parameter is added to a resource the plugin uses, it will be inaccessible until
 the plugin is updated.
 
-This issue is localised to the plugin, and plugins can operate with different definitions of Cloudformation
-resources. This will only become problematic if Cloudformation has a breaking change, which happen rarely.
+This issue is localised to the plugin, and plugins can operate with different definitions of CloudFormation
+resources. This will only become problematic if CloudFormation has a breaking change, which happen rarely.
 
 ## Best Practices
 
@@ -57,6 +57,10 @@ A plugin's parser functions should all be pure; they should generate the same ou
 ### Accessing AWS Resources in a plugin
 
 If your plugin needs to access AWS resources during create or update, the only method you should
-use are [Custom Resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html).
+use are [Custom Resources][2].
 
-An example of when you may want to do this, is to get the latest AMI for a set of tags. AWS has a [walkthrough for this use case](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/walkthrough-custom-resources-lambda-lookup-amiids.html).
+An example of when you may want to do this, is to get the latest AMI for a set of tags. AWS has a [walkthrough for this use case][3].
+
+[1]:	https://golang.org/pkg/plugin/
+[2]:	https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html
+[3]:	https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/walkthrough-custom-resources-lambda-lookup-amiids.html

@@ -13,9 +13,9 @@ In addition to generating templates, Kombustion can also create, update and
 delete your CloudFormation stacks.
 
 Kombustion has automatic support for new CloudFormation types as they are
-released ([how?](docs/generation.md)).
+released.
 
-See the [Quick start](docs/quickstart.md) for more details.
+See the [Quick start](https://kombustion.io/docs/getting-started/) for more details.
 
 ## Getting Started
 
@@ -32,15 +32,67 @@ sudo chmod +x kombustion
 sudo cp kombustion /usr/local/bin/kombustion
 ```
 
-### Docker
+## Usage
 
-Alternatively, you can run Kombustion via our public Docker image:
+Initialise a `kombustion.yaml` file with the following:
 
 ```sh
-docker run -ti kablamooss/kombustion
+$ kombustion init
 ```
 
-## Usage
+This is an example of `kombustion.yaml`, it should be committed to version control.
+
+```yaml
+# Name of this project. This is used with `--environment` to create a stack name, which can
+# be overridden with `--stack-name`
+Name: KombustionExample
+# Region is the default region stacks will be deployed into. Can be overridden with `--region us-east-2`
+Region: us-east-1
+# Plugins can be installed by running `kombustion add github.com/KablamoOSS/kombustion-plugin-serverless`
+Plugins:
+  github.com/KablamoOSS/kombustion-plugin-serverless@0.1.0:
+    Name: github.com/KablamoOSS/kombustion-plugin-serverless
+    Version: 0.1.0
+Environments:
+  Development:
+    # Optionally whitelist the accounts for the environment `development`, this will
+    # ensure CloudFormation actions are only performed in this account
+    AccountIDs:
+    - "1234567890"
+    # Parameters are added to the CloudFormation Stack during upsert
+    Parameters:
+      Environment: development
+# Kombustion can generate default outputs for your resources to use as references in other
+# stacks.
+GenerateDefaultOutputs: false
+```
+
+### CloudFormation Stack Management
+
+Upsert a CloudFormation template:
+
+```sh
+$ kombustion upsert examples/stacks/test.yaml --stackName test-stack
+```
+
+Delete a CloudFormation stack:
+
+```sh
+$ kombustion delete examples/stacks/test.yaml
+```
+
+Print all the events for a stack:
+
+```sh
+$ kombustion events examples/stacks/test.yaml
+```
+
+#### StackName
+
+You don't need to specify `--stack-name`, instead when you pass an environment `--environment` it
+gets merged in with the project name from `kombustion.yaml` and the filename as `{ProjectName}-{FileName}-{Environment}`.
+
+This applies to `upsert`,`delete`, and `events`.
 
 ### CloudFormation Stacks
 
@@ -132,25 +184,6 @@ Check out the
 [examples](https://github.com/KablamoOSS/Kombustion/tree/master/examples/)
 directory for example stacks.
 
-### CloudFormation Stack Management
-
-Upsert a CloudFormation template:
-
-```sh
-kombustion cf upsert examples/stacks/test.yaml --stackName test-stack
-```
-
-Delete a CloudFormation stack:
-
-```sh
-kombustion cf delete examples/stacks/test.yaml
-```
-
-Print all the events for a stack:
-
-```sh
-kombustion cf events examples/stacks/test.yaml
-```
 
 #### Credentials
 
@@ -162,7 +195,7 @@ You can either use the standard environment variables `AWS_ACCESS_KEY_ID`,
 Or use a profile you have configured, for example:
 
 ```sh
-kombustion cf upsert examples/stacks/test.yaml --stackName test-stack --profile myAwsProfile
+$ kombustion --profile myAwsProfile upsert examples/stacks/test.yaml --stackName test-stack
 ```
 
 ### Plugins
@@ -174,19 +207,7 @@ kombustion cf upsert examples/stacks/test.yaml --stackName test-stack --profile 
 Install a plugin:
 
 ```sh
-kombustion cf plugins get mypluginname
-```
-
-List all installed plugins:
-
-```sh
-kombustion cf plugins list
-```
-
-Delete an installed plugin:
-
-```sh
-kombustion cf plugins delete mypluginname
+$ kombustion add github.com/Example/ExamplePlugin
 ```
 
 ## Contributing

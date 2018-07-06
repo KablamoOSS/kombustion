@@ -27,7 +27,7 @@ You can run `kombustion -v` to confirm you have the correct version installed.
 
 ## Create your project
 
-In the root directory of your repository containing your Cloudformation templates run the following to create the `kombustion.yaml` file:
+In the root directory of your repository containing your CloudFormation templates run the following to create the `kombustion.yaml` file:
 
 ```bash
 # Create a new kombustion.yaml file in the current directory

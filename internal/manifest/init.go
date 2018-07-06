@@ -87,7 +87,7 @@ func surveyForName() (string, error) {
 	}
 
 	// TODO: Add a better transform here, to ensure name is valid to the
-	// Cloudformation name spec
+	// CloudFormation name spec
 	return strings.Replace(surveyAnswers.Name, " ", "", -1), nil
 }
 

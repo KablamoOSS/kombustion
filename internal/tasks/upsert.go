@@ -112,7 +112,7 @@ func Upsert(c *cli.Context) {
 
 	capabilities := getCapabilities(c)
 
-	// Cloudformation Stack parameters
+	// CloudFormation Stack parameters
 	var parameters []*awsCF.Parameter
 
 	stackName := cloudformation.GetStackName(manifestFile, fileName, environment, c.String("stack-name"))

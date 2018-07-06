@@ -17,7 +17,7 @@ When using a plugin, a template cannot be created without the plugin - to ensure
 
 ## Create your project
 
-In the root directory of your repository containing your Cloudformation templates run the following to create the `kombustion.yaml` file:
+In the root directory of your repository containing your CloudFormation templates run the following to create the `kombustion.yaml` file:
 
 ```bash
 # Create a new kombustion.yaml file in the current directory

@@ -11,10 +11,10 @@ layout = "docs"
 
 
 The `kombustion.yaml` manifest file fits best alongside the concept of a project. Your project may
-have a few Cloudformation template files in them. And those template files use resources provided
+have a few CloudFormation template files in them. And those template files use resources provided
 by Kombustion plugins. Therefore, without the plugins the template files cannot be used.
 
-To ensure you can always modify your Cloudformation stacks, we reccomend committing `kombustion.yaml`,
+To ensure you can always modify your CloudFormation stacks, we reccomend committing `kombustion.yaml`,
 `kombustion.lock` and the `.kombustion` folder. The latter stores downloaded plugins. With those pieces
 you will always be able to `kombustion upsert` and `kombustion delete`. At any time you can generate
-the final Cloudformation template with `kombustion generate`.
+the final CloudFormation template with `kombustion generate`.

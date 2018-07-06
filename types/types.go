@@ -4,7 +4,7 @@ type Validatable interface {
 	Validate() []error
 }
 
-// CfResource - A Cloudformation Resource
+// CfResource - A CloudFormation Resource
 type CfResource struct {
 	Type       string      `yaml:"Type"`
 	Properties interface{} `yaml:"Properties"`

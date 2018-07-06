@@ -8,7 +8,7 @@ Paginate = 4
   RSSLink = "/index.xml"
   author = "Kablamo"
   github = "KablamoOSS" # add your github profile name
-  description = "Extend Cloudformation with plugins"
+  description = "Extend CloudFormation with plugins"
 
 [[menu.main]]
     name = "Docs"
