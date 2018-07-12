@@ -37,6 +37,16 @@ func Update(currentVersion string, noPrompt bool) {
 	if foundRelease {
 		printer.Stop()
 
+		if *latestRelease.TagName == currentVersion {
+			printer.SubStep(
+				fmt.Sprintf("You have the current version."),
+				1,
+				true,
+				true,
+			)
+			return
+		}
+
 		var confirm bool
 
 		if noPrompt == false {
