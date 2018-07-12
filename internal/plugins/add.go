@@ -114,47 +114,56 @@ func constructGithubPlugin(
 	)
 	pluginLock.Name = plugin.Name
 
-	latestRelease, latestReleaseErr := core.GetLatestRelease(githubOrg, githubProject)
-
-	printer.SubStep(
-		fmt.Sprintf("Found release %s for %s/%s", *latestRelease.TagName, githubOrg, githubProject),
-		1,
-		true,
-		false,
-	)
-
-	// TODO: handle no release
-	// TODO: handle release with no files
-	if err != nil {
-		return plugin, pluginLock, latestReleaseErr
+	latestRelease, latestReleaseErr := core.GetLatestRelease(githubClient, githubOrg, githubProject)
+	if latestReleaseErr != nil {
+		printer.Fatal(
+			latestReleaseErr,
+			"",
+			"",
+		)
 	}
 
-	if pluginLock.Resolved == nil {
-		pluginLock.Resolved = make(map[string]lock.PluginResolution)
-	}
+	if latestRelease != nil {
+		fmt.Println(latestRelease)
+		printer.SubStep(
+			fmt.Sprintf("Found release %s for %s/%s", *latestRelease.TagName, githubOrg, githubProject),
+			1,
+			true,
+			false,
+		)
 
-	plugin.Version = *latestRelease.TagName
-	pluginLock.Version = plugin.Version
+		// TODO: handle no release
+		// TODO: handle release with no files
+		if err != nil {
+			return plugin, pluginLock, latestReleaseErr
+		}
 
-	// Loop through the assets we found and try to create a resolution lock for them
-	if latestRelease.Assets != nil {
-		for _, release := range latestRelease.Assets {
-			operatingSystem, architecture, valid := core.GetOSArchFromFilename(githubProject, *release.Name)
+		if pluginLock.Resolved == nil {
+			pluginLock.Resolved = make(map[string]lock.PluginResolution)
+		}
 
-			// If the file is a valid plugin file create a resolution lock
-			if valid {
-				pluginLock.Resolved[strings.Join([]string{operatingSystem, architecture}, "-")] = lock.PluginResolution{
-					URL:             *release.BrowserDownloadURL,
-					OperatingSystem: operatingSystem,
-					Architecture:    architecture,
-					PathOnDisk:      "",
-					Hash:            "",
-					ArchiveHash:     "",
-					ArchiveName:     *release.Name,
+		plugin.Version = *latestRelease.TagName
+		pluginLock.Version = plugin.Version
+
+		// Loop through the assets we found and try to create a resolution lock for them
+		if latestRelease.Assets != nil {
+			for _, release := range latestRelease.Assets {
+				operatingSystem, architecture, valid := core.GetOSArchFromFilename(githubProject, *release.Name)
+
+				// If the file is a valid plugin file create a resolution lock
+				if valid {
+					pluginLock.Resolved[strings.Join([]string{operatingSystem, architecture}, "-")] = lock.PluginResolution{
+						URL:             *release.BrowserDownloadURL,
+						OperatingSystem: operatingSystem,
+						Architecture:    architecture,
+						PathOnDisk:      "",
+						Hash:            "",
+						ArchiveHash:     "",
+						ArchiveName:     *release.Name,
+					}
 				}
 			}
 		}
 	}
-
 	return plugin, pluginLock, err
 }

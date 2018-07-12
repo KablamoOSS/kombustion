@@ -8,14 +8,9 @@ import (
 	"github.com/mholt/archiver"
 )
 
-var githubClient *github.Client
-
-func init() {
-	githubClient = github.NewClient(nil)
-}
-
 // GetLatestRelease - Return the latest release of the repository
 func GetLatestRelease(
+	githubClient *github.Client,
 	githubOrg string,
 	githubProject string,
 ) (

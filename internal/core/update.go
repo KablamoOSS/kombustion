@@ -14,6 +14,12 @@ import (
 	"gopkg.in/AlecAivazis/survey.v1"
 )
 
+var githubClient *github.Client
+
+func init() {
+	githubClient = github.NewClient(nil)
+}
+
 // Update kombustion with the latest release on Github
 func Update(currentVersion string, noPrompt bool) {
 	printer.Step("Updating kombustion")
@@ -80,6 +86,7 @@ func checkForUpdate(
 	foundRelease bool,
 ) {
 	latestRelease, err := GetLatestRelease(
+		githubClient,
 		"KablamoOSS",
 		"kombustion",
 	)
