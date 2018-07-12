@@ -78,6 +78,8 @@ $ kombustion -v
 
 ---
 
+## Core
+
 ### `update`
 
 _Update `kombustion` binary to the latest release._
