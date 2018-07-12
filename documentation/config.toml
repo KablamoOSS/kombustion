@@ -4,7 +4,7 @@ title = "Kombustion"
 Paginate = 4
 
 [Params]
-  Release = "0.1.6"
+  Release = "0.2.1"
   RSSLink = "/index.xml"
   author = "Kablamo"
   github = "KablamoOSS" # add your github profile name
