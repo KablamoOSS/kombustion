@@ -76,6 +76,14 @@ func Update(currentVersion string, noPrompt bool) {
 				true,
 				true,
 			)
+		} else {
+			printer.SubStep(
+				fmt.Sprintf("No update performed."),
+				1,
+				true,
+				true,
+			)
+			return
 		}
 	} else {
 		printer.SubStep(
