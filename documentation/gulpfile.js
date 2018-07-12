@@ -20,7 +20,8 @@ var scripts = [
   "static-src/_js/Collapse/Kube.Collapse.js",
   "static-src/_js/Dropdown/Kube.Dropdown.js",
   "static-src/_js/Tabs/Kube.Tabs.js",
-  "static-src/_js/Modal/Kube.Modal.js"
+  "static-src/_js/Modal/Kube.Modal.js",
+  "static-src/_js/custom.js"
 ];
 
 gulp.task('sass', function() {

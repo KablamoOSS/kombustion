@@ -30,6 +30,8 @@
   <link rel="next" href="{{ .Params.next }}"> {{ end }}
 
   {{ partial "favicon" . }}
+  <script src="{{ "/js/jquery-2.1.4.min.js" | relURL }}" type="text/javascript">
+  </script>
 
   <link href="{{ "/css/font.css" | relURL }}" rel="stylesheet" type="text/css">
   <!-- <link href="{{ "/css/kube.legenda.css" | relURL }}" rel="stylesheet" type="text/css"> -->
@@ -48,8 +50,6 @@
   <script>hljs.initHighlightingOnLoad();</script>
 
   <!-- js vendor -->
-  <script src="{{ "/js/jquery-2.1.4.min.js" | relURL }}" type="text/javascript">
-  </script>
 </head>
 
 

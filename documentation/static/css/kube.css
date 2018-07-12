@@ -2155,52 +2155,8 @@ button:hover,
   .tabs li.active a {
     border-bottom: 1px solid #fff; } }
 
-body.dark {
-  background-color: #222 !important; }
-
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
-.dark abbr, .dark acronym, .dark address, .dark big, .dark cite,
-.dark del, .dark dfn, .dark em, .dark ins, .dark kbd, .dark q, .dark s, .dark samp,
-.dark small, .dark strike, .dark strong, .dark sub, .dark sup, .dark tt, .dark var,
-.dark b, .dark u, .dark i, .dark center,
-.dark dl, .dark dt, .dark dd, .dark ol, .dark ul, .dark li,
-.dark fieldset, .dark form, .dark label, .dark legend,
-.dark table, .dark caption, .dark tbody, .dark tfoot, .dark thead, .dark tr, .dark th, .dark td,
-.dark article, .dark aside, .dark canvas, .dark details, .dark embed,
-.dark figure, .dark figcaption, .dark footer, .dark header, .dark hgroup,
-.dark menu, .dark nav, .dark output, .dark ruby, .dark section, .dark summary,
-.dark time, .dark mark, .dark audio, .dark video,
-.dark div p, .dark footer div, .dark .made-with {
-  color: #b4b4b4; }
-
-.dark a {
-  color: #bf882f; }
-
-.dark #hero p {
-  color: #ccc; }
-
-.dark #top-brand a {
-  color: #FFF; }
-
-.dark #top {
-  border-bottom: 1px solid #2d2d2d; }
-  .dark #top #top-nav-main {
-    border-left: 1px solid #2d2d2d; }
-    .dark #top #top-nav-main a {
-      color: #f0f0f0; }
-
-.dark blockquote {
-  border-color: #2d2d2d; }
-
-.dark code {
-  background: #2d2d2d;
-  color: #f0f0f0; }
-
-.dark .docs-toc {
-  border: 1px solid #2d2d2d; }
-
-.dark #footer {
-  border-top: 1px solid #2d2d2d; }
+.docs-toc {
+  margin: 0 0 1em 0; }
 
 pre {
   border-radius: 4px;
@@ -3626,52 +3582,8 @@ tr.border-none td {
   font-style: italic;
   font-weight: 900; }
 
-body.dark {
-  background-color: #222 !important; }
-
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
-.dark abbr, .dark acronym, .dark address, .dark big, .dark cite,
-.dark del, .dark dfn, .dark em, .dark ins, .dark kbd, .dark q, .dark s, .dark samp,
-.dark small, .dark strike, .dark strong, .dark sub, .dark sup, .dark tt, .dark var,
-.dark b, .dark u, .dark i, .dark center,
-.dark dl, .dark dt, .dark dd, .dark ol, .dark ul, .dark li,
-.dark fieldset, .dark form, .dark label, .dark legend,
-.dark table, .dark caption, .dark tbody, .dark tfoot, .dark thead, .dark tr, .dark th, .dark td,
-.dark article, .dark aside, .dark canvas, .dark details, .dark embed,
-.dark figure, .dark figcaption, .dark footer, .dark header, .dark hgroup,
-.dark menu, .dark nav, .dark output, .dark ruby, .dark section, .dark summary,
-.dark time, .dark mark, .dark audio, .dark video,
-.dark div p, .dark footer div, .dark .made-with {
-  color: #b4b4b4; }
-
-.dark a {
-  color: #bf882f; }
-
-.dark #hero p {
-  color: #ccc; }
-
-.dark #top-brand a {
-  color: #FFF; }
-
-.dark #top {
-  border-bottom: 1px solid #2d2d2d; }
-  .dark #top #top-nav-main {
-    border-left: 1px solid #2d2d2d; }
-    .dark #top #top-nav-main a {
-      color: #f0f0f0; }
-
-.dark blockquote {
-  border-color: #2d2d2d; }
-
-.dark code {
-  background: #2d2d2d;
-  color: #f0f0f0; }
-
-.dark .docs-toc {
-  border: 1px solid #2d2d2d; }
-
-.dark #footer {
-  border-top: 1px solid #2d2d2d; }
+.docs-toc {
+  margin: 0 0 1em 0; }
 
 pre {
   border-radius: 4px;
@@ -3760,3 +3672,104 @@ pre {
   text-transform: uppercase;
   color: black;
   font-style: italic; }
+
+#dark-mode-toggle {
+  width: 10px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 20px;
+  font-size: 1px;
+  line-height: 10px;
+  position: relative; }
+  #dark-mode-toggle:before {
+    width: 10px;
+    height: 20px;
+    background: black;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border: 1px solid black;
+    border-right: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    left: -10px;
+    top: 0;
+    position: absolute; }
+  #dark-mode-toggle:after {
+    width: 10px;
+    height: 20px;
+    background: white;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid black;
+    border-left: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    right: 0;
+    top: 0;
+    position: absolute; }
+
+body.dark #dark-mode-toggle:before {
+  background: white; }
+
+body.dark {
+  background-color: #222 !important; }
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
+.dark abbr, .dark acronym, .dark address, .dark big, .dark cite,
+.dark del, .dark dfn, .dark em, .dark ins, .dark kbd, .dark q, .dark s, .dark samp,
+.dark small, .dark strike, .dark strong, .dark sub, .dark sup, .dark tt, .dark var,
+.dark b, .dark u, .dark i, .dark center,
+.dark dl, .dark dt, .dark dd, .dark ol, .dark ul, .dark li,
+.dark fieldset, .dark form, .dark label, .dark legend,
+.dark table, .dark caption, .dark tbody, .dark tfoot, .dark thead, .dark tr, .dark th, .dark td,
+.dark article, .dark aside, .dark canvas, .dark details, .dark embed,
+.dark figure, .dark figcaption, .dark footer, .dark header, .dark hgroup,
+.dark menu, .dark nav, .dark output, .dark ruby, .dark section, .dark summary,
+.dark time, .dark mark, .dark audio, .dark video,
+.dark div p, .dark footer div, .dark .made-with {
+  color: #b4b4b4; }
+
+.dark a {
+  color: #bf882f; }
+
+.dark #hero h1 {
+  color: #ffffff; }
+
+.dark #hero p {
+  color: #ccc; }
+
+.dark #top-brand a {
+  color: #FFF; }
+
+.dark #top {
+  border-bottom: 1px solid #2d2d2d; }
+  .dark #top #top-nav-main {
+    border-left: 1px solid #2d2d2d; }
+    .dark #top #top-nav-main a {
+      color: #f0f0f0; }
+
+.dark blockquote {
+  border-color: #2d2d2d; }
+
+.dark code,
+.dark #components .item {
+  background: #2d2d2d;
+  color: #f0f0f0; }
+
+.dark .docs-toc {
+  border: 1px solid #2d2d2d; }
+
+.dark #kube-features p {
+  color: #ccc; }
+
+.dark #footer {
+  border-top: 1px solid #2d2d2d; }
+
+.dark .pictogram {
+  filter: invert(100); }
