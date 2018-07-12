@@ -45,7 +45,8 @@ func InitaliseNewManifest() error {
 func surveyForInitialManifest() (
 	name string,
 	environments map[string]Environment,
-	err error) {
+	err error,
+) {
 
 	// name
 	surveyName, err := surveyForName()

@@ -186,6 +186,13 @@ ISSUES:
 			Action:    tasks.PrintEvents,
 			Flags:     tasks.CloudFormationStackFlags,
 		},
+		// Core - Self update
+		{
+			Name:   "update",
+			Usage:  "update kombustion",
+			Action: tasks.Update,
+			Flags:  tasks.UpdateFlags,
+		},
 	}
 
 	err := app.Run(os.Args)
@@ -195,7 +202,7 @@ ISSUES:
 				err,
 				"--load-plugin is only available when kombustion is built from source. See the link below for more information.",
 				"https://www.kombustion.io/plugins/developing",
-				)
+			)
 		}
 		printer.Fatal(err, config.ErrorHelpInfo, "")
 	}
