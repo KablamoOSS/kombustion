@@ -9,8 +9,8 @@ import (
 	"strings"
 
 	"github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/internal/plugins/lock"
-	"github.com/mholt/archiver"
 )
 
 // InstallPlugins - Get the lock file and then call installPluginsWithLock
@@ -217,7 +217,7 @@ func downloadPlugin(plugin lock.Plugin, resolved lock.PluginResolution) (updated
 // Extract a plugin downloaded to the local cache, into the local plugin dir
 func extractPlugin(pluginName string, operatingSystem string, architecture string, version string, fileName string) (extractedFilePath string, err error) {
 	destination := getLocalPluginDir(pluginName, operatingSystem, architecture, version)
-	extracter := getExtracter(fileName)
+	extracter := core.GetExtracter(fileName)
 	if extracter == nil {
 		return extractedFilePath, fmt.Errorf(fmt.Sprintf("Unable to extract: %s", fileName))
 	}
@@ -268,15 +268,4 @@ func getDownloadDir(pluginName string, version string) string {
 	pluginDir := fmt.Sprintf("%s/%s/%s", cacheDir, pluginName, version)
 	os.MkdirAll(pluginDir, 0744)
 	return pluginDir
-}
-
-// The PR hasn't been released into a new version, so we're putting it here
-// https://github.com/mholt/archiver/pull/45/files
-func getExtracter(fpath string) archiver.Archiver {
-	for _, format := range archiver.SupportedFormats {
-		if format.Match(fpath) {
-			return format
-		}
-	}
-	return nil
 }

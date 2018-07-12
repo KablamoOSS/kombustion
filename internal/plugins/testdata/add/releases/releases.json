@@ -1,13 +1,13 @@
 [
   {
     "url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11302021",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11302021",
     "assets_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11302021/assets",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11302021/assets",
     "upload_url":
-      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11302021/assets{?name,label}",
+      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11302021/assets{?name,label}",
     "html_url":
-      "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/tag/0.1.0",
+      "https://github.com/KablamoOSS/kombustion-plugin-test/releases/tag/0.1.0",
     "id": 11302021,
     "node_id": "MDc6UmVsZWFzZTExMzAyMDIx",
     "tag_name": "0.1.0",
@@ -43,10 +43,10 @@
     "assets": [
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7396492",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7396492",
         "id": 7396492,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczOTY0OTI=",
-        "name": "kombustion-plugin-serverless-darwin-10.6-amd64.tgz",
+        "name": "kombustion-plugin-test-darwin-10.6-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -79,14 +79,14 @@
         "created_at": "2018-06-04T04:44:54Z",
         "updated_at": "2018-06-04T04:44:54Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.1.0/kombustion-plugin-serverless-darwin-10.6-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.1.0/kombustion-plugin-test-darwin-10.6-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7396491",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7396491",
         "id": 7396491,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczOTY0OTE=",
-        "name": "kombustion-plugin-serverless-linux-386.tgz",
+        "name": "kombustion-plugin-test-linux-386.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -119,14 +119,14 @@
         "created_at": "2018-06-04T04:44:53Z",
         "updated_at": "2018-06-04T04:44:53Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.1.0/kombustion-plugin-serverless-linux-386.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.1.0/kombustion-plugin-test-linux-386.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7396490",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7396490",
         "id": 7396490,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczOTY0OTA=",
-        "name": "kombustion-plugin-serverless-linux-amd64.tgz",
+        "name": "kombustion-plugin-test-linux-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -159,14 +159,14 @@
         "created_at": "2018-06-04T04:44:51Z",
         "updated_at": "2018-06-04T04:44:52Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.1.0/kombustion-plugin-serverless-linux-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.1.0/kombustion-plugin-test-linux-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7396489",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7396489",
         "id": 7396489,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczOTY0ODk=",
-        "name": "kombustion-plugin-serverless-linux-arm64.tgz",
+        "name": "kombustion-plugin-test-linux-arm64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -199,24 +199,24 @@
         "created_at": "2018-06-04T04:44:50Z",
         "updated_at": "2018-06-04T04:44:51Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.1.0/kombustion-plugin-serverless-linux-arm64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.1.0/kombustion-plugin-test-linux-arm64.tgz"
       }
     ],
     "tarball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/tarball/0.1.0",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/tarball/0.1.0",
     "zipball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/zipball/0.1.0",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/zipball/0.1.0",
     "body": null
   },
   {
     "url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11263741",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11263741",
     "assets_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11263741/assets",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11263741/assets",
     "upload_url":
-      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11263741/assets{?name,label}",
+      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11263741/assets{?name,label}",
     "html_url":
-      "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/tag/0.0.8",
+      "https://github.com/KablamoOSS/kombustion-plugin-test/releases/tag/0.0.8",
     "id": 11263741,
     "node_id": "MDc6UmVsZWFzZTExMjYzNzQx",
     "tag_name": "0.0.8",
@@ -252,10 +252,10 @@
     "assets": [
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364352",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364352",
         "id": 7364352,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQzNTI=",
-        "name": "kombustion-plugin-serverless-darwin-10.6-amd64.tgz",
+        "name": "kombustion-plugin-test-darwin-10.6-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -288,14 +288,14 @@
         "created_at": "2018-05-31T15:34:07Z",
         "updated_at": "2018-05-31T15:34:07Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.8/kombustion-plugin-serverless-darwin-10.6-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.8/kombustion-plugin-test-darwin-10.6-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364351",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364351",
         "id": 7364351,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQzNTE=",
-        "name": "kombustion-plugin-serverless-linux-386.tgz",
+        "name": "kombustion-plugin-test-linux-386.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -328,14 +328,14 @@
         "created_at": "2018-05-31T15:34:05Z",
         "updated_at": "2018-05-31T15:34:06Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.8/kombustion-plugin-serverless-linux-386.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.8/kombustion-plugin-test-linux-386.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364350",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364350",
         "id": 7364350,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQzNTA=",
-        "name": "kombustion-plugin-serverless-linux-amd64.tgz",
+        "name": "kombustion-plugin-test-linux-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -368,14 +368,14 @@
         "created_at": "2018-05-31T15:34:04Z",
         "updated_at": "2018-05-31T15:34:04Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.8/kombustion-plugin-serverless-linux-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.8/kombustion-plugin-test-linux-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364349",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364349",
         "id": 7364349,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQzNDk=",
-        "name": "kombustion-plugin-serverless-linux-arm64.tgz",
+        "name": "kombustion-plugin-test-linux-arm64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -408,24 +408,24 @@
         "created_at": "2018-05-31T15:34:02Z",
         "updated_at": "2018-05-31T15:34:03Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.8/kombustion-plugin-serverless-linux-arm64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.8/kombustion-plugin-test-linux-arm64.tgz"
       }
     ],
     "tarball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/tarball/0.0.8",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/tarball/0.0.8",
     "zipball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/zipball/0.0.8",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/zipball/0.0.8",
     "body": null
   },
   {
     "url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11263245",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11263245",
     "assets_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11263245/assets",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11263245/assets",
     "upload_url":
-      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11263245/assets{?name,label}",
+      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11263245/assets{?name,label}",
     "html_url":
-      "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/tag/0.0.7",
+      "https://github.com/KablamoOSS/kombustion-plugin-test/releases/tag/0.0.7",
     "id": 11263245,
     "node_id": "MDc6UmVsZWFzZTExMjYzMjQ1",
     "tag_name": "0.0.7",
@@ -461,10 +461,10 @@
     "assets": [
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364108",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364108",
         "id": 7364108,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQxMDg=",
-        "name": "kombustion-plugin-serverless-darwin-10.6-amd64.tgz",
+        "name": "kombustion-plugin-test-darwin-10.6-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -497,14 +497,14 @@
         "created_at": "2018-05-31T15:12:00Z",
         "updated_at": "2018-05-31T15:12:01Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.7/kombustion-plugin-serverless-darwin-10.6-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.7/kombustion-plugin-test-darwin-10.6-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364107",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364107",
         "id": 7364107,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQxMDc=",
-        "name": "kombustion-plugin-serverless-linux-386.tgz",
+        "name": "kombustion-plugin-test-linux-386.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -537,14 +537,14 @@
         "created_at": "2018-05-31T15:11:59Z",
         "updated_at": "2018-05-31T15:11:59Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.7/kombustion-plugin-serverless-linux-386.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.7/kombustion-plugin-test-linux-386.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364106",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364106",
         "id": 7364106,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQxMDY=",
-        "name": "kombustion-plugin-serverless-linux-amd64.tgz",
+        "name": "kombustion-plugin-test-linux-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -577,14 +577,14 @@
         "created_at": "2018-05-31T15:11:57Z",
         "updated_at": "2018-05-31T15:11:57Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.7/kombustion-plugin-serverless-linux-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.7/kombustion-plugin-test-linux-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364105",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364105",
         "id": 7364105,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQxMDU=",
-        "name": "kombustion-plugin-serverless-linux-arm64.tgz",
+        "name": "kombustion-plugin-test-linux-arm64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -617,24 +617,24 @@
         "created_at": "2018-05-31T15:11:55Z",
         "updated_at": "2018-05-31T15:11:55Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.7/kombustion-plugin-serverless-linux-arm64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.7/kombustion-plugin-test-linux-arm64.tgz"
       }
     ],
     "tarball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/tarball/0.0.7",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/tarball/0.0.7",
     "zipball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/zipball/0.0.7",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/zipball/0.0.7",
     "body": null
   },
   {
     "url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11263187",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11263187",
     "assets_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11263187/assets",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11263187/assets",
     "upload_url":
-      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11263187/assets{?name,label}",
+      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11263187/assets{?name,label}",
     "html_url":
-      "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/tag/0.0.6",
+      "https://github.com/KablamoOSS/kombustion-plugin-test/releases/tag/0.0.6",
     "id": 11263187,
     "node_id": "MDc6UmVsZWFzZTExMjYzMTg3",
     "tag_name": "0.0.6",
@@ -670,10 +670,10 @@
     "assets": [
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364084",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364084",
         "id": 7364084,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQwODQ=",
-        "name": "kombustion-plugin-serverless-darwin-10.6-amd64.tgz",
+        "name": "kombustion-plugin-test-darwin-10.6-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -706,14 +706,14 @@
         "created_at": "2018-05-31T15:09:34Z",
         "updated_at": "2018-05-31T15:09:35Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.6/kombustion-plugin-serverless-darwin-10.6-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.6/kombustion-plugin-test-darwin-10.6-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364083",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364083",
         "id": 7364083,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQwODM=",
-        "name": "kombustion-plugin-serverless-linux-386.tgz",
+        "name": "kombustion-plugin-test-linux-386.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -746,14 +746,14 @@
         "created_at": "2018-05-31T15:09:32Z",
         "updated_at": "2018-05-31T15:09:33Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.6/kombustion-plugin-serverless-linux-386.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.6/kombustion-plugin-test-linux-386.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364082",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364082",
         "id": 7364082,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQwODI=",
-        "name": "kombustion-plugin-serverless-linux-amd64.tgz",
+        "name": "kombustion-plugin-test-linux-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -786,14 +786,14 @@
         "created_at": "2018-05-31T15:09:30Z",
         "updated_at": "2018-05-31T15:09:31Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.6/kombustion-plugin-serverless-linux-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.6/kombustion-plugin-test-linux-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7364081",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7364081",
         "id": 7364081,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjQwODE=",
-        "name": "kombustion-plugin-serverless-linux-arm64.tgz",
+        "name": "kombustion-plugin-test-linux-arm64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -826,24 +826,24 @@
         "created_at": "2018-05-31T15:09:29Z",
         "updated_at": "2018-05-31T15:09:29Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.6/kombustion-plugin-serverless-linux-arm64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.6/kombustion-plugin-test-linux-arm64.tgz"
       }
     ],
     "tarball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/tarball/0.0.6",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/tarball/0.0.6",
     "zipball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/zipball/0.0.6",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/zipball/0.0.6",
     "body": null
   },
   {
     "url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11262706",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11262706",
     "assets_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11262706/assets",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11262706/assets",
     "upload_url":
-      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11262706/assets{?name,label}",
+      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11262706/assets{?name,label}",
     "html_url":
-      "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/tag/0.0.5",
+      "https://github.com/KablamoOSS/kombustion-plugin-test/releases/tag/0.0.5",
     "id": 11262706,
     "node_id": "MDc6UmVsZWFzZTExMjYyNzA2",
     "tag_name": "0.0.5",
@@ -879,10 +879,10 @@
     "assets": [
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7363874",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7363874",
         "id": 7363874,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjM4NzQ=",
-        "name": "kombustion-plugin-serverless-darwin-10.6-amd64.tgz",
+        "name": "kombustion-plugin-test-darwin-10.6-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -915,14 +915,14 @@
         "created_at": "2018-05-31T14:48:18Z",
         "updated_at": "2018-05-31T14:48:19Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.5/kombustion-plugin-serverless-darwin-10.6-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.5/kombustion-plugin-test-darwin-10.6-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7363873",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7363873",
         "id": 7363873,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjM4NzM=",
-        "name": "kombustion-plugin-serverless-linux-386.tgz",
+        "name": "kombustion-plugin-test-linux-386.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -955,14 +955,14 @@
         "created_at": "2018-05-31T14:48:16Z",
         "updated_at": "2018-05-31T14:48:17Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.5/kombustion-plugin-serverless-linux-386.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.5/kombustion-plugin-test-linux-386.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7363871",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7363871",
         "id": 7363871,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjM4NzE=",
-        "name": "kombustion-plugin-serverless-linux-amd64.tgz",
+        "name": "kombustion-plugin-test-linux-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -995,14 +995,14 @@
         "created_at": "2018-05-31T14:48:14Z",
         "updated_at": "2018-05-31T14:48:15Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.5/kombustion-plugin-serverless-linux-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.5/kombustion-plugin-test-linux-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7363870",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7363870",
         "id": 7363870,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjM4NzA=",
-        "name": "kombustion-plugin-serverless-linux-arm64.tgz",
+        "name": "kombustion-plugin-test-linux-arm64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1035,24 +1035,24 @@
         "created_at": "2018-05-31T14:48:12Z",
         "updated_at": "2018-05-31T14:48:13Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.5/kombustion-plugin-serverless-linux-arm64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.5/kombustion-plugin-test-linux-arm64.tgz"
       }
     ],
     "tarball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/tarball/0.0.5",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/tarball/0.0.5",
     "zipball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/zipball/0.0.5",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/zipball/0.0.5",
     "body": null
   },
   {
     "url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11261541",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11261541",
     "assets_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11261541/assets",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11261541/assets",
     "upload_url":
-      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11261541/assets{?name,label}",
+      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11261541/assets{?name,label}",
     "html_url":
-      "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/tag/0.0.4",
+      "https://github.com/KablamoOSS/kombustion-plugin-test/releases/tag/0.0.4",
     "id": 11261541,
     "node_id": "MDc6UmVsZWFzZTExMjYxNTQx",
     "tag_name": "0.0.4",
@@ -1088,10 +1088,10 @@
     "assets": [
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7363279",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7363279",
         "id": 7363279,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjMyNzk=",
-        "name": "kombustion-plugin-serverless-darwin-10.6-amd64.tgz",
+        "name": "kombustion-plugin-test-darwin-10.6-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1124,14 +1124,14 @@
         "created_at": "2018-05-31T13:57:26Z",
         "updated_at": "2018-05-31T13:57:27Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.4/kombustion-plugin-serverless-darwin-10.6-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.4/kombustion-plugin-test-darwin-10.6-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7363276",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7363276",
         "id": 7363276,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjMyNzY=",
-        "name": "kombustion-plugin-serverless-linux-386.tgz",
+        "name": "kombustion-plugin-test-linux-386.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1164,14 +1164,14 @@
         "created_at": "2018-05-31T13:57:24Z",
         "updated_at": "2018-05-31T13:57:25Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.4/kombustion-plugin-serverless-linux-386.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.4/kombustion-plugin-test-linux-386.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7363272",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7363272",
         "id": 7363272,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjMyNzI=",
-        "name": "kombustion-plugin-serverless-linux-amd64.tgz",
+        "name": "kombustion-plugin-test-linux-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1204,14 +1204,14 @@
         "created_at": "2018-05-31T13:57:22Z",
         "updated_at": "2018-05-31T13:57:23Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.4/kombustion-plugin-serverless-linux-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.4/kombustion-plugin-test-linux-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7363271",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7363271",
         "id": 7363271,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjMyNzE=",
-        "name": "kombustion-plugin-serverless-linux-arm64.tgz",
+        "name": "kombustion-plugin-test-linux-arm64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1244,24 +1244,24 @@
         "created_at": "2018-05-31T13:57:21Z",
         "updated_at": "2018-05-31T13:57:21Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.4/kombustion-plugin-serverless-linux-arm64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.4/kombustion-plugin-test-linux-arm64.tgz"
       }
     ],
     "tarball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/tarball/0.0.4",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/tarball/0.0.4",
     "zipball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/zipball/0.0.4",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/zipball/0.0.4",
     "body": null
   },
   {
     "url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11260402",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11260402",
     "assets_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11260402/assets",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11260402/assets",
     "upload_url":
-      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11260402/assets{?name,label}",
+      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11260402/assets{?name,label}",
     "html_url":
-      "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/tag/0.0.3",
+      "https://github.com/KablamoOSS/kombustion-plugin-test/releases/tag/0.0.3",
     "id": 11260402,
     "node_id": "MDc6UmVsZWFzZTExMjYwNDAy",
     "tag_name": "0.0.3",
@@ -1297,10 +1297,10 @@
     "assets": [
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7362732",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7362732",
         "id": 7362732,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjI3MzI=",
-        "name": "kombustion-plugin-serverless-darwin-10.6-amd64.tgz",
+        "name": "kombustion-plugin-test-darwin-10.6-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1333,14 +1333,14 @@
         "created_at": "2018-05-31T13:02:25Z",
         "updated_at": "2018-05-31T13:02:26Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.3/kombustion-plugin-serverless-darwin-10.6-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.3/kombustion-plugin-test-darwin-10.6-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7362731",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7362731",
         "id": 7362731,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjI3MzE=",
-        "name": "kombustion-plugin-serverless-linux-386.tgz",
+        "name": "kombustion-plugin-test-linux-386.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1373,14 +1373,14 @@
         "created_at": "2018-05-31T13:02:24Z",
         "updated_at": "2018-05-31T13:02:24Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.3/kombustion-plugin-serverless-linux-386.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.3/kombustion-plugin-test-linux-386.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7362730",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7362730",
         "id": 7362730,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjI3MzA=",
-        "name": "kombustion-plugin-serverless-linux-amd64.tgz",
+        "name": "kombustion-plugin-test-linux-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1413,14 +1413,14 @@
         "created_at": "2018-05-31T13:02:22Z",
         "updated_at": "2018-05-31T13:02:23Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.3/kombustion-plugin-serverless-linux-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.3/kombustion-plugin-test-linux-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7362729",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7362729",
         "id": 7362729,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDczNjI3Mjk=",
-        "name": "kombustion-plugin-serverless-linux-arm64.tgz",
+        "name": "kombustion-plugin-test-linux-arm64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1453,24 +1453,24 @@
         "created_at": "2018-05-31T13:02:20Z",
         "updated_at": "2018-05-31T13:02:21Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.3/kombustion-plugin-serverless-linux-arm64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.3/kombustion-plugin-test-linux-arm64.tgz"
       }
     ],
     "tarball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/tarball/0.0.3",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/tarball/0.0.3",
     "zipball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/zipball/0.0.3",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/zipball/0.0.3",
     "body": null
   },
   {
     "url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11172323",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11172323",
     "assets_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11172323/assets",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11172323/assets",
     "upload_url":
-      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/11172323/assets{?name,label}",
+      "https://uploads.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/11172323/assets{?name,label}",
     "html_url":
-      "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/tag/0.0.2",
+      "https://github.com/KablamoOSS/kombustion-plugin-test/releases/tag/0.0.2",
     "id": 11172323,
     "node_id": "MDc6UmVsZWFzZTExMTcyMzIz",
     "tag_name": "0.0.2",
@@ -1506,10 +1506,10 @@
     "assets": [
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7298176",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7298176",
         "id": 7298176,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDcyOTgxNzY=",
-        "name": "kombustion-plugin-serverless-darwin-10.6-amd64.tgz",
+        "name": "kombustion-plugin-test-darwin-10.6-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1542,14 +1542,14 @@
         "created_at": "2018-05-25T07:04:07Z",
         "updated_at": "2018-05-25T07:04:08Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.2/kombustion-plugin-serverless-darwin-10.6-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.2/kombustion-plugin-test-darwin-10.6-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7298175",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7298175",
         "id": 7298175,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDcyOTgxNzU=",
-        "name": "kombustion-plugin-serverless-linux-386.tgz",
+        "name": "kombustion-plugin-test-linux-386.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1582,14 +1582,14 @@
         "created_at": "2018-05-25T07:04:04Z",
         "updated_at": "2018-05-25T07:04:06Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.2/kombustion-plugin-serverless-linux-386.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.2/kombustion-plugin-test-linux-386.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7298174",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7298174",
         "id": 7298174,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDcyOTgxNzQ=",
-        "name": "kombustion-plugin-serverless-linux-amd64.tgz",
+        "name": "kombustion-plugin-test-linux-amd64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1622,14 +1622,14 @@
         "created_at": "2018-05-25T07:04:03Z",
         "updated_at": "2018-05-25T07:04:03Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.2/kombustion-plugin-serverless-linux-amd64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.2/kombustion-plugin-test-linux-amd64.tgz"
       },
       {
         "url":
-          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/releases/assets/7298173",
+          "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/releases/assets/7298173",
         "id": 7298173,
         "node_id": "MDEyOlJlbGVhc2VBc3NldDcyOTgxNzM=",
-        "name": "kombustion-plugin-serverless-linux-arm64.tgz",
+        "name": "kombustion-plugin-test-linux-arm64.tgz",
         "label": "",
         "uploader": {
           "login": "ojkelly",
@@ -1662,13 +1662,13 @@
         "created_at": "2018-05-25T07:04:01Z",
         "updated_at": "2018-05-25T07:04:02Z",
         "browser_download_url":
-          "https://github.com/KablamoOSS/kombustion-plugin-serverless/releases/download/0.0.2/kombustion-plugin-serverless-linux-arm64.tgz"
+          "https://github.com/KablamoOSS/kombustion-plugin-test/releases/download/0.0.2/kombustion-plugin-test-linux-arm64.tgz"
       }
     ],
     "tarball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/tarball/0.0.2",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/tarball/0.0.2",
     "zipball_url":
-      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-serverless/zipball/0.0.2",
+      "https://api.github.com/repos/KablamoOSS/kombustion-plugin-test/zipball/0.0.2",
     "body": null
   }
 ]
