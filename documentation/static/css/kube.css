@@ -2284,6 +2284,12 @@ pre {
   font-size: 1.7em;
   font-style: italic; }
 
+#nav-toggle-brand a {
+  font-family: "Passion One", sans-serif;
+  text-transform: uppercase;
+  color: black;
+  font-style: italic; }
+
 body {
   font-family: Lato, Arial, sans-serif; }
 
@@ -3747,4 +3753,10 @@ pre {
   text-transform: uppercase;
   color: black;
   font-size: 1.7em;
+  font-style: italic; }
+
+#nav-toggle-brand a {
+  font-family: "Passion One", sans-serif;
+  text-transform: uppercase;
+  color: black;
   font-style: italic; }
