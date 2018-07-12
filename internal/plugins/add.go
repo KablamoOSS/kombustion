@@ -124,7 +124,6 @@ func constructGithubPlugin(
 	}
 
 	if latestRelease != nil {
-		fmt.Println(latestRelease)
 		printer.SubStep(
 			fmt.Sprintf("Found release %s for %s/%s", *latestRelease.TagName, githubOrg, githubProject),
 			1,
