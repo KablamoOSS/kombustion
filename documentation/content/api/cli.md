@@ -78,6 +78,22 @@ $ kombustion -v
 
 ---
 
+### `update`
+
+_Update `kombustion` binary to the latest release._
+
+```bash
+$ kombustion update
+```
+
+__Options__
+
+#### `-y`
+
+_Don't prompt to update, if there is a release._
+
+---
+
 ## Plugins
 
 The following commands manage plugins in your project.
