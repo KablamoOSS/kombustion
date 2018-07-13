@@ -27,11 +27,10 @@ func ExtractResourcesFromPlugins(
 				} else {
 					wrappedParserFunc := func(
 						name string, data string,
-					) (
-						kombustionTypes.TemplateObject,
-						error,
-					) {
-						return loadResource(parserFunc(name, data))
+					) (kombustionTypes.TemplateObject, error) {
+						resources, _ := loadResource(parserFunc(name, data))
+						// TODO: print errs here as we know what plugin they came from
+						return resources, nil
 					}
 					(*resources)[pluginKey] = wrappedParserFunc
 				}
@@ -61,11 +60,9 @@ func ExtractMappingsFromPlugins(
 				} else {
 					wrappedParserFunc := func(
 						name string, data string,
-					) (
-						kombustionTypes.TemplateObject,
-						error,
-					) {
-						return loadResource(parserFunc(name, data))
+					) (kombustionTypes.TemplateObject, error) {
+						mapping, _ := loadMapping(parserFunc(name, data))
+						return mapping, nil
 					}
 					(*mappings)[pluginKey] = wrappedParserFunc
 				}
@@ -97,11 +94,9 @@ func ExtractOutputsFromPlugins(
 				} else {
 					wrappedParserFunc := func(
 						name string, data string,
-					) (
-						kombustionTypes.TemplateObject,
-						error,
-					) {
-						return loadResource(parserFunc(name, data))
+					) (kombustionTypes.TemplateObject, error) {
+						outputs, _ := loadOutput(parserFunc(name, data))
+						return outputs, nil
 					}
 					(*outputs)[pluginKey] = wrappedParserFunc
 				}

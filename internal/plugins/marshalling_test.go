@@ -57,12 +57,15 @@ func TestLoadResource(t *testing.T) {
 	tests := []struct {
 		input  []byte
 		output kombustionTypes.TemplateObject
-		throws bool
+		errs   []error
 	}{
 		{
 			input: func() []byte {
-				blob, err := msgpack.Marshal(&kombustionTypes.TemplateObject{
-					"Name": "example-plugin",
+				blob, err := msgpack.Marshal(&pluginTypes.PluginResult{
+					Data: kombustionTypes.TemplateObject{
+						"Name": "example-plugin",
+					},
+					Errors: []error{nil},
 				})
 
 				if err != nil {
@@ -74,34 +77,34 @@ func TestLoadResource(t *testing.T) {
 			output: kombustionTypes.TemplateObject{
 				"Name": "example-plugin",
 			},
-			throws: false,
+			errs: []error{nil},
 		},
 	}
 
 	for i, test := range tests {
 		assert := assert.New(t)
-		testOutput, err := loadResource(
+		testOutput, testErrs := loadResource(
 			test.input,
 		)
-		if test.throws {
-			assert.NotNil(err)
-		} else {
-			assert.Nil(err)
-			assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d:", i))
-		}
+		assert.Equal(testErrs, test.errs, fmt.Sprintf("Test %d:", i))
+		assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d:", i))
 	}
+
 }
 
 func TestLoadMapping(t *testing.T) {
 	tests := []struct {
 		input  []byte
 		output kombustionTypes.TemplateObject
-		throws bool
+		errs   []error
 	}{
 		{
 			input: func() []byte {
-				blob, err := msgpack.Marshal(&kombustionTypes.TemplateObject{
-					"Name": "example-plugin",
+				blob, err := msgpack.Marshal(&pluginTypes.PluginResult{
+					Data: kombustionTypes.TemplateObject{
+						"Name": "example-plugin",
+					},
+					Errors: []error{nil},
 				})
 
 				if err != nil {
@@ -113,21 +116,17 @@ func TestLoadMapping(t *testing.T) {
 			output: kombustionTypes.TemplateObject{
 				"Name": "example-plugin",
 			},
-			throws: false,
+			errs: []error{nil},
 		},
 	}
 
 	for i, test := range tests {
 		assert := assert.New(t)
-		testOutput, err := loadMapping(
+		testOutput, testErrs := loadMapping(
 			test.input,
 		)
-		if test.throws {
-			assert.NotNil(err)
-		} else {
-			assert.Nil(err)
-			assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d:", i))
-		}
+		assert.Equal(testErrs, test.errs, fmt.Sprintf("Test %d:", i))
+		assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d:", i))
 	}
 }
 
@@ -135,12 +134,15 @@ func TestLoadOutput(t *testing.T) {
 	tests := []struct {
 		input  []byte
 		output kombustionTypes.TemplateObject
-		throws bool
+		errs   []error
 	}{
 		{
 			input: func() []byte {
-				blob, err := msgpack.Marshal(&kombustionTypes.TemplateObject{
-					"Name": "example-plugin",
+				blob, err := msgpack.Marshal(&pluginTypes.PluginResult{
+					Data: kombustionTypes.TemplateObject{
+						"Name": "example-plugin",
+					},
+					Errors: []error{nil},
 				})
 
 				if err != nil {
@@ -152,20 +154,16 @@ func TestLoadOutput(t *testing.T) {
 			output: kombustionTypes.TemplateObject{
 				"Name": "example-plugin",
 			},
-			throws: false,
+			errs: []error{nil},
 		},
 	}
 
 	for i, test := range tests {
 		assert := assert.New(t)
-		testOutput, err := loadOutput(
+		testOutput, testErrs := loadOutput(
 			test.input,
 		)
-		if test.throws {
-			assert.NotNil(err)
-		} else {
-			assert.Nil(err)
-			assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d:", i))
-		}
+		assert.Equal(testErrs, test.errs, fmt.Sprintf("Test %d:", i))
+		assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d:", i))
 	}
 }

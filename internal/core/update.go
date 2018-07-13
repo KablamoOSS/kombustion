@@ -93,7 +93,6 @@ func Update(currentVersion string, noPrompt bool) {
 			true,
 		)
 	}
-
 }
 
 func checkForUpdate(

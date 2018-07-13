@@ -16,10 +16,10 @@ func TestRegisterPlugin(t *testing.T) {
 	}{
 		{
 			input: apiTypes.Config{
-				Name:               "Name",
-				Version:            "0.1.0",
-				Prefix:             "Test",
-				Help:               apiTypes.Help{},
+				Name:    "Name",
+				Version: "0.1.0",
+				Prefix:  "Test",
+				Help:    apiTypes.Help{},
 			},
 		},
 	}
@@ -43,18 +43,18 @@ func TestRegisterResource(t *testing.T) {
 		input func(
 			name string,
 			data string,
-		) types.TemplateObject
+		) (types.TemplateObject, []error)
 		output types.TemplateObject
 	}{
 		{
 			input: func(
 				name string,
 				data string,
-			) types.TemplateObject {
+			) (types.TemplateObject, []error) {
 				return types.TemplateObject{
 					"Name": name,
 					"Data": data,
-				}
+				}, []error{nil}
 			},
 			output: types.TemplateObject{
 				"Name": "TestName",
@@ -72,14 +72,14 @@ func TestRegisterResource(t *testing.T) {
 
 		testOutput := testFunc(name, data)
 
-		var testResource types.TemplateObject
+		var pluginResult apiTypes.PluginResult
+		err := msgpack.Unmarshal(testOutput, &pluginResult)
 
-		err := msgpack.Unmarshal(testOutput, &testResource)
 		if err != nil {
 			t.Error(err)
 		}
 
-		assert.Equal(testResource, test.output, fmt.Sprintf("Test %d", i))
+		assert.Equal(pluginResult.Data, test.output, fmt.Sprintf("Test %d", i))
 	}
 }
 
@@ -88,18 +88,18 @@ func TestRegisterOutput(t *testing.T) {
 		input func(
 			name string,
 			data string,
-		) types.TemplateObject
+		) (types.TemplateObject, []error)
 		output types.TemplateObject
 	}{
 		{
 			input: func(
 				name string,
 				data string,
-			) types.TemplateObject {
+			) (types.TemplateObject, []error) {
 				return types.TemplateObject{
 					"Name": name,
 					"Data": data,
-				}
+				}, []error{nil}
 			},
 			output: types.TemplateObject{
 				"Name": "TestName",
@@ -117,14 +117,14 @@ func TestRegisterOutput(t *testing.T) {
 
 		testOutput := testFunc(name, data)
 
-		var testMapping types.TemplateObject
+		var pluginResult apiTypes.PluginResult
+		err := msgpack.Unmarshal(testOutput, &pluginResult)
 
-		err := msgpack.Unmarshal(testOutput, &testMapping)
 		if err != nil {
 			t.Error(err)
 		}
 
-		assert.Equal(testMapping, test.output, fmt.Sprintf("Test %d", i))
+		assert.Equal(pluginResult.Data, test.output, fmt.Sprintf("Test %d", i))
 	}
 }
 
@@ -133,18 +133,18 @@ func TestRegisterMapping(t *testing.T) {
 		input func(
 			name string,
 			data string,
-		) types.TemplateObject
+		) (types.TemplateObject, []error)
 		output types.TemplateObject
 	}{
 		{
 			input: func(
 				name string,
 				data string,
-			) types.TemplateObject {
+			) (types.TemplateObject, []error) {
 				return types.TemplateObject{
 					"Name": name,
 					"Data": data,
-				}
+				}, []error{nil}
 			},
 			output: types.TemplateObject{
 				"Name": "TestName",
@@ -162,13 +162,13 @@ func TestRegisterMapping(t *testing.T) {
 
 		testOutput := testFunc(name, data)
 
-		var testMapping types.TemplateObject
+		var pluginResult apiTypes.PluginResult
+		err := msgpack.Unmarshal(testOutput, &pluginResult)
 
-		err := msgpack.Unmarshal(testOutput, &testMapping)
 		if err != nil {
 			t.Error(err)
 		}
 
-		assert.Equal(testMapping, test.output, fmt.Sprintf("Test %d", i))
+		assert.Equal(pluginResult.Data, test.output, fmt.Sprintf("Test %d", i))
 	}
 }

@@ -21,7 +21,7 @@ func RegisterResource(
 	resource func(
 		name string,
 		data string,
-	) (cf types.TemplateObject),
+	) (cf types.TemplateObject, err []error),
 ) func(
 	name string,
 	data string,
@@ -30,7 +30,8 @@ func RegisterResource(
 		name string,
 		data string,
 	) []byte {
-		return marshallResource(resource(name, data))
+		result, resultErr := resource(name, data)
+		return marshallResource(result, resultErr)
 	}
 }
 
@@ -41,7 +42,7 @@ func RegisterMapping(
 	mapping func(
 		name string,
 		data string,
-	) (cf types.TemplateObject),
+	) (cf types.TemplateObject, err []error),
 ) func(
 	name string,
 	data string,
@@ -50,7 +51,8 @@ func RegisterMapping(
 		name string,
 		data string,
 	) []byte {
-		return marshallMapping(mapping(name, data))
+		result, resultErr := mapping(name, data)
+		return marshallMapping(result, resultErr)
 	}
 }
 
@@ -61,7 +63,7 @@ func RegisterOutput(
 	output func(
 		name string,
 		data string,
-	) (cf types.TemplateObject),
+	) (cf types.TemplateObject, err []error),
 ) func(
 	name string,
 	data string,
@@ -70,6 +72,7 @@ func RegisterOutput(
 		name string,
 		data string,
 	) []byte {
-		return marshallOutput(output(name, data))
+		result, resultErr := output(name, data)
+		return marshallOutput(result, resultErr)
 	}
 }

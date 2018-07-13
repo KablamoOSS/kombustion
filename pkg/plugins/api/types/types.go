@@ -1,5 +1,15 @@
 package types
 
+import (
+	kombustionTypes "github.com/KablamoOSS/kombustion/types"
+)
+
+// PluginResult result of a parserFunc
+type PluginResult struct {
+	Data   kombustionTypes.TemplateObject
+	Errors []error
+}
+
 // Config provides Kombustion with information about your plugin
 type Config struct {
 	Name    string
