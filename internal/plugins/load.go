@@ -70,6 +70,15 @@ func loadPlugin(
 
 	// TODO: Make the help messages for users much friendlier
 	if !pluginExists(pluginPath) {
+		if isDevPlugin {
+			printer.Fatal(
+				fmt.Errorf("Plugin `%s` could not be found", pluginPath),
+				fmt.Sprintf(
+					"Check the path you provided with --load-plugin is correct.",
+				),
+				"https://www.kombustion.io/api/cli/#load-plugin",
+			)
+		}
 		printer.Fatal(
 			fmt.Errorf("Plugin `%s` is not installed, but is included in kombustion.lock", manifestPlugin.Name),
 			fmt.Sprintf(

@@ -293,6 +293,12 @@ func ParseLambdaFunction(
 You must return all errors in the `errs []error` array. These are then printed to the user, with
 information about the plugin, and the block in the template that caused it.
 
+**Don't** print errors to `stdout`, as the user wont know where they're coming from.
+
+If `errs []error` contains any errors, the task will fail.
+
+And example of how an error is printed:
+
 ```sh
 ✖  Error: Missing field 'CIDR'
 ☞  Resolution:

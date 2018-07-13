@@ -29,8 +29,10 @@ func ExtractResourcesFromPlugins(
 						name string, data string,
 					) (kombustionTypes.TemplateObject, error) {
 						resources, errs := loadResource(parserFunc(name, data))
+						hasErrors := false
 						for _, err := range errs {
 							if err != nil {
+								hasErrors = true
 								printer.Error(
 									err,
 									fmt.Sprintf(
@@ -43,7 +45,10 @@ func ExtractResourcesFromPlugins(
 								)
 							}
 						}
-						// TODO: print errs here as we know what plugin they came from
+
+						if hasErrors {
+							return resources, fmt.Errorf("There were errors parsing %s", name)
+						}
 						return resources, nil
 					}
 					(*resources)[pluginKey] = wrappedParserFunc
@@ -76,8 +81,12 @@ func ExtractMappingsFromPlugins(
 						name string, data string,
 					) (kombustionTypes.TemplateObject, error) {
 						mapping, errs := loadMapping(parserFunc(name, data))
+
+						hasErrors := false
 						for _, err := range errs {
 							if err != nil {
+								hasErrors = true
+
 								printer.Error(
 									err,
 									fmt.Sprintf(
@@ -89,6 +98,10 @@ func ExtractMappingsFromPlugins(
 									"",
 								)
 							}
+						}
+
+						if hasErrors {
+							return mapping, fmt.Errorf("There were errors parsing %s", name)
 						}
 						return mapping, nil
 					}
@@ -124,8 +137,12 @@ func ExtractOutputsFromPlugins(
 						name string, data string,
 					) (kombustionTypes.TemplateObject, error) {
 						outputs, errs := loadOutput(parserFunc(name, data))
+
+						hasErrors := false
 						for _, err := range errs {
 							if err != nil {
+								hasErrors = true
+
 								printer.Error(
 									err,
 									fmt.Sprintf(
@@ -137,6 +154,10 @@ func ExtractOutputsFromPlugins(
 									"",
 								)
 							}
+						}
+
+						if hasErrors {
+							return outputs, fmt.Errorf("There were errors parsing %s", name)
 						}
 						return outputs, nil
 					}
