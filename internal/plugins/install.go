@@ -28,7 +28,7 @@ func InstallPlugins() error {
 
 		// TODO: This error message could be more helpful
 		printer.Fatal(
-			fmt.Errorf("Failed installing plugins."),
+			fmt.Errorf("failed installing plugins"),
 			"Error installing plugins",
 			"",
 		)

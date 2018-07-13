@@ -28,7 +28,21 @@ func ExtractResourcesFromPlugins(
 					wrappedParserFunc := func(
 						name string, data string,
 					) (kombustionTypes.TemplateObject, error) {
-						resources, _ := loadResource(parserFunc(name, data))
+						resources, errs := loadResource(parserFunc(name, data))
+						for _, err := range errs {
+							if err != nil {
+								printer.Error(
+									err,
+									fmt.Sprintf(
+										"\n   ├─ Name:    %s\n   ├─ Plugin:  %s\n   └─ Type:    %s",
+										name,
+										plugin.Config.Name,
+										pluginKey,
+									),
+									"",
+								)
+							}
+						}
 						// TODO: print errs here as we know what plugin they came from
 						return resources, nil
 					}
@@ -61,7 +75,21 @@ func ExtractMappingsFromPlugins(
 					wrappedParserFunc := func(
 						name string, data string,
 					) (kombustionTypes.TemplateObject, error) {
-						mapping, _ := loadMapping(parserFunc(name, data))
+						mapping, errs := loadMapping(parserFunc(name, data))
+						for _, err := range errs {
+							if err != nil {
+								printer.Error(
+									err,
+									fmt.Sprintf(
+										"\n   ├─ Name:    %s\n   ├─ Plugin:  %s\n   └─ Type:    %s",
+										name,
+										plugin.Config.Name,
+										pluginKey,
+									),
+									"",
+								)
+							}
+						}
 						return mapping, nil
 					}
 					(*mappings)[pluginKey] = wrappedParserFunc
@@ -95,7 +123,21 @@ func ExtractOutputsFromPlugins(
 					wrappedParserFunc := func(
 						name string, data string,
 					) (kombustionTypes.TemplateObject, error) {
-						outputs, _ := loadOutput(parserFunc(name, data))
+						outputs, errs := loadOutput(parserFunc(name, data))
+						for _, err := range errs {
+							if err != nil {
+								printer.Error(
+									err,
+									fmt.Sprintf(
+										"\n   ├─ Name:    %s\n   ├─ Plugin:  %s\n   └─ Type:    %s",
+										name,
+										plugin.Config.Name,
+										pluginKey,
+									),
+									"",
+								)
+							}
+						}
 						return outputs, nil
 					}
 					(*outputs)[pluginKey] = wrappedParserFunc
