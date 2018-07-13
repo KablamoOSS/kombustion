@@ -47,6 +47,13 @@ func Update(currentVersion string, noPrompt bool) {
 			return
 		}
 
+		printer.SubStep(
+			fmt.Sprintf("Found release %s", *latestRelease.TagName),
+			1,
+			false,
+			true,
+		)
+
 		var confirm bool
 
 		if noPrompt == false {
@@ -54,13 +61,6 @@ func Update(currentVersion string, noPrompt bool) {
 		} else {
 			confirm = true
 		}
-
-		printer.SubStep(
-			fmt.Sprintf("Found release %s", *latestRelease.TagName),
-			1,
-			false,
-			true,
-		)
 
 		if confirm {
 			printer.Progress(fmt.Sprintf("Downloading %s", downloadURL))
@@ -71,7 +71,7 @@ func Update(currentVersion string, noPrompt bool) {
 			downloadRelease(downloadURL)
 
 			printer.SubStep(
-				fmt.Sprintf("Updated successful."),
+				fmt.Sprintf("Update successful."),
 				1,
 				true,
 				true,
@@ -111,8 +111,8 @@ func checkForUpdate(
 	if err != nil {
 		printer.Fatal(
 			err,
-			"",
-			"",
+			"This may have failed due to network connectivity. Try updating again, but it fails download the latest version directly.",
+			"https://www.kombustion.io/docs/downloads/",
 		)
 	}
 
@@ -207,7 +207,11 @@ func extractRelease(url, fileName string) (string, error) {
 	}
 	err := extracter.Open(fileName, destination)
 	if err != nil {
-		printer.Fatal(err, "", "")
+		printer.Fatal(
+			err,
+			"An error occured installing the new release. Try again, or download the latest release directly.",
+			"https://www.kombustion.io/docs/downloads/",
+		)
 	}
 
 	return destination, err
