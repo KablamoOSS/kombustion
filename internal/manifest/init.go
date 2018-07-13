@@ -18,7 +18,7 @@ func InitaliseNewManifest() error {
 		printer.Fatal(
 			fmt.Errorf("Sorry we can't create a new kombustion.yaml, one already exists."),
 			"If you want to re-initialise your kombustion.yaml file, first remove it.",
-			"https://kombustion.io/manifest",
+			"https://www.kombustion.io/api/manifest/",
 		)
 	}
 

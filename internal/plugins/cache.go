@@ -39,6 +39,7 @@ func findPluginInCache(plugin lock.Plugin, resolved lock.PluginResolution) (foun
 func GetCacheDir() string {
 	usr, err := user.Current()
 	if err != nil {
+		// TODO: Make this error more helpful
 		printer.Fatal(
 			err,
 			"",

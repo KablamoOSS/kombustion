@@ -64,3 +64,8 @@ An example of when you may want to do this, is to get the latest AMI for a set o
 [1]:	https://golang.org/pkg/plugin/
 [2]:	https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html
 [3]:	https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/walkthrough-custom-resources-lambda-lookup-amiids.html
+
+
+## Cache
+
+Kombustion caches downloaded plugins in `~/.kombustion/cache/plugins`.

@@ -40,33 +40,15 @@ func Generate(c *cli.Context) {
 			fmt.Sprintf(
 				"Add the path to the source template file you want to generate like: `kombustion generate template.yaml`.",
 			),
-			"",
+			"https://www.kombustion.io/api/cli/#generate",
 		)
 	}
 
 	paramMap := cloudformation.GetParamMap(c)
 
-	lockFile, err := lock.FindAndLoadLock()
-	if err != nil {
-		printer.Fatal(
-			err,
-			fmt.Sprintf(
-				"kombustion.lock may need to be rebuilt",
-			),
-			"",
-		)
-	}
+	lockFile := lock.FindAndLoadLock()
 
 	manifestFile := manifest.FindAndLoadManifest()
-	if err != nil {
-		printer.Fatal(
-			err,
-			fmt.Sprintf(
-				"kombustion.yaml may need to be rebuilt",
-			),
-			"",
-		)
-	}
 
 	// load all plugins
 	loadedPlugins := plugins.LoadPlugins(manifestFile, lockFile)
@@ -81,10 +63,10 @@ func Generate(c *cli.Context) {
 
 	printer.Progress("Generating template")
 	tasks.GenerateTemplate(cloudformation.GenerateParams{
-		Filename:           fileName,
-		Env:                c.String("env"),
+		Filename: fileName,
+		Env:      c.String("env"),
 		GenerateDefaultOutputs: c.Bool("generate-default-outputs"),
-		ParamMap:           paramMap,
-		Plugins:            loadedPlugins,
+		ParamMap:               paramMap,
+		Plugins:                loadedPlugins,
 	})
 }

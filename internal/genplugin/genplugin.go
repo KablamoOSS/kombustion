@@ -6,11 +6,11 @@ import (
 	"go/format"
 	"io/ioutil"
 
+	printer "github.com/KablamoOSS/go-cli-printer"
 	"os"
 	"os/exec"
 	"reflect"
 	"strings"
-	printer "github.com/KablamoOSS/go-cli-printer"
 
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
@@ -196,6 +196,7 @@ func main() {
 
 	err := app.Run(os.Args)
 	if err != nil {
+		// TODO: Make this error more helpful
 		printer.Fatal(
 			err,
 			"",
@@ -393,6 +394,7 @@ func writeOutput(path string, output []byte) {
 
 func checkError(err error) {
 	if err != nil {
+		// TODO: Make this error more helpful
 		printer.Fatal(
 			err,
 			"",

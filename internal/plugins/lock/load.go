@@ -1,25 +1,40 @@
 package lock
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
-	"github.com/KablamoOSS/kombustion/config"
 	"github.com/KablamoOSS/yaml"
 )
 
 // FindAndLoadLock - Search the current directory for a Lock file, and load it
 // If no lock is found, return an empty Lock
-func FindAndLoadLock() (lock *Lock, err error) {
+func FindAndLoadLock() (lock *Lock) {
+	var err error
+
 	path, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
-		printer.Fatal(err, config.ErrorHelpInfo, "")
+		printer.Fatal(
+			err,
+			fmt.Sprintf(
+				"kombustion.lock may need to be corrupted and needs to be rebuilt. Run `kombustion install` to fix this.",
+			),
+			"https://www.kombustion.io/api/cli/#install",
+		)
 	}
+
 	lock, err = findAndLoadLock(path)
 	if err != nil {
-		printer.Fatal(err, config.ErrorHelpInfo, "")
+		printer.Fatal(
+			err,
+			fmt.Sprintf(
+				"kombustion.lock may need to be corrupted and needs to be rebuilt. Run `kombustion install` to fix this.",
+			),
+			"https://www.kombustion.io/api/cli/#install",
+		)
 	}
 
 	if lock == nil {

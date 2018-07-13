@@ -49,28 +49,13 @@ func Upsert(c *cli.Context) {
 			fmt.Sprintf(
 				"Add the path to the source template file you want to generate like: `kombustion upsert template.yaml`.",
 			),
-			"",
+			"https://www.kombustion.io/api/cli/#upsert",
 		)
 	}
 
-	lockFile, err := lock.FindAndLoadLock()
-	if err != nil {
-		printer.Fatal(
-			err,
-			"",
-			"",
-		)
-
-	}
+	lockFile := lock.FindAndLoadLock()
 
 	manifestFile := manifest.FindAndLoadManifest()
-	if err != nil {
-		printer.Fatal(
-			err,
-			"",
-			"",
-		)
-	}
 
 	// load all plugins
 	loadedPlugins := plugins.LoadPlugins(manifestFile, lockFile)
@@ -103,11 +88,11 @@ func Upsert(c *cli.Context) {
 	printer.Progress("Generating template")
 	// Template generation parameters
 	generateParams := cloudformation.GenerateParams{
-		Filename:           fileName,
-		Env:                environment,
+		Filename: fileName,
+		Env:      environment,
 		GenerateDefaultOutputs: c.Bool("generate-default-outputs"),
-		ParamMap:           paramMap,
-		Plugins:            loadedPlugins,
+		ParamMap:               paramMap,
+		Plugins:                loadedPlugins,
 	}
 
 	capabilities := getCapabilities(c)

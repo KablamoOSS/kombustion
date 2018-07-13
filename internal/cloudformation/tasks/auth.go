@@ -23,7 +23,7 @@ func GetCloudformationClient(profile string, region string) *cloudformation.Clou
 			fmt.Sprintf(
 				"Pass a region in via the cli with `--region us-east-1` or set a default `region` in kombustion.yaml",
 			),
-			"http://kombustion.io/manifest#region",
+			"http://kombustion.io/manifest/#region",
 		)
 	}
 
@@ -100,10 +100,11 @@ func must(sess *session.Session, err error) *session.Session {
 			printer.Fatal(
 				err,
 				"You need to provide access credentials to your AWS account.",
-				"",
+				"https://www.kombustion.io/docs/getting-started/#ensuring-your-credentials-are-available",
 			)
 		}
 
+		// TODO: Make this error more helpful
 		printer.Fatal(
 			err,
 			"",

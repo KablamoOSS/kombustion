@@ -6,9 +6,8 @@ import (
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation/tasks"
-	"github.com/urfave/cli"
 	"github.com/KablamoOSS/kombustion/internal/manifest"
-
+	"github.com/urfave/cli"
 )
 
 // PrintEvents outputs the events of a stack
@@ -41,7 +40,7 @@ func PrintEvents(c *cli.Context) {
 			fmt.Sprintf(
 				"Add the path to the source template file, or provide use --stack-name",
 			),
-			"",
+			"https://www.kombustion.io/api/cli/#stacks",
 		)
 	}
 

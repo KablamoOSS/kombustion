@@ -18,18 +18,22 @@ func InstallPlugins() error {
 	printer.Step("Installing plugins")
 	printer.Progress("Kombusting")
 
-	lockFile, err := lock.FindAndLoadLock()
-	if err != nil {
-		return err
-	}
+	lockFile := lock.FindAndLoadLock()
+
 	updatedLockFile, installErrors := installPluginsWithLock(lockFile)
 	if len(installErrors) > 0 {
 		for _, err := range installErrors {
 			printer.Error(err, "", "")
 		}
-		printer.Fatal(err, "Error installing plugins", "")
+
+		// TODO: This error message could be more helpful
+		printer.Fatal(
+			fmt.Errorf("Failed installing plugins."),
+			"Error installing plugins",
+			"",
+		)
 	}
-	err = lock.WriteLockToDisk(updatedLockFile)
+	err := lock.WriteLockToDisk(updatedLockFile)
 	if err != nil {
 		printer.Fatal(err, "Error installing plugins", "")
 		return err
@@ -85,7 +89,11 @@ func installPlugin(plugin lock.Plugin) (updatedPlugin lock.Plugin, installErrors
 			// Check the local cache for a file
 			foundInCache, cacheFile, err := findPluginInCache(plugin, resolved)
 			if err != nil {
-				printer.Fatal(err, "", "")
+				printer.Fatal(
+					err,
+					"Try again, if this error persists try clearing the plugin cache.",
+					"https://www.kombustion.io/concepts/plugins/#cache",
+				)
 				installErrors = append(installErrors, err)
 			}
 

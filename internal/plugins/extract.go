@@ -20,9 +20,9 @@ func ExtractResourcesFromPlugins(
 					printer.Fatal(
 						fmt.Errorf("Plugin `%s` tried to load resource `%s` but it already exists", plugin.Config.Name, pluginKey),
 						fmt.Sprintf(
-							"You can add a `prefix` to this plugin in kombustion.yaml to resolve this.",
+							"You can add a `Alias` to this plugin in kombustion.yaml to resolve this.",
 						),
-						"",
+						"https://www.kombustion.io/api/manifest/#alias-optional",
 					)
 				} else {
 					wrappedParserFunc := func(
@@ -54,9 +54,9 @@ func ExtractMappingsFromPlugins(
 					printer.Fatal(
 						fmt.Errorf("Plugin `%s` tried to load mapping `%s` but it already exists", plugin.Config.Name, pluginKey),
 						fmt.Sprintf(
-							"You can add a `prefix` to this plugin in kombustion.yaml to resolve this.",
+							"You can add a `Alias` to this plugin in kombustion.yaml to resolve this.",
 						),
-						"",
+						"https://www.kombustion.io/api/manifest/#alias-optional",
 					)
 				} else {
 					wrappedParserFunc := func(
@@ -90,9 +90,9 @@ func ExtractOutputsFromPlugins(
 					printer.Fatal(
 						fmt.Errorf("Plugin `%s` tried to load output `%s` but it already exists", plugin.Config.Name, pluginKey),
 						fmt.Sprintf(
-							"You can add a `prefix` to this plugin in kombustion.yaml to resolve this.",
+							"You can add a `Alias` to this plugin in kombustion.yaml to resolve this.",
 						),
-						"",
+						"https://www.kombustion.io/api/manifest/#alias-optional",
 					)
 				} else {
 					wrappedParserFunc := func(

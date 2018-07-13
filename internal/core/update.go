@@ -63,7 +63,7 @@ func Update(currentVersion string, noPrompt bool) {
 		}
 
 		if confirm {
-			printer.Progress(fmt.Sprintf("Downloading %s", downloadURL))
+			printer.Progress(fmt.Sprintf("Downloading %s", *latestRelease.TagName))
 
 			// TODO: Codesign the update, and check it here
 
@@ -220,7 +220,7 @@ func extractRelease(url, fileName string) (string, error) {
 func surveyToConfirmUpdate(version string) bool {
 	var update bool
 	prompt := &survey.Confirm{
-		Message: fmt.Sprintf("Update to version %s?", version),
+		Message: fmt.Sprintf(" ├─ Update to version %s?", version),
 	}
 	survey.AskOne(prompt, &update, nil)
 	return update

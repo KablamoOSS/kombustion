@@ -26,11 +26,8 @@ func AddPluginsToManifest(manifest *manifestType.Manifest, pluginLocations []str
 	printer.Progress("Kombusting")
 
 	// Get the lockFile
-	lockFile, err := lock.FindAndLoadLock()
-	if err != nil {
-		printer.Error(err, config.ErrorHelpInfo, "")
-		return manifest, err
-	}
+	lockFile := lock.FindAndLoadLock()
+	var err error
 
 	// Add all the plugins to the manifest and lockfile
 	manifest, lockFile, err = addPluginsToManifestAndLock(manifest, lockFile, pluginLocations)
@@ -116,6 +113,7 @@ func constructGithubPlugin(
 
 	latestRelease, latestReleaseErr := core.GetLatestRelease(githubClient, githubOrg, githubProject)
 	if latestReleaseErr != nil {
+		// TODO: Make this error more helpful
 		printer.Fatal(
 			latestReleaseErr,
 			"",

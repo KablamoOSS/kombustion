@@ -27,7 +27,7 @@ func FindAndLoadManifest() *Manifest {
 				printer.Fatal(
 					err,
 					"If you want to re-initialise your kombustion.yaml file, first remove it.",
-					"https://kombustion.io/manifest",
+					"https://www.kombustion.io/api/manifest/",
 				)
 			}
 			manifest, err := findAndLoadManifest(path)
@@ -35,7 +35,7 @@ func FindAndLoadManifest() *Manifest {
 				printer.Fatal(
 					err,
 					"If you want to re-initialise your kombustion.yaml file, first remove it.",
-					"https://kombustion.io/manifest",
+					"https://www.kombustion.io/api/manifest/",
 				)
 			}
 			loadedManifest = &manifest

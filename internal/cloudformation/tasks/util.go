@@ -24,6 +24,7 @@ func checkError(err error) {
 				"",
 			)
 		} else {
+			// TODO: Make this error more helpful
 			printer.Fatal(err, "", "")
 		}
 	}
@@ -43,6 +44,7 @@ func checkErrorDeletePoll(err error) {
 			)
 			os.Exit(0)
 		} else {
+			// TODO: Make this error more helpful
 			printer.Fatal(err, "", "")
 		}
 	}

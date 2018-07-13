@@ -28,7 +28,7 @@ func Delete(c *cli.Context) {
 			fmt.Sprintf(
 				"Add the path to the source template file you want to generate like: `kombustion upsert template.yaml`.",
 			),
-			"",
+			"https://www.kombustion.io/api/manifest/",
 		)
 	}
 
