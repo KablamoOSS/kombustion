@@ -233,24 +233,32 @@ func ParseLambdaFunction(
   data string,
 ) (
   cf types.TemplateObject,
-  err error,
+  errs []error,
 ) {
   // Setup a variable to load the yaml into
   var config LambdaFunctionConfig
 
   // Attempt to unmarshall the yaml
-  if err = yaml.Unmarshal([]byte(data), &config); err != nil {
-    // return an error if there was one
-    return cf, err
-  }
+  err := yaml.Unmarshal([]byte(data), &config)
+
+	if err != nil {
+    // Append the error to the errs array
+		errs = append(errs, err)
+		return
+	}
+
 
   // validate the config to ensure we have required fields
   // and apply any other validation logic
   // We'll cover this shortly.
   err = config.Validate()
-  if err != nil {
-    return cf, err
-  }
+
+	if err != nil {
+    // Append the error to the errs array
+		errs = append(errs, err)
+		return
+	}
+
 
   // Now we can create resources
   // To do this we need to call a create function from
@@ -275,11 +283,23 @@ func ParseLambdaFunction(
     )
   }
 
-  return cf, err
+  return cf, errs
 }
 
 ```
 
+#### Returning Errors
+
+You must return all errors in the `errs []error` array. These are then printed to the user, with
+information about the plugin, and the block in the template that caused it.
+
+```sh
+✖  Error: Missing field 'CIDR'
+☞  Resolution:
+   ├─ Name:    MyNetwork
+   ├─ Plugin:  kombustion-plugin-network
+   └─ Type:    Kablamo::Network::VPC
+```
 
 ### Validation
 
