@@ -50,10 +50,14 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
-	"github.com/KablamoOSS/kombustion/tasks"
+	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/config"
+	"github.com/KablamoOSS/kombustion/internal/tasks"
 	log "github.com/sirupsen/logrus"
+	"github.com/ttacon/chalk"
 	"github.com/urfave/cli"
 )
 
@@ -65,96 +69,141 @@ var (
 )
 
 func main() {
+
+	// Fix for #13, to provide a fallback version for plugin developers
+	// In general it's recommended to use the official builds.
+	if version == "" {
+		version = "BUILT_FROM_SOURCE"
+
+		devModeFlags := []cli.Flag{
+			cli.StringFlag{
+				Name:  "load-plugin",
+				Usage: "load arbitrary plugin `path/to/plugin.so`",
+			},
+		}
+
+		tasks.GlobalFlags = append(tasks.GlobalFlags, devModeFlags...)
+
+	}
+
+	kombustionLogo := chalk.Dim.TextStyle(`
+   __              __            __  _
+  / /_____  __ _  / /  __ _____ / /_(_)__  ___
+ /  '_/ _ \/  ' \/ _ \/ // (_-</ __/ / _ \/ _ \
+/_/\_\\___/_/_/_/_.__/\_,_/___/\__/_/\___/_//_/
+kombustion.io
+_______________________________________________________________________
+`)
+
+	cli.AppHelpTemplate = fmt.Sprintf(`%s
+%s
+ISSUES:
+    If you have an issue with kombustion, check both the kombustion.io documentation [0], and
+    the CloudFormation documentation [1] to help you resolve it.
+
+    If the issue still persists please check out the issue queue [3] to see if it's
+    already been reported and/or has a fix. If it hasn't you can create a new one [3].
+%s`,
+		kombustionLogo,
+		cli.AppHelpTemplate,
+		chalk.Dim.TextStyle(`
+    [0] https://kombustion.com
+    [1] https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-reference.html
+    [3] https://github.com/KablamoOSS/kombustion/issues
+`),
+	)
+
 	app := cli.NewApp()
 	app.EnableBashCompletion = true
 	app.Version = version
 	app.Name = "kombustion"
-	app.Usage = "A CloudFormation template generator, written in Go."
+	app.Usage = "Extend CloudFormation with plugins."
 	app.Before = func(c *cli.Context) error {
-		log.SetLevel(log.WarnLevel)
-		if c.Bool("verbose") {
+
+		verbose := c.Bool("verbose")
+
+		if verbose {
 			log.SetLevel(log.InfoLevel)
+		} else {
+			log.SetLevel(log.WarnLevel)
 		}
+
+		// Init the spinner/printer
+		printer.Init(verbose, "yellow", 14, os.Stdout)
 		return nil
 	}
-	app.Flags = []cli.Flag{
-		cli.BoolFlag{
-			Name:  "verbose",
-			Usage: "output with high verbosity",
-		},
-	}
+
+	app.Flags = tasks.GlobalFlags
 
 	app.Commands = []cli.Command{
+		// Manifest
 		{
-			Name:    "cloudformation",
-			Aliases: []string{"cf"},
-			Usage:   "tasks for building and deploying cloudformation templates",
-			Flags: []cli.Flag{
-				cli.StringFlag{
-					Name:  "profile",
-					Usage: "aws credentials profile to use",
-				},
-			},
-			Subcommands: []cli.Command{
-				{
-					Name:      "generate",
-					Usage:     "parse a cloudformation template from ./config",
-					UsageText: "kombustion cloudformation generate [command options] [stack]",
-					Action:    tasks.Generate,
-					Flags:     tasks.Generate_Flags,
-				},
-				{
-					Name:      "upsert",
-					Usage:     "upsert a cloudformation template or a yaml config",
-					UsageText: "kombustion cloudformation upsert [command options] [stack]",
-					Action:    tasks.Upsert,
-					Flags:     tasks.Upsert_Flags,
-				},
-				{
-					Name:      "delete",
-					Usage:     "delete a cloudformation stack",
-					UsageText: "kombustion cloudformation delete [command options] [stackName]",
-					Action:    tasks.Delete,
-					Flags:     tasks.Delete_Flags,
-				},
-				{
-					Name:      "events",
-					Usage:     "print all events for a cloudformation stack ",
-					UsageText: "kombustion cloudformation events [command options] [stackName]",
-					Action:    tasks.PrintEvents,
-					Flags:     tasks.PrintEvents_Flags,
-				},
-				{
-					Name:      "plugins",
-					Usage:     "get or list plugins (see cf plugins help)",
-					UsageText: "kombustion cloudformation plugins [command options]",
-					Subcommands: []cli.Command{
-						{
-							Name:      "get",
-							Usage:     "install a plugin from the plugin repository",
-							UsageText: "kombustion cloudformation plugins get [command options] pluginname",
-							Action:    tasks.GetPlugin,
-							Flags:     tasks.GetPlugin_Flags,
-						},
-						{
-							Name:      "list",
-							Usage:     "list all loaded plugins",
-							UsageText: "kombustion cloudformation plugins list [command options]",
-							Action:    tasks.PrintPlugins,
-							Flags:     tasks.PrintPlugins_Flags,
-						},
-						{
-							Name:      "delete",
-							Usage:     "deletes the given plugin",
-							UsageText: "kombustion cloudformation plugins delete [command options] pluginname",
-							Action:    tasks.DeletePlugin,
-							Flags:     tasks.DeletePlugin_Flags,
-						},
-					},
-				},
-			},
+			Name:      "init",
+			Usage:     "init manifest file",
+			UsageText: "initialise a new manifest file in the current directory",
+			Action:    tasks.InitaliseNewManifestTask,
+			Flags:     tasks.InitManifestFlags,
+		},
+		// Plugin management
+		{
+			Name:      "add",
+			Usage:     "add github.com/organisation/plugin",
+			UsageText: "add github.com/organisation/plugin github.com/organisation/pluginTwo",
+			Action:    tasks.AddPluginToManifest,
+		},
+		{
+			Name:      "install",
+			Usage:     "install all plugins in kombustion.yaml",
+			UsageText: "install all plugins in kombustion.yaml",
+			Action:    tasks.InstallPlugins,
+		},
+		// CloudFormation
+		{
+			Name:      "generate",
+			Usage:     "parse a cloudformation template from ./config",
+			UsageText: "kombustion cloudformation generate [command options] [stack]",
+			Action:    tasks.Generate,
+			Flags:     tasks.GenerateFlags,
+		},
+		{
+			Name:      "upsert",
+			Usage:     "upsert a cloudformation template or a yaml config",
+			UsageText: "kombustion cloudformation upsert [command options] [stack]",
+			Action:    tasks.Upsert,
+			Flags:     tasks.UpsertFlags,
+		},
+		{
+			Name:      "delete",
+			Usage:     "delete a cloudformation stack",
+			UsageText: "kombustion cloudformation delete [command options] [stackName]",
+			Action:    tasks.Delete,
+			Flags:     tasks.CloudFormationStackFlags,
+		},
+		{
+			Name:      "events",
+			Usage:     "print all events for a cloudformation stack ",
+			UsageText: "kombustion cloudformation events [command options] [stackName]",
+			Action:    tasks.PrintEvents,
+			Flags:     tasks.CloudFormationStackFlags,
+		},
+		// Core - Self update
+		{
+			Name:   "update",
+			Usage:  "update kombustion",
+			Action: tasks.Update,
+			Flags:  tasks.UpdateFlags,
 		},
 	}
 
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+	if err != nil {
+		if err.Error() == "flag provided but not defined: -load-plugin" {
+			printer.Fatal(
+				err,
+				"--load-plugin is only available when kombustion is built from source. See the link below for more information.",
+				"https://www.kombustion.io/guides/plugins/",
+			)
+		}
+		printer.Fatal(err, config.ErrorHelpInfo, "")
+	}
 }

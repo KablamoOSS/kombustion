@@ -7,3 +7,9 @@ pluginParsers/
 generate/generate
 genplugin/genplugin
 .vscode/*
+kombustion.yaml
+kombustion.lock
+.kombustion/*
+build/*
+coverage*
+.idea/*

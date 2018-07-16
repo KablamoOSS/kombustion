@@ -1,0 +1,35 @@
+{{ define "title"}} {{ .Title}} {{end}}
+{{ define "header"}} {{ partial "header" .}} {{end}}
+{{ define "main"}}
+<div id="main">
+  <div id="hero">
+    <h1> {{ .Title}} </h1>
+    <p class="hero-lead">
+      {{ .Params.bref | safeHTML }}
+    </p>
+
+  </div>
+  <div class="row">
+    <div class="col col-3 push-right">
+      <aside data-component=“sticky” class="docs-toc" style="margin-bottom: 1em">
+        <small style="text-transform: uppercase; font-size: 12px; font-weight: bold; color: #ccc; margin-left:10px;">Table of Contents</small>
+        {{ .TableOfContents }}
+      </aside>
+    </div>
+    <div class="col col-6 push-center">
+      <div id="kube-component" class="content">
+        {{ .Content}}
+        <!-- Inject script tag in this template  -->
+        {{if .Params.script}}
+          {{ $script := (delimit (slice "scripts" .Params.script) "/")}}
+            {{ partial (string $script) .}}
+        {{end}}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ define "footer" }}
+  {{ partial "footer" . }}
+{{ end }}

@@ -1,0 +1,58 @@
+{{ define "title"}} {{ .Site.Title}} {{end}}
+{{ define "header"}} {{ partial "header" .}} {{end}}
+{{ define "main"}}
+
+<div id="main">
+  <div id="hero">
+    <div class="show-sm" style="text-align: center">
+        <img src="/img/favicons/logo.png" width="32" id="komby" />
+    </div>
+    <h1>{{.Title}}</h1>
+    <p>Extend CloudFormation with plugins</p>
+  </div>
+  <div id="action-buttons">
+    <a class="button primary big" href="/docs/downloads">Download</a>
+    <a class="button outline big" href="/docs/getting-started">Get Started</a>
+  </div>
+  <div id="kube-features">
+    <div class="row gutters">
+      <div class="col col-4 item">
+        <figure>
+          <img alt="Baseline" height="48" src="{{ "/img/pictogram/47- cloud-laptop-programming-upload.svg" | relURL }}" width="96" class="pictogram">
+        </figure>
+        <h3>Write Native CloudFormation</h3>
+        <p>Kombustion builds upon native CloudFormation, so you don't need to learn a new syntax or DSL.</p>
+      </div>
+      <div class="col col-4 item">
+        <figure>
+          <img alt="Typography" height="48" src="{{ "/img/pictogram/22- jigsaw-programming-drag-and-drop-2.svg" | relURL }}" width="96" class="pictogram">
+        </figure>
+        <h3>Extend with Plugins</h3>
+        <p>Kombustion uses plugins to preprocess and extend your CloudFormation templates.</p>
+      </div>
+      <div class="col col-4 item">
+        <figure>
+          <img alt="Minimalism" height="48" src="{{ "/img/pictogram/17- flowchart.svg" | relURL }}" width="96" class="pictogram">
+        </figure>
+        <h3>Upgrade Incrementally</h3>
+        <p>Kombustion can be adopted incrementally, instead of requiring a full rewrite of your infrastructure as code.</p>
+      </div>
+    </div>
+    <div class="row gutters">
+      <div class="col col-4 item">
+        <h4>Decentralised Plugins</h4>
+        <p>Kombustion plugins can be installed from a plugins Github repository.</p>
+      </div>
+      <div class="col col-4 item">
+        <h4>Cross-Platform</h4>
+        <p>Kombustion works on Linux, FreeBSD and MacOS.</p>
+      </div>
+      <div class="col col-4 item">
+        <h4>License</h4>
+        <p>Kombustion is absolutely free for personal or commercial use, under <a href="https://opensource.org/licenses/MIT">MIT</a></p>
+    </div>
+  </div>
+</div>
+</div>
+{{ end }}
+{{ define "footer"}} {{ partial "footer" .}} {{end}}
