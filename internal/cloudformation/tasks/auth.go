@@ -31,9 +31,9 @@ func GetCloudformationClient(profile string, region string) *cloudformation.Clou
 	if len(os.Getenv("ASSUMED_ROLE")) > 0 {
 		// TODO: Check for all env params, and err if not all exist
 		creds := getAWSCredentials()
-		awsConfig = &aws.Config{Credentials: creds, Region: aws.String(region)}
+		awsConfig = &aws.Config{Credentials: creds, Region: aws.String(region), MaxRetries: aws.Int(5)}
 	} else {
-		awsConfig = &aws.Config{Region: aws.String(region)}
+		awsConfig = &aws.Config{Region: aws.String(region), MaxRetries: aws.Int(5)}
 	}
 
 	awsSession := getSession(profile)
