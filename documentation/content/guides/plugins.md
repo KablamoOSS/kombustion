@@ -17,7 +17,7 @@ Before you start writing a plugin will need a working Go development environment
 In addition you need a version of `kombustion` built from source.
 
 ```bash
-# Get the latest kmobustion
+# Get the latest kombustion
 $ go get https://github.com/KablamoOSS/kombustion
 
 # Compile and install it
@@ -28,7 +28,7 @@ $ kombustion -v
 > kombustion version BUILT_FROM_SOURCE
 ```
 
-When `kombustion` is built from source a flag is made available that allows loading any arbirary plugin for the specific purpose of developing plugins. This flag does not exit for official releases of `kombustion`, preventing arbritrary plugins from being loaded.
+When `kombustion` is built from source a flag is made available that allows loading any arbirary plugin for the specific purpose of developing plugins. This flag does not exist for official releases of `kombustion`, preventing arbritrary plugins from being loaded.
 
 You can load a plugin using `--load-plugin path/to/plugin.so` before your command. For example, we can load a plugin built in a different folder.
 
