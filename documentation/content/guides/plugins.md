@@ -18,7 +18,7 @@ In addition you need a version of `kombustion` built from source.
 
 ```bash
 # Get the latest kombustion
-$ go get https://github.com/KablamoOSS/kombustion
+$ go get github.com/KablamoOSS/kombustion
 
 # Compile and install it
 $ go install github.com/KablamoOSS/kombustion
@@ -40,7 +40,7 @@ $ kombustion --load-plugin ../kombustion-plugin-example/kombustion-plugin-exampl
 The easiest way to get started is to start from a copy of the [boilerplate](https://github.com/KablamoOSS/kombustion-plugin-boilerplate) example plugin. This repository has everything you need to get started writing a plugin, including default configuration, an example folder layout, and a build script.
 
 ```bash
-$ go get https://github.com/KablamoOSS/kombustion-plugin-boilerplate
+$ go get github.com/KablamoOSS/kombustion-plugin-boilerplate
 $ cp $GOPATH/src/github.com/KablamoOSS/kombustion-plugin-boilerplate \
   $GOPATH/src/github.com/{username}/{plugin}
 ```
