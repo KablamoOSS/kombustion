@@ -18,7 +18,6 @@ type SpotFleetSpotFleetRequestConfigData struct {
 	ValidFrom                        interface{} `yaml:"ValidFrom,omitempty"`
 	ValidUntil                       interface{} `yaml:"ValidUntil,omitempty"`
 	LaunchSpecifications             interface{} `yaml:"LaunchSpecifications,omitempty"`
-	LaunchTemplateConfigs            interface{} `yaml:"LaunchTemplateConfigs,omitempty"`
 }
 
 // SpotFleetSpotFleetRequestConfigData validation

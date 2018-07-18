@@ -5,6 +5,7 @@ package resources
 
 import (
 	"fmt"
+	"github.com/KablamoOSS/kombustion/pkg/parsers/properties"
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
 	"log"
@@ -21,13 +22,14 @@ type SSMAssociation struct {
 
 // SSMAssociation Properties
 type SSMAssociationProperties struct {
-	AssociationName    interface{} `yaml:"AssociationName,omitempty"`
-	DocumentVersion    interface{} `yaml:"DocumentVersion,omitempty"`
-	InstanceId         interface{} `yaml:"InstanceId,omitempty"`
-	Name               interface{} `yaml:"Name"`
-	ScheduleExpression interface{} `yaml:"ScheduleExpression,omitempty"`
-	Parameters         interface{} `yaml:"Parameters,omitempty"`
-	Targets            interface{} `yaml:"Targets,omitempty"`
+	AssociationName    interface{}                                              `yaml:"AssociationName,omitempty"`
+	DocumentVersion    interface{}                                              `yaml:"DocumentVersion,omitempty"`
+	InstanceId         interface{}                                              `yaml:"InstanceId,omitempty"`
+	Name               interface{}                                              `yaml:"Name"`
+	ScheduleExpression interface{}                                              `yaml:"ScheduleExpression,omitempty"`
+	Parameters         interface{}                                              `yaml:"Parameters,omitempty"`
+	Targets            interface{}                                              `yaml:"Targets,omitempty"`
+	OutputLocation     *properties.AssociationInstanceAssociationOutputLocation `yaml:"OutputLocation,omitempty"`
 }
 
 // NewSSMAssociation constructor creates a new SSMAssociation

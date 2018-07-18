@@ -28,6 +28,7 @@ type AppSyncDataSourceProperties struct {
 	ServiceRoleArn      interface{}                               `yaml:"ServiceRoleArn,omitempty"`
 	Type                interface{}                               `yaml:"Type"`
 	LambdaConfig        *properties.DataSourceLambdaConfig        `yaml:"LambdaConfig,omitempty"`
+	HttpConfig          *properties.DataSourceHttpConfig          `yaml:"HttpConfig,omitempty"`
 	ElasticsearchConfig *properties.DataSourceElasticsearchConfig `yaml:"ElasticsearchConfig,omitempty"`
 	DynamoDBConfig      *properties.DataSourceDynamoDBConfig      `yaml:"DynamoDBConfig,omitempty"`
 }

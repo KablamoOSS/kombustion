@@ -46,5 +46,21 @@ func ParseIAMRole(name string, data string) (cf types.TemplateObject, err error)
 	}
 	cf[name+"Arn"] = output
 
+	output = types.TemplateObject{
+		"Description": name + " Object",
+		"Value": map[string]interface{}{
+			"Fn::GetAtt": []string{name, "RoleId"},
+		},
+		"Export": map[string]interface{}{
+			"Name": map[string]interface{}{
+				"Fn::Sub": "${AWS::StackName}-IAMRole-" + name + "-RoleId",
+			},
+		},
+	}
+	if condition, ok := resource["Condition"]; ok {
+		output["Condition"] = condition
+	}
+	cf[name+"RoleId"] = output
+
 	return
 }

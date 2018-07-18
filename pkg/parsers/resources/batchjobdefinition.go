@@ -25,6 +25,7 @@ type BatchJobDefinitionProperties struct {
 	JobDefinitionName   interface{}                                  `yaml:"JobDefinitionName,omitempty"`
 	Parameters          interface{}                                  `yaml:"Parameters,omitempty"`
 	Type                interface{}                                  `yaml:"Type"`
+	Timeout             *properties.JobDefinitionTimeout             `yaml:"Timeout,omitempty"`
 	RetryStrategy       *properties.JobDefinitionRetryStrategy       `yaml:"RetryStrategy,omitempty"`
 	ContainerProperties *properties.JobDefinitionContainerProperties `yaml:"ContainerProperties"`
 }

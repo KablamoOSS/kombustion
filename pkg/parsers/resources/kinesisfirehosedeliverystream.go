@@ -23,6 +23,7 @@ type KinesisFirehoseDeliveryStream struct {
 type KinesisFirehoseDeliveryStreamProperties struct {
 	DeliveryStreamName                    interface{}                                                     `yaml:"DeliveryStreamName,omitempty"`
 	DeliveryStreamType                    interface{}                                                     `yaml:"DeliveryStreamType,omitempty"`
+	SplunkDestinationConfiguration        *properties.DeliveryStreamSplunkDestinationConfiguration        `yaml:"SplunkDestinationConfiguration,omitempty"`
 	S3DestinationConfiguration            *properties.DeliveryStreamS3DestinationConfiguration            `yaml:"S3DestinationConfiguration,omitempty"`
 	RedshiftDestinationConfiguration      *properties.DeliveryStreamRedshiftDestinationConfiguration      `yaml:"RedshiftDestinationConfiguration,omitempty"`
 	KinesisStreamSourceConfiguration      *properties.DeliveryStreamKinesisStreamSourceConfiguration      `yaml:"KinesisStreamSourceConfiguration,omitempty"`

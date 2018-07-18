@@ -25,7 +25,7 @@ type LambdaEventSourceMappingProperties struct {
 	Enabled          interface{} `yaml:"Enabled,omitempty"`
 	EventSourceArn   interface{} `yaml:"EventSourceArn"`
 	FunctionName     interface{} `yaml:"FunctionName"`
-	StartingPosition interface{} `yaml:"StartingPosition"`
+	StartingPosition interface{} `yaml:"StartingPosition,omitempty"`
 }
 
 // NewLambdaEventSourceMapping constructor creates a new LambdaEventSourceMapping
@@ -66,9 +66,6 @@ func (resource LambdaEventSourceMappingProperties) Validate() []error {
 	}
 	if resource.FunctionName == nil {
 		errs = append(errs, fmt.Errorf("Missing required field 'FunctionName'"))
-	}
-	if resource.StartingPosition == nil {
-		errs = append(errs, fmt.Errorf("Missing required field 'StartingPosition'"))
 	}
 	return errs
 }

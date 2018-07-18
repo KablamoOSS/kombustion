@@ -34,6 +34,7 @@ type ECSServiceProperties struct {
 	LoadBalancers                 interface{}                                `yaml:"LoadBalancers,omitempty"`
 	PlacementConstraints          interface{}                                `yaml:"PlacementConstraints,omitempty"`
 	PlacementStrategies           interface{}                                `yaml:"PlacementStrategies,omitempty"`
+	ServiceRegistries             interface{}                                `yaml:"ServiceRegistries,omitempty"`
 	DeploymentConfiguration       *properties.ServiceDeploymentConfiguration `yaml:"DeploymentConfiguration,omitempty"`
 }
 

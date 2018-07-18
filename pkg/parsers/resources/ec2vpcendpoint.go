@@ -21,10 +21,14 @@ type EC2VPCEndpoint struct {
 
 // EC2VPCEndpoint Properties
 type EC2VPCEndpointProperties struct {
-	PolicyDocument interface{} `yaml:"PolicyDocument,omitempty"`
-	ServiceName    interface{} `yaml:"ServiceName"`
-	VpcId          interface{} `yaml:"VpcId"`
-	RouteTableIds  interface{} `yaml:"RouteTableIds,omitempty"`
+	IsPrivateDnsEnabled interface{} `yaml:"IsPrivateDnsEnabled,omitempty"`
+	PolicyDocument      interface{} `yaml:"PolicyDocument,omitempty"`
+	ServiceName         interface{} `yaml:"ServiceName"`
+	VPCEndpointType     interface{} `yaml:"VPCEndpointType,omitempty"`
+	VpcId               interface{} `yaml:"VpcId"`
+	RouteTableIds       interface{} `yaml:"RouteTableIds,omitempty"`
+	SecurityGroupIds    interface{} `yaml:"SecurityGroupIds,omitempty"`
+	SubnetIds           interface{} `yaml:"SubnetIds,omitempty"`
 }
 
 // NewEC2VPCEndpoint constructor creates a new EC2VPCEndpoint

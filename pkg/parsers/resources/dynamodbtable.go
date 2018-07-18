@@ -22,16 +22,17 @@ type DynamoDBTable struct {
 
 // DynamoDBTable Properties
 type DynamoDBTableProperties struct {
-	TableName               interface{}                              `yaml:"TableName,omitempty"`
-	TimeToLiveSpecification *properties.TableTimeToLiveSpecification `yaml:"TimeToLiveSpecification,omitempty"`
-	StreamSpecification     *properties.TableStreamSpecification     `yaml:"StreamSpecification,omitempty"`
-	SSESpecification        *properties.TableSSESpecification        `yaml:"SSESpecification,omitempty"`
-	ProvisionedThroughput   *properties.TableProvisionedThroughput   `yaml:"ProvisionedThroughput"`
-	GlobalSecondaryIndexes  interface{}                              `yaml:"GlobalSecondaryIndexes,omitempty"`
-	LocalSecondaryIndexes   interface{}                              `yaml:"LocalSecondaryIndexes,omitempty"`
-	AttributeDefinitions    interface{}                              `yaml:"AttributeDefinitions,omitempty"`
-	Tags                    interface{}                              `yaml:"Tags,omitempty"`
-	KeySchema               interface{}                              `yaml:"KeySchema"`
+	TableName                        interface{}                                       `yaml:"TableName,omitempty"`
+	TimeToLiveSpecification          *properties.TableTimeToLiveSpecification          `yaml:"TimeToLiveSpecification,omitempty"`
+	StreamSpecification              *properties.TableStreamSpecification              `yaml:"StreamSpecification,omitempty"`
+	SSESpecification                 *properties.TableSSESpecification                 `yaml:"SSESpecification,omitempty"`
+	ProvisionedThroughput            *properties.TableProvisionedThroughput            `yaml:"ProvisionedThroughput"`
+	PointInTimeRecoverySpecification *properties.TablePointInTimeRecoverySpecification `yaml:"PointInTimeRecoverySpecification,omitempty"`
+	KeySchema                        interface{}                                       `yaml:"KeySchema"`
+	AttributeDefinitions             interface{}                                       `yaml:"AttributeDefinitions,omitempty"`
+	GlobalSecondaryIndexes           interface{}                                       `yaml:"GlobalSecondaryIndexes,omitempty"`
+	Tags                             interface{}                                       `yaml:"Tags,omitempty"`
+	LocalSecondaryIndexes            interface{}                                       `yaml:"LocalSecondaryIndexes,omitempty"`
 }
 
 // NewDynamoDBTable constructor creates a new DynamoDBTable

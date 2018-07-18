@@ -19,19 +19,20 @@ type TaskDefinitionContainerDefinition struct {
 	WorkingDirectory       interface{}                     `yaml:"WorkingDirectory,omitempty"`
 	DockerLabels           interface{}                     `yaml:"DockerLabels,omitempty"`
 	LogConfiguration       *TaskDefinitionLogConfiguration `yaml:"LogConfiguration,omitempty"`
-	Command                interface{}                     `yaml:"Command,omitempty"`
+	VolumesFrom            interface{}                     `yaml:"VolumesFrom,omitempty"`
 	DnsServers             interface{}                     `yaml:"DnsServers,omitempty"`
 	DockerSecurityOptions  interface{}                     `yaml:"DockerSecurityOptions,omitempty"`
 	EntryPoint             interface{}                     `yaml:"EntryPoint,omitempty"`
 	Environment            interface{}                     `yaml:"Environment,omitempty"`
 	ExtraHosts             interface{}                     `yaml:"ExtraHosts,omitempty"`
+	Command                interface{}                     `yaml:"Command,omitempty"`
 	Links                  interface{}                     `yaml:"Links,omitempty"`
 	Ulimits                interface{}                     `yaml:"Ulimits,omitempty"`
 	DnsSearchDomains       interface{}                     `yaml:"DnsSearchDomains,omitempty"`
 	MountPoints            interface{}                     `yaml:"MountPoints,omitempty"`
 	PortMappings           interface{}                     `yaml:"PortMappings,omitempty"`
-	VolumesFrom            interface{}                     `yaml:"VolumesFrom,omitempty"`
 	LinuxParameters        *TaskDefinitionLinuxParameters  `yaml:"LinuxParameters,omitempty"`
+	HealthCheck            *TaskDefinitionHealthCheck      `yaml:"HealthCheck,omitempty"`
 }
 
 // TaskDefinitionContainerDefinition validation
