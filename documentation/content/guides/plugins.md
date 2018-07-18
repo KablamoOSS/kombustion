@@ -303,8 +303,8 @@ And example of how an error is printed:
 ✖  Error: Missing field 'CIDR'
 ☞  Resolution:
    ├─ Name:    MyNetwork
-   ├─ Plugin:  kombustion-plugin-network
-   └─ Type:    Kablamo::Network::VPC
+   ├─ Plugin:  kombustion-plugin-boilerplate
+   └─ Type:    Kablamo::Example::VPC
 ```
 
 ### Validation
@@ -314,19 +314,21 @@ In this example our validation function is only ensuring requried fields are pro
 ```go
 
 // Validate is attached to LambdaFunctionConfig
-func (config LambdaFunctionConfig) Validate() error {
+func (config LambdaFunctionConfig) Validate() (errors []error) {
   if config.Properties.Code == nil {
-    return fmt.Errorf("Missing required field 'Code'")
+    errors = append(errors, fmt.Errorf("Missing required field 'Code'"))
   }
   if config.Properties.Handler == nil {
-    return fmt.Errorf("Missing required field 'Handler'")
+    errors = append(errors, fmt.Errorf("Missing required field 'Handler'"))
   }
   if config.Properties.Role == nil {
-    return fmt.Errorf("Missing required field 'Role'")
+    errors = append(errors, fmt.Errorf("Missing required field 'Role'"))
   }
   if config.Properties.Runtime == nil {
-    return fmt.Errorf("Missing required field 'Runtime'")
+    errors = append(errors, fmt.Errorf("Missing required field 'Runtime'"))
   }
+
+  return
 }
 ```
 
