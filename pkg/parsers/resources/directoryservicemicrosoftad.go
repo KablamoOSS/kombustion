@@ -23,6 +23,7 @@ type DirectoryServiceMicrosoftAD struct {
 // DirectoryServiceMicrosoftAD Properties
 type DirectoryServiceMicrosoftADProperties struct {
 	CreateAlias interface{}                        `yaml:"CreateAlias,omitempty"`
+	Edition     interface{}                        `yaml:"Edition,omitempty"`
 	EnableSso   interface{}                        `yaml:"EnableSso,omitempty"`
 	Name        interface{}                        `yaml:"Name"`
 	Password    interface{}                        `yaml:"Password"`

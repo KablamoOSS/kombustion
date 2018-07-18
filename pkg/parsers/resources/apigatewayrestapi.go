@@ -28,6 +28,7 @@ type ApiGatewayRestApiProperties struct {
 	FailOnWarnings         interface{}                              `yaml:"FailOnWarnings,omitempty"`
 	MinimumCompressionSize interface{}                              `yaml:"MinimumCompressionSize,omitempty"`
 	Name                   interface{}                              `yaml:"Name,omitempty"`
+	Policy                 interface{}                              `yaml:"Policy,omitempty"`
 	BodyS3Location         *properties.RestApiS3Location            `yaml:"BodyS3Location,omitempty"`
 	Parameters             interface{}                              `yaml:"Parameters,omitempty"`
 	BinaryMediaTypes       interface{}                              `yaml:"BinaryMediaTypes,omitempty"`

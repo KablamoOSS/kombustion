@@ -22,7 +22,7 @@ type GuardDutyMaster struct {
 // GuardDutyMaster Properties
 type GuardDutyMasterProperties struct {
 	DetectorId   interface{} `yaml:"DetectorId"`
-	InvitationId interface{} `yaml:"InvitationId"`
+	InvitationId interface{} `yaml:"InvitationId,omitempty"`
 	MasterId     interface{} `yaml:"MasterId"`
 }
 
@@ -61,9 +61,6 @@ func (resource GuardDutyMasterProperties) Validate() []error {
 	errs := []error{}
 	if resource.DetectorId == nil {
 		errs = append(errs, fmt.Errorf("Missing required field 'DetectorId'"))
-	}
-	if resource.InvitationId == nil {
-		errs = append(errs, fmt.Errorf("Missing required field 'InvitationId'"))
 	}
 	if resource.MasterId == nil {
 		errs = append(errs, fmt.Errorf("Missing required field 'MasterId'"))

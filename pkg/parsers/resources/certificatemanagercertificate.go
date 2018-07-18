@@ -22,6 +22,7 @@ type CertificateManagerCertificate struct {
 // CertificateManagerCertificate Properties
 type CertificateManagerCertificateProperties struct {
 	DomainName              interface{} `yaml:"DomainName"`
+	ValidationMethod        interface{} `yaml:"ValidationMethod,omitempty"`
 	DomainValidationOptions interface{} `yaml:"DomainValidationOptions,omitempty"`
 	SubjectAlternativeNames interface{} `yaml:"SubjectAlternativeNames,omitempty"`
 	Tags                    interface{} `yaml:"Tags,omitempty"`
