@@ -26,7 +26,7 @@ type BatchComputeEnvironmentProperties struct {
 	ServiceRole            interface{}                                    `yaml:"ServiceRole"`
 	State                  interface{}                                    `yaml:"State,omitempty"`
 	Type                   interface{}                                    `yaml:"Type"`
-	ComputeResources       *properties.ComputeEnvironmentComputeResources `yaml:"ComputeResources"`
+	ComputeResources       *properties.ComputeEnvironmentComputeResources `yaml:"ComputeResources,omitempty"`
 }
 
 // NewBatchComputeEnvironment constructor creates a new BatchComputeEnvironment
@@ -67,11 +67,6 @@ func (resource BatchComputeEnvironmentProperties) Validate() []error {
 	}
 	if resource.Type == nil {
 		errs = append(errs, fmt.Errorf("Missing required field 'Type'"))
-	}
-	if resource.ComputeResources == nil {
-		errs = append(errs, fmt.Errorf("Missing required field 'ComputeResources'"))
-	} else {
-		errs = append(errs, resource.ComputeResources.Validate()...)
 	}
 	return errs
 }

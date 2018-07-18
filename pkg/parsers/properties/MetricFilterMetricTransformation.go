@@ -7,6 +7,7 @@ import "fmt"
 
 // MetricFilterMetricTransformation Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-logs-metricfilter-metrictransformation.html
 type MetricFilterMetricTransformation struct {
+	DefaultValue    interface{} `yaml:"DefaultValue,omitempty"`
 	MetricName      interface{} `yaml:"MetricName"`
 	MetricNamespace interface{} `yaml:"MetricNamespace"`
 	MetricValue     interface{} `yaml:"MetricValue"`

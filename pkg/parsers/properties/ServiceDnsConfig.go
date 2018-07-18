@@ -7,8 +7,9 @@ import "fmt"
 
 // ServiceDnsConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-dnsconfig.html
 type ServiceDnsConfig struct {
-	NamespaceId interface{} `yaml:"NamespaceId"`
-	DnsRecords  interface{} `yaml:"DnsRecords"`
+	NamespaceId   interface{} `yaml:"NamespaceId"`
+	RoutingPolicy interface{} `yaml:"RoutingPolicy,omitempty"`
+	DnsRecords    interface{} `yaml:"DnsRecords"`
 }
 
 // ServiceDnsConfig validation

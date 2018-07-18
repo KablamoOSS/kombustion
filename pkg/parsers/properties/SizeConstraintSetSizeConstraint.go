@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// SizeConstraintSetSizeConstraint Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-sizeconstraintset-sizeconstraint.html
+// SizeConstraintSetSizeConstraint Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sizeconstraintset-sizeconstraint.html
 type SizeConstraintSetSizeConstraint struct {
 	ComparisonOperator interface{}                    `yaml:"ComparisonOperator"`
 	Size               interface{}                    `yaml:"Size"`

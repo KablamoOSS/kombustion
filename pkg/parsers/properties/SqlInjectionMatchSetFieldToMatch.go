@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// SqlInjectionMatchSetFieldToMatch Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-bytematchset-bytematchtuples-fieldtomatch.html
+// SqlInjectionMatchSetFieldToMatch Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-sqlinjectionmatchset-fieldtomatch.html
 type SqlInjectionMatchSetFieldToMatch struct {
 	Data interface{} `yaml:"Data,omitempty"`
 	Type interface{} `yaml:"Type"`

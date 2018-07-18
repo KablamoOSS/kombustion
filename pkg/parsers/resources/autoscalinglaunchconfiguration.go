@@ -31,6 +31,7 @@ type AutoScalingLaunchConfigurationProperties struct {
 	InstanceType                 interface{} `yaml:"InstanceType"`
 	KernelId                     interface{} `yaml:"KernelId,omitempty"`
 	KeyName                      interface{} `yaml:"KeyName,omitempty"`
+	LaunchConfigurationName      interface{} `yaml:"LaunchConfigurationName,omitempty"`
 	PlacementTenancy             interface{} `yaml:"PlacementTenancy,omitempty"`
 	RamDiskId                    interface{} `yaml:"RamDiskId,omitempty"`
 	SpotPrice                    interface{} `yaml:"SpotPrice,omitempty"`

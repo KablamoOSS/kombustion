@@ -7,12 +7,13 @@ import "fmt"
 
 // ProjectSource Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-source.html
 type ProjectSource struct {
-	BuildSpec     interface{}        `yaml:"BuildSpec,omitempty"`
-	GitCloneDepth interface{}        `yaml:"GitCloneDepth,omitempty"`
-	InsecureSsl   interface{}        `yaml:"InsecureSsl,omitempty"`
-	Location      interface{}        `yaml:"Location,omitempty"`
-	Type          interface{}        `yaml:"Type"`
-	Auth          *ProjectSourceAuth `yaml:"Auth,omitempty"`
+	BuildSpec         interface{}        `yaml:"BuildSpec,omitempty"`
+	GitCloneDepth     interface{}        `yaml:"GitCloneDepth,omitempty"`
+	InsecureSsl       interface{}        `yaml:"InsecureSsl,omitempty"`
+	Location          interface{}        `yaml:"Location,omitempty"`
+	ReportBuildStatus interface{}        `yaml:"ReportBuildStatus,omitempty"`
+	Type              interface{}        `yaml:"Type"`
+	Auth              *ProjectSourceAuth `yaml:"Auth,omitempty"`
 }
 
 // ProjectSource validation

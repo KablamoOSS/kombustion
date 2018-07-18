@@ -22,10 +22,11 @@ type ServiceDiscoveryService struct {
 
 // ServiceDiscoveryService Properties
 type ServiceDiscoveryServiceProperties struct {
-	Description       interface{}                          `yaml:"Description,omitempty"`
-	Name              interface{}                          `yaml:"Name,omitempty"`
-	HealthCheckConfig *properties.ServiceHealthCheckConfig `yaml:"HealthCheckConfig,omitempty"`
-	DnsConfig         *properties.ServiceDnsConfig         `yaml:"DnsConfig"`
+	Description             interface{}                                `yaml:"Description,omitempty"`
+	Name                    interface{}                                `yaml:"Name,omitempty"`
+	HealthCheckCustomConfig *properties.ServiceHealthCheckCustomConfig `yaml:"HealthCheckCustomConfig,omitempty"`
+	HealthCheckConfig       *properties.ServiceHealthCheckConfig       `yaml:"HealthCheckConfig,omitempty"`
+	DnsConfig               *properties.ServiceDnsConfig               `yaml:"DnsConfig"`
 }
 
 // NewServiceDiscoveryService constructor creates a new ServiceDiscoveryService

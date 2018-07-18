@@ -22,6 +22,7 @@ type IAMRole struct {
 // IAMRole Properties
 type IAMRoleProperties struct {
 	AssumeRolePolicyDocument interface{} `yaml:"AssumeRolePolicyDocument"`
+	MaxSessionDuration       interface{} `yaml:"MaxSessionDuration,omitempty"`
 	Path                     interface{} `yaml:"Path,omitempty"`
 	RoleName                 interface{} `yaml:"RoleName,omitempty"`
 	ManagedPolicyArns        interface{} `yaml:"ManagedPolicyArns,omitempty"`

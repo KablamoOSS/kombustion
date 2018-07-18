@@ -31,6 +31,7 @@ type AutoScalingAutoScalingGroupProperties struct {
 	MaxSize                        interface{} `yaml:"MaxSize"`
 	MinSize                        interface{} `yaml:"MinSize"`
 	PlacementGroup                 interface{} `yaml:"PlacementGroup,omitempty"`
+	ServiceLinkedRoleARN           interface{} `yaml:"ServiceLinkedRoleARN,omitempty"`
 	AvailabilityZones              interface{} `yaml:"AvailabilityZones,omitempty"`
 	LifecycleHookSpecificationList interface{} `yaml:"LifecycleHookSpecificationList,omitempty"`
 	LoadBalancerNames              interface{} `yaml:"LoadBalancerNames,omitempty"`

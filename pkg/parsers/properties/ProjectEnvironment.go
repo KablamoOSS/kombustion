@@ -7,6 +7,7 @@ import "fmt"
 
 // ProjectEnvironment Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-environment.html
 type ProjectEnvironment struct {
+	Certificate          interface{} `yaml:"Certificate,omitempty"`
 	ComputeType          interface{} `yaml:"ComputeType"`
 	Image                interface{} `yaml:"Image"`
 	PrivilegedMode       interface{} `yaml:"PrivilegedMode,omitempty"`

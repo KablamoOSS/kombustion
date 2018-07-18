@@ -28,6 +28,7 @@ type ElasticsearchDomainProperties struct {
 	SnapshotOptions            *properties.DomainSnapshotOptions            `yaml:"SnapshotOptions,omitempty"`
 	AdvancedOptions            interface{}                                  `yaml:"AdvancedOptions,omitempty"`
 	Tags                       interface{}                                  `yaml:"Tags,omitempty"`
+	EncryptionAtRestOptions    *properties.DomainEncryptionAtRestOptions    `yaml:"EncryptionAtRestOptions,omitempty"`
 	ElasticsearchClusterConfig *properties.DomainElasticsearchClusterConfig `yaml:"ElasticsearchClusterConfig,omitempty"`
 	EBSOptions                 *properties.DomainEBSOptions                 `yaml:"EBSOptions,omitempty"`
 }
