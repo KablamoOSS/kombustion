@@ -219,16 +219,16 @@ func yamlTemplateCF(
 		}
 
 		var output types.TemplateObject
-		var resourseData []byte
+		var resourceData []byte
 
 		if isResources && (resource.Type == "AWS::CloudFormation::CustomResource" || strings.HasPrefix(resource.Type, "Custom::")) {
 			var cfResource types.CfResource
 
-			if resourseData, err = yaml.Marshal(resource); err != nil {
+			if resourceData, err = yaml.Marshal(resource); err != nil {
 				return
 			}
 
-			if err = yaml.Unmarshal([]byte(resourseData), &cfResource); err != nil {
+			if err = yaml.Unmarshal([]byte(resourceData), &cfResource); err != nil {
 				return
 			}
 
@@ -245,15 +245,15 @@ func yamlTemplateCF(
 				continue
 			}
 
-			if resourseData, err = yaml.Marshal(resource); err != nil {
+			if resourceData, err = yaml.Marshal(resource); err != nil {
 				return
 			}
 
-			if output, err = parser(resourceName, string(resourseData)); err != nil {
+			if output, err = parser(resourceName, string(resourceData)); err != nil {
 				log.WithFields(log.Fields{
 					"resource": resourceName,
 				}).Error("Error parsing resource")
-				logFileError(string(resourseData), err)
+				logFileError(string(resourceData), err)
 				return
 			}
 		}
