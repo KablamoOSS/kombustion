@@ -47,6 +47,7 @@ func ParseGameLiftFleet(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -55,6 +56,7 @@ func ParseGameLiftFleet(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource GameLiftFleet
 	err := yaml.Unmarshal([]byte(data), &resource)
 

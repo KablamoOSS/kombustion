@@ -40,6 +40,7 @@ func ParseRDSDBSecurityGroup(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -48,6 +49,7 @@ func ParseRDSDBSecurityGroup(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource RDSDBSecurityGroup
 	err := yaml.Unmarshal([]byte(data), &resource)
 

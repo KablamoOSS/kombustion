@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// ByteMatchSetByteMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-bytematchset-bytematchtuple.html
+// ByteMatchSetByteMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-bytematchset-bytematchtuples.html
 type ByteMatchSetByteMatchTuple struct {
 	PositionalConstraint interface{}               `yaml:"PositionalConstraint"`
 	TargetString         interface{}               `yaml:"TargetString,omitempty"`

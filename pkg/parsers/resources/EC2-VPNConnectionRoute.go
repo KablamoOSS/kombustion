@@ -38,6 +38,7 @@ func ParseEC2VPNConnectionRoute(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -46,6 +47,7 @@ func ParseEC2VPNConnectionRoute(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource EC2VPNConnectionRoute
 	err := yaml.Unmarshal([]byte(data), &resource)
 

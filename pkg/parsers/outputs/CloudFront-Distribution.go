@@ -13,6 +13,7 @@ func ParseCloudFrontDistribution(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -21,6 +22,7 @@ func ParseCloudFrontDistribution(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-outputs"
 
 	var resource, output types.TemplateObject
 

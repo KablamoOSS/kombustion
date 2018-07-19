@@ -51,6 +51,7 @@ func ParseS3Bucket(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -59,6 +60,7 @@ func ParseS3Bucket(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource S3Bucket
 	err := yaml.Unmarshal([]byte(data), &resource)
 

@@ -75,6 +75,7 @@ func ParseRDSDBInstance(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -83,6 +84,7 @@ func ParseRDSDBInstance(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource RDSDBInstance
 	err := yaml.Unmarshal([]byte(data), &resource)
 

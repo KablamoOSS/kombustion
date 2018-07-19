@@ -44,6 +44,7 @@ func ParseElasticBeanstalkConfigurationTemplate(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -52,6 +53,7 @@ func ParseElasticBeanstalkConfigurationTemplate(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource ElasticBeanstalkConfigurationTemplate
 	err := yaml.Unmarshal([]byte(data), &resource)
 

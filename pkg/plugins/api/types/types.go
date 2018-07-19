@@ -4,7 +4,7 @@ import (
 	kombustionTypes "github.com/KablamoOSS/kombustion/types"
 )
 
-// PluginResult result of a parserFunc
+// PluginParserResult result of a parserFunc
 type PluginParserResult struct {
 	Conditions kombustionTypes.TemplateObject
 	Metadata   kombustionTypes.TemplateObject
@@ -21,7 +21,6 @@ type Config struct {
 	Name    string
 	Version string
 	Prefix  string
-	Types   map[string]TypeMapping
 	Help    Help
 }
 
@@ -32,6 +31,7 @@ type Help struct {
 
 	// Examples/Snippets of how this plugin can be used
 	Snippets []string
+	Types    map[string]TypeMapping
 }
 
 // TypeMapping - recursive list of types with its associated config object
@@ -39,16 +39,4 @@ type TypeMapping struct {
 	Name        string
 	Description string
 	Config      interface{}
-	Parser      func(
-		name string,
-		data string,
-	) (
-		conditions kombustionTypes.TemplateObject,
-		metadata kombustionTypes.TemplateObject,
-		mappings kombustionTypes.TemplateObject,
-		outputs kombustionTypes.TemplateObject,
-		parameters kombustionTypes.TemplateObject,
-		resources kombustionTypes.TemplateObject,
-		errors []error,
-	)
 }

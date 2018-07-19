@@ -12,6 +12,7 @@ func ParseWAFRegionalRule(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -20,6 +21,7 @@ func ParseWAFRegionalRule(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-outputs"
 
 	outputs = types.TemplateObject{
 		name: types.TemplateObject{

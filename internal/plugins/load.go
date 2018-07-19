@@ -132,32 +132,10 @@ func loadPlugin(
 		loadedPlugin.InternalConfig.Prefix = manifestPlugin.Alias
 	}
 
-	// [ Resources ]----------------------------------------------------------------------------------
-
-	resourcesConstructor, _ := p.Lookup("Resources")
-	if resourcesConstructor != nil {
-		loadedPlugin.Resources = resourcesConstructor.(*map[string]func(
-			name string,
-			data string,
-		) []byte)
-	}
-
-	// [ Mapping ]------------------------------------------------------------------------------------
-
-	mappingsConstructor, _ := p.Lookup("Mappings")
-	if mappingsConstructor != nil {
-
-		loadedPlugin.Mappings = mappingsConstructor.(*map[string]func(
-			name string,
-			data string,
-		) []byte)
-	}
-
-	// [ Outputs ]------------------------------------------------------------------------------------
-
-	outputsConstructor, _ := p.Lookup("Outputs")
-	if outputsConstructor != nil {
-		loadedPlugin.Outputs = outputsConstructor.(*map[string]func(
+	// Load Parsers
+	parserConstructor, _ := p.Lookup("Parsers")
+	if parserConstructor != nil {
+		loadedPlugin.Parsers = parserConstructor.(*map[string]func(
 			name string,
 			data string,
 		) []byte)

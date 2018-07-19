@@ -12,14 +12,22 @@ layout  = "docs"
 
 ## `pkg/plugins/api`
 
-### func RegisterMapping
+### func RegisterParser
 
 ```go
-func RegisterMapping(
-    mapping func(
-        name string,
-        data string,
-    ) (cf types.TemplateObject),
+func RegisterParser(
+    parser func(
+      name string,
+      data string,
+    ) (
+      conditions TemplateObject,
+      metadata TemplateObject,
+      mappings TemplateObject,
+      outputs TemplateObject,
+      parameters TemplateObject,
+      resources TemplateObject,
+      errors []error,
+    )
 ) func(
     name string,
     data string,
@@ -51,31 +59,3 @@ func RegisterPlugin(config apiTypes.Config) []byte
 ```
 
 RegisterPlugin to provide the name, prefix and version, and requiresAWSSession
-
-### func RegisterResource
-
-```go
-func RegisterResource(
-    resource func(
-        name string,
-        data string,
-    ) (cf types.TemplateObject),
-) func(
-    name string,
-    data string,
-) []byte
-```
-
-RegisterResource for your plugin
-
-__Usage__
-
-```go
-var Resources = map[string]func(
-  name string,
-  data string,
-) []byte{
-  // resources.ParseLambdaFunction is explained in the next section
-  "Function": api.RegisterResource(resources.ParseLambdaFunction),
-}
-```

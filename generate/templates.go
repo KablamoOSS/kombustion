@@ -100,6 +100,7 @@ func Parse{{$ResourceName}}(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -108,6 +109,7 @@ func Parse{{$ResourceName}}(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource {{$ResourceName}}
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -160,6 +162,7 @@ func Parse{{$ResourceName}}(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -168,6 +171,8 @@ func Parse{{$ResourceName}}(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-outputs"
+
 	{{if .Attributes}}
 	var resource, output types.TemplateObject
 

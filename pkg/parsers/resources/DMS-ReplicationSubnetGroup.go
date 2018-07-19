@@ -40,6 +40,7 @@ func ParseDMSReplicationSubnetGroup(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -48,6 +49,7 @@ func ParseDMSReplicationSubnetGroup(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource DMSReplicationSubnetGroup
 	err := yaml.Unmarshal([]byte(data), &resource)
 

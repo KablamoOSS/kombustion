@@ -55,6 +55,7 @@ func ParseRDSDBCluster(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -63,6 +64,7 @@ func ParseRDSDBCluster(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource RDSDBCluster
 	err := yaml.Unmarshal([]byte(data), &resource)
 

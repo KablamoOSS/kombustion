@@ -37,6 +37,7 @@ func ParseStepFunctionsActivity(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -45,6 +46,7 @@ func ParseStepFunctionsActivity(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource StepFunctionsActivity
 	err := yaml.Unmarshal([]byte(data), &resource)
 

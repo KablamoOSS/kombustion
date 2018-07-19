@@ -24,6 +24,10 @@ type ParserFunc func(
 	name string,
 	data string,
 ) (
+	// Where this parserFunc came from
+	source string,
+
+	// Outputs
 	conditions TemplateObject,
 	metadata TemplateObject,
 	mappings TemplateObject,

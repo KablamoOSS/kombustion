@@ -46,6 +46,7 @@ func ParseEC2NetworkAclEntry(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -54,6 +55,7 @@ func ParseEC2NetworkAclEntry(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource EC2NetworkAclEntry
 	err := yaml.Unmarshal([]byte(data), &resource)
 

@@ -1,7 +1,6 @@
 package plugins
 
 import (
-	"fmt"
 	pluginTypes "github.com/KablamoOSS/kombustion/pkg/plugins/api/types"
 	kombustionTypes "github.com/KablamoOSS/kombustion/types"
 
@@ -16,54 +15,48 @@ func loadConfig(blob []byte) (config pluginTypes.Config, err error) {
 	return
 }
 
-func loadResource(blob []byte) (resource kombustionTypes.TemplateObject, errs []error) {
-	var pluginResult pluginTypes.PluginResult
+// unmarshallParser unmarshalls the result of the parser function
+func unmarshallParser(blob []byte) (
+	conditions kombustionTypes.TemplateObject,
+	metadata kombustionTypes.TemplateObject,
+	mappings kombustionTypes.TemplateObject,
+	outputs kombustionTypes.TemplateObject,
+	parameters kombustionTypes.TemplateObject,
+	resources kombustionTypes.TemplateObject,
+	errors []error,
+) {
+	var pluginResult pluginTypes.PluginParserResult
 	err := msgpack.Unmarshal(blob, &pluginResult)
 	if err != nil {
 		panic(err)
 	}
 
-	if pluginResult.Data != nil {
-		resource = pluginResult.Data
+	if pluginResult.Conditions != nil {
+		conditions = pluginResult.Conditions
 	}
+
+	if pluginResult.Metadata != nil {
+		metadata = pluginResult.Metadata
+	}
+
+	if pluginResult.Mappings != nil {
+		mappings = pluginResult.Mappings
+	}
+
+	if pluginResult.Outputs != nil {
+		outputs = pluginResult.Outputs
+	}
+
+	if pluginResult.Parameters != nil {
+		parameters = pluginResult.Parameters
+	}
+
+	if pluginResult.Resources != nil {
+		resources = pluginResult.Resources
+	}
+
 	if pluginResult.Errors != nil {
-		errs = pluginResult.Errors
-	}
-	return
-}
-
-func loadMapping(blob []byte) (mapping kombustionTypes.TemplateObject, errs []error) {
-	var pluginResult pluginTypes.PluginResult
-
-	err := msgpack.Unmarshal(blob, &pluginResult)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println("pluginResult.Data")
-	fmt.Println(pluginResult.Data)
-	if pluginResult.Data != nil {
-		mapping = pluginResult.Data
-	}
-	if pluginResult.Errors != nil {
-		errs = pluginResult.Errors
-	}
-
-	return
-}
-
-func loadOutput(blob []byte) (output kombustionTypes.TemplateObject, errs []error) {
-	var pluginResult pluginTypes.PluginResult
-
-	err := msgpack.Unmarshal(blob, &pluginResult)
-	if err != nil {
-		panic(err)
-	}
-
-	if pluginResult.Data != nil {
-		output = pluginResult.Data
-	}
-	if pluginResult.Errors != nil {
-		errs = pluginResult.Errors
+		errors = pluginResult.Errors
 	}
 
 	return

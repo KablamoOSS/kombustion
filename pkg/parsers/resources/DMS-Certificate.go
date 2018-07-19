@@ -38,6 +38,7 @@ func ParseDMSCertificate(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -46,6 +47,7 @@ func ParseDMSCertificate(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource DMSCertificate
 	err := yaml.Unmarshal([]byte(data), &resource)
 

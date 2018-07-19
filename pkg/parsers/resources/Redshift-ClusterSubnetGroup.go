@@ -39,6 +39,7 @@ func ParseRedshiftClusterSubnetGroup(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -47,6 +48,7 @@ func ParseRedshiftClusterSubnetGroup(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource RedshiftClusterSubnetGroup
 	err := yaml.Unmarshal([]byte(data), &resource)
 

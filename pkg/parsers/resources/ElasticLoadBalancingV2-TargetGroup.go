@@ -53,6 +53,7 @@ func ParseElasticLoadBalancingV2TargetGroup(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -61,6 +62,7 @@ func ParseElasticLoadBalancingV2TargetGroup(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource ElasticLoadBalancingV2TargetGroup
 	err := yaml.Unmarshal([]byte(data), &resource)
 

@@ -42,6 +42,7 @@ func ParseAppSyncGraphQLApi(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -50,6 +51,7 @@ func ParseAppSyncGraphQLApi(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource AppSyncGraphQLApi
 	err := yaml.Unmarshal([]byte(data), &resource)
 

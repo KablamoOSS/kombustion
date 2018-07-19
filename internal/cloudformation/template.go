@@ -54,55 +54,11 @@ type (
 	}
 )
 
-var resourceParsers map[string]types.ParserFunc
-var outputParsers map[string]types.ParserFunc
-var mappingParsers map[string]types.ParserFunc
-
 func init() {
 	registerYamlTagUnmarshalers()
 }
 
-func populateParsers(loadedPlugins []*plugins.PluginLoaded, noBaseOutputs bool) {
-	resourceParsers = parsers.GetParsersResources()
-	mappingParsers = make(map[string]types.ParserFunc)
-
-	if noBaseOutputs {
-		outputParsers = make(map[string]types.ParserFunc)
-	} else {
-		outputParsers = parsers.GetParsersOutputs()
-	}
-
-	plugins.ExtractResourcesFromPlugins(loadedPlugins, &resourceParsers)
-	plugins.ExtractMappingsFromPlugins(loadedPlugins, &mappingParsers)
-	plugins.ExtractOutputsFromPlugins(loadedPlugins, &outputParsers)
-
-	// dont need if above extracts work
-	// resources, outputs, mappings := plugins.LoadPlugins()
-	// for k, v := range resources {
-	// 	resourceParsers[k] = v
-	// }
-	// for k, v := range outputs {
-	// 	outputParsers[k] = v
-	// }
-	// for k, v := range mappings {
-	// 	mappingParsers[k] = v
-	// }
-}
-
-// PluginDocs -
-func PluginDocs() (docs map[string]string) {
-	docs = make(map[string]string)
-	// TODO: Plugins need to be passed in now
-	// r, _, _ := plugins.LoadPlugins()
-	// for k := range r {
-	// TODO: each plugin should export a `Usage` map.
-	// this function should return those doc strings as values in the docs map
-	// docs[k] = ""
-	// }
-	return
-}
-
-// GenerateYamlStack - generate a stack definition from ./configs
+// GenerateYamlStack - generate a stack
 func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error) {
 
 	// load the config file
@@ -110,6 +66,19 @@ func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error
 
 	// populate the parser variables
 	populateParsers(params.Plugins, params.GenerateDefaultOutputs)
+
+	// Load core AWS parsers for resources
+	coreParsers := parsers.GetParsersResources()
+
+	// If we're generating outputs, load the output parsers
+	if params.GenerateDefaultOutputs {
+		coreOoutputParsers = parsers.GetParsersOutputs()
+	} else {
+		coreOoutputParsers = make(map[string]types.ParserFunc)
+	}
+
+	// Load the parsers from Plugins
+	pluginParsers := plugins.ExtractParsersFromPlugins(params.Plugins)
 
 	configPath := fmt.Sprintf(params.Filename)
 	//configPath := fmt.Sprintf("./configs/%v.yaml", filename)
@@ -185,7 +154,12 @@ func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error
 	return out, nil
 }
 
-func addBaseResources(baseResources types.TemplateObject, configResources types.ResourceMap) (combinedResource types.ResourceMap) {
+func addBaseResources(
+	baseResources types.TemplateObject,
+	configResources types.ResourceMap,
+) (
+	combinedResource types.ResourceMap,
+) {
 	combinedResource = configResources
 	for k, v := range baseResources {
 		if obj, err := json.Marshal(v); err == nil {
@@ -225,6 +199,8 @@ func yamlTemplateCF(
 		if isResources && (resource.Type == "AWS::CloudFormation::CustomResource" || strings.HasPrefix(resource.Type, "Custom::")) {
 			var cfResource types.CfResource
 
+			// TODO: check if there is a core resource, and output an err
+			// with a prompt to update if there isnt one
 			if resourceData, err = yaml.Marshal(resource); err != nil {
 				return
 			}

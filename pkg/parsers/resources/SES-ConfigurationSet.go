@@ -36,6 +36,7 @@ func ParseSESConfigurationSet(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -44,6 +45,7 @@ func ParseSESConfigurationSet(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource SESConfigurationSet
 	err := yaml.Unmarshal([]byte(data), &resource)
 

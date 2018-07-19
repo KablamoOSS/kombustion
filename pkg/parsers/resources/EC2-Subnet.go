@@ -43,6 +43,7 @@ func ParseEC2Subnet(
 	name string,
 	data string,
 ) (
+	source string,
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
 	mappings types.TemplateObject,
@@ -51,6 +52,7 @@ func ParseEC2Subnet(
 	resources types.TemplateObject,
 	errors []error,
 ) {
+	source = "kombustion-core-resources"
 	var resource EC2Subnet
 	err := yaml.Unmarshal([]byte(data), &resource)
 
