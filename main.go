@@ -61,8 +61,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-//go:generate go run ./generate/generate.go
-//go:generate go run ./generate/generate.go pluginParsers
+//go:generate go run ./generate/main.go ./generate/generate.go ./generate/cloudformationSpec.go ./generate/templates.go ./generate/types.go ./generate/util.go
 
 var (
 	version string

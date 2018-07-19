@@ -45,14 +45,13 @@ type (
 
 	// GenerateParams are required to generate a cloudformation yaml template
 	GenerateParams struct {
-		Filename           string
-		EnvFile            string
-		Env                string
+		Filename               string
+		EnvFile                string
+		Env                    string
 		GenerateDefaultOutputs bool
-		ParamMap           map[string]string
-		Plugins            []*plugins.PluginLoaded
+		ParamMap               map[string]string
+		Plugins                []*plugins.PluginLoaded
 	}
-
 )
 
 var resourceParsers map[string]types.ParserFunc
@@ -210,6 +209,7 @@ func yamlTemplateCF(
 ) {
 	compiled = make(types.TemplateObject)
 
+	// Loop through all the resources in our input template and process them
 	for resourceName, resource := range resources {
 
 		if resource.Condition != nil { // if there is a condition on the source resource, warn the user
@@ -221,6 +221,7 @@ func yamlTemplateCF(
 		var output types.TemplateObject
 		var resourceData []byte
 
+		// Check if the resource is a Native Cloudformation Resource
 		if isResources && (resource.Type == "AWS::CloudFormation::CustomResource" || strings.HasPrefix(resource.Type, "Custom::")) {
 			var cfResource types.CfResource
 
@@ -233,11 +234,15 @@ func yamlTemplateCF(
 			}
 
 			output = types.TemplateObject{resourceName: cfResource}
-		} else {
+		} else { // Else, this is a resource with a Plugin namespace
+
+			// Check if there is a parser for this resource
 			parser, ok := parsers[resource.Type]
+
+			// If theres no parser log an error
 			if !ok {
 				if isResources {
-
+					// TODO: Update with new error printer
 					log.WithFields(log.Fields{
 						"type": resource.Type,
 					}).Warn("Type not found")
@@ -245,6 +250,7 @@ func yamlTemplateCF(
 				continue
 			}
 
+			// Marshall the resource into YAML to send to the parser function
 			if resourceData, err = yaml.Marshal(resource); err != nil {
 				return
 			}
@@ -284,5 +290,3 @@ func logFileError(file string, err error) {
 		}
 	}
 }
-
-
