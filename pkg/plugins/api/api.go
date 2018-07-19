@@ -14,14 +14,21 @@ func RegisterPlugin(config apiTypes.Config) []byte {
 	return marshallConfig(config)
 }
 
-// [ Resources ]------------------------------------------------------------------------------------
-
-// RegisterResource for your plugin
-func RegisterResource(
-	resource func(
+// RegisterParser for your plugin
+func RegisterParser(
+	// parser has the same type signature as types.ParserFunc
+	parser func(
 		name string,
 		data string,
-	) (cf types.TemplateObject, err []error),
+	) (
+		conditions types.TemplateObject,
+		metadata types.TemplateObject,
+		mappings types.TemplateObject,
+		outputs types.TemplateObject,
+		parameters types.TemplateObject,
+		resources types.TemplateObject,
+		errors []error,
+	),
 ) func(
 	name string,
 	data string,
@@ -30,49 +37,21 @@ func RegisterResource(
 		name string,
 		data string,
 	) []byte {
-		result, resultErr := resource(name, data)
-		return marshallResource(result, resultErr)
-	}
-}
-
-// [ Mapping ]--------------------------------------------------------------------------------------
-
-// RegisterMapping for your plugin
-func RegisterMapping(
-	mapping func(
-		name string,
-		data string,
-	) (cf types.TemplateObject, err []error),
-) func(
-	name string,
-	data string,
-) []byte {
-	return func(
-		name string,
-		data string,
-	) []byte {
-		result, resultErr := mapping(name, data)
-		return marshallMapping(result, resultErr)
-	}
-}
-
-// [ Outputs ]--------------------------------------------------------------------------------------
-
-// RegisterOutput for your plugin
-func RegisterOutput(
-	output func(
-		name string,
-		data string,
-	) (cf types.TemplateObject, err []error),
-) func(
-	name string,
-	data string,
-) []byte {
-	return func(
-		name string,
-		data string,
-	) []byte {
-		result, resultErr := output(name, data)
-		return marshallOutput(result, resultErr)
+		conditions,
+			metadata,
+			mappings,
+			outputs,
+			parameters,
+			resources,
+			errors := parser(name, data)
+		return marshallParserResult(
+			conditions,
+			metadata,
+			mappings,
+			outputs,
+			parameters,
+			resources,
+			errors,
+		)
 	}
 }

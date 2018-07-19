@@ -5,8 +5,14 @@ import (
 )
 
 // PluginResult result of a parserFunc
-type PluginResult struct {
-	Data   kombustionTypes.TemplateObject
+type PluginParserResult struct {
+	Conditions kombustionTypes.TemplateObject
+	Metadata   kombustionTypes.TemplateObject
+	Mappings   kombustionTypes.TemplateObject
+	Outputs    kombustionTypes.TemplateObject
+	Parameters kombustionTypes.TemplateObject
+	Resources  kombustionTypes.TemplateObject
+
 	Errors []error
 }
 
@@ -15,18 +21,14 @@ type Config struct {
 	Name    string
 	Version string
 	Prefix  string
+	Types   map[string]TypeMapping
 	Help    Help
 }
 
 // Help - a set of available documentation fields
 type Help struct {
-	// The name of the plugin
-	Name string
 	// A short description of what the plugin does
 	Description string
-
-	// Help information for all the types this pplugin provides
-	TypeMappings []TypeMapping
 
 	// Examples/Snippets of how this plugin can be used
 	Snippets []string
@@ -37,4 +39,16 @@ type TypeMapping struct {
 	Name        string
 	Description string
 	Config      interface{}
+	Parser      func(
+		name string,
+		data string,
+	) (
+		conditions kombustionTypes.TemplateObject,
+		metadata kombustionTypes.TemplateObject,
+		mappings kombustionTypes.TemplateObject,
+		outputs kombustionTypes.TemplateObject,
+		parameters kombustionTypes.TemplateObject,
+		resources kombustionTypes.TemplateObject,
+		errors []error,
+	)
 }
