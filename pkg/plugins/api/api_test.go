@@ -40,7 +40,19 @@ func TestRegisterPlugin(t *testing.T) {
 }
 func TestRegisterParser(t *testing.T) {
 	tests := []struct {
-		input  types.ParserFunc
+		input func(
+			name string,
+			data string,
+		) (
+			conditions types.TemplateObject,
+			metadata types.TemplateObject,
+			mappings types.TemplateObject,
+			outputs types.TemplateObject,
+			parameters types.TemplateObject,
+			resources types.TemplateObject,
+			transform types.TemplateObject,
+			errors []error,
+		)
 		output apiTypes.PluginParserResult
 	}{
 		{
