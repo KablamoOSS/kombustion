@@ -38,27 +38,49 @@ func TestRegisterPlugin(t *testing.T) {
 		assert.Equal(testConfig, test.input, fmt.Sprintf("Test %d", i))
 	}
 }
-func TestRegisterResource(t *testing.T) {
+func TestRegisterParser(t *testing.T) {
 	tests := []struct {
 		input func(
 			name string,
 			data string,
-		) (types.TemplateObject, []error)
-		output types.TemplateObject
+		) (
+			conditions types.TemplateObject,
+			metadata types.TemplateObject,
+			mappings types.TemplateObject,
+			outputs types.TemplateObject,
+			parameters types.TemplateObject,
+			resources types.TemplateObject,
+			transform types.TemplateObject,
+			errors []error,
+		)
+		output apiTypes.PluginParserResult
 	}{
 		{
 			input: func(
 				name string,
 				data string,
-			) (types.TemplateObject, []error) {
-				return types.TemplateObject{
+			) (
+				conditions types.TemplateObject,
+				metadata types.TemplateObject,
+				mappings types.TemplateObject,
+				outputs types.TemplateObject,
+				parameters types.TemplateObject,
+				resources types.TemplateObject,
+				transform types.TemplateObject,
+				errors []error,
+			) {
+				resources = types.TemplateObject{
 					"Name": name,
 					"Data": data,
-				}, []error{nil}
+				}
+
+				return
 			},
-			output: types.TemplateObject{
-				"Name": "TestName",
-				"Data": "TestData",
+			output: apiTypes.PluginParserResult{
+				Resources: types.TemplateObject{
+					"Name": "TestName",
+					"Data": "TestData",
+				},
 			},
 		},
 	}
@@ -68,107 +90,17 @@ func TestRegisterResource(t *testing.T) {
 
 		name := "TestName"
 		data := "TestData"
-		testFunc := RegisterResource(test.input)
+		testParserFunc := RegisterParser(test.input)
 
-		testOutput := testFunc(name, data)
+		testOutput := testParserFunc(name, data)
 
-		var pluginResult apiTypes.PluginResult
+		var pluginResult apiTypes.PluginParserResult
 		err := msgpack.Unmarshal(testOutput, &pluginResult)
 
 		if err != nil {
 			t.Error(err)
 		}
 
-		assert.Equal(pluginResult.Data, test.output, fmt.Sprintf("Test %d", i))
-	}
-}
-
-func TestRegisterOutput(t *testing.T) {
-	tests := []struct {
-		input func(
-			name string,
-			data string,
-		) (types.TemplateObject, []error)
-		output types.TemplateObject
-	}{
-		{
-			input: func(
-				name string,
-				data string,
-			) (types.TemplateObject, []error) {
-				return types.TemplateObject{
-					"Name": name,
-					"Data": data,
-				}, []error{nil}
-			},
-			output: types.TemplateObject{
-				"Name": "TestName",
-				"Data": "TestData",
-			},
-		},
-	}
-
-	for i, test := range tests {
-		assert := assert.New(t)
-
-		name := "TestName"
-		data := "TestData"
-		testFunc := RegisterOutput(test.input)
-
-		testOutput := testFunc(name, data)
-
-		var pluginResult apiTypes.PluginResult
-		err := msgpack.Unmarshal(testOutput, &pluginResult)
-
-		if err != nil {
-			t.Error(err)
-		}
-
-		assert.Equal(pluginResult.Data, test.output, fmt.Sprintf("Test %d", i))
-	}
-}
-
-func TestRegisterMapping(t *testing.T) {
-	tests := []struct {
-		input func(
-			name string,
-			data string,
-		) (types.TemplateObject, []error)
-		output types.TemplateObject
-	}{
-		{
-			input: func(
-				name string,
-				data string,
-			) (types.TemplateObject, []error) {
-				return types.TemplateObject{
-					"Name": name,
-					"Data": data,
-				}, []error{nil}
-			},
-			output: types.TemplateObject{
-				"Name": "TestName",
-				"Data": "TestData",
-			},
-		},
-	}
-
-	for i, test := range tests {
-		assert := assert.New(t)
-
-		name := "TestName"
-		data := "TestData"
-		testFunc := RegisterMapping(test.input)
-
-		testOutput := testFunc(name, data)
-
-		var pluginResult apiTypes.PluginResult
-		err := msgpack.Unmarshal(testOutput, &pluginResult)
-
-		if err != nil {
-			t.Error(err)
-		}
-
-		assert.Equal(pluginResult.Data, test.output, fmt.Sprintf("Test %d", i))
+		assert.Equal(pluginResult, test.output, fmt.Sprintf("Test %d", i))
 	}
 }

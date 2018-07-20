@@ -61,8 +61,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-//go:generate go run ./generate/generate.go
-//go:generate go run ./generate/generate.go pluginParsers
+//go:generate go run ./generate/main.go ./generate/generate.go ./generate/cloudformationSpec.go ./generate/templates.go ./generate/types.go ./generate/util.go
 
 var (
 	version string
@@ -107,7 +106,7 @@ ISSUES:
 		kombustionLogo,
 		cli.AppHelpTemplate,
 		chalk.Dim.TextStyle(`
-    [0] https://kombustion.com
+    [0] https://kombustion.io
     [1] https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-reference.html
     [3] https://github.com/KablamoOSS/kombustion/issues
 `),

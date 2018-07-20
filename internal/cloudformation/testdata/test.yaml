@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: A Demo Template for testing Kombustion
+
+Parameters:
+  Environment:
+    Type: String
+    Default: UnknownEnvironment
+
+Resources:
+  MyDemoLogGroup:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Join [ '-', [ "MyDemoLogGroup1",!Ref Environment ] ]
+      RetentionInDays: 1
+  MyDemoLogGroup2:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Join [ '-', [ "MyDemoLogGroup2",!Ref Environment ] ]
+      RetentionInDays: 1
+  MyDemoLogGroup3:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Join [ '-', [ "MyDemoLogGroup3",!Ref Environment ] ]
+      RetentionInDays: 1
+  MyDemoLogGroup4:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Join [ '-', [ "MyDemoLogGroup4",!Ref Environment ] ]
+      RetentionInDays: 1

@@ -19,7 +19,7 @@ func GenerateTemplate(params cloudformation.GenerateParams) {
 
 // GenerateYamlTemplate and return both the raw data as []byte, but also the cloudformation yaml object
 func GenerateYamlTemplate(params cloudformation.GenerateParams) ([]byte, cloudformation.YamlCloudformation) {
-	cf, err := cloudformation.GenerateYamlStack(params)
+	cf, err := cloudformation.GenerateYamlTemplate(params)
 	checkError(err)
 	output, err := yaml.Marshal(cf)
 	checkError(err)

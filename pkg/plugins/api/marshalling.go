@@ -17,38 +17,30 @@ func marshallConfig(config pluginTypes.Config) (blob []byte) {
 	return
 }
 
-func marshallResource(resource kombustionTypes.TemplateObject, errs []error) (blob []byte) {
-	result := pluginTypes.PluginResult{
-		Data:   resource,
-		Errors: errs,
+func marshallParserResult(
+	conditions kombustionTypes.TemplateObject,
+	metadata kombustionTypes.TemplateObject,
+	mappings kombustionTypes.TemplateObject,
+	outputs kombustionTypes.TemplateObject,
+	parameters kombustionTypes.TemplateObject,
+	resources kombustionTypes.TemplateObject,
+	transform kombustionTypes.TemplateObject,
+	errors []error,
+
+) (blob []byte) {
+	result := pluginTypes.PluginParserResult{
+		Conditions: conditions,
+		Metadata:   metadata,
+		Mappings:   mappings,
+		Outputs:    outputs,
+		Parameters: parameters,
+		Resources:  resources,
+		Transform:  transform,
+		Errors:     errors,
 	}
 	blob, err := msgpack.Marshal(&result)
 	if err != nil {
 		log.Fatal("Resource marshalling err:", err)
-	}
-	return
-}
-
-func marshallMapping(mapping kombustionTypes.TemplateObject, errs []error) (blob []byte) {
-	result := pluginTypes.PluginResult{
-		Data:   mapping,
-		Errors: errs,
-	}
-	blob, err := msgpack.Marshal(&result)
-	if err != nil {
-		log.Fatal("Mapping marshalling err:", err)
-	}
-	return
-}
-
-func marshallOutput(output kombustionTypes.TemplateObject, errs []error) (blob []byte) {
-	result := pluginTypes.PluginResult{
-		Data:   output,
-		Errors: errs,
-	}
-	blob, err := msgpack.Marshal(&result)
-	if err != nil {
-		log.Fatal("Output marshalling err:", err)
 	}
 	return
 }

@@ -98,7 +98,7 @@ func loadPlugin(filename, pluginDir string) (ret []TypeDefinition) {
 	help, _ := p.Lookup("Help")
 
 	if help != nil {
-		for _, typeMapping := range help.(*types.Help).TypeMappings {
+		for _, typeMapping := range help.(*types.Help).Types {
 			var typeDef TypeDefinition
 
 			typeDef.Name = typeMapping.Name
