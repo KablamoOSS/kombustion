@@ -54,6 +54,7 @@ func TestRegisterParser(t *testing.T) {
 				outputs types.TemplateObject,
 				parameters types.TemplateObject,
 				resources types.TemplateObject,
+				transform types.TemplateObject,
 				errors []error,
 			) {
 				resources = types.TemplateObject{

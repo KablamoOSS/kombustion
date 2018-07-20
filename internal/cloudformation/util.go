@@ -13,7 +13,7 @@ import (
 
 // ResolveEnvironment loads the correct configs/environment.yaml ValueMap for the specified env
 func ResolveEnvironment(envFile string, env string) types.TemplateObject {
-
+	// TODO: this func is deprecated
 	if len(envFile) == 0 {
 		envFile = "./environment.yml"
 	}

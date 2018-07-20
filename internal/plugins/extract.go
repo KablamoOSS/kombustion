@@ -10,8 +10,7 @@ import (
 // ExtractParsersFromPlugins and ensure there are no clashes for plugin resource names
 func ExtractParsersFromPlugins(
 	loadedPlugins []*PluginLoaded,
-) {
-	var parsers map[string]kombustionTypes.ParserFunc
+) (parsers map[string]kombustionTypes.ParserFunc) {
 	for _, plugin := range loadedPlugins {
 		if *plugin.Parsers != nil {
 			for key, parserFunc := range *plugin.Parsers {
@@ -32,13 +31,13 @@ func ExtractParsersFromPlugins(
 						data string,
 					) (
 						source string,
-						sourceResource string,
 						conditions kombustionTypes.TemplateObject,
 						metadata kombustionTypes.TemplateObject,
 						mappings kombustionTypes.TemplateObject,
 						outputs kombustionTypes.TemplateObject,
 						parameters kombustionTypes.TemplateObject,
 						resources kombustionTypes.TemplateObject,
+						transform kombustionTypes.TemplateObject,
 						errors []error,
 					) {
 
@@ -50,30 +49,8 @@ func ExtractParsersFromPlugins(
 							outputs,
 							parameters,
 							resources,
+							transform,
 							errors = unmarshallParser(parserFunc(name, data))
-
-						// hasErrors := false
-
-						// for _, err := range errs {
-						// 	if err != nil {
-						// 		hasErrors = true
-						// 		printer.Error(
-						// 			err,
-						// 			fmt.Sprintf(
-						// 				"\n   ├─ Name:    %s\n   ├─ Source: %s\n   └─ Type:    %s",
-						// 				name,
-						// 				plugin.Config.Name,
-						// 				pluginKey,
-						// 			),
-						// 			"",
-						// 		)
-						// 	}
-						// }
-
-						// if hasErrors {
-						// 	return parsers, fmt.Errorf("There were errors parsing %s", name)
-						// }
-
 						return
 					} // </wrappedParserFunc>
 

@@ -43,6 +43,7 @@ func ParseSDBDomain(
 	outputs types.TemplateObject,
 	parameters types.TemplateObject,
 	resources types.TemplateObject,
+	transform types.TemplateObject,
 	errors []error,
 ) {
 	source = "kombustion-core-resources"

@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 
+	printer "github.com/KablamoOSS/go-cli-printer"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/KablamoOSS/kombustion/internal/plugins"
@@ -18,82 +19,54 @@ import (
 	"github.com/KablamoOSS/yaml"
 )
 
-type (
-	// YamlConfig -
-	YamlConfig struct {
-		AWSTemplateFormatVersion string               `yaml:"AWSTemplateFormatVersion,omitempty"`
-		Description              string               `yaml:"Description,omitempty"`
-		Parameters               types.TemplateObject `yaml:"Parameters,omitempty"`
-		Mappings                 types.TemplateObject `yaml:"Mappings,omitempty"`
-		Conditions               types.TemplateObject `yaml:"Conditions,omitempty"`
-		Transform                types.TemplateObject `yaml:"Transform,omitempty"`
-		Resources                types.ResourceMap    `yaml:"Resources"`
-		Outputs                  types.TemplateObject `yaml:"Outputs,omitempty"`
-	}
-
-	// YamlCloudformation -
-	YamlCloudformation struct {
-		AWSTemplateFormatVersion string               `yaml:"AWSTemplateFormatVersion,omitempty"`
-		Description              string               `yaml:"Description,omitempty"`
-		Parameters               types.TemplateObject `yaml:"Parameters,omitempty"`
-		Mappings                 types.TemplateObject `yaml:"Mappings,omitempty"`
-		Conditions               types.TemplateObject `yaml:"Conditions,omitempty"`
-		Transform                types.TemplateObject `yaml:"Transform,omitempty"`
-		Resources                types.TemplateObject `yaml:"Resources"`
-		Outputs                  types.TemplateObject `yaml:"Outputs,omitempty"`
-	}
-
-	// GenerateParams are required to generate a cloudformation yaml template
-	GenerateParams struct {
-		Filename               string
-		EnvFile                string
-		Env                    string
-		GenerateDefaultOutputs bool
-		ParamMap               map[string]string
-		Plugins                []*plugins.PluginLoaded
-	}
-)
-
 func init() {
 	registerYamlTagUnmarshalers()
 }
 
 // GenerateYamlStack - generate a stack
-func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error) {
-
+func GenerateYamlStack(params GenerateParams) (compiledTemplate YamlCloudformation, err error) {
 	// load the config file
 	var configData []byte
 
-	// populate the parser variables
-	populateParsers(params.Plugins, params.GenerateDefaultOutputs)
+	// Setup out parser variables
+	var templateParsers,
+		coreParsers,
+		pluginParsers,
+		coreOutputParsers map[string]types.ParserFunc
+
+	templateParsers = make(map[string]types.ParserFunc)
+	coreParsers = make(map[string]types.ParserFunc)
+	pluginParsers = make(map[string]types.ParserFunc)
+	coreOutputParsers = make(map[string]types.ParserFunc)
 
 	// Load core AWS parsers for resources
-	coreParsers := parsers.GetParsersResources()
+	coreParsers = parsers.GetParsersResources()
+
+	templateParsers = mergeParsers(templateParsers, coreParsers)
 
 	// If we're generating outputs, load the output parsers
 	if params.GenerateDefaultOutputs {
-		coreOoutputParsers = parsers.GetParsersOutputs()
-	} else {
-		coreOoutputParsers = make(map[string]types.ParserFunc)
+		coreOutputParsers = parsers.GetParsersOutputs()
+		templateParsers = mergeParsers(templateParsers, coreOutputParsers)
 	}
 
 	// Load the parsers from Plugins
-	pluginParsers := plugins.ExtractParsersFromPlugins(params.Plugins)
+	pluginParsers = plugins.ExtractParsersFromPlugins(params.Plugins)
+	templateParsers = mergeParsers(templateParsers, pluginParsers)
 
-	configPath := fmt.Sprintf(params.Filename)
-	//configPath := fmt.Sprintf("./configs/%v.yaml", filename)
-	if configData, err = ioutil.ReadFile(configPath); err != nil {
-		return out, err
+	if configData, err = ioutil.ReadFile(params.Filename); err != nil {
+		return compiledTemplate, err
 	}
 
 	//preprocess - template in the environment variables and custom params
 	buf := new(bytes.Buffer)
+
 	if err = executeTemplate(buf, configData, params.ParamMap); err != nil {
 		log.WithFields(log.Fields{
-			"template": configPath,
+			"template": params.Filename,
 		}).Error("Error executing config template")
 		logFileError(string(configData), err)
-		return out, err
+		return compiledTemplate, err
 	}
 
 	// parse the config yaml
@@ -101,148 +74,174 @@ func GenerateYamlStack(params GenerateParams) (out YamlCloudformation, err error
 	var config YamlConfig
 	if err = yaml.Unmarshal(data, &config); err != nil {
 		logFileError(string(data), err)
-		return out, err
+		return compiledTemplate, err
 	}
 
-	// compile the cloudformation
-	var outputs, resources, mappings types.TemplateObject
-	if resources, err = yamlTemplateCF(config.Resources, resourceParsers, true); err != nil {
-		return out, err
-	}
+	// Setup the initial types
+	var conditions,
+		metadata,
+		mappings,
+		outputs,
+		parameters,
+		resources,
+		transform map[string]interface{}
 
-	//Adding(Replacing) base objects for correct outputs by type
-	config.Resources = addBaseResources(resources, config.Resources)
+	// Process the core and plugin parsers
+	conditions,
+		metadata,
+		mappings,
+		outputs,
+		parameters,
+		resources,
+		transform = processParsers(config.Resources, templateParsers)
 
-	if outputs, err = yamlTemplateCF(config.Resources, outputParsers, false); err != nil {
-		return out, err
-	}
-	if mappings, err = yamlTemplateCF(config.Resources, mappingParsers, false); err != nil {
-		return out, err
-	}
-
-	// merge mappings
-	for k, v := range config.Mappings {
-		if _, ok := mappings[k]; ok { // Check for duplicates
-			log.WithFields(log.Fields{
-				"mapping": k,
-			}).Warn("duplicate mapping definition for mapping - overwriting")
-		}
-		mappings[k] = v
-	}
-
-	// merge outputs
-	for k, v := range config.Outputs {
-		if _, ok := outputs[k]; ok { // Check for duplicates
-			log.WithFields(log.Fields{
-				"output": k,
-			}).Warn("duplicate output definition for output - overwriting")
-		}
-		outputs[k] = v
-	}
-
-	out = YamlCloudformation{
+	compiledTemplate = YamlCloudformation{
 		AWSTemplateFormatVersion: config.AWSTemplateFormatVersion,
 		Description:              config.Description,
-		Parameters:               config.Parameters,
-		Conditions:               config.Conditions,
-		Transform:                config.Transform,
-		Mappings:                 mappings,
-		Resources:                resources,
-		Outputs:                  outputs,
+		Metadata:                 mergeFinalTemplates(config.Metadata, metadata),
+		Parameters:               mergeFinalTemplates(config.Parameters, parameters),
+		Conditions:               mergeFinalTemplates(config.Conditions, conditions),
+		Transform:                mergeFinalTemplates(config.Transform, transform),
+		Mappings:                 mergeFinalTemplates(config.Mappings, mappings),
+		Resources:                mergeFinalResources(config.Resources, resources),
+		Outputs:                  mergeFinalTemplates(config.Outputs, outputs),
 	}
 
-	return out, nil
+	return compiledTemplate, nil
 }
 
-func addBaseResources(
-	baseResources types.TemplateObject,
-	configResources types.ResourceMap,
+// Process the parser funcs against the template's resources
+// and return new template objects
+func processParsers(
+	templateResources types.ResourceMap,
+	parserFuncs map[string]types.ParserFunc,
 ) (
-	combinedResource types.ResourceMap,
+	conditions types.TemplateObject,
+	metadata types.TemplateObject,
+	mappings types.TemplateObject,
+	outputs types.TemplateObject,
+	parameters types.TemplateObject,
+	resources types.TemplateObject,
+	transform types.TemplateObject,
 ) {
-	combinedResource = configResources
-	for k, v := range baseResources {
-		if obj, err := json.Marshal(v); err == nil {
-			var tempCfResource types.CfResource
-			if err = json.Unmarshal(obj, &tempCfResource); err == nil {
-				combinedResource[k] = tempCfResource
-			}
-		}
-	}
+	// Loop through each Resource in the template, and parse it with a ParserFunc
+	for templateResourceName, templateResource := range templateResources {
 
-	return
-}
+		// If this is a custom resource, pass it through without touching it
+		if templateResource.Type == "AWS::CloudFormation::CustomResource" ||
+			strings.HasPrefix(templateResource.Type, "Custom::") {
 
-func yamlTemplateCF(
-	resources types.ResourceMap,
-	parsers map[string]types.ParserFunc,
-	isResources bool,
-) (
-	compiled types.TemplateObject,
-	err error,
-) {
-	compiled = make(types.TemplateObject)
-
-	// Loop through all the resources in our input template and process them
-	for resourceName, resource := range resources {
-
-		if resource.Condition != nil { // if there is a condition on the source resource, warn the user
-			log.WithFields(log.Fields{
-				"resource": resourceName,
-			}).Warn("Condition being applied on resource, this is not yet supported")
-		}
-
-		var output types.TemplateObject
-		var resourceData []byte
-
-		// Check if the resource is a Native Cloudformation Resource
-		if isResources && (resource.Type == "AWS::CloudFormation::CustomResource" || strings.HasPrefix(resource.Type, "Custom::")) {
-			var cfResource types.CfResource
-
-			// TODO: check if there is a core resource, and output an err
-			// with a prompt to update if there isnt one
-			if resourceData, err = yaml.Marshal(resource); err != nil {
-				return
-			}
-
-			if err = yaml.Unmarshal([]byte(resourceData), &cfResource); err != nil {
-				return
-			}
-
-			output = types.TemplateObject{resourceName: cfResource}
-		} else { // Else, this is a resource with a Plugin namespace
-
+			resources = mergeTemplates(
+				templateResourceName,
+				"aws-custom-resource",
+				templateResource.Type,
+				resources,
+				types.TemplateObject{templateResourceName: templateResource},
+			)
+		} else { // This is a resource
 			// Check if there is a parser for this resource
-			parser, ok := parsers[resource.Type]
+			parser, ok := parserFuncs[templateResource.Type]
 
 			// If theres no parser log an error
 			if !ok {
-				if isResources {
-					// TODO: Update with new error printer
-					log.WithFields(log.Fields{
-						"type": resource.Type,
-					}).Warn("Type not found")
-				}
+				printer.Error(
+					fmt.Errorf("No parser found"),
+					fmt.Sprintf(
+						"\n   ├─ Name:    %s\n   ├─ Type:    %s\n   └─ Resolution:    %s",
+						templateResourceName,
+						templateResource.Type,
+						"You may need to install a plugin to parse the resource.",
+					),
+					"",
+				)
 				continue
 			}
 
 			// Marshall the resource into YAML to send to the parser function
-			if resourceData, err = yaml.Marshal(resource); err != nil {
+			resourceData, err := yaml.Marshal(templateResource)
+
+			if err != nil {
 				return
 			}
 
-			if output, err = parser(resourceName, string(resourceData)); err != nil {
-				log.WithFields(log.Fields{
-					"resource": resourceName,
-				}).Error("Error parsing resource")
-				logFileError(string(resourceData), err)
-				return
-			}
-		}
+			parserSource,
+				parserConditions,
+				parserMetadata,
+				parserMappings,
+				parserOutputs,
+				parserParameters,
+				parserResources,
+				parserTransform,
+				parserErrors := parser(templateResourceName, string(resourceData))
 
-		// collect all output res in one list
-		for k, v := range output {
-			compiled[k] = v
+			// If there were parser errors log them out
+			if parserErrors != nil && parserErrors[0] != nil {
+				for _, err := range parserErrors {
+					parserError(
+						err,
+						templateResourceName,
+						parserSource,
+						templateResource.Type,
+					)
+				}
+			}
+
+			// Merge the results back together
+			conditions = mergeTemplates(
+				templateResourceName,
+				parserSource,
+				templateResource.Type,
+				conditions,
+				parserConditions,
+			)
+
+			metadata = mergeTemplates(
+				templateResourceName,
+				parserSource,
+				templateResource.Type,
+				metadata,
+				parserMetadata,
+			)
+
+			mappings = mergeTemplates(
+				templateResourceName,
+				parserSource,
+				templateResource.Type,
+				mappings,
+				parserMappings,
+			)
+
+			outputs = mergeTemplates(
+				templateResourceName,
+				parserSource,
+				templateResource.Type,
+				outputs,
+				parserOutputs,
+			)
+
+			parameters = mergeTemplates(
+				templateResourceName,
+				parserSource,
+				templateResource.Type,
+				parameters,
+				parserParameters,
+			)
+
+			resources = mergeTemplates(
+				templateResourceName,
+				parserSource,
+				templateResource.Type,
+				resources,
+				parserResources,
+			)
+
+			transform = mergeTemplates(
+				templateResourceName,
+				parserSource,
+				templateResource.Type,
+				transform,
+				parserTransform,
+			)
 		}
 	}
 	return
@@ -265,4 +264,92 @@ func logFileError(file string, err error) {
 			fmt.Printf("% 6d %v\n", lineNb, line)
 		}
 	}
+}
+
+// Merge Functions
+
+func mergeParsers(maps ...map[string]types.ParserFunc) map[string]types.ParserFunc {
+	result := make(map[string]types.ParserFunc)
+	for _, m := range maps {
+		for k, v := range m {
+			result[k] = v
+		}
+	}
+	return result
+}
+
+func mergeTemplates(
+	name,
+	source,
+	resourceType string,
+	maps ...map[string]interface{},
+) map[string]interface{} {
+	result := make(map[string]interface{})
+	for _, m := range maps {
+		for k, v := range m {
+			if _, exists := result[k]; !exists {
+				result[k] = v
+			} else {
+				parserError(
+					fmt.Errorf("Duplicate key for %s", k),
+					name,
+					source,
+					resourceType,
+				)
+			}
+		}
+	}
+	return result
+}
+
+func mergeFinalTemplates(maps ...map[string]interface{}) map[string]interface{} {
+	result := make(map[string]interface{})
+	for _, m := range maps {
+		for k, v := range m {
+			result[k] = v
+		}
+	}
+	return result
+}
+
+func mergeFinalResources(
+	configResources types.ResourceMap,
+	baseResources types.TemplateObject,
+) (
+	combinedResource types.TemplateObject,
+) {
+
+	for k, v := range configResources {
+		if obj, err := json.Marshal(v); err == nil {
+			var tempCfResource types.CfResource
+			if err = json.Unmarshal(obj, &tempCfResource); err == nil {
+				combinedResource[k] = tempCfResource
+			}
+		}
+	}
+
+	for k, v := range baseResources {
+		if obj, err := json.Marshal(v); err == nil {
+			var tempCfResource types.CfResource
+			if err = json.Unmarshal(obj, &tempCfResource); err == nil {
+				combinedResource[k] = tempCfResource
+			}
+		}
+	}
+
+	return
+}
+
+// Print a error with a parser function
+func parserError(err error, name, source, resourceType string) {
+	printer.Error(
+		err,
+		fmt.Sprintf(
+			"\n   ├─ Name:    %s\n   ├─ Source:  %s\n   └─ Type:    %s",
+			name,
+			source,
+			resourceType,
+		),
+		"",
+	)
 }

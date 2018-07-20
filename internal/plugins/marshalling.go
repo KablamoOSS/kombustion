@@ -23,6 +23,7 @@ func unmarshallParser(blob []byte) (
 	outputs kombustionTypes.TemplateObject,
 	parameters kombustionTypes.TemplateObject,
 	resources kombustionTypes.TemplateObject,
+	transform kombustionTypes.TemplateObject,
 	errors []error,
 ) {
 	var pluginResult pluginTypes.PluginParserResult
@@ -53,6 +54,10 @@ func unmarshallParser(blob []byte) (
 
 	if pluginResult.Resources != nil {
 		resources = pluginResult.Resources
+	}
+
+	if pluginResult.Transform != nil {
+		transform = pluginResult.Transform
 	}
 
 	if pluginResult.Errors != nil {

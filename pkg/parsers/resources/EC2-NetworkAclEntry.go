@@ -53,6 +53,7 @@ func ParseEC2NetworkAclEntry(
 	outputs types.TemplateObject,
 	parameters types.TemplateObject,
 	resources types.TemplateObject,
+	transform types.TemplateObject,
 	errors []error,
 ) {
 	source = "kombustion-core-resources"

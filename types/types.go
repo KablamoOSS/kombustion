@@ -34,5 +34,6 @@ type ParserFunc func(
 	outputs TemplateObject,
 	parameters TemplateObject,
 	resources TemplateObject,
+	transform TemplateObject,
 	errors []error,
 )

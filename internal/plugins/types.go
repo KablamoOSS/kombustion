@@ -2,7 +2,6 @@ package plugins
 
 import (
 	apiTypes "github.com/KablamoOSS/kombustion/pkg/plugins/api/types"
-	"github.com/KablamoOSS/kombustion/types"
 )
 
 // PluginLoaded is a fully loaded plugin

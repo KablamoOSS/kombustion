@@ -12,6 +12,7 @@ type PluginParserResult struct {
 	Outputs    kombustionTypes.TemplateObject
 	Parameters kombustionTypes.TemplateObject
 	Resources  kombustionTypes.TemplateObject
+	Transform  kombustionTypes.TemplateObject
 
 	Errors []error
 }

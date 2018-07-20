@@ -24,6 +24,7 @@ func marshallParserResult(
 	outputs kombustionTypes.TemplateObject,
 	parameters kombustionTypes.TemplateObject,
 	resources kombustionTypes.TemplateObject,
+	transform kombustionTypes.TemplateObject,
 	errors []error,
 
 ) (blob []byte) {
@@ -34,6 +35,7 @@ func marshallParserResult(
 		Outputs:    outputs,
 		Parameters: parameters,
 		Resources:  resources,
+		Transform:  transform,
 		Errors:     errors,
 	}
 	blob, err := msgpack.Marshal(&result)

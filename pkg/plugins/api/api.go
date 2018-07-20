@@ -27,6 +27,7 @@ func RegisterParser(
 		outputs types.TemplateObject,
 		parameters types.TemplateObject,
 		resources types.TemplateObject,
+		transform types.TemplateObject,
 		errors []error,
 	),
 ) func(
@@ -43,6 +44,7 @@ func RegisterParser(
 			outputs,
 			parameters,
 			resources,
+			transform,
 			errors := parser(name, data)
 		return marshallParserResult(
 			conditions,
@@ -51,6 +53,7 @@ func RegisterParser(
 			outputs,
 			parameters,
 			resources,
+			transform,
 			errors,
 		)
 	}
