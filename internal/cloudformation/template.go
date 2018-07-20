@@ -5,8 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"regexp"
-	"strconv"
 	"strings"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
@@ -77,7 +75,14 @@ func GenerateYamlStack(params GenerateParams) (compiledTemplate YamlCloudformati
 	data := buf.Bytes()
 	var config YamlConfig
 	if err = yaml.Unmarshal(data, &config); err != nil {
-		logFileError(string(data), err)
+		printer.Error(
+			fmt.Errorf("Failed to unmarshall the template"),
+			fmt.Sprintf(
+				"File: %s",
+				params.Filename,
+			),
+			"",
+		)
 		return compiledTemplate, err
 	}
 
@@ -102,13 +107,13 @@ func GenerateYamlStack(params GenerateParams) (compiledTemplate YamlCloudformati
 	compiledTemplate = YamlCloudformation{
 		AWSTemplateFormatVersion: config.AWSTemplateFormatVersion,
 		Description:              config.Description,
-		Metadata:                 mergeFinalTemplates(config.Metadata, metadata),
-		Parameters:               mergeFinalTemplates(config.Parameters, parameters),
-		Conditions:               mergeFinalTemplates(config.Conditions, conditions),
-		Transform:                mergeFinalTemplates(config.Transform, transform),
-		Mappings:                 mergeFinalTemplates(config.Mappings, mappings),
-		Resources:                mergeFinalResources(config.Resources, resources),
-		Outputs:                  mergeFinalTemplates(config.Outputs, outputs),
+		Metadata:                 mergeTemplates(config.Metadata, metadata),
+		Parameters:               mergeTemplates(config.Parameters, parameters),
+		Conditions:               mergeTemplates(config.Conditions, conditions),
+		Transform:                mergeTemplates(config.Transform, transform),
+		Mappings:                 mergeTemplates(config.Mappings, mappings),
+		Resources:                mergeResources(config.Resources, resources),
+		Outputs:                  mergeTemplates(config.Outputs, outputs),
 	}
 
 	return compiledTemplate, nil
@@ -128,6 +133,14 @@ func processParsers(
 	resources types.TemplateObject,
 	transform types.TemplateObject,
 ) {
+	conditions = make(types.TemplateObject)
+	metadata = make(types.TemplateObject)
+	mappings = make(types.TemplateObject)
+	outputs = make(types.TemplateObject)
+	parameters = make(types.TemplateObject)
+	resources = make(types.TemplateObject)
+	transform = make(types.TemplateObject)
+
 	// Loop through each Resource in the template, and parse it with a ParserFunc
 	for templateResourceName, templateResource := range templateResources {
 
@@ -135,7 +148,7 @@ func processParsers(
 		if templateResource.Type == "AWS::CloudFormation::CustomResource" ||
 			strings.HasPrefix(templateResource.Type, "Custom::") {
 
-			resources = mergeTemplates(
+			resources = mergeTemplatesWithError(
 				templateResourceName,
 				"aws-custom-resource",
 				templateResource.Type,
@@ -191,7 +204,7 @@ func processParsers(
 			}
 
 			// Merge the results back together
-			conditions = mergeTemplates(
+			conditions = mergeTemplatesWithError(
 				templateResourceName,
 				parserSource,
 				templateResource.Type,
@@ -199,7 +212,7 @@ func processParsers(
 				parserConditions,
 			)
 
-			metadata = mergeTemplates(
+			metadata = mergeTemplatesWithError(
 				templateResourceName,
 				parserSource,
 				templateResource.Type,
@@ -207,7 +220,7 @@ func processParsers(
 				parserMetadata,
 			)
 
-			mappings = mergeTemplates(
+			mappings = mergeTemplatesWithError(
 				templateResourceName,
 				parserSource,
 				templateResource.Type,
@@ -215,7 +228,7 @@ func processParsers(
 				parserMappings,
 			)
 
-			outputs = mergeTemplates(
+			outputs = mergeTemplatesWithError(
 				templateResourceName,
 				parserSource,
 				templateResource.Type,
@@ -223,7 +236,7 @@ func processParsers(
 				parserOutputs,
 			)
 
-			parameters = mergeTemplates(
+			parameters = mergeTemplatesWithError(
 				templateResourceName,
 				parserSource,
 				templateResource.Type,
@@ -231,7 +244,7 @@ func processParsers(
 				parserParameters,
 			)
 
-			resources = mergeTemplates(
+			resources = mergeTemplatesWithError(
 				templateResourceName,
 				parserSource,
 				templateResource.Type,
@@ -239,7 +252,7 @@ func processParsers(
 				parserResources,
 			)
 
-			transform = mergeTemplates(
+			transform = mergeTemplatesWithError(
 				templateResourceName,
 				parserSource,
 				templateResource.Type,
@@ -249,25 +262,6 @@ func processParsers(
 		}
 	}
 	return
-}
-
-func logFileError(file string, err error) {
-	errorLocation := -1
-	re := regexp.MustCompile(`([0-9]+)`)
-	match := re.FindStringSubmatch(err.Error())
-	if len(match) > 1 {
-		errorLocation, _ = strconv.Atoi(match[1])
-	}
-
-	lines := strings.Split(file, "\n")
-	for nb, line := range lines {
-		lineNb := nb + 1
-		if lineNb == errorLocation {
-			fmt.Printf(">>% 4d %v\n", lineNb, line)
-		} else {
-			fmt.Printf("% 6d %v\n", lineNb, line)
-		}
-	}
 }
 
 // Merge Functions
@@ -282,46 +276,53 @@ func mergeParsers(maps ...map[string]types.ParserFunc) map[string]types.ParserFu
 	return result
 }
 
-func mergeTemplates(
+func mergeTemplatesWithError(
 	name,
 	source,
 	resourceType string,
-	maps ...map[string]interface{},
-) map[string]interface{} {
+	maps ...types.TemplateObject,
+) types.TemplateObject {
 	result := make(map[string]interface{})
-	for _, m := range maps {
-		for k, v := range m {
-			if _, exists := result[k]; !exists {
-				result[k] = v
-			} else {
-				parserError(
-					fmt.Errorf("Duplicate key for %s", k),
-					name,
-					source,
-					resourceType,
-				)
+	result = maps[0]
+	for i, m := range maps {
+		if i >= 1 { // map[0] is used as the starting point, so ignore it in this loop
+			for k, v := range m {
+				if _, exists := result[k]; !exists {
+					result[k] = v
+				} else {
+					parserError(
+						fmt.Errorf("Duplicate key for %s", k),
+						name,
+						source,
+						resourceType,
+					)
+				}
 			}
 		}
 	}
 	return result
 }
 
-func mergeFinalTemplates(maps ...map[string]interface{}) map[string]interface{} {
-	result := make(map[string]interface{})
-	for _, m := range maps {
-		for k, v := range m {
-			result[k] = v
+func mergeTemplates(maps ...types.TemplateObject) types.TemplateObject {
+	result := make(types.TemplateObject)
+	result = maps[0]
+	for i, m := range maps {
+		if i >= 1 { // map[0] is used as the starting point, so ignore it in this loop
+			for k, v := range m {
+				result[k] = v
+			}
 		}
 	}
 	return result
 }
 
-func mergeFinalResources(
+func mergeResources(
 	configResources types.ResourceMap,
 	baseResources types.TemplateObject,
 ) (
 	combinedResource types.TemplateObject,
 ) {
+	combinedResource = make(types.TemplateObject)
 
 	for k, v := range configResources {
 		if obj, err := json.Marshal(v); err == nil {
