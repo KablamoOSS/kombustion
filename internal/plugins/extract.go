@@ -10,7 +10,11 @@ import (
 // ExtractParsersFromPlugins and ensure there are no clashes for plugin resource names
 func ExtractParsersFromPlugins(
 	loadedPlugins []*PluginLoaded,
-) (parsers map[string]kombustionTypes.ParserFunc) {
+) (
+	parsers map[string]kombustionTypes.ParserFunc,
+) {
+	parsers = make(map[string]kombustionTypes.ParserFunc)
+
 	for _, plugin := range loadedPlugins {
 		if *plugin.Parsers != nil {
 			for key, parserFunc := range *plugin.Parsers {
