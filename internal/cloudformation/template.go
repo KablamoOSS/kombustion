@@ -20,8 +20,8 @@ func init() {
 	registerYamlTagUnmarshalers()
 }
 
-// GenerateYamlStack - generate a cloudformation template
-func GenerateYamlStack(params GenerateParams) (compiledTemplate YamlCloudformation, err error) {
+// GenerateYamlTemplate - generate a cloudformation template
+func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudformation, err error) {
 	// load the config file
 	var configData []byte
 
@@ -74,6 +74,15 @@ func GenerateYamlStack(params GenerateParams) (compiledTemplate YamlCloudformati
 	// parse the config yaml
 	data := buf.Bytes()
 	var config YamlConfig
+
+	config.Conditions = make(types.TemplateObject)
+	config.Metadata = make(types.TemplateObject)
+	config.Mappings = make(types.TemplateObject)
+	config.Outputs = make(types.TemplateObject)
+	config.Parameters = make(types.TemplateObject)
+	config.Resources = make(map[string]types.CfResource)
+	config.Transform = make(types.TemplateObject)
+
 	if err = yaml.Unmarshal(data, &config); err != nil {
 		printer.Error(
 			fmt.Errorf("Failed to unmarshall the template"),
@@ -94,6 +103,14 @@ func GenerateYamlStack(params GenerateParams) (compiledTemplate YamlCloudformati
 		parameters,
 		resources,
 		transform map[string]interface{}
+
+	conditions = make(map[string]interface{})
+	metadata = make(map[string]interface{})
+	mappings = make(map[string]interface{})
+	outputs = make(map[string]interface{})
+	parameters = make(map[string]interface{})
+	resources = make(map[string]interface{})
+	transform = make(map[string]interface{})
 
 	// Process the core and plugin parsers
 	conditions,

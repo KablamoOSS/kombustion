@@ -9,6 +9,168 @@ import (
 	"testing"
 )
 
+func TestGenerateYamlTemplate(t *testing.T) {
+	// Prevent the printer from exiting
+	printer.Test()
+
+	tests := []struct {
+		input  GenerateParams
+		output YamlCloudformation
+		err    error
+	}{
+		{
+			input: GenerateParams{
+				Filename: "testdata/test.yaml",
+			},
+			output: YamlCloudformation{
+				AWSTemplateFormatVersion: "2010-09-09",
+				Description:              "A Demo Template for testing Kombustion",
+				Metadata:                 types.TemplateObject{},
+				Parameters: types.TemplateObject{
+					"Environment": map[interface{}]interface{}{
+						"Type": "String", "Default": "UnknownEnvironment",
+					},
+				},
+				Mappings:   types.TemplateObject{},
+				Conditions: types.TemplateObject{},
+				Transform:  types.TemplateObject{},
+				Resources:  types.TemplateObject{},
+				Outputs:    types.TemplateObject{},
+			},
+			err: nil,
+		},
+		{
+			input: GenerateParams{
+				Filename:               "testdata/test.yaml",
+				GenerateDefaultOutputs: true,
+			},
+			output: YamlCloudformation{
+				AWSTemplateFormatVersion: "2010-09-09",
+				Description:              "A Demo Template for testing Kombustion",
+				Metadata:                 types.TemplateObject{},
+				Parameters: types.TemplateObject{
+					"Environment": map[interface{}]interface{}{
+						"Type": "String", "Default": "UnknownEnvironment",
+					},
+				},
+				Mappings:   types.TemplateObject{},
+				Conditions: types.TemplateObject{},
+				Transform:  types.TemplateObject{},
+				Resources:  types.TemplateObject{},
+				Outputs: types.TemplateObject{
+					"MyDemoLogGroup3": types.TemplateObject{
+						"Description": "MyDemoLogGroup3 Object",
+						"Value": map[string]interface{}{
+							"Ref": "MyDemoLogGroup3",
+						},
+						"Export": map[string]interface{}{
+							"Name": map[string]interface{}{
+								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup3",
+							},
+						},
+					},
+					"MyDemoLogGroup4": types.TemplateObject{
+						"Description": "MyDemoLogGroup4 Object",
+						"Value": map[string]interface{}{
+							"Ref": "MyDemoLogGroup4",
+						},
+						"Export": map[string]interface{}{
+							"Name": map[string]interface{}{
+								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup4",
+							},
+						},
+					},
+					"MyDemoLogGroup4Arn": types.TemplateObject{
+						"Value": map[string]interface{}{"Fn::GetAtt": []string{"MyDemoLogGroup4", "Arn"},
+						},
+						"Export": map[string]interface{}{
+							"Name": map[string]interface{}{
+								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup4-Arn",
+							},
+						},
+						"Description": "MyDemoLogGroup4 Object",
+					},
+					"MyDemoLogGroup": types.TemplateObject{
+						"Export": map[string]interface{}{
+							"Name": map[string]interface{}{
+								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup",
+							},
+						},
+						"Description": "MyDemoLogGroup Object",
+						"Value": map[string]interface{}{
+							"Ref": "MyDemoLogGroup",
+						},
+					},
+					"MyDemoLogGroupArn": types.TemplateObject{
+						"Description": "MyDemoLogGroup Object",
+						"Value": map[string]interface{}{
+							"Fn::GetAtt": []string{"MyDemoLogGroup", "Arn"},
+						},
+						"Export": map[string]interface{}{
+							"Name": map[string]interface{}{
+								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup-Arn",
+							},
+						},
+					},
+					"MyDemoLogGroup2": types.TemplateObject{
+						"Description": "MyDemoLogGroup2 Object",
+						"Value": map[string]interface{}{
+							"Ref": "MyDemoLogGroup2",
+						},
+						"Export": map[string]interface{}{
+							"Name": map[string]interface{}{
+								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup2",
+							},
+						},
+					},
+					"MyDemoLogGroup2Arn": types.TemplateObject{
+						"Description": "MyDemoLogGroup2 Object",
+						"Value": map[string]interface{}{
+							"Fn::GetAtt": []string{"MyDemoLogGroup2", "Arn"},
+						},
+						"Export": map[string]interface{}{
+							"Name": map[string]interface{}{
+								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup2-Arn",
+							},
+						},
+					},
+					"MyDemoLogGroup3Arn": types.TemplateObject{"Description": "MyDemoLogGroup3 Object",
+						"Value": map[string]interface{}{
+							"Fn::GetAtt": []string{"MyDemoLogGroup3", "Arn"},
+						},
+						"Export": map[string]interface{}{
+							"Name": map[string]interface{}{
+								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup3-Arn",
+							},
+						},
+					},
+				},
+			},
+			err: nil,
+		},
+	}
+
+	for i, test := range tests {
+		assert := assert.New(t)
+
+		output, err := GenerateYamlTemplate(
+			test.input,
+		)
+
+		assert.Equal(
+			test.err,
+			err,
+			fmt.Sprintf("Test: %d", i),
+		)
+
+		assert.Equal(
+			test.output,
+			output,
+			fmt.Sprintf("Test: %d", i),
+		)
+	}
+}
+
 func TestProcessParsers(t *testing.T) {
 	// Prevent the printer from exiting
 	printer.Test()
