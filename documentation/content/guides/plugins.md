@@ -114,7 +114,7 @@ func main() {}
 
 Now our plugin is registered, we need to provide functions for our resources, mappings and outputs.
 
-To register these you need to provide an exported variable `Resources`, `Mappings`, `Outputs`. They need to be defined exactly as follows, with your acutal Parser function wrapped in `api.RegisterResource`, `api.RegisterMapping` or `api.RegisterOutput`.
+To register these you need to provide an exported variable `Resources`, `Mappings`, `Outputs`. They need to be defined exactly as follows, with your actual Parser function wrapped in `api.RegisterResource`, `api.RegisterMapping` or `api.RegisterOutput`.
 
 ```go
 // Resources for this plugin
@@ -144,7 +144,7 @@ var Outputs = map[string]func(
 
 > A Parser function takes in YAML as a string, and returns one or more of its type (either `Resource`, `Mapping` or `Output`).
 
-We generally store then in a seperate folder for each.
+We generally store them in a separate folder for each.
 
 So to use a `Resource` function, as we did above, we need to import our `resources` package in `plugin.go`.
 
@@ -161,14 +161,14 @@ import (
 
 The process for a Parser function is the same for `Resource`, `Mapping` and `Output`. So in this example we'll cover `Resource`.
 
-In a new file at `resources/lambdaFunction.go` we start by importing the from `kombustion` core the CloudFormation parser functions, some core types, and a YAML library.
+In a new file at `resources/lambdaFunction.go` we start by importing them from `kombustion` core the CloudFormation parser functions, some core types, and a YAML library.
 
 ```go
 package resources
 
 import (
   cfResources "github.com/KablamoOSS/kombustion/pkg/parsers/resources"
-  "github.com/KablamoOSS/kombustion/types"
+  kombustionTypes "github.com/KablamoOSS/kombustion/types"
   yaml "github.com/KablamoOSS/yaml"
 )
 
@@ -293,7 +293,7 @@ func ParseLambdaFunction(
 You must return all errors in the `errs []error` array. These are then printed to the user, with
 information about the plugin, and the block in the template that caused it.
 
-**Don't** print errors to `stdout`, as the user wont know where they're coming from.
+**Don't** print errors to `stdout`, as the user won't know where they're coming from.
 
 If `errs []error` contains any errors, the task will fail.
 
