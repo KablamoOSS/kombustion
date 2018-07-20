@@ -37,11 +37,11 @@ $ kombustion --load-plugin ../kombustion-plugin-example/kombustion-plugin-exampl
 ```
 
 
-The easiest way to get started is to start from a copy of the [boilerplate](https://github.com/KablamoOSS/kombustion-plugin-boilerplate) example plugin. This repository has everything you need to get started writing a plugin, including default configuration, an example folder layout, and a build script.
+The easiest way to get started is to start from a copy of the [boilerplate](https://github.com/KablamoOSS/kombustion-plugin-example) example plugin. This repository has everything you need to get started writing a plugin, including default configuration, an example folder layout, and a build script.
 
 ```bash
-$ go get github.com/KablamoOSS/kombustion-plugin-boilerplate
-$ cp $GOPATH/src/github.com/KablamoOSS/kombustion-plugin-boilerplate \
+$ go get github.com/KablamoOSS/kombustion-plugin-example
+$ cp $GOPATH/src/github.com/KablamoOSS/kombustion-plugin-example \
   $GOPATH/src/github.com/{username}/{plugin}
 ```
 
@@ -87,9 +87,9 @@ func init() {
 func Register() []byte {
   return api.RegisterPlugin(types.Config{
     // Name should match the name of your repository
-    // so github.com/KablamoOSS/kombustion-plugin-boilerplate
-    // becomes kombustion-plugin-boilerplate
-    Name: "kombustion-plugin-boilerplate",
+    // so github.com/KablamoOSS/kombustion-plugin-example
+    // becomes kombustion-plugin-example
+    Name: "kombustion-plugin-example",
     // Version is set at compile time, to the tag
     Version: version,
     // The prefix for all resources this plugin exports
@@ -155,7 +155,7 @@ import (
   "github.com/KablamoOSS/kombustion/pkg/plugins/api"
   "github.com/KablamoOSS/kombustion/pkg/plugins/api/types"
   // Import this plugins parser functions for resources
-  "github.com/KablamoOSS/kombustion-plugin-boilerplate/resources"
+  "github.com/KablamoOSS/kombustion-plugin-example/resources"
 )
 ```
 
@@ -303,7 +303,7 @@ And example of how an error is printed:
 ✖  Error: Missing field 'CIDR'
 ☞  Resolution:
    ├─ Name:    MyNetwork
-   ├─ Plugin:  kombustion-plugin-boilerplate
+   ├─ Plugin:  kombustion-plugin-example
    └─ Type:    Kablamo::Example::VPC
 ```
 
