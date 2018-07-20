@@ -22,13 +22,13 @@ You can run `kombustion -v` to confirm you have the correct version installed.
 
 ```bash
 $ kombustion -v
-> kombustion version v0.2.4
+> kombustion version v0.3.0
 ```
 
 ### MacOS
 
-[64bit](https://github.com/KablamoOSS/kombustion/releases/download/v0.2.4/kombustion-darwin-10.11-amd64.tgz)
+[64bit](https://github.com/KablamoOSS/kombustion/releases/download/v0.3.0/kombustion-darwin-10.11-amd64.tgz)
 
 ### Linux
 
-[32bit](https://github.com/KablamoOSS/kombustion/releases/download/v0.2.4/kombustion-linux-386.tgz) | [64bit](https://github.com/KablamoOSS/kombustion/releases/download/v0.2.4/kombustion-linux-amd64.tgz) | [ARM](https://github.com/KablamoOSS/kombustion/releases/download/v0.2.4/kombustion-linux-arm-5.tgz)
+[32bit](https://github.com/KablamoOSS/kombustion/releases/download/v0.3.0/kombustion-linux-386.tgz) | [64bit](https://github.com/KablamoOSS/kombustion/releases/download/v0.3.0/kombustion-linux-amd64.tgz) | [ARM](https://github.com/KablamoOSS/kombustion/releases/download/v0.3.0/kombustion-linux-arm-5.tgz)
