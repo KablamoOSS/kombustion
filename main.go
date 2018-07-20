@@ -106,7 +106,7 @@ ISSUES:
 		kombustionLogo,
 		cli.AppHelpTemplate,
 		chalk.Dim.TextStyle(`
-    [0] https://kombustion.com
+    [0] https://kombustion.io
     [1] https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-reference.html
     [3] https://github.com/KablamoOSS/kombustion/issues
 `),

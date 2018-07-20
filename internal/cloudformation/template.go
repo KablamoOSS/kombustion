@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
-	log "github.com/sirupsen/logrus"
 
 	"github.com/KablamoOSS/kombustion/internal/plugins"
 	"github.com/KablamoOSS/kombustion/pkg/parsers"
@@ -23,7 +22,7 @@ func init() {
 	registerYamlTagUnmarshalers()
 }
 
-// GenerateYamlStack - generate a stack
+// GenerateYamlStack - generate a cloudformation template
 func GenerateYamlStack(params GenerateParams) (compiledTemplate YamlCloudformation, err error) {
 	// load the config file
 	var configData []byte
@@ -62,10 +61,15 @@ func GenerateYamlStack(params GenerateParams) (compiledTemplate YamlCloudformati
 	buf := new(bytes.Buffer)
 
 	if err = executeTemplate(buf, configData, params.ParamMap); err != nil {
-		log.WithFields(log.Fields{
-			"template": params.Filename,
-		}).Error("Error executing config template")
-		logFileError(string(configData), err)
+		printer.Error(
+			fmt.Errorf("Failed to execute the template"),
+			fmt.Sprintf(
+				"File: %s",
+				params.Filename,
+			),
+			"",
+		)
+
 		return compiledTemplate, err
 	}
 
