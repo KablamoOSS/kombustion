@@ -32,7 +32,7 @@ type Help struct {
 
 	// Examples/Snippets of how this plugin can be used
 	Snippets []string
-	Types    map[string]TypeMapping
+	Types    []TypeMapping
 }
 
 // TypeMapping - recursive list of types with its associated config object
