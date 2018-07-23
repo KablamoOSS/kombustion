@@ -165,12 +165,6 @@ First we need to make a `struct` defining the shape of the incoming YAML. This i
 In this example the YAML would look like:
 
 ```yaml
-# Parameters are show as an example here
-Parameters:
-  LambdaBucket:
-    Type: String
-  LambdaRole:
-    Type: String
 Resources:
   # MyLambda is passed to the parser function as the `name` argument
   MyLambda:
@@ -188,10 +182,10 @@ The config `struct` uses [tags](https://medium.com/golangspec/tags-in-golang-3e5
 ```go
 // LambdaFunctionConfig defines the shape of the input YAML this resource takes
 type LogConfig struct {
-	Properties struct {
-		LogGroupName    interface{} `yaml:"LogGroupName,omitempty"`
-		RetentionInDays interface{} `yaml:"RetentionInDays,omitempty"`
-	} `yaml:"Properties"`
+  Properties struct {
+    LogGroupName    interface{} `yaml:"LogGroupName,omitempty"`
+    RetentionInDays interface{} `yaml:"RetentionInDays,omitempty"`
+  } `yaml:"Properties"`
 }
 ```
 
@@ -205,17 +199,17 @@ A parser function returns `types.TemplateObject`, and an `error`. When you retur
 ```go
 // ParseLambdaFunction converts our config into a cloudformation resource
 func ParseExampleLog(
-	name string,
-	data string,
+  name string,
+  data string,
 ) (
-	conditions kombustionTypes.TemplateObject,
-	metadata kombustionTypes.TemplateObject,
-	mappings kombustionTypes.TemplateObject,
-	outputs kombustionTypes.TemplateObject,
-	parameters kombustionTypes.TemplateObject,
-	resources kombustionTypes.TemplateObject,
-	transform kombustionTypes.TemplateObject,
-	errors []error,
+  conditions kombustionTypes.TemplateObject,
+  metadata kombustionTypes.TemplateObject,
+  mappings kombustionTypes.TemplateObject,
+  outputs kombustionTypes.TemplateObject,
+  parameters kombustionTypes.TemplateObject,
+  resources kombustionTypes.TemplateObject,
+  transform kombustionTypes.TemplateObject,
+  errors []error,
 ) {
   // Setup a variable to load the yaml into
   var config LambdaFunctionConfig
@@ -223,23 +217,23 @@ func ParseExampleLog(
   // Attempt to unmarshall the yaml
   err := yaml.Unmarshal([]byte(data), &config)
 
-	if err != nil {
+  if err != nil {
     // Append the error to the errors array
-		errors = append(errors, err)
-		return
-	}
+    errors = append(errors, err)
+    return
+  }
 
 
   // validate the config to ensure we have required fields
   // and apply any other validation logic
   // We'll cover this shortly.
-	validateErrs := config.Validate()
+  validateErrs := config.Validate()
 
-	// If there are any validation errors add them to our errors array and return
-	if validateErrs != nil {
-		errors = append(errors, validateErrs...)
-		return
-	}
+  // If there are any validation errors add them to our errors array and return
+  if validateErrs != nil {
+    errors = append(errors, validateErrs...)
+    return
+  }
 
 
   // Now we can create resources
@@ -252,29 +246,29 @@ func ParseExampleLog(
   // This plugin may be used twice in the same stack, and should not collide
   logGroupName := fmt.Sprintf("%s%s", name, config.Properties.LogGroupName)
 
-	// Create a new resource and add it to cf
-	resources = kombustionTypes.TemplateObject{
-		// (name) lets us create a new resource with the same name as the input type
-		(name): cfResources.NewLogsLogGroup(
-			cfResources.LogsLogGroupProperties{
-				LogGroupName:    fmt.Sprintf("!Join [ \"-\", [ !Ref %s, !Ref Environment ] ]", logGroupName),
-				RetentionInDays: config.Properties.RetentionInDays,
-			},
-		),
-	}
+  // Create a new resource and add it to cf
+  resources = kombustionTypes.TemplateObject{
+    // (name) lets us create a new resource with the same name as the input type
+    (name): cfResources.NewLogsLogGroup(
+      cfResources.LogsLogGroupProperties{
+        LogGroupName:    fmt.Sprintf("!Join [ \"-\", [ !Ref %s, !Ref Environment ] ]", logGroupName),
+        RetentionInDays: config.Properties.RetentionInDays,
+      },
+    ),
+  }
 
   // Here we're adding a Parameter
-	parameters = kombustionTypes.TemplateObject{
-		(logGroupName): map[string]string{
-			"Type": "String",
-		},
-	}
+  parameters = kombustionTypes.TemplateObject{
+    (logGroupName): map[string]string{
+      "Type": "String",
+    },
+  }
 
   // And this is an example of how to add metadata
-	metadata = kombustionTypes.TemplateObject{
-		(logGroupName): map[string]string{
-			"Source": "kablamo-plugin-example",
-		},
+  metadata = kombustionTypes.TemplateObject{
+    (logGroupName): map[string]string{
+      "Source": "kablamo-plugin-example",
+    },
   }
 
   return
@@ -308,19 +302,19 @@ In this example our validation function is only ensuring requried fields are pro
 ```go
 // Validate - input Config validation
 func (config LogConfig) Validate() (errors []error) {
-	props := config.Properties
+  props := config.Properties
 
-	// Ensure LogGrouName has a value
-	if props.LogGroupName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'LogGroupName'"))
-	}
+  // Ensure LogGrouName has a value
+  if props.LogGroupName == nil {
+    errors = append(errors, fmt.Errorf("Missing required field 'LogGroupName'"))
+  }
 
-	// Ensure RetentionInDays has a value
-	if props.RetentionInDays == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RetentionInDays'"))
-	}
+  // Ensure RetentionInDays has a value
+  if props.RetentionInDays == nil {
+    errors = append(errors, fmt.Errorf("Missing required field 'RetentionInDays'"))
+  }
 
-	return
+  return
 }
 ```
 
