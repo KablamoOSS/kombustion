@@ -58,9 +58,9 @@ Just as with `kombustion` version is passed in at compile time (this is done in 
 
 The other key configuration value is `Prefix`. This should be set to a pattern of `Organisation::Repository`, so for the boilerplate example we would use `Kablamo::Boilerplate`.
 
-The prefix is then added to the start of any resources you define, seperated with `::`. So if we had a `Function` resource, the final resource export will be `Kablamo::Boilerplate::Function`
+The prefix is then added to the start of any resources you define, seperated with `::`. So if we had a `Log` resource, the final resource export will be `Kablamo::Example::Log`
 
-> There is no enforcement on what a `Prefix` can be, excepting those in CloudFormation: `AWS::*` and `Custom::*`. If a user has two plugins that have clashing prefixes, they can use the `Alias` paramter in `kombustion.yaml` to add another name in front for example `MyAlias::Kablamo::Boilerplate::Function`
+> There is no enforcement on what a `Prefix` can be, excepting those in CloudFormation: `AWS::*` and `Custom::*`. If a user has two plugins that have clashing prefixes, they can use the `Alias` paramter in `kombustion.yaml` to add another name in front for example `MyAlias::Kablamo::Example::Log`
 
 ```go
 package main
@@ -93,14 +93,14 @@ func Register() []byte {
     // Version is set at compile time, to the tag
     Version: version,
     // The prefix for all resources this plugin exports
-    Prefix: "Kablamo::Boilerplate",
+    Prefix: "Kablamo::Example",
     Help: types.Help{
       Description: "An Example Plugin",
-      TypeMappings: []types.TypeMapping{
+      Types: []types.TypeMapping{
         {
-          Name:        "Function",
-          Description: "Creates a function.",
-          Config:      resources.LambdaFunctionConfig{},
+          Name:        "Log",
+          Description: "Creates a Log Group.",
+          Config:      parsers.LogConfig{},
         },
       },
     },
@@ -112,41 +112,27 @@ func Register() []byte {
 func main() {}
 ```
 
-Now our plugin is registered, we need to provide functions for our resources, mappings and outputs.
-
-To register these you need to provide an exported variable `Resources`, `Mappings`, `Outputs`. They need to be defined exactly as follows, with your actual Parser function wrapped in `api.RegisterResource`, `api.RegisterMapping` or `api.RegisterOutput`.
+Now our plugin is registered, we need to provide our parser functions.
 
 ```go
-// Resources for this plugin
-var Resources = map[string]func(
+// Parsers for this plugin
+var Parsers = map[string]func(
   name string,
   data string,
 ) []byte{
   // resources.ParseLambdaFunction is explained in the next section
-  "Function": api.RegisterResource(resources.ParseLambdaFunction),
+  "Log": api.RegisterParser(parser.ParseExampleLog),
 }
-
-// Mappings for this plugin
-var Mappings = map[string]func(
-  name string,
-  data string,
-) []byte{}
-
-// Outputs for this plugin
-var Outputs = map[string]func(
-  name string,
-  data string,
-) []byte{}
 
 ```
 
 ## Writing a Parser function
 
-> A Parser function takes in YAML as a string, and returns one or more of its type (either `Resource`, `Mapping` or `Output`).
+> A Parser function takes in YAML as a string, and returns one or more of its type (either `Resource`, `Mapping`, `Conditions`, `Metdata`, `Outputs`, `Parameters`, `Transforms`).
 
-We generally store them in a separate folder for each.
+They're usually stored in `./parsers`, and often with a seperate package per parser if they are complex enough.
 
-So to use a `Resource` function, as we did above, we need to import our `resources` package in `plugin.go`.
+To create a `Resource` in our function, as we did above, we need to import our `resources` package in `plugin.go`.
 
 ```go
 package main
@@ -189,33 +175,23 @@ Resources:
   # MyLambda is passed to the parser function as the `name` argument
   MyLambda:
     # Type is derived from Prefix::ResourceName
-    Type: Kablamo::Boilerplate::Function
+    Type: Kablamo::Example::Log
     # Properties is the Config struct we are about to define, which is passed to the
     # parser function as `data`
     Properties:
-      Code:
-        Bucket: !Ref LambdaBucket
-        Key:  "lambda/MyFunction.zip"
-      Handler: "main"
-      Role: !Ref LambdaRole
-      Runtime: go1.x
+      LogGroupName: ExampleLogGroup
+      RetentionInDays: 5
 ```
 
 The config `struct` uses [tags](https://medium.com/golangspec/tags-in-golang-3e5db0b8ef3e) to inform the YAML library how to unmarshall the yaml into the struct.
 
 ```go
 // LambdaFunctionConfig defines the shape of the input YAML this resource takes
-type LambdaFunctionConfig struct {
-  Properties struct {
-    Code           Code        `yaml:"Code"`
-    Handler        interface{} `yaml:"Handler"`
-    Role           interface{} `yaml:"Role"`
-    Runtime        interface{} `yaml:"Runtime"`
-  } `yaml:"Properties"`
-}
-type Code struct {
-    Bucket           interface{} `yaml:"Bucket"`
-    Key              interface{} `yaml:"Key"`
+type LogConfig struct {
+	Properties struct {
+		LogGroupName    interface{} `yaml:"LogGroupName,omitempty"`
+		RetentionInDays interface{} `yaml:"RetentionInDays,omitempty"`
+	} `yaml:"Properties"`
 }
 ```
 
@@ -228,12 +204,18 @@ A parser function returns `types.TemplateObject`, and an `error`. When you retur
 
 ```go
 // ParseLambdaFunction converts our config into a cloudformation resource
-func ParseLambdaFunction(
-  name string,
-  data string,
+func ParseExampleLog(
+	name string,
+	data string,
 ) (
-  cf types.TemplateObject,
-  errs []error,
+	conditions kombustionTypes.TemplateObject,
+	metadata kombustionTypes.TemplateObject,
+	mappings kombustionTypes.TemplateObject,
+	outputs kombustionTypes.TemplateObject,
+	parameters kombustionTypes.TemplateObject,
+	resources kombustionTypes.TemplateObject,
+	transform kombustionTypes.TemplateObject,
+	errors []error,
 ) {
   // Setup a variable to load the yaml into
   var config LambdaFunctionConfig
@@ -242,8 +224,8 @@ func ParseLambdaFunction(
   err := yaml.Unmarshal([]byte(data), &config)
 
 	if err != nil {
-    // Append the error to the errs array
-		errs = append(errs, err)
+    // Append the error to the errors array
+		errors = append(errors, err)
 		return
 	}
 
@@ -251,11 +233,11 @@ func ParseLambdaFunction(
   // validate the config to ensure we have required fields
   // and apply any other validation logic
   // We'll cover this shortly.
-  err = config.Validate()
+	validateErrs := config.Validate()
 
-	if err != nil {
-    // Append the error to the errs array
-		errs = append(errs, err)
+	// If there are any validation errors add them to our errors array and return
+	if validateErrs != nil {
+		errors = append(errors, validateErrs...)
 		return
 	}
 
@@ -264,47 +246,59 @@ func ParseLambdaFunction(
   // To do this we need to call a create function from
   // github.com/KablamoOSS/kombustion/pkg/parsers/resources
   // which we import as cfResource
-  cf = types.TemplateObject{
-    // We're going to reuse `name` as the name of the resource
-    // This is merged in with the rest of the resources,
-    // so if you want to make multiple resources, you should
-    // derive their name starting from the name provided
-    // to avoid clashing with any other resources (either from your own plugin, or another resource)
-    (name): cfResources.NewLambdaFunction(
-      cfResources.LambdaFunctionProperties{
-        Code: properties.{
-            S3Bucket:      config.Code.Bucket,
-            S3Key:         config.Code.Key,
-        }
-        Handler: config.Code.Handler,
-        Role: config.Code.Role,
-        Runtime: config.Code.Runtime,
-      }
-    )
+
+  // We're deriving a name from the source `name` value, to ensure the outputs
+  // of this function are unique to the inputs.
+  // This plugin may be used twice in the same stack, and should not collide
+  logGroupName := fmt.Sprintf("%s%s", name, config.Properties.LogGroupName)
+
+	// Create a new resource and add it to cf
+	resources = kombustionTypes.TemplateObject{
+		// (name) lets us create a new resource with the same name as the input type
+		(name): cfResources.NewLogsLogGroup(
+			cfResources.LogsLogGroupProperties{
+				LogGroupName:    fmt.Sprintf("!Join [ \"-\", [ !Ref %s, !Ref Environment ] ]", logGroupName),
+				RetentionInDays: config.Properties.RetentionInDays,
+			},
+		),
+	}
+
+  // Here we're adding a Parameter
+	parameters = kombustionTypes.TemplateObject{
+		(logGroupName): map[string]string{
+			"Type": "String",
+		},
+	}
+
+  // And this is an example of how to add metadata
+	metadata = kombustionTypes.TemplateObject{
+		(logGroupName): map[string]string{
+			"Source": "kablamo-plugin-example",
+		},
   }
 
-  return cf, errs
+  return
 }
 
 ```
 
 #### Returning Errors
 
-You must return all errors in the `errs []error` array. These are then printed to the user, with
+You must return all errors in the `errors []error` array. These are then printed to the user, with
 information about the plugin, and the block in the template that caused it.
 
 **Don't** print errors to `stdout`, as the user won't know where they're coming from.
 
-If `errs []error` contains any errors, the task will fail.
+If `errors []error` contains any errors, the task will fail.
 
 And example of how an error is printed:
 
 ```sh
-✖  Error: Missing field 'CIDR'
+✖  Error: Missing field 'LogGroupName'
 ☞  Resolution:
    ├─ Name:    MyNetwork
    ├─ Plugin:  kombustion-plugin-example
-   └─ Type:    Kablamo::Example::VPC
+   └─ Type:    Kablamo::Example::Log
 ```
 
 ### Validation
@@ -312,23 +306,21 @@ And example of how an error is printed:
 In this example our validation function is only ensuring requried fields are provided. However, you can use any logic you want here to validate the input YAML matches what you require.
 
 ```go
+// Validate - input Config validation
+func (config LogConfig) Validate() (errors []error) {
+	props := config.Properties
 
-// Validate is attached to LambdaFunctionConfig
-func (config LambdaFunctionConfig) Validate() (errors []error) {
-  if config.Properties.Code == nil {
-    errors = append(errors, fmt.Errorf("Missing required field 'Code'"))
-  }
-  if config.Properties.Handler == nil {
-    errors = append(errors, fmt.Errorf("Missing required field 'Handler'"))
-  }
-  if config.Properties.Role == nil {
-    errors = append(errors, fmt.Errorf("Missing required field 'Role'"))
-  }
-  if config.Properties.Runtime == nil {
-    errors = append(errors, fmt.Errorf("Missing required field 'Runtime'"))
-  }
+	// Ensure LogGrouName has a value
+	if props.LogGroupName == nil {
+		errors = append(errors, fmt.Errorf("Missing required field 'LogGroupName'"))
+	}
 
-  return
+	// Ensure RetentionInDays has a value
+	if props.RetentionInDays == nil {
+		errors = append(errors, fmt.Errorf("Missing required field 'RetentionInDays'"))
+	}
+
+	return
 }
 ```
 
@@ -438,6 +430,3 @@ $ git push
 # Now push your tags
 $ git push --tags
 ```
-
-
-
