@@ -1,3 +1,4 @@
+![Kombustion Logo](https://raw.githubusercontent.com/KablamoOSS/kombustion/master/documentation/static/img/favicons/logo.png "Komby")
 ## Kombustion
 
 [![Build Status](https://travis-ci.org/KablamoOSS/kombustion.svg?branch=master)](https://travis-ci.org/KablamoOSS/kombustion)
