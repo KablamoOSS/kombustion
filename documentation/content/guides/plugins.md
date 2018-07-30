@@ -251,7 +251,11 @@ func ParseExampleLog(
     // (name) lets us create a new resource with the same name as the input type
     (name): cfResources.NewLogsLogGroup(
       cfResources.LogsLogGroupProperties{
-        LogGroupName:    fmt.Sprintf("!Join [ \"-\", [ !Ref %s, !Ref Environment ] ]", logGroupName),
+        LogGroupName:
+           fmt.Sprintf(
+             "!Join [ \"-\", [ !Ref %s, !Ref Environment ] ]",
+             logGroupName,
+            ),
         RetentionInDays: config.Properties.RetentionInDays,
       },
     ),
