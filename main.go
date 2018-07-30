@@ -159,7 +159,7 @@ ISSUES:
 		// CloudFormation
 		{
 			Name:      "generate",
-			Usage:     "parse a cloudformation template from ./config",
+			Usage:     "generate a cloudformation template",
 			UsageText: "kombustion cloudformation generate [command options] [stack]",
 			Action:    tasks.Generate,
 			Flags:     tasks.GenerateFlags,
