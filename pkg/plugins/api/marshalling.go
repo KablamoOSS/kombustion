@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/KablamoOSS/yaml"
@@ -57,10 +58,21 @@ func cleanResult(objects kombustionTypes.TemplateObject) (result kombustionTypes
 	result = make(kombustionTypes.TemplateObject)
 
 	for k, v := range objects {
-		if obj, err := yaml.Marshal(v); err == nil {
-			var tempObject kombustionTypes.TemplateObject
-			if err = yaml.Unmarshal(obj, &tempObject); err == nil {
-				result[k] = tempObject
+		// We need to check the value is not empty, to prevent a nil pointer in the yaml.Marshall
+		// it will be empty when the user leaves a key blank in their template
+		if v != nil {
+			obj, err := yaml.Marshal(v)
+			// fmt.Println(err)
+			if err == nil {
+				var tempObject kombustionTypes.TemplateObject
+				err = yaml.Unmarshal(obj, &tempObject)
+				if err == nil {
+					result[k] = tempObject
+				} else {
+					fmt.Println(err)
+				}
+			} else {
+				fmt.Println(err)
 			}
 		}
 	}
