@@ -69,7 +69,9 @@ func TestRegisterParser(t *testing.T) {
 				transform types.TemplateObject,
 				errors []error,
 			) {
-				resources = types.TemplateObject{
+				resources = make(types.TemplateObject)
+
+				resources[name] = types.TemplateObject{
 					"Name": name,
 					"Data": data,
 				}
@@ -77,10 +79,19 @@ func TestRegisterParser(t *testing.T) {
 				return
 			},
 			output: apiTypes.PluginParserResult{
+				Conditions: types.TemplateObject{},
+				Metadata:   types.TemplateObject{},
+				Mappings:   types.TemplateObject{},
+				Outputs:    types.TemplateObject{},
+				Parameters: types.TemplateObject{},
 				Resources: types.TemplateObject{
-					"Name": "TestName",
-					"Data": "TestData",
+					"TestName": map[string]interface{}{
+						"Name": "TestName",
+						"Data": "TestData",
+					},
 				},
+				Transform: types.TemplateObject{},
+				Errors:    []error(nil),
 			},
 		},
 	}
@@ -101,6 +112,6 @@ func TestRegisterParser(t *testing.T) {
 			t.Error(err)
 		}
 
-		assert.Equal(pluginResult, test.output, fmt.Sprintf("Test %d", i))
+		assert.Equal(test.output, pluginResult, fmt.Sprintf("Test %d", i))
 	}
 }
