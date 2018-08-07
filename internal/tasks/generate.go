@@ -22,10 +22,14 @@ var GenerateFlags = []cli.Flag{
 		Name:  "generate-default-outputs, b",
 		Usage: "disable generation of outputs for Base AWS types",
 	},
+	cli.BoolFlag{
+		Name:  "write-parameters, w",
+		Usage: "Write parameters to a file",
+	},
 }
 
 func init() {
-	GenerateFlags = append(CloudFormationStackFlags)
+	GenerateFlags = append(GenerateFlags, CloudFormationStackFlags...)
 }
 
 // Generate a template and save it to disk, without upserting it
@@ -63,8 +67,9 @@ func Generate(c *cli.Context) {
 
 	printer.Progress("Generating template")
 	tasks.GenerateTemplate(cloudformation.GenerateParams{
-		Filename: fileName,
-		Env:      c.String("env"),
+		Filename:    fileName,
+		WriteParams: c.Bool("write-parameters"),
+		Env:         c.String("env"),
 		GenerateDefaultOutputs: c.Bool("generate-default-outputs"),
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,
