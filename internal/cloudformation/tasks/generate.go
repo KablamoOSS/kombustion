@@ -14,11 +14,11 @@ import (
 // GenerateTemplate and save it to disk, without upserting it
 func GenerateTemplate(params cloudformation.GenerateParams) {
 	output, _ := GenerateYamlTemplate(params)
-	prepareOutputDir(params.Filename)
+	prepareOutputDir(params.Directory)
 	if params.WriteParams {
-		writeParamMap(params.Filename, params.ParamMap)
+		writeParamMap(params.Filename, params.Directory, params.ParamMap)
 	}
-	writeOutput(params.Filename, output)
+	writeOutput(params.Filename, params.Directory, output)
 }
 
 // GenerateYamlTemplate and return both the raw data as []byte, but also the cloudformation yaml object
@@ -30,25 +30,25 @@ func GenerateYamlTemplate(params cloudformation.GenerateParams) ([]byte, cloudfo
 	return output, cf
 }
 
-func prepareOutputDir(file string) {
-	err := os.Mkdir("./compiled", 0744)
+func prepareOutputDir(directory string) {
+	err := os.Mkdir(directory, 0744)
 	if !os.IsExist(err) {
 		checkError(err)
 	}
 }
 
-func writeOutput(file string, output []byte) {
+func writeOutput(file, directory string, output []byte) {
 	filename := filepath.Base(file)
 	basename := strings.TrimSuffix(filename, filepath.Ext(filename))
-	path := fmt.Sprint("compiled/", basename, ".yaml")
+	path := filepath.Join(directory, fmt.Sprint(basename, ".yaml"))
 	err := ioutil.WriteFile(path, output, 0644)
 	checkError(err)
 }
 
-func writeParamMap(file string, params map[string]string) {
+func writeParamMap(file, directory string, params map[string]string) {
 	filename := filepath.Base(file)
 	basename := strings.TrimSuffix(filename, filepath.Ext(filename))
-	path := fmt.Sprint("compiled/", basename, "-params.yaml")
+	path := filepath.Join(directory, fmt.Sprint(basename, "-params.yaml"))
 	out, err := yaml.Marshal(params)
 	checkError(err)
 
