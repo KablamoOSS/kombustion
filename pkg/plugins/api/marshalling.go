@@ -58,11 +58,10 @@ func cleanResult(objects kombustionTypes.TemplateObject) (result kombustionTypes
 	result = make(kombustionTypes.TemplateObject)
 
 	for k, v := range objects {
-		// We need to check the value is not empty, to prevent a nil pointer in the yaml.Marshall
+		// We need to check the value is not empty, to prevent a nil pointer in the yaml.Marshal
 		// it will be empty when the user leaves a key blank in their template
 		if v != nil {
 			obj, err := yaml.Marshal(v)
-			// fmt.Println(err)
 			if err == nil {
 				var tempObject kombustionTypes.TemplateObject
 				err = yaml.Unmarshal(obj, &tempObject)
