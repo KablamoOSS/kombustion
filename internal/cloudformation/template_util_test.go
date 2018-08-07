@@ -395,13 +395,13 @@ func TestMergeResources(t *testing.T) {
 			output: types.TemplateObject{
 				"Test": types.CfResource{
 					Type: "AWS::Logs::LogGroup",
-					Properties: map[string]interface{}{
+					Properties: map[interface{}]interface{}{
 						"LogGroupName": "TestLogGroup",
 					},
-					Condition: map[string]interface{}{
+					Condition: map[interface{}]interface{}{
 						"ConditionName": "ConditionValue",
 					},
-					Metadata: map[string]interface{}{
+					Metadata: map[interface{}]interface{}{
 						"MetadataName": "MetadataValue",
 					},
 					DependsOn: []interface{}{
@@ -410,13 +410,13 @@ func TestMergeResources(t *testing.T) {
 				},
 				"Test2": types.CfResource{
 					Type: "AWS::Logs::LogGroup",
-					Properties: map[string]interface{}{
+					Properties: map[interface{}]interface{}{
 						"LogGroupName": "TestLogGroup2",
 					},
-					Condition: map[string]interface{}{
+					Condition: map[interface{}]interface{}{
 						"ConditionName": "ConditionValue2",
 					},
-					Metadata: map[string]interface{}{
+					Metadata: map[interface{}]interface{}{
 						"MetadataName": "MetadataValue2",
 					},
 					DependsOn: []interface{}{
