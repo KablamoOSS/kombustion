@@ -90,7 +90,7 @@ func Upsert(c *cli.Context) {
 	generateParams := cloudformation.GenerateParams{
 		Filename: fileName,
 		Env:      environment,
-		GenerateDefaultOutputs: c.Bool("generate-default-outputs"),
+		GenerateDefaultOutputs: c.Bool("generate-default-outputs") || manifestFile.GenerateDefaultOutputs,
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,
 	}

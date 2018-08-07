@@ -76,7 +76,7 @@ func Generate(c *cli.Context) {
 		Directory:   c.String("output-directory"),
 		WriteParams: c.Bool("write-parameters"),
 		Env:         c.String("env"),
-		GenerateDefaultOutputs: c.Bool("generate-default-outputs"),
+		GenerateDefaultOutputs: c.Bool("generate-default-outputs") || manifestFile.GenerateDefaultOutputs,
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,
 	})
