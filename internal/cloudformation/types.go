@@ -35,6 +35,7 @@ type (
 	// GenerateParams are required to generate a cloudformation yaml template
 	GenerateParams struct {
 		Filename               string
+		Directory              string
 		WriteParams            bool
 		EnvFile                string
 		Env                    string

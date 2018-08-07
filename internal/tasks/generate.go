@@ -26,6 +26,11 @@ var GenerateFlags = []cli.Flag{
 		Name:  "write-parameters, w",
 		Usage: "Write parameters to a file",
 	},
+	cli.StringFlag{
+		Name:  "output-directory, d",
+		Usage: "Directory to write generated yaml to",
+		Value: "compiled",
+	},
 }
 
 func init() {
@@ -68,6 +73,7 @@ func Generate(c *cli.Context) {
 	printer.Progress("Generating template")
 	tasks.GenerateTemplate(cloudformation.GenerateParams{
 		Filename:    fileName,
+		Directory:   c.String("output-directory"),
 		WriteParams: c.Bool("write-parameters"),
 		Env:         c.String("env"),
 		GenerateDefaultOutputs: c.Bool("generate-default-outputs"),
