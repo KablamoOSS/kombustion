@@ -2,7 +2,6 @@ package cloudformation
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"strings"
@@ -341,19 +340,24 @@ func mergeResources(
 ) {
 	combinedResource = make(types.TemplateObject)
 
+	// The yaml round-trip here is because there may be problems with the
+	// msgpack round-trip from plugins. This is because we don't tag structs
+	// with `msgpack:FieldName,omitempty` (doing so would also require plugin
+	// writers to do the same). The yaml round-trip here ensures that
+	// empty/null values are handled correctly.
 	for k, v := range configResources {
-		if obj, err := json.Marshal(v); err == nil {
+		if obj, err := yaml.Marshal(v); err == nil {
 			var tempCfResource types.CfResource
-			if err = json.Unmarshal(obj, &tempCfResource); err == nil {
+			if err = yaml.Unmarshal(obj, &tempCfResource); err == nil {
 				combinedResource[k] = tempCfResource
 			}
 		}
 	}
 
 	for k, v := range baseResources {
-		if obj, err := json.Marshal(v); err == nil {
+		if obj, err := yaml.Marshal(v); err == nil {
 			var tempCfResource types.CfResource
-			if err = json.Unmarshal(obj, &tempCfResource); err == nil {
+			if err = yaml.Unmarshal(obj, &tempCfResource); err == nil {
 				combinedResource[k] = tempCfResource
 			}
 		}
