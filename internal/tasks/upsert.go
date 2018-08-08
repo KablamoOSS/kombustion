@@ -24,6 +24,10 @@ var UpsertFlags = []cli.Flag{
 		Name:  "generate-default-outputs, b",
 		Usage: "disable generation of outputs for Base AWS types",
 	},
+	cli.StringFlag{
+		Name:  "read-parameters",
+		Usage: "Read parameters from a file",
+	},
 	cli.BoolFlag{
 		Name:  "iam, i",
 		Usage: "gives the capability to perform upserts of IAM resources",
@@ -81,7 +85,14 @@ func Upsert(c *cli.Context) {
 		region,
 	)
 
-	paramMap := cloudformation.GetParamMap(c)
+	paramMap := make(map[string]string)
+	if paramsFile := c.String("read-parameters"); paramsFile != "" {
+		paramMap = readParamsFile(paramsFile)
+	}
+
+	for key, value := range cloudformation.GetParamMap(c) {
+		paramMap[key] = value
+	}
 
 	environment := c.String("environment")
 
