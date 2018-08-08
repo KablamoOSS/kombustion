@@ -1,6 +1,7 @@
 package tasks
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -46,10 +47,20 @@ func writeOutput(file, directory string, output []byte) {
 }
 
 func writeParamMap(file, directory string, params map[string]string) {
+	outParams := make([]cloudformation.Parameter, 0)
+
+	for key, value := range params {
+		cfParam := cloudformation.Parameter{
+			ParameterKey:   key,
+			ParameterValue: value,
+		}
+		outParams = append(outParams, cfParam)
+	}
+
 	filename := filepath.Base(file)
 	basename := strings.TrimSuffix(filename, filepath.Ext(filename))
-	path := filepath.Join(directory, fmt.Sprint(basename, "-params.yaml"))
-	out, err := yaml.Marshal(params)
+	path := filepath.Join(directory, fmt.Sprint(basename, "-params.json"))
+	out, err := json.MarshalIndent(outParams, "", "  ")
 	checkError(err)
 
 	ioutil.WriteFile(path, out, 0644)
