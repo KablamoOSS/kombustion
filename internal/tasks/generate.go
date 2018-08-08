@@ -1,7 +1,9 @@
 package tasks
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
@@ -21,6 +23,10 @@ var GenerateFlags = []cli.Flag{
 	cli.BoolFlag{
 		Name:  "generate-default-outputs, b",
 		Usage: "disable generation of outputs for Base AWS types",
+	},
+	cli.StringFlag{
+		Name:  "read-parameters",
+		Usage: "Read parameters from a file",
 	},
 	cli.BoolFlag{
 		Name:  "write-parameters, w",
@@ -53,7 +59,14 @@ func Generate(c *cli.Context) {
 		)
 	}
 
-	paramMap := cloudformation.GetParamMap(c)
+	paramMap := make(map[string]string)
+	if paramsFile := c.String("read-parameters"); paramsFile != "" {
+		paramMap = readParamsFile(paramsFile)
+	}
+
+	for key, value := range cloudformation.GetParamMap(c) {
+		paramMap[key] = value
+	}
 
 	lockFile := lock.FindAndLoadLock()
 
@@ -80,4 +93,35 @@ func Generate(c *cli.Context) {
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,
 	})
+}
+
+func readParamsFile(file string) (params map[string]string) {
+	body, err := ioutil.ReadFile(file)
+	if err != nil {
+		printer.Fatal(
+			fmt.Errorf("Couldn't read params file: %v", err),
+			fmt.Sprintf(
+				"Check the file exists, and your user has read permissions",
+			),
+			"",
+		)
+	}
+
+	cfParams := []cloudformation.Parameter{}
+	if err = json.Unmarshal(body, &cfParams); err != nil {
+		printer.Fatal(
+			fmt.Errorf("Couldn't unmarshal params file: %v", err),
+			fmt.Sprintf(
+				"Check the file is valid JSON, in the standard AWS cli format",
+			),
+			"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html",
+		)
+	}
+
+	params = make(map[string]string)
+	for _, param := range cfParams {
+		params[param.ParameterKey] = param.ParameterValue
+	}
+
+	return
 }
