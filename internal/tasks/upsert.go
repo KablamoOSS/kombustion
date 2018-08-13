@@ -116,6 +116,7 @@ func Upsert(c *cli.Context) {
 			capabilities,
 			stackName,
 			cfClient,
+			manifestFile.Tags,
 		)
 	} else {
 
@@ -128,6 +129,7 @@ func Upsert(c *cli.Context) {
 			capabilities,
 			stackName,
 			cfClient,
+			manifestFile.Tags,
 		)
 	}
 }

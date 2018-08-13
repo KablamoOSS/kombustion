@@ -22,6 +22,9 @@ type Manifest struct {
 	// A flag to indicate if default exports should be added to stacks in this project
 	// this defaults to false
 	GenerateDefaultOutputs bool `yaml:"GenerateDefaultOutputs"`
+
+	// A set of default tags that will be applied to created stacks
+	Tags map[string]string `yaml:"Tags"`
 }
 
 // Plugin specification inside the manifest

@@ -33,6 +33,10 @@ func ResolveParameters(
 
 	env := resolveEnvironmentParameters(manifestFile, c.String("environment"))
 
+	if env == nil {
+		env = make(map[string]string)
+	}
+
 	// override envFile values with optional --param values
 	params := GetParamMap(c)
 	for key, value := range params {
