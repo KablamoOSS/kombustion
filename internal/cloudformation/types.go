@@ -32,6 +32,14 @@ type (
 		Outputs                  types.TemplateObject `yaml:"Outputs,omitempty"`
 	}
 
+	// CloudFormation Parameter data type: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
+	Parameter struct {
+		ParameterKey     string
+		ParameterValue   string
+		ResolvedValue    string `json:"ResolvedValue,omitempty"`
+		UsePreviousValue bool   `json:"UsePreviousValue,omitempty"`
+	}
+
 	// GenerateParams are required to generate a cloudformation yaml template
 	GenerateParams struct {
 		Filename               string
