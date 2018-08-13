@@ -18,10 +18,16 @@ func UpsertStack(
 	capabilities []*string,
 	stackName string,
 	cf *awsCF.CloudFormation,
+	tags map[string]string,
 ) {
 
 	var err error
 	var action string
+
+	cfTags := make([]*awsCF.Tag, 0)
+	for key, value := range tags {
+		cfTags = append(cfTags, &awsCF.Tag{Key: &key, Value: &value})
+	}
 
 	// use template from file
 	_, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
@@ -33,6 +39,7 @@ func UpsertStack(
 			TemplateBody: aws.String(string(templateBody)),
 			Parameters:   parameters,
 			Capabilities: capabilities,
+			Tags:         cfTags,
 		})
 	} else {
 		action = "Creating"
@@ -42,6 +49,7 @@ func UpsertStack(
 			TemplateBody: aws.String(string(templateBody)),
 			Parameters:   parameters,
 			Capabilities: capabilities,
+			Tags:         cfTags,
 		})
 	}
 	checkError(err)
@@ -56,10 +64,16 @@ func UpsertStackViaS3(
 	capabilities []*string,
 	stackName string,
 	cf *awsCF.CloudFormation,
+	tags map[string]string,
 ) {
 
 	var err error
 	var action string
+
+	cfTags := make([]*awsCF.Tag, 0)
+	for key, value := range tags {
+		cfTags = append(cfTags, &awsCF.Tag{Key: &key, Value: &value})
+	}
 
 	// use cf template url
 	_, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
@@ -72,6 +86,7 @@ func UpsertStackViaS3(
 			TemplateURL:  aws.String(templateURL),
 			Parameters:   parameters,
 			Capabilities: capabilities,
+			Tags:         cfTags,
 		})
 	} else { //create
 		action = "Creating"
@@ -81,6 +96,7 @@ func UpsertStackViaS3(
 			TemplateURL:  aws.String(templateURL),
 			Parameters:   parameters,
 			Capabilities: capabilities,
+			Tags:         cfTags,
 		})
 	}
 	checkError(err)
