@@ -26,7 +26,14 @@ func UpsertStack(
 
 	cfTags := make([]*awsCF.Tag, 0)
 	for key, value := range tags {
-		cfTags = append(cfTags, &awsCF.Tag{Key: &key, Value: &value})
+		// Since aws-sdk-go insists on using string pointers, pointers to the
+		// loop variables will have their values changed.
+		// Creating a copy of the key / value here means we don't end up with
+		// all the array elements referencing the same variable (and thus
+		// having the same value).
+		k := key
+		v := value
+		cfTags = append(cfTags, &awsCF.Tag{Key: &k, Value: &v})
 	}
 
 	// use template from file

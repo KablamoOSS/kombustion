@@ -20,6 +20,10 @@ var UpsertFlags = []cli.Flag{
 		Name:  "param, p",
 		Usage: "cloudformation parameters. eg `BucketName=test`",
 	},
+	cli.StringSliceFlag{
+		Name:  "tag, t",
+		Usage: "tags to add to cloudformation stack. eg `CostCenter=example`",
+	},
 	cli.BoolFlag{
 		Name:  "generate-default-outputs, b",
 		Usage: "disable generation of outputs for Base AWS types",
@@ -94,6 +98,14 @@ func Upsert(c *cli.Context) {
 		paramMap[key] = value
 	}
 
+	tags := manifestFile.Tags
+	if tags == nil {
+		tags = make(map[string]string)
+	}
+	for key, value := range cliSliceMap(c.StringSlice("tag")) {
+		tags[key] = value
+	}
+
 	environment := c.String("environment")
 
 	printer.Progress("Generating template")
@@ -127,7 +139,7 @@ func Upsert(c *cli.Context) {
 			capabilities,
 			stackName,
 			cfClient,
-			manifestFile.Tags,
+			tags,
 		)
 	} else {
 
@@ -140,7 +152,7 @@ func Upsert(c *cli.Context) {
 			capabilities,
 			stackName,
 			cfClient,
-			manifestFile.Tags,
+			tags,
 		)
 	}
 }
