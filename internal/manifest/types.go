@@ -54,4 +54,7 @@ type Environment struct {
 	// A list of Parameters to substiture into the Parameters field of all stacks in this
 	// project.
 	Parameters map[string]string `yaml:"Parameters,omitempty"`
+
+	// A set of default tags to apply to stacks created in an environment
+	Tags map[string]string `yaml:"Tags,omitempty"`
 }
