@@ -98,15 +98,20 @@ func Upsert(c *cli.Context) {
 		paramMap[key] = value
 	}
 
+	environment := c.String("environment")
+
 	tags := manifestFile.Tags
 	if tags == nil {
 		tags = make(map[string]string)
 	}
+	if env, ok := manifestFile.Environments[environment]; ok {
+		for key, value := range env.Tags {
+			tags[key] = value
+		}
+	}
 	for key, value := range cliSliceMap(c.StringSlice("tag")) {
 		tags[key] = value
 	}
-
-	environment := c.String("environment")
 
 	printer.Progress("Generating template")
 	// Template generation parameters
