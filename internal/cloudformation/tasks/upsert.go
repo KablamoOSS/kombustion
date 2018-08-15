@@ -126,12 +126,36 @@ func upsertStack(
 		}
 		survey.AskOne(prompt, &proceed, nil)
 		if !proceed {
-			// TODO: Simply aborting kombustion here leaves leftover cruft in
-			// CloudFormation, that it would be better to clean up.
-			// If action is UPDATE we should clean up the changeset we aren't going to apply
-			// If action is CREATE, then we should clean up the cloudformation
-			// stack that's been created in a REVIEW_IN_PROGRESS state.
 			printer.Step("Aborting upsertion")
+			if *changeSetIn.ChangeSetType == "UPDATE" {
+				printer.SubStep("Cleaning up unused change set", 1, true, true)
+				_, err := cf.DeleteChangeSet(
+					&awsCF.DeleteChangeSetInput{
+						ChangeSetName: changeSet.ChangeSetId,
+					},
+				)
+				if err != nil {
+					printer.Fatal(
+						err,
+						"Manually clean up change set",
+						"",
+					)
+				}
+			} else if *changeSetIn.ChangeSetType == "CREATE" {
+				printer.SubStep("Cleaning up pending stack", 1, true, true)
+				_, err := cf.DeleteStack(
+					&awsCF.DeleteStackInput{
+						StackName: changeSetIn.StackName,
+					},
+				)
+				if err != nil {
+					printer.Fatal(
+						err,
+						"Manually clean up pending stack",
+						"",
+					)
+				}
+			}
 			printer.Stop()
 			os.Exit(1)
 		}
