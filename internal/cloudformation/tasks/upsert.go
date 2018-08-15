@@ -9,6 +9,8 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
+
+	"gopkg.in/AlecAivazis/survey.v1"
 )
 
 func UpsertStackBody(
@@ -18,6 +20,7 @@ func UpsertStackBody(
 	stackName string,
 	cf *awsCF.CloudFormation,
 	tags map[string]string,
+	confirm bool,
 ) {
 	changeSetIn := &awsCF.CreateChangeSetInput{
 		Capabilities:  capabilities,
@@ -28,7 +31,7 @@ func UpsertStackBody(
 		Tags:          formatTags(tags),
 		TemplateBody:  aws.String(string(templateBody)),
 	}
-	upsertStack(cf, changeSetIn)
+	upsertStack(cf, changeSetIn, confirm)
 }
 
 func UpsertStackURL(
@@ -38,6 +41,7 @@ func UpsertStackURL(
 	stackName string,
 	cf *awsCF.CloudFormation,
 	tags map[string]string,
+	confirm bool,
 ) {
 	changeSetIn := &awsCF.CreateChangeSetInput{
 		Capabilities:  capabilities,
@@ -48,19 +52,20 @@ func UpsertStackURL(
 		Tags:          formatTags(tags),
 		TemplateURL:   aws.String(templateURL),
 	}
-	upsertStack(cf, changeSetIn)
+	upsertStack(cf, changeSetIn, confirm)
 }
 
 func upsertStack(
 	cf *awsCF.CloudFormation,
 	changeSetIn *awsCF.CreateChangeSetInput,
+	confirm bool,
 ) {
 
 	var err error
 	var action string
 
-	_, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: changeSetIn.StackName})
-	if err == nil { //update
+	describeStacksOut, err := cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: changeSetIn.StackName})
+	if err == nil && *describeStacksOut.Stacks[0].StackStatus != "REVIEW_IN_PROGRESS" {
 		action = "Updating"
 		changeSetIn.ChangeSetType = aws.String("UPDATE")
 	} else {
@@ -113,8 +118,23 @@ func upsertStack(
 		)
 	}
 
-	// TODO: Since we're displaying the action CF is going to take, we could
-	// prompt the user to ask if they want to proceed.
+	if confirm {
+		var proceed bool
+		prompt := &survey.Confirm{
+			Message: " Apply changes?",
+		}
+		survey.AskOne(prompt, &proceed, nil)
+		if !proceed {
+			// TODO: Simply aborting kombustion here leaves leftover cruft in
+			// CloudFormation, that it would be better to clean up.
+			// If action is UPDATE we should clean up the changeset we aren't going to apply
+			// If action is CREATE, then we should clean up the cloudformation
+			// stack that's been created in a REVIEW_IN_PROGRESS state.
+			printer.Step("Aborting upsertion")
+			printer.Stop()
+			os.Exit(1)
+		}
+	}
 
 	printer.Step("Executing change set")
 	executeCSIn := &awsCF.ExecuteChangeSetInput{
