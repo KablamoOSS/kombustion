@@ -102,20 +102,21 @@ func upsertStack(
 	printer.SubStep("Changes to be applied:", 1, true, true)
 	for _, change := range changeSet.Changes {
 		resChange := change.ResourceChange
-		// TODO: ResourceChange has a .Replacement field to indicate whether a
-		// Modify action will update in place or recreate the resource. We
-		// should probably stitch that into the output.
-		printer.SubStep(
-			fmt.Sprintf(
-				"%s %s %s",
-				*resChange.Action,
-				*resChange.LogicalResourceId,
-				*resChange.ResourceType,
-			),
-			1,
-			true,
-			true,
+
+		line := fmt.Sprintf(
+			"%6s %s %s",
+			*resChange.Action,
+			*resChange.ResourceType,
+			*resChange.LogicalResourceId,
 		)
+		if *resChange.Action == "Modify" {
+			line = fmt.Sprintf(
+				"%s (Replacement: %s)",
+				line,
+				*resChange.Replacement,
+			)
+		}
+		printer.SubStep(line, 1, true, true)
 	}
 
 	if confirm {
