@@ -84,7 +84,7 @@ func Upsert(c *cli.Context) {
 		}
 	}
 
-	cfClient := tasks.GetCloudformationClient(
+	acctID, cfClient := tasks.GetCloudformationClient(
 		c.GlobalString("profile"),
 		region,
 	)
@@ -99,6 +99,16 @@ func Upsert(c *cli.Context) {
 	}
 
 	environment := c.String("environment")
+
+	if env, ok := manifestFile.Environments[environment]; ok {
+		if !env.IsWhitelistedAccount(acctID) {
+			printer.Fatal(
+				fmt.Errorf("Account %s is not allowed for environment %s", acctID, environment),
+				"Use whitelisted account, or add account to environment accounts in kombustion.yaml",
+				"",
+			)
+		}
+	}
 
 	tags := manifestFile.Tags
 	if tags == nil {
