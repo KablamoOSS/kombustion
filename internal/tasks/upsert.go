@@ -148,7 +148,7 @@ func Upsert(c *cli.Context) {
 
 		templateURL := c.String("url")
 
-		tasks.UpsertStackViaS3(
+		tasks.UpsertStackURL(
 			templateURL,
 			parameters,
 			capabilities,
@@ -161,7 +161,7 @@ func Upsert(c *cli.Context) {
 		templateBody, cfYaml := tasks.GenerateYamlTemplate(generateParams)
 		parameters = cloudformation.ResolveParameters(c, cfYaml, manifestFile)
 
-		tasks.UpsertStack(
+		tasks.UpsertStackBody(
 			templateBody,
 			parameters,
 			capabilities,

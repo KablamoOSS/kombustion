@@ -11,8 +11,7 @@ import (
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 )
 
-// UpsertStack -
-func UpsertStack(
+func UpsertStackBody(
 	templateBody []byte,
 	parameters []*awsCF.Parameter,
 	capabilities []*string,
@@ -20,52 +19,19 @@ func UpsertStack(
 	cf *awsCF.CloudFormation,
 	tags map[string]string,
 ) {
-
-	var err error
-	var action string
-
-	cfTags := make([]*awsCF.Tag, 0)
-	for key, value := range tags {
-		// Since aws-sdk-go insists on using string pointers, pointers to the
-		// loop variables will have their values changed.
-		// Creating a copy of the key / value here means we don't end up with
-		// all the array elements referencing the same variable (and thus
-		// having the same value).
-		k := key
-		v := value
-		cfTags = append(cfTags, &awsCF.Tag{Key: &k, Value: &v})
+	changeSetIn := &awsCF.CreateChangeSetInput{
+		Capabilities:  capabilities,
+		ChangeSetName: aws.String(fmt.Sprintf("%s-upsert", stackName)),
+		Description:   aws.String(fmt.Sprintf("Kombustion upsert of %s", stackName)),
+		Parameters:    parameters,
+		StackName:     aws.String(stackName),
+		Tags:          formatTags(tags),
+		TemplateBody:  aws.String(string(templateBody)),
 	}
-
-	// use template from file
-	_, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
-	if err == nil { //update
-		action = "Updating"
-		printer.Step(fmt.Sprintf("%s Stack %s:", action, stackName))
-		_, err = cf.UpdateStack(&awsCF.UpdateStackInput{
-			StackName:    aws.String(stackName),
-			TemplateBody: aws.String(string(templateBody)),
-			Parameters:   parameters,
-			Capabilities: capabilities,
-			Tags:         cfTags,
-		})
-	} else {
-		action = "Creating"
-		printer.Step(fmt.Sprintf("%s Stack %s:", action, stackName))
-		_, err = cf.CreateStack(&awsCF.CreateStackInput{
-			StackName:    aws.String(stackName),
-			TemplateBody: aws.String(string(templateBody)),
-			Parameters:   parameters,
-			Capabilities: capabilities,
-			Tags:         cfTags,
-		})
-	}
-	checkError(err)
-
-	processUpsert(stackName, action, cf)
+	upsertStack(cf, changeSetIn)
 }
 
-// UpsertStackViaS3 -
-func UpsertStackViaS3(
+func UpsertStackURL(
 	templateURL string,
 	parameters []*awsCF.Parameter,
 	capabilities []*string,
@@ -73,43 +39,91 @@ func UpsertStackViaS3(
 	cf *awsCF.CloudFormation,
 	tags map[string]string,
 ) {
+	changeSetIn := &awsCF.CreateChangeSetInput{
+		Capabilities:  capabilities,
+		ChangeSetName: aws.String(fmt.Sprintf("%s-upsert", stackName)),
+		Description:   aws.String(fmt.Sprintf("Kombustion upsert of %s", stackName)),
+		Parameters:    parameters,
+		StackName:     aws.String(stackName),
+		Tags:          formatTags(tags),
+		TemplateURL:   aws.String(templateURL),
+	}
+	upsertStack(cf, changeSetIn)
+}
+
+func upsertStack(
+	cf *awsCF.CloudFormation,
+	changeSetIn *awsCF.CreateChangeSetInput,
+) {
 
 	var err error
 	var action string
 
-	cfTags := make([]*awsCF.Tag, 0)
-	for key, value := range tags {
-		cfTags = append(cfTags, &awsCF.Tag{Key: &key, Value: &value})
-	}
-
-	// use cf template url
-	_, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
+	_, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: changeSetIn.StackName})
 	if err == nil { //update
 		action = "Updating"
-		printer.Step(fmt.Sprintf("%s Stack %s:", action, stackName))
-
-		_, err = cf.UpdateStack(&awsCF.UpdateStackInput{
-			StackName:    aws.String(stackName),
-			TemplateURL:  aws.String(templateURL),
-			Parameters:   parameters,
-			Capabilities: capabilities,
-			Tags:         cfTags,
-		})
-	} else { //create
+		changeSetIn.ChangeSetType = aws.String("UPDATE")
+	} else {
 		action = "Creating"
-		printer.Step(fmt.Sprintf("%s Stack %s:", action, stackName))
-		_, err = cf.CreateStack(&awsCF.CreateStackInput{
-			StackName:    aws.String(stackName),
-			TemplateURL:  aws.String(templateURL),
-			Parameters:   parameters,
-			Capabilities: capabilities,
-			Tags:         cfTags,
-		})
+		changeSetIn.ChangeSetType = aws.String("CREATE")
 	}
+
+	printer.Step("Creating change set")
+	changeSetOut, err := cf.CreateChangeSet(changeSetIn)
 	checkError(err)
 
-	processUpsert(stackName, action, cf)
+	printer.Step("Waiting for change set creation")
+	describeChangeSetIn := &awsCF.DescribeChangeSetInput{
+		ChangeSetName: changeSetOut.Id,
+	}
+	cf.WaitUntilChangeSetCreateComplete(describeChangeSetIn)
 
+	changeSet, err := cf.DescribeChangeSet(describeChangeSetIn)
+	checkError(err)
+
+	if *changeSet.Status == "FAILED" {
+		printer.Fatal(
+			fmt.Errorf("Cloudformation ChangeSet failed to create"),
+			*changeSet.StatusReason,
+			"",
+		)
+	}
+
+	// TODO: In theory, a DescribeChangeSetOutput can be paginated (indicated
+	// by having a .Next token), which may occur on large enough templates
+	// (total response body > 1MB). Seems unlikely for most cases, but we
+	// should probably handle it properly.
+
+	printer.SubStep("Changes to be applied:", 1, true, true)
+	for _, change := range changeSet.Changes {
+		resChange := change.ResourceChange
+		// TODO: ResourceChange has a .Replacement field to indicate whether a
+		// Modify action will update in place or recreate the resource. We
+		// should probably stitch that into the output.
+		printer.SubStep(
+			fmt.Sprintf(
+				"%s %s %s",
+				*resChange.Action,
+				*resChange.LogicalResourceId,
+				*resChange.ResourceType,
+			),
+			1,
+			true,
+			true,
+		)
+	}
+
+	// TODO: Since we're displaying the action CF is going to take, we could
+	// prompt the user to ask if they want to proceed.
+
+	printer.Step("Executing change set")
+	executeCSIn := &awsCF.ExecuteChangeSetInput{
+		ChangeSetName: changeSetOut.Id,
+	}
+	_, err = cf.ExecuteChangeSet(executeCSIn)
+	checkError(err)
+
+	processUpsert(*changeSetIn.StackName, action, cf)
 }
 
 func processUpsert(stackName, action string, cf *awsCF.CloudFormation) {
@@ -162,4 +176,19 @@ func processUpsert(stackName, action string, cf *awsCF.CloudFormation) {
 			}
 		}
 	}
+}
+
+func formatTags(tags map[string]string) []*awsCF.Tag {
+	cfTags := make([]*awsCF.Tag, 0)
+	for key, value := range tags {
+		// Since aws-sdk-go insists on using string pointers, pointers to the
+		// loop variables will have their values changed.
+		// Creating a copy of the key / value here means we don't end up with
+		// all the array elements referencing the same variable (and thus
+		// having the same value).
+		k := key
+		v := value
+		cfTags = append(cfTags, &awsCF.Tag{Key: &k, Value: &v})
+	}
+	return cfTags
 }
