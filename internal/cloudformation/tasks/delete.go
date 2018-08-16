@@ -2,17 +2,16 @@ package tasks
 
 import (
 	"fmt"
+	printer "github.com/KablamoOSS/go-cli-printer"
 	"os"
 	"time"
-	printer "github.com/KablamoOSS/go-cli-printer"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/cloudformation"
 )
 
 // DeleteStack removes a cloudformation stack
-func DeleteStack(stackName, profile, region string) {
-	cf := GetCloudformationClient(profile, region)
+func DeleteStack(cf *cloudformation.CloudFormation, stackName, region string) {
 	printer.Step(fmt.Sprintf("Delete Stack %s:", stackName))
 
 	//See if the stack exists to begin with

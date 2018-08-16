@@ -11,10 +11,11 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials/stscreds"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudformation"
+	"github.com/aws/aws-sdk-go/service/sts"
 )
 
 // GetCloudformationClient from the standard credential chain
-func GetCloudformationClient(profile string, region string) *cloudformation.CloudFormation {
+func GetCloudformationClient(profile string, region string) (string, *cloudformation.CloudFormation) {
 	var awsConfig *aws.Config
 
 	if region == "" {
@@ -37,8 +38,18 @@ func GetCloudformationClient(profile string, region string) *cloudformation.Clou
 	}
 
 	awsSession := getSession(profile)
+	stsClient := sts.New(awsSession, awsConfig)
+	callerID, err := stsClient.GetCallerIdentity(&sts.GetCallerIdentityInput{})
+	if err != nil {
+		printer.Fatal(
+			err,
+			fmt.Sprintf("Check that you have configured valid AWS credentials"),
+			"",
+		)
+	}
+
 	cf := cloudformation.New(awsSession, awsConfig)
-	return cf
+	return *callerID.Account, cf
 }
 
 func getAWSCredentials() *credentials.Credentials {

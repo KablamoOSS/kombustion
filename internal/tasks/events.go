@@ -24,7 +24,7 @@ func PrintEvents(c *cli.Context) {
 		}
 	}
 
-	cfClient := tasks.GetCloudformationClient(
+	acctID, cfClient := tasks.GetCloudformationClient(
 		c.GlobalString("profile"),
 		region,
 	)
@@ -42,6 +42,16 @@ func PrintEvents(c *cli.Context) {
 			),
 			"https://www.kombustion.io/api/cli/#stacks",
 		)
+	}
+
+	if env, ok := manifestFile.Environments[environment]; ok {
+		if !env.IsWhitelistedAccount(acctID) {
+			printer.Fatal(
+				fmt.Errorf("Account %s is not allowed for environment %s", acctID, environment),
+				"Use whitelisted account, or add account to environment accounts in kombustion.yaml",
+				"",
+			)
+		}
 	}
 
 	stackName = cloudformation.GetStackName(
