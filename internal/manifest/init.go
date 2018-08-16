@@ -61,8 +61,18 @@ func surveyForInitialManifest(prompter initialisePrompter) (*Manifest, error) {
 		if err != nil {
 			return nil, err
 		}
+
+		// Adding an empty account ID into kombustion.yaml would mean that no
+		// account would be valid, and kombustion would refuse to perform any
+		// (AWS) operation. Instead, if the user doesn't enter an ID, assume
+		// they don't want a whitelist.
+		accountIds := []string{}
+		if accountId != "" {
+			accountIds = append(accountIds, accountId)
+		}
+
 		manifest.Environments[env] = Environment{
-			AccountIDs: []string{accountId},
+			AccountIDs: accountIds,
 			Parameters: map[string]string{"Environment": env},
 		}
 	}

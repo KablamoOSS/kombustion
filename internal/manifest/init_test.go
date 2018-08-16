@@ -66,3 +66,19 @@ func TestSurveyForInitialManifestError(t *testing.T) {
 	assert.Equal(t, err.Error(), "aborted")
 	assert.Nil(t, manifest)
 }
+
+func TestSurveyForInitialManifestEmptyAccountID(t *testing.T) {
+	testPrompt := &initialiseTestPrompter{
+		Name:         "Kombustion",
+		Environments: []string{"ci"},
+		AccountIDs: map[string]string{
+			"ci": "",
+		},
+	}
+
+	manifest, err := surveyForInitialManifest(testPrompt)
+	assert.Nil(t, err)
+	assert.Equal(t, manifest.Name, "Kombustion")
+	assert.Equal(t, len(manifest.Environments), 1)
+	assert.Equal(t, len(manifest.Environments["ci"].AccountIDs), 0)
+}
