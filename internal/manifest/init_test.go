@@ -46,24 +46,23 @@ func TestSurveyForInitialManifestHappyPath(t *testing.T) {
 		},
 	}
 
-	name, environments, err := surveyForInitialManifest(testPrompt)
+	manifest, err := surveyForInitialManifest(testPrompt)
 	assert.Nil(t, err)
-	assert.Equal(t, name, "Kombustion")
-	assert.Equal(t, len(environments), 1)
-	assert.Equal(t, len(environments["ci"].AccountIDs), 1)
-	assert.Equal(t, environments["ci"].AccountIDs[0], "12345")
+	assert.Equal(t, manifest.Name, "Kombustion")
+	assert.Equal(t, len(manifest.Environments), 1)
+	assert.Equal(t, len(manifest.Environments["ci"].AccountIDs), 1)
+	assert.Equal(t, manifest.Environments["ci"].AccountIDs[0], "12345")
 }
 
 func TestSurveyForInitialManifestError(t *testing.T) {
 	testPrompt := &initialiseTestPrompter{
-		Name:         "Komb",
+		Name:         "Komb...",
 		NameError:    fmt.Errorf("aborted"),
 		Environments: []string{"N/A"},
 		AccountIDs:   map[string]string{},
 	}
 
-	name, environments, err := surveyForInitialManifest(testPrompt)
+	manifest, err := surveyForInitialManifest(testPrompt)
 	assert.Equal(t, err.Error(), "aborted")
-	assert.Equal(t, name, "")
-	assert.Equal(t, len(environments), 0)
+	assert.Nil(t, manifest)
 }

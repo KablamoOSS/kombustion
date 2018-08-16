@@ -17,8 +17,7 @@ type initialisePrompter interface {
 // InitaliseNewManifest creates a new manifest with a survey
 func InitaliseNewManifest() error {
 	// Load the manifest file from this directory
-	manifestExists := CheckManifestExists()
-	if manifestExists {
+	if CheckManifestExists() {
 		printer.Fatal(
 			fmt.Errorf("Sorry we can't create a new kombustion.yaml, one already exists."),
 			"If you want to re-initialise your kombustion.yaml file, first remove it.",
@@ -27,17 +26,12 @@ func InitaliseNewManifest() error {
 	}
 
 	// Survey the user for required info
-	name, environments, err := surveyForInitialManifest(&surveyPrompt{})
+	manifest, err := surveyForInitialManifest(&surveyPrompt{})
 	if err != nil {
 		return err
 	}
 
-	manifest := Manifest{
-		Name:         name,
-		Environments: environments,
-	}
-
-	err = WriteManifestToDisk(&manifest)
+	err = WriteManifestToDisk(manifest)
 	if err != nil {
 		return err
 	}
@@ -46,31 +40,34 @@ func InitaliseNewManifest() error {
 
 // surveyForInitialManifest - Prompt the user to fill out the required fields,
 // but check if we have a flag for them
-func surveyForInitialManifest(prompter initialisePrompter) (string, map[string]Environment, error) {
-	environments := map[string]Environment{}
+func surveyForInitialManifest(prompter initialisePrompter) (*Manifest, error) {
+	manifest := &Manifest{
+		Environments: map[string]Environment{},
+	}
 
 	name, err := prompter.name()
 	if err != nil {
-		return name, environments, err
+		return nil, err
 	}
+	manifest.Name = name
 
 	environmentNames, err := prompter.environments()
 	if err != nil {
-		return name, environments, err
+		return nil, err
 	}
 
 	for _, env := range environmentNames {
 		accountId, err := prompter.accountID(env)
 		if err != nil {
-			return name, environments, err
+			return nil, err
 		}
-		environments[env] = Environment{
+		manifest.Environments[env] = Environment{
 			AccountIDs: []string{accountId},
 			Parameters: map[string]string{"Environment": env},
 		}
 	}
 
-	return name, environments, nil
+	return manifest, nil
 }
 
 // Implements the initialisePrompter interface, so we can plug another
