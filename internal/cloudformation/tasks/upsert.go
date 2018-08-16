@@ -9,6 +9,8 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
+
+	"gopkg.in/AlecAivazis/survey.v1"
 )
 
 func UpsertStackBody(
@@ -18,6 +20,7 @@ func UpsertStackBody(
 	stackName string,
 	cf *awsCF.CloudFormation,
 	tags map[string]string,
+	confirm bool,
 ) {
 	changeSetIn := &awsCF.CreateChangeSetInput{
 		Capabilities:  capabilities,
@@ -28,7 +31,7 @@ func UpsertStackBody(
 		Tags:          formatTags(tags),
 		TemplateBody:  aws.String(string(templateBody)),
 	}
-	upsertStack(cf, changeSetIn)
+	upsertStack(cf, changeSetIn, confirm)
 }
 
 func UpsertStackURL(
@@ -38,6 +41,7 @@ func UpsertStackURL(
 	stackName string,
 	cf *awsCF.CloudFormation,
 	tags map[string]string,
+	confirm bool,
 ) {
 	changeSetIn := &awsCF.CreateChangeSetInput{
 		Capabilities:  capabilities,
@@ -48,19 +52,20 @@ func UpsertStackURL(
 		Tags:          formatTags(tags),
 		TemplateURL:   aws.String(templateURL),
 	}
-	upsertStack(cf, changeSetIn)
+	upsertStack(cf, changeSetIn, confirm)
 }
 
 func upsertStack(
 	cf *awsCF.CloudFormation,
 	changeSetIn *awsCF.CreateChangeSetInput,
+	confirm bool,
 ) {
 
 	var err error
 	var action string
 
-	_, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: changeSetIn.StackName})
-	if err == nil { //update
+	describeStacksOut, err := cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: changeSetIn.StackName})
+	if err == nil && *describeStacksOut.Stacks[0].StackStatus != "REVIEW_IN_PROGRESS" {
 		action = "Updating"
 		changeSetIn.ChangeSetType = aws.String("UPDATE")
 	} else {
@@ -97,24 +102,64 @@ func upsertStack(
 	printer.SubStep("Changes to be applied:", 1, true, true)
 	for _, change := range changeSet.Changes {
 		resChange := change.ResourceChange
-		// TODO: ResourceChange has a .Replacement field to indicate whether a
-		// Modify action will update in place or recreate the resource. We
-		// should probably stitch that into the output.
-		printer.SubStep(
-			fmt.Sprintf(
-				"%s %s %s",
-				*resChange.Action,
-				*resChange.LogicalResourceId,
-				*resChange.ResourceType,
-			),
-			1,
-			true,
-			true,
+
+		line := fmt.Sprintf(
+			"%6s %s %s",
+			*resChange.Action,
+			*resChange.ResourceType,
+			*resChange.LogicalResourceId,
 		)
+		if *resChange.Action == "Modify" {
+			line = fmt.Sprintf(
+				"%s (Replacement: %s)",
+				line,
+				*resChange.Replacement,
+			)
+		}
+		printer.SubStep(line, 1, true, true)
 	}
 
-	// TODO: Since we're displaying the action CF is going to take, we could
-	// prompt the user to ask if they want to proceed.
+	if confirm {
+		var proceed bool
+		prompt := &survey.Confirm{
+			Message: " Apply changes?",
+		}
+		survey.AskOne(prompt, &proceed, nil)
+		if !proceed {
+			printer.Step("Aborting upsertion")
+			if *changeSetIn.ChangeSetType == "UPDATE" {
+				printer.SubStep("Cleaning up unused change set", 1, true, true)
+				_, err := cf.DeleteChangeSet(
+					&awsCF.DeleteChangeSetInput{
+						ChangeSetName: changeSet.ChangeSetId,
+					},
+				)
+				if err != nil {
+					printer.Fatal(
+						err,
+						"Manually clean up change set",
+						"",
+					)
+				}
+			} else if *changeSetIn.ChangeSetType == "CREATE" {
+				printer.SubStep("Cleaning up pending stack", 1, true, true)
+				_, err := cf.DeleteStack(
+					&awsCF.DeleteStackInput{
+						StackName: changeSetIn.StackName,
+					},
+				)
+				if err != nil {
+					printer.Fatal(
+						err,
+						"Manually clean up pending stack",
+						"",
+					)
+				}
+			}
+			printer.Stop()
+			os.Exit(1)
+		}
+	}
 
 	printer.Step("Executing change set")
 	executeCSIn := &awsCF.ExecuteChangeSetInput{

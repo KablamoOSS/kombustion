@@ -40,6 +40,10 @@ var UpsertFlags = []cli.Flag{
 		Name:  "capability",
 		Usage: "set capabilities for the upsert eg `CAPABILITY_IAM`",
 	},
+	cli.BoolFlag{
+		Name:  "confirm",
+		Usage: "Manually confirm required changes before applying",
+	},
 }
 
 func init() {
@@ -155,6 +159,7 @@ func Upsert(c *cli.Context) {
 			stackName,
 			cfClient,
 			tags,
+			c.Bool("confirm"),
 		)
 	} else {
 
@@ -168,6 +173,7 @@ func Upsert(c *cli.Context) {
 			stackName,
 			cfClient,
 			tags,
+			c.Bool("confirm"),
 		)
 	}
 }
