@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path/filepath"
 	"sync"
 
 	"github.com/KablamoOSS/go-cli-printer"
@@ -22,7 +21,7 @@ var (
 func FindAndLoadManifest() *Manifest {
 	if loadedManifest == nil {
 		once.Do(func() {
-			path, err := filepath.Abs(filepath.Dir(os.Args[0]))
+			path, err := os.Getwd()
 			if err != nil {
 				printer.Fatal(
 					err,
@@ -46,7 +45,7 @@ func FindAndLoadManifest() *Manifest {
 
 // CheckManifestExists to determine if there is a manifest in the current dir
 func CheckManifestExists() bool {
-	path, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	path, err := os.Getwd()
 	if err != nil {
 		return false
 	}
