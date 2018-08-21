@@ -8,8 +8,7 @@ import (
 
 // WriteManifestToDisk - Write the final manifest to disk
 func WriteManifestToDisk(manifest *Manifest) error {
-
-	// Mashall the the struct into yaml
+	// Marshal the the struct into yaml
 	manifestString, err := yaml.Marshal(&manifest)
 	if err != nil {
 		return err

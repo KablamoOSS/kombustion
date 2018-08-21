@@ -57,7 +57,7 @@ func CheckManifestExists() bool {
 }
 
 // findAndLoadManifest - Search the given directory for a manifest file, and load it
-// This is seperated to allow for easy testing
+// This is separated to allow for easy testing
 func findAndLoadManifest(path string) (Manifest, error) {
 	var manifestPath string
 	foundManifest := false
