@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path/filepath"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/yaml"
@@ -15,7 +14,7 @@ import (
 func FindAndLoadLock() (lock *Lock) {
 	var err error
 
-	path, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	path, err := os.Getwd()
 	if err != nil {
 		printer.Fatal(
 			err,
