@@ -1,7 +1,6 @@
 package lock
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 
