@@ -32,9 +32,7 @@ func LoadPlugins(manifestFile *manifest.Manifest, lockFile *lock.Lock) (loadedPl
 			} else {
 				printer.Fatal(
 					fmt.Errorf("Plugin `%s` is not installed, but is included in kombustion.yaml", manifestPlugin.Name),
-					fmt.Sprintf(
-						"Run `kombustion install` to fix.",
-					),
+					"Run `kombustion install` to fix.",
 					"",
 				)
 			}
@@ -73,17 +71,13 @@ func loadPlugin(
 		if isDevPlugin {
 			printer.Fatal(
 				fmt.Errorf("Plugin `%s` could not be found", pluginPath),
-				fmt.Sprintf(
-					"Check the path you provided with --load-plugin is correct.",
-				),
+				"Check the path you provided with --load-plugin is correct.",
 				"https://www.kombustion.io/api/cli/#load-plugin",
 			)
 		}
 		printer.Fatal(
 			fmt.Errorf("Plugin `%s` is not installed, but is included in kombustion.lock", manifestPlugin.Name),
-			fmt.Sprintf(
-				"Run `kombustion install` to fix.",
-			),
+			"Run `kombustion install` to fix.",
 			"",
 		)
 	}
@@ -97,9 +91,7 @@ func loadPlugin(
 	if err != nil {
 		printer.Fatal(
 			fmt.Errorf("Plugin `%s` could not be loaded, this is likely an issue with the plugin", manifestPlugin.Name),
-			fmt.Sprintf(
-				"Try your command again, but if it fails file an issue with the plugin author.",
-			),
+			"Try your command again, but if it fails file an issue with the plugin author.",
 			"",
 		)
 	}

@@ -227,7 +227,7 @@ func extractPlugin(pluginName string, operatingSystem string, architecture strin
 	destination := getLocalPluginDir(pluginName, operatingSystem, architecture, version)
 	extracter := core.GetExtracter(fileName)
 	if extracter == nil {
-		return extractedFilePath, fmt.Errorf(fmt.Sprintf("Unable to extract: %s", fileName))
+		return extractedFilePath, fmt.Errorf("Unable to extract: %s", fileName)
 	}
 	err = extracter.Open(fileName, destination)
 	var found bool

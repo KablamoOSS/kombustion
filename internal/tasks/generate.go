@@ -52,9 +52,7 @@ func Generate(c *cli.Context) {
 	if fileName == "" {
 		printer.Fatal(
 			fmt.Errorf("Can't generate file, no source template provided"),
-			fmt.Sprintf(
-				"Add the path to the source template file you want to generate like: `kombustion generate template.yaml`.",
-			),
+			"Add the path to the source template file you want to generate like: `kombustion generate template.yaml`.",
 			"https://www.kombustion.io/api/cli/#generate",
 		)
 	}
@@ -100,9 +98,7 @@ func readParamsFile(file string) (params map[string]string) {
 	if err != nil {
 		printer.Fatal(
 			fmt.Errorf("Couldn't read params file: %v", err),
-			fmt.Sprintf(
-				"Check the file exists, and your user has read permissions",
-			),
+			"Check the file exists, and your user has read permissions",
 			"",
 		)
 	}
@@ -111,9 +107,7 @@ func readParamsFile(file string) (params map[string]string) {
 	if err = json.Unmarshal(body, &cfParams); err != nil {
 		printer.Fatal(
 			fmt.Errorf("Couldn't unmarshal params file: %v", err),
-			fmt.Sprintf(
-				"Check the file is valid JSON, in the standard AWS cli format",
-			),
+			"Check the file is valid JSON, in the standard AWS cli format",
 			"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html",
 		)
 	}

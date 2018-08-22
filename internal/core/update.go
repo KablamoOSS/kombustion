@@ -39,7 +39,7 @@ func Update(currentVersion string, noPrompt bool) {
 
 		if *latestRelease.TagName == currentVersion {
 			printer.SubStep(
-				fmt.Sprintf("You have the current version."),
+				"You have the current version.",
 				1,
 				true,
 				true,
@@ -71,14 +71,14 @@ func Update(currentVersion string, noPrompt bool) {
 			downloadRelease(downloadURL)
 
 			printer.SubStep(
-				fmt.Sprintf("Update successful."),
+				"Update successful.",
 				1,
 				true,
 				true,
 			)
 		} else {
 			printer.SubStep(
-				fmt.Sprintf("No update performed."),
+				"No update performed.",
 				1,
 				true,
 				true,
@@ -87,7 +87,7 @@ func Update(currentVersion string, noPrompt bool) {
 		}
 	} else {
 		printer.SubStep(
-			fmt.Sprintf("No updates found."),
+			"No updates found.",
 			1,
 			true,
 			true,
@@ -202,7 +202,7 @@ func extractRelease(url, fileName string) (string, error) {
 
 	extracter := GetExtracter(url)
 	if extracter == nil {
-		return "", fmt.Errorf(fmt.Sprintf("Unable to extract: %s", fileName))
+		return "", fmt.Errorf("Unable to extract: %s", fileName)
 	}
 	err := extracter.Open(fileName, destination)
 	if err != nil {

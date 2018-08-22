@@ -1,7 +1,6 @@
 package lock
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 
@@ -18,9 +17,7 @@ func FindAndLoadLock() (lock *Lock) {
 	if err != nil {
 		printer.Fatal(
 			err,
-			fmt.Sprintf(
-				"kombustion.lock may be corrupted and needs to be rebuilt. Run `kombustion install` to fix this.",
-			),
+			"kombustion.lock may be corrupted and needs to be rebuilt. Run `kombustion install` to fix this.",
 			"https://www.kombustion.io/api/cli/#install",
 		)
 	}
@@ -29,9 +26,7 @@ func FindAndLoadLock() (lock *Lock) {
 	if err != nil {
 		printer.Fatal(
 			err,
-			fmt.Sprintf(
-				"kombustion.lock may be corrupted and needs to be rebuilt. Run `kombustion install` to fix this.",
-			),
+			"kombustion.lock may be corrupted and needs to be rebuilt. Run `kombustion install` to fix this.",
 			"https://www.kombustion.io/api/cli/#install",
 		)
 	}

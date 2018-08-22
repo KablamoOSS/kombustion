@@ -21,9 +21,7 @@ func GetCloudformationClient(profile string, region string) (string, *cloudforma
 	if region == "" {
 		printer.Fatal(
 			fmt.Errorf("No region has been set"),
-			fmt.Sprintf(
-				"Pass a region in via the cli with `--region us-east-1` or set a default `region` in kombustion.yaml",
-			),
+			"Pass a region in via the cli with `--region us-east-1` or set a default `region` in kombustion.yaml",
 			"http://kombustion.io/manifest/#region",
 		)
 	}
@@ -43,7 +41,7 @@ func GetCloudformationClient(profile string, region string) (string, *cloudforma
 	if err != nil {
 		printer.Fatal(
 			err,
-			fmt.Sprintf("Check that you have configured valid AWS credentials"),
+			"Check that you have configured valid AWS credentials",
 			"",
 		)
 	}
