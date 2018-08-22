@@ -37,9 +37,7 @@ func PrintEvents(c *cli.Context) {
 	if fileName == "" {
 		printer.Fatal(
 			fmt.Errorf("Can't find stack, no source template provided"),
-			fmt.Sprintf(
-				"Add the path to the source template file, or provide use --stack-name",
-			),
+			"Add the path to the source template file, or provide use --stack-name",
 			"https://www.kombustion.io/api/cli/#stacks",
 		)
 	}

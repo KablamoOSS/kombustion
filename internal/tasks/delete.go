@@ -25,9 +25,7 @@ func Delete(c *cli.Context) {
 	if fileName == "" {
 		printer.Fatal(
 			fmt.Errorf("Can't upsert file, no source template provided"),
-			fmt.Sprintf(
-				"Add the path to the source template file you want to generate like: `kombustion upsert template.yaml`.",
-			),
+			"Add the path to the source template file you want to generate like: `kombustion upsert template.yaml`.",
 			"https://www.kombustion.io/api/manifest/",
 		)
 	}

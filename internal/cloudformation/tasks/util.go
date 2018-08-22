@@ -37,7 +37,7 @@ func checkErrorDeletePoll(err error) {
 			os.Exit(0)
 		} else if strings.Contains(err.Error(), "Stack with id") && strings.Contains(err.Error(), "does not exist") {
 			printer.SubStep(
-				fmt.Sprintf("Success: Deleted Stack"),
+				"Success: Deleted Stack",
 				1,
 				true,
 				true,
