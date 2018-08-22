@@ -4,6 +4,7 @@ import (
 	"context"
 	"strings"
 
+	"github.com/KablamoOSS/go-cli-printer"
 	"github.com/google/go-github/github"
 	"github.com/mholt/archiver"
 )
@@ -24,6 +25,13 @@ func GetLatestRelease(
 		githubOrg,
 		githubProject,
 	)
+	if rlerr, ok := err.(*github.RateLimitError); ok {
+		printer.Fatal(
+			err,
+			fmt.Sprintf("Wait for Github API rate limit to reset (at %v)", rlerr.Rate.Reset),
+			"https://developer.github.com/v3/#rate-limiting"
+		)
+	}
 	if err != nil {
 		return latestRelease, err
 	}
