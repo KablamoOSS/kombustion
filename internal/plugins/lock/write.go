@@ -10,8 +10,7 @@ import (
 
 // WriteLockToDisk - Write the Lock to disk
 func WriteLockToDisk(lockFile *Lock) error {
-
-	// Mashall the the struct into yaml
+	// Marshal the the struct into yaml
 	lockString, err := yaml.Marshal(&lockFile)
 	if err != nil {
 		return err
@@ -22,5 +21,6 @@ func WriteLockToDisk(lockFile *Lock) error {
 	if err != nil {
 		printer.Fatal(err, config.ErrorHelpInfo, "")
 	}
+
 	return nil
 }

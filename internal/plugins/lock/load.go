@@ -10,19 +10,20 @@ import (
 
 // FindAndLoadLock - Search the current directory for a Lock file, and load it
 // If no lock is found, return an empty Lock
-func FindAndLoadLock() (lock *Lock) {
+func FindAndLoadLock() *Lock {
 	var err error
 
 	path, err := os.Getwd()
 	if err != nil {
+		// os.Getwd failure conditions are likely to be OS dependant
 		printer.Fatal(
 			err,
-			"kombustion.lock may be corrupted and needs to be rebuilt. Run `kombustion install` to fix this.",
-			"https://www.kombustion.io/api/cli/#install",
+			"Check your operating environment has a valid working directory",
+			"",
 		)
 	}
 
-	lock, err = findAndLoadLock(path)
+	lock, err := findAndLoadLock(path)
 	if err != nil {
 		printer.Fatal(
 			err,
@@ -35,44 +36,33 @@ func FindAndLoadLock() (lock *Lock) {
 		lock = &Lock{}
 		lock.Plugins = make(map[string]Plugin)
 	}
-	return
+
+	return lock
 }
 
 // findAndLoadLock - Search the given directory for a Lock , and load it
 // This is seperated to allow for easy testing
-func findAndLoadLock(path string) (lock *Lock, err error) {
-	var lockPath string
-	foundLock := false
+func findAndLoadLock(path string) (*Lock, error) {
+	lockPath := path + "/kombustion.lock"
 
-	if _, err := os.Stat(path + "/kombustion.lock"); err == nil {
-		lockPath = path + "/kombustion.lock"
-		foundLock = true
-	}
-
-	if foundLock {
+	if _, err := os.Stat(lockPath); err == nil {
 		// Read the Lock file
 		data, err := ioutil.ReadFile(lockPath)
 		if err != nil {
-			return lock, err
+			return nil, err
 		}
 
-		lock, err := loadLockFromString(data)
-		if err != nil {
-			return lock, err
-		}
-		return lock, err
+		return unmarshalLock(data)
 	}
+
 	// We didn't find a lock file
-	return lock, nil
+	return nil, nil
 }
 
-// loadLockFromString - Load a Lock from a string into a Lock struct
-func loadLockFromString(lockYaml []byte) (*Lock, error) {
-	lock := Lock{}
+// unmarshalLock - Load a Lock from a byte array into a Lock struct
+func unmarshalLock(lockYaml []byte) (*Lock, error) {
+	lock := &Lock{}
 
-	err := yaml.Unmarshal([]byte(lockYaml), &lock)
-	if err != nil {
-		return &lock, err
-	}
-	return &lock, nil
+	err := yaml.Unmarshal([]byte(lockYaml), lock)
+	return lock, err
 }

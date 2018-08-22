@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"plugin"
-	"runtime"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/manifest"
@@ -18,21 +17,23 @@ func LoadPlugins(manifestFile *manifest.Manifest, lockFile *lock.Lock) (loadedPl
 	for _, manifestPlugin := range manifestFile.Plugins {
 		for _, plugin := range lockFile.Plugins {
 			// Find the matching plugin in the lock file
-			if manifestPlugin.Name == plugin.Name && manifestPlugin.Version == plugin.Version {
-				for _, resolved := range plugin.Resolved {
-					// Find the right plugin for the current OS/Arch
-					if runtime.GOOS == resolved.OperatingSystem &&
-						runtime.GOARCH == resolved.Architecture {
-						loadedPlugins = append(
-							loadedPlugins,
-							loadPlugin(manifestPlugin, plugin.Name, plugin.Version, resolved.PathOnDisk, false),
-						)
-					}
+			if plugin.Match(&manifestPlugin) {
+				resolution := plugin.ResolveForRuntime()
+				if resolution == nil {
+					printer.Fatal(
+						fmt.Errorf("Could not resolve plugin %s", plugin.Name),
+						"Ensure plugin supports your operating system and architecture",
+						"",
+					)
 				}
+				loadedPlugins = append(
+					loadedPlugins,
+					loadPlugin(plugin.Name, plugin.Version, resolution.PathOnDisk, resolution.Hash, false, manifestPlugin.Alias),
+				)
 			} else {
 				printer.Fatal(
-					fmt.Errorf("Plugin `%s` is not installed, but is included in kombustion.yaml", manifestPlugin.Name),
-					"Run `kombustion install` to fix.",
+					fmt.Errorf("Plugin `%s@%s` is not installed, but is included in kombustion.yaml", manifestPlugin.Name, manifestPlugin.Version),
+					"Run `kombustion install`",
 					"",
 				)
 			}
@@ -44,53 +45,67 @@ func LoadPlugins(manifestFile *manifest.Manifest, lockFile *lock.Lock) (loadedPl
 
 // LoadDevPlugin loads an arbitrary plugin for plugin developers, to ease plugin development.
 // Only works with a kombustion binary that was built from source
-func LoadDevPlugin(
-	pluginPath string,
-) *PluginLoaded {
+func LoadDevPlugin(pluginPath string) *PluginLoaded {
 	return loadPlugin(
-		manifest.Plugin{},
 		"dev-loaded-plugin",
 		"DEV",
 		pluginPath,
+		"",
 		true,
+		"",
 	)
 }
 
 func loadPlugin(
-	manifestPlugin manifest.Plugin,
-	pluginName string,
-	pluginVersion string,
-	pluginPath string,
+	name string,
+	version string,
+	path string,
+	expectedHash string,
 	isDevPlugin bool,
+	alias string,
 ) *PluginLoaded {
 
 	loadedPlugin := PluginLoaded{}
 
 	// TODO: Make the help messages for users much friendlier
-	if !pluginExists(pluginPath) {
+	if !pluginExists(path) {
 		if isDevPlugin {
 			printer.Fatal(
-				fmt.Errorf("Plugin `%s` could not be found", pluginPath),
+				fmt.Errorf("Plugin `%s` could not be found", path),
 				"Check the path you provided with --load-plugin is correct.",
 				"https://www.kombustion.io/api/cli/#load-plugin",
 			)
 		}
 		printer.Fatal(
-			fmt.Errorf("Plugin `%s` is not installed, but is included in kombustion.lock", manifestPlugin.Name),
+			fmt.Errorf("Plugin `%s` is not installed, but is included in kombustion.lock", name),
 			"Run `kombustion install` to fix.",
 			"",
 		)
 	}
 
-	loadedPlugin.InternalConfig.PathOnDisk = pluginPath
+	loadedPlugin.InternalConfig.PathOnDisk = path
 
-	// TODO: Check the hash of the plugin to load matches the lockfile
-
-	// Open the plugin
-	p, err := plugin.Open(pluginPath)
+	currentHash, err := getHashOfFile(path)
 	if err != nil {
 		printer.Fatal(
-			fmt.Errorf("Plugin `%s` could not be loaded, this is likely an issue with the plugin", manifestPlugin.Name),
+			err,
+			fmt.Sprintf("Check user has permissions to read %s", path),
+			"",
+		)
+	}
+	if !isDevPlugin && currentHash != expectedHash {
+		printer.Fatal(
+			fmt.Errorf("Hash of plugin %s@%s does not match lock file", name, version),
+			"Reinstall the plugin by removing %s and running `kombustion install`",
+			"",
+		)
+	}
+
+	// Open the plugin
+	p, err := plugin.Open(path)
+	if err != nil {
+		printer.Fatal(
+			fmt.Errorf("Plugin `%s` could not be loaded, this is likely an issue with the plugin", name),
 			"Try your command again, but if it fails file an issue with the plugin author.",
 			"",
 		)
@@ -102,15 +117,15 @@ func loadPlugin(
 	config, err := loadConfig(configFunc())
 	if err != nil {
 		printer.Fatal(
-			fmt.Errorf("Plugin `%s` does not have a valid config", pluginName),
+			fmt.Errorf("Plugin `%s` does not have a valid config", name),
 			"Try your command again, but if it fails file an issue with the plugin author.",
 			"",
 		)
 	}
 
-	if configIsValid(config, pluginName, pluginVersion) == false {
+	if !configIsValid(config, name, version) {
 		printer.Fatal(
-			fmt.Errorf("Plugin `%s` does not have a valid config", pluginName),
+			fmt.Errorf("Plugin `%s` does not have a valid config", name),
 			"Contact the plugin author.",
 			"",
 		)
@@ -120,17 +135,14 @@ func loadPlugin(
 
 	loadedPlugin.InternalConfig.Prefix = config.Prefix
 
-	if manifestPlugin.Alias != "" {
-		loadedPlugin.InternalConfig.Prefix = manifestPlugin.Alias
+	if alias != "" {
+		loadedPlugin.InternalConfig.Prefix = alias
 	}
 
 	// Load Parsers
 	parserConstructor, _ := p.Lookup("Parsers")
 	if parserConstructor != nil {
-		loadedPlugin.Parsers = parserConstructor.(*map[string]func(
-			name string,
-			data string,
-		) []byte)
+		loadedPlugin.Parsers = parserConstructor.(*map[string]func(string, string) []byte)
 	}
 
 	return &loadedPlugin
@@ -145,56 +157,52 @@ func pluginExists(filePath string) bool {
 }
 
 func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion string) (ok bool) {
-	foundIssue := false
 	// TODO: improve these error messages, and provide links to the docs for plugin devs
+
+	// NOTE: Even though `printer.Fatal` normally terminates the program,
+	// that's bypassed in testing so the `return false` is important.
 	if config.Name == "" {
 		printer.Fatal(
 			fmt.Errorf("Plugin `%s` did not supply a name, this plugin cannot be loaded", pluginName),
 			"Try your command again, but if it fails file an issue with the plugin author.",
 			"",
 		)
-
-		foundIssue = true
+		return false
 	}
 
-	if config.Prefix == "" {
+	switch config.Prefix {
+	case "":
 		printer.Fatal(
 			fmt.Errorf("Plugin `%s` did not supply a prefix, this plugin cannot be loaded", pluginName),
 			"Try your command again, but if it fails file an issue with the plugin author.",
 			"",
 		)
-		foundIssue = true
-	}
+		return false
 
-	if config.Prefix == "AWS" {
+	case "AWS":
 		printer.Fatal(
 			fmt.Errorf("Plugin `%s` tried to use 'AWS' as prefix, this plugin cannot be loaded", pluginName),
 			"'AWS' is a restricted prefix, and cannt be used by a plugin. This is an issue with the plugin.",
 			"",
 		)
-		foundIssue = true
-	}
+		return false
 
-	if config.Prefix == "Custom" {
+	case "Custom":
 		printer.Fatal(
 			fmt.Errorf("Plugin `%s` tried to use 'Custom' as prefix, this plugin cannot be loaded", pluginName),
 			"'Custom' is a restricted prefix, and cannt be used by a plugin. This is an issue with the plugin.",
 			"",
 		)
-		foundIssue = true
-	}
+		return false
 
-	if config.Prefix == "Kombustion" {
+	case "Kombustion":
 		printer.Fatal(
 			fmt.Errorf("Plugin `%s` tried to use 'Kombustion' as prefix, this plugin cannot be loaded", pluginName),
 			"'Kombustion' is a restricted prefix, and cannt be used by a plugin. This is an issue with the plugin.",
 			"",
 		)
-		foundIssue = true
+		return false
 	}
 
-	if foundIssue == false {
-		ok = true
-	}
-	return
+	return true
 }
