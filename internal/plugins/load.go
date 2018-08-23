@@ -123,13 +123,7 @@ func loadPlugin(
 		)
 	}
 
-	if !configIsValid(config, name, version) {
-		printer.Fatal(
-			fmt.Errorf("Plugin `%s` does not have a valid config", name),
-			"Contact the plugin author.",
-			"",
-		)
-	}
+	validateConfig(config, name, version)
 
 	loadedPlugin.Config = config
 
@@ -156,18 +150,15 @@ func pluginExists(filePath string) bool {
 	return false
 }
 
-func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion string) (ok bool) {
+func validateConfig(config pluginTypes.Config, pluginName string, pluginVersion string) {
 	// TODO: improve these error messages, and provide links to the docs for plugin devs
 
-	// NOTE: Even though `printer.Fatal` normally terminates the program,
-	// that's bypassed in testing so the `return false` is important.
 	if config.Name == "" {
 		printer.Fatal(
 			fmt.Errorf("Plugin `%s` did not supply a name, this plugin cannot be loaded", pluginName),
 			"Try your command again, but if it fails file an issue with the plugin author.",
 			"",
 		)
-		return false
 	}
 
 	switch config.Prefix {
@@ -177,7 +168,6 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 			"Try your command again, but if it fails file an issue with the plugin author.",
 			"",
 		)
-		return false
 
 	case "AWS":
 		printer.Fatal(
@@ -185,7 +175,6 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 			"'AWS' is a restricted prefix, and cannt be used by a plugin. This is an issue with the plugin.",
 			"",
 		)
-		return false
 
 	case "Custom":
 		printer.Fatal(
@@ -193,7 +182,6 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 			"'Custom' is a restricted prefix, and cannt be used by a plugin. This is an issue with the plugin.",
 			"",
 		)
-		return false
 
 	case "Kombustion":
 		printer.Fatal(
@@ -201,8 +189,5 @@ func configIsValid(config pluginTypes.Config, pluginName string, pluginVersion s
 			"'Kombustion' is a restricted prefix, and cannt be used by a plugin. This is an issue with the plugin.",
 			"",
 		)
-		return false
 	}
-
-	return true
 }
