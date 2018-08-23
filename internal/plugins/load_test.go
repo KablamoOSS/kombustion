@@ -98,11 +98,23 @@ func TestConfigValid(t *testing.T) {
 
 	for i, test := range tests {
 		assert := assert.New(t)
-		testOutput := configIsValid(
-			test.input.config,
-			test.input.pluginName,
-			test.input.pluginVersion,
-		)
+		if test.output {
+			testOutput := configIsValid(
+				test.input.config,
+				test.input.pluginName,
+				test.input.pluginVersion,
+			)
 			assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d:", i))
+		} else {
+			assert.Panics(
+				func() {
+					configIsValid(
+						test.input.config,
+						test.input.pluginName,
+						test.input.pluginVersion,
+					)
+				},
+			)
+		}
 	}
 }
