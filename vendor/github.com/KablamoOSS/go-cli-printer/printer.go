@@ -31,6 +31,18 @@ var writer io.Writer
 // Is the output a full terminal
 var outputTTY bool
 
+// Default way of terminating (from Fatal) is to os.Exit, but allow this to be
+// changed for the purposes of testing.
+var Terminate = ExitTerminate
+
+func ExitTerminate(err error) {
+	os.Exit(1)
+}
+
+func PanicTerminate(err error) {
+	panic(err)
+}
+
 func init() {
 	verbose = false
 	color = "yellow"
@@ -58,7 +70,7 @@ func Init(initVerbose bool, initColor string, initSpinner int, writer io.Writer)
 
 // Test to set testing to true, to prevent exiting on Fatal errors
 func Test() {
-	testing = true
+	Terminate = PanicTerminate
 }
 
 // SetOutput to an io.Writer compatitble interface. Designed
@@ -93,6 +105,13 @@ func Progress(message string) {
 	}
 }
 
+// Progress with formatted message
+func Progressf(message string, args ...interface{}) {
+	Progress(
+		fmt.Sprintf(message, args),
+	)
+}
+
 // Step prints a line console and stops the spinner
 func Step(message string) {
 	if outputTTY {
@@ -108,9 +127,16 @@ func Step(message string) {
 	}
 }
 
+// Step with formatted message
+func Stepf(message string, args ...interface{}) {
+	Step(
+		fmt.Sprintf(message, args),
+	)
+}
+
 // SubStep prints a line console, at a given indent and stops the spinner
 // ignoreVerboseRule true, ensures the SubStep always prints
-func SubStep(message string, indent int, last bool, ignoreVerboseRule bool) {
+func SubStep(message string, indent int, last, ignoreVerboseRule bool) {
 	if outputTTY {
 		if message != previousSubStepMessage {
 			previousSubStepMessage = message
@@ -139,6 +165,18 @@ func SubStep(message string, indent int, last bool, ignoreVerboseRule bool) {
 	}
 }
 
+// SubStep with formatted message
+// FIXME: The extra arguments for SubStep being between the format string and
+// it's formatting arguments is rather awkward
+func SubStepf(message string, indent int, last, ignoreVerboseRule bool, args ...interface{}) {
+	SubStep(
+		fmt.Sprintf(message, args),
+		indent,
+		last,
+		ignoreVerboseRule,
+	)
+}
+
 // Finish prints message to the console and stops the spinner with success.
 // This is best used to indicated the end of a task
 func Finish(message string) {
@@ -149,6 +187,13 @@ func Finish(message string) {
 	} else {
 		log.Printf("✔ %s", message)
 	}
+}
+
+// Finish with formatted message
+func Finishf(message string, args ...interface{}) {
+	Finish(
+		fmt.Sprintf(message, args),
+	)
 }
 
 // Warn prints a warning to the screen. It's formatted like other errors, and coloured yellow.
@@ -263,9 +308,7 @@ func Fatal(err error, resolution string, link string) {
 		log.Printf("FATAL: %s", err.Error())
 	}
 
-	if testing == false {
-		os.Exit(1)
-	}
+	Terminate(err)
 }
 
 // Stop the spinner
