@@ -2,6 +2,7 @@ package core
 
 import (
 	"context"
+	"fmt"
 	"strings"
 
 	"github.com/KablamoOSS/go-cli-printer"
@@ -29,7 +30,7 @@ func GetLatestRelease(
 		printer.Fatal(
 			err,
 			fmt.Sprintf("Wait for Github API rate limit to reset (at %v)", rlerr.Rate.Reset),
-			"https://developer.github.com/v3/#rate-limiting"
+			"https://developer.github.com/v3/#rate-limiting",
 		)
 	}
 	if err != nil {
