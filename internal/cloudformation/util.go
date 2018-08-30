@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"path/filepath"
 	"text/template"
 
 	"github.com/KablamoOSS/kombustion/types"
@@ -31,29 +30,6 @@ func ResolveEnvironment(envFile string, env string) types.TemplateObject {
 	}
 
 	return types.TemplateObject{}
-}
-
-/*
-	loadFiles
-	Load a map of files from a folder (mapping: <filename>:<filedata> )
-*/
-func loadFiles(path string) (files map[string][]byte, err error) {
-	files = make(map[string][]byte)
-	fileInfo, err := ioutil.ReadDir(path)
-	if err != nil {
-		return files, err
-	}
-	for _, file := range fileInfo {
-		if file.IsDir() {
-			continue
-		}
-		data, err := ioutil.ReadFile(filepath.Join(path, file.Name()))
-		if err != nil {
-			return files, err
-		}
-		files[file.Name()] = data
-	}
-	return files, nil
 }
 
 /*
