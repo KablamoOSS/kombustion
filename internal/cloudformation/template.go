@@ -50,8 +50,14 @@ func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudform
 	pluginParsers = plugins.ExtractParsersFromPlugins(params.Plugins)
 	templateParsers = mergeParsers(templateParsers, pluginParsers)
 
-	if configData, err = ioutil.ReadFile(params.Filename); err != nil {
-		return compiledTemplate, err
+	if params.ObjectStore == nil {
+		if configData, err = ioutil.ReadFile(params.Filename); err != nil {
+			return compiledTemplate, err
+		}
+	} else {
+		if configData, err = params.ObjectStore.Get(params.Filename); err != nil {
+			return compiledTemplate, err
+		}
 	}
 
 	//preprocess - template in the environment variables and custom params

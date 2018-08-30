@@ -1,6 +1,7 @@
 package cloudformation
 
 import (
+	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/internal/plugins"
 	"github.com/KablamoOSS/kombustion/types"
 )
@@ -42,6 +43,7 @@ type (
 
 	// GenerateParams are required to generate a cloudformation yaml template
 	GenerateParams struct {
+		ObjectStore            core.ObjectStore
 		Filename               string
 		Directory              string
 		WriteParams            bool

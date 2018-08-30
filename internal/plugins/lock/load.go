@@ -1,11 +1,13 @@
 package lock
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/yaml"
+	"github.com/KablamoOSS/kombustion/internal/core"
 )
 
 // FindAndLoadLock - Search the current directory for a Lock file, and load it
@@ -57,6 +59,15 @@ func findAndLoadLock(path string) (*Lock, error) {
 
 	// We didn't find a lock file
 	return nil, nil
+}
+
+func GetLockObject(objectStore core.ObjectStore, path string) (*Lock, error) {
+	data, err := objectStore.Get(path)
+	if err != nil {
+		return nil, fmt.Errorf("get lock: %v", err)
+	}
+
+	return unmarshalLock(data)
 }
 
 // unmarshalLock - Load a Lock from a byte array into a Lock struct
