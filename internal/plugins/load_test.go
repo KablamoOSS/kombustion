@@ -19,8 +19,8 @@ func TestConfigValid(t *testing.T) {
 	}
 
 	tests := []struct {
-		input  input
-		output bool
+		input input
+		valid bool
 	}{
 		{
 			input: input{
@@ -32,7 +32,7 @@ func TestConfigValid(t *testing.T) {
 				pluginName:    "Example",
 				pluginVersion: "0.1.0",
 			},
-			output: true,
+			valid: true,
 		},
 		{
 			input: input{
@@ -44,7 +44,7 @@ func TestConfigValid(t *testing.T) {
 				pluginName:    "Example",
 				pluginVersion: "0.1.0",
 			},
-			output: false,
+			valid: false,
 		},
 		{
 			input: input{
@@ -56,7 +56,7 @@ func TestConfigValid(t *testing.T) {
 				pluginName:    "Example",
 				pluginVersion: "0.1.0",
 			},
-			output: false,
+			valid: false,
 		},
 		{
 			input: input{
@@ -68,7 +68,7 @@ func TestConfigValid(t *testing.T) {
 				pluginName:    "Example",
 				pluginVersion: "0.1.0",
 			},
-			output: false,
+			valid: false,
 		},
 		{
 			input: input{
@@ -80,7 +80,7 @@ func TestConfigValid(t *testing.T) {
 				pluginName:    "Example",
 				pluginVersion: "0.1.0",
 			},
-			output: false,
+			valid: false,
 		},
 		{
 			input: input{
@@ -92,17 +92,34 @@ func TestConfigValid(t *testing.T) {
 				pluginName:    "Example",
 				pluginVersion: "0.1.0",
 			},
-			output: false,
+			valid: false,
 		},
 	}
 
 	for i, test := range tests {
 		assert := assert.New(t)
-		testOutput := configIsValid(
-			test.input.config,
-			test.input.pluginName,
-			test.input.pluginVersion,
-		)
-			assert.Equal(testOutput, test.output, fmt.Sprintf("Test %d:", i))
+		if test.valid {
+			assert.NotPanics(
+				func() {
+					validateConfig(
+						test.input.config,
+						test.input.pluginName,
+						test.input.pluginVersion,
+					)
+				},
+				fmt.Sprintf("Test %d:", i),
+			)
+		} else {
+			assert.Panics(
+				func() {
+					validateConfig(
+						test.input.config,
+						test.input.pluginName,
+						test.input.pluginVersion,
+					)
+				},
+				fmt.Sprintf("Test %d:", i),
+			)
+		}
 	}
 }
