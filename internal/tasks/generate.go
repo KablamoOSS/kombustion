@@ -118,7 +118,7 @@ func generate(
 	}
 
 	// manifestFile := manifest.FindAndLoadManifest()
-	manifestFile, err := manifest.GetManifestObject(objectStore, "kombustion.yaml")
+	manifestFile, err := manifest.GetManifestObject(objectStore)
 	if err != nil {
 		printer.Fatal(
 			fmt.Errorf("Couldn't load manifest file: %v", err),

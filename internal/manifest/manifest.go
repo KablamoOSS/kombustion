@@ -96,19 +96,21 @@ func findAndLoadManifest(path string) (Manifest, error) {
 
 // findAndLoadManifest - Search the given directory for a manifest file, and load it
 // This is separated to allow for easy testing
-func GetManifestObject(objectStore core.ObjectStore, path string) (*Manifest, error) {
-	var manifest &Manifest
+func GetManifestObject(objectStore core.ObjectStore, path ...string) (*Manifest, error) {
+	var manifest Manifest
 	var err error
 
-	ymldata, err := objectStore.Get(path, "kombustion.yml")
+	ymlpath := append(path, "kombustion.yml")
+	ymldata, err := objectStore.Get(ymlpath[0], ymlpath[1:]...)
 	if err != nil {
-		return &Manifest{}, err
+		return &Manifest{}, fmt.Errorf("kombustion.yml: %v", err)
 	}
 
 	// Read the manifest file
-	yamldata, err := objectStore.Get(path, "kombustion.yaml"
+	yamlpath := append(path, "kombustion.yaml")
+	yamldata, err := objectStore.Get(yamlpath[0], yamlpath[1:]...)
 	if err != nil {
-		return &Manifest{}, err
+		return &Manifest{}, fmt.Errorf("kombustion.yaml: %v", err)
 	}
 
 	if ymldata != nil && yamldata != nil {

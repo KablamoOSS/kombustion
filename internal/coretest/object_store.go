@@ -1,7 +1,6 @@
 package coretest
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -22,7 +21,7 @@ func (objstore *MockObjectStore) Get(path string, subpath ...string) ([]byte, er
 	fullPath := strings.Join(append([]string{path}, subpath...), "/")
 	data, ok := objstore.Objects[fullPath]
 	if !ok {
-		return nil, fmt.Errorf("get object: not found")
+		return nil, nil
 	}
 	return data, nil
 }
