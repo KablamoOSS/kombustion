@@ -3,34 +3,8 @@ package cloudformation
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"text/template"
-
-	"github.com/KablamoOSS/kombustion/types"
-	yaml "github.com/KablamoOSS/yaml"
 )
-
-// ResolveEnvironment loads the correct configs/environment.yaml ValueMap for the specified env
-func ResolveEnvironment(envFile string, env string) types.TemplateObject {
-	// TODO: this func is deprecated
-	if len(envFile) == 0 {
-		envFile = "./environment.yml"
-	}
-
-	data, err := ioutil.ReadFile(envFile)
-	if err != nil {
-		return make(types.TemplateObject)
-	}
-
-	var envMap map[string]types.TemplateObject
-	yaml.Unmarshal(data, &envMap)
-
-	if env, ok := envMap[env]; ok {
-		return env
-	}
-
-	return types.TemplateObject{}
-}
 
 /*
 	executeTemplate
