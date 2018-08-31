@@ -178,7 +178,7 @@ Environments:
 
 	for i, test := range tests {
 		assert := assert.New(t)
-		testOutput, err := loadManifestFromString([]byte(test.manifestYaml))
+		testOutput, err := unmarshalManifest([]byte(test.manifestYaml))
 		if test.throws {
 			assert.NotNil(err)
 		} else {

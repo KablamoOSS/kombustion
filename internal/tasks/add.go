@@ -24,10 +24,13 @@ func AddPluginToManifest(c *cli.Context) error {
 func addPluginToManifest(objectStore core.ObjectStore, pluginNames []string) {
 	printer.Step("Add plugins")
 	// Try and load the manifest
-	manifestFile := manifest.FindAndLoadManifest()
+	manifestFile, err := manifest.GetManifestObject(objectStore)
+	if err != nil {
+		printer.Fatal(err, config.ErrorHelpInfo, "")
+	}
 
 	// Add them
-	_, err := plugins.AddPluginsToManifest(objectStore, manifestFile, pluginNames)
+	_, err = plugins.AddPluginsToManifest(objectStore, manifestFile, pluginNames)
 	if err != nil {
 		printer.Fatal(err, config.ErrorHelpInfo, "")
 	}

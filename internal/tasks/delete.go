@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/config"
+	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation/tasks"
 	"github.com/KablamoOSS/kombustion/internal/manifest"
@@ -19,7 +21,7 @@ func init() {
 
 // Delete a given stack
 func Delete(c *cli.Context) {
-	printer.Progress("Kombusting")
+	objectStore := core.NewFilesystemStore(".")
 
 	fileName := c.Args().Get(0)
 	if fileName == "" {
@@ -30,13 +32,38 @@ func Delete(c *cli.Context) {
 		)
 	}
 
-	manifestFile := manifest.FindAndLoadManifest()
-
-	environment := c.String("environment")
-
-	stackName := cloudformation.GetStackName(manifestFile, fileName, environment, c.String("stack-name"))
-
+	profile := c.GlobalString("profile")
 	region := c.String("region")
+	envName := c.String("env")
+	stackName := c.String("stackName")
+
+	taskDelete(
+		objectStore,
+		fileName,
+		profile,
+		stackName,
+		region,
+		envName,
+	)
+}
+
+func taskDelete(
+	objectStore core.ObjectStore,
+	templatePath string,
+	profileName string,
+	stackName string,
+	region string,
+	envName string,
+) {
+	printer.Progress("Kombusting")
+
+	manifestFile, err := manifest.GetManifestObject(objectStore)
+	if err != nil {
+		printer.Fatal(err, config.ErrorHelpInfo, "")
+	}
+
+	fullStackName := cloudformation.GetStackName(manifestFile, templatePath, envName, stackName)
+
 	if region == "" {
 		// If no region was provided by the cli flag, check for the default in the manifest
 		if manifestFile.Region != "" {
@@ -44,11 +71,11 @@ func Delete(c *cli.Context) {
 		}
 	}
 
-	acctID, cf := tasks.GetCloudformationClient(c.GlobalString("profile"), region)
-	if env, ok := manifestFile.Environments[environment]; ok {
+	acctID, cf := tasks.GetCloudformationClient(profileName, region)
+	if env, ok := manifestFile.Environments[envName]; ok {
 		if !env.IsWhitelistedAccount(acctID) {
 			printer.Fatal(
-				fmt.Errorf("Account %s is not allowed for environment %s", acctID, environment),
+				fmt.Errorf("Account %s is not allowed for environment %s", acctID, envName),
 				"Use whitelisted account, or add account to environment accounts in kombustion.yaml",
 				"",
 			)
@@ -57,7 +84,7 @@ func Delete(c *cli.Context) {
 
 	tasks.DeleteStack(
 		cf,
-		stackName,
+		fullStackName,
 		region,
 	)
 }
