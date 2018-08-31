@@ -22,12 +22,11 @@ func init() {
 // AddPluginsToManifest - Add all new plugin to the manifest
 // update it if it's already there
 // then write the manifest to disk
-func AddPluginsToManifest(manifest *manifestType.Manifest, pluginLocations []string) (*manifestType.Manifest, error) {
+func AddPluginsToManifest(objectStore core.ObjectStore, manifest *manifestType.Manifest, pluginLocations []string) (*manifestType.Manifest, error) {
 	printer.Progress("Kombusting")
 
 	// Get the lockFile
-	lockFile := lock.FindAndLoadLock()
-	var err error
+	lockFile, err := lock.GetLockObject(objectStore, "kombustion.lock")
 
 	// Add all the plugins to the manifest and lockfile
 	manifest, lockFile, err = addPluginsToManifestAndLock(manifest, lockFile, pluginLocations)
@@ -43,7 +42,7 @@ func AddPluginsToManifest(manifest *manifestType.Manifest, pluginLocations []str
 		return manifest, err
 	}
 
-	err = lock.UpdateLock(manifest, lockFile)
+	err = lockFile.Save(objectStore)
 	if err != nil {
 		printer.Error(err, fmt.Sprintf("%s\n%s", "There was an error updating lockfile. Try your previous command again, and if that fails you may need to remove kombustion.lock entirely.", config.ErrorHelpInfo), "")
 		return manifest, err
