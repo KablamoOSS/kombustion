@@ -95,10 +95,6 @@ func generate(
 	printer.Step("Generate template")
 	printer.Progress("Kombusting")
 
-	if objectStore == nil {
-		panic("objectstore is nil")
-	}
-
 	paramMap := make(map[string]string)
 	if paramsPath != "" {
 		paramMap = readParamsObject(objectStore, paramsPath)

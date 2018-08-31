@@ -6,6 +6,7 @@ import (
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation/tasks"
+	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/KablamoOSS/kombustion/internal/plugins"
 	"github.com/KablamoOSS/kombustion/internal/plugins/lock"
@@ -52,7 +53,7 @@ func init() {
 
 // Upsert a stack
 func Upsert(c *cli.Context) {
-	printer.Progress("Kombusting")
+	objectStore := core.NewFilesystemStore(".")
 
 	fileName := c.Args().Get(0)
 	if fileName == "" {
@@ -63,22 +64,83 @@ func Upsert(c *cli.Context) {
 		)
 	}
 
-	lockFile := lock.FindAndLoadLock()
+	paramsSlice := c.StringSlice("param")
+	paramsMap := cliSliceMap(paramsSlice)
 
-	manifestFile := manifest.FindAndLoadManifest()
+	tagsSlice := c.StringSlice("tag")
+	tagsMap := cliSliceMap(tagsSlice)
+
+	stackName := c.String("stack-name")
+	profile := c.GlobalString("profile")
+	region := c.String("region")
+	devPluginPath := c.GlobalString("load-plugin")
+	inputParameters := c.String("read-parameters")
+	env := c.String("env")
+	generateDefaultOutputs := c.Bool("generate-default-outputs")
+	capabilities := getCapabilities(c)
+	confirm := c.Bool("confirm")
+
+	upsert(
+		objectStore,
+		fileName,
+		stackName,
+		profile,
+		region,
+		paramsMap,
+		inputParameters,
+		tagsMap,
+		devPluginPath,
+		env,
+		generateDefaultOutputs,
+		capabilities,
+		confirm,
+	)
+}
+func upsert(
+	objectStore core.ObjectStore,
+	templatePath string,
+	stackName string,
+	profile string,
+	region string,
+	cliParams map[string]string,
+	paramsPath string,
+	cliTags map[string]string,
+	devPluginPath string,
+	env string,
+	generateDefaultOutputs bool,
+	capabilities []*string,
+	confirm bool,
+) {
+	printer.Progress("Kombusting")
+
+	lockFile, err := lock.GetLockObject(objectStore, "kombustion.lock")
+	if err != nil {
+		printer.Fatal(
+			fmt.Errorf("Couldn't load lock file: %v", err),
+			"Check the file exists, and your user has read permissions",
+			"",
+		)
+	}
+
+	// manifestFile := manifest.FindAndLoadManifest()
+	manifestFile, err := manifest.GetManifestObject(objectStore)
+	if err != nil {
+		printer.Fatal(
+			fmt.Errorf("Couldn't load manifest file: %v", err),
+			"Check the file exists, and your user has read permissions",
+			"",
+		)
+	}
 
 	// load all plugins
 	loadedPlugins := plugins.LoadPlugins(manifestFile, lockFile)
 
 	// if in devMode optionally load a devMode plugin
-	devPluginPath := c.GlobalString("load-plugin")
-
 	if devPluginPath != "" {
 		devPluginLoaded := plugins.LoadDevPlugin(devPluginPath)
 		loadedPlugins = append(loadedPlugins, devPluginLoaded)
 	}
 
-	region := c.String("region")
 	if region == "" {
 		// If no region was provided by the cli flag, check for the default in the manifest
 		if manifestFile.Region != "" {
@@ -86,26 +148,21 @@ func Upsert(c *cli.Context) {
 		}
 	}
 
-	acctID, cfClient := tasks.GetCloudformationClient(
-		c.GlobalString("profile"),
-		region,
-	)
+	acctID, cfClient := tasks.GetCloudformationClient(profile, region)
 
 	paramMap := make(map[string]string)
-	if paramsFile := c.String("read-parameters"); paramsFile != "" {
-		paramMap = readParamsFile(paramsFile)
+	if paramsPath != "" {
+		paramMap = readParamsObject(objectStore, paramsPath)
 	}
 
-	for key, value := range cloudformation.GetParamMap(c) {
+	for key, value := range cliParams {
 		paramMap[key] = value
 	}
 
-	environment := c.String("environment")
-
-	if env, ok := manifestFile.Environments[environment]; ok {
+	if env, ok := manifestFile.Environments[env]; ok {
 		if !env.IsWhitelistedAccount(acctID) {
 			printer.Fatal(
-				fmt.Errorf("Account %s is not allowed for environment %s", acctID, environment),
+				fmt.Errorf("Account %s is not allowed for environment %s", acctID, env),
 				"Use whitelisted account, or add account to environment accounts in kombustion.yaml",
 				"",
 			)
@@ -116,64 +173,47 @@ func Upsert(c *cli.Context) {
 	if tags == nil {
 		tags = make(map[string]string)
 	}
-	if env, ok := manifestFile.Environments[environment]; ok {
+	if env, ok := manifestFile.Environments[env]; ok {
 		for key, value := range env.Tags {
 			tags[key] = value
 		}
 	}
-	for key, value := range cliSliceMap(c.StringSlice("tag")) {
+	for key, value := range cliTags {
 		tags[key] = value
 	}
 
 	printer.Progress("Generating template")
 	// Template generation parameters
 	generateParams := cloudformation.GenerateParams{
-		Filename: fileName,
-		Env:      environment,
-		GenerateDefaultOutputs: c.Bool("generate-default-outputs") || manifestFile.GenerateDefaultOutputs,
+		ObjectStore: objectStore,
+		Filename: templatePath,
+		Env:      env,
+		GenerateDefaultOutputs: generateDefaultOutputs || manifestFile.GenerateDefaultOutputs,
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,
 	}
 
-	capabilities := getCapabilities(c)
-
 	// CloudFormation Stack parameters
 	var parameters []*awsCF.Parameter
 
-	stackName := cloudformation.GetStackName(manifestFile, fileName, environment, c.String("stack-name"))
+	fullStackName := cloudformation.GetStackName(manifestFile, templatePath, env, stackName)
 
 	printer.Progress("Upserting template")
-	if len(c.String("url")) > 0 {
-		// TODO: We probably need to download the template to determine what params
-		// it needs, and filter the available params only to those
-		parameters = cloudformation.ResolveParametersS3(c, manifestFile)
 
-		templateURL := c.String("url")
+	// FIXME - this previously looked for a --url param to use a template in
+	// S3. This should probably be reimplemented around an S3ObjectStore
+	templateBody, cfYaml := tasks.GenerateYamlTemplate(generateParams)
+	parameters = cloudformation.ResolveParameters(env, paramMap, cfYaml, manifestFile)
 
-		tasks.UpsertStackURL(
-			templateURL,
-			parameters,
-			capabilities,
-			stackName,
-			cfClient,
-			tags,
-			c.Bool("confirm"),
-		)
-	} else {
-
-		templateBody, cfYaml := tasks.GenerateYamlTemplate(generateParams)
-		parameters = cloudformation.ResolveParameters(c, cfYaml, manifestFile)
-
-		tasks.UpsertStackBody(
-			templateBody,
-			parameters,
-			capabilities,
-			stackName,
-			cfClient,
-			tags,
-			c.Bool("confirm"),
-		)
-	}
+	tasks.UpsertStackBody(
+		templateBody,
+		parameters,
+		capabilities,
+		fullStackName,
+		cfClient,
+		tags,
+		confirm,
+	)
 }
 
 // Extract capabilities from the cli call

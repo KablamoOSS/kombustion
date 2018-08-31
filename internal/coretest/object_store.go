@@ -5,7 +5,7 @@ import (
 )
 
 // Implements the ObjectStore interface from internal/core, so that other
-// packages can import it for testing. 
+// packages can import it for testing.
 
 type MockObjectStore struct {
 	Objects map[string][]byte

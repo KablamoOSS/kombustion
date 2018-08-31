@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
+	"github.com/KablamoOSS/kombustion/internal/core"
 	yaml "github.com/KablamoOSS/yaml"
 )
 

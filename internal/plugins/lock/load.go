@@ -6,8 +6,8 @@ import (
 	"os"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
-	"github.com/KablamoOSS/yaml"
 	"github.com/KablamoOSS/kombustion/internal/core"
+	"github.com/KablamoOSS/yaml"
 )
 
 // FindAndLoadLock - Search the current directory for a Lock file, and load it
