@@ -18,7 +18,7 @@
   version = "v2.2.2"
 
 [[projects]]
-  digest = "1:1411fb1648f4fa52916c4ff6c2b4ab03bc99fac766fe6afcd2b8427249251cfd"
+  digest = "1:58b7dde4d340be973dc636120ddd843520d78439d1be1dfb61fc6898506eeef6"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -44,9 +44,11 @@
     "private/protocol/query",
     "private/protocol/query/queryutil",
     "private/protocol/rest",
+    "private/protocol/restxml",
     "private/protocol/xml/xmlutil",
     "service/cloudformation",
     "service/cloudformation/cloudformationiface",
+    "service/s3",
     "service/sts",
   ]
   pruneopts = "UT"
@@ -304,6 +306,7 @@
     "github.com/aws/aws-sdk-go/aws/session",
     "github.com/aws/aws-sdk-go/service/cloudformation",
     "github.com/aws/aws-sdk-go/service/cloudformation/cloudformationiface",
+    "github.com/aws/aws-sdk-go/service/s3",
     "github.com/aws/aws-sdk-go/service/sts",
     "github.com/google/go-github/github",
     "github.com/mholt/archiver",

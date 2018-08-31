@@ -3,11 +3,11 @@ package tasks
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 
+	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	yaml "github.com/KablamoOSS/yaml"
 )
@@ -15,11 +15,11 @@ import (
 // GenerateTemplate and save it to disk, without upserting it
 func GenerateTemplate(params cloudformation.GenerateParams) {
 	output, _ := GenerateYamlTemplate(params)
-	prepareOutputDir(params.Directory)
+	// prepareOutputDir(params.Directory)
 	if params.WriteParams {
-		writeParamMap(params.Filename, params.Directory, params.ParamMap)
+		writeParamMap(params.ObjectStore, params.Filename, params.Directory, params.ParamMap)
 	}
-	writeOutput(params.Filename, params.Directory, output)
+	writeOutput(params.ObjectStore, params.Filename, params.Directory, output)
 }
 
 // GenerateYamlTemplate and return both the raw data as []byte, but also the cloudformation yaml object
@@ -38,15 +38,14 @@ func prepareOutputDir(directory string) {
 	}
 }
 
-func writeOutput(file, directory string, output []byte) {
+func writeOutput(store core.ObjectStore, file, directory string, output []byte) {
 	filename := filepath.Base(file)
 	basename := strings.TrimSuffix(filename, filepath.Ext(filename))
-	path := filepath.Join(directory, fmt.Sprint(basename, ".yaml"))
-	err := ioutil.WriteFile(path, output, 0644)
+	err := store.Put(output, directory, fmt.Sprint(basename, ".yaml"))
 	checkError(err)
 }
 
-func writeParamMap(file, directory string, params map[string]string) {
+func writeParamMap(store core.ObjectStore, file, directory string, params map[string]string) {
 	outParams := make([]cloudformation.Parameter, 0)
 
 	for key, value := range params {
@@ -57,11 +56,11 @@ func writeParamMap(file, directory string, params map[string]string) {
 		outParams = append(outParams, cfParam)
 	}
 
-	filename := filepath.Base(file)
-	basename := strings.TrimSuffix(filename, filepath.Ext(filename))
-	path := filepath.Join(directory, fmt.Sprint(basename, "-params.json"))
 	out, err := json.MarshalIndent(outParams, "", "  ")
 	checkError(err)
 
-	ioutil.WriteFile(path, out, 0644)
+	filename := filepath.Base(file)
+	basename := strings.TrimSuffix(filename, filepath.Ext(filename))
+	err = store.Put(out, directory, fmt.Sprint(basename, "-params.json"))
+	checkError(err)
 }

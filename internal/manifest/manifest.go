@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	"github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/internal/core"
 
 	yaml "github.com/KablamoOSS/yaml"
 )
@@ -91,6 +92,41 @@ func findAndLoadManifest(path string) (Manifest, error) {
 
 	}
 	return Manifest{}, fmt.Errorf("kombustion.yaml was not found")
+}
+
+// findAndLoadManifest - Search the given directory for a manifest file, and load it
+// This is separated to allow for easy testing
+func GetManifestObject(objectStore core.ObjectStore, path ...string) (*Manifest, error) {
+	var manifest Manifest
+	var err error
+
+	ymlpath := append(path, "kombustion.yml")
+	ymldata, err := objectStore.Get(ymlpath[0], ymlpath[1:]...)
+	if err != nil {
+		return &Manifest{}, fmt.Errorf("kombustion.yml: %v", err)
+	}
+
+	// Read the manifest file
+	yamlpath := append(path, "kombustion.yaml")
+	yamldata, err := objectStore.Get(yamlpath[0], yamlpath[1:]...)
+	if err != nil {
+		return &Manifest{}, fmt.Errorf("kombustion.yaml: %v", err)
+	}
+
+	if ymldata != nil && yamldata != nil {
+		return &Manifest{}, fmt.Errorf("there are both kombustion.yaml && kombustion.yml files, please remove one")
+	} else if ymldata != nil {
+		manifest, err = loadManifestFromString(ymldata)
+	} else if yamldata != nil {
+		manifest, err = loadManifestFromString(yamldata)
+	} else {
+		return &Manifest{}, fmt.Errorf("kombustion.yaml was not found")
+	}
+
+	if err != nil {
+		return &Manifest{}, err
+	}
+	return &manifest, nil
 }
 
 // loadManifestFromString - Load a manifest from a string into a Manifest struct
