@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"path"
 	"path/filepath"
 
@@ -37,20 +38,32 @@ func (fs *FileSystemStore) Get(path string, subpath ...string) ([]byte, error) {
 	keys := append([]string{fs.basedir, path}, subpath...)
 	objectPath := filepath.Join(keys...)
 
-	return ioutil.ReadFile(objectPath)
+	data, err := ioutil.ReadFile(objectPath)
+	if os.IsNotExist(err) {
+		return nil, nil
+	} else if err != nil {
+		return nil, fmt.Errorf("get object: %v", err)
+	}
+	return data, nil
 }
 
 func (fs *FileSystemStore) Put(data []byte, path string, subpath ...string) error {
-	// FIXME: This should transparently create directories when required, to be
-	// consistent with the behaviour of s3
 	if filepath.IsAbs(path) {
-		return fmt.Errorf("get object: only relative paths allowed")
+		return fmt.Errorf("put object: only relative paths allowed")
 	}
 
 	// go doesn't allow passing mixed values and variadic arrays so we need to
 	// collapse it to a single array first
 	keys := append([]string{fs.basedir, path}, subpath...)
 	objectPath := filepath.Join(keys...)
+
+	// Transparently create directories when required, to be
+	// consistent with the behaviour of s3
+	dirName := filepath.Dir(objectPath)
+	err := os.MkdirAll(dirName, 0755)
+	if err != nil {
+		return fmt.Errorf("put object: create path: %v", err)
+	}
 
 	return ioutil.WriteFile(objectPath, data, 0644)
 }

@@ -40,8 +40,9 @@ Resources:
         Value: 123
 `
 
-// TODO: This is a little fragile - there's probably a better way of testing
-// the output is correct.
+// TODO: This is super fragile, but works as a quick and dirty first pass to
+// some testing over the generate task. We should really decompose this down to
+// specific properties we want to test for.
 var expectedOutput = `AWSTemplateFormatVersion: "2010-09-09"
 Description: S3 test bucket
 Parameters:
