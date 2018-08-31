@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/KablamoOSS/kombustion/internal/core"
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"gopkg.in/AlecAivazis/survey.v1"
 )
@@ -15,9 +16,9 @@ type initialisePrompter interface {
 }
 
 // InitaliseNewManifest creates a new manifest with a survey
-func InitaliseNewManifest() error {
+func InitaliseNewManifest(objectStore core.ObjectStore) error {
 	// Load the manifest file from this directory
-	if CheckManifestExists() {
+	if CheckManifestExists(objectStore) {
 		printer.Fatal(
 			fmt.Errorf("Sorry we can't create a new kombustion.yaml, one already exists."),
 			"If you want to re-initialise your kombustion.yaml file, first remove it.",

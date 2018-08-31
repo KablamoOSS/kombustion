@@ -1,6 +1,7 @@
 package tasks
 
 import (
+	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/urfave/cli"
 )
@@ -20,9 +21,10 @@ var InitManifestFlags = []cli.Flag{
 // InitaliseNewManifestTask - Create a new manifest file, and prompt to fill out
 // the default required fields
 func InitaliseNewManifestTask(c *cli.Context) error {
+	objectStore := core.NewFilesystemStore(".")
 
 	// This funciton is a thin layer between the task, and the cli wrapper
-	err := manifest.InitaliseNewManifest()
+	err := manifest.InitaliseNewManifest(objectStore)
 
 	return err
 }

@@ -45,16 +45,12 @@ func FindAndLoadManifest() *Manifest {
 }
 
 // CheckManifestExists to determine if there is a manifest in the current dir
-func CheckManifestExists() bool {
-	path, err := os.Getwd()
+func CheckManifestExists(objectStore core.ObjectStore) bool {
+	data, err := GetManifestObject(objectStore)
 	if err != nil {
 		return false
 	}
-	_, err = findAndLoadManifest(path)
-	if err != nil {
-		return false
-	}
-	return true
+	return data != nil
 }
 
 // findAndLoadManifest - Search the given directory for a manifest file, and load it
