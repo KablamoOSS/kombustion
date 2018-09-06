@@ -20,9 +20,9 @@ var InitManifestFlags = []cli.Flag{
 
 // InitaliseNewManifestTask - Create a new manifest file, and prompt to fill out
 // the default required fields
-func InitaliseNewManifestTask(c *cli.Context) error {
+func InitialiseNewManifestTask(c *cli.Context) error {
 	objectStore := core.NewFilesystemStore(".")
 
 	// This funciton is a thin layer between the task, and the cli wrapper
-	return manifest.InitaliseNewManifest(objectStore)
+	return manifest.InitialiseNewManifest(objectStore)
 }

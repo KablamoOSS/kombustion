@@ -140,7 +140,7 @@ ISSUES:
 			Name:      "init",
 			Usage:     "init manifest file",
 			UsageText: "initialise a new manifest file in the current directory",
-			Action:    tasks.InitaliseNewManifestTask,
+			Action:    tasks.InitialiseNewManifestTask,
 			Flags:     tasks.InitManifestFlags,
 		},
 		// Plugin management

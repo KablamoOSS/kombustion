@@ -16,7 +16,7 @@ type initialisePrompter interface {
 }
 
 // InitaliseNewManifest creates a new manifest with a survey
-func InitaliseNewManifest(objectStore core.ObjectStore) error {
+func InitialiseNewManifest(objectStore core.ObjectStore) error {
 	// Load the manifest file from this directory
 	if CheckManifestExists(objectStore) {
 		printer.Fatal(

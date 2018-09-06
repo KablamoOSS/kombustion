@@ -83,7 +83,7 @@ func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudform
 
 	if err = yaml.Unmarshal(data, &config); err != nil {
 		printer.Error(
-			fmt.Errorf("Failed to unmarshall the template"),
+			fmt.Errorf("Failed to unmarshal the template"),
 			fmt.Sprintf(
 				"File: %s",
 				params.Filename,
@@ -189,7 +189,7 @@ func processParsers(
 				continue
 			}
 
-			// Marshall the resource into YAML to send to the parser function
+			// Marshal the resource into YAML to send to the parser function
 			resourceData, err := yaml.Marshal(templateResource)
 
 			if err != nil {
