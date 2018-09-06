@@ -1,13 +1,12 @@
 package manifest
 
 import (
-	"io/ioutil"
-
+	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/yaml"
 )
 
 // WriteManifestToDisk - Write the final manifest to disk
-func WriteManifestToDisk(manifest *Manifest) error {
+func WriteManifestObject(objectStore core.ObjectStore, manifest *Manifest) error {
 	// Marshal the the struct into yaml
 	manifestString, err := yaml.Marshal(&manifest)
 	if err != nil {
@@ -15,7 +14,7 @@ func WriteManifestToDisk(manifest *Manifest) error {
 	}
 
 	// Write the manifest
-	err = ioutil.WriteFile("kombustion.yaml", manifestString, 0644)
+	err = objectStore.Put(manifestString, "kombustion.yaml")
 	if err != nil {
 		return err
 	}

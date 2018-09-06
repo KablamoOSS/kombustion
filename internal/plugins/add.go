@@ -36,7 +36,7 @@ func AddPluginsToManifest(objectStore core.ObjectStore, manifest *manifestType.M
 	}
 
 	printer.Progress("Updating manifest")
-	err = manifestType.WriteManifestToDisk(manifest)
+	err = manifestType.WriteManifestObject(objectStore, manifest)
 	if err != nil {
 		printer.Error(err, config.ErrorHelpInfo, "")
 		return manifest, err

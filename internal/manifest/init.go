@@ -9,7 +9,7 @@ import (
 	"gopkg.in/AlecAivazis/survey.v1"
 )
 
-type initialisePrompter interface {
+type InitialisePrompter interface {
 	name() (string, error)
 	environments() ([]string, error)
 	accountID(string) (string, error)
@@ -17,6 +17,10 @@ type initialisePrompter interface {
 
 // InitaliseNewManifest creates a new manifest with a survey
 func InitialiseNewManifest(objectStore core.ObjectStore) error {
+	return initialiseNewManifest(objectStore, &surveyPrompt{})
+}
+
+func initialiseNewManifest(objectStore core.ObjectStore, prompter InitialisePrompter) error {
 	// Load the manifest file from this directory
 	if CheckManifestExists(objectStore) {
 		printer.Fatal(
@@ -27,12 +31,12 @@ func InitialiseNewManifest(objectStore core.ObjectStore) error {
 	}
 
 	// Survey the user for required info
-	manifest, err := surveyForInitialManifest(&surveyPrompt{})
+	manifest, err := surveyForInitialManifest(prompter)
 	if err != nil {
 		return err
 	}
 
-	err = WriteManifestToDisk(manifest)
+	err = WriteManifestObject(objectStore, manifest)
 	if err != nil {
 		return err
 	}
@@ -41,7 +45,7 @@ func InitialiseNewManifest(objectStore core.ObjectStore) error {
 
 // surveyForInitialManifest - Prompt the user to fill out the required fields,
 // but check if we have a flag for them
-func surveyForInitialManifest(prompter initialisePrompter) (*Manifest, error) {
+func surveyForInitialManifest(prompter InitialisePrompter) (*Manifest, error) {
 	manifest := &Manifest{
 		Environments: map[string]Environment{},
 	}
