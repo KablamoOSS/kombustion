@@ -24,7 +24,5 @@ func InitaliseNewManifestTask(c *cli.Context) error {
 	objectStore := core.NewFilesystemStore(".")
 
 	// This funciton is a thin layer between the task, and the cli wrapper
-	err := manifest.InitaliseNewManifest(objectStore)
-
-	return err
+	return manifest.InitaliseNewManifest(objectStore)
 }
