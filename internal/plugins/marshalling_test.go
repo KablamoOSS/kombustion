@@ -110,7 +110,7 @@ func TestLoadParser(t *testing.T) {
 			parameters,
 			resources,
 			transform,
-			testErrs := unmarshallParser(
+			testErrs := unmarshalParser(
 			test.input,
 		)
 

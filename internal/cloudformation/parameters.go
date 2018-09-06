@@ -1,45 +1,29 @@
 package cloudformation
 
 import (
-	"strings"
-
 	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/urfave/cli"
 )
 
-// GetParamMap retrives the --param if any, for the map of
-// Parameters in the template
-func GetParamMap(c *cli.Context) map[string]string {
-	paramMap := make(map[string]string)
-	params := c.StringSlice("param")
-	for _, param := range params {
-		parts := strings.SplitN(param, "=", 2)
-		if len(parts) > 1 {
-			paramMap[parts[0]] = parts[1]
-		}
-	}
-	return paramMap
-}
-
 // ResolveParameters for the template
 func ResolveParameters(
-	c *cli.Context,
+	environment string,
+	cliParams map[string]string,
 	cfYaml YamlCloudformation,
 	manifestFile *manifest.Manifest,
 ) []*awsCF.Parameter {
 	results := []*awsCF.Parameter{}
 
-	env := resolveEnvironmentParameters(manifestFile, c.String("environment"))
+	env := resolveEnvironmentParameters(manifestFile, environment)
 
 	if env == nil {
 		env = make(map[string]string)
 	}
 
 	// override envFile values with optional --param values
-	params := GetParamMap(c)
-	for key, value := range params {
+	for key, value := range cliParams {
 		env[key] = value
 	}
 

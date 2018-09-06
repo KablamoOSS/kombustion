@@ -15,8 +15,8 @@ func loadConfig(blob []byte) (config pluginTypes.Config, err error) {
 	return
 }
 
-// unmarshallParser unmarshalls the result of the parser function
-func unmarshallParser(blob []byte) (
+// unmarshalParser unmarshals the result of the parser function
+func unmarshalParser(blob []byte) (
 	conditions kombustionTypes.TemplateObject,
 	metadata kombustionTypes.TemplateObject,
 	mappings kombustionTypes.TemplateObject,

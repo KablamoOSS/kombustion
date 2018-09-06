@@ -3,7 +3,6 @@ package tasks
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
@@ -95,10 +94,6 @@ func generate(
 	printer.Step("Generate template")
 	printer.Progress("Kombusting")
 
-	if objectStore == nil {
-		panic("objectstore is nil")
-	}
-
 	paramMap := make(map[string]string)
 	if paramsPath != "" {
 		paramMap = readParamsObject(objectStore, paramsPath)
@@ -146,33 +141,6 @@ func generate(
 		Plugins:                loadedPlugins,
 		GenerateDefaultOutputs: generateDefaultOutputs || manifestFile.GenerateDefaultOutputs,
 	})
-}
-
-func readParamsFile(path string) map[string]string {
-	body, err := ioutil.ReadFile(path)
-	if err != nil {
-		printer.Fatal(
-			fmt.Errorf("Couldn't read params file: %v", err),
-			"Check the file exists, and your user has read permissions",
-			"",
-		)
-	}
-
-	cfParams := []cloudformation.Parameter{}
-	if err = json.Unmarshal(body, &cfParams); err != nil {
-		printer.Fatal(
-			fmt.Errorf("Couldn't unmarshal params file: %v", err),
-			"Check the file is valid JSON, in the standard AWS cli format",
-			"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html",
-		)
-	}
-
-	params := make(map[string]string)
-	for _, param := range cfParams {
-		params[param.ParameterKey] = param.ParameterValue
-	}
-
-	return params
 }
 
 func readParamsObject(objStore core.ObjectStore, path string) map[string]string {

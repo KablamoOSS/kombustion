@@ -52,7 +52,7 @@ func ExtractParsersFromPlugins(
 							parameters,
 							resources,
 							transform,
-							errors = unmarshallParser(parserFunc(name, data))
+							errors = unmarshalParser(parserFunc(name, data))
 						return
 					} // </wrappedParserFunc>
 

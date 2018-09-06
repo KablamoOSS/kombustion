@@ -3,15 +3,50 @@ package cloudformation
 import (
 	"fmt"
 	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/internal/coretest"
 	"github.com/KablamoOSS/kombustion/pkg/parsers/resources"
 	"github.com/KablamoOSS/kombustion/types"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
+var testYaml = `AWSTemplateFormatVersion: "2010-09-09"
+Description: A Demo Template for testing Kombustion
+
+Parameters:
+  Environment:
+    Type: String
+    Default: UnknownEnvironment
+
+Resources:
+  MyDemoLogGroup:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Join [ '-', [ "MyDemoLogGroup1",!Ref Environment ] ]
+      RetentionInDays: 1
+  MyDemoLogGroup2:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Join [ '-', [ "MyDemoLogGroup2",!Ref Environment ] ]
+      RetentionInDays: 1
+  MyDemoLogGroup3:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Join [ '-', [ "MyDemoLogGroup3",!Ref Environment ] ]
+      RetentionInDays: 1
+  MyDemoLogGroup4:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Join [ '-', [ "MyDemoLogGroup4",!Ref Environment ] ]
+      RetentionInDays: 1
+`
+
 func TestGenerateYamlTemplate(t *testing.T) {
 	// Prevent the printer from exiting
 	printer.Test()
+
+	objectStore := coretest.NewMockObjectStore()
+	objectStore.Put([]byte(testYaml), "test.yaml")
 
 	tests := []struct {
 		input  GenerateParams
@@ -20,7 +55,8 @@ func TestGenerateYamlTemplate(t *testing.T) {
 	}{
 		{
 			input: GenerateParams{
-				Filename: "testdata/test.yaml",
+				ObjectStore: objectStore,
+				Filename: "test.yaml",
 			},
 			output: YamlCloudformation{
 				AWSTemplateFormatVersion: "2010-09-09",
@@ -88,7 +124,8 @@ func TestGenerateYamlTemplate(t *testing.T) {
 		},
 		{
 			input: GenerateParams{
-				Filename:               "testdata/test.yaml",
+				ObjectStore: objectStore,
+				Filename:               "test.yaml",
 				GenerateDefaultOutputs: true,
 			},
 			output: YamlCloudformation{

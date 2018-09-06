@@ -4,20 +4,25 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/KablamoOSS/kombustion/internal/core"
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"gopkg.in/AlecAivazis/survey.v1"
 )
 
-type initialisePrompter interface {
+type InitialisePrompter interface {
 	name() (string, error)
 	environments() ([]string, error)
 	accountID(string) (string, error)
 }
 
 // InitaliseNewManifest creates a new manifest with a survey
-func InitaliseNewManifest() error {
+func InitialiseNewManifest(objectStore core.ObjectStore) error {
+	return initialiseNewManifest(objectStore, &surveyPrompt{})
+}
+
+func initialiseNewManifest(objectStore core.ObjectStore, prompter InitialisePrompter) error {
 	// Load the manifest file from this directory
-	if CheckManifestExists() {
+	if CheckManifestExists(objectStore) {
 		printer.Fatal(
 			fmt.Errorf("Sorry we can't create a new kombustion.yaml, one already exists."),
 			"If you want to re-initialise your kombustion.yaml file, first remove it.",
@@ -26,12 +31,12 @@ func InitaliseNewManifest() error {
 	}
 
 	// Survey the user for required info
-	manifest, err := surveyForInitialManifest(&surveyPrompt{})
+	manifest, err := surveyForInitialManifest(prompter)
 	if err != nil {
 		return err
 	}
 
-	err = WriteManifestToDisk(manifest)
+	err = WriteManifestObject(objectStore, manifest)
 	if err != nil {
 		return err
 	}
@@ -40,7 +45,7 @@ func InitaliseNewManifest() error {
 
 // surveyForInitialManifest - Prompt the user to fill out the required fields,
 // but check if we have a flag for them
-func surveyForInitialManifest(prompter initialisePrompter) (*Manifest, error) {
+func surveyForInitialManifest(prompter InitialisePrompter) (*Manifest, error) {
 	manifest := &Manifest{
 		Environments: map[string]Environment{},
 	}

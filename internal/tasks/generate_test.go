@@ -3,8 +3,8 @@ package tasks
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/KablamoOSS/kombustion/internal/coretest"
+	"github.com/stretchr/testify/assert"
 )
 
 var sampleKombYaml = `---

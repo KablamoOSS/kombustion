@@ -3,7 +3,6 @@ package cloudformation
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"strings"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
@@ -50,14 +49,8 @@ func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudform
 	pluginParsers = plugins.ExtractParsersFromPlugins(params.Plugins)
 	templateParsers = mergeParsers(templateParsers, pluginParsers)
 
-	if params.ObjectStore == nil {
-		if configData, err = ioutil.ReadFile(params.Filename); err != nil {
-			return compiledTemplate, err
-		}
-	} else {
-		if configData, err = params.ObjectStore.Get(params.Filename); err != nil {
-			return compiledTemplate, err
-		}
+	if configData, err = params.ObjectStore.Get(params.Filename); err != nil {
+		return compiledTemplate, err
 	}
 
 	//preprocess - template in the environment variables and custom params
@@ -90,7 +83,7 @@ func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudform
 
 	if err = yaml.Unmarshal(data, &config); err != nil {
 		printer.Error(
-			fmt.Errorf("Failed to unmarshall the template"),
+			fmt.Errorf("Failed to unmarshal the template"),
 			fmt.Sprintf(
 				"File: %s",
 				params.Filename,
@@ -196,7 +189,7 @@ func processParsers(
 				continue
 			}
 
-			// Marshall the resource into YAML to send to the parser function
+			// Marshal the resource into YAML to send to the parser function
 			resourceData, err := yaml.Marshal(templateResource)
 
 			if err != nil {

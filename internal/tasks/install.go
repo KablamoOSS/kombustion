@@ -1,11 +1,11 @@
 package tasks
 
 import (
-	"fmt"
-
 	"github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/config"
+	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/internal/plugins"
+	"github.com/KablamoOSS/kombustion/internal/plugins/lock"
 	"github.com/urfave/cli"
 )
 
@@ -13,11 +13,24 @@ import (
 // Which is to say, ensure the manifest and lock file agree with the state of the plugins
 // and then ensure the lock file agrees with the disk on the state of the plugins
 func InstallPlugins(c *cli.Context) {
+	objectStore := core.NewFilesystemStore(".")
+	installPlugins(objectStore)
+}
+
+func installPlugins(objectStore core.ObjectStore) {
 	printer.Step("Install plugins")
 	printer.Progress("Kombusting")
 
-	err := plugins.InstallPlugins()
+
+	lockFile, err := lock.GetLockObject(objectStore, "kombustion.lock")
 	if err != nil {
-		printer.Fatal(err, fmt.Sprintf("%s\n%s", "Instaling plugins failed. Try again.", config.ErrorHelpInfo), "")
+		printer.Fatal(err, config.ErrorHelpInfo, "")
+	}
+
+	lockFile = plugins.InstallPlugins(lockFile)
+
+	lockFile.Save(objectStore)
+	if err != nil {
+		printer.Fatal(err, config.ErrorHelpInfo, "")
 	}
 }

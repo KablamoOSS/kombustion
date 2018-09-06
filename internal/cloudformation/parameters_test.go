@@ -93,7 +93,8 @@ func TestResolveEnvironmentParameters(t *testing.T) {
 
 func TestResolveParameters(t *testing.T) {
 	type input struct {
-		ctx          *cli.Context
+		envName string
+		cliParams map[string]string
 		cfYaml       YamlCloudformation
 		cfClient     *awsCF.CloudFormation
 		manifestFile *manifest.Manifest
@@ -107,35 +108,11 @@ func TestResolveParameters(t *testing.T) {
 		{
 			name: "Dev",
 			input: input{
-				ctx: func() *cli.Context {
-					var context *cli.Context
-
-					app := cli.NewApp()
-
-					app.Flags = []cli.Flag{
-						cli.StringSliceFlag{
-							Name:  "param, p",
-							Usage: "cloudformation parameters. eg. ( -p Env=dev -p BucketName=test )",
-						},
-						cli.StringFlag{
-							Name:  "environment, e",
-							Usage: "environment config to use from ./kombustion.yaml",
-						},
-					}
-
-					app.Action = func(c *cli.Context) error {
-						context = c
-						return nil
-					}
-
-					app.Run([]string{
-						"",
-						"--environment", "development",
-						"--param", "parameterOneName=parameterOneValue",
-						"--param", "parameterTwoName=8654238642489624862",
-					})
-					return context
-				}(),
+				envName: "development",
+				cliParams: map[string]string {
+					"parameterOneName": "parameterOneValue",
+					"parameterTwoName": "8654238642489624862",
+				},
 				cfYaml: YamlCloudformation{
 					AWSTemplateFormatVersion: "version",
 					Description:              "Test Template",
@@ -191,7 +168,8 @@ func TestResolveParameters(t *testing.T) {
 	for i, test := range tests {
 		assert := assert.New(t)
 		testOutput := ResolveParameters(
-			test.input.ctx,
+			test.input.envName,
+			test.input.cliParams,
 			test.input.cfYaml,
 			test.input.manifestFile,
 		)

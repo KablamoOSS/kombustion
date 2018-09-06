@@ -92,7 +92,7 @@ func (store *S3ObjectStore) Get(objpath string, subpath ...string) ([]byte, erro
 	obj, err := store.client.GetObject(
 		&s3.GetObjectInput{
 			Bucket: &store.bucket,
-			Key: &key,
+			Key:    &key,
 		},
 	)
 	if err != nil {
@@ -112,8 +112,8 @@ func (store *S3ObjectStore) Put(data []byte, objpath string, subpath ...string) 
 	_, err := store.client.PutObject(
 		&s3.PutObjectInput{
 			Bucket: &store.bucket,
-			Key: &key,
-			Body: buf,
+			Key:    &key,
+			Body:   buf,
 		},
 	)
 	if err != nil {
@@ -122,4 +122,3 @@ func (store *S3ObjectStore) Put(data []byte, objpath string, subpath ...string) 
 
 	return nil
 }
-

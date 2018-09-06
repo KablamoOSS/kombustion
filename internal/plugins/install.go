@@ -14,11 +14,9 @@ import (
 )
 
 // InstallPlugins - Get the lock file and then call installPluginsWithLock
-func InstallPlugins() error {
+func InstallPlugins(lockFile *lock.Lock) *lock.Lock {
 	printer.Step("Installing plugins")
 	printer.Progress("Kombusting")
-
-	lockFile := lock.FindAndLoadLock()
 
 	updatedLockFile, installErrors := installPluginsWithLock(lockFile)
 	if len(installErrors) > 0 {
@@ -33,12 +31,7 @@ func InstallPlugins() error {
 			"",
 		)
 	}
-	err := lock.WriteLockToDisk(updatedLockFile)
-	if err != nil {
-		printer.Fatal(err, "Error installing plugins", "")
-		return err
-	}
-	return nil
+	return updatedLockFile
 }
 
 // installPluginsWithLock - Using a provided lockFile install plugins

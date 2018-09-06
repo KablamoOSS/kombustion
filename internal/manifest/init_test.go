@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/KablamoOSS/kombustion/internal/coretest"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -81,4 +82,26 @@ func TestSurveyForInitialManifestEmptyAccountID(t *testing.T) {
 	assert.Equal(t, manifest.Name, "Kombustion")
 	assert.Equal(t, len(manifest.Environments), 1)
 	assert.Equal(t, len(manifest.Environments["ci"].AccountIDs), 0)
+}
+
+func TestInitialiseManifest(t *testing.T) {
+	testPrompt := &initialiseTestPrompter{
+		Name:         "Kombustion",
+		Environments: []string{"ci"},
+		AccountIDs: map[string]string{
+			"ci": "12345",
+		},
+	}
+
+	objectStore := coretest.NewMockObjectStore()
+
+	err := initialiseNewManifest(objectStore, testPrompt)
+	assert.Nil(t, err)
+
+	data, err := objectStore.Get("kombustion.yaml")
+	assert.Nil(t, err)
+
+	assert.Contains(t, string(data), "Name: Kombustion\n")
+	assert.Contains(t, string(data), "Environments:\n  ci")
+	assert.Contains(t, string(data), "GenerateDefaultOutputs: false\n")
 }
