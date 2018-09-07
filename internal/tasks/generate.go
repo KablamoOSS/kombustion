@@ -64,7 +64,7 @@ func Generate(c *cli.Context) {
 	outputDirectory := c.String("output-directory")
 	inputParameters := c.String("read-parameters")
 	outputParameters := c.Bool("write-parameters")
-	env := c.String("env")
+	env := c.String("environment")
 	generateDefaultOutputs := c.Bool("generate-default-outputs")
 
 	generate(

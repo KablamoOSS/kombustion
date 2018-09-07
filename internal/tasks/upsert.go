@@ -75,7 +75,7 @@ func Upsert(c *cli.Context) {
 	region := c.String("region")
 	devPluginPath := c.GlobalString("load-plugin")
 	inputParameters := c.String("read-parameters")
-	env := c.String("env")
+	env := c.String("environment")
 	generateDefaultOutputs := c.Bool("generate-default-outputs")
 	capabilities := getCapabilities(c)
 	confirm := c.Bool("confirm")
