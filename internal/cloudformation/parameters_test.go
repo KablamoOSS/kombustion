@@ -28,9 +28,9 @@ func TestResolveEnvironmentParameters(t *testing.T) {
 			name:        "Returns map of env vars",
 			environment: "development",
 			manifest: manifest.Manifest{
-				Name:               "TestManifestWithEnvironment",
-				Plugins:            nil,
-				Architectures:      []string(nil),
+				Name:                   "TestManifestWithEnvironment",
+				Plugins:                nil,
+				Architectures:          []string(nil),
 				GenerateDefaultOutputs: false,
 				Environments: map[string]manifest.Environment{
 					"development": {
@@ -55,9 +55,9 @@ func TestResolveEnvironmentParameters(t *testing.T) {
 			name:        "Returns emtpy map",
 			environment: "production",
 			manifest: manifest.Manifest{
-				Name:               "TestManifestWithEnvironment",
-				Plugins:            nil,
-				Architectures:      []string(nil),
+				Name:                   "TestManifestWithEnvironment",
+				Plugins:                nil,
+				Architectures:          []string(nil),
 				GenerateDefaultOutputs: false,
 				Environments: map[string]manifest.Environment{
 					"development": {
@@ -93,8 +93,8 @@ func TestResolveEnvironmentParameters(t *testing.T) {
 
 func TestResolveParameters(t *testing.T) {
 	type input struct {
-		envName string
-		cliParams map[string]string
+		envName      string
+		cliParams    map[string]string
 		cfYaml       YamlCloudformation
 		cfClient     *awsCF.CloudFormation
 		manifestFile *manifest.Manifest
@@ -109,7 +109,7 @@ func TestResolveParameters(t *testing.T) {
 			name: "Dev",
 			input: input{
 				envName: "development",
-				cliParams: map[string]string {
+				cliParams: map[string]string{
 					"parameterOneName": "parameterOneValue",
 					"parameterTwoName": "8654238642489624862",
 				},
@@ -129,9 +129,9 @@ func TestResolveParameters(t *testing.T) {
 					Outputs:    types.TemplateObject{},
 				},
 				manifestFile: &manifest.Manifest{
-					Name:               "TestManifestWithEnvironment",
-					Plugins:            nil,
-					Architectures:      []string(nil),
+					Name:                   "TestManifestWithEnvironment",
+					Plugins:                nil,
+					Architectures:          []string(nil),
 					GenerateDefaultOutputs: false,
 					Environments: map[string]manifest.Environment{
 						"development": {
@@ -226,9 +226,9 @@ func TestResolveParametersS3(t *testing.T) {
 					return context
 				}(),
 				manifestFile: &manifest.Manifest{
-					Name:               "TestManifestWithEnvironment",
-					Plugins:            nil,
-					Architectures:      []string(nil),
+					Name:                   "TestManifestWithEnvironment",
+					Plugins:                nil,
+					Architectures:          []string(nil),
 					GenerateDefaultOutputs: false,
 					Environments: map[string]manifest.Environment{
 						"development": {

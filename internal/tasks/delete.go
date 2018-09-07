@@ -5,9 +5,9 @@ import (
 
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/config"
-	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation/tasks"
+	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/urfave/cli"
 )

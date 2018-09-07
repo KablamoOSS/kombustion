@@ -186,8 +186,8 @@ func upsert(
 	// Template generation parameters
 	generateParams := cloudformation.GenerateParams{
 		ObjectStore: objectStore,
-		Filename: templatePath,
-		Env:      env,
+		Filename:    templatePath,
+		Env:         env,
 		GenerateDefaultOutputs: generateDefaultOutputs || manifestFile.GenerateDefaultOutputs,
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,
