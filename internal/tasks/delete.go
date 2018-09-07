@@ -34,7 +34,7 @@ func Delete(c *cli.Context) {
 
 	profile := c.GlobalString("profile")
 	region := c.String("region")
-	envName := c.String("env")
+	envName := c.String("environment")
 	stackName := c.String("stackName")
 
 	taskDelete(
