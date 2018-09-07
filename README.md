@@ -1,4 +1,5 @@
 ![Kombustion Logo](https://raw.githubusercontent.com/KablamoOSS/kombustion/master/documentation/static/img/favicons/logo.png "Komby")
+
 ## Kombustion
 
 [![Build Status](https://travis-ci.org/KablamoOSS/kombustion.svg?branch=master)](https://travis-ci.org/KablamoOSS/kombustion)
@@ -16,7 +17,8 @@ delete your CloudFormation stacks.
 Kombustion has automatic support for new CloudFormation types as they are
 released.
 
-See the [Quick start](https://kombustion.io/docs/getting-started/) for more details.
+See the [Quick start](https://kombustion.io/docs/getting-started/) for more
+details.
 
 ## Getting Started
 
@@ -41,7 +43,8 @@ Initialise a `kombustion.yaml` file with the following:
 $ kombustion init
 ```
 
-This is an example of `kombustion.yaml`, it should be committed to version control.
+This is an example of `kombustion.yaml`, it should be committed to version
+control.
 
 ```yaml
 # Name of this project. This is used with `--environment` to create a stack name, which can
@@ -56,11 +59,11 @@ Plugins:
     Version: 0.1.0
 Environments:
   Development:
-    # Optionally whitelist the accounts for the environment `development`, this will
+    # Optionally allowlist the accounts for the environment `development`, this will
     # ensure CloudFormation actions are only performed in this account
     AccountIDs:
-    - "1234567890"
-    # Parameters are added to the CloudFormation Stack during upsert
+      - "1234567890"
+      # Parameters are added to the CloudFormation Stack during upsert
     Parameters:
       Environment: development
 # Kombustion can generate default outputs for your resources to use as references in other
@@ -90,8 +93,9 @@ $ kombustion events examples/stacks/test.yaml
 
 #### StackName
 
-You don't need to specify `--stack-name`, instead when you pass an environment `--environment` it
-gets merged in with the project name from `kombustion.yaml` and the filename as `{ProjectName}-{FileName}-{Environment}`.
+You don't need to specify `--stack-name`, instead when you pass an environment
+`--environment` it gets merged in with the project name from `kombustion.yaml`
+and the filename as `{ProjectName}-{FileName}-{Environment}`.
 
 This applies to `upsert`,`delete`, and `events`.
 
@@ -184,7 +188,6 @@ Resources:
 Check out the
 [examples](https://github.com/KablamoOSS/Kombustion/tree/master/examples/)
 directory for example stacks.
-
 
 #### Credentials
 
