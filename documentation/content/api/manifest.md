@@ -76,7 +76,7 @@ environment_
 
 #### `AccountIDs` _Optional_
 
-_A allowlist of Account ID's this environment can be deployed to._
+_An allowlist of Account ID's this environment can be deployed to._
 
 If the Account ID the stack is going to be deployed into does not match from
 this list, the operation will fail. This is a safety to prevent accidentally

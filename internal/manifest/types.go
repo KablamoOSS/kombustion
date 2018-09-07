@@ -46,7 +46,7 @@ type Plugin struct {
 
 // Environment specific parameters
 type Environment struct {
-	// A allowlist of allowed accountID's for this enviroment.
+	// An allowlist of allowed accountID's for this enviroment.
 	// This restricts where stacks in this project can be deployed to.
 	// This is a harm minimisation feature, intended to limit damage from human error.
 	AccountIDs []string `yaml:"AccountIDs,omitempty"`
