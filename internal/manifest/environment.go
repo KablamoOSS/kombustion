@@ -1,6 +1,6 @@
 package manifest
 
-func (env *Environment) IsWhitelistedAccount(acctID string) bool {
+func (env *Environment) IsAllowlistedAccount(acctID string) bool {
 	if len(env.AccountIDs) == 0 {
 		// If no account IDs are specified, assume allow all
 		return true

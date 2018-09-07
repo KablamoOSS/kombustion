@@ -70,7 +70,7 @@ func surveyForInitialManifest(prompter InitialisePrompter) (*Manifest, error) {
 		// Adding an empty account ID into kombustion.yaml would mean that no
 		// account would be valid, and kombustion would refuse to perform any
 		// (AWS) operation. Instead, if the user doesn't enter an ID, assume
-		// they don't want a whitelist.
+		// they don't want a allowlist.
 		accountIds := []string{}
 		if accountId != "" {
 			accountIds = append(accountIds, accountId)
@@ -140,7 +140,7 @@ func (sp *surveyPrompt) environments() ([]string, error) {
 func (sp *surveyPrompt) accountID(environment string) (accountId string, err error) {
 	prompt := &survey.Input{
 		Message: fmt.Sprintf("What is the Account ID for %s:", environment),
-		Help:    "This is a whitelist of accounts, these stacks and parameters can be deployed to. This can prevent unintentional deployment.",
+		Help:    "This is a allowlist of accounts, these stacks and parameters can be deployed to. This can prevent unintentional deployment.",
 	}
 	// Prompts the user
 	err = survey.AskOne(prompt, &accountId, nil)

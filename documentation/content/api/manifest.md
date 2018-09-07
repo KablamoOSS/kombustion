@@ -9,7 +9,6 @@ toc = true
 layout = "docs"
 +++
 
-
 ## `kombustion.yaml`
 
 You can generate this with `kombustion init`.
@@ -25,7 +24,7 @@ Plugins:
 Environments:
   Production:
     AccountIDs:
-    - "13521354"
+      - "13521354"
     Parameters:
       ENVIRONMENT: production
 ```
@@ -34,7 +33,8 @@ Environments:
 
 _The name of your project._
 
-If `--stack-name` is not provided this is used along with `--environment` and the file name, to make the CloudFormation Stack name.
+If `--stack-name` is not provided this is used along with `--environment` and
+the file name, to make the CloudFormation Stack name.
 
 ### `Region`
 
@@ -46,7 +46,8 @@ Can be overidden by passing `--region us-east-1` with your desired region.
 
 _A list of all plugins_
 
-A plugin has a key formed of it's `Name` and `Version`, under which contains the `Name`, `Version`, and optional `Alias`.
+A plugin has a key formed of it's `Name` and `Version`, under which contains the
+`Name`, `Version`, and optional `Alias`.
 
 #### `Name`
 
@@ -58,27 +59,33 @@ Currently only Github is supported.
 
 _Version constraint._
 
-Using [SemVer](https://semver.org) to describe which version of the plugin you need. This is pinned in `kombustion.lock`.
+Using [SemVer](https://semver.org) to describe which version of the plugin you
+need. This is pinned in `kombustion.lock`.
 
 #### `Alias` _Optional_
 
 _Add an alias to the plugin._
 
-If two plugins use the same namespace for their resource, you can add an `Alias` to one of them to use both.
+If two plugins use the same namespace for their resource, you can add an `Alias`
+to one of them to use both.
 
 ### `Environments`
 
-_Allows you to provide Parameters to your Stacks based on the target environment_
+_Allows you to provide Parameters to your Stacks based on the target
+environment_
 
 #### `AccountIDs` _Optional_
 
-_A whitelist of Account ID's this environment can be deployed to._
+_A allowlist of Account ID's this environment can be deployed to._
 
-If the Account ID the stack is going to be deployed into does not match from this list, the operation will fail. This
-is a safety to prevent accidentally deploying into the wrong account.
+If the Account ID the stack is going to be deployed into does not match from
+this list, the operation will fail. This is a safety to prevent accidentally
+deploying into the wrong account.
 
 #### `Parameters`
 
-_A map of `Key: Value` parameters that will be supplied to the CloudFormation Stack._
+_A map of `Key: Value` parameters that will be supplied to the CloudFormation
+Stack._
 
-Only the Paramters the stack needs are supplied, so multiple stacks can all use a subset of all the Parameters.
+Only the Paramters the stack needs are supplied, so multiple stacks can all use
+a subset of all the Parameters.
