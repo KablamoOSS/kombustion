@@ -60,10 +60,10 @@ func printEvents(
 	acctID, cfClient := tasks.GetCloudformationClient(profileName, region)
 
 	if env, ok := manifestFile.Environments[envName]; ok {
-		if !env.IsWhitelistedAccount(acctID) {
+		if !env.IsAllowlistedAccount(acctID) {
 			printer.Fatal(
 				fmt.Errorf("Account %s is not allowed for environment %s", acctID, envName),
-				"Use whitelisted account, or add account to environment accounts in kombustion.yaml",
+				"Use allowlisted account, or add account to environment accounts in kombustion.yaml",
 				"",
 			)
 		}
