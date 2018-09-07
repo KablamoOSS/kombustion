@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/KablamoOSS/kombustion/internal/core"
 	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/internal/core"
 	"gopkg.in/AlecAivazis/survey.v1"
 )
 

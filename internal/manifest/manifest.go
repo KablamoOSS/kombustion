@@ -7,7 +7,6 @@ import (
 	yaml "github.com/KablamoOSS/yaml"
 )
 
-
 func CheckManifestExists(objectStore core.ObjectStore) bool {
 	data, err := GetManifestObject(objectStore)
 	if err != nil {
@@ -15,7 +14,6 @@ func CheckManifestExists(objectStore core.ObjectStore) bool {
 	}
 	return data != nil
 }
-
 
 func GetManifestObject(objectStore core.ObjectStore, path ...string) (*Manifest, error) {
 	var manifest Manifest

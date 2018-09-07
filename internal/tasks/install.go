@@ -21,7 +21,6 @@ func installPlugins(objectStore core.ObjectStore) {
 	printer.Step("Install plugins")
 	printer.Progress("Kombusting")
 
-
 	lockFile, err := lock.GetLockObject(objectStore, "kombustion.lock")
 	if err != nil {
 		printer.Fatal(err, config.ErrorHelpInfo, "")

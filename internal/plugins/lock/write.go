@@ -2,8 +2,8 @@ package lock
 
 import (
 	printer "github.com/KablamoOSS/go-cli-printer"
-	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/config"
+	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/yaml"
 )
 

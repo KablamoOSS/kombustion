@@ -75,7 +75,7 @@ func Upsert(c *cli.Context) {
 	region := c.String("region")
 	devPluginPath := c.GlobalString("load-plugin")
 	inputParameters := c.String("read-parameters")
-	env := c.String("env")
+	env := c.String("environment")
 	generateDefaultOutputs := c.Bool("generate-default-outputs")
 	capabilities := getCapabilities(c)
 	confirm := c.Bool("confirm")
@@ -186,8 +186,8 @@ func upsert(
 	// Template generation parameters
 	generateParams := cloudformation.GenerateParams{
 		ObjectStore: objectStore,
-		Filename: templatePath,
-		Env:      env,
+		Filename:    templatePath,
+		Env:         env,
 		GenerateDefaultOutputs: generateDefaultOutputs || manifestFile.GenerateDefaultOutputs,
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,

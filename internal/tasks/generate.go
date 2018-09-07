@@ -64,7 +64,7 @@ func Generate(c *cli.Context) {
 	outputDirectory := c.String("output-directory")
 	inputParameters := c.String("read-parameters")
 	outputParameters := c.Bool("write-parameters")
-	env := c.String("env")
+	env := c.String("environment")
 	generateDefaultOutputs := c.Bool("generate-default-outputs")
 
 	generate(
@@ -88,20 +88,11 @@ func generate(
 	devPluginPath string,
 	outputDirectory string,
 	outputParameters bool,
-	env string,
+	envName string,
 	generateDefaultOutputs bool,
 ) {
 	printer.Step("Generate template")
 	printer.Progress("Kombusting")
-
-	paramMap := make(map[string]string)
-	if paramsPath != "" {
-		paramMap = readParamsObject(objectStore, paramsPath)
-	}
-
-	for key, value := range cliParams {
-		paramMap[key] = value
-	}
 
 	lockFile, err := lock.GetLockObject(objectStore, "kombustion.lock")
 	if err != nil {
@@ -122,6 +113,24 @@ func generate(
 		)
 	}
 
+	paramMap := make(map[string]string)
+
+	if env, ok := manifestFile.Environments[envName]; ok {
+		for key, value := range env.Parameters {
+			paramMap[key] = value
+		}
+	}
+
+	if paramsPath != "" {
+		for key, value := range readParamsObject(objectStore, paramsPath) {
+			paramMap[key] = value
+		}
+	}
+
+	for key, value := range cliParams {
+		paramMap[key] = value
+	}
+
 	// load all plugins
 	loadedPlugins := plugins.LoadPlugins(manifestFile, lockFile)
 
@@ -136,7 +145,7 @@ func generate(
 		Filename:               templatePath,
 		Directory:              outputDirectory,
 		WriteParams:            outputParameters,
-		Env:                    env,
+		Env:                    envName,
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,
 		GenerateDefaultOutputs: generateDefaultOutputs || manifestFile.GenerateDefaultOutputs,

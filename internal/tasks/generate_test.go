@@ -11,9 +11,9 @@ var sampleKombYaml = `---
 Name: Kombustion
 Region: ""
 Environments:
-  development:
+  ci:
     Parameters:
-      Environment: development
+      BucketName: fooBucket
 GenerateDefaultOutputs: false
 Tags: {}
 `
@@ -61,6 +61,13 @@ Resources:
         Value: 123
 `
 
+var expectedParameterOutput = `[
+  {
+    "ParameterKey": "BucketName",
+    "ParameterValue": "fooBucket"
+  }
+]`
+
 func TestSimpleGenerate(t *testing.T) {
 	objectStore := coretest.NewMockObjectStore()
 	objectStore.Put([]byte(sampleKombYaml), "kombustion.yaml")
@@ -71,19 +78,22 @@ func TestSimpleGenerate(t *testing.T) {
 		t,
 		func() {
 			generate(
-				objectStore,
-				"test.yaml",
-				map[string]string{},
-				"",
-				"",
-				"compiled",
-				true,
-				"ci",
-				false,
+				objectStore,         // objectStore
+				"test.yaml",         // templatePath
+				map[string]string{}, // cliParams
+				"",                  // paramsPath
+				"",                  // devPluginPath
+				"compiled",          // outputDirectory
+				true,                // ouputParameters
+				"ci",                // envName
+				false,               // generateDefaultOutputs
 			)
 		},
 	)
 
 	output, _ := objectStore.Get("compiled", "test.yaml")
 	assert.Equal(t, expectedOutput, string(output))
+
+	output, _ = objectStore.Get("compiled", "test-params.json")
+	assert.Equal(t, expectedParameterOutput, string(output))
 }

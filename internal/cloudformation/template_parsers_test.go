@@ -56,7 +56,7 @@ func TestGenerateYamlTemplate(t *testing.T) {
 		{
 			input: GenerateParams{
 				ObjectStore: objectStore,
-				Filename: "test.yaml",
+				Filename:    "test.yaml",
 			},
 			output: YamlCloudformation{
 				AWSTemplateFormatVersion: "2010-09-09",
@@ -124,7 +124,7 @@ func TestGenerateYamlTemplate(t *testing.T) {
 		},
 		{
 			input: GenerateParams{
-				ObjectStore: objectStore,
+				ObjectStore:            objectStore,
 				Filename:               "test.yaml",
 				GenerateDefaultOutputs: true,
 			},
