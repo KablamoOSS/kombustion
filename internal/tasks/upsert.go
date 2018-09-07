@@ -106,7 +106,7 @@ func upsert(
 	paramsPath string,
 	cliTags map[string]string,
 	devPluginPath string,
-	env string,
+	envName string,
 	generateDefaultOutputs bool,
 	capabilities []*string,
 	confirm bool,
@@ -159,11 +159,11 @@ func upsert(
 		paramMap[key] = value
 	}
 
-	if env, ok := manifestFile.Environments[env]; ok {
+	if env, ok := manifestFile.Environments[envName]; ok {
 		if !env.IsWhitelistedAccount(acctID) {
 			printer.Fatal(
-				fmt.Errorf("Account %s is not allowed for environment %s", acctID, env),
-				"Use whitelisted account, or add account to environment accounts in kombustion.yaml",
+				fmt.Errorf("Account %s is not allowed for environment %s", acctID, envName),
+				fmt.Sprintf("Use whitelisted account, or add account %s to environment accounts in kombustion.yaml", acctID),
 				"",
 			)
 		}
@@ -173,7 +173,7 @@ func upsert(
 	if tags == nil {
 		tags = make(map[string]string)
 	}
-	if env, ok := manifestFile.Environments[env]; ok {
+	if env, ok := manifestFile.Environments[envName]; ok {
 		for key, value := range env.Tags {
 			tags[key] = value
 		}
@@ -187,7 +187,7 @@ func upsert(
 	generateParams := cloudformation.GenerateParams{
 		ObjectStore: objectStore,
 		Filename:    templatePath,
-		Env:         env,
+		Env:         envName,
 		GenerateDefaultOutputs: generateDefaultOutputs || manifestFile.GenerateDefaultOutputs,
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,
@@ -196,14 +196,14 @@ func upsert(
 	// CloudFormation Stack parameters
 	var parameters []*awsCF.Parameter
 
-	fullStackName := cloudformation.GetStackName(manifestFile, templatePath, env, stackName)
+	fullStackName := cloudformation.GetStackName(manifestFile, templatePath, envName, stackName)
 
 	printer.Progress("Upserting template")
 
 	// FIXME - this previously looked for a --url param to use a template in
 	// S3. This should probably be reimplemented around an S3ObjectStore
 	templateBody, cfYaml := tasks.GenerateYamlTemplate(generateParams)
-	parameters = cloudformation.ResolveParameters(env, paramMap, cfYaml, manifestFile)
+	parameters = cloudformation.ResolveParameters(envName, paramMap, cfYaml, manifestFile)
 
 	tasks.UpsertStackBody(
 		templateBody,
