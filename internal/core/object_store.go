@@ -29,10 +29,6 @@ func NewFilesystemStore(basedir string) *FileSystemStore {
 }
 
 func (fs *FileSystemStore) Get(path string, subpath ...string) ([]byte, error) {
-	if filepath.IsAbs(path) {
-		return nil, fmt.Errorf("get object: only relative paths allowed")
-	}
-
 	// go doesn't allow passing mixed values and variadic arrays so we need to
 	// collapse it to a single array first
 	keys := append([]string{fs.basedir, path}, subpath...)
