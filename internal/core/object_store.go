@@ -29,9 +29,16 @@ func NewFilesystemStore(basedir string) *FileSystemStore {
 }
 
 func (fs *FileSystemStore) Get(path string, subpath ...string) ([]byte, error) {
+	var keys []string
+
 	// go doesn't allow passing mixed values and variadic arrays so we need to
 	// collapse it to a single array first
-	keys := append([]string{fs.basedir, path}, subpath...)
+	if filepath.IsAbs(path) {
+		keys = append([]string{path}, subpath...)
+	} else {
+		keys = append([]string{fs.basedir, path}, subpath...)
+	}
+
 	objectPath := filepath.Join(keys...)
 
 	data, err := ioutil.ReadFile(objectPath)
@@ -44,13 +51,16 @@ func (fs *FileSystemStore) Get(path string, subpath ...string) ([]byte, error) {
 }
 
 func (fs *FileSystemStore) Put(data []byte, path string, subpath ...string) error {
-	if filepath.IsAbs(path) {
-		return fmt.Errorf("put object: only relative paths allowed")
-	}
+	var keys []string
 
 	// go doesn't allow passing mixed values and variadic arrays so we need to
 	// collapse it to a single array first
-	keys := append([]string{fs.basedir, path}, subpath...)
+	if filepath.IsAbs(path) {
+		keys = append([]string{path}, subpath...)
+	} else {
+		keys = append([]string{fs.basedir, path}, subpath...)
+	}
+
 	objectPath := filepath.Join(keys...)
 
 	// Transparently create directories when required, to be
