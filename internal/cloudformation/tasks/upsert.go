@@ -6,6 +6,7 @@ import (
 	"time"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
@@ -175,6 +176,7 @@ func processUpsert(stackName, action string, cf *awsCF.CloudFormation) {
 	var err error
 	var status *awsCF.DescribeStacksOutput
 
+	eventer := cloudformation.NewEventer(cf)
 	PrintStackEventHeader()
 	for {
 		printer.Progress(action)
@@ -182,7 +184,7 @@ func processUpsert(stackName, action string, cf *awsCF.CloudFormation) {
 		status, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
 		checkError(err)
 
-		events, err := cf.DescribeStackEvents(&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)})
+		events, err := eventer.StackEvents(stackName)
 		checkError(err)
 
 		if len(status.Stacks) > 0 {
@@ -190,8 +192,8 @@ func processUpsert(stackName, action string, cf *awsCF.CloudFormation) {
 			stack := status.Stacks[0]
 			stackStatus := *stack.StackStatus
 
-			if len(events.StackEvents) > 0 {
-				PrintStackEvent(events.StackEvents[0], false)
+			if len(events) > 0 {
+				PrintStackEvent(events[0], false)
 			}
 
 			if stackStatus != awsCF.StackStatusCreateInProgress &&
