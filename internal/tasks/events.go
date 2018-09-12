@@ -25,7 +25,7 @@ func PrintEvents(c *cli.Context) {
 		)
 	}
 
-	eventer := cloudformation.NewEventer(nil)
+	eventer := &cloudformation.Wrapper{}
 
 	printEvents(
 		objectStore,

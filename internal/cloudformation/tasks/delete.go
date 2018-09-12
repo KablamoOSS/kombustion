@@ -22,7 +22,7 @@ func DeleteStack(cf *awsCF.CloudFormation, stackName, region string) {
 	_, err = cf.DeleteStack(&awsCF.DeleteStackInput{StackName: aws.String(stackName)})
 	checkError(err)
 
-	eventer := cloudformation.NewEventer(cf)
+	eventer := cloudformation.NewWrapper(cf)
 
 	// status polling
 	PrintStackEventHeader()

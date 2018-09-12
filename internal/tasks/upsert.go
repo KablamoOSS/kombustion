@@ -80,7 +80,10 @@ func Upsert(c *cli.Context) {
 	capabilities := getCapabilities(c)
 	confirm := c.Bool("confirm")
 
+	client := &cloudformation.Wrapper{}
+
 	upsert(
+		client,
 		objectStore,
 		fileName,
 		stackName,
@@ -97,6 +100,7 @@ func Upsert(c *cli.Context) {
 	)
 }
 func upsert(
+	client cloudformation.StackUpserter,
 	objectStore core.ObjectStore,
 	templatePath string,
 	stackName string,
@@ -148,7 +152,7 @@ func upsert(
 		}
 	}
 
-	acctID, cfClient := tasks.GetCloudformationClient(profile, region)
+	acctID := client.Open(profile, region)
 
 	paramMap := make(map[string]string)
 	if paramsPath != "" {
@@ -185,9 +189,9 @@ func upsert(
 	printer.Progress("Generating template")
 	// Template generation parameters
 	generateParams := cloudformation.GenerateParams{
-		ObjectStore: objectStore,
-		Filename:    templatePath,
-		Env:         envName,
+		ObjectStore:            objectStore,
+		Filename:               templatePath,
+		Env:                    envName,
 		GenerateDefaultOutputs: generateDefaultOutputs || manifestFile.GenerateDefaultOutputs,
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,
@@ -210,7 +214,7 @@ func upsert(
 		parameters,
 		capabilities,
 		fullStackName,
-		cfClient,
+		client,
 		tags,
 		confirm,
 	)

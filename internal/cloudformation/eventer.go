@@ -19,23 +19,24 @@ type StackEvent struct {
 	Reason    string
 }
 
-type CloudFormationEventer struct {
+type Wrapper struct {
 	client *awsCF.CloudFormation
 }
 
-func NewEventer(client *awsCF.CloudFormation) *CloudFormationEventer {
-	return &CloudFormationEventer{
+func NewWrapper(client *awsCF.CloudFormation) *Wrapper {
+	return &Wrapper{
 		client: client,
 	}
 }
 
-func (cfe *CloudFormationEventer) Open(profile, region string) string {
+func (cfe *Wrapper) Open(profile, region string) string {
 	acctID, cfClient := GetCloudformationClient(profile, region)
 	cfe.client = cfClient
 	return acctID
 }
 
-func (cfe *CloudFormationEventer) StackEvents(stack string) ([]*StackEvent, error) {
+// TODO: Roll this back to a thin wrapper?
+func (cfe *Wrapper) StackEvents(stack string) ([]*StackEvent, error) {
 	events := make([]*StackEvent, 0)
 
 	err := cfe.client.DescribeStackEventsPages(

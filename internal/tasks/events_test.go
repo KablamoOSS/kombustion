@@ -38,7 +38,7 @@ func TestEventsTask(t *testing.T) {
 	eventer := &MockStackEventer{
 		AcctID: "acct-12345",
 		Events: map[string][]*cloudformation.StackEvent{
-			"foo": []*cloudformation.StackEvent{},
+			"event-stack": []*cloudformation.StackEvent{},
 		},
 	}
 
@@ -48,11 +48,11 @@ func TestEventsTask(t *testing.T) {
 			printEvents(
 				objectStore,
 				eventer,
-				"test.yaml", // templatePath
-				"foo",       // stackName
-				"ci",        // envName
-				"profile",   // profile
-				"region",    // region
+				"test.yaml",   // templatePath
+				"event-stack", // stackName
+				"ci",          // envName
+				"profile",     // profile
+				"region",      // region
 			)
 		},
 	)
@@ -74,11 +74,11 @@ func TestEventsTaskNotFound(t *testing.T) {
 			printEvents(
 				objectStore,
 				eventer,
-				"test.yaml", // templatePath
-				"foo",       // stackName
-				"ci",        // envName
-				"profile",   // profile
-				"region",    // region
+				"test.yaml",   // templatePath
+				"event-stack", // stackName
+				"ci",          // envName
+				"profile",     // profile
+				"region",      // region
 			)
 		},
 	)
