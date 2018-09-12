@@ -5,6 +5,16 @@ import (
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 )
 
+// Subset of AWS API calls required by the events task, as a mockable
+// interface.
+type StackEventer interface {
+	Open(string, string) string
+	DescribeStackEvents(*awsCF.DescribeStackEventsInput) (*awsCF.DescribeStackEventsOutput, error)
+	DescribeStackEventsPages(*awsCF.DescribeStackEventsInput, func(*awsCF.DescribeStackEventsOutput, bool) bool) error
+}
+
+// Subset of AWS API calls required by the upsert task, as a mockable
+// interface.
 type StackUpserter interface {
 	Open(string, string) string
 	DescribeStackEvents(*awsCF.DescribeStackEventsInput) (*awsCF.DescribeStackEventsOutput, error)
@@ -16,6 +26,38 @@ type StackUpserter interface {
 	DeleteChangeSet(*awsCF.DeleteChangeSetInput) (*awsCF.DeleteChangeSetOutput, error)
 	DeleteStack(*awsCF.DeleteStackInput) (*awsCF.DeleteStackOutput, error)
 	ExecuteChangeSet(*awsCF.ExecuteChangeSetInput) (*awsCF.ExecuteChangeSetOutput, error)
+}
+
+type Wrapper struct {
+	client *awsCF.CloudFormation
+}
+
+// Placeholder helper so that tasks still using awsCF.CloudFormation directly
+// can wrap it to use helpers that have been updated to use interfaces.
+func NewWrapper(client *awsCF.CloudFormation) *Wrapper {
+	return &Wrapper{
+		client: client,
+	}
+}
+
+func (wr *Wrapper) Open(profile, region string) string {
+	acctID, cfClient := GetCloudformationClient(profile, region)
+	wr.client = cfClient
+	return acctID
+}
+
+func (wr *Wrapper) DescribeStackEvents(input *awsCF.DescribeStackEventsInput) (*awsCF.DescribeStackEventsOutput, error) {
+	if wr.client == nil {
+		return nil, fmt.Errorf("connection not opened")
+	}
+	return wr.client.DescribeStackEvents(input)
+}
+
+func (wr *Wrapper) DescribeStackEventsPages(input *awsCF.DescribeStackEventsInput, fn func(*awsCF.DescribeStackEventsOutput, bool) bool) error {
+	if wr.client == nil {
+		return fmt.Errorf("connection not opened")
+	}
+	return wr.client.DescribeStackEventsPages(input, fn)
 }
 
 func (wr *Wrapper) DescribeStacks(in *awsCF.DescribeStacksInput) (*awsCF.DescribeStacksOutput, error) {
