@@ -5,26 +5,41 @@ import (
 	"testing"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
-	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/coretest"
+	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/stretchr/testify/assert"
 )
 
 type MockStackEventer struct {
 	AcctID string
-	Events map[string][]*cloudformation.StackEvent
+	Events map[string][]*awsCF.StackEvent
 }
 
 func (mse *MockStackEventer) Open(_, _ string) string {
 	return mse.AcctID
 }
 
-func (mse *MockStackEventer) StackEvents(stackName string) ([]*cloudformation.StackEvent, error) {
-	events, ok := mse.Events[stackName]
+func (mse *MockStackEventer) DescribeStackEvents(input *awsCF.DescribeStackEventsInput) (*awsCF.DescribeStackEventsOutput, error) {
+	events, ok := mse.Events[*input.StackName]
 	if !ok {
-		return nil, fmt.Errorf("stack %s not found", stackName)
+		return nil, fmt.Errorf("stack %s not found", *input.StackName)
 	}
-	return events, nil
+
+	out := &awsCF.DescribeStackEventsOutput{
+		StackEvents: events,
+	}
+
+	return out, nil
+}
+
+func (mse *MockStackEventer) DescribeStackEventsPages(input *awsCF.DescribeStackEventsInput, fn func(*awsCF.DescribeStackEventsOutput, bool) bool) error {
+	out, err := mse.DescribeStackEvents(input)
+	if err != nil {
+		return err
+	}
+
+	fn(out, true)
+	return nil
 }
 
 func TestEventsTask(t *testing.T) {
@@ -37,8 +52,8 @@ func TestEventsTask(t *testing.T) {
 
 	eventer := &MockStackEventer{
 		AcctID: "acct-12345",
-		Events: map[string][]*cloudformation.StackEvent{
-			"event-stack": []*cloudformation.StackEvent{},
+		Events: map[string][]*awsCF.StackEvent{
+			"event-stack": []*awsCF.StackEvent{},
 		},
 	}
 

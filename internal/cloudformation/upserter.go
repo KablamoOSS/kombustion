@@ -7,7 +7,8 @@ import (
 
 type StackUpserter interface {
 	Open(string, string) string
-	StackEvents(string) ([]*StackEvent, error)
+	DescribeStackEvents(*awsCF.DescribeStackEventsInput) (*awsCF.DescribeStackEventsOutput, error)
+	DescribeStackEventsPages(*awsCF.DescribeStackEventsInput, func(*awsCF.DescribeStackEventsOutput, bool) bool) error
 	DescribeStacks(*awsCF.DescribeStacksInput) (*awsCF.DescribeStacksOutput, error)
 	CreateChangeSet(*awsCF.CreateChangeSetInput) (*awsCF.CreateChangeSetOutput, error)
 	DescribeChangeSet(*awsCF.DescribeChangeSetInput) (*awsCF.DescribeChangeSetOutput, error)

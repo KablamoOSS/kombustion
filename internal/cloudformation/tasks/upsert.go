@@ -183,7 +183,9 @@ func processUpsert(stackName, action string, client cloudformation.StackUpserter
 		status, err = client.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
 		checkError(err)
 
-		events, err := client.StackEvents(stackName)
+		events, err := client.DescribeStackEvents(
+			&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)},
+		)
 		checkError(err)
 
 		if len(status.Stacks) > 0 {
@@ -191,8 +193,8 @@ func processUpsert(stackName, action string, client cloudformation.StackUpserter
 			stack := status.Stacks[0]
 			stackStatus := *stack.StackStatus
 
-			if len(events) > 0 {
-				PrintStackEvent(events[0], false)
+			if len(events.StackEvents) > 0 {
+				PrintStackEvent(events.StackEvents[0], false)
 			}
 
 			if stackStatus != awsCF.StackStatusCreateInProgress &&

@@ -1,22 +1,13 @@
 package cloudformation
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
-	"time"
 )
 
 type StackEventer interface {
 	Open(string, string) string
-	StackEvents(string) ([]*StackEvent, error)
-}
-
-type StackEvent struct {
-	Time      time.Time
-	Type      string
-	LogicalID string
-	Status    string
-	Reason    string
+	DescribeStackEvents(*awsCF.DescribeStackEventsInput) (*awsCF.DescribeStackEventsOutput, error)
+	DescribeStackEventsPages(*awsCF.DescribeStackEventsInput, func(*awsCF.DescribeStackEventsOutput, bool) bool) error
 }
 
 type Wrapper struct {
@@ -35,35 +26,10 @@ func (cfe *Wrapper) Open(profile, region string) string {
 	return acctID
 }
 
-// TODO: Roll this back to a thin wrapper?
-func (cfe *Wrapper) StackEvents(stack string) ([]*StackEvent, error) {
-	events := make([]*StackEvent, 0)
+func (cfe *Wrapper) DescribeStackEvents(input *awsCF.DescribeStackEventsInput) (*awsCF.DescribeStackEventsOutput, error) {
+	return cfe.client.DescribeStackEvents(input)
+}
 
-	err := cfe.client.DescribeStackEventsPages(
-		&awsCF.DescribeStackEventsInput{
-			StackName: aws.String(stack),
-		},
-		func(page *awsCF.DescribeStackEventsOutput, lastPage bool) bool {
-			for _, event := range page.StackEvents {
-
-				stackEvent := &StackEvent{
-					Time:      *event.Timestamp,
-					Type:      *event.ResourceType,
-					LogicalID: *event.LogicalResourceId,
-					Status:    *event.ResourceStatus,
-					Reason:    *event.ResourceStatusReason,
-				}
-
-				events = append(events, stackEvent)
-			}
-
-			return !lastPage
-		},
-	)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return events, nil
+func (cfe *Wrapper) DescribeStackEventsPages(input *awsCF.DescribeStackEventsInput, fn func(*awsCF.DescribeStackEventsOutput, bool) bool) error {
+	return cfe.client.DescribeStackEventsPages(input, fn)
 }

@@ -33,14 +33,16 @@ func DeleteStack(cf *awsCF.CloudFormation, stackName, region string) {
 		status, err := cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
 		checkErrorDeletePoll(err)
 
-		events, err := eventer.StackEvents(stackName)
+		events, err := eventer.DescribeStackEvents(
+			&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)},
+		)
 		checkError(err)
 
 		if len(status.Stacks) > 0 {
 			stackStatus := *status.Stacks[0].StackStatus
 
-			if len(events) > 0 {
-				PrintStackEvent(events[0], false)
+			if len(events.StackEvents) > 0 {
+				PrintStackEvent(events.StackEvents[0], false)
 			}
 			if stackStatus == awsCF.StackStatusDeleteInProgress {
 				continue

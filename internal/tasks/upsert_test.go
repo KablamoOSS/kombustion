@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
-	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/coretest"
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
@@ -14,20 +13,39 @@ import (
 
 type MockStackUpserter struct {
 	AcctID  string
-	Events  map[string][]*cloudformation.StackEvent
+	Events  map[string][]*awsCF.StackEvent
 	Stacks  map[string]*awsCF.Stack
 	Changes map[string]*awsCF.ChangeSetSummary
 }
 
 func (msu *MockStackUpserter) Open(_, _ string) string {
-	msu.Events = make(map[string][]*cloudformation.StackEvent)
+	msu.Events = make(map[string][]*awsCF.StackEvent)
 	msu.Stacks = make(map[string]*awsCF.Stack)
 	msu.Changes = make(map[string]*awsCF.ChangeSetSummary)
 	return msu.AcctID
 }
 
-func (msu *MockStackUpserter) StackEvents(stackName string) ([]*cloudformation.StackEvent, error) {
-	return msu.Events[stackName], nil
+func (msu *MockStackUpserter) DescribeStackEvents(input *awsCF.DescribeStackEventsInput) (*awsCF.DescribeStackEventsOutput, error) {
+	events, ok := msu.Events[*input.StackName]
+	if !ok {
+		return nil, fmt.Errorf("stack %s not found", *input.StackName)
+	}
+
+	out := &awsCF.DescribeStackEventsOutput{
+		StackEvents: events,
+	}
+
+	return out, nil
+}
+
+func (msu *MockStackUpserter) DescribeStackEventsPages(input *awsCF.DescribeStackEventsInput, fn func(*awsCF.DescribeStackEventsOutput, bool) bool) error {
+	out, err := msu.DescribeStackEvents(input)
+	if err != nil {
+		return err
+	}
+
+	fn(out, true)
+	return nil
 }
 
 func (msu *MockStackUpserter) DescribeStacks(input *awsCF.DescribeStacksInput) (*awsCF.DescribeStacksOutput, error) {
@@ -134,6 +152,7 @@ func (msu *MockStackUpserter) ExecuteChangeSet(input *awsCF.ExecuteChangeSetInpu
 			StackName:   change.StackName,
 			StackStatus: aws.String("CREATE_IN_PROGRESS"),
 		}
+		msu.Events[*change.StackName] = []*awsCF.StackEvent{}
 	} else {
 		stack.StackStatus = aws.String("UPDATE_IN_PROGRESS")
 	}

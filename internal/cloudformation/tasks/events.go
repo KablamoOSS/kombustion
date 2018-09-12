@@ -5,6 +5,8 @@ import (
 
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
+	"github.com/aws/aws-sdk-go/aws"
+	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/ttacon/chalk"
 )
 
@@ -13,16 +15,18 @@ var lineFormat = "%-19v | %-35v | %-40v | %-50v | %-30v "
 // PrintStackEvents outputs the events of a stack
 // TODO: add flags to allow printing all events, and default only to recent events
 func PrintStackEvents(eventer cloudformation.StackEventer, stackName string) {
-	events, err := eventer.StackEvents(stackName)
+	out, err := eventer.DescribeStackEvents(
+		&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)},
+	)
 	checkError(err)
 
 	printer.Step(fmt.Sprintf("Events for %s:", stackName))
 
 	PrintStackEventHeader()
 
-	for i, event := range events {
+	for i, event := range out.StackEvents {
 		var isLast bool
-		if i+1 == len(events) {
+		if i+1 == len(out.StackEvents) {
 			isLast = true
 		}
 		PrintStackEvent(event, isLast)
@@ -47,12 +51,12 @@ func PrintStackEventHeader() {
 }
 
 // PrintStackEvent prints a single event
-func PrintStackEvent(event *cloudformation.StackEvent, isLast bool) {
-	timeStamp := event.Time.Format("2006-01-02 15:04:05")
-	resourceStatus := event.Status
-	resourceType := event.Type
-	logicalResourceID := event.LogicalID
-	resourceStatusReason := event.Reason
+func PrintStackEvent(event *awsCF.StackEvent, isLast bool) {
+	timeStamp := event.Timestamp.Format("2006-01-02 15:04:05")
+	resourceStatus := event.ResourceStatus
+	resourceType := event.ResourceType
+	logicalResourceID := event.LogicalResourceId
+	resourceStatusReason := event.ResourceStatusReason
 
 	printer.SubStep(
 		fmt.Sprintf(
