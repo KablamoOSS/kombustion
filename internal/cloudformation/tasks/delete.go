@@ -12,17 +12,15 @@ import (
 )
 
 // DeleteStack removes a cloudformation stack
-func DeleteStack(cf *awsCF.CloudFormation, stackName, region string) {
+func DeleteStack(client cloudformation.StackDeleter, stackName, region string) {
 	printer.Step(fmt.Sprintf("Delete Stack %s:", stackName))
 
 	//See if the stack exists to begin with
-	_, err := cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
+	_, err := client.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
 	checkError(err)
 
-	_, err = cf.DeleteStack(&awsCF.DeleteStackInput{StackName: aws.String(stackName)})
+	_, err = client.DeleteStack(&awsCF.DeleteStackInput{StackName: aws.String(stackName)})
 	checkError(err)
-
-	eventer := cloudformation.NewWrapper(cf)
 
 	// status polling
 	PrintStackEventHeader()
@@ -30,10 +28,10 @@ func DeleteStack(cf *awsCF.CloudFormation, stackName, region string) {
 	for {
 		printer.Progress("Deleting")
 		time.Sleep(2 * time.Second)
-		status, err := cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
+		status, err := client.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
 		checkErrorDeletePoll(err)
 
-		events, err := eventer.DescribeStackEvents(
+		events, err := client.DescribeStackEvents(
 			&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)},
 		)
 		checkError(err)
@@ -52,7 +50,7 @@ func DeleteStack(cf *awsCF.CloudFormation, stackName, region string) {
 	}
 
 	// Make sure delete worked
-	_, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
+	_, err = client.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
 	if err != nil {
 		checkErrorDeletePoll(err)
 	} else {

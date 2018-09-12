@@ -17,15 +17,23 @@ type StackEventer interface {
 // interface.
 type StackUpserter interface {
 	Open(string, string) string
+	CreateChangeSet(*awsCF.CreateChangeSetInput) (*awsCF.CreateChangeSetOutput, error)
+	DeleteChangeSet(*awsCF.DeleteChangeSetInput) (*awsCF.DeleteChangeSetOutput, error)
+	DeleteStack(*awsCF.DeleteStackInput) (*awsCF.DeleteStackOutput, error)
+	DescribeChangeSet(*awsCF.DescribeChangeSetInput) (*awsCF.DescribeChangeSetOutput, error)
 	DescribeStackEvents(*awsCF.DescribeStackEventsInput) (*awsCF.DescribeStackEventsOutput, error)
 	DescribeStackEventsPages(*awsCF.DescribeStackEventsInput, func(*awsCF.DescribeStackEventsOutput, bool) bool) error
 	DescribeStacks(*awsCF.DescribeStacksInput) (*awsCF.DescribeStacksOutput, error)
-	CreateChangeSet(*awsCF.CreateChangeSetInput) (*awsCF.CreateChangeSetOutput, error)
-	DescribeChangeSet(*awsCF.DescribeChangeSetInput) (*awsCF.DescribeChangeSetOutput, error)
-	WaitUntilChangeSetCreateComplete(*awsCF.DescribeChangeSetInput) error
-	DeleteChangeSet(*awsCF.DeleteChangeSetInput) (*awsCF.DeleteChangeSetOutput, error)
-	DeleteStack(*awsCF.DeleteStackInput) (*awsCF.DeleteStackOutput, error)
 	ExecuteChangeSet(*awsCF.ExecuteChangeSetInput) (*awsCF.ExecuteChangeSetOutput, error)
+	WaitUntilChangeSetCreateComplete(*awsCF.DescribeChangeSetInput) error
+}
+
+type StackDeleter interface {
+	Open(string, string) string
+	DeleteStack(*awsCF.DeleteStackInput) (*awsCF.DeleteStackOutput, error)
+	DescribeStackEvents(*awsCF.DescribeStackEventsInput) (*awsCF.DescribeStackEventsOutput, error)
+	DescribeStackEventsPages(*awsCF.DescribeStackEventsInput, func(*awsCF.DescribeStackEventsOutput, bool) bool) error
+	DescribeStacks(*awsCF.DescribeStacksInput) (*awsCF.DescribeStacksOutput, error)
 }
 
 type Wrapper struct {

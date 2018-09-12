@@ -32,12 +32,14 @@ func Delete(c *cli.Context) {
 		)
 	}
 
+	client := &cloudformation.Wrapper{}
 	profile := c.GlobalString("profile")
 	region := c.String("region")
 	envName := c.String("env")
 	stackName := c.String("stackName")
 
 	taskDelete(
+		client,
 		objectStore,
 		fileName,
 		profile,
@@ -48,6 +50,7 @@ func Delete(c *cli.Context) {
 }
 
 func taskDelete(
+	client cloudformation.StackDeleter,
 	objectStore core.ObjectStore,
 	templatePath string,
 	profileName string,
@@ -71,7 +74,7 @@ func taskDelete(
 		}
 	}
 
-	acctID, cf := tasks.GetCloudformationClient(profileName, region)
+	acctID := client.Open(profileName, region)
 	if env, ok := manifestFile.Environments[envName]; ok {
 		if !env.IsWhitelistedAccount(acctID) {
 			printer.Fatal(
@@ -83,7 +86,7 @@ func taskDelete(
 	}
 
 	tasks.DeleteStack(
-		cf,
+		client,
 		fullStackName,
 		region,
 	)
