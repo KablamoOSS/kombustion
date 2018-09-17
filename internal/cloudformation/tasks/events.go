@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/ttacon/chalk"
@@ -13,17 +14,19 @@ var lineFormat = "%-19v | %-35v | %-40v | %-50v | %-30v "
 
 // PrintStackEvents outputs the events of a stack
 // TODO: add flags to allow printing all events, and default only to recent events
-func PrintStackEvents(cf *awsCF.CloudFormation, stackName string) {
-	status, err := cf.DescribeStackEvents(&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)})
+func PrintStackEvents(eventer cloudformation.StackEventer, stackName string) {
+	out, err := eventer.DescribeStackEvents(
+		&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)},
+	)
 	checkError(err)
 
 	printer.Step(fmt.Sprintf("Events for %s:", stackName))
 
 	PrintStackEventHeader()
 
-	for i, event := range status.StackEvents {
+	for i, event := range out.StackEvents {
 		var isLast bool
-		if i+1 == len(status.StackEvents) {
+		if i+1 == len(out.StackEvents) {
 			isLast = true
 		}
 		PrintStackEvent(event, isLast)
@@ -49,26 +52,11 @@ func PrintStackEventHeader() {
 
 // PrintStackEvent prints a single event
 func PrintStackEvent(event *awsCF.StackEvent, isLast bool) {
-	var timeStamp,
-		resourceStatus,
-		resourceType,
-		logicalResourceID,
-		resourceStatusReason string
-	if event.Timestamp != nil {
-		timeStamp = event.Timestamp.Format("2006-01-02 15:04:05")
-	}
-	if event.ResourceStatus != nil {
-		resourceStatus = *event.ResourceStatus
-	}
-	if event.ResourceType != nil {
-		resourceType = *event.ResourceType
-	}
-	if event.LogicalResourceId != nil {
-		logicalResourceID = *event.LogicalResourceId
-	}
-	if event.ResourceStatusReason != nil {
-		resourceStatusReason = *event.ResourceStatusReason
-	}
+	timeStamp := event.Timestamp.Format("2006-01-02 15:04:05")
+	resourceStatus := event.ResourceStatus
+	resourceType := event.ResourceType
+	logicalResourceID := event.LogicalResourceId
+	resourceStatusReason := event.ResourceStatusReason
 
 	printer.SubStep(
 		fmt.Sprintf(

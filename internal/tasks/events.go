@@ -25,23 +25,27 @@ func PrintEvents(c *cli.Context) {
 		)
 	}
 
+	eventer := &cloudformation.Wrapper{}
+
 	printEvents(
 		objectStore,
+		eventer,
 		fileName,
 		c.String("stack-name"),
-		c.String("region"),
-		c.GlobalString("profile"),
 		c.GlobalString("environment"),
+		c.GlobalString("region"),
+		c.String("profile"),
 	)
 }
 
 func printEvents(
 	objectStore core.ObjectStore,
+	eventer cloudformation.StackEventer,
 	templatePath string,
 	stackName string,
-	region string,
-	profileName string,
 	envName string,
+	profile string,
+	region string,
 ) {
 	printer.Progress("Kombusting")
 
@@ -56,8 +60,7 @@ func printEvents(
 			region = manifestFile.Region
 		}
 	}
-
-	acctID, cfClient := tasks.GetCloudformationClient(profileName, region)
+	acctID := eventer.Open(profile, region)
 
 	if env, ok := manifestFile.Environments[envName]; ok {
 		if !env.IsAllowlistedAccount(acctID) {
@@ -76,5 +79,5 @@ func printEvents(
 		stackName,
 	)
 
-	tasks.PrintStackEvents(cfClient, stackName)
+	tasks.PrintStackEvents(eventer, stackName)
 }
