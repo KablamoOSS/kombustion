@@ -35,7 +35,7 @@ func Delete(c *cli.Context) {
 	client := &cloudformation.Wrapper{}
 	profile := c.GlobalString("profile")
 	region := c.String("region")
-	envName := c.String("env")
+	envName := c.String("environment")
 	stackName := c.String("stackName")
 
 	taskDelete(
@@ -76,10 +76,10 @@ func taskDelete(
 
 	acctID := client.Open(profileName, region)
 	if env, ok := manifestFile.Environments[envName]; ok {
-		if !env.IsWhitelistedAccount(acctID) {
+		if !env.IsAllowlistedAccount(acctID) {
 			printer.Fatal(
 				fmt.Errorf("Account %s is not allowed for environment %s", acctID, envName),
-				"Use whitelisted account, or add account to environment accounts in kombustion.yaml",
+				"Use allowlisted account, or add account to environment accounts in kombustion.yaml",
 				"",
 			)
 		}

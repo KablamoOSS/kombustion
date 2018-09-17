@@ -164,10 +164,10 @@ func upsert(
 	}
 
 	if env, ok := manifestFile.Environments[envName]; ok {
-		if !env.IsWhitelistedAccount(acctID) {
+		if !env.IsAllowlistedAccount(acctID) {
 			printer.Fatal(
 				fmt.Errorf("Account %s is not allowed for environment %s", acctID, envName),
-				fmt.Sprintf("Use whitelisted account, or add account %s to environment accounts in kombustion.yaml", acctID),
+				fmt.Sprintf("Use allowlisted account, or add account %s to environment accounts in kombustion.yaml", acctID),
 				"",
 			)
 		}
