@@ -95,7 +95,7 @@ func upsertStack(
 				"",
 			)
 			printer.SubStep("Cleaning up unused change set", 1, true, true)
-			_, err := cf.DeleteChangeSet(
+			_, err := client.DeleteChangeSet(
 				&awsCF.DeleteChangeSetInput{
 					ChangeSetName: changeSet.ChangeSetId,
 				},
@@ -108,7 +108,7 @@ func upsertStack(
 				)
 			}
 			printer.Stop()
-			os.Exit(1)
+			return
 		} else {
 			printer.Fatal(
 				fmt.Errorf("Cloudformation ChangeSet failed to create"),
