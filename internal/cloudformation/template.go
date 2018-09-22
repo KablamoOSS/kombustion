@@ -127,7 +127,7 @@ func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudform
 		Conditions:               mergeTemplates(config.Conditions, conditions),
 		Transform:                mergeTemplates(config.Transform, transform),
 		Mappings:                 mergeTemplates(config.Mappings, mappings),
-		Resources:                mergeResources(config.Resources, resources),
+		Resources:                resources, //mergeResources(config.Resources, resources),
 		Outputs:                  mergeTemplates(config.Outputs, outputs),
 	}
 
@@ -162,7 +162,6 @@ func processParsers(
 		// If this is a custom resource, pass it through without touching it
 		if templateResource.Type == "AWS::CloudFormation::CustomResource" ||
 			strings.HasPrefix(templateResource.Type, "Custom::") {
-			fmt.Println("templateResourceName: ", templateResourceName)
 			resources = mergeTemplatesWithError(
 				templateResourceName,
 				"aws-custom-resource",
