@@ -127,8 +127,11 @@ func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudform
 		Conditions:               mergeTemplates(config.Conditions, conditions),
 		Transform:                mergeTemplates(config.Transform, transform),
 		Mappings:                 mergeTemplates(config.Mappings, mappings),
-		Resources:                resources, //mergeResources(config.Resources, resources),
-		Outputs:                  mergeTemplates(config.Outputs, outputs),
+		// As we've processed all the resources through our parsers, we don't want to merge in the
+		// initial resources, as we will retain plugin definitions that don't map to
+		// cloudformation template resources
+		Resources: resources,
+		Outputs:   mergeTemplates(config.Outputs, outputs),
 	}
 
 	return compiledTemplate, nil
