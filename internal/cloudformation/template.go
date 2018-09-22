@@ -118,7 +118,7 @@ func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudform
 		parameters,
 		resources,
 		transform = processParsers(config.Resources, templateParsers)
-	fmt.Println(resources)
+
 	compiledTemplate = YamlCloudformation{
 		AWSTemplateFormatVersion: config.AWSTemplateFormatVersion,
 		Description:              config.Description,
