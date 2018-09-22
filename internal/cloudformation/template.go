@@ -162,7 +162,7 @@ func processParsers(
 		// If this is a custom resource, pass it through without touching it
 		if templateResource.Type == "AWS::CloudFormation::CustomResource" ||
 			strings.HasPrefix(templateResource.Type, "Custom::") {
-
+			fmt.Println("templateResourceName: ", templateResourceName)
 			resources = mergeTemplatesWithError(
 				templateResourceName,
 				"aws-custom-resource",
