@@ -22,6 +22,7 @@ func UpsertStackBody(
 	tags map[string]string,
 	confirm bool,
 ) {
+	fmt.Println(string(templateBody))
 	changeSetIn := &awsCF.CreateChangeSetInput{
 		Capabilities:  capabilities,
 		ChangeSetName: aws.String(fmt.Sprintf("%s-upsert", stackName)),
