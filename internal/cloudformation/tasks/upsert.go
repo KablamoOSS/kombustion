@@ -78,6 +78,7 @@ func upsertStack(
 	checkError(err)
 
 	printer.SubStep("Waiting for change set creation", 1, false, true)
+	printer.Progress("Creating")
 	describeChangeSetIn := &awsCF.DescribeChangeSetInput{
 		ChangeSetName: changeSetOut.Id,
 	}
