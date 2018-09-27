@@ -65,59 +65,86 @@ func TestGenerateYamlTemplate(t *testing.T) {
 				Metadata:                 types.TemplateObject{},
 				Parameters: types.TemplateObject{
 					"Environment": map[interface{}]interface{}{
-						"Type": "String", "Default": "UnknownEnvironment",
+						"Type":    "String",
+						"Default": "UnknownEnvironment",
 					},
 				},
 				Mappings:   types.TemplateObject{},
 				Conditions: types.TemplateObject{},
 				Transform:  types.TemplateObject{},
 				Resources: types.TemplateObject{
-					"MyDemoLogGroup": types.CfResource{
+					"MyDemoLogGroup4": resources.LogsLogGroup{
 						Type: "AWS::Logs::LogGroup",
-						Properties: map[interface{}]interface{}{"RetentionInDays": 1,
-							"LogGroupName": map[interface{}]interface{}{"Fn::Join": []interface{}{"-",
-								[]interface{}{"MyDemoLogGroup1",
-									map[interface{}]interface{}{"Ref": "Environment"},
+						Properties: resources.LogsLogGroupProperties{
+							LogGroupName: map[interface{}]interface{}{
+								"Fn::Join": []interface{}{
+									"-",
+									[]interface{}{
+										"MyDemoLogGroup4",
+										map[interface{}]interface{}{
+											"Ref": "Environment",
+										},
+									},
 								},
 							},
-							},
+							RetentionInDays: 1,
 						},
 						Condition: interface{}(nil),
 						Metadata:  interface{}(nil),
 						DependsOn: interface{}(nil)},
-					"MyDemoLogGroup2": types.CfResource{Type: "AWS::Logs::LogGroup",
-						Properties: map[interface{}]interface{}{"LogGroupName": map[interface{}]interface{}{"Fn::Join": []interface{}{"-",
-							[]interface{}{"MyDemoLogGroup2",
-								map[interface{}]interface{}{"Ref": "Environment"},
+					"MyDemoLogGroup": resources.LogsLogGroup{
+						Type: "AWS::Logs::LogGroup",
+						Properties: resources.LogsLogGroupProperties{
+							LogGroupName: map[interface{}]interface{}{
+								"Fn::Join": []interface{}{
+									"-", []interface{}{
+										"MyDemoLogGroup1",
+										map[interface{}]interface{}{
+											"Ref": "Environment",
+										},
+									},
+								},
 							},
+							RetentionInDays: 1,
 						},
-						},
-							"RetentionInDays": 1},
 						Condition: interface{}(nil),
 						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil)},
-					"MyDemoLogGroup3": types.CfResource{Type: "AWS::Logs::LogGroup",
-						Properties: map[interface{}]interface{}{"LogGroupName": map[interface{}]interface{}{"Fn::Join": []interface{}{"-",
-							[]interface{}{"MyDemoLogGroup3",
-								map[interface{}]interface{}{"Ref": "Environment"},
+						DependsOn: interface{}(nil)}, "MyDemoLogGroup2": resources.LogsLogGroup{
+						Type: "AWS::Logs::LogGroup", Properties: resources.LogsLogGroupProperties{
+							LogGroupName: map[interface{}]interface{}{
+								"Fn::Join": []interface{}{
+									"-", []interface{}{
+										"MyDemoLogGroup2",
+										map[interface{}]interface{}{
+											"Ref": "Environment",
+										},
+									},
+								},
 							},
+							RetentionInDays: 1,
 						},
-						},
-							"RetentionInDays": 1},
 						Condition: interface{}(nil),
 						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil)},
-					"MyDemoLogGroup4": types.CfResource{Type: "AWS::Logs::LogGroup",
-						Properties: map[interface{}]interface{}{"LogGroupName": map[interface{}]interface{}{"Fn::Join": []interface{}{"-",
-							[]interface{}{"MyDemoLogGroup4",
-								map[interface{}]interface{}{"Ref": "Environment"},
+						DependsOn: interface{}(nil)}, "MyDemoLogGroup3": resources.LogsLogGroup{
+						Type: "AWS::Logs::LogGroup",
+						Properties: resources.LogsLogGroupProperties{
+							LogGroupName: map[interface{}]interface{}{
+								"Fn::Join": []interface{}{
+									"-",
+									[]interface{}{
+										"MyDemoLogGroup3",
+										map[interface{}]interface{}{
+											"Ref": "Environment",
+										},
+									},
+								},
 							},
+							RetentionInDays: 1,
 						},
-						},
-							"RetentionInDays": 1},
 						Condition: interface{}(nil),
 						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil)},
+						DependsOn: interface{}(nil),
+					},
 				},
 				Outputs: types.TemplateObject{},
 			},
@@ -142,54 +169,87 @@ func TestGenerateYamlTemplate(t *testing.T) {
 				Conditions: types.TemplateObject{},
 				Transform:  types.TemplateObject{},
 				Resources: types.TemplateObject{
-					"MyDemoLogGroup": types.CfResource{
+					"MyDemoLogGroup2": resources.LogsLogGroup{
 						Type: "AWS::Logs::LogGroup",
-						Properties: map[interface{}]interface{}{"RetentionInDays": 1,
-							"LogGroupName": map[interface{}]interface{}{"Fn::Join": []interface{}{"-",
-								[]interface{}{"MyDemoLogGroup1",
-									map[interface{}]interface{}{"Ref": "Environment"},
+						Properties: resources.LogsLogGroupProperties{
+							LogGroupName: map[interface{}]interface{}{
+								"Fn::Join": []interface{}{"-", []interface{}{
+									"MyDemoLogGroup2", map[interface{}]interface{}{
+										"Ref": "Environment",
+									},
+								},
 								},
 							},
+							RetentionInDays: 1,
+						},
+						Condition: interface{}(nil),
+						Metadata:  interface{}(nil),
+						DependsOn: interface{}(nil),
+					},
+					"MyDemoLogGroup3": resources.LogsLogGroup{
+						Type: "AWS::Logs::LogGroup",
+						Properties: resources.LogsLogGroupProperties{
+							LogGroupName: map[interface{}]interface{}{
+								"Fn::Join": []interface{}{"-", []interface{}{
+									"MyDemoLogGroup3",
+									map[interface{}]interface{}{
+										"Ref": "Environment",
+									},
+								},
+								},
 							},
+							RetentionInDays: 1,
+						},
+						Condition: interface{}(nil),
+						Metadata:  interface{}(nil),
+						DependsOn: interface{}(nil),
+					},
+					"MyDemoLogGroup4": resources.LogsLogGroup{
+						Type: "AWS::Logs::LogGroup",
+						Properties: resources.LogsLogGroupProperties{
+							LogGroupName: map[interface{}]interface{}{
+								"Fn::Join": []interface{}{
+									"-",
+									[]interface{}{
+										"MyDemoLogGroup4",
+										map[interface{}]interface{}{"Ref": "Environment"},
+									},
+								},
+							},
+							RetentionInDays: 1,
 						},
 						Condition: interface{}(nil),
 						Metadata:  interface{}(nil),
 						DependsOn: interface{}(nil)},
-					"MyDemoLogGroup2": types.CfResource{Type: "AWS::Logs::LogGroup",
-						Properties: map[interface{}]interface{}{"LogGroupName": map[interface{}]interface{}{"Fn::Join": []interface{}{"-",
-							[]interface{}{"MyDemoLogGroup2",
-								map[interface{}]interface{}{"Ref": "Environment"},
+					"MyDemoLogGroup": resources.LogsLogGroup{
+						Type: "AWS::Logs::LogGroup",
+						Properties: resources.LogsLogGroupProperties{
+							LogGroupName: map[interface{}]interface{}{
+								"Fn::Join": []interface{}{"-",
+									[]interface{}{"MyDemoLogGroup1",
+										map[interface{}]interface{}{"Ref": "Environment"},
+									},
+								},
 							},
+							RetentionInDays: 1,
 						},
-						},
-							"RetentionInDays": 1},
 						Condition: interface{}(nil),
 						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil)},
-					"MyDemoLogGroup3": types.CfResource{Type: "AWS::Logs::LogGroup",
-						Properties: map[interface{}]interface{}{"LogGroupName": map[interface{}]interface{}{"Fn::Join": []interface{}{"-",
-							[]interface{}{"MyDemoLogGroup3",
-								map[interface{}]interface{}{"Ref": "Environment"},
-							},
-						},
-						},
-							"RetentionInDays": 1},
-						Condition: interface{}(nil),
-						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil)},
-					"MyDemoLogGroup4": types.CfResource{Type: "AWS::Logs::LogGroup",
-						Properties: map[interface{}]interface{}{"LogGroupName": map[interface{}]interface{}{"Fn::Join": []interface{}{"-",
-							[]interface{}{"MyDemoLogGroup4",
-								map[interface{}]interface{}{"Ref": "Environment"},
-							},
-						},
-						},
-							"RetentionInDays": 1},
-						Condition: interface{}(nil),
-						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil)},
+						DependsOn: interface{}(nil),
+					},
 				},
 				Outputs: types.TemplateObject{
+					"MyDemoLogGroup2": types.TemplateObject{
+						"Description": "MyDemoLogGroup2 Object",
+						"Value": map[string]interface{}{
+							"Ref": "MyDemoLogGroup2",
+						},
+						"Export": map[string]interface{}{
+							"Name": map[string]interface{}{
+								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup2",
+							},
+						},
+					},
 					"MyDemoLogGroup3": types.TemplateObject{
 						"Description": "MyDemoLogGroup3 Object",
 						"Value": map[string]interface{}{
@@ -202,76 +262,23 @@ func TestGenerateYamlTemplate(t *testing.T) {
 						},
 					},
 					"MyDemoLogGroup4": types.TemplateObject{
-						"Description": "MyDemoLogGroup4 Object",
-						"Value": map[string]interface{}{
-							"Ref": "MyDemoLogGroup4",
-						},
 						"Export": map[string]interface{}{
 							"Name": map[string]interface{}{
 								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup4",
 							},
+						}, "Description": "MyDemoLogGroup4 Object",
+						"Value": map[string]interface{}{
+							"Ref": "MyDemoLogGroup4",
 						},
-					},
-					"MyDemoLogGroup4Arn": types.TemplateObject{
-						"Value": map[string]interface{}{"Fn::GetAtt": []string{"MyDemoLogGroup4", "Arn"}},
-						"Export": map[string]interface{}{
-							"Name": map[string]interface{}{
-								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup4-Arn",
-							},
-						},
-						"Description": "MyDemoLogGroup4 Object",
 					},
 					"MyDemoLogGroup": types.TemplateObject{
-						"Export": map[string]interface{}{
-							"Name": map[string]interface{}{
-								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup",
-							},
-						},
 						"Description": "MyDemoLogGroup Object",
 						"Value": map[string]interface{}{
 							"Ref": "MyDemoLogGroup",
 						},
-					},
-					"MyDemoLogGroupArn": types.TemplateObject{
-						"Description": "MyDemoLogGroup Object",
-						"Value": map[string]interface{}{
-							"Fn::GetAtt": []string{"MyDemoLogGroup", "Arn"},
-						},
 						"Export": map[string]interface{}{
 							"Name": map[string]interface{}{
-								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup-Arn",
-							},
-						},
-					},
-					"MyDemoLogGroup2": types.TemplateObject{
-						"Description": "MyDemoLogGroup2 Object",
-						"Value": map[string]interface{}{
-							"Ref": "MyDemoLogGroup2",
-						},
-						"Export": map[string]interface{}{
-							"Name": map[string]interface{}{
-								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup2",
-							},
-						},
-					},
-					"MyDemoLogGroup2Arn": types.TemplateObject{
-						"Description": "MyDemoLogGroup2 Object",
-						"Value": map[string]interface{}{
-							"Fn::GetAtt": []string{"MyDemoLogGroup2", "Arn"},
-						},
-						"Export": map[string]interface{}{
-							"Name": map[string]interface{}{
-								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup2-Arn",
-							},
-						},
-					},
-					"MyDemoLogGroup3Arn": types.TemplateObject{"Description": "MyDemoLogGroup3 Object",
-						"Value": map[string]interface{}{
-							"Fn::GetAtt": []string{"MyDemoLogGroup3", "Arn"},
-						},
-						"Export": map[string]interface{}{
-							"Name": map[string]interface{}{
-								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup3-Arn",
+								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup",
 							},
 						},
 					},
