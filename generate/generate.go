@@ -6,7 +6,6 @@ import (
 	"go/format"
 	"io/ioutil"
 	"log"
-	"regexp"
 	"strings"
 	"text/template"
 )
@@ -27,14 +26,6 @@ func buildYamlParsers(cfnSpec CfnSpec) {
 	resourceParsersObject := buildParserMapping(cfnSpec, "resources")
 	filePath := fmt.Sprintf("%vresources.go", parsersDir)
 	formatted, err := format.Source([]byte(resourceParsersObject))
-	checkError(err)
-	err = ioutil.WriteFile(filePath, formatted, 0644)
-	checkError(err)
-
-	log.Println("Generate Output Map")
-	outputParsersObject := buildParserMapping(cfnSpec, "outputs")
-	filePath = fmt.Sprintf("%voutput.go", parsersDir)
-	formatted, err = format.Source([]byte(outputParsersObject))
 	checkError(err)
 	err = ioutil.WriteFile(filePath, formatted, 0644)
 	checkError(err)
@@ -62,18 +53,6 @@ func buildYamlParsers(cfnSpec CfnSpec) {
 		checkError(err)
 
 		resourceTypes = append(resourceTypes, titleCaseNameFromCfnType(k))
-	}
-
-	log.Println("Generate Outputs")
-	// Output parsers
-	for k, cfnType := range cfnSpec.ResourceTypes {
-		outputObject := buildOutputYaml(k, cfnType)
-		filePath := fmt.Sprintf("%v%v.go", outputsDir, fileNameFromCfnType(k))
-		formatted, err := format.Source([]byte(outputObject))
-		checkError(err)
-		err = ioutil.WriteFile(filePath, formatted, 0644)
-
-		checkError(err)
 	}
 }
 
@@ -149,25 +128,6 @@ func buildResourceYaml(obj string, cfnType CfnType) string {
 		"NeedsFmtImport":        needsFmtImport(cfnType),
 		"NeedsPropertiesImport": needsPropertiesImport(cfnType),
 		"MainPackageName":       mainPackageName,
-	})
-	checkError(err)
-	return buf.String()
-}
-
-func buildOutputYaml(obj string, cfnType CfnType) string {
-	alnumRegex, _ := regexp.Compile("[^a-zA-Z0-9]+")
-	attributes := make(map[string]string)
-	for _, attName := range sortAttributeNames(cfnType.Attributes) {
-		attributes[attName] = alnumRegex.ReplaceAllString(attName, "")
-	}
-
-	buf := bytes.NewBufferString("")
-	t := template.Must(template.New("").Parse(outputTemplate))
-	err := t.Execute(buf, map[string]interface{}{
-		"ResourceName":    titleCaseNameFromCfnType(obj),
-		"Attributes":      attributes,
-		"Documentation":   cfnType.Documentation,
-		"MainPackageName": mainPackageName,
 	})
 	checkError(err)
 	return buf.String()

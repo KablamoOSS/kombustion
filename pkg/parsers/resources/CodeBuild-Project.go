@@ -61,6 +61,8 @@ func ParseCodeBuildProject(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource CodeBuildProject
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -75,6 +77,22 @@ func ParseCodeBuildProject(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-CodeBuildProject-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

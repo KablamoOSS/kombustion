@@ -53,6 +53,8 @@ func ParseElasticLoadBalancingV2Listener(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource ElasticLoadBalancingV2Listener
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -67,6 +69,22 @@ func ParseElasticLoadBalancingV2Listener(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-ElasticLoadBalancingV2Listener-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

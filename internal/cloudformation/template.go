@@ -26,24 +26,16 @@ func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudform
 	// Setup out parser variables
 	var templateParsers,
 		coreParsers,
-		pluginParsers,
-		coreOutputParsers map[string]types.ParserFunc
+		pluginParsers map[string]types.ParserFunc
 
 	templateParsers = make(map[string]types.ParserFunc)
 	coreParsers = make(map[string]types.ParserFunc)
 	pluginParsers = make(map[string]types.ParserFunc)
-	coreOutputParsers = make(map[string]types.ParserFunc)
 
 	// Load core AWS parsers for resources
 	coreParsers = parsers.GetParsersResources()
 
 	templateParsers = mergeParsers(templateParsers, coreParsers)
-
-	// If we're generating outputs, load the output parsers
-	if params.GenerateDefaultOutputs {
-		coreOutputParsers = parsers.GetParsersOutputs()
-		templateParsers = mergeParsers(templateParsers, coreOutputParsers)
-	}
 
 	// Load the parsers from Plugins
 	pluginParsers = plugins.ExtractParsersFromPlugins(params.Plugins)
@@ -117,7 +109,7 @@ func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudform
 		outputs,
 		parameters,
 		resources,
-		transform = processParsers(config.Resources, templateParsers)
+		transform = processParsers(config.Resources, templateParsers, params.GenerateDefaultOutputs)
 
 	compiledTemplate = YamlCloudformation{
 		AWSTemplateFormatVersion: config.AWSTemplateFormatVersion,
@@ -127,8 +119,11 @@ func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudform
 		Conditions:               mergeTemplates(config.Conditions, conditions),
 		Transform:                mergeTemplates(config.Transform, transform),
 		Mappings:                 mergeTemplates(config.Mappings, mappings),
-		Resources:                mergeResources(config.Resources, resources),
-		Outputs:                  mergeTemplates(config.Outputs, outputs),
+		// As we've processed all the resources through our parsers, we don't want to merge in the
+		// initial resources, as we will retain plugin definitions that don't map to
+		// cloudformation template resources
+		Resources: resources,
+		Outputs:   mergeTemplates(config.Outputs, outputs),
 	}
 
 	return compiledTemplate, nil
@@ -139,6 +134,7 @@ func GenerateYamlTemplate(params GenerateParams) (compiledTemplate YamlCloudform
 func processParsers(
 	templateResources types.ResourceMap,
 	parserFuncs map[string]types.ParserFunc,
+	generateDefaultOutputs bool,
 ) (
 	conditions types.TemplateObject,
 	metadata types.TemplateObject,
@@ -158,11 +154,24 @@ func processParsers(
 
 	// Loop through each Resource in the template, and parse it with a ParserFunc
 	for templateResourceName, templateResource := range templateResources {
+		var willMergeOutputs bool
+
+		if strings.HasPrefix(templateResource.Type, "AWS::") {
+			if generateDefaultOutputs {
+				// if the flag is set merge the default generated outputs in
+				willMergeOutputs = true
+			} else {
+				// If the flag is not set default behaviour is to ignore outputs
+				willMergeOutputs = false
+			}
+		} else {
+			// If this is a plugin merge the outputs
+			willMergeOutputs = true
+		}
 
 		// If this is a custom resource, pass it through without touching it
 		if templateResource.Type == "AWS::CloudFormation::CustomResource" ||
 			strings.HasPrefix(templateResource.Type, "Custom::") {
-
 			resources = mergeTemplatesWithError(
 				templateResourceName,
 				"aws-custom-resource",
@@ -243,13 +252,15 @@ func processParsers(
 				parserMappings,
 			)
 
-			outputs = mergeTemplatesWithError(
-				templateResourceName,
-				parserSource,
-				templateResource.Type,
-				outputs,
-				parserOutputs,
-			)
+			if willMergeOutputs {
+				outputs = mergeTemplatesWithError(
+					templateResourceName,
+					parserSource,
+					templateResource.Type,
+					outputs,
+					parserOutputs,
+				)
+			}
 
 			parameters = mergeTemplatesWithError(
 				templateResourceName,

@@ -49,6 +49,8 @@ func ParseIoTPolicy(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource IoTPolicy
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -63,6 +65,22 @@ func ParseIoTPolicy(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-IoTPolicy-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

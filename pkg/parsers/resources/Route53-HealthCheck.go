@@ -50,6 +50,8 @@ func ParseRoute53HealthCheck(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource Route53HealthCheck
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -64,6 +66,22 @@ func ParseRoute53HealthCheck(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-Route53HealthCheck-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

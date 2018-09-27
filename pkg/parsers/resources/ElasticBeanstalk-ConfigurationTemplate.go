@@ -55,6 +55,8 @@ func ParseElasticBeanstalkConfigurationTemplate(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource ElasticBeanstalkConfigurationTemplate
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -69,6 +71,22 @@ func ParseElasticBeanstalkConfigurationTemplate(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-ElasticBeanstalkConfigurationTemplate-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

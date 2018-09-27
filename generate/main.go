@@ -13,7 +13,6 @@ import (
 const typesDir = "./pkg/parsers/types/"
 const parsersDir = "./pkg/parsers/"
 const propertiesDir = "./pkg/parsers/properties/"
-const outputsDir = "./pkg/parsers/outputs/"
 const resourcesDir = "./pkg/parsers/resources/"
 
 const mainPackageName = "parsers"
@@ -25,7 +24,6 @@ func init() {
 	os.RemoveAll(parsersDir)
 
 	os.Mkdir(parsersDir, 0744)
-	os.Mkdir(outputsDir, 0744)
 	os.Mkdir(propertiesDir, 0744)
 	os.Mkdir(resourcesDir, 0744)
 	log.Println("Created directories")

@@ -52,6 +52,8 @@ func ParseWAFWebACL(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource WAFWebACL
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -66,6 +68,22 @@ func ParseWAFWebACL(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-WAFWebACL-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

@@ -50,6 +50,8 @@ func ParseEC2Host(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource EC2Host
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -64,6 +66,22 @@ func ParseEC2Host(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-EC2Host-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }
