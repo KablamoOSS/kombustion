@@ -6,6 +6,7 @@ import (
 	"time"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
@@ -18,7 +19,7 @@ func UpsertStackBody(
 	parameters []*awsCF.Parameter,
 	capabilities []*string,
 	stackName string,
-	cf *awsCF.CloudFormation,
+	client cloudformation.StackUpserter,
 	tags map[string]string,
 	confirm bool,
 ) {
@@ -31,7 +32,7 @@ func UpsertStackBody(
 		Tags:          formatTags(tags),
 		TemplateBody:  aws.String(string(templateBody)),
 	}
-	upsertStack(cf, changeSetIn, confirm)
+	upsertStack(client, changeSetIn, confirm)
 }
 
 func UpsertStackURL(
@@ -39,7 +40,7 @@ func UpsertStackURL(
 	parameters []*awsCF.Parameter,
 	capabilities []*string,
 	stackName string,
-	cf *awsCF.CloudFormation,
+	client cloudformation.StackUpserter,
 	tags map[string]string,
 	confirm bool,
 ) {
@@ -52,11 +53,11 @@ func UpsertStackURL(
 		Tags:          formatTags(tags),
 		TemplateURL:   aws.String(templateURL),
 	}
-	upsertStack(cf, changeSetIn, confirm)
+	upsertStack(client, changeSetIn, confirm)
 }
 
 func upsertStack(
-	cf *awsCF.CloudFormation,
+	client cloudformation.StackUpserter,
 	changeSetIn *awsCF.CreateChangeSetInput,
 	confirm bool,
 ) {
@@ -64,7 +65,7 @@ func upsertStack(
 	var err error
 	var action string
 
-	describeStacksOut, err := cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: changeSetIn.StackName})
+	describeStacksOut, err := client.DescribeStacks(&awsCF.DescribeStacksInput{StackName: changeSetIn.StackName})
 	if err == nil && *describeStacksOut.Stacks[0].StackStatus != "REVIEW_IN_PROGRESS" {
 		action = "Updating"
 		changeSetIn.ChangeSetType = aws.String("UPDATE")
@@ -74,7 +75,7 @@ func upsertStack(
 	}
 
 	printer.Step("Creating change set")
-	changeSetOut, err := cf.CreateChangeSet(changeSetIn)
+	changeSetOut, err := client.CreateChangeSet(changeSetIn)
 	checkError(err)
 
 	printer.SubStep("Waiting for change set creation", 1, false, true)
@@ -82,9 +83,9 @@ func upsertStack(
 	describeChangeSetIn := &awsCF.DescribeChangeSetInput{
 		ChangeSetName: changeSetOut.Id,
 	}
-	cf.WaitUntilChangeSetCreateComplete(describeChangeSetIn)
+	client.WaitUntilChangeSetCreateComplete(describeChangeSetIn)
 
-	changeSet, err := cf.DescribeChangeSet(describeChangeSetIn)
+	changeSet, err := client.DescribeChangeSet(describeChangeSetIn)
 	checkError(err)
 
 	if *changeSet.Status == "FAILED" {
@@ -157,7 +158,7 @@ func upsertStack(
 			printer.Step("Aborting upsertion")
 			if *changeSetIn.ChangeSetType == "UPDATE" {
 				printer.SubStep("Cleaning up unused change set", 1, true, true)
-				_, err := cf.DeleteChangeSet(
+				_, err := client.DeleteChangeSet(
 					&awsCF.DeleteChangeSetInput{
 						ChangeSetName: changeSet.ChangeSetId,
 					},
@@ -171,7 +172,7 @@ func upsertStack(
 				}
 			} else if *changeSetIn.ChangeSetType == "CREATE" {
 				printer.SubStep("Cleaning up pending stack", 1, true, true)
-				_, err := cf.DeleteStack(
+				_, err := client.DeleteStack(
 					&awsCF.DeleteStackInput{
 						StackName: changeSetIn.StackName,
 					},
@@ -193,13 +194,13 @@ func upsertStack(
 	executeCSIn := &awsCF.ExecuteChangeSetInput{
 		ChangeSetName: changeSetOut.Id,
 	}
-	_, err = cf.ExecuteChangeSet(executeCSIn)
+	_, err = client.ExecuteChangeSet(executeCSIn)
 	checkError(err)
 
-	processUpsert(*changeSetIn.StackName, action, cf)
+	processUpsert(*changeSetIn.StackName, action, client)
 }
 
-func processUpsert(stackName, action string, cf *awsCF.CloudFormation) {
+func processUpsert(stackName, action string, client cloudformation.StackUpserter) {
 	var err error
 	var status *awsCF.DescribeStacksOutput
 
@@ -207,10 +208,12 @@ func processUpsert(stackName, action string, cf *awsCF.CloudFormation) {
 	for {
 		printer.Progress(action)
 		time.Sleep(2 * time.Second)
-		status, err = cf.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
+		status, err = client.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
 		checkError(err)
 
-		events, err := cf.DescribeStackEvents(&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)})
+		events, err := client.DescribeStackEvents(
+			&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)},
+		)
 		checkError(err)
 
 		if len(status.Stacks) > 0 {
