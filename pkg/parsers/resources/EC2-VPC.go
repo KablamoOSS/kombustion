@@ -52,6 +52,8 @@ func ParseEC2VPC(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource EC2VPC
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -66,6 +68,22 @@ func ParseEC2VPC(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-EC2VPC-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

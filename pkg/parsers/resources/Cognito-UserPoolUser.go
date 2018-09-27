@@ -54,6 +54,8 @@ func ParseCognitoUserPoolUser(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource CognitoUserPoolUser
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -68,6 +70,22 @@ func ParseCognitoUserPoolUser(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-CognitoUserPoolUser-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

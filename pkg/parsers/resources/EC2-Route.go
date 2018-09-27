@@ -56,6 +56,8 @@ func ParseEC2Route(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource EC2Route
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -70,6 +72,22 @@ func ParseEC2Route(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-EC2Route-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

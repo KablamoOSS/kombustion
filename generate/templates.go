@@ -111,6 +111,8 @@ func Parse{{$ResourceName}}(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource {{$ResourceName}}
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -125,6 +127,53 @@ func Parse{{$ResourceName}}(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	{{if .Attributes}}
+	var resource, output types.TemplateObject
+
+	err := yaml.Unmarshal([]byte(data), &resource)
+
+	if err != nil {
+		errors = append(errors, err)
+		return
+	}
+
+	{{end}}
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-{{$ResourceName}}-" + name,
+				},
+			},
+		},
+	}
+
+	{{range $attrName, $attr := .Attributes}}
+	output = types.TemplateObject{
+		"Description": name + " Object",
+		"Value": map[string]interface{}{
+			"Fn::GetAtt": []string{name, "{{$attrName}}"},
+		},
+		"Export": map[string]interface{}{
+			"Name": map[string]interface{}{
+				"Fn::Sub": "${AWS::StackName}-{{$ResourceName}}-" + name + "-{{$attr}}",
+			},
+		},
+	}
+
+	if condition, ok := resource["Condition"]; ok {
+		output["Condition"] = condition
+	}
+
+	outputs[name+"{{$attr}}"] = output
+	{{end}}
 
 	return
 }

@@ -50,6 +50,8 @@ func ParseEC2VolumeAttachment(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource EC2VolumeAttachment
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -64,6 +66,22 @@ func ParseEC2VolumeAttachment(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-EC2VolumeAttachment-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

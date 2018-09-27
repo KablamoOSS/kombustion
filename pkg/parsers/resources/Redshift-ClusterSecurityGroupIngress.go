@@ -51,6 +51,8 @@ func ParseRedshiftClusterSecurityGroupIngress(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource RedshiftClusterSecurityGroupIngress
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -65,6 +67,22 @@ func ParseRedshiftClusterSecurityGroupIngress(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-RedshiftClusterSecurityGroupIngress-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

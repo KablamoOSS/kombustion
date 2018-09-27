@@ -2,12 +2,13 @@ package cloudformation
 
 import (
 	"fmt"
+	"testing"
+
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/coretest"
 	"github.com/KablamoOSS/kombustion/pkg/parsers/resources"
 	"github.com/KablamoOSS/kombustion/types"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 var testYaml = `AWSTemplateFormatVersion: "2010-09-09"
@@ -474,6 +475,7 @@ func TestProcessParsers(t *testing.T) {
 			transform := processParsers(
 			test.input.templateResources,
 			test.input.parserFuncs,
+			false,
 		)
 
 		assert.Equal(

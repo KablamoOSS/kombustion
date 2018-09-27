@@ -55,6 +55,8 @@ func ParseGlueDevEndpoint(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource GlueDevEndpoint
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -69,6 +71,22 @@ func ParseGlueDevEndpoint(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-GlueDevEndpoint-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

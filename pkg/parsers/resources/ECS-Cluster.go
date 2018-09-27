@@ -47,6 +47,8 @@ func ParseECSCluster(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource ECSCluster
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -61,6 +63,22 @@ func ParseECSCluster(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-ECSCluster-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

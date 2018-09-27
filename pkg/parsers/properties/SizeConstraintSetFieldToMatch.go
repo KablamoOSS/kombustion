@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// SizeConstraintSetFieldToMatch Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sizeconstraintset-sizeconstraint-fieldtomatch.html
+// SizeConstraintSetFieldToMatch Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-sizeconstraintset-fieldtomatch.html
 type SizeConstraintSetFieldToMatch struct {
 	Data interface{} `yaml:"Data,omitempty"`
 	Type interface{} `yaml:"Type"`

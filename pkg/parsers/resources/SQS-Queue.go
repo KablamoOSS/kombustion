@@ -57,6 +57,8 @@ func ParseSQSQueue(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource SQSQueue
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -71,6 +73,22 @@ func ParseSQSQueue(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-SQSQueue-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

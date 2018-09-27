@@ -62,6 +62,8 @@ func ParseECSService(
 	errors []error,
 ) {
 	source = "kombustion-core-resources"
+
+	// Resources
 	var resource ECSService
 	err := yaml.Unmarshal([]byte(data), &resource)
 
@@ -76,6 +78,22 @@ func ParseECSService(
 	}
 
 	resources = types.TemplateObject{name: resource}
+
+	// Outputs
+
+	outputs = types.TemplateObject{
+		name: types.TemplateObject{
+			"Description": name + " Object",
+			"Value": map[string]interface{}{
+				"Ref": name,
+			},
+			"Export": map[string]interface{}{
+				"Name": map[string]interface{}{
+					"Fn::Sub": "${AWS::StackName}-ECSService-" + name,
+				},
+			},
+		},
+	}
 
 	return
 }

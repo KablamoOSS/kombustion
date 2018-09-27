@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// RulePredicate Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-rule-predicates.html
+// RulePredicate Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-rule-predicate.html
 type RulePredicate struct {
 	DataId  interface{} `yaml:"DataId"`
 	Negated interface{} `yaml:"Negated"`
