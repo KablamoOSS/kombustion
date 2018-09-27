@@ -78,7 +78,7 @@ func upsertStack(
 	changeSetOut, err := client.CreateChangeSet(changeSetIn)
 	checkError(err)
 
-	printer.Step("Waiting for change set creation")
+	printer.SubStep("Waiting for change set creation", 1, false, true)
 	describeChangeSetIn := &awsCF.DescribeChangeSetInput{
 		ChangeSetName: changeSetOut.Id,
 	}
@@ -88,11 +88,34 @@ func upsertStack(
 	checkError(err)
 
 	if *changeSet.Status == "FAILED" {
-		printer.Fatal(
-			fmt.Errorf("Cloudformation ChangeSet failed to create"),
-			*changeSet.StatusReason,
-			"",
-		)
+		if *changeSet.StatusReason == "The submitted information didn't contain changes. Submit different information to create a change set." {
+			printer.Error(
+				fmt.Errorf("Cloudformation ChangeSet failed to create: no changes"),
+				*changeSet.StatusReason,
+				"",
+			)
+			printer.SubStep("Cleaning up unused change set", 1, true, true)
+			_, err := client.DeleteChangeSet(
+				&awsCF.DeleteChangeSetInput{
+					ChangeSetName: changeSet.ChangeSetId,
+				},
+			)
+			if err != nil {
+				printer.Fatal(
+					err,
+					"Manually clean up change set",
+					"",
+				)
+			}
+			printer.Stop()
+			return
+		} else {
+			printer.Fatal(
+				fmt.Errorf("Cloudformation ChangeSet failed to create"),
+				*changeSet.StatusReason,
+				"",
+			)
+		}
 	}
 
 	// TODO: In theory, a DescribeChangeSetOutput can be paginated (indicated
@@ -101,11 +124,11 @@ func upsertStack(
 	// should probably handle it properly.
 
 	printer.SubStep("Changes to be applied:", 1, true, true)
-	for _, change := range changeSet.Changes {
+	for i, change := range changeSet.Changes {
 		resChange := change.ResourceChange
 
 		line := fmt.Sprintf(
-			"%6s %s %s",
+			"%s %s %s",
 			*resChange.Action,
 			*resChange.ResourceType,
 			*resChange.LogicalResourceId,
@@ -117,7 +140,11 @@ func upsertStack(
 				*resChange.Replacement,
 			)
 		}
-		printer.SubStep(line, 1, true, true)
+		isLast := false
+		if len(changeSet.Changes) == i+1 {
+			isLast = true
+		}
+		printer.SubStep(line, 2, isLast, true)
 	}
 
 	if confirm {
