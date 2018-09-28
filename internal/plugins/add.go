@@ -22,7 +22,7 @@ func init() {
 // AddPluginsToManifest - Add all new plugin to the manifest
 // update it if it's already there
 // then write the manifest to disk
-func AddPluginsToManifest(objectStore core.ObjectStore, manifest *manifestType.Manifest, pluginLocations []string) (*manifestType.Manifest, error) {
+func AddPluginsToManifest(objectStore core.ObjectStore, manifest *manifestType.Manifest, pluginLocations []string, manifestLocation string) (*manifestType.Manifest, error) {
 	printer.Progress("Kombusting")
 
 	// Get the lockFile
@@ -36,7 +36,7 @@ func AddPluginsToManifest(objectStore core.ObjectStore, manifest *manifestType.M
 	}
 
 	printer.Progress("Updating manifest")
-	err = manifestType.WriteManifestObject(objectStore, manifest)
+	err = manifestType.WriteManifestObject(objectStore, manifest, manifestLocation)
 	if err != nil {
 		printer.Error(err, config.ErrorHelpInfo, "")
 		return manifest, err

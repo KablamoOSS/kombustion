@@ -40,6 +40,16 @@ $ kombustion --profile MyProfile
 
 ---
 
+### `--manifest-file`
+
+_location of the manifest file, defaults to `kombustion.yaml`_
+
+```bash
+$ kombustion --manifest-file dir/dir/kombustion.yaml
+```
+
+---
+
 ### `--load-plugin`
 
 _Load arbitrary plugin._

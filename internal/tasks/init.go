@@ -24,5 +24,5 @@ func InitialiseNewManifestTask(c *cli.Context) error {
 	objectStore := core.NewFilesystemStore(".")
 
 	// This funciton is a thin layer between the task, and the cli wrapper
-	return manifest.InitialiseNewManifest(objectStore)
+	return manifest.InitialiseNewManifest(objectStore, c.GlobalString("manifest-file"))
 }

@@ -66,6 +66,7 @@ func Generate(c *cli.Context) {
 	outputParameters := c.Bool("write-parameters")
 	env := c.String("environment")
 	generateDefaultOutputs := c.Bool("generate-default-outputs")
+	manifestFile := c.GlobalString("manifest-file")
 
 	generate(
 		objectStore,
@@ -77,6 +78,7 @@ func Generate(c *cli.Context) {
 		outputParameters,
 		env,
 		generateDefaultOutputs,
+		manifestFile,
 	)
 }
 
@@ -90,6 +92,7 @@ func generate(
 	outputParameters bool,
 	envName string,
 	generateDefaultOutputs bool,
+	manifestLocation string,
 ) {
 	printer.Step("Generate template")
 	printer.Progress("Kombusting")
@@ -104,7 +107,7 @@ func generate(
 	}
 
 	// manifestFile := manifest.FindAndLoadManifest()
-	manifestFile, err := manifest.GetManifestObject(objectStore)
+	manifestFile, err := manifest.GetManifestObject(objectStore, manifestLocation)
 	if err != nil {
 		printer.Fatal(
 			fmt.Errorf("Couldn't load manifest file: %v", err),

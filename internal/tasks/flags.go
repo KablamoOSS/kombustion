@@ -16,6 +16,11 @@ var GlobalFlags = []cli.Flag{
 		Name:  "profile",
 		Usage: "use a profile from ~/.aws/credentials eg `MyProfile`",
 	},
+	cli.StringFlag{
+		Name:  "manifest-file",
+		Usage: "location of the manifest file, defaults to `kombustion.yaml`",
+		Value: "kombustion.yaml",
+	},
 }
 
 // CloudFormationStackFlags for tasks relating to CRUD of cloudformation stacks

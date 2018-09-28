@@ -16,16 +16,16 @@ type InitialisePrompter interface {
 }
 
 // InitaliseNewManifest creates a new manifest with a survey
-func InitialiseNewManifest(objectStore core.ObjectStore) error {
-	return initialiseNewManifest(objectStore, &surveyPrompt{})
+func InitialiseNewManifest(objectStore core.ObjectStore, manifestLocation string) error {
+	return initialiseNewManifest(objectStore, &surveyPrompt{}, manifestLocation)
 }
 
-func initialiseNewManifest(objectStore core.ObjectStore, prompter InitialisePrompter) error {
+func initialiseNewManifest(objectStore core.ObjectStore, prompter InitialisePrompter, manifestLocation string) error {
 	// Load the manifest file from this directory
-	if CheckManifestExists(objectStore) {
+	if CheckManifestExists(objectStore, manifestLocation) {
 		printer.Fatal(
-			fmt.Errorf("Sorry we can't create a new kombustion.yaml, one already exists."),
-			"If you want to re-initialise your kombustion.yaml file, first remove it.",
+			fmt.Errorf("Sorry we can't create a new manifest file, one already exists."),
+			"If you want to re-initialise your manifest file, first remove it.",
 			"https://www.kombustion.io/api/manifest/",
 		)
 	}
@@ -36,7 +36,7 @@ func initialiseNewManifest(objectStore core.ObjectStore, prompter InitialiseProm
 		return err
 	}
 
-	err = WriteManifestObject(objectStore, manifest)
+	err = WriteManifestObject(objectStore, manifest, manifestLocation)
 	if err != nil {
 		return err
 	}

@@ -35,6 +35,7 @@ func PrintEvents(c *cli.Context) {
 		c.GlobalString("environment"),
 		c.GlobalString("region"),
 		c.String("profile"),
+		c.GlobalString("manifest-file"),
 	)
 }
 
@@ -46,10 +47,11 @@ func printEvents(
 	envName string,
 	profile string,
 	region string,
+	manifestLocation string,
 ) {
 	printer.Progress("Kombusting")
 
-	manifestFile, err := manifest.GetManifestObject(objectStore)
+	manifestFile, err := manifest.GetManifestObject(objectStore, manifestLocation)
 	if err != nil {
 		printer.Fatal(err, config.ErrorHelpInfo, "")
 	}
