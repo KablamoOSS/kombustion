@@ -167,6 +167,65 @@ $ kombustion generate [template file]
 $ kombustion generate path/to/cloudformation/stack.yaml
 ```
 
+
+__Options__
+
+#### `--output-directory`, `-d`
+
+_(Optional) Set the directory to write the generated files in._
+
+#### `--region`, `-r`
+
+_(Optional)Set the region to deploy into._
+
+#### `--stack-name`
+
+_(Optional) Set the stack name._
+
+If not provided a stack name is derived from `Title` in `kombustion.yaml`, the file name of the
+stack, and the environment in the following pattern `{Title}-{FileName}-{Environment}`.
+
+If you do not provide `--stack-name` you must provide `--environment`.
+
+#### `--environment`, `-e`
+
+_(Optional) The environment to deploy to._
+
+Environment config to use as defined in ./kombustion.yaml.
+
+If `AccountIDs` are listed under the environment, then you will only be able to deploy into that
+account.
+
+If `Parameters` are listed under the environment, they will be added to the stack.
+
+
+#### `--param`, `-p`
+
+_(Optional) Specify CloudFormation parameters._
+
+Parameters are also sourced from `kombustion.yaml`, but paramteres passed via the cli have precedence.
+Anything you pass via this option, will be used instead of whats in `kombustion.yaml`.
+
+```bash
+$ kombustion upsert \
+  --param ParamKeyOne=ParamValueOne, ParamKeyTwo=ParamValueTwo \
+  path/to/cloudformation/stack.yaml
+```
+
+#### `--generate-default-outputs`, `-b`
+
+_(Optional) Disable generation of outputs for Base AWS types_
+
+
+#### `--read-parameters`
+
+_(Optional) Read parameters from a CloudFormation parameters file_
+
+
+#### `--write-parameters`, `-w`
+
+_(Optional) Write parameters to a CloudFormation paramters file_
+
 ---
 
 ### `upsert`

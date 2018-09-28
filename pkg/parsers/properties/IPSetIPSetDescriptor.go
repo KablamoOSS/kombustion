@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// IPSetIPSetDescriptor Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-ipset-ipsetdescriptor.html
+// IPSetIPSetDescriptor Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-ipset-ipsetdescriptors.html
 type IPSetIPSetDescriptor struct {
 	Type  interface{} `yaml:"Type"`
 	Value interface{} `yaml:"Value"`
