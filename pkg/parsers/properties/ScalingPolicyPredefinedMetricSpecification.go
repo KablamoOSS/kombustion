@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// ScalingPolicyPredefinedMetricSpecification Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-predefinedmetricspecification.html
+// ScalingPolicyPredefinedMetricSpecification Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-scalingpolicy-predefinedmetricspecification.html
 type ScalingPolicyPredefinedMetricSpecification struct {
 	PredefinedMetricType interface{} `yaml:"PredefinedMetricType"`
 	ResourceLabel        interface{} `yaml:"ResourceLabel,omitempty"`

@@ -21,7 +21,9 @@ const sourceDir = "./generate/source/"
 func init() {
 	log.Println("Creating directories")
 
-	os.RemoveAll(parsersDir)
+	os.RemoveAll(typesDir)
+	os.RemoveAll(propertiesDir)
+	os.RemoveAll(resourcesDir)
 
 	os.Mkdir(parsersDir, 0744)
 	os.Mkdir(propertiesDir, 0744)
