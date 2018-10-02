@@ -21,19 +21,22 @@ type CodeBuildProject struct {
 
 // CodeBuildProject Properties
 type CodeBuildProjectProperties struct {
-	BadgeEnabled     interface{}                        `yaml:"BadgeEnabled,omitempty"`
-	Description      interface{}                        `yaml:"Description,omitempty"`
-	EncryptionKey    interface{}                        `yaml:"EncryptionKey,omitempty"`
-	Name             interface{}                        `yaml:"Name,omitempty"`
-	ServiceRole      interface{}                        `yaml:"ServiceRole"`
-	TimeoutInMinutes interface{}                        `yaml:"TimeoutInMinutes,omitempty"`
-	VpcConfig        *properties.ProjectVpcConfig       `yaml:"VpcConfig,omitempty"`
-	Source           *properties.ProjectSource          `yaml:"Source"`
-	Triggers         *properties.ProjectProjectTriggers `yaml:"Triggers,omitempty"`
-	Cache            *properties.ProjectProjectCache    `yaml:"Cache,omitempty"`
-	Tags             interface{}                        `yaml:"Tags,omitempty"`
-	Environment      *properties.ProjectEnvironment     `yaml:"Environment"`
-	Artifacts        *properties.ProjectArtifacts       `yaml:"Artifacts"`
+	BadgeEnabled       interface{}                        `yaml:"BadgeEnabled,omitempty"`
+	Description        interface{}                        `yaml:"Description,omitempty"`
+	EncryptionKey      interface{}                        `yaml:"EncryptionKey,omitempty"`
+	Name               interface{}                        `yaml:"Name,omitempty"`
+	ServiceRole        interface{}                        `yaml:"ServiceRole"`
+	TimeoutInMinutes   interface{}                        `yaml:"TimeoutInMinutes,omitempty"`
+	VpcConfig          *properties.ProjectVpcConfig       `yaml:"VpcConfig,omitempty"`
+	Source             *properties.ProjectSource          `yaml:"Source"`
+	Triggers           *properties.ProjectProjectTriggers `yaml:"Triggers,omitempty"`
+	Cache              *properties.ProjectProjectCache    `yaml:"Cache,omitempty"`
+	LogsConfig         *properties.ProjectLogsConfig      `yaml:"LogsConfig,omitempty"`
+	SecondaryArtifacts interface{}                        `yaml:"SecondaryArtifacts,omitempty"`
+	SecondarySources   interface{}                        `yaml:"SecondarySources,omitempty"`
+	Tags               interface{}                        `yaml:"Tags,omitempty"`
+	Environment        *properties.ProjectEnvironment     `yaml:"Environment"`
+	Artifacts          *properties.ProjectArtifacts       `yaml:"Artifacts"`
 }
 
 // NewCodeBuildProject constructor creates a new CodeBuildProject

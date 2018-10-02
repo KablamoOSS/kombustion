@@ -37,6 +37,7 @@ type EMRClusterProperties struct {
 	BootstrapActions      interface{}                               `yaml:"BootstrapActions,omitempty"`
 	Configurations        interface{}                               `yaml:"Configurations,omitempty"`
 	Tags                  interface{}                               `yaml:"Tags,omitempty"`
+	KerberosAttributes    *properties.ClusterKerberosAttributes     `yaml:"KerberosAttributes,omitempty"`
 	Instances             *properties.ClusterJobFlowInstancesConfig `yaml:"Instances"`
 }
 

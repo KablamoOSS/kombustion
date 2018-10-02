@@ -27,6 +27,7 @@ type ECSServiceProperties struct {
 	LaunchType                    interface{}                                `yaml:"LaunchType,omitempty"`
 	PlatformVersion               interface{}                                `yaml:"PlatformVersion,omitempty"`
 	Role                          interface{}                                `yaml:"Role,omitempty"`
+	SchedulingStrategy            interface{}                                `yaml:"SchedulingStrategy,omitempty"`
 	ServiceName                   interface{}                                `yaml:"ServiceName,omitempty"`
 	TaskDefinition                interface{}                                `yaml:"TaskDefinition"`
 	NetworkConfiguration          *properties.ServiceNetworkConfiguration    `yaml:"NetworkConfiguration,omitempty"`

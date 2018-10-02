@@ -25,11 +25,13 @@ type CodeDeployDeploymentGroupProperties struct {
 	DeploymentConfigName         interface{}                                          `yaml:"DeploymentConfigName,omitempty"`
 	DeploymentGroupName          interface{}                                          `yaml:"DeploymentGroupName,omitempty"`
 	ServiceRoleArn               interface{}                                          `yaml:"ServiceRoleArn"`
+	OnPremisesTagSet             *properties.DeploymentGroupOnPremisesTagSet          `yaml:"OnPremisesTagSet,omitempty"`
 	LoadBalancerInfo             *properties.DeploymentGroupLoadBalancerInfo          `yaml:"LoadBalancerInfo,omitempty"`
-	OnPremisesInstanceTagFilters interface{}                                          `yaml:"OnPremisesInstanceTagFilters,omitempty"`
 	AutoScalingGroups            interface{}                                          `yaml:"AutoScalingGroups,omitempty"`
-	Ec2TagFilters                interface{}                                          `yaml:"Ec2TagFilters,omitempty"`
 	TriggerConfigurations        interface{}                                          `yaml:"TriggerConfigurations,omitempty"`
+	Ec2TagFilters                interface{}                                          `yaml:"Ec2TagFilters,omitempty"`
+	OnPremisesInstanceTagFilters interface{}                                          `yaml:"OnPremisesInstanceTagFilters,omitempty"`
+	Ec2TagSet                    *properties.DeploymentGroupEC2TagSet                 `yaml:"Ec2TagSet,omitempty"`
 	DeploymentStyle              *properties.DeploymentGroupDeploymentStyle           `yaml:"DeploymentStyle,omitempty"`
 	Deployment                   *properties.DeploymentGroupDeployment                `yaml:"Deployment,omitempty"`
 	AutoRollbackConfiguration    *properties.DeploymentGroupAutoRollbackConfiguration `yaml:"AutoRollbackConfiguration,omitempty"`

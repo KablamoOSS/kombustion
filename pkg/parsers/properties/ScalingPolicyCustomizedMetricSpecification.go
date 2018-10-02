@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// ScalingPolicyCustomizedMetricSpecification Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-scalingpolicy-customizedmetricspecification.html
+// ScalingPolicyCustomizedMetricSpecification Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-customizedmetricspecification.html
 type ScalingPolicyCustomizedMetricSpecification struct {
 	MetricName interface{} `yaml:"MetricName"`
 	Namespace  interface{} `yaml:"Namespace"`

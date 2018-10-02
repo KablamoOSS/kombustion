@@ -19,9 +19,13 @@ type SNSSubscription struct {
 
 // SNSSubscription Properties
 type SNSSubscriptionProperties struct {
-	Endpoint interface{} `yaml:"Endpoint,omitempty"`
-	Protocol interface{} `yaml:"Protocol,omitempty"`
-	TopicArn interface{} `yaml:"TopicArn,omitempty"`
+	DeliveryPolicy     interface{} `yaml:"DeliveryPolicy,omitempty"`
+	Endpoint           interface{} `yaml:"Endpoint,omitempty"`
+	FilterPolicy       interface{} `yaml:"FilterPolicy,omitempty"`
+	Protocol           interface{} `yaml:"Protocol,omitempty"`
+	RawMessageDelivery interface{} `yaml:"RawMessageDelivery,omitempty"`
+	Region             interface{} `yaml:"Region,omitempty"`
+	TopicArn           interface{} `yaml:"TopicArn,omitempty"`
 }
 
 // NewSNSSubscription constructor creates a new SNSSubscription

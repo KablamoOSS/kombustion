@@ -7,17 +7,20 @@ import "fmt"
 
 // SpotFleetSpotFleetRequestConfigData Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata.html
 type SpotFleetSpotFleetRequestConfigData struct {
-	AllocationStrategy               interface{} `yaml:"AllocationStrategy,omitempty"`
-	ExcessCapacityTerminationPolicy  interface{} `yaml:"ExcessCapacityTerminationPolicy,omitempty"`
-	IamFleetRole                     interface{} `yaml:"IamFleetRole"`
-	ReplaceUnhealthyInstances        interface{} `yaml:"ReplaceUnhealthyInstances,omitempty"`
-	SpotPrice                        interface{} `yaml:"SpotPrice,omitempty"`
-	TargetCapacity                   interface{} `yaml:"TargetCapacity"`
-	TerminateInstancesWithExpiration interface{} `yaml:"TerminateInstancesWithExpiration,omitempty"`
-	Type                             interface{} `yaml:"Type,omitempty"`
-	ValidFrom                        interface{} `yaml:"ValidFrom,omitempty"`
-	ValidUntil                       interface{} `yaml:"ValidUntil,omitempty"`
-	LaunchSpecifications             interface{} `yaml:"LaunchSpecifications,omitempty"`
+	AllocationStrategy               interface{}                   `yaml:"AllocationStrategy,omitempty"`
+	ExcessCapacityTerminationPolicy  interface{}                   `yaml:"ExcessCapacityTerminationPolicy,omitempty"`
+	IamFleetRole                     interface{}                   `yaml:"IamFleetRole"`
+	InstanceInterruptionBehavior     interface{}                   `yaml:"InstanceInterruptionBehavior,omitempty"`
+	ReplaceUnhealthyInstances        interface{}                   `yaml:"ReplaceUnhealthyInstances,omitempty"`
+	SpotPrice                        interface{}                   `yaml:"SpotPrice,omitempty"`
+	TargetCapacity                   interface{}                   `yaml:"TargetCapacity"`
+	TerminateInstancesWithExpiration interface{}                   `yaml:"TerminateInstancesWithExpiration,omitempty"`
+	Type                             interface{}                   `yaml:"Type,omitempty"`
+	ValidFrom                        interface{}                   `yaml:"ValidFrom,omitempty"`
+	ValidUntil                       interface{}                   `yaml:"ValidUntil,omitempty"`
+	LoadBalancersConfig              *SpotFleetLoadBalancersConfig `yaml:"LoadBalancersConfig,omitempty"`
+	LaunchSpecifications             interface{}                   `yaml:"LaunchSpecifications,omitempty"`
+	LaunchTemplateConfigs            interface{}                   `yaml:"LaunchTemplateConfigs,omitempty"`
 }
 
 // SpotFleetSpotFleetRequestConfigData validation

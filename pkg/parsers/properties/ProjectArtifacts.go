@@ -7,12 +7,15 @@ import "fmt"
 
 // ProjectArtifacts Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-artifacts.html
 type ProjectArtifacts struct {
-	Location      interface{} `yaml:"Location,omitempty"`
-	Name          interface{} `yaml:"Name,omitempty"`
-	NamespaceType interface{} `yaml:"NamespaceType,omitempty"`
-	Packaging     interface{} `yaml:"Packaging,omitempty"`
-	Path          interface{} `yaml:"Path,omitempty"`
-	Type          interface{} `yaml:"Type"`
+	ArtifactIdentifier   interface{} `yaml:"ArtifactIdentifier,omitempty"`
+	EncryptionDisabled   interface{} `yaml:"EncryptionDisabled,omitempty"`
+	Location             interface{} `yaml:"Location,omitempty"`
+	Name                 interface{} `yaml:"Name,omitempty"`
+	NamespaceType        interface{} `yaml:"NamespaceType,omitempty"`
+	OverrideArtifactName interface{} `yaml:"OverrideArtifactName,omitempty"`
+	Packaging            interface{} `yaml:"Packaging,omitempty"`
+	Path                 interface{} `yaml:"Path,omitempty"`
+	Type                 interface{} `yaml:"Type"`
 }
 
 // ProjectArtifacts validation

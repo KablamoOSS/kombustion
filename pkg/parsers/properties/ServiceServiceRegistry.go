@@ -5,8 +5,10 @@ package properties
 
 // ServiceServiceRegistry Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-serviceregistry.html
 type ServiceServiceRegistry struct {
-	Port        interface{} `yaml:"Port,omitempty"`
-	RegistryArn interface{} `yaml:"RegistryArn,omitempty"`
+	ContainerName interface{} `yaml:"ContainerName,omitempty"`
+	ContainerPort interface{} `yaml:"ContainerPort,omitempty"`
+	Port          interface{} `yaml:"Port,omitempty"`
+	RegistryArn   interface{} `yaml:"RegistryArn,omitempty"`
 }
 
 // ServiceServiceRegistry validation

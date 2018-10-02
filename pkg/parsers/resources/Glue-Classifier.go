@@ -20,6 +20,8 @@ type GlueClassifier struct {
 
 // GlueClassifier Properties
 type GlueClassifierProperties struct {
+	XMLClassifier  *properties.ClassifierXMLClassifier  `yaml:"XMLClassifier,omitempty"`
+	JsonClassifier *properties.ClassifierJsonClassifier `yaml:"JsonClassifier,omitempty"`
 	GrokClassifier *properties.ClassifierGrokClassifier `yaml:"GrokClassifier,omitempty"`
 }
 

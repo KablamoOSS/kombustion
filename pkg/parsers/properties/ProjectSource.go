@@ -12,6 +12,7 @@ type ProjectSource struct {
 	InsecureSsl       interface{}        `yaml:"InsecureSsl,omitempty"`
 	Location          interface{}        `yaml:"Location,omitempty"`
 	ReportBuildStatus interface{}        `yaml:"ReportBuildStatus,omitempty"`
+	SourceIdentifier  interface{}        `yaml:"SourceIdentifier,omitempty"`
 	Type              interface{}        `yaml:"Type"`
 	Auth              *ProjectSourceAuth `yaml:"Auth,omitempty"`
 }

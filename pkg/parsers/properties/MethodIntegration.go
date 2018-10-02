@@ -6,10 +6,13 @@ package properties
 // MethodIntegration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration.html
 type MethodIntegration struct {
 	CacheNamespace        interface{} `yaml:"CacheNamespace,omitempty"`
+	ConnectionId          interface{} `yaml:"ConnectionId,omitempty"`
+	ConnectionType        interface{} `yaml:"ConnectionType,omitempty"`
 	ContentHandling       interface{} `yaml:"ContentHandling,omitempty"`
 	Credentials           interface{} `yaml:"Credentials,omitempty"`
 	IntegrationHttpMethod interface{} `yaml:"IntegrationHttpMethod,omitempty"`
 	PassthroughBehavior   interface{} `yaml:"PassthroughBehavior,omitempty"`
+	TimeoutInMillis       interface{} `yaml:"TimeoutInMillis,omitempty"`
 	Type                  interface{} `yaml:"Type,omitempty"`
 	Uri                   interface{} `yaml:"Uri,omitempty"`
 	RequestParameters     interface{} `yaml:"RequestParameters,omitempty"`

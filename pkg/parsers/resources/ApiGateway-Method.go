@@ -21,18 +21,19 @@ type ApiGatewayMethod struct {
 
 // ApiGatewayMethod Properties
 type ApiGatewayMethodProperties struct {
-	ApiKeyRequired     interface{}                   `yaml:"ApiKeyRequired,omitempty"`
-	AuthorizationType  interface{}                   `yaml:"AuthorizationType,omitempty"`
-	AuthorizerId       interface{}                   `yaml:"AuthorizerId,omitempty"`
-	HttpMethod         interface{}                   `yaml:"HttpMethod"`
-	OperationName      interface{}                   `yaml:"OperationName,omitempty"`
-	RequestValidatorId interface{}                   `yaml:"RequestValidatorId,omitempty"`
-	ResourceId         interface{}                   `yaml:"ResourceId"`
-	RestApiId          interface{}                   `yaml:"RestApiId"`
-	RequestModels      interface{}                   `yaml:"RequestModels,omitempty"`
-	RequestParameters  interface{}                   `yaml:"RequestParameters,omitempty"`
-	MethodResponses    interface{}                   `yaml:"MethodResponses,omitempty"`
-	Integration        *properties.MethodIntegration `yaml:"Integration,omitempty"`
+	ApiKeyRequired      interface{}                   `yaml:"ApiKeyRequired,omitempty"`
+	AuthorizationType   interface{}                   `yaml:"AuthorizationType,omitempty"`
+	AuthorizerId        interface{}                   `yaml:"AuthorizerId,omitempty"`
+	HttpMethod          interface{}                   `yaml:"HttpMethod"`
+	OperationName       interface{}                   `yaml:"OperationName,omitempty"`
+	RequestValidatorId  interface{}                   `yaml:"RequestValidatorId,omitempty"`
+	ResourceId          interface{}                   `yaml:"ResourceId"`
+	RestApiId           interface{}                   `yaml:"RestApiId"`
+	RequestModels       interface{}                   `yaml:"RequestModels,omitempty"`
+	RequestParameters   interface{}                   `yaml:"RequestParameters,omitempty"`
+	AuthorizationScopes interface{}                   `yaml:"AuthorizationScopes,omitempty"`
+	MethodResponses     interface{}                   `yaml:"MethodResponses,omitempty"`
+	Integration         *properties.MethodIntegration `yaml:"Integration,omitempty"`
 }
 
 // NewApiGatewayMethod constructor creates a new ApiGatewayMethod

@@ -21,6 +21,7 @@ type GlueCrawler struct {
 
 // GlueCrawler Properties
 type GlueCrawlerProperties struct {
+	Configuration      interface{}                           `yaml:"Configuration,omitempty"`
 	DatabaseName       interface{}                           `yaml:"DatabaseName"`
 	Description        interface{}                           `yaml:"Description,omitempty"`
 	Name               interface{}                           `yaml:"Name,omitempty"`

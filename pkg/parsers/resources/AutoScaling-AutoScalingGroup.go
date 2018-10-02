@@ -5,6 +5,7 @@ package resources
 
 import (
 	"fmt"
+	"github.com/KablamoOSS/kombustion/pkg/parsers/properties"
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
 )
@@ -20,26 +21,27 @@ type AutoScalingAutoScalingGroup struct {
 
 // AutoScalingAutoScalingGroup Properties
 type AutoScalingAutoScalingGroupProperties struct {
-	AutoScalingGroupName           interface{} `yaml:"AutoScalingGroupName,omitempty"`
-	Cooldown                       interface{} `yaml:"Cooldown,omitempty"`
-	DesiredCapacity                interface{} `yaml:"DesiredCapacity,omitempty"`
-	HealthCheckGracePeriod         interface{} `yaml:"HealthCheckGracePeriod,omitempty"`
-	HealthCheckType                interface{} `yaml:"HealthCheckType,omitempty"`
-	InstanceId                     interface{} `yaml:"InstanceId,omitempty"`
-	LaunchConfigurationName        interface{} `yaml:"LaunchConfigurationName,omitempty"`
-	MaxSize                        interface{} `yaml:"MaxSize"`
-	MinSize                        interface{} `yaml:"MinSize"`
-	PlacementGroup                 interface{} `yaml:"PlacementGroup,omitempty"`
-	ServiceLinkedRoleARN           interface{} `yaml:"ServiceLinkedRoleARN,omitempty"`
-	AvailabilityZones              interface{} `yaml:"AvailabilityZones,omitempty"`
-	LifecycleHookSpecificationList interface{} `yaml:"LifecycleHookSpecificationList,omitempty"`
-	LoadBalancerNames              interface{} `yaml:"LoadBalancerNames,omitempty"`
-	MetricsCollection              interface{} `yaml:"MetricsCollection,omitempty"`
-	NotificationConfigurations     interface{} `yaml:"NotificationConfigurations,omitempty"`
-	Tags                           interface{} `yaml:"Tags,omitempty"`
-	TargetGroupARNs                interface{} `yaml:"TargetGroupARNs,omitempty"`
-	TerminationPolicies            interface{} `yaml:"TerminationPolicies,omitempty"`
-	VPCZoneIdentifier              interface{} `yaml:"VPCZoneIdentifier,omitempty"`
+	AutoScalingGroupName           interface{}                                             `yaml:"AutoScalingGroupName,omitempty"`
+	Cooldown                       interface{}                                             `yaml:"Cooldown,omitempty"`
+	DesiredCapacity                interface{}                                             `yaml:"DesiredCapacity,omitempty"`
+	HealthCheckGracePeriod         interface{}                                             `yaml:"HealthCheckGracePeriod,omitempty"`
+	HealthCheckType                interface{}                                             `yaml:"HealthCheckType,omitempty"`
+	InstanceId                     interface{}                                             `yaml:"InstanceId,omitempty"`
+	LaunchConfigurationName        interface{}                                             `yaml:"LaunchConfigurationName,omitempty"`
+	MaxSize                        interface{}                                             `yaml:"MaxSize"`
+	MinSize                        interface{}                                             `yaml:"MinSize"`
+	PlacementGroup                 interface{}                                             `yaml:"PlacementGroup,omitempty"`
+	ServiceLinkedRoleARN           interface{}                                             `yaml:"ServiceLinkedRoleARN,omitempty"`
+	AvailabilityZones              interface{}                                             `yaml:"AvailabilityZones,omitempty"`
+	TargetGroupARNs                interface{}                                             `yaml:"TargetGroupARNs,omitempty"`
+	LifecycleHookSpecificationList interface{}                                             `yaml:"LifecycleHookSpecificationList,omitempty"`
+	LoadBalancerNames              interface{}                                             `yaml:"LoadBalancerNames,omitempty"`
+	MetricsCollection              interface{}                                             `yaml:"MetricsCollection,omitempty"`
+	NotificationConfigurations     interface{}                                             `yaml:"NotificationConfigurations,omitempty"`
+	Tags                           interface{}                                             `yaml:"Tags,omitempty"`
+	TerminationPolicies            interface{}                                             `yaml:"TerminationPolicies,omitempty"`
+	VPCZoneIdentifier              interface{}                                             `yaml:"VPCZoneIdentifier,omitempty"`
+	LaunchTemplate                 *properties.AutoScalingGroupLaunchTemplateSpecification `yaml:"LaunchTemplate,omitempty"`
 }
 
 // NewAutoScalingAutoScalingGroup constructor creates a new AutoScalingAutoScalingGroup

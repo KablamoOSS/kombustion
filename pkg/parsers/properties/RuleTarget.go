@@ -12,6 +12,7 @@ type RuleTarget struct {
 	Input                interface{}               `yaml:"Input,omitempty"`
 	InputPath            interface{}               `yaml:"InputPath,omitempty"`
 	RoleArn              interface{}               `yaml:"RoleArn,omitempty"`
+	SqsParameters        *RuleSqsParameters        `yaml:"SqsParameters,omitempty"`
 	RunCommandParameters *RuleRunCommandParameters `yaml:"RunCommandParameters,omitempty"`
 	KinesisParameters    *RuleKinesisParameters    `yaml:"KinesisParameters,omitempty"`
 	InputTransformer     *RuleInputTransformer     `yaml:"InputTransformer,omitempty"`

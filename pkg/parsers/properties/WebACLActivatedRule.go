@@ -9,7 +9,7 @@ import "fmt"
 type WebACLActivatedRule struct {
 	Priority interface{}      `yaml:"Priority"`
 	RuleId   interface{}      `yaml:"RuleId"`
-	Action   *WebACLWafAction `yaml:"Action"`
+	Action   *WebACLWafAction `yaml:"Action,omitempty"`
 }
 
 // WebACLActivatedRule validation
@@ -21,11 +21,6 @@ func (resource WebACLActivatedRule) Validate() []error {
 	}
 	if resource.RuleId == nil {
 		errors = append(errors, fmt.Errorf("Missing required field 'RuleId'"))
-	}
-	if resource.Action == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Action'"))
-	} else {
-		errors = append(errors, resource.Action.Validate()...)
 	}
 	return errors
 }

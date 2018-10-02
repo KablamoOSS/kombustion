@@ -21,6 +21,7 @@ type EC2VPCPeeringConnection struct {
 // EC2VPCPeeringConnection Properties
 type EC2VPCPeeringConnectionProperties struct {
 	PeerOwnerId interface{} `yaml:"PeerOwnerId,omitempty"`
+	PeerRegion  interface{} `yaml:"PeerRegion,omitempty"`
 	PeerRoleArn interface{} `yaml:"PeerRoleArn,omitempty"`
 	PeerVpcId   interface{} `yaml:"PeerVpcId"`
 	VpcId       interface{} `yaml:"VpcId"`

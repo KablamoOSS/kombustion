@@ -5,6 +5,7 @@ package properties
 
 // ReplicationGroupNodeGroupConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-replicationgroup-nodegroupconfiguration.html
 type ReplicationGroupNodeGroupConfiguration struct {
+	NodeGroupId              interface{} `yaml:"NodeGroupId,omitempty"`
 	PrimaryAvailabilityZone  interface{} `yaml:"PrimaryAvailabilityZone,omitempty"`
 	ReplicaCount             interface{} `yaml:"ReplicaCount,omitempty"`
 	Slots                    interface{} `yaml:"Slots,omitempty"`
