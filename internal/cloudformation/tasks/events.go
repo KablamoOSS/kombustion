@@ -53,10 +53,26 @@ func PrintStackEventHeader() {
 // PrintStackEvent prints a single event
 func PrintStackEvent(event *awsCF.StackEvent, isLast bool) {
 	timeStamp := event.Timestamp.Format("2006-01-02 15:04:05")
-	resourceStatus := event.ResourceStatus
-	resourceType := event.ResourceType
-	logicalResourceID := event.LogicalResourceId
-	resourceStatusReason := event.ResourceStatusReason
+	var resourceStatus string
+
+	if event.ResourceStatus != nil {
+		resourceStatus = *event.ResourceStatus
+	}
+	var resourceType string
+
+	if event.ResourceType != nil {
+		resourceType = *event.ResourceType
+	}
+	var logicalResourceID string
+
+	if event.LogicalResourceId != nil {
+		logicalResourceID = *event.LogicalResourceId
+	}
+	var resourceStatusReason string
+
+	if event.ResourceStatusReason != nil {
+		resourceStatusReason = *event.ResourceStatusReason
+	}
 
 	printer.SubStep(
 		fmt.Sprintf(
