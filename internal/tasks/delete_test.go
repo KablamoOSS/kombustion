@@ -6,17 +6,16 @@ import (
 
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/coretest"
-	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/aws/aws-sdk-go/aws"
+	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/stretchr/testify/assert"
 )
 
 type MockStackDeleter struct {
 	AcctID string
-	Events  map[string][]*awsCF.StackEvent
-	Stacks  map[string]*awsCF.Stack
+	Events map[string][]*awsCF.StackEvent
+	Stacks map[string]*awsCF.Stack
 }
-
 
 func (msd *MockStackDeleter) Open(_, _ string) string {
 	if msd.Events == nil {
@@ -104,11 +103,12 @@ func TestDeleteTask(t *testing.T) {
 			taskDelete(
 				deleter,
 				objectStore,
-				"test.yaml",   // templatePath
-				"foo-stack", // stackName
-				"ci",          // envName
-				"profile",     // profile
-				"region",      // region
+				"test.yaml",       // templatePath
+				"foo-stack",       // stackName
+				"ci",              // envName
+				"profile",         // profile
+				"region",          // region
+				"kombustion.yaml", // manifest location
 			)
 		},
 	)
@@ -130,11 +130,12 @@ func TestDeleteTaskStackNotFound(t *testing.T) {
 			taskDelete(
 				deleter,
 				objectStore,
-				"test.yaml",   // templatePath
-				"event-stack", // stackName
-				"ci",          // envName
-				"profile",     // profile
-				"region",      // region
+				"test.yaml",       // templatePath
+				"event-stack",     // stackName
+				"ci",              // envName
+				"profile",         // profile
+				"region",          // region
+				"kombustion.yaml", // manifest location
 			)
 		},
 	)

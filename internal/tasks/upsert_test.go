@@ -189,6 +189,7 @@ func TestUpsert(t *testing.T) {
 				false,               // generateDefaultOutputs
 				[]*string{},         // capabilities
 				false,               // confirm
+				"kombustion.yaml",   // manifest location
 			)
 		},
 	)

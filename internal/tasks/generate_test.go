@@ -87,6 +87,7 @@ func TestSimpleGenerate(t *testing.T) {
 				true,                // ouputParameters
 				"ci",                // envName
 				false,               // generateDefaultOutputs
+				"kombustion.yaml",   // manifest location
 			)
 		},
 	)
