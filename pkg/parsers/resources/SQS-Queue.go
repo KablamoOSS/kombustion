@@ -30,6 +30,7 @@ type SQSQueueProperties struct {
 	ReceiveMessageWaitTimeSeconds interface{} `yaml:"ReceiveMessageWaitTimeSeconds,omitempty"`
 	RedrivePolicy                 interface{} `yaml:"RedrivePolicy,omitempty"`
 	VisibilityTimeout             interface{} `yaml:"VisibilityTimeout,omitempty"`
+	Tags                          interface{} `yaml:"Tags,omitempty"`
 }
 
 // NewSQSQueue constructor creates a new SQSQueue

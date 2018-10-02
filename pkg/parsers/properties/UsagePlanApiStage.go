@@ -5,8 +5,9 @@ package properties
 
 // UsagePlanApiStage Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-apistage.html
 type UsagePlanApiStage struct {
-	ApiId interface{} `yaml:"ApiId,omitempty"`
-	Stage interface{} `yaml:"Stage,omitempty"`
+	ApiId    interface{} `yaml:"ApiId,omitempty"`
+	Stage    interface{} `yaml:"Stage,omitempty"`
+	Throttle interface{} `yaml:"Throttle,omitempty"`
 }
 
 // UsagePlanApiStage validation

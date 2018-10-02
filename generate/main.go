@@ -37,7 +37,7 @@ func main() {
 
 	// Download the latest Cloudformation Specification
 	log.Println("Download the latest Cloudformation Specification")
-	// getCloudformationSpecification(sourceDir, cfnEndpoints)
+	getCloudformationSpecification(sourceDir, cfnEndpoints)
 
 	// Load and de-dupe the specification
 	log.Println("Load and de-dupe the specification")

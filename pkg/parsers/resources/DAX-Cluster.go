@@ -5,6 +5,7 @@ package resources
 
 import (
 	"fmt"
+	"github.com/KablamoOSS/kombustion/pkg/parsers/properties"
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
 )
@@ -20,18 +21,19 @@ type DAXCluster struct {
 
 // DAXCluster Properties
 type DAXClusterProperties struct {
-	ClusterName                interface{} `yaml:"ClusterName,omitempty"`
-	Description                interface{} `yaml:"Description,omitempty"`
-	IAMRoleARN                 interface{} `yaml:"IAMRoleARN"`
-	NodeType                   interface{} `yaml:"NodeType"`
-	NotificationTopicARN       interface{} `yaml:"NotificationTopicARN,omitempty"`
-	ParameterGroupName         interface{} `yaml:"ParameterGroupName,omitempty"`
-	PreferredMaintenanceWindow interface{} `yaml:"PreferredMaintenanceWindow,omitempty"`
-	ReplicationFactor          interface{} `yaml:"ReplicationFactor"`
-	SubnetGroupName            interface{} `yaml:"SubnetGroupName,omitempty"`
-	Tags                       interface{} `yaml:"Tags,omitempty"`
-	AvailabilityZones          interface{} `yaml:"AvailabilityZones,omitempty"`
-	SecurityGroupIds           interface{} `yaml:"SecurityGroupIds,omitempty"`
+	ClusterName                interface{}                         `yaml:"ClusterName,omitempty"`
+	Description                interface{}                         `yaml:"Description,omitempty"`
+	IAMRoleARN                 interface{}                         `yaml:"IAMRoleARN"`
+	NodeType                   interface{}                         `yaml:"NodeType"`
+	NotificationTopicARN       interface{}                         `yaml:"NotificationTopicARN,omitempty"`
+	ParameterGroupName         interface{}                         `yaml:"ParameterGroupName,omitempty"`
+	PreferredMaintenanceWindow interface{}                         `yaml:"PreferredMaintenanceWindow,omitempty"`
+	ReplicationFactor          interface{}                         `yaml:"ReplicationFactor"`
+	SubnetGroupName            interface{}                         `yaml:"SubnetGroupName,omitempty"`
+	Tags                       interface{}                         `yaml:"Tags,omitempty"`
+	SSESpecification           *properties.ClusterSSESpecification `yaml:"SSESpecification,omitempty"`
+	AvailabilityZones          interface{}                         `yaml:"AvailabilityZones,omitempty"`
+	SecurityGroupIds           interface{}                         `yaml:"SecurityGroupIds,omitempty"`
 }
 
 // NewDAXCluster constructor creates a new DAXCluster

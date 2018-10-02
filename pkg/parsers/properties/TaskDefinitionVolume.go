@@ -5,8 +5,9 @@ package properties
 
 // TaskDefinitionVolume Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-volumes.html
 type TaskDefinitionVolume struct {
-	Name interface{}                         `yaml:"Name,omitempty"`
-	Host *TaskDefinitionHostVolumeProperties `yaml:"Host,omitempty"`
+	Name                      interface{}                              `yaml:"Name,omitempty"`
+	Host                      *TaskDefinitionHostVolumeProperties      `yaml:"Host,omitempty"`
+	DockerVolumeConfiguration *TaskDefinitionDockerVolumeConfiguration `yaml:"DockerVolumeConfiguration,omitempty"`
 }
 
 // TaskDefinitionVolume validation

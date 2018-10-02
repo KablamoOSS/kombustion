@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// SqlInjectionMatchSetSqlInjectionMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sqlinjectionmatchset-sqlinjectionmatchtuples.html
+// SqlInjectionMatchSetSqlInjectionMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-sqlinjectionmatchset-sqlinjectionmatchtuple.html
 type SqlInjectionMatchSetSqlInjectionMatchTuple struct {
 	TextTransformation interface{}                       `yaml:"TextTransformation"`
 	FieldToMatch       *SqlInjectionMatchSetFieldToMatch `yaml:"FieldToMatch"`

@@ -19,10 +19,12 @@ type EFSFileSystem struct {
 
 // EFSFileSystem Properties
 type EFSFileSystemProperties struct {
-	Encrypted       interface{} `yaml:"Encrypted,omitempty"`
-	KmsKeyId        interface{} `yaml:"KmsKeyId,omitempty"`
-	PerformanceMode interface{} `yaml:"PerformanceMode,omitempty"`
-	FileSystemTags  interface{} `yaml:"FileSystemTags,omitempty"`
+	Encrypted                    interface{} `yaml:"Encrypted,omitempty"`
+	KmsKeyId                     interface{} `yaml:"KmsKeyId,omitempty"`
+	PerformanceMode              interface{} `yaml:"PerformanceMode,omitempty"`
+	ProvisionedThroughputInMibps interface{} `yaml:"ProvisionedThroughputInMibps,omitempty"`
+	ThroughputMode               interface{} `yaml:"ThroughputMode,omitempty"`
+	FileSystemTags               interface{} `yaml:"FileSystemTags,omitempty"`
 }
 
 // NewEFSFileSystem constructor creates a new EFSFileSystem

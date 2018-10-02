@@ -21,10 +21,11 @@ type ApiGatewayDeployment struct {
 
 // ApiGatewayDeployment Properties
 type ApiGatewayDeploymentProperties struct {
-	Description      interface{}                            `yaml:"Description,omitempty"`
-	RestApiId        interface{}                            `yaml:"RestApiId"`
-	StageName        interface{}                            `yaml:"StageName,omitempty"`
-	StageDescription *properties.DeploymentStageDescription `yaml:"StageDescription,omitempty"`
+	Description              interface{}                                    `yaml:"Description,omitempty"`
+	RestApiId                interface{}                                    `yaml:"RestApiId"`
+	StageName                interface{}                                    `yaml:"StageName,omitempty"`
+	StageDescription         *properties.DeploymentStageDescription         `yaml:"StageDescription,omitempty"`
+	DeploymentCanarySettings *properties.DeploymentDeploymentCanarySettings `yaml:"DeploymentCanarySettings,omitempty"`
 }
 
 // NewApiGatewayDeployment constructor creates a new ApiGatewayDeployment

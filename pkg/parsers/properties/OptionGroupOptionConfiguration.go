@@ -7,12 +7,12 @@ import "fmt"
 
 // OptionGroupOptionConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-optiongroup-optionconfigurations.html
 type OptionGroupOptionConfiguration struct {
-	OptionName                  interface{}               `yaml:"OptionName"`
-	OptionVersion               interface{}               `yaml:"OptionVersion,omitempty"`
-	Port                        interface{}               `yaml:"Port,omitempty"`
-	OptionSettings              *OptionGroupOptionSetting `yaml:"OptionSettings,omitempty"`
-	DBSecurityGroupMemberships  interface{}               `yaml:"DBSecurityGroupMemberships,omitempty"`
-	VpcSecurityGroupMemberships interface{}               `yaml:"VpcSecurityGroupMemberships,omitempty"`
+	OptionName                  interface{} `yaml:"OptionName"`
+	OptionVersion               interface{} `yaml:"OptionVersion,omitempty"`
+	Port                        interface{} `yaml:"Port,omitempty"`
+	DBSecurityGroupMemberships  interface{} `yaml:"DBSecurityGroupMemberships,omitempty"`
+	OptionSettings              interface{} `yaml:"OptionSettings,omitempty"`
+	VpcSecurityGroupMemberships interface{} `yaml:"VpcSecurityGroupMemberships,omitempty"`
 }
 
 // OptionGroupOptionConfiguration validation

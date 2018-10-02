@@ -5,6 +5,7 @@ package resources
 
 import (
 	"fmt"
+	"github.com/KablamoOSS/kombustion/pkg/parsers/properties"
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
 )
@@ -20,16 +21,18 @@ type ApiGatewayStage struct {
 
 // ApiGatewayStage Properties
 type ApiGatewayStageProperties struct {
-	CacheClusterEnabled  interface{} `yaml:"CacheClusterEnabled,omitempty"`
-	CacheClusterSize     interface{} `yaml:"CacheClusterSize,omitempty"`
-	ClientCertificateId  interface{} `yaml:"ClientCertificateId,omitempty"`
-	DeploymentId         interface{} `yaml:"DeploymentId,omitempty"`
-	Description          interface{} `yaml:"Description,omitempty"`
-	DocumentationVersion interface{} `yaml:"DocumentationVersion,omitempty"`
-	RestApiId            interface{} `yaml:"RestApiId"`
-	StageName            interface{} `yaml:"StageName,omitempty"`
-	Variables            interface{} `yaml:"Variables,omitempty"`
-	MethodSettings       interface{} `yaml:"MethodSettings,omitempty"`
+	CacheClusterEnabled  interface{}                       `yaml:"CacheClusterEnabled,omitempty"`
+	CacheClusterSize     interface{}                       `yaml:"CacheClusterSize,omitempty"`
+	ClientCertificateId  interface{}                       `yaml:"ClientCertificateId,omitempty"`
+	DeploymentId         interface{}                       `yaml:"DeploymentId,omitempty"`
+	Description          interface{}                       `yaml:"Description,omitempty"`
+	DocumentationVersion interface{}                       `yaml:"DocumentationVersion,omitempty"`
+	RestApiId            interface{}                       `yaml:"RestApiId"`
+	StageName            interface{}                       `yaml:"StageName,omitempty"`
+	Variables            interface{}                       `yaml:"Variables,omitempty"`
+	MethodSettings       interface{}                       `yaml:"MethodSettings,omitempty"`
+	CanarySetting        *properties.StageCanarySetting    `yaml:"CanarySetting,omitempty"`
+	AccessLogSetting     *properties.StageAccessLogSetting `yaml:"AccessLogSetting,omitempty"`
 }
 
 // NewApiGatewayStage constructor creates a new ApiGatewayStage

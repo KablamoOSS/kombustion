@@ -7,6 +7,7 @@ package properties
 type SpotFleetSpotPlacement struct {
 	AvailabilityZone interface{} `yaml:"AvailabilityZone,omitempty"`
 	GroupName        interface{} `yaml:"GroupName,omitempty"`
+	Tenancy          interface{} `yaml:"Tenancy,omitempty"`
 }
 
 // SpotFleetSpotPlacement validation

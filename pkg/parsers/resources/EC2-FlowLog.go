@@ -20,8 +20,10 @@ type EC2FlowLog struct {
 
 // EC2FlowLog Properties
 type EC2FlowLogProperties struct {
-	DeliverLogsPermissionArn interface{} `yaml:"DeliverLogsPermissionArn"`
-	LogGroupName             interface{} `yaml:"LogGroupName"`
+	DeliverLogsPermissionArn interface{} `yaml:"DeliverLogsPermissionArn,omitempty"`
+	LogDestination           interface{} `yaml:"LogDestination,omitempty"`
+	LogDestinationType       interface{} `yaml:"LogDestinationType,omitempty"`
+	LogGroupName             interface{} `yaml:"LogGroupName,omitempty"`
 	ResourceId               interface{} `yaml:"ResourceId"`
 	ResourceType             interface{} `yaml:"ResourceType"`
 	TrafficType              interface{} `yaml:"TrafficType"`
@@ -96,12 +98,6 @@ func (resource EC2FlowLog) Validate() []error {
 // ParseEC2FlowLogProperties validator
 func (resource EC2FlowLogProperties) Validate() []error {
 	errors := []error{}
-	if resource.DeliverLogsPermissionArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DeliverLogsPermissionArn'"))
-	}
-	if resource.LogGroupName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'LogGroupName'"))
-	}
 	if resource.ResourceId == nil {
 		errors = append(errors, fmt.Errorf("Missing required field 'ResourceId'"))
 	}

@@ -5,6 +5,7 @@ package resources
 
 import (
 	"fmt"
+	"github.com/KablamoOSS/kombustion/pkg/parsers/properties"
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
 )
@@ -20,25 +21,27 @@ type RDSDBCluster struct {
 
 // RDSDBCluster Properties
 type RDSDBClusterProperties struct {
-	BackupRetentionPeriod       interface{} `yaml:"BackupRetentionPeriod,omitempty"`
-	DBClusterIdentifier         interface{} `yaml:"DBClusterIdentifier,omitempty"`
-	DBClusterParameterGroupName interface{} `yaml:"DBClusterParameterGroupName,omitempty"`
-	DBSubnetGroupName           interface{} `yaml:"DBSubnetGroupName,omitempty"`
-	DatabaseName                interface{} `yaml:"DatabaseName,omitempty"`
-	Engine                      interface{} `yaml:"Engine"`
-	EngineVersion               interface{} `yaml:"EngineVersion,omitempty"`
-	KmsKeyId                    interface{} `yaml:"KmsKeyId,omitempty"`
-	MasterUserPassword          interface{} `yaml:"MasterUserPassword,omitempty"`
-	MasterUsername              interface{} `yaml:"MasterUsername,omitempty"`
-	Port                        interface{} `yaml:"Port,omitempty"`
-	PreferredBackupWindow       interface{} `yaml:"PreferredBackupWindow,omitempty"`
-	PreferredMaintenanceWindow  interface{} `yaml:"PreferredMaintenanceWindow,omitempty"`
-	ReplicationSourceIdentifier interface{} `yaml:"ReplicationSourceIdentifier,omitempty"`
-	SnapshotIdentifier          interface{} `yaml:"SnapshotIdentifier,omitempty"`
-	StorageEncrypted            interface{} `yaml:"StorageEncrypted,omitempty"`
-	AvailabilityZones           interface{} `yaml:"AvailabilityZones,omitempty"`
-	Tags                        interface{} `yaml:"Tags,omitempty"`
-	VpcSecurityGroupIds         interface{} `yaml:"VpcSecurityGroupIds,omitempty"`
+	BackupRetentionPeriod       interface{}                               `yaml:"BackupRetentionPeriod,omitempty"`
+	DBClusterIdentifier         interface{}                               `yaml:"DBClusterIdentifier,omitempty"`
+	DBClusterParameterGroupName interface{}                               `yaml:"DBClusterParameterGroupName,omitempty"`
+	DBSubnetGroupName           interface{}                               `yaml:"DBSubnetGroupName,omitempty"`
+	DatabaseName                interface{}                               `yaml:"DatabaseName,omitempty"`
+	Engine                      interface{}                               `yaml:"Engine"`
+	EngineMode                  interface{}                               `yaml:"EngineMode,omitempty"`
+	EngineVersion               interface{}                               `yaml:"EngineVersion,omitempty"`
+	KmsKeyId                    interface{}                               `yaml:"KmsKeyId,omitempty"`
+	MasterUserPassword          interface{}                               `yaml:"MasterUserPassword,omitempty"`
+	MasterUsername              interface{}                               `yaml:"MasterUsername,omitempty"`
+	Port                        interface{}                               `yaml:"Port,omitempty"`
+	PreferredBackupWindow       interface{}                               `yaml:"PreferredBackupWindow,omitempty"`
+	PreferredMaintenanceWindow  interface{}                               `yaml:"PreferredMaintenanceWindow,omitempty"`
+	ReplicationSourceIdentifier interface{}                               `yaml:"ReplicationSourceIdentifier,omitempty"`
+	SnapshotIdentifier          interface{}                               `yaml:"SnapshotIdentifier,omitempty"`
+	StorageEncrypted            interface{}                               `yaml:"StorageEncrypted,omitempty"`
+	ScalingConfiguration        *properties.DBClusterScalingConfiguration `yaml:"ScalingConfiguration,omitempty"`
+	AvailabilityZones           interface{}                               `yaml:"AvailabilityZones,omitempty"`
+	Tags                        interface{}                               `yaml:"Tags,omitempty"`
+	VpcSecurityGroupIds         interface{}                               `yaml:"VpcSecurityGroupIds,omitempty"`
 }
 
 // NewRDSDBCluster constructor creates a new RDSDBCluster

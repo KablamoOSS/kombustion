@@ -9,6 +9,7 @@ import "fmt"
 type DistributionDefaultCacheBehavior struct {
 	Compress                   interface{}                  `yaml:"Compress,omitempty"`
 	DefaultTTL                 interface{}                  `yaml:"DefaultTTL,omitempty"`
+	FieldLevelEncryptionId     interface{}                  `yaml:"FieldLevelEncryptionId,omitempty"`
 	MaxTTL                     interface{}                  `yaml:"MaxTTL,omitempty"`
 	MinTTL                     interface{}                  `yaml:"MinTTL,omitempty"`
 	SmoothStreaming            interface{}                  `yaml:"SmoothStreaming,omitempty"`
