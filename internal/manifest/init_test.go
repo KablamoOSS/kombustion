@@ -95,7 +95,7 @@ func TestInitialiseManifest(t *testing.T) {
 
 	objectStore := coretest.NewMockObjectStore()
 
-	err := initialiseNewManifest(objectStore, testPrompt)
+	err := initialiseNewManifest(objectStore, testPrompt, "kombustion.yaml")
 	assert.Nil(t, err)
 
 	data, err := objectStore.Get("kombustion.yaml")

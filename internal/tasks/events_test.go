@@ -63,11 +63,12 @@ func TestEventsTask(t *testing.T) {
 			printEvents(
 				objectStore,
 				eventer,
-				"test.yaml",   // templatePath
-				"event-stack", // stackName
-				"ci",          // envName
-				"profile",     // profile
-				"region",      // region
+				"test.yaml",       // templatePath
+				"event-stack",     // stackName
+				"ci",              // envName
+				"profile",         // profile
+				"region",          // region
+				"kombustion.yaml", // manifest location
 			)
 		},
 	)
@@ -89,11 +90,12 @@ func TestEventsTaskNotFound(t *testing.T) {
 			printEvents(
 				objectStore,
 				eventer,
-				"test.yaml",   // templatePath
-				"event-stack", // stackName
-				"ci",          // envName
-				"profile",     // profile
-				"region",      // region
+				"test.yaml",       // templatePath
+				"event-stack",     // stackName
+				"ci",              // envName
+				"profile",         // profile
+				"region",          // region
+				"kombustion.yaml", // manifest location
 			)
 		},
 	)

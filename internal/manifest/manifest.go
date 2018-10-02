@@ -2,44 +2,35 @@ package manifest
 
 import (
 	"fmt"
+
 	"github.com/KablamoOSS/kombustion/internal/core"
 
 	yaml "github.com/KablamoOSS/yaml"
 )
 
-func CheckManifestExists(objectStore core.ObjectStore) bool {
-	data, err := GetManifestObject(objectStore)
+func CheckManifestExists(objectStore core.ObjectStore, manifestLocation string) bool {
+	data, err := GetManifestObject(objectStore, manifestLocation)
 	if err != nil {
 		return false
 	}
 	return data != nil
 }
 
-func GetManifestObject(objectStore core.ObjectStore, path ...string) (*Manifest, error) {
+func GetManifestObject(objectStore core.ObjectStore, manifestLocation string, path ...string) (*Manifest, error) {
 	var manifest Manifest
 	var err error
 
-	ymlpath := append(path, "kombustion.yml")
-	ymldata, err := objectStore.Get(ymlpath[0], ymlpath[1:]...)
-	if err != nil {
-		return &Manifest{}, fmt.Errorf("kombustion.yml: %v", err)
-	}
-
 	// Read the manifest file
-	yamlpath := append(path, "kombustion.yaml")
+	yamlpath := append(path, manifestLocation)
 	yamldata, err := objectStore.Get(yamlpath[0], yamlpath[1:]...)
 	if err != nil {
-		return &Manifest{}, fmt.Errorf("kombustion.yaml: %v", err)
+		return &Manifest{}, fmt.Errorf("%v: %v", manifestLocation, err)
 	}
 
-	if ymldata != nil && yamldata != nil {
-		return &Manifest{}, fmt.Errorf("there are both kombustion.yaml && kombustion.yml files, please remove one")
-	} else if ymldata != nil {
-		manifest, err = unmarshalManifest(ymldata)
-	} else if yamldata != nil {
+	if yamldata != nil {
 		manifest, err = unmarshalManifest(yamldata)
 	} else {
-		return &Manifest{}, fmt.Errorf("kombustion.yaml was not found")
+		return &Manifest{}, fmt.Errorf("%v was not found", manifestLocation)
 	}
 
 	if err != nil {

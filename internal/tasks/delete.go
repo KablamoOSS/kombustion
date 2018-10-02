@@ -37,6 +37,7 @@ func Delete(c *cli.Context) {
 	region := c.String("region")
 	envName := c.String("environment")
 	stackName := c.String("stack-name")
+	manifestFile := c.GlobalString("manifest-file")
 
 	taskDelete(
 		client,
@@ -46,6 +47,7 @@ func Delete(c *cli.Context) {
 		stackName,
 		region,
 		envName,
+		manifestFile,
 	)
 }
 
@@ -57,10 +59,11 @@ func taskDelete(
 	stackName string,
 	region string,
 	envName string,
+	manifestLocation string,
 ) {
 	printer.Progress("Kombusting")
 
-	manifestFile, err := manifest.GetManifestObject(objectStore)
+	manifestFile, err := manifest.GetManifestObject(objectStore, manifestLocation)
 	if err != nil {
 		printer.Fatal(err, config.ErrorHelpInfo, "")
 	}

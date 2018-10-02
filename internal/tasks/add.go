@@ -15,22 +15,23 @@ import (
 func AddPluginToManifest(c *cli.Context) error {
 	// Get the plugin to add
 	pluginNames := c.Args()
+	manifestLocation := c.GlobalString("manifest-file")
 
 	objectStore := core.NewFilesystemStore(".")
-	addPluginToManifest(objectStore, pluginNames)
+	addPluginToManifest(objectStore, pluginNames, manifestLocation)
 	return nil
 }
 
-func addPluginToManifest(objectStore core.ObjectStore, pluginNames []string) {
+func addPluginToManifest(objectStore core.ObjectStore, pluginNames []string, manifestLocation string) {
 	printer.Step("Add plugins")
 	// Try and load the manifest
-	manifestFile, err := manifest.GetManifestObject(objectStore)
+	manifestFile, err := manifest.GetManifestObject(objectStore, manifestLocation)
 	if err != nil {
 		printer.Fatal(err, config.ErrorHelpInfo, "")
 	}
 
 	// Add them
-	_, err = plugins.AddPluginsToManifest(objectStore, manifestFile, pluginNames)
+	_, err = plugins.AddPluginsToManifest(objectStore, manifestFile, pluginNames, manifestLocation)
 	if err != nil {
 		printer.Fatal(err, config.ErrorHelpInfo, "")
 	}

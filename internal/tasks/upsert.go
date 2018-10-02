@@ -79,6 +79,7 @@ func Upsert(c *cli.Context) {
 	generateDefaultOutputs := c.Bool("generate-default-outputs")
 	capabilities := getCapabilities(c)
 	confirm := c.Bool("confirm")
+	manifestFile := c.GlobalString("manifest-file")
 
 	client := &cloudformation.Wrapper{}
 
@@ -97,6 +98,7 @@ func Upsert(c *cli.Context) {
 		generateDefaultOutputs,
 		capabilities,
 		confirm,
+		manifestFile,
 	)
 }
 func upsert(
@@ -114,6 +116,7 @@ func upsert(
 	generateDefaultOutputs bool,
 	capabilities []*string,
 	confirm bool,
+	manifestLocation string,
 ) {
 	printer.Progress("Kombusting")
 
@@ -127,7 +130,7 @@ func upsert(
 	}
 
 	// manifestFile := manifest.FindAndLoadManifest()
-	manifestFile, err := manifest.GetManifestObject(objectStore)
+	manifestFile, err := manifest.GetManifestObject(objectStore, manifestLocation)
 	if err != nil {
 		printer.Fatal(
 			fmt.Errorf("Couldn't load manifest file: %v", err),
@@ -189,9 +192,9 @@ func upsert(
 	printer.Progress("Generating template")
 	// Template generation parameters
 	generateParams := cloudformation.GenerateParams{
-		ObjectStore:            objectStore,
-		Filename:               templatePath,
-		Env:                    envName,
+		ObjectStore: objectStore,
+		Filename:    templatePath,
+		Env:         envName,
 		GenerateDefaultOutputs: generateDefaultOutputs || manifestFile.GenerateDefaultOutputs,
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,
