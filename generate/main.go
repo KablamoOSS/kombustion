@@ -43,6 +43,12 @@ func main() {
 	log.Println("Load and de-dupe the specification")
 	cfnSpec = buildUniqueSet(sourceDir, cfnEndpoints)
 
+	// Temporary fix for https://github.com/KablamoOSS/kombustion/issues/121
+	if cfnSpec.ResourceTypes["AWS::EC2::VPCEndpoint"].Properties["VPCEndpointType"].Documentation != "" {
+		cfnSpec.ResourceTypes["AWS::EC2::VPCEndpoint"].Properties["VpcEndpointType"] = cfnSpec.ResourceTypes["AWS::EC2::VPCEndpoint"].Properties["VPCEndpointType"]
+		delete(cfnSpec.ResourceTypes["AWS::EC2::VPCEndpoint"].Properties, "VPCEndpointType")
+	}
+
 	// Build the Yaml Parsers
 	log.Println("Build the Yaml Parsers")
 	buildYamlParsers(cfnSpec)
