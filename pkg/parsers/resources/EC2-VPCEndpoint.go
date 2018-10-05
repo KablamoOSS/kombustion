@@ -23,7 +23,7 @@ type EC2VPCEndpointProperties struct {
 	PolicyDocument    interface{} `yaml:"PolicyDocument,omitempty"`
 	PrivateDnsEnabled interface{} `yaml:"PrivateDnsEnabled,omitempty"`
 	ServiceName       interface{} `yaml:"ServiceName"`
-	VPCEndpointType   interface{} `yaml:"VPCEndpointType,omitempty"`
+	VpcEndpointType   interface{} `yaml:"VpcEndpointType,omitempty"`
 	VpcId             interface{} `yaml:"VpcId"`
 	RouteTableIds     interface{} `yaml:"RouteTableIds,omitempty"`
 	SecurityGroupIds  interface{} `yaml:"SecurityGroupIds,omitempty"`

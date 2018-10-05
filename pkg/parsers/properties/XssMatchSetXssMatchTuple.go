@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// XssMatchSetXssMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-xssmatchset-xssmatchtuple.html
+// XssMatchSetXssMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple.html
 type XssMatchSetXssMatchTuple struct {
 	TextTransformation interface{}              `yaml:"TextTransformation"`
 	FieldToMatch       *XssMatchSetFieldToMatch `yaml:"FieldToMatch"`
