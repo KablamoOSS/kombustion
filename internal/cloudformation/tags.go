@@ -20,7 +20,7 @@ func registerYamlTagUnmarshalers() {
 	yaml.RegisterTagUnmarshaler("!FindInMap", intrinsicFn("Fn::FindInMap"))
 	yaml.RegisterTagUnmarshaler("!Join", intrinsicFn("Fn::Join"))
 	yaml.RegisterTagUnmarshaler("!Select", intrinsicFn("Fn::Select"))
-	yaml.RegisterTagUnmarshaler("!Condition", intrinsicFn("Fn::Condition"))
+	yaml.RegisterTagUnmarshaler("!Condition", intrinsicFn("Condition"))
 	yaml.RegisterTagUnmarshaler("!Split", intrinsicFn("Fn::Split"))
 	yaml.RegisterTagUnmarshaler("!Sub", intrinsicFn("Fn::Sub"))
 	yaml.RegisterTagUnmarshaler("!And", intrinsicFn("Fn::And"))
