@@ -6,11 +6,14 @@ type Validatable interface {
 
 // CfResource - A CloudFormation Resource
 type CfResource struct {
-	Type       string      `yaml:"Type"`
-	Properties interface{} `yaml:"Properties"`
-	Condition  interface{} `yaml:"Condition,omitempty"`
-	Metadata   interface{} `yaml:"Metadata,omitempty"`
-	DependsOn  interface{} `yaml:"DependsOn,omitempty"`
+	Type           string      `yaml:"Type"`
+	Properties     interface{} `yaml:"Properties"`
+	Condition      interface{} `yaml:"Condition,omitempty"`
+	Metadata       interface{} `yaml:"Metadata,omitempty"`
+	DependsOn      interface{} `yaml:"DependsOn,omitempty"`
+	CreationPolicy interface{} `yaml:"CreationPolicy,omitempty"`
+	UpdatePolicy   interface{} `yaml:"UpdatePolicy,omitempty"`
+	DeletionPolicy interface{} `yaml:"DeletionPolicy,omitempty"`
 }
 
 // ResourceMap - a map of resouces
