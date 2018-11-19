@@ -1,10 +1,12 @@
 package tasks
 
 import (
+	"fmt"
 	"testing"
 
-	"github.com/KablamoOSS/kombustion/internal/coretest"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/KablamoOSS/kombustion/internal/coretest"
 )
 
 var sampleKombYaml = `---
@@ -23,7 +25,7 @@ var sampleKombLock = `plugins: {}`
 var sampleYaml = `AWSTemplateFormatVersion: 2010-09-09
 Description: S3 test bucket
 Parameters:
-  BucketName: 
+  BucketName:
     Type: "String"
     Default: "testBucket"
     Description: "S3 bucket name"
@@ -68,33 +70,74 @@ var expectedParameterOutput = `[
   }
 ]`
 
-func TestSimpleGenerate(t *testing.T) {
+// func TestSimpleGenerate(t *testing.T) {
+// 	objectStore := coretest.NewMockObjectStore()
+// 	objectStore.Put([]byte(sampleKombYaml), "kombustion.yaml")
+// 	objectStore.Put([]byte(sampleKombLock), "kombustion.lock")
+// 	objectStore.Put([]byte(sampleYaml), "test.yaml")
+
+// 	assert.NotPanics(
+// 		t,
+// 		func() {
+// 			generate(
+// 				objectStore,         // objectStore
+// 				"test.yaml",         // templatePath
+// 				map[string]string{}, // cliParams
+// 				"",                  // paramsPath
+// 				"",                  // devPluginPath
+// 				"compiled",          // outputDirectory
+// 				true,                // ouputParameters
+// 				"ci",                // envName
+// 				false,               // generateDefaultOutputs
+// 				"kombustion.yaml",   // manifest location
+// 			)
+// 		},
+// 	)
+
+// 	output, _ := objectStore.Get("compiled", "test.yaml")
+// 	assert.Equal(t, expectedOutput, string(output))
+
+// 	output, _ = objectStore.Get("compiled", "test-params.json")
+// 	assert.Equal(t, expectedParameterOutput, string(output))
+// }
+
+func TestGenerateTemplates(t *testing.T) {
 	objectStore := coretest.NewMockObjectStore()
 	objectStore.Put([]byte(sampleKombYaml), "kombustion.yaml")
 	objectStore.Put([]byte(sampleKombLock), "kombustion.lock")
-	objectStore.Put([]byte(sampleYaml), "test.yaml")
 
-	assert.NotPanics(
-		t,
-		func() {
-			generate(
-				objectStore,         // objectStore
-				"test.yaml",         // templatePath
-				map[string]string{}, // cliParams
-				"",                  // paramsPath
-				"",                  // devPluginPath
-				"compiled",          // outputDirectory
-				true,                // ouputParameters
-				"ci",                // envName
-				false,               // generateDefaultOutputs
-				"kombustion.yaml",   // manifest location
-			)
+	tests := []struct {
+		templateFile      string
+		generatedTemplate string
+	}{
+		{
+			templateFile:      "testdata/generate/kinesis-firehose.yaml",
+			generatedTemplate: "testdata/generate/kinesis-firehose.generated.yaml",
 		},
-	)
+	}
 
-	output, _ := objectStore.Get("compiled", "test.yaml")
-	assert.Equal(t, expectedOutput, string(output))
+	for i, test := range tests {
+		assert := assert.New(t)
 
-	output, _ = objectStore.Get("compiled", "test-params.json")
-	assert.Equal(t, expectedParameterOutput, string(output))
+		objectStore.PutFile(test.templateFile, "template.yaml")
+		objectStore.PutFile(test.generatedTemplate, "expected.yaml")
+
+		generate(
+			objectStore,         // objectStore
+			"template.yaml",     // templatePath
+			map[string]string{}, // cliParams
+			"",                  // paramsPath
+			"",                  // devPluginPath
+			"compiled",          // outputDirectory
+			true,                // ouputParameters
+			"ci",                // envName
+			false,               // generateDefaultOutputs
+			"kombustion.yaml",   // manifest location
+		)
+
+		output, _ := objectStore.Get("compiled", "template.yaml")
+
+		expectedOutput, _ := objectStore.Get("expected.yaml")
+		assert.Equal(t, expectedOutput, string(output), fmt.Sprintf("Failed generating template: Test #%d", i))
+	}
 }

@@ -1,0 +1,242 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Kinesis Firehose delivery stream to S3 bucket
+Parameters:
+  BufferingInterval:
+    Description: For how long in seconds Kinesis Firehose buffers incoming data
+      before delivering it to the destination
+    Type: String
+    Default: '300'
+  BufferingSizeMb:
+    Description: Buffer in MBs, for Kinesis Firehose to use for incoming data
+      before delivering it to the destination
+    Type: String
+    Default: '5'
+  Name:
+    Description: Kinesis Firehose stream name
+    Type: String
+    Default: ''
+  CloudWatchLogGroup:
+    Description: CloudWatch log group for Kinesis Firehose to log to
+    Type: String
+    Default: ''
+  CloudWatchLogStream:
+    Description: CloudWatch log stream name for Kinesis Firehose to log to
+    Type: String
+    Default: ''
+  CompressionFormat:
+    Description: Compression format
+    Type: String
+    Default: UNCOMPRESSED
+    AllowedValues:
+      - UNCOMPRESSED
+      - GZIP
+      - ZIP
+      - Snappy
+  KinesisStreamSourceArn:
+    Description: Source Kinesis stream ARN
+    Type: String
+    Default: ''
+  KMSKeyArn:
+    Description: KMS Key Arn for encrypting the files
+    Type: String
+    Default: ''
+  TargetS3AccessControl:
+    Type: String
+    Description: The canned access control list (ACL) that grants predefined
+      permissions to the S3 destination bucket
+    Default: ""
+  TargetS3Bucket:
+    Description: S3 bucket to send data to
+    Type: String
+  TargetS3BucketCreate:
+    Description: Whether to create the destination S3 bucket
+    Type: String
+    Default: 'false'
+    AllowedValues:
+      - 'true'
+      - 'false'
+  TargetS3BucketEncryption:
+    Type: String
+    Description: Whether enable server-side bucket encryption on destination S3
+      bucket
+    Default: "aws:kms"
+    AllowedValues:
+      - "false"
+      - "aws:kms"
+      - "AES256"
+  TargetS3Prefix:
+    Description: A prefix to add to the files for delivery into the destination
+      S3 bucket
+    Type: String
+    Default: ''
+  TargetS3GlacierTransition:
+    Type: String
+    Description: Glacier transitioning in days for S3 destination bucket,
+      leave blank for no transition
+    Default: ""
+  TargetS3StandardIATransition:
+    Type: String
+    Description: Transitioning to standard IA in days for S3 destination bucket,
+      leave blank for no transition
+    Default: ""
+  Type:
+    Description: Kinesis Firehose stream type
+    Type: String
+    AllowedValues:
+      - DirectPut
+      - KinesisStreamAsSource
+    Default: DirectPut
+Conditions:
+  TargetS3AccessControlIsDefined: !Not [ !Equals [ "", !Ref TargetS3AccessControl ] ]
+  TargetS3BucketEncryptionIsOn: !Not [ !Equals [ "false", !Ref TargetS3BucketEncryption ] ]
+  TargetS3GlacierTransitionIsDefined: !Not [ !Equals [ "", !Ref TargetS3GlacierTransition ] ]
+  TargetS3StandardIATransitionIsDefined: !Not [ !Equals [ "", !Ref TargetS3StandardIATransition ] ]
+  LifecycleConfigurationIsDefined: !Or
+    - !Condition TargetS3GlacierTransitionIsDefined
+    - !Condition TargetS3StandardIATransitionIsDefined
+  CloudWatchLoggingIsEnabled: !And
+    - !Not [ !Equals [ '', !Ref CloudWatchLogGroup ] ]
+    - !Not [ !Equals [ '', !Ref CloudWatchLogStream ] ]
+  NameIsDefined: !Not [ !Equals [ '', !Ref Name ] ]
+  KinesisStreamAsSourceIsDefined: !And
+    - !Equals [ 'KinesisStreamAsSource', Type ]
+    - !Not [ !Equals [ '', !Ref KinesisStreamSourceArn ] ]
+  KMSKeyArnIsDefined: !Not [ !Equals [ '', !Ref KMSKeyArn ] ]
+  TargetS3PrefixIsDefined: !Not [ !Equals [ '', !Ref TargetS3Prefix ] ]
+  TargetS3BucketCreate: !Not [ !Equals [ 'false', !Ref TargetS3BucketCreate ] ]
+Resources:
+  KinesisFirehoseStream:
+    Type: "AWS::KinesisFirehose::DeliveryStream"
+    Properties:
+      DeliveryStreamName: !If
+        - NameIsDefined
+        - !Ref Name
+        - !Ref AWS::NoValue
+      DeliveryStreamType: !Ref Type
+     KinesisStreamSourceConfiguration: !If
+       - KinesisStreamAsSource
+       - KinesisStreamARN: !Ref KinesisStreamSourceArn
+         RoleARN: !GetAtt 'KinesisFirehoseRole.Arn'
+       - !Ref AWS::NoValue
+      S3DestinationConfiguration:
+        BucketARN: !Sub "arn:aws:s3:::${TargetS3Bucket}"
+        BufferingHints:
+          IntervalInSeconds: !Ref BufferingInterval
+          SizeInMBs: !Ref BufferingSizeMb
+       CloudWatchLoggingOptions: !If
+         - CloudWatchLoggingIsEnabled
+         - Enabled: 'true'
+           LogGroupName: !Ref CloudWatchLogGroup
+           LogStreamName: !Ref CloudWatchLogStream
+         - !Ref AWS::NoValue
+       EncryptionConfiguration: !If
+         - KMSKeyArnIsDefined
+         - KMSEncryptionConfig:
+             AWSKMSKeyARN: !Ref KMSKeyArn
+         - !Ref AWS::NoValue
+        CompressionFormat: !Ref CompressionFormat
+        Prefix: !If
+          - TargetS3PrefixIsDefined
+          - !Ref TargetS3Prefix
+          - !Ref AWS::NoValue
+        RoleARN: !GetAtt 'KinesisFirehoseRole.Arn'
+  KinesisFirehoseRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - firehose.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      Policies:
+        - !If
+          - KinesisStreamAsSourceIsDefined
+          - PolicyName: KinesisStreamSourceAccess
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - kinesis:Describe*
+                    - kinesis:Get*
+                    - kinesis:List*
+                  Resource: !Ref KinesisStreamSourceArn
+          - !Ref AWS::NoValue
+        - !If
+          - KMSKeyArnIsDefined
+          - PolicyName: KMSAccess
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - kms:DescribeKey
+                    - kms:Encrypt
+                    - kms:GenerateDataKey
+                  Resource: !Ref KMSKeyArn
+          - !Ref AWS::NoValue
+        - PolicyName: TargetS3BucketAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                Resource: !Sub "arn:aws:s3:::${TargetS3Bucket}/*"
+  S3Bucket:
+    Condition: TargetS3BucketCreate
+    Type: "AWS::S3::Bucket"
+    Properties:
+      AccessControl: !If
+        - TargetS3AccessControlIsDefined
+        - !Ref TargetS3AccessControl
+        - !Ref AWS::NoValue
+      BucketName: !Ref TargetS3Bucket
+      LifecycleConfiguration:
+        Rules: !If
+          - LifecycleConfigurationIsDefined
+          -
+            - Id: Archive to Glacier/StandardIA
+              Prefix: ''
+              Status: Enabled
+              Transitions:
+                - !If
+                  - TargetS3StandardIATransitionIsDefined
+                  - StorageClass: STANDARD_IA
+                    TransitionInDays: !Ref TargetS3StandardIATransition
+                  - !Ref AWS::NoValue
+                - !If
+                  - TargetS3GlacierTransitionIsDefined
+                  - StorageClass: GLACIER
+                    TransitionInDays: !Ref TargetS3GlacierTransition
+                  - !Ref AWS::NoValue
+          - !Ref AWS::NoValue
+      BucketEncryption:
+        ServerSideEncryptionConfiguration: !If
+          - TargetS3BucketEncryptionIsOn
+          -
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: !Ref TargetS3BucketEncryption
+          - !Ref AWS::NoValue
+      Tags:
+        - Key: "Name"
+          Value: !Ref TargetS3Bucket
+Outputs:
+  KinesisName:
+    Description: Name of the created Kinesis Firehose Stream name
+    Value: !Ref KinesisFirehoseStream
+    Export:
+      Name: !Sub "${AWS::StackName}-KinesisName"
+  KinesisARN:
+    Description: ARN of the created Kinesis Stream
+    Value:
+      Fn::GetAtt:
+        - KinesisFirehoseStream
+        - Arn
+    Export:
+      Name: !Sub "${AWS::StackName}-KinesisArn"

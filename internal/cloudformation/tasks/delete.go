@@ -2,13 +2,14 @@ package tasks
 
 import (
 	"fmt"
-	printer "github.com/KablamoOSS/go-cli-printer"
 	"os"
 	"time"
 
-	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
+
+	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 )
 
 // DeleteStack removes a cloudformation stack
@@ -31,15 +32,15 @@ func DeleteStack(client cloudformation.StackDeleter, stackName, region string) {
 		status, err := client.DescribeStacks(&awsCF.DescribeStacksInput{StackName: aws.String(stackName)})
 		checkErrorDeletePoll(err)
 
-		events, err := client.DescribeStackEvents(
-			&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)},
-		)
-		checkError(err)
-
 		if len(status.Stacks) > 0 {
+			events, err := client.DescribeStackEvents(
+				&awsCF.DescribeStackEventsInput{StackName: aws.String(stackName)},
+			)
+			checkErrorDeletePoll(err)
+
 			stackStatus := *status.Stacks[0].StackStatus
 
-			if len(events.StackEvents) > 0 {
+			if events != nil && len(events.StackEvents) > 0 {
 				PrintStackEvent(events.StackEvents[0], false)
 			}
 			if stackStatus == awsCF.StackStatusDeleteInProgress {
