@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"testing"
 
-	printer "github.com/KablamoOSS/go-cli-printer"
-	"github.com/KablamoOSS/kombustion/internal/coretest"
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/stretchr/testify/assert"
+
+	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/internal/coretest"
 )
 
 type MockStackUpserter struct {
@@ -194,3 +195,38 @@ func TestUpsert(t *testing.T) {
 		},
 	)
 }
+
+// func TestUpsertFileNotFound(t *testing.T) {
+// 	printer.Test()
+// 	client := &MockStackUpserter{
+// 		AcctID: "12345",
+// 	}
+
+// 	objectStore := coretest.NewMockObjectStore()
+// 	objectStore.Put([]byte(sampleKombYaml), "kombustion.yaml")
+// 	objectStore.Put([]byte(sampleKombLock), "kombustion.lock")
+// 	objectStore.Put([]byte(sampleYaml), "test.yaml")
+
+// 	assert.NotPanics(
+// 		t,
+// 		func() {
+// 			upsert(
+// 				client,
+// 				objectStore,
+// 				"test.yaml",         // fileName
+// 				"foo-stack",         //stackName
+// 				"profile",           // profile
+// 				"region",            // region
+// 				map[string]string{}, // paramsMap
+// 				"",                  // inputParameters
+// 				map[string]string{}, // tagsMap
+// 				"",                  // devPluginPath
+// 				"ci",                // envName
+// 				false,               // generateDefaultOutputs
+// 				[]*string{},         // capabilities
+// 				false,               // confirm
+// 				"kombustion.yaml",   // manifest location
+// 			)
+// 		},
+// 	)
+// }

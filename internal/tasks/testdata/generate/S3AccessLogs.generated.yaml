@@ -1,0 +1,196 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Access logs S3 Bucket
+Parameters:
+  AccessControl:
+    Default: ""
+    Description: The canned access control list (ACL) that grants predefined permissions
+      to the bucket.
+    Type: String
+  BucketEncryption:
+    AllowedValues:
+    - "false"
+    - aws:kms
+    - AES256
+    Default: aws:kms
+    Description: Whether server-side bucket encryption is on by default
+    Type: String
+  BucketName:
+    Default: ""
+    Description: Bucket Name (optional). If not provided CloudFormaiton will generate
+      one
+    Type: String
+  DenyInSecureQueries:
+    AllowedValues:
+    - "true"
+    - "false"
+    Default: "true"
+    Description: Whether to deny insecure requests to S3 bucket
+    Type: String
+  GlacierTransition:
+    Default: ""
+    Description: Glacier transitioning in days, leave blank for no transition
+    Type: String
+  LoggingBucket:
+    Default: ""
+    Description: Amazon S3 bucket where Amazon S3 store server access log files
+    Type: String
+  LoggingPrefix:
+    Default: ""
+    Description: prefix for the all log object keys in the S3 logging bucket
+    Type: String
+  StandardIATransition:
+    Default: ""
+    Description: Transitioning to standard IA in days, leave blank for no transition
+    Type: String
+  VersioningConfiguration:
+    Default: ""
+    Description: Enable versioning to prevent objects from being deleted or overwritten
+      by mistake.
+    Type: String
+Conditions:
+  AccessControlIsDefined:
+    Fn::Not:
+    - Fn::Equals:
+      - ""
+      - Ref: AccessControl
+  BucketEncryptionIsOn:
+    Fn::Not:
+    - Fn::Equals:
+      - "false"
+      - Ref: BucketEncryption
+  BucketNameIsDefined:
+    Fn::Not:
+    - Fn::Equals:
+      - ""
+      - Ref: BucketName
+  GlacierTransitionIsDefined:
+    Fn::Not:
+    - Fn::Equals:
+      - ""
+      - Ref: GlacierTransition
+  LifecycleConfigurationIsDefined:
+    Fn::Or:
+    - Condition: GlacierTransitionIsDefined
+    - Condition: StandardIATransitionIsDefined
+  LoggingBucketIsDefined:
+    Fn::Not:
+    - Fn::Equals:
+      - ""
+      - Ref: LoggingBucket
+  LoggingPrefixIsDefined:
+    Fn::Not:
+    - Fn::Equals:
+      - ""
+      - Ref: LoggingPrefix
+  SecureTransportOnly:
+    Fn::And:
+    - Condition: BucketEncryptionIsOn
+    - Fn::Not:
+      - Fn::Equals:
+        - "false"
+        - Ref: DenyInSecureQueries
+  StandardIATransitionIsDefined:
+    Fn::Not:
+    - Fn::Equals:
+      - ""
+      - Ref: StandardIATransition
+  VersioningConfigurationIsDefined:
+    Fn::Not:
+    - Fn::Equals:
+      - ""
+      - Ref: VersioningConfiguration
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl:
+        Fn::If:
+        - AccessControlIsDefined
+        - Ref: AccessControl
+        - Ref: AWS::NoValue
+      BucketName:
+        Fn::If:
+        - BucketNameIsDefined
+        - Ref: BucketName
+        - Ref: AWS::NoValue
+      VersioningConfiguration:
+        Status:
+          Fn::If:
+          - VersioningConfigurationIsDefined
+          - Ref: VersioningConfiguration
+          - Ref: AWS::NoValue
+      LoggingConfiguration: {}
+      Tags:
+        Fn::If:
+        - BucketNameIsDefined
+        - - Key: Name
+            Value:
+              Ref: BucketName
+        - Ref: AWS::NoValue
+      LifecycleConfiguration:
+        Rules:
+          Fn::If:
+          - LifecycleConfigurationIsDefined
+          - - Id: Archive to Glacier/StandardIA
+              Prefix: ""
+              Status: Enabled
+              Transitions:
+              - Fn::If:
+                - StandardIATransitionIsDefined
+                - StorageClass: STANDARD_IA
+                  TransitionInDays:
+                    Ref: StandardIATransition
+                - Ref: AWS::NoValue
+              - Fn::If:
+                - GlacierTransitionIsDefined
+                - StorageClass: GLACIER
+                  TransitionInDays:
+                    Ref: GlacierTransition
+                - Ref: AWS::NoValue
+          - Ref: AWS::NoValue
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          Fn::If:
+          - BucketEncryptionIsOn
+          - - ServerSideEncryptionByDefault:
+                SSEAlgorithm:
+                  Ref: BucketEncryption
+          - Ref: AWS::NoValue
+  S3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: S3Bucket
+      PolicyDocument:
+        Statement:
+        - Fn::If:
+          - SecureTransportOnly
+          - Action: s3:*
+            Condition:
+              Bool:
+                aws:SecureTransport: "false"
+            Effect: Deny
+            Principal: '*'
+            Resource:
+              Fn::Sub: arn:aws:s3:::${S3Bucket}/*
+          - Ref: AWS::NoValue
+        - Action: s3:PutObject
+          Effect: Allow
+          Principal:
+            AWS: arn:aws:iam::000000000000:root
+          Resource:
+          - Fn::Sub: arn:aws:s3:::${S3Bucket}/AWSLogs/*
+    DependsOn: S3Bucket
+Outputs:
+  S3Bucket:
+    Export:
+      Name:
+        Fn::Sub: ${AWS::StackName}::S3Bucket
+    Value:
+      Ref: S3Bucket
+  S3BucketPolicy:
+    Export:
+      Name:
+        Fn::Sub: ${AWS::StackName}::S3BucketPolicy
+    Value:
+      Ref: S3BucketPolicy
