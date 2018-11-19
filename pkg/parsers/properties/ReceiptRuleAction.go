@@ -5,13 +5,13 @@ package properties
 
 // ReceiptRuleAction Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-action.html
 type ReceiptRuleAction struct {
-	WorkmailAction  *ReceiptRuleWorkmailAction  `yaml:"WorkmailAction,omitempty"`
-	StopAction      *ReceiptRuleStopAction      `yaml:"StopAction,omitempty"`
-	SNSAction       *ReceiptRuleSNSAction       `yaml:"SNSAction,omitempty"`
-	S3Action        *ReceiptRuleS3Action        `yaml:"S3Action,omitempty"`
-	LambdaAction    *ReceiptRuleLambdaAction    `yaml:"LambdaAction,omitempty"`
-	BounceAction    *ReceiptRuleBounceAction    `yaml:"BounceAction,omitempty"`
-	AddHeaderAction *ReceiptRuleAddHeaderAction `yaml:"AddHeaderAction,omitempty"`
+	WorkmailAction  interface{} `yaml:"WorkmailAction,omitempty"`
+	StopAction      interface{} `yaml:"StopAction,omitempty"`
+	SNSAction       interface{} `yaml:"SNSAction,omitempty"`
+	S3Action        interface{} `yaml:"S3Action,omitempty"`
+	LambdaAction    interface{} `yaml:"LambdaAction,omitempty"`
+	BounceAction    interface{} `yaml:"BounceAction,omitempty"`
+	AddHeaderAction interface{} `yaml:"AddHeaderAction,omitempty"`
 }
 
 // ReceiptRuleAction validation

@@ -5,10 +5,10 @@ package properties
 
 // LaunchTemplateBlockDeviceMapping Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-blockdevicemapping.html
 type LaunchTemplateBlockDeviceMapping struct {
-	DeviceName  interface{}        `yaml:"DeviceName,omitempty"`
-	NoDevice    interface{}        `yaml:"NoDevice,omitempty"`
-	VirtualName interface{}        `yaml:"VirtualName,omitempty"`
-	Ebs         *LaunchTemplateEbs `yaml:"Ebs,omitempty"`
+	DeviceName  interface{} `yaml:"DeviceName,omitempty"`
+	NoDevice    interface{} `yaml:"NoDevice,omitempty"`
+	VirtualName interface{} `yaml:"VirtualName,omitempty"`
+	Ebs         interface{} `yaml:"Ebs,omitempty"`
 }
 
 // LaunchTemplateBlockDeviceMapping validation

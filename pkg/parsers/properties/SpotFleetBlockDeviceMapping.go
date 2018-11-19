@@ -7,18 +7,15 @@ import "fmt"
 
 // SpotFleetBlockDeviceMapping Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-blockdevicemappings.html
 type SpotFleetBlockDeviceMapping struct {
-	DeviceName  interface{}              `yaml:"DeviceName"`
-	NoDevice    interface{}              `yaml:"NoDevice,omitempty"`
-	VirtualName interface{}              `yaml:"VirtualName,omitempty"`
-	Ebs         *SpotFleetEbsBlockDevice `yaml:"Ebs,omitempty"`
+	DeviceName  interface{} `yaml:"DeviceName"`
+	NoDevice    interface{} `yaml:"NoDevice,omitempty"`
+	VirtualName interface{} `yaml:"VirtualName,omitempty"`
+	Ebs         interface{} `yaml:"Ebs,omitempty"`
 }
 
 // SpotFleetBlockDeviceMapping validation
 func (resource SpotFleetBlockDeviceMapping) Validate() []error {
 	errors := []error{}
 
-	if resource.DeviceName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DeviceName'"))
-	}
 	return errors
 }

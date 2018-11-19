@@ -15,11 +15,5 @@ type MicrosoftADVpcSettings struct {
 func (resource MicrosoftADVpcSettings) Validate() []error {
 	errors := []error{}
 
-	if resource.VpcId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'VpcId'"))
-	}
-	if resource.SubnetIds == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SubnetIds'"))
-	}
 	return errors
 }

@@ -16,8 +16,5 @@ type ServiceAwsVpcConfiguration struct {
 func (resource ServiceAwsVpcConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.Subnets == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Subnets'"))
-	}
 	return errors
 }

@@ -18,14 +18,5 @@ type ScalingPlanCustomizedScalingMetricSpecification struct {
 func (resource ScalingPlanCustomizedScalingMetricSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.MetricName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MetricName'"))
-	}
-	if resource.Namespace == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Namespace'"))
-	}
-	if resource.Statistic == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Statistic'"))
-	}
 	return errors
 }

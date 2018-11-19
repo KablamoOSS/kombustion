@@ -15,11 +15,5 @@ type RuleRunCommandTarget struct {
 func (resource RuleRunCommandTarget) Validate() []error {
 	errors := []error{}
 
-	if resource.Key == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Key'"))
-	}
-	if resource.Values == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Values'"))
-	}
 	return errors
 }

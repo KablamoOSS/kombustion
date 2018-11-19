@@ -5,7 +5,7 @@ package properties
 
 // BucketServerSideEncryptionRule Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionrule.html
 type BucketServerSideEncryptionRule struct {
-	ServerSideEncryptionByDefault *BucketServerSideEncryptionByDefault `yaml:"ServerSideEncryptionByDefault,omitempty"`
+	ServerSideEncryptionByDefault interface{} `yaml:"ServerSideEncryptionByDefault,omitempty"`
 }
 
 // BucketServerSideEncryptionRule validation

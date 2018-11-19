@@ -16,11 +16,5 @@ type ClusterSpotProvisioningSpecification struct {
 func (resource ClusterSpotProvisioningSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.TimeoutAction == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TimeoutAction'"))
-	}
-	if resource.TimeoutDurationMinutes == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TimeoutDurationMinutes'"))
-	}
 	return errors
 }

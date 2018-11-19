@@ -17,14 +17,5 @@ type BudgetNotification struct {
 func (resource BudgetNotification) Validate() []error {
 	errors := []error{}
 
-	if resource.ComparisonOperator == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ComparisonOperator'"))
-	}
-	if resource.NotificationType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'NotificationType'"))
-	}
-	if resource.Threshold == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Threshold'"))
-	}
 	return errors
 }

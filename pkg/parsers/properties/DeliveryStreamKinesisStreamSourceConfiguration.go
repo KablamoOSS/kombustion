@@ -15,11 +15,5 @@ type DeliveryStreamKinesisStreamSourceConfiguration struct {
 func (resource DeliveryStreamKinesisStreamSourceConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.KinesisStreamARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'KinesisStreamARN'"))
-	}
-	if resource.RoleARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleARN'"))
-	}
 	return errors
 }

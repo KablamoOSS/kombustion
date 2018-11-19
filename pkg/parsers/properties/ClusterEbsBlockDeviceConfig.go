@@ -7,18 +7,13 @@ import "fmt"
 
 // ClusterEbsBlockDeviceConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-cluster-ebsblockdeviceconfig.html
 type ClusterEbsBlockDeviceConfig struct {
-	VolumesPerInstance  interface{}                 `yaml:"VolumesPerInstance,omitempty"`
-	VolumeSpecification *ClusterVolumeSpecification `yaml:"VolumeSpecification"`
+	VolumesPerInstance  interface{} `yaml:"VolumesPerInstance,omitempty"`
+	VolumeSpecification interface{} `yaml:"VolumeSpecification"`
 }
 
 // ClusterEbsBlockDeviceConfig validation
 func (resource ClusterEbsBlockDeviceConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.VolumeSpecification == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'VolumeSpecification'"))
-	} else {
-		errors = append(errors, resource.VolumeSpecification.Validate()...)
-	}
 	return errors
 }

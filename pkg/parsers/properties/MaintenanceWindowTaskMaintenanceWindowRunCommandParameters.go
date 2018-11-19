@@ -5,15 +5,15 @@ package properties
 
 // MaintenanceWindowTaskMaintenanceWindowRunCommandParameters Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowruncommandparameters.html
 type MaintenanceWindowTaskMaintenanceWindowRunCommandParameters struct {
-	Comment            interface{}                              `yaml:"Comment,omitempty"`
-	DocumentHash       interface{}                              `yaml:"DocumentHash,omitempty"`
-	DocumentHashType   interface{}                              `yaml:"DocumentHashType,omitempty"`
-	OutputS3BucketName interface{}                              `yaml:"OutputS3BucketName,omitempty"`
-	OutputS3KeyPrefix  interface{}                              `yaml:"OutputS3KeyPrefix,omitempty"`
-	Parameters         interface{}                              `yaml:"Parameters,omitempty"`
-	ServiceRoleArn     interface{}                              `yaml:"ServiceRoleArn,omitempty"`
-	TimeoutSeconds     interface{}                              `yaml:"TimeoutSeconds,omitempty"`
-	NotificationConfig *MaintenanceWindowTaskNotificationConfig `yaml:"NotificationConfig,omitempty"`
+	Comment            interface{} `yaml:"Comment,omitempty"`
+	DocumentHash       interface{} `yaml:"DocumentHash,omitempty"`
+	DocumentHashType   interface{} `yaml:"DocumentHashType,omitempty"`
+	OutputS3BucketName interface{} `yaml:"OutputS3BucketName,omitempty"`
+	OutputS3KeyPrefix  interface{} `yaml:"OutputS3KeyPrefix,omitempty"`
+	Parameters         interface{} `yaml:"Parameters,omitempty"`
+	ServiceRoleArn     interface{} `yaml:"ServiceRoleArn,omitempty"`
+	TimeoutSeconds     interface{} `yaml:"TimeoutSeconds,omitempty"`
+	NotificationConfig interface{} `yaml:"NotificationConfig,omitempty"`
 }
 
 // MaintenanceWindowTaskMaintenanceWindowRunCommandParameters validation

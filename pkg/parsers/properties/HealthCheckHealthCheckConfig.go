@@ -7,30 +7,27 @@ import "fmt"
 
 // HealthCheckHealthCheckConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-healthcheckconfig.html
 type HealthCheckHealthCheckConfig struct {
-	EnableSNI                    interface{}                 `yaml:"EnableSNI,omitempty"`
-	FailureThreshold             interface{}                 `yaml:"FailureThreshold,omitempty"`
-	FullyQualifiedDomainName     interface{}                 `yaml:"FullyQualifiedDomainName,omitempty"`
-	HealthThreshold              interface{}                 `yaml:"HealthThreshold,omitempty"`
-	IPAddress                    interface{}                 `yaml:"IPAddress,omitempty"`
-	InsufficientDataHealthStatus interface{}                 `yaml:"InsufficientDataHealthStatus,omitempty"`
-	Inverted                     interface{}                 `yaml:"Inverted,omitempty"`
-	MeasureLatency               interface{}                 `yaml:"MeasureLatency,omitempty"`
-	Port                         interface{}                 `yaml:"Port,omitempty"`
-	RequestInterval              interface{}                 `yaml:"RequestInterval,omitempty"`
-	ResourcePath                 interface{}                 `yaml:"ResourcePath,omitempty"`
-	SearchString                 interface{}                 `yaml:"SearchString,omitempty"`
-	Type                         interface{}                 `yaml:"Type"`
-	ChildHealthChecks            interface{}                 `yaml:"ChildHealthChecks,omitempty"`
-	Regions                      interface{}                 `yaml:"Regions,omitempty"`
-	AlarmIdentifier              *HealthCheckAlarmIdentifier `yaml:"AlarmIdentifier,omitempty"`
+	EnableSNI                    interface{} `yaml:"EnableSNI,omitempty"`
+	FailureThreshold             interface{} `yaml:"FailureThreshold,omitempty"`
+	FullyQualifiedDomainName     interface{} `yaml:"FullyQualifiedDomainName,omitempty"`
+	HealthThreshold              interface{} `yaml:"HealthThreshold,omitempty"`
+	IPAddress                    interface{} `yaml:"IPAddress,omitempty"`
+	InsufficientDataHealthStatus interface{} `yaml:"InsufficientDataHealthStatus,omitempty"`
+	Inverted                     interface{} `yaml:"Inverted,omitempty"`
+	MeasureLatency               interface{} `yaml:"MeasureLatency,omitempty"`
+	Port                         interface{} `yaml:"Port,omitempty"`
+	RequestInterval              interface{} `yaml:"RequestInterval,omitempty"`
+	ResourcePath                 interface{} `yaml:"ResourcePath,omitempty"`
+	SearchString                 interface{} `yaml:"SearchString,omitempty"`
+	Type                         interface{} `yaml:"Type"`
+	ChildHealthChecks            interface{} `yaml:"ChildHealthChecks,omitempty"`
+	Regions                      interface{} `yaml:"Regions,omitempty"`
+	AlarmIdentifier              interface{} `yaml:"AlarmIdentifier,omitempty"`
 }
 
 // HealthCheckHealthCheckConfig validation
 func (resource HealthCheckHealthCheckConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

@@ -14,8 +14,5 @@ type DeliveryStreamKMSEncryptionConfig struct {
 func (resource DeliveryStreamKMSEncryptionConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.AWSKMSKeyARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AWSKMSKeyARN'"))
-	}
 	return errors
 }

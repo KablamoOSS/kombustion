@@ -14,8 +14,5 @@ type RuleKinesisParameters struct {
 func (resource RuleKinesisParameters) Validate() []error {
 	errors := []error{}
 
-	if resource.PartitionKeyPath == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PartitionKeyPath'"))
-	}
 	return errors
 }

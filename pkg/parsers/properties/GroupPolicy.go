@@ -15,11 +15,5 @@ type GroupPolicy struct {
 func (resource GroupPolicy) Validate() []error {
 	errors := []error{}
 
-	if resource.PolicyDocument == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PolicyDocument'"))
-	}
-	if resource.PolicyName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PolicyName'"))
-	}
 	return errors
 }

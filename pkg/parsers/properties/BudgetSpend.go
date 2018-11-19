@@ -15,11 +15,5 @@ type BudgetSpend struct {
 func (resource BudgetSpend) Validate() []error {
 	errors := []error{}
 
-	if resource.Amount == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Amount'"))
-	}
-	if resource.Unit == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Unit'"))
-	}
 	return errors
 }

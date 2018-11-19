@@ -14,8 +14,5 @@ type BucketAccessControlTranslation struct {
 func (resource BucketAccessControlTranslation) Validate() []error {
 	errors := []error{}
 
-	if resource.Owner == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Owner'"))
-	}
 	return errors
 }

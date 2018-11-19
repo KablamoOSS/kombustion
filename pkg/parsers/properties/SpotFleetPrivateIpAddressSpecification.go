@@ -15,8 +15,5 @@ type SpotFleetPrivateIpAddressSpecification struct {
 func (resource SpotFleetPrivateIpAddressSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.PrivateIpAddress == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PrivateIpAddress'"))
-	}
 	return errors
 }

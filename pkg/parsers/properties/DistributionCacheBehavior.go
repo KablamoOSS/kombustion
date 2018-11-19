@@ -7,39 +7,25 @@ import "fmt"
 
 // DistributionCacheBehavior Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-cachebehavior.html
 type DistributionCacheBehavior struct {
-	Compress                   interface{}                  `yaml:"Compress,omitempty"`
-	DefaultTTL                 interface{}                  `yaml:"DefaultTTL,omitempty"`
-	FieldLevelEncryptionId     interface{}                  `yaml:"FieldLevelEncryptionId,omitempty"`
-	MaxTTL                     interface{}                  `yaml:"MaxTTL,omitempty"`
-	MinTTL                     interface{}                  `yaml:"MinTTL,omitempty"`
-	PathPattern                interface{}                  `yaml:"PathPattern"`
-	SmoothStreaming            interface{}                  `yaml:"SmoothStreaming,omitempty"`
-	TargetOriginId             interface{}                  `yaml:"TargetOriginId"`
-	ViewerProtocolPolicy       interface{}                  `yaml:"ViewerProtocolPolicy"`
-	AllowedMethods             interface{}                  `yaml:"AllowedMethods,omitempty"`
-	CachedMethods              interface{}                  `yaml:"CachedMethods,omitempty"`
-	LambdaFunctionAssociations interface{}                  `yaml:"LambdaFunctionAssociations,omitempty"`
-	TrustedSigners             interface{}                  `yaml:"TrustedSigners,omitempty"`
-	ForwardedValues            *DistributionForwardedValues `yaml:"ForwardedValues"`
+	Compress                   interface{} `yaml:"Compress,omitempty"`
+	DefaultTTL                 interface{} `yaml:"DefaultTTL,omitempty"`
+	FieldLevelEncryptionId     interface{} `yaml:"FieldLevelEncryptionId,omitempty"`
+	MaxTTL                     interface{} `yaml:"MaxTTL,omitempty"`
+	MinTTL                     interface{} `yaml:"MinTTL,omitempty"`
+	PathPattern                interface{} `yaml:"PathPattern"`
+	SmoothStreaming            interface{} `yaml:"SmoothStreaming,omitempty"`
+	TargetOriginId             interface{} `yaml:"TargetOriginId"`
+	ViewerProtocolPolicy       interface{} `yaml:"ViewerProtocolPolicy"`
+	AllowedMethods             interface{} `yaml:"AllowedMethods,omitempty"`
+	CachedMethods              interface{} `yaml:"CachedMethods,omitempty"`
+	LambdaFunctionAssociations interface{} `yaml:"LambdaFunctionAssociations,omitempty"`
+	TrustedSigners             interface{} `yaml:"TrustedSigners,omitempty"`
+	ForwardedValues            interface{} `yaml:"ForwardedValues"`
 }
 
 // DistributionCacheBehavior validation
 func (resource DistributionCacheBehavior) Validate() []error {
 	errors := []error{}
 
-	if resource.PathPattern == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PathPattern'"))
-	}
-	if resource.TargetOriginId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TargetOriginId'"))
-	}
-	if resource.ViewerProtocolPolicy == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ViewerProtocolPolicy'"))
-	}
-	if resource.ForwardedValues == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ForwardedValues'"))
-	} else {
-		errors = append(errors, resource.ForwardedValues.Validate()...)
-	}
 	return errors
 }

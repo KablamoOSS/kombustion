@@ -18,20 +18,5 @@ type TopicRuleElasticsearchAction struct {
 func (resource TopicRuleElasticsearchAction) Validate() []error {
 	errors := []error{}
 
-	if resource.Endpoint == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Endpoint'"))
-	}
-	if resource.Id == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Id'"))
-	}
-	if resource.Index == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Index'"))
-	}
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

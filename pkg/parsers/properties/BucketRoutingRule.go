@@ -7,18 +7,13 @@ import "fmt"
 
 // BucketRoutingRule Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-routingrules.html
 type BucketRoutingRule struct {
-	RoutingRuleCondition *BucketRoutingRuleCondition `yaml:"RoutingRuleCondition,omitempty"`
-	RedirectRule         *BucketRedirectRule         `yaml:"RedirectRule"`
+	RoutingRuleCondition interface{} `yaml:"RoutingRuleCondition,omitempty"`
+	RedirectRule         interface{} `yaml:"RedirectRule"`
 }
 
 // BucketRoutingRule validation
 func (resource BucketRoutingRule) Validate() []error {
 	errors := []error{}
 
-	if resource.RedirectRule == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RedirectRule'"))
-	} else {
-		errors = append(errors, resource.RedirectRule.Validate()...)
-	}
 	return errors
 }

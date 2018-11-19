@@ -16,8 +16,5 @@ type MaintenanceWindowTaskNotificationConfig struct {
 func (resource MaintenanceWindowTaskNotificationConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.NotificationArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'NotificationArn'"))
-	}
 	return errors
 }

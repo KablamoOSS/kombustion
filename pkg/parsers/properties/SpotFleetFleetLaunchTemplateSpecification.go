@@ -16,8 +16,5 @@ type SpotFleetFleetLaunchTemplateSpecification struct {
 func (resource SpotFleetFleetLaunchTemplateSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.Version == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Version'"))
-	}
 	return errors
 }

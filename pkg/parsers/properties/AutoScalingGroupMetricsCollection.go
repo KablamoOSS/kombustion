@@ -15,8 +15,5 @@ type AutoScalingGroupMetricsCollection struct {
 func (resource AutoScalingGroupMetricsCollection) Validate() []error {
 	errors := []error{}
 
-	if resource.Granularity == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Granularity'"))
-	}
 	return errors
 }

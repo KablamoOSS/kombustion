@@ -15,11 +15,5 @@ type StreamStreamEncryption struct {
 func (resource StreamStreamEncryption) Validate() []error {
 	errors := []error{}
 
-	if resource.EncryptionType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'EncryptionType'"))
-	}
-	if resource.KeyId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'KeyId'"))
-	}
 	return errors
 }

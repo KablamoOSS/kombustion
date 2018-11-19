@@ -5,10 +5,10 @@ package properties
 
 // MaintenanceWindowTaskTaskInvocationParameters Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-taskinvocationparameters.html
 type MaintenanceWindowTaskTaskInvocationParameters struct {
-	MaintenanceWindowStepFunctionsParameters *MaintenanceWindowTaskMaintenanceWindowStepFunctionsParameters `yaml:"MaintenanceWindowStepFunctionsParameters,omitempty"`
-	MaintenanceWindowRunCommandParameters    *MaintenanceWindowTaskMaintenanceWindowRunCommandParameters    `yaml:"MaintenanceWindowRunCommandParameters,omitempty"`
-	MaintenanceWindowLambdaParameters        *MaintenanceWindowTaskMaintenanceWindowLambdaParameters        `yaml:"MaintenanceWindowLambdaParameters,omitempty"`
-	MaintenanceWindowAutomationParameters    *MaintenanceWindowTaskMaintenanceWindowAutomationParameters    `yaml:"MaintenanceWindowAutomationParameters,omitempty"`
+	MaintenanceWindowStepFunctionsParameters interface{} `yaml:"MaintenanceWindowStepFunctionsParameters,omitempty"`
+	MaintenanceWindowRunCommandParameters    interface{} `yaml:"MaintenanceWindowRunCommandParameters,omitempty"`
+	MaintenanceWindowLambdaParameters        interface{} `yaml:"MaintenanceWindowLambdaParameters,omitempty"`
+	MaintenanceWindowAutomationParameters    interface{} `yaml:"MaintenanceWindowAutomationParameters,omitempty"`
 }
 
 // MaintenanceWindowTaskTaskInvocationParameters validation

@@ -25,14 +25,5 @@ type JobDefinitionContainerProperties struct {
 func (resource JobDefinitionContainerProperties) Validate() []error {
 	errors := []error{}
 
-	if resource.Image == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Image'"))
-	}
-	if resource.Memory == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Memory'"))
-	}
-	if resource.Vcpus == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Vcpus'"))
-	}
 	return errors
 }

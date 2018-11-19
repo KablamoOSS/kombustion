@@ -15,11 +15,5 @@ type CustomActionTypeArtifactDetails struct {
 func (resource CustomActionTypeArtifactDetails) Validate() []error {
 	errors := []error{}
 
-	if resource.MaximumCount == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MaximumCount'"))
-	}
-	if resource.MinimumCount == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MinimumCount'"))
-	}
 	return errors
 }

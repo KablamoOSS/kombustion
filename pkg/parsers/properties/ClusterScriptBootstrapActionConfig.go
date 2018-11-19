@@ -15,8 +15,5 @@ type ClusterScriptBootstrapActionConfig struct {
 func (resource ClusterScriptBootstrapActionConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.Path == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Path'"))
-	}
 	return errors
 }

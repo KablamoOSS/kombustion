@@ -7,17 +7,12 @@ import "fmt"
 
 // ClusterInstanceFleetProvisioningSpecifications Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-cluster-instancefleetprovisioningspecifications.html
 type ClusterInstanceFleetProvisioningSpecifications struct {
-	SpotSpecification *ClusterSpotProvisioningSpecification `yaml:"SpotSpecification"`
+	SpotSpecification interface{} `yaml:"SpotSpecification"`
 }
 
 // ClusterInstanceFleetProvisioningSpecifications validation
 func (resource ClusterInstanceFleetProvisioningSpecifications) Validate() []error {
 	errors := []error{}
 
-	if resource.SpotSpecification == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SpotSpecification'"))
-	} else {
-		errors = append(errors, resource.SpotSpecification.Validate()...)
-	}
 	return errors
 }

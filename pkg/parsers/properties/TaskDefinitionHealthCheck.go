@@ -18,8 +18,5 @@ type TaskDefinitionHealthCheck struct {
 func (resource TaskDefinitionHealthCheck) Validate() []error {
 	errors := []error{}
 
-	if resource.Command == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Command'"))
-	}
 	return errors
 }

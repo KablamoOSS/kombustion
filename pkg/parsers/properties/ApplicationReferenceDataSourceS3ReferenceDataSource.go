@@ -16,14 +16,5 @@ type ApplicationReferenceDataSourceS3ReferenceDataSource struct {
 func (resource ApplicationReferenceDataSourceS3ReferenceDataSource) Validate() []error {
 	errors := []error{}
 
-	if resource.BucketARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'BucketARN'"))
-	}
-	if resource.FileKey == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'FileKey'"))
-	}
-	if resource.ReferenceRoleARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ReferenceRoleARN'"))
-	}
 	return errors
 }

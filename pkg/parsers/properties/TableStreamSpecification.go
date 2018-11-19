@@ -14,8 +14,5 @@ type TableStreamSpecification struct {
 func (resource TableStreamSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.StreamViewType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'StreamViewType'"))
-	}
 	return errors
 }

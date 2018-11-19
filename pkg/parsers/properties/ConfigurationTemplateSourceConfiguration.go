@@ -15,11 +15,5 @@ type ConfigurationTemplateSourceConfiguration struct {
 func (resource ConfigurationTemplateSourceConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.ApplicationName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ApplicationName'"))
-	}
-	if resource.TemplateName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TemplateName'"))
-	}
 	return errors
 }

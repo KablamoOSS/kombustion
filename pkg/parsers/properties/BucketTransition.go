@@ -16,8 +16,5 @@ type BucketTransition struct {
 func (resource BucketTransition) Validate() []error {
 	errors := []error{}
 
-	if resource.StorageClass == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'StorageClass'"))
-	}
 	return errors
 }

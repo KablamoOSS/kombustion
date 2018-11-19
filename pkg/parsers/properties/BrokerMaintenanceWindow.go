@@ -16,14 +16,5 @@ type BrokerMaintenanceWindow struct {
 func (resource BrokerMaintenanceWindow) Validate() []error {
 	errors := []error{}
 
-	if resource.DayOfWeek == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DayOfWeek'"))
-	}
-	if resource.TimeOfDay == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TimeOfDay'"))
-	}
-	if resource.TimeZone == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TimeZone'"))
-	}
 	return errors
 }

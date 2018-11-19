@@ -16,11 +16,5 @@ type ConfigRuleSource struct {
 func (resource ConfigRuleSource) Validate() []error {
 	errors := []error{}
 
-	if resource.Owner == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Owner'"))
-	}
-	if resource.SourceIdentifier == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SourceIdentifier'"))
-	}
 	return errors
 }

@@ -7,20 +7,14 @@ import "fmt"
 
 // WebACLActivatedRule Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-webacl-rules.html
 type WebACLActivatedRule struct {
-	Priority interface{}      `yaml:"Priority"`
-	RuleId   interface{}      `yaml:"RuleId"`
-	Action   *WebACLWafAction `yaml:"Action,omitempty"`
+	Priority interface{} `yaml:"Priority"`
+	RuleId   interface{} `yaml:"RuleId"`
+	Action   interface{} `yaml:"Action,omitempty"`
 }
 
 // WebACLActivatedRule validation
 func (resource WebACLActivatedRule) Validate() []error {
 	errors := []error{}
 
-	if resource.Priority == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Priority'"))
-	}
-	if resource.RuleId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RuleId'"))
-	}
 	return errors
 }

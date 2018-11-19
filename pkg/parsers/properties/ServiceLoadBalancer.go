@@ -17,8 +17,5 @@ type ServiceLoadBalancer struct {
 func (resource ServiceLoadBalancer) Validate() []error {
 	errors := []error{}
 
-	if resource.ContainerPort == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ContainerPort'"))
-	}
 	return errors
 }

@@ -15,8 +15,5 @@ type BucketServerSideEncryptionByDefault struct {
 func (resource BucketServerSideEncryptionByDefault) Validate() []error {
 	errors := []error{}
 
-	if resource.SSEAlgorithm == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SSEAlgorithm'"))
-	}
 	return errors
 }

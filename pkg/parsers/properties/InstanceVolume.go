@@ -15,11 +15,5 @@ type InstanceVolume struct {
 func (resource InstanceVolume) Validate() []error {
 	errors := []error{}
 
-	if resource.Device == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Device'"))
-	}
-	if resource.VolumeId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'VolumeId'"))
-	}
 	return errors
 }

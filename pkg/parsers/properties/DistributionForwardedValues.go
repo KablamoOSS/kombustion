@@ -7,18 +7,15 @@ import "fmt"
 
 // DistributionForwardedValues Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-forwardedvalues.html
 type DistributionForwardedValues struct {
-	QueryString          interface{}          `yaml:"QueryString"`
-	Headers              interface{}          `yaml:"Headers,omitempty"`
-	QueryStringCacheKeys interface{}          `yaml:"QueryStringCacheKeys,omitempty"`
-	Cookies              *DistributionCookies `yaml:"Cookies,omitempty"`
+	QueryString          interface{} `yaml:"QueryString"`
+	Headers              interface{} `yaml:"Headers,omitempty"`
+	QueryStringCacheKeys interface{} `yaml:"QueryStringCacheKeys,omitempty"`
+	Cookies              interface{} `yaml:"Cookies,omitempty"`
 }
 
 // DistributionForwardedValues validation
 func (resource DistributionForwardedValues) Validate() []error {
 	errors := []error{}
 
-	if resource.QueryString == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'QueryString'"))
-	}
 	return errors
 }

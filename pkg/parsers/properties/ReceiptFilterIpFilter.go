@@ -15,11 +15,5 @@ type ReceiptFilterIpFilter struct {
 func (resource ReceiptFilterIpFilter) Validate() []error {
 	errors := []error{}
 
-	if resource.Cidr == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Cidr'"))
-	}
-	if resource.Policy == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Policy'"))
-	}
 	return errors
 }

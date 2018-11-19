@@ -18,20 +18,5 @@ type EndpointConfigProductionVariant struct {
 func (resource EndpointConfigProductionVariant) Validate() []error {
 	errors := []error{}
 
-	if resource.InitialInstanceCount == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'InitialInstanceCount'"))
-	}
-	if resource.InitialVariantWeight == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'InitialVariantWeight'"))
-	}
-	if resource.InstanceType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'InstanceType'"))
-	}
-	if resource.ModelName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ModelName'"))
-	}
-	if resource.VariantName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'VariantName'"))
-	}
 	return errors
 }

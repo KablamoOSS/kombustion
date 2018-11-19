@@ -15,11 +15,5 @@ type TopicRuleRepublishAction struct {
 func (resource TopicRuleRepublishAction) Validate() []error {
 	errors := []error{}
 
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
-	if resource.Topic == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Topic'"))
-	}
 	return errors
 }

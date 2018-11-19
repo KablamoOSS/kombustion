@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// ScalingPolicyStepAdjustment Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-scalingpolicy-stepadjustments.html
+// ScalingPolicyStepAdjustment Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-stepadjustment.html
 type ScalingPolicyStepAdjustment struct {
 	MetricIntervalLowerBound interface{} `yaml:"MetricIntervalLowerBound,omitempty"`
 	MetricIntervalUpperBound interface{} `yaml:"MetricIntervalUpperBound,omitempty"`
@@ -16,8 +16,5 @@ type ScalingPolicyStepAdjustment struct {
 func (resource ScalingPolicyStepAdjustment) Validate() []error {
 	errors := []error{}
 
-	if resource.ScalingAdjustment == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ScalingAdjustment'"))
-	}
 	return errors
 }

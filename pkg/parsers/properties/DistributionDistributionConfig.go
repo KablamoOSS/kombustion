@@ -7,29 +7,26 @@ import "fmt"
 
 // DistributionDistributionConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-distributionconfig.html
 type DistributionDistributionConfig struct {
-	Comment              interface{}                       `yaml:"Comment,omitempty"`
-	DefaultRootObject    interface{}                       `yaml:"DefaultRootObject,omitempty"`
-	Enabled              interface{}                       `yaml:"Enabled"`
-	HttpVersion          interface{}                       `yaml:"HttpVersion,omitempty"`
-	IPV6Enabled          interface{}                       `yaml:"IPV6Enabled,omitempty"`
-	PriceClass           interface{}                       `yaml:"PriceClass,omitempty"`
-	WebACLId             interface{}                       `yaml:"WebACLId,omitempty"`
-	ViewerCertificate    *DistributionViewerCertificate    `yaml:"ViewerCertificate,omitempty"`
-	Restrictions         *DistributionRestrictions         `yaml:"Restrictions,omitempty"`
-	Logging              *DistributionLogging              `yaml:"Logging,omitempty"`
-	CustomErrorResponses interface{}                       `yaml:"CustomErrorResponses,omitempty"`
-	Origins              interface{}                       `yaml:"Origins,omitempty"`
-	Aliases              interface{}                       `yaml:"Aliases,omitempty"`
-	CacheBehaviors       interface{}                       `yaml:"CacheBehaviors,omitempty"`
-	DefaultCacheBehavior *DistributionDefaultCacheBehavior `yaml:"DefaultCacheBehavior,omitempty"`
+	Comment              interface{} `yaml:"Comment,omitempty"`
+	DefaultRootObject    interface{} `yaml:"DefaultRootObject,omitempty"`
+	Enabled              interface{} `yaml:"Enabled"`
+	HttpVersion          interface{} `yaml:"HttpVersion,omitempty"`
+	IPV6Enabled          interface{} `yaml:"IPV6Enabled,omitempty"`
+	PriceClass           interface{} `yaml:"PriceClass,omitempty"`
+	WebACLId             interface{} `yaml:"WebACLId,omitempty"`
+	ViewerCertificate    interface{} `yaml:"ViewerCertificate,omitempty"`
+	Restrictions         interface{} `yaml:"Restrictions,omitempty"`
+	Logging              interface{} `yaml:"Logging,omitempty"`
+	CustomErrorResponses interface{} `yaml:"CustomErrorResponses,omitempty"`
+	Origins              interface{} `yaml:"Origins,omitempty"`
+	Aliases              interface{} `yaml:"Aliases,omitempty"`
+	CacheBehaviors       interface{} `yaml:"CacheBehaviors,omitempty"`
+	DefaultCacheBehavior interface{} `yaml:"DefaultCacheBehavior,omitempty"`
 }
 
 // DistributionDistributionConfig validation
 func (resource DistributionDistributionConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.Enabled == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Enabled'"))
-	}
 	return errors
 }

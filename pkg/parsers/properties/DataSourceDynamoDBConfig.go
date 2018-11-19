@@ -16,11 +16,5 @@ type DataSourceDynamoDBConfig struct {
 func (resource DataSourceDynamoDBConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.AwsRegion == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AwsRegion'"))
-	}
-	if resource.TableName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TableName'"))
-	}
 	return errors
 }

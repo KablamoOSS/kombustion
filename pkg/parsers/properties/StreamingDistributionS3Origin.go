@@ -15,11 +15,5 @@ type StreamingDistributionS3Origin struct {
 func (resource StreamingDistributionS3Origin) Validate() []error {
 	errors := []error{}
 
-	if resource.DomainName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DomainName'"))
-	}
-	if resource.OriginAccessIdentity == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'OriginAccessIdentity'"))
-	}
 	return errors
 }

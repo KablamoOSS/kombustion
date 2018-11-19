@@ -15,11 +15,5 @@ type ApplicationKinesisStreamsInput struct {
 func (resource ApplicationKinesisStreamsInput) Validate() []error {
 	errors := []error{}
 
-	if resource.ResourceARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ResourceARN'"))
-	}
-	if resource.RoleARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleARN'"))
-	}
 	return errors
 }

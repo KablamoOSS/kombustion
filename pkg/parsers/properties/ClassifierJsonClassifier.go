@@ -15,8 +15,5 @@ type ClassifierJsonClassifier struct {
 func (resource ClassifierJsonClassifier) Validate() []error {
 	errors := []error{}
 
-	if resource.JsonPath == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'JsonPath'"))
-	}
 	return errors
 }

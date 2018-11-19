@@ -7,32 +7,18 @@ import "fmt"
 
 // DeliveryStreamS3DestinationConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-s3destinationconfiguration.html
 type DeliveryStreamS3DestinationConfiguration struct {
-	BucketARN                interface{}                             `yaml:"BucketARN"`
-	CompressionFormat        interface{}                             `yaml:"CompressionFormat"`
-	Prefix                   interface{}                             `yaml:"Prefix,omitempty"`
-	RoleARN                  interface{}                             `yaml:"RoleARN"`
-	EncryptionConfiguration  *DeliveryStreamEncryptionConfiguration  `yaml:"EncryptionConfiguration,omitempty"`
-	CloudWatchLoggingOptions *DeliveryStreamCloudWatchLoggingOptions `yaml:"CloudWatchLoggingOptions,omitempty"`
-	BufferingHints           *DeliveryStreamBufferingHints           `yaml:"BufferingHints"`
+	BucketARN                interface{} `yaml:"BucketARN"`
+	CompressionFormat        interface{} `yaml:"CompressionFormat"`
+	Prefix                   interface{} `yaml:"Prefix,omitempty"`
+	RoleARN                  interface{} `yaml:"RoleARN"`
+	EncryptionConfiguration  interface{} `yaml:"EncryptionConfiguration,omitempty"`
+	CloudWatchLoggingOptions interface{} `yaml:"CloudWatchLoggingOptions,omitempty"`
+	BufferingHints           interface{} `yaml:"BufferingHints"`
 }
 
 // DeliveryStreamS3DestinationConfiguration validation
 func (resource DeliveryStreamS3DestinationConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.BucketARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'BucketARN'"))
-	}
-	if resource.CompressionFormat == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'CompressionFormat'"))
-	}
-	if resource.RoleARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleARN'"))
-	}
-	if resource.BufferingHints == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'BufferingHints'"))
-	} else {
-		errors = append(errors, resource.BufferingHints.Validate()...)
-	}
 	return errors
 }

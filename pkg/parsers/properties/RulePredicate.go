@@ -16,14 +16,5 @@ type RulePredicate struct {
 func (resource RulePredicate) Validate() []error {
 	errors := []error{}
 
-	if resource.DataId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DataId'"))
-	}
-	if resource.Negated == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Negated'"))
-	}
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

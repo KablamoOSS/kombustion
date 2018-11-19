@@ -15,11 +15,5 @@ type TableTimeToLiveSpecification struct {
 func (resource TableTimeToLiveSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.AttributeName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AttributeName'"))
-	}
-	if resource.Enabled == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Enabled'"))
-	}
 	return errors
 }

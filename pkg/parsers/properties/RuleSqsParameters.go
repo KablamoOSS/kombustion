@@ -14,8 +14,5 @@ type RuleSqsParameters struct {
 func (resource RuleSqsParameters) Validate() []error {
 	errors := []error{}
 
-	if resource.MessageGroupId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MessageGroupId'"))
-	}
 	return errors
 }

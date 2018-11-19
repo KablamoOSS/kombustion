@@ -15,8 +15,5 @@ type UserLoginProfile struct {
 func (resource UserLoginProfile) Validate() []error {
 	errors := []error{}
 
-	if resource.Password == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Password'"))
-	}
 	return errors
 }

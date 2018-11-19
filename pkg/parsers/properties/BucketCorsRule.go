@@ -19,11 +19,5 @@ type BucketCorsRule struct {
 func (resource BucketCorsRule) Validate() []error {
 	errors := []error{}
 
-	if resource.AllowedMethods == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AllowedMethods'"))
-	}
-	if resource.AllowedOrigins == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AllowedOrigins'"))
-	}
 	return errors
 }

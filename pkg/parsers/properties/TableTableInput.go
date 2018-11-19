@@ -5,16 +5,16 @@ package properties
 
 // TableTableInput Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-tableinput.html
 type TableTableInput struct {
-	Description       interface{}             `yaml:"Description,omitempty"`
-	Name              interface{}             `yaml:"Name,omitempty"`
-	Owner             interface{}             `yaml:"Owner,omitempty"`
-	Parameters        interface{}             `yaml:"Parameters,omitempty"`
-	Retention         interface{}             `yaml:"Retention,omitempty"`
-	TableType         interface{}             `yaml:"TableType,omitempty"`
-	ViewExpandedText  interface{}             `yaml:"ViewExpandedText,omitempty"`
-	ViewOriginalText  interface{}             `yaml:"ViewOriginalText,omitempty"`
-	StorageDescriptor *TableStorageDescriptor `yaml:"StorageDescriptor,omitempty"`
-	PartitionKeys     interface{}             `yaml:"PartitionKeys,omitempty"`
+	Description       interface{} `yaml:"Description,omitempty"`
+	Name              interface{} `yaml:"Name,omitempty"`
+	Owner             interface{} `yaml:"Owner,omitempty"`
+	Parameters        interface{} `yaml:"Parameters,omitempty"`
+	Retention         interface{} `yaml:"Retention,omitempty"`
+	TableType         interface{} `yaml:"TableType,omitempty"`
+	ViewExpandedText  interface{} `yaml:"ViewExpandedText,omitempty"`
+	ViewOriginalText  interface{} `yaml:"ViewOriginalText,omitempty"`
+	StorageDescriptor interface{} `yaml:"StorageDescriptor,omitempty"`
+	PartitionKeys     interface{} `yaml:"PartitionKeys,omitempty"`
 }
 
 // TableTableInput validation

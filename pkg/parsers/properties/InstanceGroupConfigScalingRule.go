@@ -7,28 +7,15 @@ import "fmt"
 
 // InstanceGroupConfigScalingRule Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-instancegroupconfig-scalingrule.html
 type InstanceGroupConfigScalingRule struct {
-	Description interface{}                        `yaml:"Description,omitempty"`
-	Name        interface{}                        `yaml:"Name"`
-	Trigger     *InstanceGroupConfigScalingTrigger `yaml:"Trigger"`
-	Action      *InstanceGroupConfigScalingAction  `yaml:"Action"`
+	Description interface{} `yaml:"Description,omitempty"`
+	Name        interface{} `yaml:"Name"`
+	Trigger     interface{} `yaml:"Trigger"`
+	Action      interface{} `yaml:"Action"`
 }
 
 // InstanceGroupConfigScalingRule validation
 func (resource InstanceGroupConfigScalingRule) Validate() []error {
 	errors := []error{}
 
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.Trigger == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Trigger'"))
-	} else {
-		errors = append(errors, resource.Trigger.Validate()...)
-	}
-	if resource.Action == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Action'"))
-	} else {
-		errors = append(errors, resource.Action.Validate()...)
-	}
 	return errors
 }

@@ -19,8 +19,5 @@ type DistributionCustomOriginConfig struct {
 func (resource DistributionCustomOriginConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.OriginProtocolPolicy == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'OriginProtocolPolicy'"))
-	}
 	return errors
 }

@@ -15,11 +15,5 @@ type DataSourceElasticsearchConfig struct {
 func (resource DataSourceElasticsearchConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.AwsRegion == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AwsRegion'"))
-	}
-	if resource.Endpoint == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Endpoint'"))
-	}
 	return errors
 }

@@ -22,17 +22,5 @@ type InstanceGroupConfigCloudWatchAlarmDefinition struct {
 func (resource InstanceGroupConfigCloudWatchAlarmDefinition) Validate() []error {
 	errors := []error{}
 
-	if resource.ComparisonOperator == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ComparisonOperator'"))
-	}
-	if resource.MetricName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MetricName'"))
-	}
-	if resource.Period == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Period'"))
-	}
-	if resource.Threshold == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Threshold'"))
-	}
 	return errors
 }

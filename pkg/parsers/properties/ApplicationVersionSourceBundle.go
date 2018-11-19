@@ -15,11 +15,5 @@ type ApplicationVersionSourceBundle struct {
 func (resource ApplicationVersionSourceBundle) Validate() []error {
 	errors := []error{}
 
-	if resource.S3Bucket == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'S3Bucket'"))
-	}
-	if resource.S3Key == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'S3Key'"))
-	}
 	return errors
 }

@@ -5,10 +5,10 @@ package properties
 
 // DBClusterScalingConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-scalingconfiguration.html
 type DBClusterScalingConfiguration struct {
-	AutoPause              interface{} `yaml:"AutoPause,omitempty"`
-	MaxCapacity            interface{} `yaml:"MaxCapacity,omitempty"`
-	MinCapacity            interface{} `yaml:"MinCapacity,omitempty"`
-	SecondsBeforeAutoPause interface{} `yaml:"SecondsBeforeAutoPause,omitempty"`
+	AutoPause             interface{} `yaml:"AutoPause,omitempty"`
+	MaxCapacity           interface{} `yaml:"MaxCapacity,omitempty"`
+	MinCapacity           interface{} `yaml:"MinCapacity,omitempty"`
+	SecondsUntilAutoPause interface{} `yaml:"SecondsUntilAutoPause,omitempty"`
 }
 
 // DBClusterScalingConfiguration validation

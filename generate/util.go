@@ -1,13 +1,11 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"sort"
 	"strings"
-	"text/template"
 )
 
 func checkError(err error) {
@@ -21,30 +19,30 @@ func valueStringYaml(propPackage, obj, name string, property CfnProperty) string
 	if property.Required {
 		omitempty = ""
 	}
-	if len(property.PrimitiveType) > 0 {
-		return name + " interface{} `yaml:" + `"` + name + omitempty + `"` + "`"
-	} else if len(property.Type) > 0 && property.Type != "List" && property.Type != "Map" {
-		subPropertyName := propertyNameFromResourceType(obj, property.Type)
-		return name + " *" + propPackage + subPropertyName + " `yaml:" + `"` + name + omitempty + `"` + "`"
-	}
+	// if len(property.PrimitiveType) > 0 {
+	// return name + " interface{} `yaml:" + `"` + name + omitempty + `"` + "`"
+	// } else if len(property.Type) > 0 && property.Type != "List" && property.Type != "Map" {
+	// 	subPropertyName := propertyNameFromResourceType(obj, property.Type)
+	// 	return name + " *" + propPackage + subPropertyName + " `yaml:" + `"` + name + omitempty + `"` + "`"
+	// }
 	return name + " interface{} `yaml:" + `"` + name + omitempty + `"` + "`"
 }
 
-func validatorYaml(obj, name string, property CfnProperty) string {
-	if !property.Required {
-		return ""
-	}
+// func validatorYaml(obj, name string, property CfnProperty) string {
+// 	if !property.Required {
+// 		return ""
+// 	}
 
-	buf := bytes.NewBufferString("")
-	t := template.Must(template.New("").Parse(validatorTemplate))
-	err := t.Execute(buf, map[string]interface{}{
-		"Name":          name,
-		"PrimitiveType": len(property.PrimitiveType) > 0,
-		"ListMapType":   len(property.Type) > 0 && property.Type != "List" && property.Type != "Map",
-	})
-	checkError(err)
-	return buf.String()
-}
+// 	buf := bytes.NewBufferString("")
+// 	t := template.Must(template.New("").Parse(validatorTemplate))
+// 	err := t.Execute(buf, map[string]interface{}{
+// 		"Name":          name,
+// 		"PrimitiveType": len(property.PrimitiveType) > 0,
+// 		"ListMapType":   len(property.Type) > 0 && property.Type != "List" && property.Type != "Map",
+// 	})
+// 	checkError(err)
+// 	return buf.String()
+// }
 
 func sortSpecList(specList map[string]string) []string {
 	regions := make([]string, len(specList))

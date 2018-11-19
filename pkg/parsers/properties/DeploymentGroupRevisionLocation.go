@@ -5,9 +5,9 @@ package properties
 
 // DeploymentGroupRevisionLocation Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision.html
 type DeploymentGroupRevisionLocation struct {
-	RevisionType   interface{}                    `yaml:"RevisionType,omitempty"`
-	S3Location     *DeploymentGroupS3Location     `yaml:"S3Location,omitempty"`
-	GitHubLocation *DeploymentGroupGitHubLocation `yaml:"GitHubLocation,omitempty"`
+	RevisionType   interface{} `yaml:"RevisionType,omitempty"`
+	S3Location     interface{} `yaml:"S3Location,omitempty"`
+	GitHubLocation interface{} `yaml:"GitHubLocation,omitempty"`
 }
 
 // DeploymentGroupRevisionLocation validation

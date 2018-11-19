@@ -16,11 +16,5 @@ type ConfigRuleSourceDetail struct {
 func (resource ConfigRuleSourceDetail) Validate() []error {
 	errors := []error{}
 
-	if resource.EventSource == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'EventSource'"))
-	}
-	if resource.MessageType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MessageType'"))
-	}
 	return errors
 }

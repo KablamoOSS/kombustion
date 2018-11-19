@@ -14,8 +14,5 @@ type PipelineOutputArtifact struct {
 func (resource PipelineOutputArtifact) Validate() []error {
 	errors := []error{}
 
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
 	return errors
 }

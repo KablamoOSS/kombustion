@@ -16,8 +16,5 @@ type ConfigurationAggregatorOrganizationAggregationSource struct {
 func (resource ConfigurationAggregatorOrganizationAggregationSource) Validate() []error {
 	errors := []error{}
 
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
 	return errors
 }

@@ -17,8 +17,5 @@ type ModelContainerDefinition struct {
 func (resource ModelContainerDefinition) Validate() []error {
 	errors := []error{}
 
-	if resource.Image == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Image'"))
-	}
 	return errors
 }

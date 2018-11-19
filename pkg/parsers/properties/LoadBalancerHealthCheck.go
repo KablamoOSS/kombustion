@@ -18,20 +18,5 @@ type LoadBalancerHealthCheck struct {
 func (resource LoadBalancerHealthCheck) Validate() []error {
 	errors := []error{}
 
-	if resource.HealthyThreshold == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'HealthyThreshold'"))
-	}
-	if resource.Interval == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Interval'"))
-	}
-	if resource.Target == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Target'"))
-	}
-	if resource.Timeout == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Timeout'"))
-	}
-	if resource.UnhealthyThreshold == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'UnhealthyThreshold'"))
-	}
 	return errors
 }

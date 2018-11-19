@@ -177,7 +177,8 @@ Resources:
         - Action: s3:PutObject
           Effect: Allow
           Principal:
-            AWS: arn:aws:iam::000000000000:root
+            AWS:
+              Fn::Sub: arn:aws:iam::${AWS::AccountId}:root
           Resource:
           - Fn::Sub: arn:aws:s3:::${S3Bucket}/AWSLogs/*
     DependsOn: S3Bucket

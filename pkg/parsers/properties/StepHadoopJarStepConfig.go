@@ -17,8 +17,5 @@ type StepHadoopJarStepConfig struct {
 func (resource StepHadoopJarStepConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.Jar == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Jar'"))
-	}
 	return errors
 }

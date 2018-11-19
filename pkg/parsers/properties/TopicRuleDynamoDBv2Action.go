@@ -5,8 +5,8 @@ package properties
 
 // TopicRuleDynamoDBv2Action Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-dynamodbv2action.html
 type TopicRuleDynamoDBv2Action struct {
-	RoleArn interface{}            `yaml:"RoleArn,omitempty"`
-	PutItem *TopicRulePutItemInput `yaml:"PutItem,omitempty"`
+	RoleArn interface{} `yaml:"RoleArn,omitempty"`
+	PutItem interface{} `yaml:"PutItem,omitempty"`
 }
 
 // TopicRuleDynamoDBv2Action validation

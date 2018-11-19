@@ -16,11 +16,5 @@ type TopicRuleKinesisAction struct {
 func (resource TopicRuleKinesisAction) Validate() []error {
 	errors := []error{}
 
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
-	if resource.StreamName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'StreamName'"))
-	}
 	return errors
 }

@@ -16,11 +16,5 @@ type ClassifierXMLClassifier struct {
 func (resource ClassifierXMLClassifier) Validate() []error {
 	errors := []error{}
 
-	if resource.Classification == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Classification'"))
-	}
-	if resource.RowTag == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RowTag'"))
-	}
 	return errors
 }

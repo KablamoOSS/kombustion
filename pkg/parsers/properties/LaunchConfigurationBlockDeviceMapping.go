@@ -7,18 +7,15 @@ import "fmt"
 
 // LaunchConfigurationBlockDeviceMapping Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-mapping.html
 type LaunchConfigurationBlockDeviceMapping struct {
-	DeviceName  interface{}                     `yaml:"DeviceName"`
-	NoDevice    interface{}                     `yaml:"NoDevice,omitempty"`
-	VirtualName interface{}                     `yaml:"VirtualName,omitempty"`
-	Ebs         *LaunchConfigurationBlockDevice `yaml:"Ebs,omitempty"`
+	DeviceName  interface{} `yaml:"DeviceName"`
+	NoDevice    interface{} `yaml:"NoDevice,omitempty"`
+	VirtualName interface{} `yaml:"VirtualName,omitempty"`
+	Ebs         interface{} `yaml:"Ebs,omitempty"`
 }
 
 // LaunchConfigurationBlockDeviceMapping validation
 func (resource LaunchConfigurationBlockDeviceMapping) Validate() []error {
 	errors := []error{}
 
-	if resource.DeviceName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DeviceName'"))
-	}
 	return errors
 }

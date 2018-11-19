@@ -16,11 +16,5 @@ type MaintenanceWindowTaskLoggingInfo struct {
 func (resource MaintenanceWindowTaskLoggingInfo) Validate() []error {
 	errors := []error{}
 
-	if resource.Region == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Region'"))
-	}
-	if resource.S3Bucket == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'S3Bucket'"))
-	}
 	return errors
 }

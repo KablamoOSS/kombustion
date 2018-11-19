@@ -14,8 +14,5 @@ type TableSSESpecification struct {
 func (resource TableSSESpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.SSEEnabled == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SSEEnabled'"))
-	}
 	return errors
 }

@@ -16,8 +16,5 @@ type CloudFormationProductProvisioningArtifactProperties struct {
 func (resource CloudFormationProductProvisioningArtifactProperties) Validate() []error {
 	errors := []error{}
 
-	if resource.Info == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Info'"))
-	}
 	return errors
 }

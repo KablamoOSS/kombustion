@@ -7,22 +7,14 @@ import "fmt"
 
 // ApplicationInputSchema Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputschema.html
 type ApplicationInputSchema struct {
-	RecordEncoding interface{}              `yaml:"RecordEncoding,omitempty"`
-	RecordFormat   *ApplicationRecordFormat `yaml:"RecordFormat"`
-	RecordColumns  interface{}              `yaml:"RecordColumns"`
+	RecordEncoding interface{} `yaml:"RecordEncoding,omitempty"`
+	RecordFormat   interface{} `yaml:"RecordFormat"`
+	RecordColumns  interface{} `yaml:"RecordColumns"`
 }
 
 // ApplicationInputSchema validation
 func (resource ApplicationInputSchema) Validate() []error {
 	errors := []error{}
 
-	if resource.RecordFormat == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RecordFormat'"))
-	} else {
-		errors = append(errors, resource.RecordFormat.Validate()...)
-	}
-	if resource.RecordColumns == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RecordColumns'"))
-	}
 	return errors
 }

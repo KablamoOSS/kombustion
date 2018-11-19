@@ -15,11 +15,5 @@ type TopicSubscription struct {
 func (resource TopicSubscription) Validate() []error {
 	errors := []error{}
 
-	if resource.Endpoint == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Endpoint'"))
-	}
-	if resource.Protocol == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Protocol'"))
-	}
 	return errors
 }

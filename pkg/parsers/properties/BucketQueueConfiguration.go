@@ -7,20 +7,14 @@ import "fmt"
 
 // BucketQueueConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-queueconfig.html
 type BucketQueueConfiguration struct {
-	Event  interface{}               `yaml:"Event"`
-	Queue  interface{}               `yaml:"Queue"`
-	Filter *BucketNotificationFilter `yaml:"Filter,omitempty"`
+	Event  interface{} `yaml:"Event"`
+	Queue  interface{} `yaml:"Queue"`
+	Filter interface{} `yaml:"Filter,omitempty"`
 }
 
 // BucketQueueConfiguration validation
 func (resource BucketQueueConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.Event == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Event'"))
-	}
-	if resource.Queue == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Queue'"))
-	}
 	return errors
 }

@@ -16,11 +16,5 @@ type TopicRuleSnsAction struct {
 func (resource TopicRuleSnsAction) Validate() []error {
 	errors := []error{}
 
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
-	if resource.TargetArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TargetArn'"))
-	}
 	return errors
 }

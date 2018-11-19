@@ -14,8 +14,5 @@ type BucketBucketEncryption struct {
 func (resource BucketBucketEncryption) Validate() []error {
 	errors := []error{}
 
-	if resource.ServerSideEncryptionConfiguration == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ServerSideEncryptionConfiguration'"))
-	}
 	return errors
 }

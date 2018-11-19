@@ -16,8 +16,5 @@ type ConfigurationAggregatorAccountAggregationSource struct {
 func (resource ConfigurationAggregatorAccountAggregationSource) Validate() []error {
 	errors := []error{}
 
-	if resource.AccountIds == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AccountIds'"))
-	}
 	return errors
 }

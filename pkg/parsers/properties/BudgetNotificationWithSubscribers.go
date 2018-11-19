@@ -7,21 +7,13 @@ import "fmt"
 
 // BudgetNotificationWithSubscribers Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-notificationwithsubscribers.html
 type BudgetNotificationWithSubscribers struct {
-	Notification *BudgetNotification `yaml:"Notification"`
-	Subscribers  interface{}         `yaml:"Subscribers"`
+	Notification interface{} `yaml:"Notification"`
+	Subscribers  interface{} `yaml:"Subscribers"`
 }
 
 // BudgetNotificationWithSubscribers validation
 func (resource BudgetNotificationWithSubscribers) Validate() []error {
 	errors := []error{}
 
-	if resource.Notification == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Notification'"))
-	} else {
-		errors = append(errors, resource.Notification.Validate()...)
-	}
-	if resource.Subscribers == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Subscribers'"))
-	}
 	return errors
 }

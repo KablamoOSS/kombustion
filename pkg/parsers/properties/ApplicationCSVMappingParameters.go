@@ -15,11 +15,5 @@ type ApplicationCSVMappingParameters struct {
 func (resource ApplicationCSVMappingParameters) Validate() []error {
 	errors := []error{}
 
-	if resource.RecordColumnDelimiter == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RecordColumnDelimiter'"))
-	}
-	if resource.RecordRowDelimiter == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RecordRowDelimiter'"))
-	}
 	return errors
 }

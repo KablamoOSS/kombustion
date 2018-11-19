@@ -16,14 +16,5 @@ type PipelinePipelineObject struct {
 func (resource PipelinePipelineObject) Validate() []error {
 	errors := []error{}
 
-	if resource.Id == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Id'"))
-	}
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.Fields == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Fields'"))
-	}
 	return errors
 }

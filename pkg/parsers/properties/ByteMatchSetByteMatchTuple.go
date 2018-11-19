@@ -5,29 +5,18 @@ package properties
 
 import "fmt"
 
-// ByteMatchSetByteMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-bytematchset-bytematchtuple.html
+// ByteMatchSetByteMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-bytematchset-bytematchtuples.html
 type ByteMatchSetByteMatchTuple struct {
-	PositionalConstraint interface{}               `yaml:"PositionalConstraint"`
-	TargetString         interface{}               `yaml:"TargetString,omitempty"`
-	TargetStringBase64   interface{}               `yaml:"TargetStringBase64,omitempty"`
-	TextTransformation   interface{}               `yaml:"TextTransformation"`
-	FieldToMatch         *ByteMatchSetFieldToMatch `yaml:"FieldToMatch"`
+	PositionalConstraint interface{} `yaml:"PositionalConstraint"`
+	TargetString         interface{} `yaml:"TargetString,omitempty"`
+	TargetStringBase64   interface{} `yaml:"TargetStringBase64,omitempty"`
+	TextTransformation   interface{} `yaml:"TextTransformation"`
+	FieldToMatch         interface{} `yaml:"FieldToMatch"`
 }
 
 // ByteMatchSetByteMatchTuple validation
 func (resource ByteMatchSetByteMatchTuple) Validate() []error {
 	errors := []error{}
 
-	if resource.PositionalConstraint == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PositionalConstraint'"))
-	}
-	if resource.TextTransformation == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TextTransformation'"))
-	}
-	if resource.FieldToMatch == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'FieldToMatch'"))
-	} else {
-		errors = append(errors, resource.FieldToMatch.Validate()...)
-	}
 	return errors
 }

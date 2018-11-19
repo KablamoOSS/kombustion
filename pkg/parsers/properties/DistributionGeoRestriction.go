@@ -15,8 +15,5 @@ type DistributionGeoRestriction struct {
 func (resource DistributionGeoRestriction) Validate() []error {
 	errors := []error{}
 
-	if resource.RestrictionType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RestrictionType'"))
-	}
 	return errors
 }

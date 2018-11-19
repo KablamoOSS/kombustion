@@ -15,11 +15,5 @@ type BrokerConfigurationId struct {
 func (resource BrokerConfigurationId) Validate() []error {
 	errors := []error{}
 
-	if resource.Id == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Id'"))
-	}
-	if resource.Revision == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Revision'"))
-	}
 	return errors
 }

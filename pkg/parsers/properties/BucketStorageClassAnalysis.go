@@ -5,7 +5,7 @@ package properties
 
 // BucketStorageClassAnalysis Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-storageclassanalysis.html
 type BucketStorageClassAnalysis struct {
-	DataExport *BucketDataExport `yaml:"DataExport,omitempty"`
+	DataExport interface{} `yaml:"DataExport,omitempty"`
 }
 
 // BucketStorageClassAnalysis validation

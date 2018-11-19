@@ -16,14 +16,5 @@ type StackRdsDbInstance struct {
 func (resource StackRdsDbInstance) Validate() []error {
 	errors := []error{}
 
-	if resource.DbPassword == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DbPassword'"))
-	}
-	if resource.DbUser == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DbUser'"))
-	}
-	if resource.RdsDbInstanceArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RdsDbInstanceArn'"))
-	}
 	return errors
 }

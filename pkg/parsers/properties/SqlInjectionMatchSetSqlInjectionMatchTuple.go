@@ -5,23 +5,15 @@ package properties
 
 import "fmt"
 
-// SqlInjectionMatchSetSqlInjectionMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-sqlinjectionmatchset-sqlinjectionmatchtuple.html
+// SqlInjectionMatchSetSqlInjectionMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sqlinjectionmatchset-sqlinjectionmatchtuples.html
 type SqlInjectionMatchSetSqlInjectionMatchTuple struct {
-	TextTransformation interface{}                       `yaml:"TextTransformation"`
-	FieldToMatch       *SqlInjectionMatchSetFieldToMatch `yaml:"FieldToMatch"`
+	TextTransformation interface{} `yaml:"TextTransformation"`
+	FieldToMatch       interface{} `yaml:"FieldToMatch"`
 }
 
 // SqlInjectionMatchSetSqlInjectionMatchTuple validation
 func (resource SqlInjectionMatchSetSqlInjectionMatchTuple) Validate() []error {
 	errors := []error{}
 
-	if resource.TextTransformation == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TextTransformation'"))
-	}
-	if resource.FieldToMatch == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'FieldToMatch'"))
-	} else {
-		errors = append(errors, resource.FieldToMatch.Validate()...)
-	}
 	return errors
 }

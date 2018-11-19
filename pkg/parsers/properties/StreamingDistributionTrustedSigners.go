@@ -15,8 +15,5 @@ type StreamingDistributionTrustedSigners struct {
 func (resource StreamingDistributionTrustedSigners) Validate() []error {
 	errors := []error{}
 
-	if resource.Enabled == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Enabled'"))
-	}
 	return errors
 }

@@ -14,8 +14,5 @@ type LoadBalancerConnectionSettings struct {
 func (resource LoadBalancerConnectionSettings) Validate() []error {
 	errors := []error{}
 
-	if resource.IdleTimeout == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'IdleTimeout'"))
-	}
 	return errors
 }

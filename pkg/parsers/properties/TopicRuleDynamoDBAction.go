@@ -22,17 +22,5 @@ type TopicRuleDynamoDBAction struct {
 func (resource TopicRuleDynamoDBAction) Validate() []error {
 	errors := []error{}
 
-	if resource.HashKeyField == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'HashKeyField'"))
-	}
-	if resource.HashKeyValue == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'HashKeyValue'"))
-	}
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
-	if resource.TableName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TableName'"))
-	}
 	return errors
 }

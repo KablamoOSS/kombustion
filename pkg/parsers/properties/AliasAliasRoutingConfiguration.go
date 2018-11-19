@@ -14,8 +14,5 @@ type AliasAliasRoutingConfiguration struct {
 func (resource AliasAliasRoutingConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.AdditionalVersionWeights == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AdditionalVersionWeights'"))
-	}
 	return errors
 }

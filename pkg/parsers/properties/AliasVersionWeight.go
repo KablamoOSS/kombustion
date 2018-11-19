@@ -15,11 +15,5 @@ type AliasVersionWeight struct {
 func (resource AliasVersionWeight) Validate() []error {
 	errors := []error{}
 
-	if resource.FunctionVersion == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'FunctionVersion'"))
-	}
-	if resource.FunctionWeight == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'FunctionWeight'"))
-	}
 	return errors
 }

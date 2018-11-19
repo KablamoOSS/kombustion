@@ -17,11 +17,5 @@ type ConfigurationTemplateConfigurationOptionSetting struct {
 func (resource ConfigurationTemplateConfigurationOptionSetting) Validate() []error {
 	errors := []error{}
 
-	if resource.Namespace == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Namespace'"))
-	}
-	if resource.OptionName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'OptionName'"))
-	}
 	return errors
 }

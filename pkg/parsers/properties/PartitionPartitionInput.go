@@ -7,17 +7,14 @@ import "fmt"
 
 // PartitionPartitionInput Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-partitioninput.html
 type PartitionPartitionInput struct {
-	Parameters        interface{}                 `yaml:"Parameters,omitempty"`
-	StorageDescriptor *PartitionStorageDescriptor `yaml:"StorageDescriptor,omitempty"`
-	Values            interface{}                 `yaml:"Values"`
+	Parameters        interface{} `yaml:"Parameters,omitempty"`
+	StorageDescriptor interface{} `yaml:"StorageDescriptor,omitempty"`
+	Values            interface{} `yaml:"Values"`
 }
 
 // PartitionPartitionInput validation
 func (resource PartitionPartitionInput) Validate() []error {
 	errors := []error{}
 
-	if resource.Values == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Values'"))
-	}
 	return errors
 }

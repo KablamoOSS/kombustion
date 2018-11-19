@@ -5,8 +5,8 @@ package properties
 
 // ProjectLogsConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-logsconfig.html
 type ProjectLogsConfig struct {
-	S3Logs         *ProjectS3LogsConfig         `yaml:"S3Logs,omitempty"`
-	CloudWatchLogs *ProjectCloudWatchLogsConfig `yaml:"CloudWatchLogs,omitempty"`
+	S3Logs         interface{} `yaml:"S3Logs,omitempty"`
+	CloudWatchLogs interface{} `yaml:"CloudWatchLogs,omitempty"`
 }
 
 // ProjectLogsConfig validation

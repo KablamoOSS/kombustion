@@ -15,11 +15,5 @@ type DeliveryStreamProcessor struct {
 func (resource DeliveryStreamProcessor) Validate() []error {
 	errors := []error{}
 
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
-	if resource.Parameters == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Parameters'"))
-	}
 	return errors
 }

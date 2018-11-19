@@ -19,14 +19,5 @@ type ProjectEnvironment struct {
 func (resource ProjectEnvironment) Validate() []error {
 	errors := []error{}
 
-	if resource.ComputeType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ComputeType'"))
-	}
-	if resource.Image == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Image'"))
-	}
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

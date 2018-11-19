@@ -7,7 +7,7 @@ import "fmt"
 
 // ServiceDnsConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-dnsconfig.html
 type ServiceDnsConfig struct {
-	NamespaceId   interface{} `yaml:"NamespaceId"`
+	NamespaceId   interface{} `yaml:"NamespaceId,omitempty"`
 	RoutingPolicy interface{} `yaml:"RoutingPolicy,omitempty"`
 	DnsRecords    interface{} `yaml:"DnsRecords"`
 }
@@ -16,11 +16,5 @@ type ServiceDnsConfig struct {
 func (resource ServiceDnsConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.NamespaceId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'NamespaceId'"))
-	}
-	if resource.DnsRecords == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DnsRecords'"))
-	}
 	return errors
 }

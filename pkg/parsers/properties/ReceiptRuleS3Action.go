@@ -17,8 +17,5 @@ type ReceiptRuleS3Action struct {
 func (resource ReceiptRuleS3Action) Validate() []error {
 	errors := []error{}
 
-	if resource.BucketName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'BucketName'"))
-	}
 	return errors
 }

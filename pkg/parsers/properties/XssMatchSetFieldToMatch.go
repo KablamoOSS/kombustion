@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// XssMatchSetFieldToMatch Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-xssmatchset-fieldtomatch.html
+// XssMatchSetFieldToMatch Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple-fieldtomatch.html
 type XssMatchSetFieldToMatch struct {
 	Data interface{} `yaml:"Data,omitempty"`
 	Type interface{} `yaml:"Type"`
@@ -15,8 +15,5 @@ type XssMatchSetFieldToMatch struct {
 func (resource XssMatchSetFieldToMatch) Validate() []error {
 	errors := []error{}
 
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

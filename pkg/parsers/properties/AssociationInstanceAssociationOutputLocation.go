@@ -5,7 +5,7 @@ package properties
 
 // AssociationInstanceAssociationOutputLocation Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-instanceassociationoutputlocation.html
 type AssociationInstanceAssociationOutputLocation struct {
-	S3Location *AssociationS3OutputLocation `yaml:"S3Location,omitempty"`
+	S3Location interface{} `yaml:"S3Location,omitempty"`
 }
 
 // AssociationInstanceAssociationOutputLocation validation

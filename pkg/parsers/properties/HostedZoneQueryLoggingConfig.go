@@ -14,8 +14,5 @@ type HostedZoneQueryLoggingConfig struct {
 func (resource HostedZoneQueryLoggingConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.CloudWatchLogsLogGroupArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'CloudWatchLogsLogGroupArn'"))
-	}
 	return errors
 }

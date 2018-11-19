@@ -15,11 +15,5 @@ type ServiceDnsRecord struct {
 func (resource ServiceDnsRecord) Validate() []error {
 	errors := []error{}
 
-	if resource.TTL == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TTL'"))
-	}
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

@@ -15,11 +15,5 @@ type FunctionVpcConfig struct {
 func (resource FunctionVpcConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.SecurityGroupIds == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SecurityGroupIds'"))
-	}
-	if resource.SubnetIds == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SubnetIds'"))
-	}
 	return errors
 }

@@ -17,8 +17,5 @@ type DistributionCustomErrorResponse struct {
 func (resource DistributionCustomErrorResponse) Validate() []error {
 	errors := []error{}
 
-	if resource.ErrorCode == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ErrorCode'"))
-	}
 	return errors
 }

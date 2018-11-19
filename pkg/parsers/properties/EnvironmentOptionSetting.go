@@ -17,11 +17,5 @@ type EnvironmentOptionSetting struct {
 func (resource EnvironmentOptionSetting) Validate() []error {
 	errors := []error{}
 
-	if resource.Namespace == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Namespace'"))
-	}
-	if resource.OptionName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'OptionName'"))
-	}
 	return errors
 }

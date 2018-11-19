@@ -15,8 +15,5 @@ type StackElasticIp struct {
 func (resource StackElasticIp) Validate() []error {
 	errors := []error{}
 
-	if resource.Ip == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Ip'"))
-	}
 	return errors
 }

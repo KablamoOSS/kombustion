@@ -5,8 +5,8 @@ package properties
 
 // ApplicationReferenceDataSourceMappingParameters Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-mappingparameters.html
 type ApplicationReferenceDataSourceMappingParameters struct {
-	JSONMappingParameters *ApplicationReferenceDataSourceJSONMappingParameters `yaml:"JSONMappingParameters,omitempty"`
-	CSVMappingParameters  *ApplicationReferenceDataSourceCSVMappingParameters  `yaml:"CSVMappingParameters,omitempty"`
+	JSONMappingParameters interface{} `yaml:"JSONMappingParameters,omitempty"`
+	CSVMappingParameters  interface{} `yaml:"CSVMappingParameters,omitempty"`
 }
 
 // ApplicationReferenceDataSourceMappingParameters validation

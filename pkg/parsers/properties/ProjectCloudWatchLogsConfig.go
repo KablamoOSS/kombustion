@@ -16,8 +16,5 @@ type ProjectCloudWatchLogsConfig struct {
 func (resource ProjectCloudWatchLogsConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.Status == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Status'"))
-	}
 	return errors
 }

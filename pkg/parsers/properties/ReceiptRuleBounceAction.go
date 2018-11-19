@@ -18,14 +18,5 @@ type ReceiptRuleBounceAction struct {
 func (resource ReceiptRuleBounceAction) Validate() []error {
 	errors := []error{}
 
-	if resource.Message == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Message'"))
-	}
-	if resource.Sender == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Sender'"))
-	}
-	if resource.SmtpReplyCode == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SmtpReplyCode'"))
-	}
 	return errors
 }

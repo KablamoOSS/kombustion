@@ -16,8 +16,5 @@ type DistributionLogging struct {
 func (resource DistributionLogging) Validate() []error {
 	errors := []error{}
 
-	if resource.Bucket == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Bucket'"))
-	}
 	return errors
 }

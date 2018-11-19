@@ -18,14 +18,5 @@ type LoadBalancerPolicies struct {
 func (resource LoadBalancerPolicies) Validate() []error {
 	errors := []error{}
 
-	if resource.PolicyName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PolicyName'"))
-	}
-	if resource.PolicyType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PolicyType'"))
-	}
-	if resource.Attributes == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Attributes'"))
-	}
 	return errors
 }

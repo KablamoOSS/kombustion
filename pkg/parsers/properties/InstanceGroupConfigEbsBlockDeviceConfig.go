@@ -7,18 +7,13 @@ import "fmt"
 
 // InstanceGroupConfigEbsBlockDeviceConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-emr-ebsconfiguration-ebsblockdeviceconfig.html
 type InstanceGroupConfigEbsBlockDeviceConfig struct {
-	VolumesPerInstance  interface{}                             `yaml:"VolumesPerInstance,omitempty"`
-	VolumeSpecification *InstanceGroupConfigVolumeSpecification `yaml:"VolumeSpecification"`
+	VolumesPerInstance  interface{} `yaml:"VolumesPerInstance,omitempty"`
+	VolumeSpecification interface{} `yaml:"VolumeSpecification"`
 }
 
 // InstanceGroupConfigEbsBlockDeviceConfig validation
 func (resource InstanceGroupConfigEbsBlockDeviceConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.VolumeSpecification == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'VolumeSpecification'"))
-	} else {
-		errors = append(errors, resource.VolumeSpecification.Validate()...)
-	}
 	return errors
 }

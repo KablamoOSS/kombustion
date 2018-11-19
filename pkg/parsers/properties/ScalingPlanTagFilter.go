@@ -15,8 +15,5 @@ type ScalingPlanTagFilter struct {
 func (resource ScalingPlanTagFilter) Validate() []error {
 	errors := []error{}
 
-	if resource.Key == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Key'"))
-	}
 	return errors
 }

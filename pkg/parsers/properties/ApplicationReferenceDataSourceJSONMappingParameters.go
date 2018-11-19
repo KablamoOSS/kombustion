@@ -14,8 +14,5 @@ type ApplicationReferenceDataSourceJSONMappingParameters struct {
 func (resource ApplicationReferenceDataSourceJSONMappingParameters) Validate() []error {
 	errors := []error{}
 
-	if resource.RecordRowPath == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RecordRowPath'"))
-	}
 	return errors
 }

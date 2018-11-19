@@ -6,6 +6,8 @@ package resources
 import (
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
+	//
+	//
 )
 
 // SESReceiptRuleSet Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-receiptruleset.html

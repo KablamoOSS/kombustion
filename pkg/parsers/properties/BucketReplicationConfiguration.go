@@ -15,11 +15,5 @@ type BucketReplicationConfiguration struct {
 func (resource BucketReplicationConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.Role == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Role'"))
-	}
-	if resource.Rules == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Rules'"))
-	}
 	return errors
 }

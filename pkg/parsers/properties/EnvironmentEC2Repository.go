@@ -15,11 +15,5 @@ type EnvironmentEC2Repository struct {
 func (resource EnvironmentEC2Repository) Validate() []error {
 	errors := []error{}
 
-	if resource.PathComponent == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PathComponent'"))
-	}
-	if resource.RepositoryUrl == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RepositoryUrl'"))
-	}
 	return errors
 }

@@ -15,11 +15,5 @@ type ClusterParameterGroupParameter struct {
 func (resource ClusterParameterGroupParameter) Validate() []error {
 	errors := []error{}
 
-	if resource.ParameterName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ParameterName'"))
-	}
-	if resource.ParameterValue == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ParameterValue'"))
-	}
 	return errors
 }

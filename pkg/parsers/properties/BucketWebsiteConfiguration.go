@@ -5,10 +5,10 @@ package properties
 
 // BucketWebsiteConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration.html
 type BucketWebsiteConfiguration struct {
-	ErrorDocument         interface{}                  `yaml:"ErrorDocument,omitempty"`
-	IndexDocument         interface{}                  `yaml:"IndexDocument,omitempty"`
-	RedirectAllRequestsTo *BucketRedirectAllRequestsTo `yaml:"RedirectAllRequestsTo,omitempty"`
-	RoutingRules          interface{}                  `yaml:"RoutingRules,omitempty"`
+	ErrorDocument         interface{} `yaml:"ErrorDocument,omitempty"`
+	IndexDocument         interface{} `yaml:"IndexDocument,omitempty"`
+	RedirectAllRequestsTo interface{} `yaml:"RedirectAllRequestsTo,omitempty"`
+	RoutingRules          interface{} `yaml:"RoutingRules,omitempty"`
 }
 
 // BucketWebsiteConfiguration validation

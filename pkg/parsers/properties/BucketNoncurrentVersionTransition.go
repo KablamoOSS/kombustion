@@ -15,11 +15,5 @@ type BucketNoncurrentVersionTransition struct {
 func (resource BucketNoncurrentVersionTransition) Validate() []error {
 	errors := []error{}
 
-	if resource.StorageClass == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'StorageClass'"))
-	}
-	if resource.TransitionInDays == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TransitionInDays'"))
-	}
 	return errors
 }

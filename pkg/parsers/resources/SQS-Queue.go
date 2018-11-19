@@ -6,6 +6,8 @@ package resources
 import (
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
+	//
+	//
 )
 
 // SQSQueue Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html

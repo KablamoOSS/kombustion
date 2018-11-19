@@ -18,11 +18,5 @@ type ClusterKerberosAttributes struct {
 func (resource ClusterKerberosAttributes) Validate() []error {
 	errors := []error{}
 
-	if resource.KdcAdminPassword == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'KdcAdminPassword'"))
-	}
-	if resource.Realm == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Realm'"))
-	}
 	return errors
 }

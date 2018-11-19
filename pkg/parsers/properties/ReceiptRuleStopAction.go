@@ -15,8 +15,5 @@ type ReceiptRuleStopAction struct {
 func (resource ReceiptRuleStopAction) Validate() []error {
 	errors := []error{}
 
-	if resource.Scope == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Scope'"))
-	}
 	return errors
 }

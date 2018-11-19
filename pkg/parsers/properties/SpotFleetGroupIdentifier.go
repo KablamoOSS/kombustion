@@ -14,8 +14,5 @@ type SpotFleetGroupIdentifier struct {
 func (resource SpotFleetGroupIdentifier) Validate() []error {
 	errors := []error{}
 
-	if resource.GroupId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'GroupId'"))
-	}
 	return errors
 }

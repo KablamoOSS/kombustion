@@ -15,8 +15,5 @@ type ScalingPlanPredefinedScalingMetricSpecification struct {
 func (resource ScalingPlanPredefinedScalingMetricSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.PredefinedScalingMetricType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PredefinedScalingMetricType'"))
-	}
 	return errors
 }

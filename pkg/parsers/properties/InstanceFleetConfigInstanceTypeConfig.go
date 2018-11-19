@@ -7,20 +7,17 @@ import "fmt"
 
 // InstanceFleetConfigInstanceTypeConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-instancefleetconfig-instancetypeconfig.html
 type InstanceFleetConfigInstanceTypeConfig struct {
-	BidPrice                            interface{}                          `yaml:"BidPrice,omitempty"`
-	BidPriceAsPercentageOfOnDemandPrice interface{}                          `yaml:"BidPriceAsPercentageOfOnDemandPrice,omitempty"`
-	InstanceType                        interface{}                          `yaml:"InstanceType"`
-	WeightedCapacity                    interface{}                          `yaml:"WeightedCapacity,omitempty"`
-	Configurations                      interface{}                          `yaml:"Configurations,omitempty"`
-	EbsConfiguration                    *InstanceFleetConfigEbsConfiguration `yaml:"EbsConfiguration,omitempty"`
+	BidPrice                            interface{} `yaml:"BidPrice,omitempty"`
+	BidPriceAsPercentageOfOnDemandPrice interface{} `yaml:"BidPriceAsPercentageOfOnDemandPrice,omitempty"`
+	InstanceType                        interface{} `yaml:"InstanceType"`
+	WeightedCapacity                    interface{} `yaml:"WeightedCapacity,omitempty"`
+	Configurations                      interface{} `yaml:"Configurations,omitempty"`
+	EbsConfiguration                    interface{} `yaml:"EbsConfiguration,omitempty"`
 }
 
 // InstanceFleetConfigInstanceTypeConfig validation
 func (resource InstanceFleetConfigInstanceTypeConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.InstanceType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'InstanceType'"))
-	}
 	return errors
 }

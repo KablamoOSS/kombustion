@@ -7,34 +7,18 @@ import "fmt"
 
 // StreamingDistributionStreamingDistributionConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-streamingdistributionconfig.html
 type StreamingDistributionStreamingDistributionConfig struct {
-	Comment        interface{}                          `yaml:"Comment"`
-	Enabled        interface{}                          `yaml:"Enabled"`
-	PriceClass     interface{}                          `yaml:"PriceClass,omitempty"`
-	TrustedSigners *StreamingDistributionTrustedSigners `yaml:"TrustedSigners"`
-	S3Origin       *StreamingDistributionS3Origin       `yaml:"S3Origin"`
-	Logging        *StreamingDistributionLogging        `yaml:"Logging,omitempty"`
-	Aliases        interface{}                          `yaml:"Aliases,omitempty"`
+	Comment        interface{} `yaml:"Comment"`
+	Enabled        interface{} `yaml:"Enabled"`
+	PriceClass     interface{} `yaml:"PriceClass,omitempty"`
+	TrustedSigners interface{} `yaml:"TrustedSigners"`
+	S3Origin       interface{} `yaml:"S3Origin"`
+	Logging        interface{} `yaml:"Logging,omitempty"`
+	Aliases        interface{} `yaml:"Aliases,omitempty"`
 }
 
 // StreamingDistributionStreamingDistributionConfig validation
 func (resource StreamingDistributionStreamingDistributionConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.Comment == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Comment'"))
-	}
-	if resource.Enabled == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Enabled'"))
-	}
-	if resource.TrustedSigners == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TrustedSigners'"))
-	} else {
-		errors = append(errors, resource.TrustedSigners.Validate()...)
-	}
-	if resource.S3Origin == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'S3Origin'"))
-	} else {
-		errors = append(errors, resource.S3Origin.Validate()...)
-	}
 	return errors
 }

@@ -16,14 +16,5 @@ type BuildS3Location struct {
 func (resource BuildS3Location) Validate() []error {
 	errors := []error{}
 
-	if resource.Bucket == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Bucket'"))
-	}
-	if resource.Key == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Key'"))
-	}
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
 	return errors
 }

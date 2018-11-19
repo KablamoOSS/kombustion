@@ -15,11 +15,5 @@ type NetworkInterfacePrivateIpAddressSpecification struct {
 func (resource NetworkInterfacePrivateIpAddressSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.Primary == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Primary'"))
-	}
-	if resource.PrivateIpAddress == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PrivateIpAddress'"))
-	}
 	return errors
 }

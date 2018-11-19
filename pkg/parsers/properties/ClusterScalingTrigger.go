@@ -7,17 +7,12 @@ import "fmt"
 
 // ClusterScalingTrigger Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-cluster-scalingtrigger.html
 type ClusterScalingTrigger struct {
-	CloudWatchAlarmDefinition *ClusterCloudWatchAlarmDefinition `yaml:"CloudWatchAlarmDefinition"`
+	CloudWatchAlarmDefinition interface{} `yaml:"CloudWatchAlarmDefinition"`
 }
 
 // ClusterScalingTrigger validation
 func (resource ClusterScalingTrigger) Validate() []error {
 	errors := []error{}
 
-	if resource.CloudWatchAlarmDefinition == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'CloudWatchAlarmDefinition'"))
-	} else {
-		errors = append(errors, resource.CloudWatchAlarmDefinition.Validate()...)
-	}
 	return errors
 }

@@ -21,8 +21,5 @@ type SecurityGroupEgress struct {
 func (resource SecurityGroupEgress) Validate() []error {
 	errors := []error{}
 
-	if resource.IpProtocol == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'IpProtocol'"))
-	}
 	return errors
 }

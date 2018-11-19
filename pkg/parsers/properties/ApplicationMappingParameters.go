@@ -5,8 +5,8 @@ package properties
 
 // ApplicationMappingParameters Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-mappingparameters.html
 type ApplicationMappingParameters struct {
-	JSONMappingParameters *ApplicationJSONMappingParameters `yaml:"JSONMappingParameters,omitempty"`
-	CSVMappingParameters  *ApplicationCSVMappingParameters  `yaml:"CSVMappingParameters,omitempty"`
+	JSONMappingParameters interface{} `yaml:"JSONMappingParameters,omitempty"`
+	CSVMappingParameters  interface{} `yaml:"CSVMappingParameters,omitempty"`
 }
 
 // ApplicationMappingParameters validation

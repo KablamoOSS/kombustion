@@ -15,11 +15,5 @@ type CertificateDomainValidationOption struct {
 func (resource CertificateDomainValidationOption) Validate() []error {
 	errors := []error{}
 
-	if resource.DomainName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DomainName'"))
-	}
-	if resource.ValidationDomain == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ValidationDomain'"))
-	}
 	return errors
 }

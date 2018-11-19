@@ -14,8 +14,5 @@ type BucketCorsConfiguration struct {
 func (resource BucketCorsConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.CorsRules == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'CorsRules'"))
-	}
 	return errors
 }

@@ -7,21 +7,13 @@ import "fmt"
 
 // XssMatchSetXssMatchTuple Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple.html
 type XssMatchSetXssMatchTuple struct {
-	TextTransformation interface{}              `yaml:"TextTransformation"`
-	FieldToMatch       *XssMatchSetFieldToMatch `yaml:"FieldToMatch"`
+	TextTransformation interface{} `yaml:"TextTransformation"`
+	FieldToMatch       interface{} `yaml:"FieldToMatch"`
 }
 
 // XssMatchSetXssMatchTuple validation
 func (resource XssMatchSetXssMatchTuple) Validate() []error {
 	errors := []error{}
 
-	if resource.TextTransformation == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TextTransformation'"))
-	}
-	if resource.FieldToMatch == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'FieldToMatch'"))
-	} else {
-		errors = append(errors, resource.FieldToMatch.Validate()...)
-	}
 	return errors
 }

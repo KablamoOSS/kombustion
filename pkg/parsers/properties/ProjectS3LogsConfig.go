@@ -15,8 +15,5 @@ type ProjectS3LogsConfig struct {
 func (resource ProjectS3LogsConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.Status == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Status'"))
-	}
 	return errors
 }

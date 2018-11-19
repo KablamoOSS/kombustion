@@ -7,35 +7,25 @@ import "fmt"
 
 // ScalingPlanScalingInstruction Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-scalinginstruction.html
 type ScalingPlanScalingInstruction struct {
-	MaxCapacity                  interface{} `yaml:"MaxCapacity"`
-	MinCapacity                  interface{} `yaml:"MinCapacity"`
-	ResourceId                   interface{} `yaml:"ResourceId"`
-	ScalableDimension            interface{} `yaml:"ScalableDimension"`
-	ServiceNamespace             interface{} `yaml:"ServiceNamespace"`
-	TargetTrackingConfigurations interface{} `yaml:"TargetTrackingConfigurations"`
+	DisableDynamicScaling                interface{} `yaml:"DisableDynamicScaling,omitempty"`
+	MaxCapacity                          interface{} `yaml:"MaxCapacity"`
+	MinCapacity                          interface{} `yaml:"MinCapacity"`
+	PredictiveScalingMaxCapacityBehavior interface{} `yaml:"PredictiveScalingMaxCapacityBehavior,omitempty"`
+	PredictiveScalingMaxCapacityBuffer   interface{} `yaml:"PredictiveScalingMaxCapacityBuffer,omitempty"`
+	PredictiveScalingMode                interface{} `yaml:"PredictiveScalingMode,omitempty"`
+	ResourceId                           interface{} `yaml:"ResourceId"`
+	ScalableDimension                    interface{} `yaml:"ScalableDimension"`
+	ScalingPolicyUpdateBehavior          interface{} `yaml:"ScalingPolicyUpdateBehavior,omitempty"`
+	ScheduledActionBufferTime            interface{} `yaml:"ScheduledActionBufferTime,omitempty"`
+	ServiceNamespace                     interface{} `yaml:"ServiceNamespace"`
+	PredefinedLoadMetricSpecification    interface{} `yaml:"PredefinedLoadMetricSpecification,omitempty"`
+	TargetTrackingConfigurations         interface{} `yaml:"TargetTrackingConfigurations"`
+	CustomizedLoadMetricSpecification    interface{} `yaml:"CustomizedLoadMetricSpecification,omitempty"`
 }
 
 // ScalingPlanScalingInstruction validation
 func (resource ScalingPlanScalingInstruction) Validate() []error {
 	errors := []error{}
 
-	if resource.MaxCapacity == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MaxCapacity'"))
-	}
-	if resource.MinCapacity == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MinCapacity'"))
-	}
-	if resource.ResourceId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ResourceId'"))
-	}
-	if resource.ScalableDimension == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ScalableDimension'"))
-	}
-	if resource.ServiceNamespace == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ServiceNamespace'"))
-	}
-	if resource.TargetTrackingConfigurations == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TargetTrackingConfigurations'"))
-	}
 	return errors
 }

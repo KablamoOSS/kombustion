@@ -7,17 +7,12 @@ import "fmt"
 
 // InstanceGroupConfigScalingTrigger Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-instancegroupconfig-scalingtrigger.html
 type InstanceGroupConfigScalingTrigger struct {
-	CloudWatchAlarmDefinition *InstanceGroupConfigCloudWatchAlarmDefinition `yaml:"CloudWatchAlarmDefinition"`
+	CloudWatchAlarmDefinition interface{} `yaml:"CloudWatchAlarmDefinition"`
 }
 
 // InstanceGroupConfigScalingTrigger validation
 func (resource InstanceGroupConfigScalingTrigger) Validate() []error {
 	errors := []error{}
 
-	if resource.CloudWatchAlarmDefinition == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'CloudWatchAlarmDefinition'"))
-	} else {
-		errors = append(errors, resource.CloudWatchAlarmDefinition.Validate()...)
-	}
 	return errors
 }

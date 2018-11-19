@@ -16,11 +16,5 @@ type TopicRuleFirehoseAction struct {
 func (resource TopicRuleFirehoseAction) Validate() []error {
 	errors := []error{}
 
-	if resource.DeliveryStreamName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DeliveryStreamName'"))
-	}
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
 	return errors
 }

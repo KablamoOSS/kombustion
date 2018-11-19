@@ -14,8 +14,5 @@ type DataSourceLambdaConfig struct {
 func (resource DataSourceLambdaConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.LambdaFunctionArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'LambdaFunctionArn'"))
-	}
 	return errors
 }

@@ -15,11 +15,5 @@ type TableProvisionedThroughput struct {
 func (resource TableProvisionedThroughput) Validate() []error {
 	errors := []error{}
 
-	if resource.ReadCapacityUnits == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ReadCapacityUnits'"))
-	}
-	if resource.WriteCapacityUnits == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'WriteCapacityUnits'"))
-	}
 	return errors
 }

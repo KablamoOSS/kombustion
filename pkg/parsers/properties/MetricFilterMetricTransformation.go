@@ -17,14 +17,5 @@ type MetricFilterMetricTransformation struct {
 func (resource MetricFilterMetricTransformation) Validate() []error {
 	errors := []error{}
 
-	if resource.MetricName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MetricName'"))
-	}
-	if resource.MetricNamespace == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MetricNamespace'"))
-	}
-	if resource.MetricValue == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MetricValue'"))
-	}
 	return errors
 }

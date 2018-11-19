@@ -16,11 +16,5 @@ type ProjectEnvironmentVariable struct {
 func (resource ProjectEnvironmentVariable) Validate() []error {
 	errors := []error{}
 
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.Value == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Value'"))
-	}
 	return errors
 }

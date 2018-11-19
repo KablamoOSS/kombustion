@@ -7,19 +7,14 @@ import "fmt"
 
 // ApplicationReferenceDataSourceReferenceDataSource Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-referencedatasource.html
 type ApplicationReferenceDataSourceReferenceDataSource struct {
-	TableName             interface{}                                          `yaml:"TableName,omitempty"`
-	S3ReferenceDataSource *ApplicationReferenceDataSourceS3ReferenceDataSource `yaml:"S3ReferenceDataSource,omitempty"`
-	ReferenceSchema       *ApplicationReferenceDataSourceReferenceSchema       `yaml:"ReferenceSchema"`
+	TableName             interface{} `yaml:"TableName,omitempty"`
+	S3ReferenceDataSource interface{} `yaml:"S3ReferenceDataSource,omitempty"`
+	ReferenceSchema       interface{} `yaml:"ReferenceSchema"`
 }
 
 // ApplicationReferenceDataSourceReferenceDataSource validation
 func (resource ApplicationReferenceDataSourceReferenceDataSource) Validate() []error {
 	errors := []error{}
 
-	if resource.ReferenceSchema == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ReferenceSchema'"))
-	} else {
-		errors = append(errors, resource.ReferenceSchema.Validate()...)
-	}
 	return errors
 }

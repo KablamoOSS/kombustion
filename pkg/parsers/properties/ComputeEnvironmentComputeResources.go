@@ -26,26 +26,5 @@ type ComputeEnvironmentComputeResources struct {
 func (resource ComputeEnvironmentComputeResources) Validate() []error {
 	errors := []error{}
 
-	if resource.InstanceRole == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'InstanceRole'"))
-	}
-	if resource.MaxvCpus == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MaxvCpus'"))
-	}
-	if resource.MinvCpus == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MinvCpus'"))
-	}
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
-	if resource.InstanceTypes == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'InstanceTypes'"))
-	}
-	if resource.SecurityGroupIds == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SecurityGroupIds'"))
-	}
-	if resource.Subnets == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Subnets'"))
-	}
 	return errors
 }

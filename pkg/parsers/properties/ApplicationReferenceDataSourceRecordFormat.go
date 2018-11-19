@@ -7,16 +7,13 @@ import "fmt"
 
 // ApplicationReferenceDataSourceRecordFormat Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-recordformat.html
 type ApplicationReferenceDataSourceRecordFormat struct {
-	RecordFormatType  interface{}                                      `yaml:"RecordFormatType"`
-	MappingParameters *ApplicationReferenceDataSourceMappingParameters `yaml:"MappingParameters,omitempty"`
+	RecordFormatType  interface{} `yaml:"RecordFormatType"`
+	MappingParameters interface{} `yaml:"MappingParameters,omitempty"`
 }
 
 // ApplicationReferenceDataSourceRecordFormat validation
 func (resource ApplicationReferenceDataSourceRecordFormat) Validate() []error {
 	errors := []error{}
 
-	if resource.RecordFormatType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RecordFormatType'"))
-	}
 	return errors
 }

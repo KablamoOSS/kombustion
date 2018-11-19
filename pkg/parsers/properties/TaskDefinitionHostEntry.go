@@ -15,11 +15,5 @@ type TaskDefinitionHostEntry struct {
 func (resource TaskDefinitionHostEntry) Validate() []error {
 	errors := []error{}
 
-	if resource.Hostname == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Hostname'"))
-	}
-	if resource.IpAddress == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'IpAddress'"))
-	}
 	return errors
 }

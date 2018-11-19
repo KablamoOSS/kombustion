@@ -20,17 +20,5 @@ type CustomActionTypeConfigurationProperties struct {
 func (resource CustomActionTypeConfigurationProperties) Validate() []error {
 	errors := []error{}
 
-	if resource.Key == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Key'"))
-	}
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.Required == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Required'"))
-	}
-	if resource.Secret == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Secret'"))
-	}
 	return errors
 }

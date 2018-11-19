@@ -17,17 +17,5 @@ type FleetIpPermission struct {
 func (resource FleetIpPermission) Validate() []error {
 	errors := []error{}
 
-	if resource.FromPort == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'FromPort'"))
-	}
-	if resource.IpRange == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'IpRange'"))
-	}
-	if resource.Protocol == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Protocol'"))
-	}
-	if resource.ToPort == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ToPort'"))
-	}
 	return errors
 }

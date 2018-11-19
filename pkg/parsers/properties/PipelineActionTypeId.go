@@ -17,17 +17,5 @@ type PipelineActionTypeId struct {
 func (resource PipelineActionTypeId) Validate() []error {
 	errors := []error{}
 
-	if resource.Category == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Category'"))
-	}
-	if resource.Owner == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Owner'"))
-	}
-	if resource.Provider == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Provider'"))
-	}
-	if resource.Version == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Version'"))
-	}
 	return errors
 }

@@ -1,9 +1,3 @@
 #generate
 
-Auto generated cloudformation parsers
-
-##Installation:
-
-```sh
-go get github.com/KablamoOSS/kombustion/generate
-```
+To generate new parsers,run `go generate` from the root directory.

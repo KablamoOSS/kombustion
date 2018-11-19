@@ -15,11 +15,5 @@ type DistributionOriginCustomHeader struct {
 func (resource DistributionOriginCustomHeader) Validate() []error {
 	errors := []error{}
 
-	if resource.HeaderName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'HeaderName'"))
-	}
-	if resource.HeaderValue == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'HeaderValue'"))
-	}
 	return errors
 }

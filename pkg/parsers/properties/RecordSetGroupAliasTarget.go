@@ -16,11 +16,5 @@ type RecordSetGroupAliasTarget struct {
 func (resource RecordSetGroupAliasTarget) Validate() []error {
 	errors := []error{}
 
-	if resource.DNSName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DNSName'"))
-	}
-	if resource.HostedZoneId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'HostedZoneId'"))
-	}
 	return errors
 }

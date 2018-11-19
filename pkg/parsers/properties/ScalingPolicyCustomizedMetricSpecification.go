@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// ScalingPolicyCustomizedMetricSpecification Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-customizedmetricspecification.html
+// ScalingPolicyCustomizedMetricSpecification Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-scalingpolicy-customizedmetricspecification.html
 type ScalingPolicyCustomizedMetricSpecification struct {
 	MetricName interface{} `yaml:"MetricName"`
 	Namespace  interface{} `yaml:"Namespace"`
@@ -18,14 +18,5 @@ type ScalingPolicyCustomizedMetricSpecification struct {
 func (resource ScalingPolicyCustomizedMetricSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.MetricName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MetricName'"))
-	}
-	if resource.Namespace == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Namespace'"))
-	}
-	if resource.Statistic == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Statistic'"))
-	}
 	return errors
 }

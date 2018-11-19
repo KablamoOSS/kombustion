@@ -20,11 +20,5 @@ type AutoScalingGroupLifecycleHookSpecification struct {
 func (resource AutoScalingGroupLifecycleHookSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.LifecycleHookName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'LifecycleHookName'"))
-	}
-	if resource.LifecycleTransition == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'LifecycleTransition'"))
-	}
 	return errors
 }

@@ -17,11 +17,5 @@ type LoadBalancerAccessLoggingPolicy struct {
 func (resource LoadBalancerAccessLoggingPolicy) Validate() []error {
 	errors := []error{}
 
-	if resource.Enabled == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Enabled'"))
-	}
-	if resource.S3BucketName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'S3BucketName'"))
-	}
 	return errors
 }

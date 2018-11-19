@@ -16,14 +16,5 @@ type ConfigurationSetEventDestinationDimensionConfiguration struct {
 func (resource ConfigurationSetEventDestinationDimensionConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.DefaultDimensionValue == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DefaultDimensionValue'"))
-	}
-	if resource.DimensionName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DimensionName'"))
-	}
-	if resource.DimensionValueSource == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DimensionValueSource'"))
-	}
 	return errors
 }

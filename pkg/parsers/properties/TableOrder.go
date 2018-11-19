@@ -15,11 +15,5 @@ type TableOrder struct {
 func (resource TableOrder) Validate() []error {
 	errors := []error{}
 
-	if resource.Column == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Column'"))
-	}
-	if resource.SortOrder == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SortOrder'"))
-	}
 	return errors
 }

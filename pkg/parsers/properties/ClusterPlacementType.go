@@ -14,8 +14,5 @@ type ClusterPlacementType struct {
 func (resource ClusterPlacementType) Validate() []error {
 	errors := []error{}
 
-	if resource.AvailabilityZone == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AvailabilityZone'"))
-	}
 	return errors
 }

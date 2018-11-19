@@ -15,11 +15,5 @@ type BudgetSubscriber struct {
 func (resource BudgetSubscriber) Validate() []error {
 	errors := []error{}
 
-	if resource.Address == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Address'"))
-	}
-	if resource.SubscriptionType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SubscriptionType'"))
-	}
 	return errors
 }

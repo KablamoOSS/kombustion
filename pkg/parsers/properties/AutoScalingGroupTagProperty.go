@@ -16,14 +16,5 @@ type AutoScalingGroupTagProperty struct {
 func (resource AutoScalingGroupTagProperty) Validate() []error {
 	errors := []error{}
 
-	if resource.Key == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Key'"))
-	}
-	if resource.PropagateAtLaunch == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PropagateAtLaunch'"))
-	}
-	if resource.Value == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Value'"))
-	}
 	return errors
 }

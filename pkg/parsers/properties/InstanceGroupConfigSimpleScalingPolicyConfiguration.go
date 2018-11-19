@@ -16,8 +16,5 @@ type InstanceGroupConfigSimpleScalingPolicyConfiguration struct {
 func (resource InstanceGroupConfigSimpleScalingPolicyConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.ScalingAdjustment == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ScalingAdjustment'"))
-	}
 	return errors
 }

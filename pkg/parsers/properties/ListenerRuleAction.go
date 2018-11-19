@@ -15,11 +15,5 @@ type ListenerRuleAction struct {
 func (resource ListenerRuleAction) Validate() []error {
 	errors := []error{}
 
-	if resource.TargetGroupArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TargetGroupArn'"))
-	}
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

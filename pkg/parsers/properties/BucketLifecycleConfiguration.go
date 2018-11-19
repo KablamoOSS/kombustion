@@ -14,8 +14,5 @@ type BucketLifecycleConfiguration struct {
 func (resource BucketLifecycleConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.Rules == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Rules'"))
-	}
 	return errors
 }

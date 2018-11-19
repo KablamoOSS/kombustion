@@ -15,11 +15,5 @@ type DeploymentGroupGitHubLocation struct {
 func (resource DeploymentGroupGitHubLocation) Validate() []error {
 	errors := []error{}
 
-	if resource.CommitId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'CommitId'"))
-	}
-	if resource.Repository == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Repository'"))
-	}
 	return errors
 }

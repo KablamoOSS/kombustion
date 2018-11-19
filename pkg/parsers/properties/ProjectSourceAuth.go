@@ -15,8 +15,5 @@ type ProjectSourceAuth struct {
 func (resource ProjectSourceAuth) Validate() []error {
 	errors := []error{}
 
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

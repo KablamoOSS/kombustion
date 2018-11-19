@@ -1,9 +1,7 @@
 Name: ""
 Region: "ap-southeast-2"
 Environments:
-  phoenix:
-    AccountIDs:
-      - "000000000000"
+  ci:
     Parameters:
       BucketEncryption: "AES256"
       GlacierTransition: "60"

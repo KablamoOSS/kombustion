@@ -16,8 +16,5 @@ type InstanceLaunchTemplateSpecification struct {
 func (resource InstanceLaunchTemplateSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.Version == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Version'"))
-	}
 	return errors
 }

@@ -7,19 +7,14 @@ import "fmt"
 
 // DeploymentGroupDeployment Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment.html
 type DeploymentGroupDeployment struct {
-	Description                   interface{}                      `yaml:"Description,omitempty"`
-	IgnoreApplicationStopFailures interface{}                      `yaml:"IgnoreApplicationStopFailures,omitempty"`
-	Revision                      *DeploymentGroupRevisionLocation `yaml:"Revision"`
+	Description                   interface{} `yaml:"Description,omitempty"`
+	IgnoreApplicationStopFailures interface{} `yaml:"IgnoreApplicationStopFailures,omitempty"`
+	Revision                      interface{} `yaml:"Revision"`
 }
 
 // DeploymentGroupDeployment validation
 func (resource DeploymentGroupDeployment) Validate() []error {
 	errors := []error{}
 
-	if resource.Revision == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Revision'"))
-	} else {
-		errors = append(errors, resource.Revision.Validate()...)
-	}
 	return errors
 }

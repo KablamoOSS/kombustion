@@ -17,11 +17,5 @@ type BucketDestination struct {
 func (resource BucketDestination) Validate() []error {
 	errors := []error{}
 
-	if resource.BucketArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'BucketArn'"))
-	}
-	if resource.Format == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Format'"))
-	}
 	return errors
 }

@@ -14,8 +14,5 @@ type CloudFrontOriginAccessIdentityCloudFrontOriginAccessIdentityConfig struct {
 func (resource CloudFrontOriginAccessIdentityCloudFrontOriginAccessIdentityConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.Comment == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Comment'"))
-	}
 	return errors
 }

@@ -16,8 +16,5 @@ type TaskDefinitionDevice struct {
 func (resource TaskDefinitionDevice) Validate() []error {
 	errors := []error{}
 
-	if resource.HostPath == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'HostPath'"))
-	}
 	return errors
 }

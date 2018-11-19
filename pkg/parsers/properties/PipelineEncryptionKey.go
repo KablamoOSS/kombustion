@@ -15,11 +15,5 @@ type PipelineEncryptionKey struct {
 func (resource PipelineEncryptionKey) Validate() []error {
 	errors := []error{}
 
-	if resource.Id == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Id'"))
-	}
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

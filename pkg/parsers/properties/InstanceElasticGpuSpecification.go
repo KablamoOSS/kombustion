@@ -14,8 +14,5 @@ type InstanceElasticGpuSpecification struct {
 func (resource InstanceElasticGpuSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

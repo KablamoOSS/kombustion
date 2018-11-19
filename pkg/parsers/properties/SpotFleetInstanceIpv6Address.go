@@ -14,8 +14,5 @@ type SpotFleetInstanceIpv6Address struct {
 func (resource SpotFleetInstanceIpv6Address) Validate() []error {
 	errors := []error{}
 
-	if resource.Ipv6Address == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Ipv6Address'"))
-	}
 	return errors
 }

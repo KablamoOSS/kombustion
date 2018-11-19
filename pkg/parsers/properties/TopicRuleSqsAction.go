@@ -16,11 +16,5 @@ type TopicRuleSqsAction struct {
 func (resource TopicRuleSqsAction) Validate() []error {
 	errors := []error{}
 
-	if resource.QueueUrl == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'QueueUrl'"))
-	}
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
 	return errors
 }

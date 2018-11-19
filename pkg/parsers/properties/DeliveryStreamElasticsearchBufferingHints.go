@@ -15,11 +15,5 @@ type DeliveryStreamElasticsearchBufferingHints struct {
 func (resource DeliveryStreamElasticsearchBufferingHints) Validate() []error {
 	errors := []error{}
 
-	if resource.IntervalInSeconds == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'IntervalInSeconds'"))
-	}
-	if resource.SizeInMBs == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SizeInMBs'"))
-	}
 	return errors
 }

@@ -17,11 +17,5 @@ type BrokerUser struct {
 func (resource BrokerUser) Validate() []error {
 	errors := []error{}
 
-	if resource.Password == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Password'"))
-	}
-	if resource.Username == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Username'"))
-	}
 	return errors
 }

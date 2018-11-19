@@ -12,6 +12,7 @@ type SecurityGroupIngress struct {
 	Description                interface{} `yaml:"Description,omitempty"`
 	FromPort                   interface{} `yaml:"FromPort,omitempty"`
 	IpProtocol                 interface{} `yaml:"IpProtocol"`
+	SourcePrefixListId         interface{} `yaml:"SourcePrefixListId,omitempty"`
 	SourceSecurityGroupId      interface{} `yaml:"SourceSecurityGroupId,omitempty"`
 	SourceSecurityGroupName    interface{} `yaml:"SourceSecurityGroupName,omitempty"`
 	SourceSecurityGroupOwnerId interface{} `yaml:"SourceSecurityGroupOwnerId,omitempty"`
@@ -22,8 +23,5 @@ type SecurityGroupIngress struct {
 func (resource SecurityGroupIngress) Validate() []error {
 	errors := []error{}
 
-	if resource.IpProtocol == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'IpProtocol'"))
-	}
 	return errors
 }

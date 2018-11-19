@@ -7,25 +7,14 @@ import "fmt"
 
 // WebACLRule Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-webacl-rule.html
 type WebACLRule struct {
-	Priority interface{}   `yaml:"Priority"`
-	RuleId   interface{}   `yaml:"RuleId"`
-	Action   *WebACLAction `yaml:"Action"`
+	Priority interface{} `yaml:"Priority"`
+	RuleId   interface{} `yaml:"RuleId"`
+	Action   interface{} `yaml:"Action"`
 }
 
 // WebACLRule validation
 func (resource WebACLRule) Validate() []error {
 	errors := []error{}
 
-	if resource.Priority == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Priority'"))
-	}
-	if resource.RuleId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RuleId'"))
-	}
-	if resource.Action == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Action'"))
-	} else {
-		errors = append(errors, resource.Action.Validate()...)
-	}
 	return errors
 }

@@ -16,14 +16,5 @@ type StreamingDistributionLogging struct {
 func (resource StreamingDistributionLogging) Validate() []error {
 	errors := []error{}
 
-	if resource.Bucket == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Bucket'"))
-	}
-	if resource.Enabled == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Enabled'"))
-	}
-	if resource.Prefix == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Prefix'"))
-	}
 	return errors
 }

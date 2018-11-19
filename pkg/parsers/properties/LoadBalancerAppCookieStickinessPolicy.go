@@ -15,11 +15,5 @@ type LoadBalancerAppCookieStickinessPolicy struct {
 func (resource LoadBalancerAppCookieStickinessPolicy) Validate() []error {
 	errors := []error{}
 
-	if resource.CookieName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'CookieName'"))
-	}
-	if resource.PolicyName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PolicyName'"))
-	}
 	return errors
 }

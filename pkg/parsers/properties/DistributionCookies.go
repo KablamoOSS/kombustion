@@ -15,8 +15,5 @@ type DistributionCookies struct {
 func (resource DistributionCookies) Validate() []error {
 	errors := []error{}
 
-	if resource.Forward == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Forward'"))
-	}
 	return errors
 }

@@ -25,8 +25,5 @@ type InstanceNetworkInterface struct {
 func (resource InstanceNetworkInterface) Validate() []error {
 	errors := []error{}
 
-	if resource.DeviceIndex == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DeviceIndex'"))
-	}
 	return errors
 }

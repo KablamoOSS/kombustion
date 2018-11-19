@@ -15,11 +15,5 @@ type TableKeySchema struct {
 func (resource TableKeySchema) Validate() []error {
 	errors := []error{}
 
-	if resource.AttributeName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AttributeName'"))
-	}
-	if resource.KeyType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'KeyType'"))
-	}
 	return errors
 }

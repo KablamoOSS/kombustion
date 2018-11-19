@@ -5,11 +5,11 @@ package properties
 
 // ClusterInstanceFleetConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-cluster-instancefleetconfig.html
 type ClusterInstanceFleetConfig struct {
-	Name                   interface{}                                     `yaml:"Name,omitempty"`
-	TargetOnDemandCapacity interface{}                                     `yaml:"TargetOnDemandCapacity,omitempty"`
-	TargetSpotCapacity     interface{}                                     `yaml:"TargetSpotCapacity,omitempty"`
-	InstanceTypeConfigs    interface{}                                     `yaml:"InstanceTypeConfigs,omitempty"`
-	LaunchSpecifications   *ClusterInstanceFleetProvisioningSpecifications `yaml:"LaunchSpecifications,omitempty"`
+	Name                   interface{} `yaml:"Name,omitempty"`
+	TargetOnDemandCapacity interface{} `yaml:"TargetOnDemandCapacity,omitempty"`
+	TargetSpotCapacity     interface{} `yaml:"TargetSpotCapacity,omitempty"`
+	InstanceTypeConfigs    interface{} `yaml:"InstanceTypeConfigs,omitempty"`
+	LaunchSpecifications   interface{} `yaml:"LaunchSpecifications,omitempty"`
 }
 
 // ClusterInstanceFleetConfig validation

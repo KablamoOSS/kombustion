@@ -7,23 +7,15 @@ import "fmt"
 
 // BucketAnalyticsConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-analyticsconfiguration.html
 type BucketAnalyticsConfiguration struct {
-	Id                   interface{}                 `yaml:"Id"`
-	Prefix               interface{}                 `yaml:"Prefix,omitempty"`
-	StorageClassAnalysis *BucketStorageClassAnalysis `yaml:"StorageClassAnalysis"`
-	TagFilters           interface{}                 `yaml:"TagFilters,omitempty"`
+	Id                   interface{} `yaml:"Id"`
+	Prefix               interface{} `yaml:"Prefix,omitempty"`
+	StorageClassAnalysis interface{} `yaml:"StorageClassAnalysis"`
+	TagFilters           interface{} `yaml:"TagFilters,omitempty"`
 }
 
 // BucketAnalyticsConfiguration validation
 func (resource BucketAnalyticsConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.Id == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Id'"))
-	}
-	if resource.StorageClassAnalysis == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'StorageClassAnalysis'"))
-	} else {
-		errors = append(errors, resource.StorageClassAnalysis.Validate()...)
-	}
 	return errors
 }

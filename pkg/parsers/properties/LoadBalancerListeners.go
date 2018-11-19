@@ -19,14 +19,5 @@ type LoadBalancerListeners struct {
 func (resource LoadBalancerListeners) Validate() []error {
 	errors := []error{}
 
-	if resource.InstancePort == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'InstancePort'"))
-	}
-	if resource.LoadBalancerPort == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'LoadBalancerPort'"))
-	}
-	if resource.Protocol == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Protocol'"))
-	}
 	return errors
 }

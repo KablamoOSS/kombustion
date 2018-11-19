@@ -16,8 +16,5 @@ type DeliveryStreamCopyCommand struct {
 func (resource DeliveryStreamCopyCommand) Validate() []error {
 	errors := []error{}
 
-	if resource.DataTableName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DataTableName'"))
-	}
 	return errors
 }

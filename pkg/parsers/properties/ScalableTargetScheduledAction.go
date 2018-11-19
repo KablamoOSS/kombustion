@@ -7,22 +7,16 @@ import "fmt"
 
 // ScalableTargetScheduledAction Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-scheduledaction.html
 type ScalableTargetScheduledAction struct {
-	EndTime              interface{}                         `yaml:"EndTime,omitempty"`
-	Schedule             interface{}                         `yaml:"Schedule"`
-	ScheduledActionName  interface{}                         `yaml:"ScheduledActionName"`
-	StartTime            interface{}                         `yaml:"StartTime,omitempty"`
-	ScalableTargetAction *ScalableTargetScalableTargetAction `yaml:"ScalableTargetAction,omitempty"`
+	EndTime              interface{} `yaml:"EndTime,omitempty"`
+	Schedule             interface{} `yaml:"Schedule"`
+	ScheduledActionName  interface{} `yaml:"ScheduledActionName"`
+	StartTime            interface{} `yaml:"StartTime,omitempty"`
+	ScalableTargetAction interface{} `yaml:"ScalableTargetAction,omitempty"`
 }
 
 // ScalableTargetScheduledAction validation
 func (resource ScalableTargetScheduledAction) Validate() []error {
 	errors := []error{}
 
-	if resource.Schedule == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Schedule'"))
-	}
-	if resource.ScheduledActionName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ScheduledActionName'"))
-	}
 	return errors
 }

@@ -15,8 +15,5 @@ type PartitionOrder struct {
 func (resource PartitionOrder) Validate() []error {
 	errors := []error{}
 
-	if resource.Column == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Column'"))
-	}
 	return errors
 }

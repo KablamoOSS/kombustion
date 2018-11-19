@@ -7,17 +7,12 @@ import "fmt"
 
 // BucketSourceSelectionCriteria Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-sourceselectioncriteria.html
 type BucketSourceSelectionCriteria struct {
-	SseKmsEncryptedObjects *BucketSseKmsEncryptedObjects `yaml:"SseKmsEncryptedObjects"`
+	SseKmsEncryptedObjects interface{} `yaml:"SseKmsEncryptedObjects"`
 }
 
 // BucketSourceSelectionCriteria validation
 func (resource BucketSourceSelectionCriteria) Validate() []error {
 	errors := []error{}
 
-	if resource.SseKmsEncryptedObjects == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SseKmsEncryptedObjects'"))
-	} else {
-		errors = append(errors, resource.SseKmsEncryptedObjects.Validate()...)
-	}
 	return errors
 }

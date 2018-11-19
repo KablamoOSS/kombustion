@@ -15,8 +15,5 @@ type InstanceSsmAssociation struct {
 func (resource InstanceSsmAssociation) Validate() []error {
 	errors := []error{}
 
-	if resource.DocumentName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DocumentName'"))
-	}
 	return errors
 }

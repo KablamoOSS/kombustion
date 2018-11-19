@@ -15,11 +15,5 @@ type InstanceGroupConfigScalingConstraints struct {
 func (resource InstanceGroupConfigScalingConstraints) Validate() []error {
 	errors := []error{}
 
-	if resource.MaxCapacity == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MaxCapacity'"))
-	}
-	if resource.MinCapacity == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MinCapacity'"))
-	}
 	return errors
 }

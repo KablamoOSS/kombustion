@@ -7,19 +7,16 @@ import "fmt"
 
 // BucketReplicationDestination Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration-rules-destination.html
 type BucketReplicationDestination struct {
-	Account                  interface{}                     `yaml:"Account,omitempty"`
-	Bucket                   interface{}                     `yaml:"Bucket"`
-	StorageClass             interface{}                     `yaml:"StorageClass,omitempty"`
-	EncryptionConfiguration  *BucketEncryptionConfiguration  `yaml:"EncryptionConfiguration,omitempty"`
-	AccessControlTranslation *BucketAccessControlTranslation `yaml:"AccessControlTranslation,omitempty"`
+	Account                  interface{} `yaml:"Account,omitempty"`
+	Bucket                   interface{} `yaml:"Bucket"`
+	StorageClass             interface{} `yaml:"StorageClass,omitempty"`
+	EncryptionConfiguration  interface{} `yaml:"EncryptionConfiguration,omitempty"`
+	AccessControlTranslation interface{} `yaml:"AccessControlTranslation,omitempty"`
 }
 
 // BucketReplicationDestination validation
 func (resource BucketReplicationDestination) Validate() []error {
 	errors := []error{}
 
-	if resource.Bucket == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Bucket'"))
-	}
 	return errors
 }

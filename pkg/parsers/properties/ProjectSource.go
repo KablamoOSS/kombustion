@@ -7,22 +7,19 @@ import "fmt"
 
 // ProjectSource Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-source.html
 type ProjectSource struct {
-	BuildSpec         interface{}        `yaml:"BuildSpec,omitempty"`
-	GitCloneDepth     interface{}        `yaml:"GitCloneDepth,omitempty"`
-	InsecureSsl       interface{}        `yaml:"InsecureSsl,omitempty"`
-	Location          interface{}        `yaml:"Location,omitempty"`
-	ReportBuildStatus interface{}        `yaml:"ReportBuildStatus,omitempty"`
-	SourceIdentifier  interface{}        `yaml:"SourceIdentifier,omitempty"`
-	Type              interface{}        `yaml:"Type"`
-	Auth              *ProjectSourceAuth `yaml:"Auth,omitempty"`
+	BuildSpec         interface{} `yaml:"BuildSpec,omitempty"`
+	GitCloneDepth     interface{} `yaml:"GitCloneDepth,omitempty"`
+	InsecureSsl       interface{} `yaml:"InsecureSsl,omitempty"`
+	Location          interface{} `yaml:"Location,omitempty"`
+	ReportBuildStatus interface{} `yaml:"ReportBuildStatus,omitempty"`
+	SourceIdentifier  interface{} `yaml:"SourceIdentifier,omitempty"`
+	Type              interface{} `yaml:"Type"`
+	Auth              interface{} `yaml:"Auth,omitempty"`
 }
 
 // ProjectSource validation
 func (resource ProjectSource) Validate() []error {
 	errors := []error{}
 
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

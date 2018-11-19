@@ -7,21 +7,13 @@ import "fmt"
 
 // ClusterBootstrapActionConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-cluster-bootstrapactionconfig.html
 type ClusterBootstrapActionConfig struct {
-	Name                  interface{}                         `yaml:"Name"`
-	ScriptBootstrapAction *ClusterScriptBootstrapActionConfig `yaml:"ScriptBootstrapAction"`
+	Name                  interface{} `yaml:"Name"`
+	ScriptBootstrapAction interface{} `yaml:"ScriptBootstrapAction"`
 }
 
 // ClusterBootstrapActionConfig validation
 func (resource ClusterBootstrapActionConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.ScriptBootstrapAction == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ScriptBootstrapAction'"))
-	} else {
-		errors = append(errors, resource.ScriptBootstrapAction.Validate()...)
-	}
 	return errors
 }

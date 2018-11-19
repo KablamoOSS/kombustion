@@ -5,18 +5,18 @@ package properties
 
 // PartitionStorageDescriptor Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-storagedescriptor.html
 type PartitionStorageDescriptor struct {
-	Compressed             interface{}          `yaml:"Compressed,omitempty"`
-	InputFormat            interface{}          `yaml:"InputFormat,omitempty"`
-	Location               interface{}          `yaml:"Location,omitempty"`
-	NumberOfBuckets        interface{}          `yaml:"NumberOfBuckets,omitempty"`
-	OutputFormat           interface{}          `yaml:"OutputFormat,omitempty"`
-	Parameters             interface{}          `yaml:"Parameters,omitempty"`
-	StoredAsSubDirectories interface{}          `yaml:"StoredAsSubDirectories,omitempty"`
-	SkewedInfo             *PartitionSkewedInfo `yaml:"SkewedInfo,omitempty"`
-	SerdeInfo              *PartitionSerdeInfo  `yaml:"SerdeInfo,omitempty"`
-	BucketColumns          interface{}          `yaml:"BucketColumns,omitempty"`
-	Columns                interface{}          `yaml:"Columns,omitempty"`
-	SortColumns            interface{}          `yaml:"SortColumns,omitempty"`
+	Compressed             interface{} `yaml:"Compressed,omitempty"`
+	InputFormat            interface{} `yaml:"InputFormat,omitempty"`
+	Location               interface{} `yaml:"Location,omitempty"`
+	NumberOfBuckets        interface{} `yaml:"NumberOfBuckets,omitempty"`
+	OutputFormat           interface{} `yaml:"OutputFormat,omitempty"`
+	Parameters             interface{} `yaml:"Parameters,omitempty"`
+	StoredAsSubDirectories interface{} `yaml:"StoredAsSubDirectories,omitempty"`
+	SkewedInfo             interface{} `yaml:"SkewedInfo,omitempty"`
+	SerdeInfo              interface{} `yaml:"SerdeInfo,omitempty"`
+	BucketColumns          interface{} `yaml:"BucketColumns,omitempty"`
+	Columns                interface{} `yaml:"Columns,omitempty"`
+	SortColumns            interface{} `yaml:"SortColumns,omitempty"`
 }
 
 // PartitionStorageDescriptor validation

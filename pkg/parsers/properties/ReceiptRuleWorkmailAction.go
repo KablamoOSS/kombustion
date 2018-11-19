@@ -15,8 +15,5 @@ type ReceiptRuleWorkmailAction struct {
 func (resource ReceiptRuleWorkmailAction) Validate() []error {
 	errors := []error{}
 
-	if resource.OrganizationArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'OrganizationArn'"))
-	}
 	return errors
 }

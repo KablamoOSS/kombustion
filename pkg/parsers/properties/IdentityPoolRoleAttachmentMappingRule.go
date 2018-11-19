@@ -17,17 +17,5 @@ type IdentityPoolRoleAttachmentMappingRule struct {
 func (resource IdentityPoolRoleAttachmentMappingRule) Validate() []error {
 	errors := []error{}
 
-	if resource.Claim == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Claim'"))
-	}
-	if resource.MatchType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MatchType'"))
-	}
-	if resource.RoleARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleARN'"))
-	}
-	if resource.Value == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Value'"))
-	}
 	return errors
 }

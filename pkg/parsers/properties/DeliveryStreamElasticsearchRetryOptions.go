@@ -14,8 +14,5 @@ type DeliveryStreamElasticsearchRetryOptions struct {
 func (resource DeliveryStreamElasticsearchRetryOptions) Validate() []error {
 	errors := []error{}
 
-	if resource.DurationInSeconds == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DurationInSeconds'"))
-	}
 	return errors
 }

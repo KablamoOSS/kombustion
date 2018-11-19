@@ -16,8 +16,5 @@ type BucketMetricsConfiguration struct {
 func (resource BucketMetricsConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.Id == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Id'"))
-	}
 	return errors
 }

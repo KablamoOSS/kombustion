@@ -15,11 +15,5 @@ type PipelineParameterAttribute struct {
 func (resource PipelineParameterAttribute) Validate() []error {
 	errors := []error{}
 
-	if resource.Key == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Key'"))
-	}
-	if resource.StringValue == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'StringValue'"))
-	}
 	return errors
 }

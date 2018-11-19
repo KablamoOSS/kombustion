@@ -15,8 +15,5 @@ type TaskDefinitionLogConfiguration struct {
 func (resource TaskDefinitionLogConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.LogDriver == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'LogDriver'"))
-	}
 	return errors
 }

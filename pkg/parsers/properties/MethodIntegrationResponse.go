@@ -18,8 +18,5 @@ type MethodIntegrationResponse struct {
 func (resource MethodIntegrationResponse) Validate() []error {
 	errors := []error{}
 
-	if resource.StatusCode == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'StatusCode'"))
-	}
 	return errors
 }

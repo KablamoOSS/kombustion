@@ -15,8 +15,5 @@ type AutoScalingGroupNotificationConfiguration struct {
 func (resource AutoScalingGroupNotificationConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.TopicARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TopicARN'"))
-	}
 	return errors
 }

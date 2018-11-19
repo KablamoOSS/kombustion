@@ -19,8 +19,5 @@ type OptionGroupOptionConfiguration struct {
 func (resource OptionGroupOptionConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.OptionName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'OptionName'"))
-	}
 	return errors
 }

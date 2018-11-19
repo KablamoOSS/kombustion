@@ -17,17 +17,5 @@ type TopicRuleCloudwatchAlarmAction struct {
 func (resource TopicRuleCloudwatchAlarmAction) Validate() []error {
 	errors := []error{}
 
-	if resource.AlarmName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AlarmName'"))
-	}
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
-	if resource.StateReason == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'StateReason'"))
-	}
-	if resource.StateValue == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'StateValue'"))
-	}
 	return errors
 }

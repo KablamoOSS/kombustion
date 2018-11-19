@@ -7,31 +7,26 @@ import "fmt"
 
 // RecordSetGroupRecordSet Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
 type RecordSetGroupRecordSet struct {
-	Comment         interface{}                `yaml:"Comment,omitempty"`
-	Failover        interface{}                `yaml:"Failover,omitempty"`
-	HealthCheckId   interface{}                `yaml:"HealthCheckId,omitempty"`
-	HostedZoneId    interface{}                `yaml:"HostedZoneId,omitempty"`
-	HostedZoneName  interface{}                `yaml:"HostedZoneName,omitempty"`
-	Name            interface{}                `yaml:"Name"`
-	Region          interface{}                `yaml:"Region,omitempty"`
-	SetIdentifier   interface{}                `yaml:"SetIdentifier,omitempty"`
-	TTL             interface{}                `yaml:"TTL,omitempty"`
-	Type            interface{}                `yaml:"Type"`
-	Weight          interface{}                `yaml:"Weight,omitempty"`
-	ResourceRecords interface{}                `yaml:"ResourceRecords,omitempty"`
-	GeoLocation     *RecordSetGroupGeoLocation `yaml:"GeoLocation,omitempty"`
-	AliasTarget     *RecordSetGroupAliasTarget `yaml:"AliasTarget,omitempty"`
+	Comment          interface{} `yaml:"Comment,omitempty"`
+	Failover         interface{} `yaml:"Failover,omitempty"`
+	HealthCheckId    interface{} `yaml:"HealthCheckId,omitempty"`
+	HostedZoneId     interface{} `yaml:"HostedZoneId,omitempty"`
+	HostedZoneName   interface{} `yaml:"HostedZoneName,omitempty"`
+	MultiValueAnswer interface{} `yaml:"MultiValueAnswer,omitempty"`
+	Name             interface{} `yaml:"Name"`
+	Region           interface{} `yaml:"Region,omitempty"`
+	SetIdentifier    interface{} `yaml:"SetIdentifier,omitempty"`
+	TTL              interface{} `yaml:"TTL,omitempty"`
+	Type             interface{} `yaml:"Type"`
+	Weight           interface{} `yaml:"Weight,omitempty"`
+	ResourceRecords  interface{} `yaml:"ResourceRecords,omitempty"`
+	GeoLocation      interface{} `yaml:"GeoLocation,omitempty"`
+	AliasTarget      interface{} `yaml:"AliasTarget,omitempty"`
 }
 
 // RecordSetGroupRecordSet validation
 func (resource RecordSetGroupRecordSet) Validate() []error {
 	errors := []error{}
 
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.Type == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Type'"))
-	}
 	return errors
 }

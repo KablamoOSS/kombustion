@@ -15,11 +15,5 @@ type LoadBalancerSubnetMapping struct {
 func (resource LoadBalancerSubnetMapping) Validate() []error {
 	errors := []error{}
 
-	if resource.AllocationId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AllocationId'"))
-	}
-	if resource.SubnetId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SubnetId'"))
-	}
 	return errors
 }

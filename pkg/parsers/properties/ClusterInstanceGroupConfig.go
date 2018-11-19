@@ -7,25 +7,19 @@ import "fmt"
 
 // ClusterInstanceGroupConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-cluster-instancegroupconfig.html
 type ClusterInstanceGroupConfig struct {
-	BidPrice          interface{}               `yaml:"BidPrice,omitempty"`
-	InstanceCount     interface{}               `yaml:"InstanceCount"`
-	InstanceType      interface{}               `yaml:"InstanceType"`
-	Market            interface{}               `yaml:"Market,omitempty"`
-	Name              interface{}               `yaml:"Name,omitempty"`
-	Configurations    interface{}               `yaml:"Configurations,omitempty"`
-	EbsConfiguration  *ClusterEbsConfiguration  `yaml:"EbsConfiguration,omitempty"`
-	AutoScalingPolicy *ClusterAutoScalingPolicy `yaml:"AutoScalingPolicy,omitempty"`
+	BidPrice          interface{} `yaml:"BidPrice,omitempty"`
+	InstanceCount     interface{} `yaml:"InstanceCount"`
+	InstanceType      interface{} `yaml:"InstanceType"`
+	Market            interface{} `yaml:"Market,omitempty"`
+	Name              interface{} `yaml:"Name,omitempty"`
+	Configurations    interface{} `yaml:"Configurations,omitempty"`
+	EbsConfiguration  interface{} `yaml:"EbsConfiguration,omitempty"`
+	AutoScalingPolicy interface{} `yaml:"AutoScalingPolicy,omitempty"`
 }
 
 // ClusterInstanceGroupConfig validation
 func (resource ClusterInstanceGroupConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.InstanceCount == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'InstanceCount'"))
-	}
-	if resource.InstanceType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'InstanceType'"))
-	}
 	return errors
 }

@@ -15,11 +15,5 @@ type ScalingPlanMetricDimension struct {
 func (resource ScalingPlanMetricDimension) Validate() []error {
 	errors := []error{}
 
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.Value == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Value'"))
-	}
 	return errors
 }

@@ -7,20 +7,14 @@ import "fmt"
 
 // BucketLambdaConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-lambdaconfig.html
 type BucketLambdaConfiguration struct {
-	Event    interface{}               `yaml:"Event"`
-	Function interface{}               `yaml:"Function"`
-	Filter   *BucketNotificationFilter `yaml:"Filter,omitempty"`
+	Event    interface{} `yaml:"Event"`
+	Function interface{} `yaml:"Function"`
+	Filter   interface{} `yaml:"Filter,omitempty"`
 }
 
 // BucketLambdaConfiguration validation
 func (resource BucketLambdaConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.Event == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Event'"))
-	}
-	if resource.Function == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Function'"))
-	}
 	return errors
 }

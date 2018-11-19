@@ -15,8 +15,5 @@ type LoadBalancerConnectionDrainingPolicy struct {
 func (resource LoadBalancerConnectionDrainingPolicy) Validate() []error {
 	errors := []error{}
 
-	if resource.Enabled == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Enabled'"))
-	}
 	return errors
 }

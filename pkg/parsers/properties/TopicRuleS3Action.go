@@ -16,14 +16,5 @@ type TopicRuleS3Action struct {
 func (resource TopicRuleS3Action) Validate() []error {
 	errors := []error{}
 
-	if resource.BucketName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'BucketName'"))
-	}
-	if resource.Key == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Key'"))
-	}
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
 	return errors
 }

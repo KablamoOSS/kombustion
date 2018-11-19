@@ -62,12 +62,12 @@ const resourceTemplate = `package resources
 import (
 	yaml "github.com/KablamoOSS/yaml"
 	"github.com/KablamoOSS/kombustion/types"
-	{{- if .NeedsFmtImport}}
-	"fmt"
-	{{- end}}
-	{{- if .NeedsPropertiesImport}}
-	"github.com/KablamoOSS/kombustion/pkg/{{$MainPackageName}}/properties"
-	{{- end}}
+	// {{- if .NeedsFmtImport}}
+	// "fmt"
+	// {{- end}}
+	//{{- if .NeedsPropertiesImport}}
+	//"github.com/KablamoOSS/kombustion/pkg/{{$MainPackageName}}/properties"
+	//{{- end}}
 )
 
 // {{$ResourceName}} Documentation: {{.Documentation}}
@@ -186,27 +186,6 @@ func (resource {{$ResourceName}}) Validate() []error {
 // Parse{{$ResourceName}}Properties validator
 func (resource {{$ResourceName}}Properties) Validate() []error {
 	errors := []error{}
-	{{- range $validator := .ValidatorStrings}}
-	{{$validator}}
-	{{- end}}
 	return errors
 }
-`
-
-const validatorTemplate = `
-	{{- if .PrimitiveType -}}
-	if resource.{{.Name}} == nil {
-		errors = append(errors, fmt.Errorf("Missing required field '{{.Name}}'"))
-	}
-	{{- else if .ListMapType -}}
-	if resource.{{.Name}} == nil {
-		errors = append(errors, fmt.Errorf("Missing required field '{{.Name}}'"))
-	} else {
-		errors = append(errors, resource.{{.Name}}.Validate()...)
-	}
-	{{- else -}}
-	if resource.{{.Name}} == nil {
-		errors = append(errors, fmt.Errorf("Missing required field '{{.Name}}'"))
-	}
-	{{- end -}}
 `

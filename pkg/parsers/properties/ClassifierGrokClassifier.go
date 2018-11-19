@@ -17,11 +17,5 @@ type ClassifierGrokClassifier struct {
 func (resource ClassifierGrokClassifier) Validate() []error {
 	errors := []error{}
 
-	if resource.Classification == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Classification'"))
-	}
-	if resource.GrokPattern == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'GrokPattern'"))
-	}
 	return errors
 }

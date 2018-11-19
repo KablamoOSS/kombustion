@@ -15,8 +15,5 @@ type ClusterLoggingProperties struct {
 func (resource ClusterLoggingProperties) Validate() []error {
 	errors := []error{}
 
-	if resource.BucketName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'BucketName'"))
-	}
 	return errors
 }

@@ -14,8 +14,5 @@ type TargetGroupMatcher struct {
 func (resource TargetGroupMatcher) Validate() []error {
 	errors := []error{}
 
-	if resource.HttpCode == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'HttpCode'"))
-	}
 	return errors
 }

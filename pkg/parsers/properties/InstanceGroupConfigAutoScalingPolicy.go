@@ -7,21 +7,13 @@ import "fmt"
 
 // InstanceGroupConfigAutoScalingPolicy Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-instancegroupconfig-autoscalingpolicy.html
 type InstanceGroupConfigAutoScalingPolicy struct {
-	Constraints *InstanceGroupConfigScalingConstraints `yaml:"Constraints"`
-	Rules       interface{}                            `yaml:"Rules"`
+	Constraints interface{} `yaml:"Constraints"`
+	Rules       interface{} `yaml:"Rules"`
 }
 
 // InstanceGroupConfigAutoScalingPolicy validation
 func (resource InstanceGroupConfigAutoScalingPolicy) Validate() []error {
 	errors := []error{}
 
-	if resource.Constraints == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Constraints'"))
-	} else {
-		errors = append(errors, resource.Constraints.Validate()...)
-	}
-	if resource.Rules == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Rules'"))
-	}
 	return errors
 }

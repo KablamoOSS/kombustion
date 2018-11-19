@@ -14,8 +14,5 @@ type BucketEncryptionConfiguration struct {
 func (resource BucketEncryptionConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.ReplicaKmsKeyID == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ReplicaKmsKeyID'"))
-	}
 	return errors
 }

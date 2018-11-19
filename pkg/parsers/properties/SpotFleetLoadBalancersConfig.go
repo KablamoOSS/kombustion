@@ -5,8 +5,8 @@ package properties
 
 // SpotFleetLoadBalancersConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-loadbalancersconfig.html
 type SpotFleetLoadBalancersConfig struct {
-	TargetGroupsConfig         *SpotFleetTargetGroupsConfig         `yaml:"TargetGroupsConfig,omitempty"`
-	ClassicLoadBalancersConfig *SpotFleetClassicLoadBalancersConfig `yaml:"ClassicLoadBalancersConfig,omitempty"`
+	TargetGroupsConfig         interface{} `yaml:"TargetGroupsConfig,omitempty"`
+	ClassicLoadBalancersConfig interface{} `yaml:"ClassicLoadBalancersConfig,omitempty"`
 }
 
 // SpotFleetLoadBalancersConfig validation

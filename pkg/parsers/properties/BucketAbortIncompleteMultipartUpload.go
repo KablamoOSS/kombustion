@@ -14,8 +14,5 @@ type BucketAbortIncompleteMultipartUpload struct {
 func (resource BucketAbortIncompleteMultipartUpload) Validate() []error {
 	errors := []error{}
 
-	if resource.DaysAfterInitiation == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DaysAfterInitiation'"))
-	}
 	return errors
 }

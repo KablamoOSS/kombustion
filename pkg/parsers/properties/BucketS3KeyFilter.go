@@ -14,8 +14,5 @@ type BucketS3KeyFilter struct {
 func (resource BucketS3KeyFilter) Validate() []error {
 	errors := []error{}
 
-	if resource.Rules == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Rules'"))
-	}
 	return errors
 }

@@ -98,11 +98,10 @@ Resources:
                     TransitionInDays: !Ref GlacierTransition
                   - !Ref AWS::NoValue
           - !Ref AWS::NoValue
-      VersioningConfiguration:
-        Status: !If
-          - VersioningConfigurationIsDefined
-          - !Ref VersioningConfiguration
-          - !Ref AWS::NoValue
+      VersioningConfiguration: !If
+        - VersioningConfigurationIsDefined
+        - Status: !Ref VersioningConfiguration
+        - !Ref AWS::NoValue
       LoggingConfiguration: !If
         - LoggingBucketIsDefined
         - DestinationBucketName: !Ref LoggingBucket
@@ -143,7 +142,7 @@ Resources:
           - Action: s3:PutObject
             Effect: Allow
             Principal:
-              AWS: arn:aws:iam::000000000000:root
+              AWS: !Sub arn:aws:iam::${AWS::AccountId}:root
             Resource:
               - !Sub "arn:aws:s3:::${S3Bucket}/AWSLogs/*"
 

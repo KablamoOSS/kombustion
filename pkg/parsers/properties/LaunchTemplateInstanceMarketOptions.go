@@ -5,8 +5,8 @@ package properties
 
 // LaunchTemplateInstanceMarketOptions Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-instancemarketoptions.html
 type LaunchTemplateInstanceMarketOptions struct {
-	MarketType  interface{}                `yaml:"MarketType,omitempty"`
-	SpotOptions *LaunchTemplateSpotOptions `yaml:"SpotOptions,omitempty"`
+	MarketType  interface{} `yaml:"MarketType,omitempty"`
+	SpotOptions interface{} `yaml:"SpotOptions,omitempty"`
 }
 
 // LaunchTemplateInstanceMarketOptions validation

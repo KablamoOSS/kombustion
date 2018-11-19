@@ -14,8 +14,5 @@ type SpotFleetClassicLoadBalancersConfig struct {
 func (resource SpotFleetClassicLoadBalancersConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.ClassicLoadBalancers == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ClassicLoadBalancers'"))
-	}
 	return errors
 }

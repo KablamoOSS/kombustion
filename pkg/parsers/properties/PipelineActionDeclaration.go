@@ -7,26 +7,19 @@ import "fmt"
 
 // PipelineActionDeclaration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions.html
 type PipelineActionDeclaration struct {
-	Configuration   interface{}           `yaml:"Configuration,omitempty"`
-	Name            interface{}           `yaml:"Name"`
-	RoleArn         interface{}           `yaml:"RoleArn,omitempty"`
-	RunOrder        interface{}           `yaml:"RunOrder,omitempty"`
-	InputArtifacts  interface{}           `yaml:"InputArtifacts,omitempty"`
-	OutputArtifacts interface{}           `yaml:"OutputArtifacts,omitempty"`
-	ActionTypeId    *PipelineActionTypeId `yaml:"ActionTypeId"`
+	Configuration   interface{} `yaml:"Configuration,omitempty"`
+	Name            interface{} `yaml:"Name"`
+	Region          interface{} `yaml:"Region,omitempty"`
+	RoleArn         interface{} `yaml:"RoleArn,omitempty"`
+	RunOrder        interface{} `yaml:"RunOrder,omitempty"`
+	InputArtifacts  interface{} `yaml:"InputArtifacts,omitempty"`
+	OutputArtifacts interface{} `yaml:"OutputArtifacts,omitempty"`
+	ActionTypeId    interface{} `yaml:"ActionTypeId"`
 }
 
 // PipelineActionDeclaration validation
 func (resource PipelineActionDeclaration) Validate() []error {
 	errors := []error{}
 
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.ActionTypeId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ActionTypeId'"))
-	} else {
-		errors = append(errors, resource.ActionTypeId.Validate()...)
-	}
 	return errors
 }

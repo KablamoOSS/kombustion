@@ -15,8 +15,5 @@ type RuleEcsParameters struct {
 func (resource RuleEcsParameters) Validate() []error {
 	errors := []error{}
 
-	if resource.TaskDefinitionArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TaskDefinitionArn'"))
-	}
 	return errors
 }

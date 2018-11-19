@@ -12,20 +12,12 @@ type TopicRuleTopicRulePayload struct {
 	RuleDisabled     interface{} `yaml:"RuleDisabled"`
 	Sql              interface{} `yaml:"Sql"`
 	Actions          interface{} `yaml:"Actions"`
+	ErrorAction      interface{} `yaml:"ErrorAction,omitempty"`
 }
 
 // TopicRuleTopicRulePayload validation
 func (resource TopicRuleTopicRulePayload) Validate() []error {
 	errors := []error{}
 
-	if resource.RuleDisabled == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RuleDisabled'"))
-	}
-	if resource.Sql == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Sql'"))
-	}
-	if resource.Actions == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Actions'"))
-	}
 	return errors
 }

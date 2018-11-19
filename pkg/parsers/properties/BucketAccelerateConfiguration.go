@@ -14,8 +14,5 @@ type BucketAccelerateConfiguration struct {
 func (resource BucketAccelerateConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.AccelerationStatus == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AccelerationStatus'"))
-	}
 	return errors
 }

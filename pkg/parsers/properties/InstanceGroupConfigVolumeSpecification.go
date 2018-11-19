@@ -16,11 +16,5 @@ type InstanceGroupConfigVolumeSpecification struct {
 func (resource InstanceGroupConfigVolumeSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.SizeInGB == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SizeInGB'"))
-	}
-	if resource.VolumeType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'VolumeType'"))
-	}
 	return errors
 }

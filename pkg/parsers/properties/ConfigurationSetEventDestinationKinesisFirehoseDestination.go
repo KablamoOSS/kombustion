@@ -15,11 +15,5 @@ type ConfigurationSetEventDestinationKinesisFirehoseDestination struct {
 func (resource ConfigurationSetEventDestinationKinesisFirehoseDestination) Validate() []error {
 	errors := []error{}
 
-	if resource.DeliveryStreamARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'DeliveryStreamARN'"))
-	}
-	if resource.IAMRoleARN == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'IAMRoleARN'"))
-	}
 	return errors
 }

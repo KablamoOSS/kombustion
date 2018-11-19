@@ -14,8 +14,5 @@ type AssociationParameterValues struct {
 func (resource AssociationParameterValues) Validate() []error {
 	errors := []error{}
 
-	if resource.ParameterValues == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ParameterValues'"))
-	}
 	return errors
 }

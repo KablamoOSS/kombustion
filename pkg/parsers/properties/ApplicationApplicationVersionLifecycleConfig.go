@@ -5,8 +5,8 @@ package properties
 
 // ApplicationApplicationVersionLifecycleConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-applicationversionlifecycleconfig.html
 type ApplicationApplicationVersionLifecycleConfig struct {
-	MaxCountRule *ApplicationMaxCountRule `yaml:"MaxCountRule,omitempty"`
-	MaxAgeRule   *ApplicationMaxAgeRule   `yaml:"MaxAgeRule,omitempty"`
+	MaxCountRule interface{} `yaml:"MaxCountRule,omitempty"`
+	MaxAgeRule   interface{} `yaml:"MaxAgeRule,omitempty"`
 }
 
 // ApplicationApplicationVersionLifecycleConfig validation

@@ -7,23 +7,17 @@ import "fmt"
 
 // ConnectionConnectionInput Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-connection-connectioninput.html
 type ConnectionConnectionInput struct {
-	ConnectionProperties           interface{}                               `yaml:"ConnectionProperties"`
-	ConnectionType                 interface{}                               `yaml:"ConnectionType"`
-	Description                    interface{}                               `yaml:"Description,omitempty"`
-	Name                           interface{}                               `yaml:"Name,omitempty"`
-	PhysicalConnectionRequirements *ConnectionPhysicalConnectionRequirements `yaml:"PhysicalConnectionRequirements,omitempty"`
-	MatchCriteria                  interface{}                               `yaml:"MatchCriteria,omitempty"`
+	ConnectionProperties           interface{} `yaml:"ConnectionProperties"`
+	ConnectionType                 interface{} `yaml:"ConnectionType"`
+	Description                    interface{} `yaml:"Description,omitempty"`
+	Name                           interface{} `yaml:"Name,omitempty"`
+	PhysicalConnectionRequirements interface{} `yaml:"PhysicalConnectionRequirements,omitempty"`
+	MatchCriteria                  interface{} `yaml:"MatchCriteria,omitempty"`
 }
 
 // ConnectionConnectionInput validation
 func (resource ConnectionConnectionInput) Validate() []error {
 	errors := []error{}
 
-	if resource.ConnectionProperties == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ConnectionProperties'"))
-	}
-	if resource.ConnectionType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ConnectionType'"))
-	}
 	return errors
 }

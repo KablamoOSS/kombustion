@@ -15,11 +15,5 @@ type HostedZoneVPC struct {
 func (resource HostedZoneVPC) Validate() []error {
 	errors := []error{}
 
-	if resource.VPCId == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'VPCId'"))
-	}
-	if resource.VPCRegion == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'VPCRegion'"))
-	}
 	return errors
 }

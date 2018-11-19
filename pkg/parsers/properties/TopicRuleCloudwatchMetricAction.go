@@ -19,20 +19,5 @@ type TopicRuleCloudwatchMetricAction struct {
 func (resource TopicRuleCloudwatchMetricAction) Validate() []error {
 	errors := []error{}
 
-	if resource.MetricName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MetricName'"))
-	}
-	if resource.MetricNamespace == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MetricNamespace'"))
-	}
-	if resource.MetricUnit == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MetricUnit'"))
-	}
-	if resource.MetricValue == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'MetricValue'"))
-	}
-	if resource.RoleArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'RoleArn'"))
-	}
 	return errors
 }

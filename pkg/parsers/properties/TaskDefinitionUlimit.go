@@ -16,14 +16,5 @@ type TaskDefinitionUlimit struct {
 func (resource TaskDefinitionUlimit) Validate() []error {
 	errors := []error{}
 
-	if resource.HardLimit == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'HardLimit'"))
-	}
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.SoftLimit == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SoftLimit'"))
-	}
 	return errors
 }

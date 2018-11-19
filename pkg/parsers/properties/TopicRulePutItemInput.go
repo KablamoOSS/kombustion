@@ -14,8 +14,5 @@ type TopicRulePutItemInput struct {
 func (resource TopicRulePutItemInput) Validate() []error {
 	errors := []error{}
 
-	if resource.TableName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'TableName'"))
-	}
 	return errors
 }

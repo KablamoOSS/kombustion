@@ -16,8 +16,5 @@ type ClusterSimpleScalingPolicyConfiguration struct {
 func (resource ClusterSimpleScalingPolicyConfiguration) Validate() []error {
 	errors := []error{}
 
-	if resource.ScalingAdjustment == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ScalingAdjustment'"))
-	}
 	return errors
 }

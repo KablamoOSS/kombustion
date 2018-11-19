@@ -15,11 +15,5 @@ type HealthCheckAlarmIdentifier struct {
 func (resource HealthCheckAlarmIdentifier) Validate() []error {
 	errors := []error{}
 
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.Region == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Region'"))
-	}
 	return errors
 }

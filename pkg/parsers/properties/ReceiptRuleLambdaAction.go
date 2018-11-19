@@ -16,8 +16,5 @@ type ReceiptRuleLambdaAction struct {
 func (resource ReceiptRuleLambdaAction) Validate() []error {
 	errors := []error{}
 
-	if resource.FunctionArn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'FunctionArn'"))
-	}
 	return errors
 }

@@ -5,7 +5,7 @@ package properties
 
 // ApplicationInputProcessingConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputprocessingconfiguration.html
 type ApplicationInputProcessingConfiguration struct {
-	InputLambdaProcessor *ApplicationInputLambdaProcessor `yaml:"InputLambdaProcessor,omitempty"`
+	InputLambdaProcessor interface{} `yaml:"InputLambdaProcessor,omitempty"`
 }
 
 // ApplicationInputProcessingConfiguration validation

@@ -15,11 +15,5 @@ type PipelineStageTransition struct {
 func (resource PipelineStageTransition) Validate() []error {
 	errors := []error{}
 
-	if resource.Reason == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Reason'"))
-	}
-	if resource.StageName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'StageName'"))
-	}
 	return errors
 }

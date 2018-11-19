@@ -15,11 +15,5 @@ type TableAttributeDefinition struct {
 func (resource TableAttributeDefinition) Validate() []error {
 	errors := []error{}
 
-	if resource.AttributeName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AttributeName'"))
-	}
-	if resource.AttributeType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'AttributeType'"))
-	}
 	return errors
 }

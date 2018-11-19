@@ -15,8 +15,5 @@ type RuleInputTransformer struct {
 func (resource RuleInputTransformer) Validate() []error {
 	errors := []error{}
 
-	if resource.InputTemplate == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'InputTemplate'"))
-	}
 	return errors
 }

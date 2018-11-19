@@ -7,17 +7,12 @@ import "fmt"
 
 // InstanceFleetConfigInstanceFleetProvisioningSpecifications Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-instancefleetconfig-instancefleetprovisioningspecifications.html
 type InstanceFleetConfigInstanceFleetProvisioningSpecifications struct {
-	SpotSpecification *InstanceFleetConfigSpotProvisioningSpecification `yaml:"SpotSpecification"`
+	SpotSpecification interface{} `yaml:"SpotSpecification"`
 }
 
 // InstanceFleetConfigInstanceFleetProvisioningSpecifications validation
 func (resource InstanceFleetConfigInstanceFleetProvisioningSpecifications) Validate() []error {
 	errors := []error{}
 
-	if resource.SpotSpecification == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SpotSpecification'"))
-	} else {
-		errors = append(errors, resource.SpotSpecification.Validate()...)
-	}
 	return errors
 }

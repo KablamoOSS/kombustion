@@ -15,8 +15,5 @@ type BucketRedirectAllRequestsTo struct {
 func (resource BucketRedirectAllRequestsTo) Validate() []error {
 	errors := []error{}
 
-	if resource.HostName == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'HostName'"))
-	}
 	return errors
 }

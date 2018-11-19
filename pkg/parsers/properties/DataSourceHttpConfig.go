@@ -7,15 +7,13 @@ import "fmt"
 
 // DataSourceHttpConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-httpconfig.html
 type DataSourceHttpConfig struct {
-	Endpoint interface{} `yaml:"Endpoint"`
+	Endpoint            interface{} `yaml:"Endpoint"`
+	AuthorizationConfig interface{} `yaml:"AuthorizationConfig,omitempty"`
 }
 
 // DataSourceHttpConfig validation
 func (resource DataSourceHttpConfig) Validate() []error {
 	errors := []error{}
 
-	if resource.Endpoint == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Endpoint'"))
-	}
 	return errors
 }

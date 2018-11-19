@@ -5,10 +5,10 @@ package properties
 
 // InstanceBlockDeviceMapping Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-blockdevicemapping.html
 type InstanceBlockDeviceMapping struct {
-	DeviceName  interface{}             `yaml:"DeviceName,omitempty"`
-	NoDevice    interface{}             `yaml:"NoDevice,omitempty"`
-	VirtualName interface{}             `yaml:"VirtualName,omitempty"`
-	Ebs         *InstanceEbsBlockDevice `yaml:"Ebs,omitempty"`
+	DeviceName  interface{} `yaml:"DeviceName,omitempty"`
+	NoDevice    interface{} `yaml:"NoDevice,omitempty"`
+	VirtualName interface{} `yaml:"VirtualName,omitempty"`
+	Ebs         interface{} `yaml:"Ebs,omitempty"`
 }
 
 // InstanceBlockDeviceMapping validation

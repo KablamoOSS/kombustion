@@ -15,11 +15,5 @@ type JobQueueComputeEnvironmentOrder struct {
 func (resource JobQueueComputeEnvironmentOrder) Validate() []error {
 	errors := []error{}
 
-	if resource.ComputeEnvironment == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'ComputeEnvironment'"))
-	}
-	if resource.Order == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Order'"))
-	}
 	return errors
 }

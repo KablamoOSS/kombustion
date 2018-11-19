@@ -16,11 +16,5 @@ type ApplicationRecordColumn struct {
 func (resource ApplicationRecordColumn) Validate() []error {
 	errors := []error{}
 
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.SqlType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'SqlType'"))
-	}
 	return errors
 }

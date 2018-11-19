@@ -5,7 +5,7 @@ package properties
 
 import "fmt"
 
-// ScalingPolicyPredefinedMetricSpecification Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-scalingpolicy-predefinedmetricspecification.html
+// ScalingPolicyPredefinedMetricSpecification Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-predefinedmetricspecification.html
 type ScalingPolicyPredefinedMetricSpecification struct {
 	PredefinedMetricType interface{} `yaml:"PredefinedMetricType"`
 	ResourceLabel        interface{} `yaml:"ResourceLabel,omitempty"`
@@ -15,8 +15,5 @@ type ScalingPolicyPredefinedMetricSpecification struct {
 func (resource ScalingPolicyPredefinedMetricSpecification) Validate() []error {
 	errors := []error{}
 
-	if resource.PredefinedMetricType == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'PredefinedMetricType'"))
-	}
 	return errors
 }

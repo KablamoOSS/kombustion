@@ -5,6 +5,7 @@ package properties
 
 // LayerVolumeConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-volumeconfiguration.html
 type LayerVolumeConfiguration struct {
+	Encrypted     interface{} `yaml:"Encrypted,omitempty"`
 	Iops          interface{} `yaml:"Iops,omitempty"`
 	MountPoint    interface{} `yaml:"MountPoint,omitempty"`
 	NumberOfDisks interface{} `yaml:"NumberOfDisks,omitempty"`

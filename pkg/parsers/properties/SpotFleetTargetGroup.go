@@ -14,8 +14,5 @@ type SpotFleetTargetGroup struct {
 func (resource SpotFleetTargetGroup) Validate() []error {
 	errors := []error{}
 
-	if resource.Arn == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Arn'"))
-	}
 	return errors
 }

@@ -5,13 +5,13 @@ package properties
 
 // UserPoolSchemaAttribute Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-schemaattribute.html
 type UserPoolSchemaAttribute struct {
-	AttributeDataType          interface{}                         `yaml:"AttributeDataType,omitempty"`
-	DeveloperOnlyAttribute     interface{}                         `yaml:"DeveloperOnlyAttribute,omitempty"`
-	Mutable                    interface{}                         `yaml:"Mutable,omitempty"`
-	Name                       interface{}                         `yaml:"Name,omitempty"`
-	Required                   interface{}                         `yaml:"Required,omitempty"`
-	StringAttributeConstraints *UserPoolStringAttributeConstraints `yaml:"StringAttributeConstraints,omitempty"`
-	NumberAttributeConstraints *UserPoolNumberAttributeConstraints `yaml:"NumberAttributeConstraints,omitempty"`
+	AttributeDataType          interface{} `yaml:"AttributeDataType,omitempty"`
+	DeveloperOnlyAttribute     interface{} `yaml:"DeveloperOnlyAttribute,omitempty"`
+	Mutable                    interface{} `yaml:"Mutable,omitempty"`
+	Name                       interface{} `yaml:"Name,omitempty"`
+	Required                   interface{} `yaml:"Required,omitempty"`
+	StringAttributeConstraints interface{} `yaml:"StringAttributeConstraints,omitempty"`
+	NumberAttributeConstraints interface{} `yaml:"NumberAttributeConstraints,omitempty"`
 }
 
 // UserPoolSchemaAttribute validation

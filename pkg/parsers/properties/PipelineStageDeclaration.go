@@ -16,11 +16,5 @@ type PipelineStageDeclaration struct {
 func (resource PipelineStageDeclaration) Validate() []error {
 	errors := []error{}
 
-	if resource.Name == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Name'"))
-	}
-	if resource.Actions == nil {
-		errors = append(errors, fmt.Errorf("Missing required field 'Actions'"))
-	}
 	return errors
 }
