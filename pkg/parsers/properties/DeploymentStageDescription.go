@@ -5,23 +5,24 @@ package properties
 
 // DeploymentStageDescription Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-stagedescription.html
 type DeploymentStageDescription struct {
-	CacheClusterEnabled  interface{}                 `yaml:"CacheClusterEnabled,omitempty"`
-	CacheClusterSize     interface{}                 `yaml:"CacheClusterSize,omitempty"`
-	CacheDataEncrypted   interface{}                 `yaml:"CacheDataEncrypted,omitempty"`
-	CacheTtlInSeconds    interface{}                 `yaml:"CacheTtlInSeconds,omitempty"`
-	CachingEnabled       interface{}                 `yaml:"CachingEnabled,omitempty"`
-	ClientCertificateId  interface{}                 `yaml:"ClientCertificateId,omitempty"`
-	DataTraceEnabled     interface{}                 `yaml:"DataTraceEnabled,omitempty"`
-	Description          interface{}                 `yaml:"Description,omitempty"`
-	DocumentationVersion interface{}                 `yaml:"DocumentationVersion,omitempty"`
-	LoggingLevel         interface{}                 `yaml:"LoggingLevel,omitempty"`
-	MetricsEnabled       interface{}                 `yaml:"MetricsEnabled,omitempty"`
-	ThrottlingBurstLimit interface{}                 `yaml:"ThrottlingBurstLimit,omitempty"`
-	ThrottlingRateLimit  interface{}                 `yaml:"ThrottlingRateLimit,omitempty"`
-	Variables            interface{}                 `yaml:"Variables,omitempty"`
-	MethodSettings       interface{}                 `yaml:"MethodSettings,omitempty"`
-	CanarySetting        *DeploymentCanarySetting    `yaml:"CanarySetting,omitempty"`
-	AccessLogSetting     *DeploymentAccessLogSetting `yaml:"AccessLogSetting,omitempty"`
+	CacheClusterEnabled  interface{} `yaml:"CacheClusterEnabled,omitempty"`
+	CacheClusterSize     interface{} `yaml:"CacheClusterSize,omitempty"`
+	CacheDataEncrypted   interface{} `yaml:"CacheDataEncrypted,omitempty"`
+	CacheTtlInSeconds    interface{} `yaml:"CacheTtlInSeconds,omitempty"`
+	CachingEnabled       interface{} `yaml:"CachingEnabled,omitempty"`
+	ClientCertificateId  interface{} `yaml:"ClientCertificateId,omitempty"`
+	DataTraceEnabled     interface{} `yaml:"DataTraceEnabled,omitempty"`
+	Description          interface{} `yaml:"Description,omitempty"`
+	DocumentationVersion interface{} `yaml:"DocumentationVersion,omitempty"`
+	LoggingLevel         interface{} `yaml:"LoggingLevel,omitempty"`
+	MetricsEnabled       interface{} `yaml:"MetricsEnabled,omitempty"`
+	ThrottlingBurstLimit interface{} `yaml:"ThrottlingBurstLimit,omitempty"`
+	ThrottlingRateLimit  interface{} `yaml:"ThrottlingRateLimit,omitempty"`
+	TracingEnabled       interface{} `yaml:"TracingEnabled,omitempty"`
+	Variables            interface{} `yaml:"Variables,omitempty"`
+	MethodSettings       interface{} `yaml:"MethodSettings,omitempty"`
+	CanarySetting        interface{} `yaml:"CanarySetting,omitempty"`
+	AccessLogSetting     interface{} `yaml:"AccessLogSetting,omitempty"`
 }
 
 // DeploymentStageDescription validation

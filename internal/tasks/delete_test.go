@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"testing"
 
-	printer "github.com/KablamoOSS/go-cli-printer"
-	"github.com/KablamoOSS/kombustion/internal/coretest"
 	"github.com/aws/aws-sdk-go/aws"
 	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/stretchr/testify/assert"
+
+	printer "github.com/KablamoOSS/go-cli-printer"
+	"github.com/KablamoOSS/kombustion/internal/coretest"
 )
 
 type MockStackDeleter struct {
@@ -30,7 +31,7 @@ func (msd *MockStackDeleter) Open(_, _ string) string {
 func (msd *MockStackDeleter) DeleteStack(input *awsCF.DeleteStackInput) (*awsCF.DeleteStackOutput, error) {
 	stack, ok := msd.Stacks[*input.StackName]
 	if !ok {
-		return nil, fmt.Errorf("stack not found: %s", *input.StackName)
+		return nil, fmt.Errorf("Stack with id %s does not exist", *input.StackName)
 	}
 	stack.StackStatus = aws.String("DELETE_IN_PROGRESS")
 	return &awsCF.DeleteStackOutput{}, nil
@@ -38,14 +39,22 @@ func (msd *MockStackDeleter) DeleteStack(input *awsCF.DeleteStackInput) (*awsCF.
 
 func (msd *MockStackDeleter) DescribeStackEvents(input *awsCF.DescribeStackEventsInput) (*awsCF.DescribeStackEventsOutput, error) {
 	events, ok := msd.Events[*input.StackName]
+	fmt.Println(ok, events, *input.StackName, msd.Events)
 	if !ok {
-		return nil, fmt.Errorf("stack %s not found", *input.StackName)
+		return nil, fmt.Errorf("Stack with id %s does not exist", *input.StackName)
+
 	}
 
 	out := &awsCF.DescribeStackEventsOutput{
 		StackEvents: events,
 	}
-
+	stack, ok := msd.Stacks[*input.StackName]
+	if ok {
+		if *stack.StackStatus == "DELETE_IN_PROGRESS" {
+			delete(msd.Stacks, *input.StackName)
+			delete(msd.Events, *input.StackName)
+		}
+	}
 	return out, nil
 }
 
@@ -62,14 +71,10 @@ func (msd *MockStackDeleter) DescribeStackEventsPages(input *awsCF.DescribeStack
 func (msd *MockStackDeleter) DescribeStacks(input *awsCF.DescribeStacksInput) (*awsCF.DescribeStacksOutput, error) {
 	stack, ok := msd.Stacks[*input.StackName]
 	if !ok {
-		return nil, fmt.Errorf("stack not found: %s", *input.StackName)
+		return nil, fmt.Errorf("Stack with id %s does not exist", *input.StackName)
 	}
 	output := &awsCF.DescribeStacksOutput{
 		Stacks: []*awsCF.Stack{stack},
-	}
-	if *stack.StackStatus == "DELETE_IN_PROGRESS" {
-		delete(msd.Stacks, *input.StackName)
-		delete(msd.Events, *input.StackName)
 	}
 	return output, nil
 }
@@ -77,6 +82,7 @@ func (msd *MockStackDeleter) DescribeStacks(input *awsCF.DescribeStacksInput) (*
 func TestDeleteTask(t *testing.T) {
 	printer.Test()
 
+	stackName := "TestDeleteTaskStack"
 	objectStore := coretest.NewMockObjectStore()
 	objectStore.Put([]byte(sampleKombYaml), "kombustion.yaml")
 	objectStore.Put([]byte(sampleKombLock), "kombustion.lock")
@@ -85,18 +91,18 @@ func TestDeleteTask(t *testing.T) {
 	stacks := make(map[string]*awsCF.Stack)
 	events := make(map[string][]*awsCF.StackEvent)
 
-	stacks["foo-stack"] = &awsCF.Stack{
-		StackId:     aws.String("foo-stack"),
-		StackName:   aws.String("foo-stack"),
+	stacks[stackName] = &awsCF.Stack{
+		StackId:     aws.String(stackName),
+		StackName:   aws.String(stackName),
 		StackStatus: aws.String("CREATE_COMPLETE"),
 	}
-	events["foo-stack"] = []*awsCF.StackEvent{}
+	events[stackName] = []*awsCF.StackEvent{}
 
 	deleter := &MockStackDeleter{
 		Stacks: stacks,
 		Events: events,
 	}
-
+	fmt.Println(deleter.Events)
 	assert.NotPanics(
 		t,
 		func() {
@@ -104,10 +110,10 @@ func TestDeleteTask(t *testing.T) {
 				deleter,
 				objectStore,
 				"test.yaml",       // templatePath
-				"foo-stack",       // stackName
-				"ci",              // envName
 				"profile",         // profile
+				stackName,         // stackName
 				"region",          // region
+				"ci",              // envName
 				"kombustion.yaml", // manifest location
 			)
 		},
@@ -131,10 +137,10 @@ func TestDeleteTaskStackNotFound(t *testing.T) {
 				deleter,
 				objectStore,
 				"test.yaml",       // templatePath
-				"event-stack",     // stackName
-				"ci",              // envName
 				"profile",         // profile
+				"event-stack",     // stackName
 				"region",          // region
+				"ci",              // envName
 				"kombustion.yaml", // manifest location
 			)
 		},

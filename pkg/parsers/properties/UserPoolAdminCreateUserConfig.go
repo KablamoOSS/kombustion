@@ -5,9 +5,9 @@ package properties
 
 // UserPoolAdminCreateUserConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-admincreateuserconfig.html
 type UserPoolAdminCreateUserConfig struct {
-	AllowAdminCreateUserOnly  interface{}                    `yaml:"AllowAdminCreateUserOnly,omitempty"`
-	UnusedAccountValidityDays interface{}                    `yaml:"UnusedAccountValidityDays,omitempty"`
-	InviteMessageTemplate     *UserPoolInviteMessageTemplate `yaml:"InviteMessageTemplate,omitempty"`
+	AllowAdminCreateUserOnly  interface{} `yaml:"AllowAdminCreateUserOnly,omitempty"`
+	UnusedAccountValidityDays interface{} `yaml:"UnusedAccountValidityDays,omitempty"`
+	InviteMessageTemplate     interface{} `yaml:"InviteMessageTemplate,omitempty"`
 }
 
 // UserPoolAdminCreateUserConfig validation

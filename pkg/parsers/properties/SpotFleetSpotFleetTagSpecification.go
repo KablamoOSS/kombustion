@@ -6,6 +6,7 @@ package properties
 // SpotFleetSpotFleetTagSpecification Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-tagspecifications.html
 type SpotFleetSpotFleetTagSpecification struct {
 	ResourceType interface{} `yaml:"ResourceType,omitempty"`
+	Tags         interface{} `yaml:"Tags,omitempty"`
 }
 
 // SpotFleetSpotFleetTagSpecification validation

@@ -24,8 +24,9 @@ func checkError(err error) {
 				"",
 			)
 		} else {
+			fmt.Println(err)
 			// TODO: Make this error more helpful
-			printer.Fatal(err, "", "")
+			printer.Fatal(err, "An unknown error occured, please subbmit an issue", "https://github.com/KablamoOSS/kombustion/issues/new?template=bug_report.md")
 		}
 	}
 }

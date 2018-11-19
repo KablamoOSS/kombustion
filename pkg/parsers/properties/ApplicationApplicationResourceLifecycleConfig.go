@@ -5,8 +5,8 @@ package properties
 
 // ApplicationApplicationResourceLifecycleConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-applicationresourcelifecycleconfig.html
 type ApplicationApplicationResourceLifecycleConfig struct {
-	ServiceRole            interface{}                                   `yaml:"ServiceRole,omitempty"`
-	VersionLifecycleConfig *ApplicationApplicationVersionLifecycleConfig `yaml:"VersionLifecycleConfig,omitempty"`
+	ServiceRole            interface{} `yaml:"ServiceRole,omitempty"`
+	VersionLifecycleConfig interface{} `yaml:"VersionLifecycleConfig,omitempty"`
 }
 
 // ApplicationApplicationResourceLifecycleConfig validation

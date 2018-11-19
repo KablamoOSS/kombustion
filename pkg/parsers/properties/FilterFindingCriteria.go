@@ -5,8 +5,8 @@ package properties
 
 // FilterFindingCriteria Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-findingcriteria.html
 type FilterFindingCriteria struct {
-	Criterion interface{}      `yaml:"Criterion,omitempty"`
-	ItemType  *FilterCondition `yaml:"ItemType,omitempty"`
+	Criterion interface{} `yaml:"Criterion,omitempty"`
+	ItemType  interface{} `yaml:"ItemType,omitempty"`
 }
 
 // FilterFindingCriteria validation

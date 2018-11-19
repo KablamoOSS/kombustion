@@ -5,11 +5,11 @@ package properties
 
 // TaskDefinitionLinuxParameters Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-linuxparameters.html
 type TaskDefinitionLinuxParameters struct {
-	InitProcessEnabled interface{}                       `yaml:"InitProcessEnabled,omitempty"`
-	SharedMemorySize   interface{}                       `yaml:"SharedMemorySize,omitempty"`
-	Devices            interface{}                       `yaml:"Devices,omitempty"`
-	Tmpfs              interface{}                       `yaml:"Tmpfs,omitempty"`
-	Capabilities       *TaskDefinitionKernelCapabilities `yaml:"Capabilities,omitempty"`
+	InitProcessEnabled interface{} `yaml:"InitProcessEnabled,omitempty"`
+	SharedMemorySize   interface{} `yaml:"SharedMemorySize,omitempty"`
+	Devices            interface{} `yaml:"Devices,omitempty"`
+	Tmpfs              interface{} `yaml:"Tmpfs,omitempty"`
+	Capabilities       interface{} `yaml:"Capabilities,omitempty"`
 }
 
 // TaskDefinitionLinuxParameters validation

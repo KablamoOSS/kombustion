@@ -5,8 +5,8 @@ package properties
 
 // DeliveryStreamEncryptionConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-encryptionconfiguration.html
 type DeliveryStreamEncryptionConfiguration struct {
-	NoEncryptionConfig  interface{}                        `yaml:"NoEncryptionConfig,omitempty"`
-	KMSEncryptionConfig *DeliveryStreamKMSEncryptionConfig `yaml:"KMSEncryptionConfig,omitempty"`
+	NoEncryptionConfig  interface{} `yaml:"NoEncryptionConfig,omitempty"`
+	KMSEncryptionConfig interface{} `yaml:"KMSEncryptionConfig,omitempty"`
 }
 
 // DeliveryStreamEncryptionConfiguration validation

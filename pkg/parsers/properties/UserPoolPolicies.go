@@ -5,7 +5,7 @@ package properties
 
 // UserPoolPolicies Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-policies.html
 type UserPoolPolicies struct {
-	PasswordPolicy *UserPoolPasswordPolicy `yaml:"PasswordPolicy,omitempty"`
+	PasswordPolicy interface{} `yaml:"PasswordPolicy,omitempty"`
 }
 
 // UserPoolPolicies validation

@@ -5,26 +5,26 @@ package properties
 
 // LaunchTemplateLaunchTemplateData Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html
 type LaunchTemplateLaunchTemplateData struct {
-	DisableApiTermination             interface{}                          `yaml:"DisableApiTermination,omitempty"`
-	EbsOptimized                      interface{}                          `yaml:"EbsOptimized,omitempty"`
-	ImageId                           interface{}                          `yaml:"ImageId,omitempty"`
-	InstanceInitiatedShutdownBehavior interface{}                          `yaml:"InstanceInitiatedShutdownBehavior,omitempty"`
-	InstanceType                      interface{}                          `yaml:"InstanceType,omitempty"`
-	KernelId                          interface{}                          `yaml:"KernelId,omitempty"`
-	KeyName                           interface{}                          `yaml:"KeyName,omitempty"`
-	RamDiskId                         interface{}                          `yaml:"RamDiskId,omitempty"`
-	UserData                          interface{}                          `yaml:"UserData,omitempty"`
-	Placement                         *LaunchTemplatePlacement             `yaml:"Placement,omitempty"`
-	Monitoring                        *LaunchTemplateMonitoring            `yaml:"Monitoring,omitempty"`
-	BlockDeviceMappings               interface{}                          `yaml:"BlockDeviceMappings,omitempty"`
-	ElasticGpuSpecifications          interface{}                          `yaml:"ElasticGpuSpecifications,omitempty"`
-	SecurityGroups                    interface{}                          `yaml:"SecurityGroups,omitempty"`
-	TagSpecifications                 interface{}                          `yaml:"TagSpecifications,omitempty"`
-	NetworkInterfaces                 interface{}                          `yaml:"NetworkInterfaces,omitempty"`
-	SecurityGroupIds                  interface{}                          `yaml:"SecurityGroupIds,omitempty"`
-	InstanceMarketOptions             *LaunchTemplateInstanceMarketOptions `yaml:"InstanceMarketOptions,omitempty"`
-	IamInstanceProfile                *LaunchTemplateIamInstanceProfile    `yaml:"IamInstanceProfile,omitempty"`
-	CreditSpecification               *LaunchTemplateCreditSpecification   `yaml:"CreditSpecification,omitempty"`
+	DisableApiTermination             interface{} `yaml:"DisableApiTermination,omitempty"`
+	EbsOptimized                      interface{} `yaml:"EbsOptimized,omitempty"`
+	ImageId                           interface{} `yaml:"ImageId,omitempty"`
+	InstanceInitiatedShutdownBehavior interface{} `yaml:"InstanceInitiatedShutdownBehavior,omitempty"`
+	InstanceType                      interface{} `yaml:"InstanceType,omitempty"`
+	KernelId                          interface{} `yaml:"KernelId,omitempty"`
+	KeyName                           interface{} `yaml:"KeyName,omitempty"`
+	RamDiskId                         interface{} `yaml:"RamDiskId,omitempty"`
+	UserData                          interface{} `yaml:"UserData,omitempty"`
+	Placement                         interface{} `yaml:"Placement,omitempty"`
+	Monitoring                        interface{} `yaml:"Monitoring,omitempty"`
+	BlockDeviceMappings               interface{} `yaml:"BlockDeviceMappings,omitempty"`
+	ElasticGpuSpecifications          interface{} `yaml:"ElasticGpuSpecifications,omitempty"`
+	SecurityGroups                    interface{} `yaml:"SecurityGroups,omitempty"`
+	TagSpecifications                 interface{} `yaml:"TagSpecifications,omitempty"`
+	NetworkInterfaces                 interface{} `yaml:"NetworkInterfaces,omitempty"`
+	SecurityGroupIds                  interface{} `yaml:"SecurityGroupIds,omitempty"`
+	InstanceMarketOptions             interface{} `yaml:"InstanceMarketOptions,omitempty"`
+	IamInstanceProfile                interface{} `yaml:"IamInstanceProfile,omitempty"`
+	CreditSpecification               interface{} `yaml:"CreditSpecification,omitempty"`
 }
 
 // LaunchTemplateLaunchTemplateData validation

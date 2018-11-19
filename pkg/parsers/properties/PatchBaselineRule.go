@@ -5,10 +5,10 @@ package properties
 
 // PatchBaselineRule Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-rule.html
 type PatchBaselineRule struct {
-	ApproveAfterDays  interface{}                    `yaml:"ApproveAfterDays,omitempty"`
-	ComplianceLevel   interface{}                    `yaml:"ComplianceLevel,omitempty"`
-	EnableNonSecurity interface{}                    `yaml:"EnableNonSecurity,omitempty"`
-	PatchFilterGroup  *PatchBaselinePatchFilterGroup `yaml:"PatchFilterGroup,omitempty"`
+	ApproveAfterDays  interface{} `yaml:"ApproveAfterDays,omitempty"`
+	ComplianceLevel   interface{} `yaml:"ComplianceLevel,omitempty"`
+	EnableNonSecurity interface{} `yaml:"EnableNonSecurity,omitempty"`
+	PatchFilterGroup  interface{} `yaml:"PatchFilterGroup,omitempty"`
 }
 
 // PatchBaselineRule validation

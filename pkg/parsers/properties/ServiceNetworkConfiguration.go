@@ -5,7 +5,7 @@ package properties
 
 // ServiceNetworkConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-networkconfiguration.html
 type ServiceNetworkConfiguration struct {
-	AwsvpcConfiguration *ServiceAwsVpcConfiguration `yaml:"AwsvpcConfiguration,omitempty"`
+	AwsvpcConfiguration interface{} `yaml:"AwsvpcConfiguration,omitempty"`
 }
 
 // ServiceNetworkConfiguration validation

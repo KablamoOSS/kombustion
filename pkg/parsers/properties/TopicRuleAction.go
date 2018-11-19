@@ -5,18 +5,20 @@ package properties
 
 // TopicRuleAction Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-action.html
 type TopicRuleAction struct {
-	Sqs              *TopicRuleSqsAction              `yaml:"Sqs,omitempty"`
-	Sns              *TopicRuleSnsAction              `yaml:"Sns,omitempty"`
-	S3               *TopicRuleS3Action               `yaml:"S3,omitempty"`
-	Republish        *TopicRuleRepublishAction        `yaml:"Republish,omitempty"`
-	Lambda           *TopicRuleLambdaAction           `yaml:"Lambda,omitempty"`
-	Kinesis          *TopicRuleKinesisAction          `yaml:"Kinesis,omitempty"`
-	Firehose         *TopicRuleFirehoseAction         `yaml:"Firehose,omitempty"`
-	Elasticsearch    *TopicRuleElasticsearchAction    `yaml:"Elasticsearch,omitempty"`
-	DynamoDBv2       *TopicRuleDynamoDBv2Action       `yaml:"DynamoDBv2,omitempty"`
-	DynamoDB         *TopicRuleDynamoDBAction         `yaml:"DynamoDB,omitempty"`
-	CloudwatchMetric *TopicRuleCloudwatchMetricAction `yaml:"CloudwatchMetric,omitempty"`
-	CloudwatchAlarm  *TopicRuleCloudwatchAlarmAction  `yaml:"CloudwatchAlarm,omitempty"`
+	StepFunctions    interface{} `yaml:"StepFunctions,omitempty"`
+	Sqs              interface{} `yaml:"Sqs,omitempty"`
+	Sns              interface{} `yaml:"Sns,omitempty"`
+	S3               interface{} `yaml:"S3,omitempty"`
+	Republish        interface{} `yaml:"Republish,omitempty"`
+	Lambda           interface{} `yaml:"Lambda,omitempty"`
+	Kinesis          interface{} `yaml:"Kinesis,omitempty"`
+	IotAnalytics     interface{} `yaml:"IotAnalytics,omitempty"`
+	Firehose         interface{} `yaml:"Firehose,omitempty"`
+	Elasticsearch    interface{} `yaml:"Elasticsearch,omitempty"`
+	DynamoDBv2       interface{} `yaml:"DynamoDBv2,omitempty"`
+	DynamoDB         interface{} `yaml:"DynamoDB,omitempty"`
+	CloudwatchMetric interface{} `yaml:"CloudwatchMetric,omitempty"`
+	CloudwatchAlarm  interface{} `yaml:"CloudwatchAlarm,omitempty"`
 }
 
 // TopicRuleAction validation

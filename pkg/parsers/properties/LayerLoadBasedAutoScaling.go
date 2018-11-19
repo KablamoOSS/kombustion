@@ -5,9 +5,9 @@ package properties
 
 // LayerLoadBasedAutoScaling Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-loadbasedautoscaling.html
 type LayerLoadBasedAutoScaling struct {
-	Enable      interface{}                 `yaml:"Enable,omitempty"`
-	DownScaling *LayerAutoScalingThresholds `yaml:"DownScaling,omitempty"`
-	UpScaling   *LayerAutoScalingThresholds `yaml:"UpScaling,omitempty"`
+	Enable      interface{} `yaml:"Enable,omitempty"`
+	DownScaling interface{} `yaml:"DownScaling,omitempty"`
+	UpScaling   interface{} `yaml:"UpScaling,omitempty"`
 }
 
 // LayerLoadBasedAutoScaling validation

@@ -5,8 +5,8 @@ package properties
 
 // JobDefinitionVolumes Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-volumes.html
 type JobDefinitionVolumes struct {
-	Name interface{}               `yaml:"Name,omitempty"`
-	Host *JobDefinitionVolumesHost `yaml:"Host,omitempty"`
+	Name interface{} `yaml:"Name,omitempty"`
+	Host interface{} `yaml:"Host,omitempty"`
 }
 
 // JobDefinitionVolumes validation

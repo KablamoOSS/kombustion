@@ -5,8 +5,8 @@ package properties
 
 // SpotFleetLaunchTemplateConfig Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-launchtemplateconfig.html
 type SpotFleetLaunchTemplateConfig struct {
-	Overrides                   interface{}                                `yaml:"Overrides,omitempty"`
-	LaunchTemplateSpecification *SpotFleetFleetLaunchTemplateSpecification `yaml:"LaunchTemplateSpecification,omitempty"`
+	Overrides                   interface{} `yaml:"Overrides,omitempty"`
+	LaunchTemplateSpecification interface{} `yaml:"LaunchTemplateSpecification,omitempty"`
 }
 
 // SpotFleetLaunchTemplateConfig validation

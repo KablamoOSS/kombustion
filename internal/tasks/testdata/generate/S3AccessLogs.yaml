@@ -1,0 +1,158 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Access logs S3 Bucket"
+Parameters:
+  AccessControl:
+    Type: String
+    Description:
+      The canned access control list (ACL) that grants predefined permissions to
+      the bucket.
+    Default: ""
+  BucketEncryption:
+    Type: String
+    Description: Whether server-side bucket encryption is on by default
+    Default: "aws:kms"
+    AllowedValues:
+      - "false"
+      - "aws:kms"
+      - "AES256"
+  BucketName:
+    Type: String
+    Description:
+      Bucket Name (optional). If not provided CloudFormaiton will generate one
+    Default: ""
+  DenyInSecureQueries:
+    Type: String
+    Description: Whether to deny insecure requests to S3 bucket
+    Default: "true"
+    AllowedValues:
+      - "true"
+      - "false"
+  GlacierTransition:
+    Type: String
+    Description: Glacier transitioning in days, leave blank for no transition
+    Default: ""
+  StandardIATransition:
+    Type: String
+    Description:
+      Transitioning to standard IA in days, leave blank for no transition
+    Default: ""
+  VersioningConfiguration:
+    Type: String
+    Description:
+      Enable versioning to prevent objects from being deleted or overwritten by
+      mistake.
+    Default: ""
+  LoggingBucket:
+    Type: String
+    Description: Amazon S3 bucket where Amazon S3 store server access log files
+    Default: ""
+  LoggingPrefix:
+    Type: String
+    Description: prefix for the all log object keys in the S3 logging bucket
+    Default: ""
+
+Conditions:
+  AccessControlIsDefined: !Not [!Equals ["", !Ref AccessControl]]
+  BucketEncryptionIsOn: !Not [!Equals ["false", !Ref BucketEncryption]]
+  BucketNameIsDefined: !Not [!Equals ["", !Ref BucketName]]
+  GlacierTransitionIsDefined: !Not [!Equals ["", !Ref GlacierTransition]]
+  StandardIATransitionIsDefined: !Not [!Equals ["", !Ref StandardIATransition]]
+  VersioningConfigurationIsDefined:
+    !Not [!Equals ["", !Ref VersioningConfiguration]]
+  LifecycleConfigurationIsDefined: !Or
+    - !Condition GlacierTransitionIsDefined
+    - !Condition StandardIATransitionIsDefined
+  LoggingBucketIsDefined: !Not [!Equals ["", !Ref LoggingBucket]]
+  LoggingPrefixIsDefined: !Not [!Equals ["", !Ref LoggingPrefix]]
+  SecureTransportOnly: !And
+    - !Condition BucketEncryptionIsOn
+    - !Not [!Equals ["false", !Ref DenyInSecureQueries]]
+
+Resources:
+  S3Bucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: !If
+        - BucketNameIsDefined
+        - !Ref BucketName
+        - !Ref AWS::NoValue
+      AccessControl: !If
+        - AccessControlIsDefined
+        - !Ref AccessControl
+        - !Ref AWS::NoValue
+      LifecycleConfiguration:
+        Rules: !If
+          - LifecycleConfigurationIsDefined
+          - - Id: Archive to Glacier/StandardIA
+              Prefix: ""
+              Status: Enabled
+              Transitions:
+                - !If
+                  - StandardIATransitionIsDefined
+                  - StorageClass: STANDARD_IA
+                    TransitionInDays: !Ref StandardIATransition
+                  - !Ref AWS::NoValue
+                - !If
+                  - GlacierTransitionIsDefined
+                  - StorageClass: GLACIER
+                    TransitionInDays: !Ref GlacierTransition
+                  - !Ref AWS::NoValue
+          - !Ref AWS::NoValue
+      VersioningConfiguration: !If
+        - VersioningConfigurationIsDefined
+        - Status: !Ref VersioningConfiguration
+        - !Ref AWS::NoValue
+      LoggingConfiguration: !If
+        - LoggingBucketIsDefined
+        - DestinationBucketName: !Ref LoggingBucket
+          LogFilePrefix: !If
+            - LoggingPrefixIsDefined
+            - !Ref LoggingPrefix
+            - !Ref AWS::NoValue
+        - !Ref AWS::NoValue
+      BucketEncryption:
+        ServerSideEncryptionConfiguration: !If
+          - BucketEncryptionIsOn
+          - - ServerSideEncryptionByDefault:
+                SSEAlgorithm: !Ref BucketEncryption
+          - !Ref AWS::NoValue
+      Tags: !If
+        - BucketNameIsDefined
+        - - Key: "Name"
+            Value: !Ref BucketName
+        - !Ref AWS::NoValue
+
+  S3BucketPolicy:
+    DependsOn: S3Bucket
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Statement:
+          - !If
+            - SecureTransportOnly
+            - Action: s3:*
+              Condition:
+                Bool:
+                  aws:SecureTransport: "false"
+              Effect: Deny
+              Principal: "*"
+              Resource: !Sub "arn:aws:s3:::${S3Bucket}/*"
+            - !Ref AWS::NoValue
+          - Action: s3:PutObject
+            Effect: Allow
+            Principal:
+              AWS: !Sub arn:aws:iam::${AWS::AccountId}:root
+            Resource:
+              - !Sub "arn:aws:s3:::${S3Bucket}/AWSLogs/*"
+
+Outputs:
+  S3Bucket:
+    Value: !Ref S3Bucket
+    Export:
+      Name: !Sub "${AWS::StackName}::S3Bucket"
+
+  S3BucketPolicy:
+    Value: !Ref S3BucketPolicy
+    Export:
+      Name: !Sub "${AWS::StackName}::S3BucketPolicy"

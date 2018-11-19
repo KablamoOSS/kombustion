@@ -83,11 +83,6 @@ func buildPropertyYaml(obj string, cfnType CfnType) string {
 			propertyStrings = append(propertyStrings, str)
 		}
 	}
-	for _, property := range sortProperties(cfnType.Properties) {
-		if str := validatorYaml(obj, property.name, property.CfnProperty); len(str) > 0 {
-			validatorStrings = append(validatorStrings, str)
-		}
-	}
 
 	buf := bytes.NewBufferString("")
 	t := template.Must(template.New("").Parse(propertyTemplate))
@@ -109,11 +104,6 @@ func buildResourceYaml(obj string, cfnType CfnType) string {
 	for _, property := range sortProperties(cfnType.Properties) {
 		if str := valueStringYaml("properties.", obj, property.name, property.CfnProperty); len(str) > 0 {
 			propertyStrings = append(propertyStrings, str)
-		}
-	}
-	for _, property := range sortProperties(cfnType.Properties) {
-		if str := validatorYaml(obj, property.name, property.CfnProperty); len(str) > 0 {
-			validatorStrings = append(validatorStrings, str)
 		}
 	}
 

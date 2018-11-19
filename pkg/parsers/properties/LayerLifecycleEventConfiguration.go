@@ -5,7 +5,7 @@ package properties
 
 // LayerLifecycleEventConfiguration Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-lifecycleeventconfiguration.html
 type LayerLifecycleEventConfiguration struct {
-	ShutdownEventConfiguration *LayerShutdownEventConfiguration `yaml:"ShutdownEventConfiguration,omitempty"`
+	ShutdownEventConfiguration interface{} `yaml:"ShutdownEventConfiguration,omitempty"`
 }
 
 // LayerLifecycleEventConfiguration validation
