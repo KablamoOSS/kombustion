@@ -6,12 +6,6 @@ package resources
 import (
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
-	//
-	// "fmt"
-	//
-	//
-	//"github.com/KablamoOSS/kombustion/pkg/parsers/properties"
-	//
 )
 
 // KinesisStream Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html

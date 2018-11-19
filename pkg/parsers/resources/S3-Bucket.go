@@ -6,10 +6,6 @@ package resources
 import (
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
-	//
-	//
-	//"github.com/KablamoOSS/kombustion/pkg/parsers/properties"
-	//
 )
 
 // S3Bucket Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html

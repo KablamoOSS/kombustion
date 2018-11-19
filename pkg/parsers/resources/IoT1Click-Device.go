@@ -6,10 +6,6 @@ package resources
 import (
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
-	//
-	// "fmt"
-	//
-	//
 )
 
 // IoT1ClickDevice Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot1click-device.html

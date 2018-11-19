@@ -6,12 +6,6 @@ package resources
 import (
 	"github.com/KablamoOSS/kombustion/types"
 	yaml "github.com/KablamoOSS/yaml"
-	//
-	// "fmt"
-	//
-	//
-	//"github.com/KablamoOSS/kombustion/pkg/parsers/properties"
-	//
 )
 
 // AppSyncResolver Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-resolver.html

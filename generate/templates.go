@@ -29,10 +29,6 @@ const propertyTemplate = `package properties
 
 {{$PropertyName := .PropertyName}}
 
-{{- if .NeedsFmtImport}}
-	import "fmt"
-{{- end}}
-
 // {{$PropertyName}} Documentation: {{.Documentation}}
 type {{$PropertyName}} struct {
 	{{- range $property := .PropertyStrings}}
@@ -62,12 +58,6 @@ const resourceTemplate = `package resources
 import (
 	yaml "github.com/KablamoOSS/yaml"
 	"github.com/KablamoOSS/kombustion/types"
-	// {{- if .NeedsFmtImport}}
-	// "fmt"
-	// {{- end}}
-	//{{- if .NeedsPropertiesImport}}
-	//"github.com/KablamoOSS/kombustion/pkg/{{$MainPackageName}}/properties"
-	//{{- end}}
 )
 
 // {{$ResourceName}} Documentation: {{.Documentation}}
