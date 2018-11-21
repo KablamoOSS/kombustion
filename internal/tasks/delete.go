@@ -3,13 +3,14 @@ package tasks
 import (
 	"fmt"
 
+	"github.com/urfave/cli"
+
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/config"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation/tasks"
 	"github.com/KablamoOSS/kombustion/internal/core"
 	"github.com/KablamoOSS/kombustion/internal/manifest"
-	"github.com/urfave/cli"
 )
 
 // DeleteFlags for use with the delete taks
@@ -36,6 +37,7 @@ func Delete(c *cli.Context) {
 	profile := c.GlobalString("profile")
 	region := c.String("region")
 	envName := c.String("environment")
+	accountFlag := c.StringSlice("account")
 	stackName := c.String("stack-name")
 	manifestFile := c.GlobalString("manifest-file")
 
@@ -48,6 +50,7 @@ func Delete(c *cli.Context) {
 		region,
 		envName,
 		manifestFile,
+		accountFlag,
 	)
 }
 
@@ -60,6 +63,7 @@ func taskDelete(
 	region string,
 	envName string,
 	manifestLocation string,
+	accountFlag []string,
 ) {
 	printer.Progress("Kombusting")
 
@@ -83,6 +87,22 @@ func taskDelete(
 			printer.Fatal(
 				fmt.Errorf("Account %s is not allowed for environment %s", acctID, envName),
 				"Use allowlisted account, or add account to environment accounts in kombustion.yaml",
+				"",
+			)
+		}
+	}
+
+	if accountFlag != nil {
+		var accountIsAllowed bool
+		for _, account := range accountFlag {
+			if account == acctID {
+				accountIsAllowed = true
+			}
+		}
+		if accountIsAllowed == false {
+			printer.Fatal(
+				fmt.Errorf("Account %s is not allowed for environment %s", acctID, envName),
+				fmt.Sprintf("The account %s does not match the account provided by `--account`", acctID),
 				"",
 			)
 		}

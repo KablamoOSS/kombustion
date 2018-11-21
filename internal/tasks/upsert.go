@@ -3,6 +3,10 @@ package tasks
 import (
 	"fmt"
 
+	"github.com/aws/aws-sdk-go/aws"
+	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
+	"github.com/urfave/cli"
+
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation/tasks"
@@ -10,9 +14,6 @@ import (
 	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/KablamoOSS/kombustion/internal/plugins"
 	"github.com/KablamoOSS/kombustion/internal/plugins/lock"
-	"github.com/aws/aws-sdk-go/aws"
-	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
-	"github.com/urfave/cli"
 )
 
 // UpsertFlags for kombustion upsert
@@ -71,6 +72,7 @@ func Upsert(c *cli.Context) {
 	tagsMap := cliSliceMap(tagsSlice)
 
 	stackName := c.String("stack-name")
+	accountFlag := c.StringSlice("account")
 	profile := c.GlobalString("profile")
 	region := c.String("region")
 	devPluginPath := c.GlobalString("load-plugin")
@@ -99,8 +101,10 @@ func Upsert(c *cli.Context) {
 		capabilities,
 		confirm,
 		manifestFile,
+		accountFlag,
 	)
 }
+
 func upsert(
 	client cloudformation.StackUpserter,
 	objectStore core.ObjectStore,
@@ -117,6 +121,7 @@ func upsert(
 	capabilities []*string,
 	confirm bool,
 	manifestLocation string,
+	accountFlag []string,
 ) {
 	printer.Progress("Kombusting")
 
@@ -171,6 +176,22 @@ func upsert(
 			printer.Fatal(
 				fmt.Errorf("Account %s is not allowed for environment %s", acctID, envName),
 				fmt.Sprintf("Use allowlisted account, or add account %s to environment accounts in kombustion.yaml", acctID),
+				"",
+			)
+		}
+	}
+
+	if accountFlag != nil {
+		var accountIsAllowed bool
+		for _, account := range accountFlag {
+			if account == acctID {
+				accountIsAllowed = true
+			}
+		}
+		if accountIsAllowed == false {
+			printer.Fatal(
+				fmt.Errorf("Account %s is not allowed for environment %s", acctID, envName),
+				fmt.Sprintf("The account %s does not match the account provided by `--account`", acctID),
 				"",
 			)
 		}

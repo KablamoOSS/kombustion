@@ -114,7 +114,8 @@ func TestDeleteTask(t *testing.T) {
 				stackName,         // stackName
 				"region",          // region
 				"ci",              // envName
-				"kombustion.yaml", // manifest location
+				"kombustion.yaml", // manifest location,
+				nil,               // account flag
 			)
 		},
 	)
@@ -142,6 +143,7 @@ func TestDeleteTaskStackNotFound(t *testing.T) {
 				"region",          // region
 				"ci",              // envName
 				"kombustion.yaml", // manifest location
+				nil,               // account flag
 			)
 		},
 	)

@@ -37,4 +37,8 @@ var CloudFormationStackFlags = []cli.Flag{
 		Name:  "environment, e",
 		Usage: "environment config to use from ./kombustion.yaml eg `production`",
 	},
+	cli.StringSliceFlag{
+		Name:  "account, a",
+		Usage: "restrict to a specific account id `acountid=000000000`",
+	},
 }
