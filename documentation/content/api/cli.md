@@ -209,6 +209,21 @@ account.
 If `Parameters` are listed under the environment, they will be added to the stack.
 
 
+#### `--account`, `-a`
+
+_(Optional) Specify AWS Account Id._
+
+Similar to `AccountIDs` in the manifest file, specify one or more account ID's that can be deployed to.
+
+If the role being used to deploy is different from the specified account ID kombustion will fail.
+
+This enabled you to allowlist specific accounts, to prevent deploying to the wrong account.
+
+```bash
+$ kombustion upsert --account 000000000  path/to/cloudformation/stack.yaml
+```
+
+
 #### `--param`, `-p`
 
 _(Optional) Specify CloudFormation parameters._
