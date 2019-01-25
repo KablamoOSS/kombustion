@@ -6,11 +6,9 @@ import (
 	"strings"
 
 	printer "github.com/KablamoOSS/go-cli-printer"
-
 	"github.com/KablamoOSS/kombustion/internal/plugins"
 	"github.com/KablamoOSS/kombustion/pkg/parsers"
 	"github.com/KablamoOSS/kombustion/types"
-
 	"github.com/KablamoOSS/yaml"
 )
 
@@ -174,7 +172,15 @@ func processParsers(
 			strings.HasPrefix(templateResource.Type, "Custom::") {
 			resources = mergeTemplatesWithError(
 				templateResourceName,
-				"aws-custom-resource",
+				"non-plugin-resource",
+				templateResource.Type,
+				resources,
+				types.TemplateObject{templateResourceName: templateResource},
+			)
+		} else if strings.HasPrefix(templateResource.Type, "AWS::") {
+			resources = mergeTemplatesWithError(
+				templateResourceName,
+				"aws-resource",
 				templateResource.Type,
 				resources,
 				types.TemplateObject{templateResourceName: templateResource},
@@ -183,17 +189,14 @@ func processParsers(
 			// Check if there is a parser for this resource
 			parser, ok := parserFuncs[templateResource.Type]
 
-			// If theres no parser log an error
+			// If theres no parser dont adjust the out
 			if !ok {
-				printer.Error(
-					fmt.Errorf("No parser found"),
-					fmt.Sprintf(
-						"\n   ├─ Name:    %s\n   ├─ Type:    %s\n   └─ Resolution:    %s",
-						templateResourceName,
-						templateResource.Type,
-						"You may need to install a plugin to parse the resource.",
-					),
-					"",
+				resources = mergeTemplatesWithError(
+					templateResourceName,
+					"unknown-resource",
+					templateResource.Type,
+					resources,
+					types.TemplateObject{templateResourceName: templateResource},
 				)
 				continue
 			}
