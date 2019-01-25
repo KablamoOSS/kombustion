@@ -21,6 +21,7 @@ type DeploymentStageDescription struct {
 	TracingEnabled       interface{} `yaml:"TracingEnabled,omitempty"`
 	Variables            interface{} `yaml:"Variables,omitempty"`
 	MethodSettings       interface{} `yaml:"MethodSettings,omitempty"`
+	Tags                 interface{} `yaml:"Tags,omitempty"`
 	CanarySetting        interface{} `yaml:"CanarySetting,omitempty"`
 	AccessLogSetting     interface{} `yaml:"AccessLogSetting,omitempty"`
 }

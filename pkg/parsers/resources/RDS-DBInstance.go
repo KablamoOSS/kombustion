@@ -33,6 +33,8 @@ type RDSDBInstanceProperties struct {
 	DBParameterGroupName               interface{} `yaml:"DBParameterGroupName,omitempty"`
 	DBSnapshotIdentifier               interface{} `yaml:"DBSnapshotIdentifier,omitempty"`
 	DBSubnetGroupName                  interface{} `yaml:"DBSubnetGroupName,omitempty"`
+	DeleteAutomatedBackups             interface{} `yaml:"DeleteAutomatedBackups,omitempty"`
+	DeletionProtection                 interface{} `yaml:"DeletionProtection,omitempty"`
 	Domain                             interface{} `yaml:"Domain,omitempty"`
 	DomainIAMRoleName                  interface{} `yaml:"DomainIAMRoleName,omitempty"`
 	EnableIAMDatabaseAuthentication    interface{} `yaml:"EnableIAMDatabaseAuthentication,omitempty"`
@@ -60,6 +62,7 @@ type RDSDBInstanceProperties struct {
 	StorageEncrypted                   interface{} `yaml:"StorageEncrypted,omitempty"`
 	StorageType                        interface{} `yaml:"StorageType,omitempty"`
 	Timezone                           interface{} `yaml:"Timezone,omitempty"`
+	UseDefaultProcessorFeatures        interface{} `yaml:"UseDefaultProcessorFeatures,omitempty"`
 	DBSecurityGroups                   interface{} `yaml:"DBSecurityGroups,omitempty"`
 	EnableCloudwatchLogsExports        interface{} `yaml:"EnableCloudwatchLogsExports,omitempty"`
 	ProcessorFeatures                  interface{} `yaml:"ProcessorFeatures,omitempty"`

@@ -6,6 +6,7 @@ package properties
 // JobDefinitionContainerProperties Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties.html
 type JobDefinitionContainerProperties struct {
 	Image                  interface{} `yaml:"Image"`
+	InstanceType           interface{} `yaml:"InstanceType,omitempty"`
 	JobRoleArn             interface{} `yaml:"JobRoleArn,omitempty"`
 	Memory                 interface{} `yaml:"Memory"`
 	Privileged             interface{} `yaml:"Privileged,omitempty"`

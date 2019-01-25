@@ -20,7 +20,7 @@ type InspectorAssessmentTarget struct {
 // InspectorAssessmentTarget Properties
 type InspectorAssessmentTargetProperties struct {
 	AssessmentTargetName interface{} `yaml:"AssessmentTargetName,omitempty"`
-	ResourceGroupArn     interface{} `yaml:"ResourceGroupArn"`
+	ResourceGroupArn     interface{} `yaml:"ResourceGroupArn,omitempty"`
 }
 
 // NewInspectorAssessmentTarget constructor creates a new InspectorAssessmentTarget

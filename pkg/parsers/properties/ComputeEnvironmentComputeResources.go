@@ -12,12 +12,14 @@ type ComputeEnvironmentComputeResources struct {
 	InstanceRole     interface{} `yaml:"InstanceRole"`
 	MaxvCpus         interface{} `yaml:"MaxvCpus"`
 	MinvCpus         interface{} `yaml:"MinvCpus"`
+	PlacementGroup   interface{} `yaml:"PlacementGroup,omitempty"`
 	SpotIamFleetRole interface{} `yaml:"SpotIamFleetRole,omitempty"`
 	Tags             interface{} `yaml:"Tags,omitempty"`
 	Type             interface{} `yaml:"Type"`
 	InstanceTypes    interface{} `yaml:"InstanceTypes"`
 	SecurityGroupIds interface{} `yaml:"SecurityGroupIds"`
 	Subnets          interface{} `yaml:"Subnets"`
+	LaunchTemplate   interface{} `yaml:"LaunchTemplate,omitempty"`
 }
 
 // ComputeEnvironmentComputeResources validation

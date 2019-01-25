@@ -5,8 +5,13 @@ package properties
 
 // ListenerRuleAction Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-actions.html
 type ListenerRuleAction struct {
-	TargetGroupArn interface{} `yaml:"TargetGroupArn"`
-	Type           interface{} `yaml:"Type"`
+	Order                     interface{} `yaml:"Order,omitempty"`
+	TargetGroupArn            interface{} `yaml:"TargetGroupArn,omitempty"`
+	Type                      interface{} `yaml:"Type"`
+	RedirectConfig            interface{} `yaml:"RedirectConfig,omitempty"`
+	FixedResponseConfig       interface{} `yaml:"FixedResponseConfig,omitempty"`
+	AuthenticateOidcConfig    interface{} `yaml:"AuthenticateOidcConfig,omitempty"`
+	AuthenticateCognitoConfig interface{} `yaml:"AuthenticateCognitoConfig,omitempty"`
 }
 
 // ListenerRuleAction validation

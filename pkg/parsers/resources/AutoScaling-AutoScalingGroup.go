@@ -30,13 +30,14 @@ type AutoScalingAutoScalingGroupProperties struct {
 	MinSize                        interface{} `yaml:"MinSize"`
 	PlacementGroup                 interface{} `yaml:"PlacementGroup,omitempty"`
 	ServiceLinkedRoleARN           interface{} `yaml:"ServiceLinkedRoleARN,omitempty"`
+	MixedInstancesPolicy           interface{} `yaml:"MixedInstancesPolicy,omitempty"`
 	AvailabilityZones              interface{} `yaml:"AvailabilityZones,omitempty"`
-	TargetGroupARNs                interface{} `yaml:"TargetGroupARNs,omitempty"`
+	Tags                           interface{} `yaml:"Tags,omitempty"`
 	LifecycleHookSpecificationList interface{} `yaml:"LifecycleHookSpecificationList,omitempty"`
 	LoadBalancerNames              interface{} `yaml:"LoadBalancerNames,omitempty"`
 	MetricsCollection              interface{} `yaml:"MetricsCollection,omitempty"`
 	NotificationConfigurations     interface{} `yaml:"NotificationConfigurations,omitempty"`
-	Tags                           interface{} `yaml:"Tags,omitempty"`
+	TargetGroupARNs                interface{} `yaml:"TargetGroupARNs,omitempty"`
 	TerminationPolicies            interface{} `yaml:"TerminationPolicies,omitempty"`
 	VPCZoneIdentifier              interface{} `yaml:"VPCZoneIdentifier,omitempty"`
 	LaunchTemplate                 interface{} `yaml:"LaunchTemplate,omitempty"`
