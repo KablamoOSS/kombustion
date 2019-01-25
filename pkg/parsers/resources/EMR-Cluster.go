@@ -34,6 +34,7 @@ type EMRClusterProperties struct {
 	Applications          interface{} `yaml:"Applications,omitempty"`
 	BootstrapActions      interface{} `yaml:"BootstrapActions,omitempty"`
 	Configurations        interface{} `yaml:"Configurations,omitempty"`
+	Steps                 interface{} `yaml:"Steps,omitempty"`
 	Tags                  interface{} `yaml:"Tags,omitempty"`
 	KerberosAttributes    interface{} `yaml:"KerberosAttributes,omitempty"`
 	Instances             interface{} `yaml:"Instances"`

@@ -28,6 +28,7 @@ type ECSTaskDefinitionProperties struct {
 	ContainerDefinitions    interface{} `yaml:"ContainerDefinitions,omitempty"`
 	PlacementConstraints    interface{} `yaml:"PlacementConstraints,omitempty"`
 	RequiresCompatibilities interface{} `yaml:"RequiresCompatibilities,omitempty"`
+	Tags                    interface{} `yaml:"Tags,omitempty"`
 	Volumes                 interface{} `yaml:"Volumes,omitempty"`
 }
 

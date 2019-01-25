@@ -25,6 +25,7 @@ type RDSDBClusterProperties struct {
 	DBClusterParameterGroupName     interface{} `yaml:"DBClusterParameterGroupName,omitempty"`
 	DBSubnetGroupName               interface{} `yaml:"DBSubnetGroupName,omitempty"`
 	DatabaseName                    interface{} `yaml:"DatabaseName,omitempty"`
+	DeletionProtection              interface{} `yaml:"DeletionProtection,omitempty"`
 	EnableIAMDatabaseAuthentication interface{} `yaml:"EnableIAMDatabaseAuthentication,omitempty"`
 	Engine                          interface{} `yaml:"Engine"`
 	EngineMode                      interface{} `yaml:"EngineMode,omitempty"`
@@ -37,6 +38,7 @@ type RDSDBClusterProperties struct {
 	PreferredMaintenanceWindow      interface{} `yaml:"PreferredMaintenanceWindow,omitempty"`
 	ReplicationSourceIdentifier     interface{} `yaml:"ReplicationSourceIdentifier,omitempty"`
 	SnapshotIdentifier              interface{} `yaml:"SnapshotIdentifier,omitempty"`
+	SourceRegion                    interface{} `yaml:"SourceRegion,omitempty"`
 	StorageEncrypted                interface{} `yaml:"StorageEncrypted,omitempty"`
 	ScalingConfiguration            interface{} `yaml:"ScalingConfiguration,omitempty"`
 	AvailabilityZones               interface{} `yaml:"AvailabilityZones,omitempty"`

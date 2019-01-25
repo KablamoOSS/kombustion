@@ -24,6 +24,7 @@ type ApiGatewayApiKeyProperties struct {
 	Enabled            interface{} `yaml:"Enabled,omitempty"`
 	GenerateDistinctId interface{} `yaml:"GenerateDistinctId,omitempty"`
 	Name               interface{} `yaml:"Name,omitempty"`
+	Value              interface{} `yaml:"Value,omitempty"`
 	StageKeys          interface{} `yaml:"StageKeys,omitempty"`
 }
 

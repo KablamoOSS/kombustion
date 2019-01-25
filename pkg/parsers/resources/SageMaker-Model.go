@@ -22,8 +22,9 @@ type SageMakerModelProperties struct {
 	ExecutionRoleArn interface{} `yaml:"ExecutionRoleArn"`
 	ModelName        interface{} `yaml:"ModelName,omitempty"`
 	VpcConfig        interface{} `yaml:"VpcConfig,omitempty"`
+	Containers       interface{} `yaml:"Containers,omitempty"`
 	Tags             interface{} `yaml:"Tags,omitempty"`
-	PrimaryContainer interface{} `yaml:"PrimaryContainer"`
+	PrimaryContainer interface{} `yaml:"PrimaryContainer,omitempty"`
 }
 
 // NewSageMakerModel constructor creates a new SageMakerModel

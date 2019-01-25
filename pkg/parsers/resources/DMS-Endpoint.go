@@ -34,6 +34,8 @@ type DMSEndpointProperties struct {
 	S3Settings                interface{} `yaml:"S3Settings,omitempty"`
 	MongoDbSettings           interface{} `yaml:"MongoDbSettings,omitempty"`
 	Tags                      interface{} `yaml:"Tags,omitempty"`
+	KinesisSettings           interface{} `yaml:"KinesisSettings,omitempty"`
+	ElasticsearchSettings     interface{} `yaml:"ElasticsearchSettings,omitempty"`
 	DynamoDbSettings          interface{} `yaml:"DynamoDbSettings,omitempty"`
 }
 

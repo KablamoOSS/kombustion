@@ -19,9 +19,10 @@ type SNSTopic struct {
 
 // SNSTopic Properties
 type SNSTopicProperties struct {
-	DisplayName  interface{} `yaml:"DisplayName,omitempty"`
-	TopicName    interface{} `yaml:"TopicName,omitempty"`
-	Subscription interface{} `yaml:"Subscription,omitempty"`
+	DisplayName    interface{} `yaml:"DisplayName,omitempty"`
+	KmsMasterKeyId interface{} `yaml:"KmsMasterKeyId,omitempty"`
+	TopicName      interface{} `yaml:"TopicName,omitempty"`
+	Subscription   interface{} `yaml:"Subscription,omitempty"`
 }
 
 // NewSNSTopic constructor creates a new SNSTopic
