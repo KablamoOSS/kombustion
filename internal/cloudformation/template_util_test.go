@@ -2,10 +2,12 @@ package cloudformation
 
 import (
 	"fmt"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/types"
-	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 // This test confirms the merge works, but does not
