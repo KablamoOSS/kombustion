@@ -29,6 +29,7 @@ type ECSServiceProperties struct {
 	ServiceName                   interface{} `yaml:"ServiceName,omitempty"`
 	TaskDefinition                interface{} `yaml:"TaskDefinition"`
 	NetworkConfiguration          interface{} `yaml:"NetworkConfiguration,omitempty"`
+	Tags                          interface{} `yaml:"Tags,omitempty"`
 	LoadBalancers                 interface{} `yaml:"LoadBalancers,omitempty"`
 	PlacementConstraints          interface{} `yaml:"PlacementConstraints,omitempty"`
 	PlacementStrategies           interface{} `yaml:"PlacementStrategies,omitempty"`

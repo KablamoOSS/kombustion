@@ -10,6 +10,7 @@ type ClusterJobFlowInstancesConfig struct {
 	EmrManagedMasterSecurityGroup  interface{} `yaml:"EmrManagedMasterSecurityGroup,omitempty"`
 	EmrManagedSlaveSecurityGroup   interface{} `yaml:"EmrManagedSlaveSecurityGroup,omitempty"`
 	HadoopVersion                  interface{} `yaml:"HadoopVersion,omitempty"`
+	KeepJobFlowAliveWhenNoSteps    interface{} `yaml:"KeepJobFlowAliveWhenNoSteps,omitempty"`
 	ServiceAccessSecurityGroup     interface{} `yaml:"ServiceAccessSecurityGroup,omitempty"`
 	TerminationProtected           interface{} `yaml:"TerminationProtected,omitempty"`
 	Placement                      interface{} `yaml:"Placement,omitempty"`

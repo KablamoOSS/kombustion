@@ -19,8 +19,9 @@ type EC2EIP struct {
 
 // EC2EIP Properties
 type EC2EIPProperties struct {
-	Domain     interface{} `yaml:"Domain,omitempty"`
-	InstanceId interface{} `yaml:"InstanceId,omitempty"`
+	Domain         interface{} `yaml:"Domain,omitempty"`
+	InstanceId     interface{} `yaml:"InstanceId,omitempty"`
+	PublicIpv4Pool interface{} `yaml:"PublicIpv4Pool,omitempty"`
 }
 
 // NewEC2EIP constructor creates a new EC2EIP

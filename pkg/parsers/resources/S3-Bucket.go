@@ -19,21 +19,22 @@ type S3Bucket struct {
 
 // S3Bucket Properties
 type S3BucketProperties struct {
-	AccessControl             interface{} `yaml:"AccessControl,omitempty"`
-	BucketName                interface{} `yaml:"BucketName,omitempty"`
-	WebsiteConfiguration      interface{} `yaml:"WebsiteConfiguration,omitempty"`
-	VersioningConfiguration   interface{} `yaml:"VersioningConfiguration,omitempty"`
-	ReplicationConfiguration  interface{} `yaml:"ReplicationConfiguration,omitempty"`
-	NotificationConfiguration interface{} `yaml:"NotificationConfiguration,omitempty"`
-	LoggingConfiguration      interface{} `yaml:"LoggingConfiguration,omitempty"`
-	AnalyticsConfigurations   interface{} `yaml:"AnalyticsConfigurations,omitempty"`
-	InventoryConfigurations   interface{} `yaml:"InventoryConfigurations,omitempty"`
-	MetricsConfigurations     interface{} `yaml:"MetricsConfigurations,omitempty"`
-	Tags                      interface{} `yaml:"Tags,omitempty"`
-	LifecycleConfiguration    interface{} `yaml:"LifecycleConfiguration,omitempty"`
-	CorsConfiguration         interface{} `yaml:"CorsConfiguration,omitempty"`
-	BucketEncryption          interface{} `yaml:"BucketEncryption,omitempty"`
-	AccelerateConfiguration   interface{} `yaml:"AccelerateConfiguration,omitempty"`
+	AccessControl                  interface{} `yaml:"AccessControl,omitempty"`
+	BucketName                     interface{} `yaml:"BucketName,omitempty"`
+	WebsiteConfiguration           interface{} `yaml:"WebsiteConfiguration,omitempty"`
+	VersioningConfiguration        interface{} `yaml:"VersioningConfiguration,omitempty"`
+	ReplicationConfiguration       interface{} `yaml:"ReplicationConfiguration,omitempty"`
+	PublicAccessBlockConfiguration interface{} `yaml:"PublicAccessBlockConfiguration,omitempty"`
+	NotificationConfiguration      interface{} `yaml:"NotificationConfiguration,omitempty"`
+	LoggingConfiguration           interface{} `yaml:"LoggingConfiguration,omitempty"`
+	MetricsConfigurations          interface{} `yaml:"MetricsConfigurations,omitempty"`
+	InventoryConfigurations        interface{} `yaml:"InventoryConfigurations,omitempty"`
+	Tags                           interface{} `yaml:"Tags,omitempty"`
+	AnalyticsConfigurations        interface{} `yaml:"AnalyticsConfigurations,omitempty"`
+	LifecycleConfiguration         interface{} `yaml:"LifecycleConfiguration,omitempty"`
+	CorsConfiguration              interface{} `yaml:"CorsConfiguration,omitempty"`
+	BucketEncryption               interface{} `yaml:"BucketEncryption,omitempty"`
+	AccelerateConfiguration        interface{} `yaml:"AccelerateConfiguration,omitempty"`
 }
 
 // NewS3Bucket constructor creates a new S3Bucket

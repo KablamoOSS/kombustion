@@ -41,14 +41,16 @@ type EC2InstanceProperties struct {
 	Tenancy                           interface{} `yaml:"Tenancy,omitempty"`
 	UserData                          interface{} `yaml:"UserData,omitempty"`
 	BlockDeviceMappings               interface{} `yaml:"BlockDeviceMappings,omitempty"`
-	SecurityGroups                    interface{} `yaml:"SecurityGroups,omitempty"`
+	Tags                              interface{} `yaml:"Tags,omitempty"`
 	ElasticGpuSpecifications          interface{} `yaml:"ElasticGpuSpecifications,omitempty"`
+	ElasticInferenceAccelerators      interface{} `yaml:"ElasticInferenceAccelerators,omitempty"`
 	Ipv6Addresses                     interface{} `yaml:"Ipv6Addresses,omitempty"`
-	Volumes                           interface{} `yaml:"Volumes,omitempty"`
+	SsmAssociations                   interface{} `yaml:"SsmAssociations,omitempty"`
+	LicenseSpecifications             interface{} `yaml:"LicenseSpecifications,omitempty"`
 	NetworkInterfaces                 interface{} `yaml:"NetworkInterfaces,omitempty"`
 	SecurityGroupIds                  interface{} `yaml:"SecurityGroupIds,omitempty"`
-	SsmAssociations                   interface{} `yaml:"SsmAssociations,omitempty"`
-	Tags                              interface{} `yaml:"Tags,omitempty"`
+	SecurityGroups                    interface{} `yaml:"SecurityGroups,omitempty"`
+	Volumes                           interface{} `yaml:"Volumes,omitempty"`
 	LaunchTemplate                    interface{} `yaml:"LaunchTemplate,omitempty"`
 	CreditSpecification               interface{} `yaml:"CreditSpecification,omitempty"`
 }

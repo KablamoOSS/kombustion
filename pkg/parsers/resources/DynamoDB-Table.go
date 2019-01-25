@@ -19,11 +19,12 @@ type DynamoDBTable struct {
 
 // DynamoDBTable Properties
 type DynamoDBTableProperties struct {
+	BillingMode                      interface{} `yaml:"BillingMode,omitempty"`
 	TableName                        interface{} `yaml:"TableName,omitempty"`
 	TimeToLiveSpecification          interface{} `yaml:"TimeToLiveSpecification,omitempty"`
 	StreamSpecification              interface{} `yaml:"StreamSpecification,omitempty"`
 	SSESpecification                 interface{} `yaml:"SSESpecification,omitempty"`
-	ProvisionedThroughput            interface{} `yaml:"ProvisionedThroughput"`
+	ProvisionedThroughput            interface{} `yaml:"ProvisionedThroughput,omitempty"`
 	PointInTimeRecoverySpecification interface{} `yaml:"PointInTimeRecoverySpecification,omitempty"`
 	KeySchema                        interface{} `yaml:"KeySchema"`
 	AttributeDefinitions             interface{} `yaml:"AttributeDefinitions,omitempty"`

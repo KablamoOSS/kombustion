@@ -21,7 +21,7 @@ type IoT1ClickPlacement struct {
 type IoT1ClickPlacementProperties struct {
 	AssociatedDevices interface{} `yaml:"AssociatedDevices,omitempty"`
 	Attributes        interface{} `yaml:"Attributes,omitempty"`
-	PlacementName     interface{} `yaml:"PlacementName"`
+	PlacementName     interface{} `yaml:"PlacementName,omitempty"`
 	ProjectName       interface{} `yaml:"ProjectName"`
 }
 

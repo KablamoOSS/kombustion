@@ -27,9 +27,9 @@ type CloudWatchAlarmProperties struct {
 	EvaluateLowSampleCountPercentile interface{} `yaml:"EvaluateLowSampleCountPercentile,omitempty"`
 	EvaluationPeriods                interface{} `yaml:"EvaluationPeriods"`
 	ExtendedStatistic                interface{} `yaml:"ExtendedStatistic,omitempty"`
-	MetricName                       interface{} `yaml:"MetricName"`
-	Namespace                        interface{} `yaml:"Namespace"`
-	Period                           interface{} `yaml:"Period"`
+	MetricName                       interface{} `yaml:"MetricName,omitempty"`
+	Namespace                        interface{} `yaml:"Namespace,omitempty"`
+	Period                           interface{} `yaml:"Period,omitempty"`
 	Statistic                        interface{} `yaml:"Statistic,omitempty"`
 	Threshold                        interface{} `yaml:"Threshold"`
 	TreatMissingData                 interface{} `yaml:"TreatMissingData,omitempty"`

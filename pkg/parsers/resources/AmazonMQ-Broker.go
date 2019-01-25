@@ -28,9 +28,10 @@ type AmazonMQBrokerProperties struct {
 	PubliclyAccessible         interface{} `yaml:"PubliclyAccessible"`
 	MaintenanceWindowStartTime interface{} `yaml:"MaintenanceWindowStartTime,omitempty"`
 	Logs                       interface{} `yaml:"Logs,omitempty"`
+	Users                      interface{} `yaml:"Users"`
 	SecurityGroups             interface{} `yaml:"SecurityGroups,omitempty"`
 	SubnetIds                  interface{} `yaml:"SubnetIds,omitempty"`
-	Users                      interface{} `yaml:"Users"`
+	Tags                       interface{} `yaml:"Tags,omitempty"`
 	Configuration              interface{} `yaml:"Configuration,omitempty"`
 }
 

@@ -19,16 +19,17 @@ type ElasticsearchDomain struct {
 
 // ElasticsearchDomain Properties
 type ElasticsearchDomainProperties struct {
-	AccessPolicies             interface{} `yaml:"AccessPolicies,omitempty"`
-	DomainName                 interface{} `yaml:"DomainName,omitempty"`
-	ElasticsearchVersion       interface{} `yaml:"ElasticsearchVersion,omitempty"`
-	VPCOptions                 interface{} `yaml:"VPCOptions,omitempty"`
-	SnapshotOptions            interface{} `yaml:"SnapshotOptions,omitempty"`
-	AdvancedOptions            interface{} `yaml:"AdvancedOptions,omitempty"`
-	Tags                       interface{} `yaml:"Tags,omitempty"`
-	EncryptionAtRestOptions    interface{} `yaml:"EncryptionAtRestOptions,omitempty"`
-	ElasticsearchClusterConfig interface{} `yaml:"ElasticsearchClusterConfig,omitempty"`
-	EBSOptions                 interface{} `yaml:"EBSOptions,omitempty"`
+	AccessPolicies              interface{} `yaml:"AccessPolicies,omitempty"`
+	DomainName                  interface{} `yaml:"DomainName,omitempty"`
+	ElasticsearchVersion        interface{} `yaml:"ElasticsearchVersion,omitempty"`
+	VPCOptions                  interface{} `yaml:"VPCOptions,omitempty"`
+	SnapshotOptions             interface{} `yaml:"SnapshotOptions,omitempty"`
+	NodeToNodeEncryptionOptions interface{} `yaml:"NodeToNodeEncryptionOptions,omitempty"`
+	AdvancedOptions             interface{} `yaml:"AdvancedOptions,omitempty"`
+	Tags                        interface{} `yaml:"Tags,omitempty"`
+	EncryptionAtRestOptions     interface{} `yaml:"EncryptionAtRestOptions,omitempty"`
+	ElasticsearchClusterConfig  interface{} `yaml:"ElasticsearchClusterConfig,omitempty"`
+	EBSOptions                  interface{} `yaml:"EBSOptions,omitempty"`
 }
 
 // NewElasticsearchDomain constructor creates a new ElasticsearchDomain

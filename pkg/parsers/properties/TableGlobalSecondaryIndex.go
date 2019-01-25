@@ -6,7 +6,7 @@ package properties
 // TableGlobalSecondaryIndex Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-gsi.html
 type TableGlobalSecondaryIndex struct {
 	IndexName             interface{} `yaml:"IndexName"`
-	ProvisionedThroughput interface{} `yaml:"ProvisionedThroughput"`
+	ProvisionedThroughput interface{} `yaml:"ProvisionedThroughput,omitempty"`
 	Projection            interface{} `yaml:"Projection"`
 	KeySchema             interface{} `yaml:"KeySchema"`
 }

@@ -30,6 +30,7 @@ type LambdaFunctionProperties struct {
 	Timeout                      interface{} `yaml:"Timeout,omitempty"`
 	VpcConfig                    interface{} `yaml:"VpcConfig,omitempty"`
 	TracingConfig                interface{} `yaml:"TracingConfig,omitempty"`
+	Layers                       interface{} `yaml:"Layers,omitempty"`
 	Tags                         interface{} `yaml:"Tags,omitempty"`
 	Environment                  interface{} `yaml:"Environment,omitempty"`
 	DeadLetterConfig             interface{} `yaml:"DeadLetterConfig,omitempty"`

@@ -20,7 +20,7 @@ type IoT1ClickProject struct {
 // IoT1ClickProject Properties
 type IoT1ClickProjectProperties struct {
 	Description       interface{} `yaml:"Description,omitempty"`
-	ProjectName       interface{} `yaml:"ProjectName"`
+	ProjectName       interface{} `yaml:"ProjectName,omitempty"`
 	PlacementTemplate interface{} `yaml:"PlacementTemplate"`
 }
 

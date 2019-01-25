@@ -20,6 +20,7 @@ type ECSCluster struct {
 // ECSCluster Properties
 type ECSClusterProperties struct {
 	ClusterName interface{} `yaml:"ClusterName,omitempty"`
+	Tags        interface{} `yaml:"Tags,omitempty"`
 }
 
 // NewECSCluster constructor creates a new ECSCluster

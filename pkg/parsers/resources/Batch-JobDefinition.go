@@ -24,7 +24,8 @@ type BatchJobDefinitionProperties struct {
 	Type                interface{} `yaml:"Type"`
 	Timeout             interface{} `yaml:"Timeout,omitempty"`
 	RetryStrategy       interface{} `yaml:"RetryStrategy,omitempty"`
-	ContainerProperties interface{} `yaml:"ContainerProperties"`
+	NodeProperties      interface{} `yaml:"NodeProperties,omitempty"`
+	ContainerProperties interface{} `yaml:"ContainerProperties,omitempty"`
 }
 
 // NewBatchJobDefinition constructor creates a new BatchJobDefinition

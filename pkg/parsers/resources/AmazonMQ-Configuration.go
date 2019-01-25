@@ -24,6 +24,7 @@ type AmazonMQConfigurationProperties struct {
 	EngineType    interface{} `yaml:"EngineType"`
 	EngineVersion interface{} `yaml:"EngineVersion"`
 	Name          interface{} `yaml:"Name"`
+	Tags          interface{} `yaml:"Tags,omitempty"`
 }
 
 // NewAmazonMQConfiguration constructor creates a new AmazonMQConfiguration

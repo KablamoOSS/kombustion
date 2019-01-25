@@ -5,6 +5,7 @@ package properties
 
 // EndpointConfigProductionVariant Documentation: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-endpointconfig-productionvariant.html
 type EndpointConfigProductionVariant struct {
+	AcceleratorType      interface{} `yaml:"AcceleratorType,omitempty"`
 	InitialInstanceCount interface{} `yaml:"InitialInstanceCount"`
 	InitialVariantWeight interface{} `yaml:"InitialVariantWeight"`
 	InstanceType         interface{} `yaml:"InstanceType"`
