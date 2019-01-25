@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/coretest"
 	"github.com/KablamoOSS/kombustion/pkg/parsers/resources"
 	"github.com/KablamoOSS/kombustion/types"
-	"github.com/stretchr/testify/assert"
 )
 
 var testYaml = `AWSTemplateFormatVersion: "2010-09-09"
@@ -59,96 +60,8 @@ func TestGenerateYamlTemplate(t *testing.T) {
 				ObjectStore: objectStore,
 				Filename:    "test.yaml",
 			},
-			output: YamlCloudformation{
-				AWSTemplateFormatVersion: "2010-09-09",
-				Description:              "A Demo Template for testing Kombustion",
-				Metadata:                 types.TemplateObject{},
-				Parameters: types.TemplateObject{
-					"Environment": map[interface{}]interface{}{
-						"Type":    "String",
-						"Default": "UnknownEnvironment",
-					},
-				},
-				Mappings:   types.TemplateObject{},
-				Conditions: types.TemplateObject{},
-				Transform:  types.TemplateObject{},
-				Resources: types.TemplateObject{
-					"MyDemoLogGroup4": resources.LogsLogGroup{
-						Type: "AWS::Logs::LogGroup",
-						Properties: resources.LogsLogGroupProperties{
-							LogGroupName: map[interface{}]interface{}{
-								"Fn::Join": []interface{}{
-									"-",
-									[]interface{}{
-										"MyDemoLogGroup4",
-										map[interface{}]interface{}{
-											"Ref": "Environment",
-										},
-									},
-								},
-							},
-							RetentionInDays: 1,
-						},
-						Condition: interface{}(nil),
-						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil)},
-					"MyDemoLogGroup": resources.LogsLogGroup{
-						Type: "AWS::Logs::LogGroup",
-						Properties: resources.LogsLogGroupProperties{
-							LogGroupName: map[interface{}]interface{}{
-								"Fn::Join": []interface{}{
-									"-", []interface{}{
-										"MyDemoLogGroup1",
-										map[interface{}]interface{}{
-											"Ref": "Environment",
-										},
-									},
-								},
-							},
-							RetentionInDays: 1,
-						},
-						Condition: interface{}(nil),
-						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil)}, "MyDemoLogGroup2": resources.LogsLogGroup{
-						Type: "AWS::Logs::LogGroup", Properties: resources.LogsLogGroupProperties{
-							LogGroupName: map[interface{}]interface{}{
-								"Fn::Join": []interface{}{
-									"-", []interface{}{
-										"MyDemoLogGroup2",
-										map[interface{}]interface{}{
-											"Ref": "Environment",
-										},
-									},
-								},
-							},
-							RetentionInDays: 1,
-						},
-						Condition: interface{}(nil),
-						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil)}, "MyDemoLogGroup3": resources.LogsLogGroup{
-						Type: "AWS::Logs::LogGroup",
-						Properties: resources.LogsLogGroupProperties{
-							LogGroupName: map[interface{}]interface{}{
-								"Fn::Join": []interface{}{
-									"-",
-									[]interface{}{
-										"MyDemoLogGroup3",
-										map[interface{}]interface{}{
-											"Ref": "Environment",
-										},
-									},
-								},
-							},
-							RetentionInDays: 1,
-						},
-						Condition: interface{}(nil),
-						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil),
-					},
-				},
-				Outputs: types.TemplateObject{},
-			},
-			err: nil,
+			output: YamlCloudformation{AWSTemplateFormatVersion: "2010-09-09", Description: "A Demo Template for testing Kombustion", Metadata: types.TemplateObject{}, Parameters: types.TemplateObject{"Environment": map[interface{}]interface{}{"Type": "String", "Default": "UnknownEnvironment"}}, Mappings: types.TemplateObject{}, Conditions: types.TemplateObject{}, Transform: types.TemplateObject{}, Resources: types.TemplateObject{"MyDemoLogGroup4": types.CfResource{Type: "AWS::Logs::LogGroup", Properties: map[interface{}]interface{}{"LogGroupName": map[string]interface{}{"Fn::Join": []interface{}{"-", []interface{}{"MyDemoLogGroup4", map[string]interface{}{"Ref": "Environment"}}}}, "RetentionInDays": 1}, Condition: interface{}(nil), Metadata: interface{}(nil), DependsOn: interface{}(nil), CreationPolicy: interface{}(nil), UpdatePolicy: interface{}(nil), DeletionPolicy: interface{}(nil)}, "MyDemoLogGroup": types.CfResource{Type: "AWS::Logs::LogGroup", Properties: map[interface{}]interface{}{"LogGroupName": map[string]interface{}{"Fn::Join": []interface{}{"-", []interface{}{"MyDemoLogGroup1", map[string]interface{}{"Ref": "Environment"}}}}, "RetentionInDays": 1}, Condition: interface{}(nil), Metadata: interface{}(nil), DependsOn: interface{}(nil), CreationPolicy: interface{}(nil), UpdatePolicy: interface{}(nil), DeletionPolicy: interface{}(nil)}, "MyDemoLogGroup2": types.CfResource{Type: "AWS::Logs::LogGroup", Properties: map[interface{}]interface{}{"RetentionInDays": 1, "LogGroupName": map[string]interface{}{"Fn::Join": []interface{}{"-", []interface{}{"MyDemoLogGroup2", map[string]interface{}{"Ref": "Environment"}}}}}, Condition: interface{}(nil), Metadata: interface{}(nil), DependsOn: interface{}(nil), CreationPolicy: interface{}(nil), UpdatePolicy: interface{}(nil), DeletionPolicy: interface{}(nil)}, "MyDemoLogGroup3": types.CfResource{Type: "AWS::Logs::LogGroup", Properties: map[interface{}]interface{}{"LogGroupName": map[string]interface{}{"Fn::Join": []interface{}{"-", []interface{}{"MyDemoLogGroup3", map[string]interface{}{"Ref": "Environment"}}}}, "RetentionInDays": 1}, Condition: interface{}(nil), Metadata: interface{}(nil), DependsOn: interface{}(nil), CreationPolicy: interface{}(nil), UpdatePolicy: interface{}(nil), DeletionPolicy: interface{}(nil)}}, Outputs: types.TemplateObject{}},
+			err:    nil,
 		},
 		{
 			input: GenerateParams{
@@ -156,135 +69,8 @@ func TestGenerateYamlTemplate(t *testing.T) {
 				Filename:               "test.yaml",
 				GenerateDefaultOutputs: true,
 			},
-			output: YamlCloudformation{
-				AWSTemplateFormatVersion: "2010-09-09",
-				Description:              "A Demo Template for testing Kombustion",
-				Metadata:                 types.TemplateObject{},
-				Parameters: types.TemplateObject{
-					"Environment": map[interface{}]interface{}{
-						"Type": "String", "Default": "UnknownEnvironment",
-					},
-				},
-				Mappings:   types.TemplateObject{},
-				Conditions: types.TemplateObject{},
-				Transform:  types.TemplateObject{},
-				Resources: types.TemplateObject{
-					"MyDemoLogGroup2": resources.LogsLogGroup{
-						Type: "AWS::Logs::LogGroup",
-						Properties: resources.LogsLogGroupProperties{
-							LogGroupName: map[interface{}]interface{}{
-								"Fn::Join": []interface{}{"-", []interface{}{
-									"MyDemoLogGroup2", map[interface{}]interface{}{
-										"Ref": "Environment",
-									},
-								},
-								},
-							},
-							RetentionInDays: 1,
-						},
-						Condition: interface{}(nil),
-						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil),
-					},
-					"MyDemoLogGroup3": resources.LogsLogGroup{
-						Type: "AWS::Logs::LogGroup",
-						Properties: resources.LogsLogGroupProperties{
-							LogGroupName: map[interface{}]interface{}{
-								"Fn::Join": []interface{}{"-", []interface{}{
-									"MyDemoLogGroup3",
-									map[interface{}]interface{}{
-										"Ref": "Environment",
-									},
-								},
-								},
-							},
-							RetentionInDays: 1,
-						},
-						Condition: interface{}(nil),
-						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil),
-					},
-					"MyDemoLogGroup4": resources.LogsLogGroup{
-						Type: "AWS::Logs::LogGroup",
-						Properties: resources.LogsLogGroupProperties{
-							LogGroupName: map[interface{}]interface{}{
-								"Fn::Join": []interface{}{
-									"-",
-									[]interface{}{
-										"MyDemoLogGroup4",
-										map[interface{}]interface{}{"Ref": "Environment"},
-									},
-								},
-							},
-							RetentionInDays: 1,
-						},
-						Condition: interface{}(nil),
-						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil)},
-					"MyDemoLogGroup": resources.LogsLogGroup{
-						Type: "AWS::Logs::LogGroup",
-						Properties: resources.LogsLogGroupProperties{
-							LogGroupName: map[interface{}]interface{}{
-								"Fn::Join": []interface{}{"-",
-									[]interface{}{"MyDemoLogGroup1",
-										map[interface{}]interface{}{"Ref": "Environment"},
-									},
-								},
-							},
-							RetentionInDays: 1,
-						},
-						Condition: interface{}(nil),
-						Metadata:  interface{}(nil),
-						DependsOn: interface{}(nil),
-					},
-				},
-				Outputs: types.TemplateObject{
-					"MyDemoLogGroup2": types.TemplateObject{
-						"Description": "MyDemoLogGroup2 Object",
-						"Value": map[string]interface{}{
-							"Ref": "MyDemoLogGroup2",
-						},
-						"Export": map[string]interface{}{
-							"Name": map[string]interface{}{
-								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup2",
-							},
-						},
-					},
-					"MyDemoLogGroup3": types.TemplateObject{
-						"Description": "MyDemoLogGroup3 Object",
-						"Value": map[string]interface{}{
-							"Ref": "MyDemoLogGroup3",
-						},
-						"Export": map[string]interface{}{
-							"Name": map[string]interface{}{
-								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup3",
-							},
-						},
-					},
-					"MyDemoLogGroup4": types.TemplateObject{
-						"Export": map[string]interface{}{
-							"Name": map[string]interface{}{
-								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup4",
-							},
-						}, "Description": "MyDemoLogGroup4 Object",
-						"Value": map[string]interface{}{
-							"Ref": "MyDemoLogGroup4",
-						},
-					},
-					"MyDemoLogGroup": types.TemplateObject{
-						"Description": "MyDemoLogGroup Object",
-						"Value": map[string]interface{}{
-							"Ref": "MyDemoLogGroup",
-						},
-						"Export": map[string]interface{}{
-							"Name": map[string]interface{}{
-								"Fn::Sub": "${AWS::StackName}-LogsLogGroup-MyDemoLogGroup",
-							},
-						},
-					},
-				},
-			},
-			err: nil,
+			output: YamlCloudformation{AWSTemplateFormatVersion: "2010-09-09", Description: "A Demo Template for testing Kombustion", Metadata: types.TemplateObject{}, Parameters: types.TemplateObject{"Environment": map[interface{}]interface{}{"Default": "UnknownEnvironment", "Type": "String"}}, Mappings: types.TemplateObject{}, Conditions: types.TemplateObject{}, Transform: types.TemplateObject{}, Resources: types.TemplateObject{"MyDemoLogGroup4": types.CfResource{Type: "AWS::Logs::LogGroup", Properties: map[interface{}]interface{}{"LogGroupName": map[string]interface{}{"Fn::Join": []interface{}{"-", []interface{}{"MyDemoLogGroup4", map[string]interface{}{"Ref": "Environment"}}}}, "RetentionInDays": 1}, Condition: interface{}(nil), Metadata: interface{}(nil), DependsOn: interface{}(nil), CreationPolicy: interface{}(nil), UpdatePolicy: interface{}(nil), DeletionPolicy: interface{}(nil)}, "MyDemoLogGroup": types.CfResource{Type: "AWS::Logs::LogGroup", Properties: map[interface{}]interface{}{"LogGroupName": map[string]interface{}{"Fn::Join": []interface{}{"-", []interface{}{"MyDemoLogGroup1", map[string]interface{}{"Ref": "Environment"}}}}, "RetentionInDays": 1}, Condition: interface{}(nil), Metadata: interface{}(nil), DependsOn: interface{}(nil), CreationPolicy: interface{}(nil), UpdatePolicy: interface{}(nil), DeletionPolicy: interface{}(nil)}, "MyDemoLogGroup2": types.CfResource{Type: "AWS::Logs::LogGroup", Properties: map[interface{}]interface{}{"LogGroupName": map[string]interface{}{"Fn::Join": []interface{}{"-", []interface{}{"MyDemoLogGroup2", map[string]interface{}{"Ref": "Environment"}}}}, "RetentionInDays": 1}, Condition: interface{}(nil), Metadata: interface{}(nil), DependsOn: interface{}(nil), CreationPolicy: interface{}(nil), UpdatePolicy: interface{}(nil), DeletionPolicy: interface{}(nil)}, "MyDemoLogGroup3": types.CfResource{Type: "AWS::Logs::LogGroup", Properties: map[interface{}]interface{}{"LogGroupName": map[string]interface{}{"Fn::Join": []interface{}{"-", []interface{}{"MyDemoLogGroup3", map[string]interface{}{"Ref": "Environment"}}}}, "RetentionInDays": 1}, Condition: interface{}(nil), Metadata: interface{}(nil), DependsOn: interface{}(nil), CreationPolicy: interface{}(nil), UpdatePolicy: interface{}(nil), DeletionPolicy: interface{}(nil)}}, Outputs: types.TemplateObject{}},
+			err:    nil,
 		},
 	}
 
@@ -360,22 +146,8 @@ func TestProcessParsers(t *testing.T) {
 				mappings:   types.TemplateObject{},
 				outputs:    types.TemplateObject{},
 				parameters: types.TemplateObject{},
-				resources: types.TemplateObject{
-					"Test": resources.LogsLogGroup{
-						Type: "AWS::Logs::LogsGroup",
-						Properties: resources.LogsLogGroupProperties{
-							LogGroupName:    "TestLogGroup",
-							RetentionInDays: interface{}(nil)},
-						Condition: map[interface{}]interface{}{
-							"ConditionName": "ConditionValue",
-						},
-						Metadata: map[interface{}]interface{}{
-							"MetadataName": "MetadataValue",
-						},
-						DependsOn: []interface{}{"OtherResource"},
-					},
-				},
-				transform: types.TemplateObject{},
+				resources:  types.TemplateObject{"Test": types.CfResource{Type: "AWS::Logs::LogsGroup", Properties: map[string]interface{}{"LogGroupName": "TestLogGroup"}, Condition: map[string]interface{}{"ConditionName": "ConditionValue"}, Metadata: map[string]interface{}{"MetadataName": "MetadataValue"}, DependsOn: []interface{}{"OtherResource"}, CreationPolicy: interface{}(nil), UpdatePolicy: interface{}(nil), DeletionPolicy: interface{}(nil)}},
+				transform:  types.TemplateObject{},
 			},
 		},
 		{
