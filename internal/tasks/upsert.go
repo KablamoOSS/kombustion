@@ -3,6 +3,10 @@ package tasks
 import (
 	"fmt"
 
+	"github.com/aws/aws-sdk-go/aws"
+	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
+	"github.com/urfave/cli"
+
 	printer "github.com/KablamoOSS/go-cli-printer"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation"
 	"github.com/KablamoOSS/kombustion/internal/cloudformation/tasks"
@@ -10,9 +14,6 @@ import (
 	"github.com/KablamoOSS/kombustion/internal/manifest"
 	"github.com/KablamoOSS/kombustion/internal/plugins"
 	"github.com/KablamoOSS/kombustion/internal/plugins/lock"
-	"github.com/aws/aws-sdk-go/aws"
-	awsCF "github.com/aws/aws-sdk-go/service/cloudformation"
-	"github.com/urfave/cli"
 )
 
 // UpsertFlags for kombustion upsert
@@ -192,13 +193,15 @@ func upsert(
 	printer.Progress("Generating template")
 	// Template generation parameters
 	generateParams := cloudformation.GenerateParams{
-		ObjectStore: objectStore,
-		Filename:    templatePath,
-		Env:         envName,
+		ObjectStore:            objectStore,
+		Filename:               templatePath,
+		Env:                    envName,
 		GenerateDefaultOutputs: generateDefaultOutputs || manifestFile.GenerateDefaultOutputs,
 		ParamMap:               paramMap,
 		Plugins:                loadedPlugins,
 	}
+
+	printer.Stepf("Generate Default Outputs: %t", generateParams.GenerateDefaultOutputs)
 
 	// CloudFormation Stack parameters
 	var parameters []*awsCF.Parameter
