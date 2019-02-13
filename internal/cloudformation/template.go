@@ -177,14 +177,6 @@ func processParsers(
 				resources,
 				types.TemplateObject{templateResourceName: templateResource},
 			)
-		} else if strings.HasPrefix(templateResource.Type, "AWS::") {
-			resources = mergeTemplatesWithError(
-				templateResourceName,
-				"aws-resource",
-				templateResource.Type,
-				resources,
-				types.TemplateObject{templateResourceName: templateResource},
-			)
 		} else { // This is a resource
 			// Check if there is a parser for this resource
 			parser, ok := parserFuncs[templateResource.Type]
@@ -198,6 +190,7 @@ func processParsers(
 					resources,
 					types.TemplateObject{templateResourceName: templateResource},
 				)
+
 				continue
 			}
 
