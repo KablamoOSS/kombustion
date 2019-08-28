@@ -26,11 +26,11 @@ type ElasticLoadBalancingV2TargetGroupProperties struct {
 	HealthCheckTimeoutSeconds  interface{} `yaml:"HealthCheckTimeoutSeconds,omitempty"`
 	HealthyThresholdCount      interface{} `yaml:"HealthyThresholdCount,omitempty"`
 	Name                       interface{} `yaml:"Name,omitempty"`
-	Port                       interface{} `yaml:"Port"`
-	Protocol                   interface{} `yaml:"Protocol"`
+	Port                       interface{} `yaml:"Port,omitempty"`
+	Protocol                   interface{} `yaml:"Protocol,omitempty"`
 	TargetType                 interface{} `yaml:"TargetType,omitempty"`
 	UnhealthyThresholdCount    interface{} `yaml:"UnhealthyThresholdCount,omitempty"`
-	VpcId                      interface{} `yaml:"VpcId"`
+	VpcId                      interface{} `yaml:"VpcId,omitempty"`
 	Matcher                    interface{} `yaml:"Matcher,omitempty"`
 	Tags                       interface{} `yaml:"Tags,omitempty"`
 	TargetGroupAttributes      interface{} `yaml:"TargetGroupAttributes,omitempty"`
